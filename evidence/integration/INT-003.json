@@ -1,0 +1,58 @@
+{
+  "schema_version": "zcr-integration-record/0",
+  "id": "INT-003",
+  "source_commit": "2944789ed09182f360542f2371c17f5cb250023f",
+  "branch": "integration",
+  "changes": [
+    "fast-forward integration to task-t03 f2fca29 (T03 S06)",
+    "build.zig: register T04 (tests/t04_test.zig group io; zcr_fs_read module)"
+  ],
+  "retest_of": [
+    "T00",
+    "T01",
+    "T02",
+    "T03 ME-001/002/003/007 (Debug and ReleaseSafe)"
+  ],
+  "runs": [
+    {
+      "label": "int3-all-debug",
+      "command": "zig build test -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-int3-all-debug",
+      "expected": "53/53 tests pass; step fails only because tests/t04_test.zig is registered but not delivered",
+      "summary": "Build Summary: 16/18 steps succeeded (1 failed); 53/53 tests passed",
+      "log": "logs/int3-all-debug.log",
+      "log_sha256": "6543b595db981fe04dcacb6ea6be72287a55597819a396615547332f9173412b",
+      "installed_test_binaries_sha256": {
+        "T00-test": "3d66f177b768707b08c97c5088a9ee326b2e67f2e0c3078b889cab80aca4eff7",
+        "T01-test": "89ce3df9dc6167aba7df22ad509bae9e1f36ca3aa8cf43bbe2afaf3d3cabad70",
+        "T02-test": "fc6df69913eccb555e835d366e82a8ff4292ede0d2fff6c9c8409f672d7fae3a",
+        "T03-test": "cf62069c65592b6f2a8acaeb7119e2e0fc95fe5eefb123e3b7c8b1ca9aced163"
+      }
+    },
+    {
+      "label": "int3-memory-releasesafe",
+      "command": "zig build test -Dtest-group=memory -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix $STATE/out-int3-memory-releasesafe",
+      "expected": "pass",
+      "summary": "Build Summary: 4/4 steps succeeded; 12/12 tests passed",
+      "log": "logs/int3-memory-releasesafe.log",
+      "log_sha256": "4c6c00f79296bee948de5cd3d085d7780aa98731b4b1812b761f1b0adcf923c7",
+      "installed_test_binaries_sha256": {
+        "T03-test": "fce751ba660d9db6b36851ebc1617b1042a61e947e54f1d80d084177b0e59f0e"
+      }
+    },
+    {
+      "label": "int3-verify-contracts",
+      "command": "zig build verify-contracts -Dinstall-tests=true --prefix $STATE/out-int3-verify-contracts",
+      "expected": "pass",
+      "summary": "Build Summary: 3/3 steps succeeded",
+      "log": "logs/int3-verify-contracts.log",
+      "log_sha256": "7672d708bae88f3375fdc889085cf502ca46c2363fd0295adb490a1d049e163b",
+      "installed_test_binaries_sha256": {}
+    }
+  ],
+  "not_done": [
+    "main branch not updated",
+    "MANIFEST.sha256 AGENTS.md mismatch open",
+    "E_MANIFEST_UNBOUND decision open",
+    "tasks.json/catalog proposals open"
+  ]
+}
