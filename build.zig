@@ -21,7 +21,7 @@ comptime {
 
 pub const TestGroup = enum { io, fs, search, batch, write, mcp, isolation, broker, watch, observe, ast, scheduler, memory, perf, dev, security };
 
-const Import = enum { core, evidence, caps, build_options, policy, guard, memory, admission, fs_read };
+const Import = enum { core, evidence, caps, build_options, policy, guard, memory, admission, fs_read, fs_traverse };
 
 const TestFile = struct {
     task: []const u8,
@@ -37,6 +37,7 @@ const test_files = [_]TestFile{
     .{ .task = "T02", .path = "tests/t02_test.zig", .group = .isolation, .imports = &.{ .core, .policy, .guard, .evidence, .build_options } },
     .{ .task = "T03", .path = "tests/t03_test.zig", .group = .memory, .imports = &.{ .core, .memory, .admission } },
     .{ .task = "T04", .path = "tests/t04_test.zig", .group = .io, .imports = &.{ .core, .policy, .memory, .admission, .fs_read } },
+    .{ .task = "T05", .path = "tests/t05_test.zig", .group = .fs, .imports = &.{ .core, .policy, .memory, .fs_traverse, .evidence } },
 };
 
 /// Exit code for CLI roles that exist in the contract but are not built yet (EX_UNAVAILABLE).
@@ -139,6 +140,16 @@ pub fn build(b: *std.Build) void {
             .{ .name = "zcr_memory", .module = memory_module },
         },
     });
+    // T05: Git-aware streaming traversal with ignore rules (I04).
+    const fs_traverse_module = b.createModule(.{
+        .root_source_file = b.path("src/fs/traverse.zig"),
+        .target = target,
+        .optimize = optimize,
+        .imports = &.{
+            .{ .name = "zcr_core", .module = core },
+            .{ .name = "zcr_policy", .module = policy_module },
+        },
+    });
     // A tool is installed once its owning task has delivered the source file.
     if (sourceExists(b, "tools/dev/guard.zig")) {
         b.installArtifact(b.addExecutable(.{ .name = "zcr-dev-guard", .root_module = guard_module }));
@@ -185,6 +196,7 @@ pub fn build(b: *std.Build) void {
             .memory => module.addImport("zcr_memory", memory_module),
             .admission => module.addImport("zcr_admission", admission_module),
             .fs_read => module.addImport("zcr_fs_read", fs_read_module),
+            .fs_traverse => module.addImport("zcr_fs_traverse", fs_traverse_module),
             .caps => module.addImport("caps", caps_module orelse blk: {
                 caps_module = capsModule(b, target, optimize);
                 break :blk caps_module.?;
