@@ -379,34 +379,36 @@ test "ME-002 release waits for a child on another thread to drain" {
 
 // ------------------------------------------------------------------ ME-007
 
+/// Read requests with a child job cancelled every third cycle.
+fn readCancelCycles(child: std.mem.Allocator, counters: *memory.accounting.Counters, budget: *memory.Budget, gate: *admission.Admission, first: usize, count: usize) !void {
+    const cost = try admission.estimate(.{ .operation = .read, .frame_bytes = 2 * KiB, .output_bytes = 64 * KiB });
+    for (first..first + count) |i| {
+        const who = session(@intCast(i % 4 + 1));
+        var reservation = try gate.reserve(who, cost);
+        var request: memory.RequestArena = undefined;
+        request.init(child, &reservation, counters, null);
+        _ = try request.allocator().alloc(u8, 16 * KiB);
+        _ = try request.allocator().alloc(u8, 3 * KiB + (i % 97));
+        if (i % 3 == 0) {
+            const token = try request.beginChild();
+            request.requestCancel();
+            try testing.expectError(error.ChildrenPending, request.release(budget, &reservation));
+            request.endChild(token);
+        }
+        _ = try request.release(budget, &reservation);
+        gate.releaseSlot(who);
+    }
+}
+
 test "ME-007 10k read and cancel cycles return to idle without leak growth" {
     var counters: memory.accounting.Counters = .{};
     var budget = inflightBudget(&counters);
     var gate = admission.Admission.init(&budget, null);
-    const cost = try admission.estimate(.{ .operation = .read, .frame_bytes = 2 * KiB, .output_bytes = 64 * KiB });
 
-    var peak_after_1k: u64 = 0;
-    var footprint_after_1k: ?u64 = null;
-    for (0..10_000) |i| {
-        var reservation = try gate.reserve(session(@intCast(i % 4 + 1)), cost);
-        var request: memory.RequestArena = undefined;
-        request.init(testing.allocator, &reservation, &counters, null);
-        _ = try request.allocator().alloc(u8, 16 * KiB);
-        _ = try request.allocator().alloc(u8, 3 * KiB + (i % 97));
-        if (i % 3 == 0) {
-            const child = try request.beginChild();
-            request.requestCancel();
-            try testing.expectError(error.ChildrenPending, request.release(&budget, &reservation));
-            request.endChild(child);
-        }
-        _ = try request.release(&budget, &reservation);
-        gate.releaseSlot(session(@intCast(i % 4 + 1)));
-
-        if (i + 1 == 1_000) {
-            peak_after_1k = budget.peakBytes();
-            footprint_after_1k = memory.accounting.processFootprint().physical_bytes;
-        }
-    }
+    // Leak detection: testing.allocator fails the test on any unreturned allocation.
+    try readCancelCycles(testing.allocator, &counters, &budget, &gate, 0, 1_000);
+    const peak_after_1k = budget.peakBytes();
+    try readCancelCycles(testing.allocator, &counters, &budget, &gate, 1_000, 9_000);
 
     const snapshot = counters.snapshot();
     try testing.expectEqual(@as(u64, 0), snapshot.live_bytes);
@@ -415,13 +417,20 @@ test "ME-007 10k read and cancel cycles return to idle without leak growth" {
     try testing.expectEqual(@as(u32, 0), gate.inFlight());
     try testing.expectEqual(peak_after_1k, budget.peakBytes());
     try testing.expectEqual(snapshot.allocations, snapshot.frees);
-    if (footprint_after_1k) |before| {
-        // Process footprint is an observation, not a hard cap; allow allocator caching noise.
+
+    // Footprint observation with a production child allocator. testing.allocator keeps its
+    // own debug bookkeeping (about 15 MiB over 9k cycles here), so it cannot show growth.
+    if (builtin.os.tag == .macos) {
+        try readCancelCycles(std.heap.smp_allocator, &counters, &budget, &gate, 0, 1_000);
+        const before = memory.accounting.processFootprint().physical_bytes.?;
+        try readCancelCycles(std.heap.smp_allocator, &counters, &budget, &gate, 1_000, 9_000);
         const after = memory.accounting.processFootprint().physical_bytes.?;
-        try testing.expect(after <= before + 8 * MiB);
+        try testing.expect(after <= before + 1 * MiB);
+        try testing.expectEqual(@as(u64, 0), counters.snapshot().live_bytes);
     }
 
     // The next normal request succeeds.
+    const cost = try admission.estimate(.{ .operation = .read, .frame_bytes = 2 * KiB, .output_bytes = 64 * KiB });
     var next = try gate.reserve(session(1), cost);
     try gate.release(session(1), &next);
 }
