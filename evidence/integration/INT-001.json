@@ -1,0 +1,78 @@
+{
+  "schema_version": "zcr-integration-record/0",
+  "id": "INT-001",
+  "source_commit": "0abc58e150b130f68de6d94045e3e99984c25c4f",
+  "branch": "integration",
+  "parent": "35321adc16557ce9fd66084af1a8ba156d03ad98 (task-t01 S06, includes task-t00)",
+  "changes": [
+    "src/core/types.zig: I01-I18 signature types are functions of the receiver type; I19 JournalStoreVTable; GitMetadata added",
+    "tests/t01_test.zig: interface table test instantiates signatures with a receiver",
+    "build.zig: T02 registration (zcr_policy, dev_guard, zcr-dev-guard, tests/t02_test.zig group isolation); missing registered test file fails explicitly"
+  ],
+  "reason": "T01's I01 signature had no parameter for the policy snapshot, root handle or git metadata, so authorize could only be implemented with global state; T02 may not change core or build.zig",
+  "retest_of": [
+    "T00 PF-001",
+    "T01 DV-001/DV-004/DV-005 and core contract tests"
+  ],
+  "runs": [
+    {
+      "label": "int-dev-debug",
+      "command": "zig build test -Dtest-group=dev -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-int-dev-debug",
+      "expected": "pass",
+      "summary": "Build Summary: 8/8 steps succeeded; 18/18 tests passed",
+      "log": "logs/int-dev-debug.log",
+      "log_sha256": "797aff7f00cd7c20c48a6959496bcfd6cccb546fd0b37b1c44fb33209a0e1f15",
+      "installed_test_binaries_sha256": {
+        "T01-test": "89ce3df9dc6167aba7df22ad509bae9e1f36ca3aa8cf43bbe2afaf3d3cabad70"
+      }
+    },
+    {
+      "label": "int-dev-releasesafe",
+      "command": "zig build test -Dtest-group=dev -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix $STATE/out-int-dev-releasesafe",
+      "expected": "pass",
+      "summary": "Build Summary: 8/8 steps succeeded; 18/18 tests passed",
+      "log": "logs/int-dev-releasesafe.log",
+      "log_sha256": "9a85b5dce44982b801ef321593690cba3e10be91f2176c4835bc8e21460a3031",
+      "installed_test_binaries_sha256": {
+        "T01-test": "15e22bff5dcbcc1c6f2dc7c7d28680102ab8c0b7d59b4ba22fb5884aaf1667c9"
+      }
+    },
+    {
+      "label": "int-perf-debug",
+      "command": "zig build test -Dtest-group=perf -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-int-perf-debug",
+      "expected": "pass",
+      "summary": "Build Summary: 4/4 steps succeeded; 11/11 tests passed",
+      "log": "logs/int-perf-debug.log",
+      "log_sha256": "26fd0f20e7b96f3ab923fe940dadf32b2f01c02da29d315a8d06f2a1a630cd1a",
+      "installed_test_binaries_sha256": {
+        "T00-test": "3d66f177b768707b08c97c5088a9ee326b2e67f2e0c3078b889cab80aca4eff7"
+      }
+    },
+    {
+      "label": "int-verify-contracts",
+      "command": "zig build verify-contracts -Dinstall-tests=true --prefix $STATE/out-int-verify-contracts",
+      "expected": "pass",
+      "summary": "Build Summary: 3/3 steps succeeded",
+      "log": "logs/int-verify-contracts.log",
+      "log_sha256": "e452c5abcd6bc96d0ac80f7843416cb56d42227b8b5208b3b0e9d8567f967a23",
+      "installed_test_binaries_sha256": {}
+    },
+    {
+      "label": "int-all-debug",
+      "command": "zig build test -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-int-all-debug",
+      "expected": "fail only on unregistered-delivery: tests/t02_test.zig missing",
+      "summary": "Build Summary: 10/12 steps succeeded (1 failed); 29/29 tests passed",
+      "log": "logs/int-all-debug.log",
+      "log_sha256": "545e634cb8fdf85045c6e63e82992768a5d82d29cfb07c84388cb6e25e69187b",
+      "installed_test_binaries_sha256": {
+        "T00-test": "3d66f177b768707b08c97c5088a9ee326b2e67f2e0c3078b889cab80aca4eff7",
+        "T01-test": "89ce3df9dc6167aba7df22ad509bae9e1f36ca3aa8cf43bbe2afaf3d3cabad70"
+      }
+    }
+  ],
+  "not_done": [
+    "main branch not updated",
+    "MANIFEST.sha256 still reports AGENTS.md FAILED (T01 proposal pending)",
+    "E_MANIFEST_UNBOUND decision pending"
+  ]
+}
