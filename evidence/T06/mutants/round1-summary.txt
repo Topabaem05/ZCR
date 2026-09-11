@@ -1,0 +1,17 @@
+m1-no-dedupe exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 8/9 tests passed (1 failed) :: SR-001 tiny chunks over random file;
+m2-no-overlap exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 6/9 tests passed (3 failed) :: SR-001 a literal across the 256 KiB;SR-001 tiny chunks over random file;SR-004 binary, invalid UTF-8 and ov;
+m3-lines-from-window-start exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 6/9 tests passed (2 failed, 1 crashed) :: SR-001 tiny chunks over random file;SR-006 a file that changes between ;
+m4-no-merge exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 6/9 tests passed (3 failed) :: SR-001 tiny chunks over random file;SR-002 several matches on one line ;SR-006 a file that changes between ;
+m5-no-binary exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 8/9 tests passed (1 failed) :: SR-004 binary, invalid UTF-8 and ov;
+m6-no-utf8-finish exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 8/9 tests passed (1 failed) :: SR-004 binary, invalid UTF-8 and ov;
+m7-no-version-recheck exit=1 cached=0 Build Summary: 0/3 steps succeeded (1 failed) :: 
+m8-no-projection-validation exit=1 cached=0 Build Summary: 0/3 steps succeeded (1 failed) :: 
+m9-no-match-limit exit=1 cached=0 Build Summary: 0/3 steps succeeded (1 failed) :: 
+m10-no-output-budget exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 8/9 tests passed (1 failed) :: SR-005 match, output and deadline c;
+m11-no-scan-cancel exit=0 cached=0 Build Summary: 3/3 steps succeeded; 9/9 tests passed :: 
+m12-no-retry exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 8/9 tests passed (1 failed) :: SR-006 a file that changes between ;
+m13-no-oversize exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 8/9 tests passed (1 failed) :: SR-004 binary, invalid UTF-8 and ov;
+m14-overlapping-matches exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 8/9 tests passed (1 failed) :: SR-001 tiny chunks over random file;
+/dev/disk3s5   460Gi   429Gi   1.1Gi   100%    4.5M   11M   28%   /System/Volumes/Data
+
+[exited with code 0]

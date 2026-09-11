@@ -1,0 +1,26 @@
+test
++- run test T06-test 10 pass, 1 fail (11 total)
+error: 't06_test.test.SR-001 tiny chunks over random files never duplicate or miss a match' failed:
+       expected 6, found 7
+       chunk=1 literal=aba
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x10037271b in expectEqualInner__anon_37715 (T06-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x1003a26b7 in expectEqual (T06-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T06/tmp/mutants/m1-no-dedupe/tests/t06_test.zig:181:5: 0x1003a2727 in expectFileMatchesOracle (T06-test)
+           try testing.expectEqual(expected.len, hit.matches.len);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T06/tmp/mutants/m1-no-dedupe/tests/t06_test.zig:244:17: 0x1003af143 in test.SR-001 tiny chunks over random files never duplicate or miss a match (T06-test)
+                       return err;
+                       ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache/o/e44754157b31c01e5573534de90d247a/T06-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache --seed=0x41e0e10f --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 10/11 tests passed (1 failed)
+test transitive failure
++- run test T06-test 10 pass, 1 fail (11 total)
+   +- compile test T06-test Debug native success 1s MaxRSS:256M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache/o/ce59de40176ab3ab39ded0a6edd5fd7e/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T06/tmp/mutants/m1-no-dedupe /Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T06/zig-global-cache --seed 0x41e0e10f -Z8fe1f7379301ee4a test -Dtest-group=search --summary all

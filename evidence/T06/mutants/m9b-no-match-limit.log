@@ -1,0 +1,47 @@
+test
++- run test T06-test 10 pass, 1 crash (11 total)
+error: 't06_test.test.SR-005 match, output and deadline caps stop the search honestly without allocating' terminated with signal ABRT with stderr:
+       thread 27192422 panic: integer overflow
+       /Users/guribbong/code/ZCR-state/tasks/T06/tmp/mutants/m9b-no-match-limit/src/search/literal.zig:341:44: 0x102839c6f in searchFile (T06-test)
+                       self.run.remaining_matches -= @intCast(projection.matches);
+                                                  ^
+       /Users/guribbong/code/ZCR-state/tasks/T06/tmp/mutants/m9b-no-match-limit/src/search/literal.zig:249:24: 0x1028386bb in onFile (T06-test)
+               self.searchFile(item.bytes) catch |err| switch (err) {
+                              ^
+       /Users/guribbong/code/ZCR-state/tasks/T06/tmp/mutants/m9b-no-match-limit/src/core/types.zig:337:32: 0x10283a8cb in push (T06-test)
+                   return sink.push_fn(sink.context, item);
+                                      ^
+       /Users/guribbong/code/ZCR-state/tasks/T06/tmp/mutants/m9b-no-match-limit/src/fs/traverse.zig:292:34: 0x10283a6fb in walk (T06-test)
+                           try sink.push(.{ .bytes = rel });
+                                        ^
+       /Users/guribbong/code/ZCR-state/tasks/T06/tmp/mutants/m9b-no-match-limit/src/fs/traverse.zig:177:26: 0x102838427 in enumerate (T06-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T06/tmp/mutants/m9b-no-match-limit/src/search/literal.zig:203:37: 0x102835ac7 in search (T06-test)
+               _ = self.traverser.enumerate(io, capability, file_spec, walk_sink, cancel) catch |err| {
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T06/tmp/mutants/m9b-no-match-limit/tests/t06_test.zig:134:33: 0x102832423 in run (T06-test)
+               return h.searcher.search(io, capability, spec, collector.sink(), h.cancel());
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T06/tmp/mutants/m9b-no-match-limit/tests/t06_test.zig:341:31: 0x10286b3db in test.SR-005 match, output and deadline caps stop the search honestly without allocating (T06-test)
+           const coverage = try h.run(.{ .literal = "hit", .limit = 3, .order = .path_then_offset, .context_lines = 0 }, &limited);
+                                     ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x10280f12f in mainServer (T06-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x10280f7df in main (T06-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x10280d5a3 in callMain (T06-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache/o/6ac72d34f3e1e827d592168e294285f1/T06-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache --seed=0x39dbd627 --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 10/11 tests passed (1 crashed)
+test transitive failure
++- run test T06-test 10 pass, 1 crash (11 total)
+   +- compile test T06-test Debug native success 3s MaxRSS:249M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache/o/ce59de40176ab3ab39ded0a6edd5fd7e/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T06/tmp/mutants/m9b-no-match-limit /Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T06/zig-global-cache --seed 0x39dbd627 -Z7431d96255f1f176 test -Dtest-group=search --summary all

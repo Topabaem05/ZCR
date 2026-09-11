@@ -1,0 +1,13 @@
+{
+  "schema_version": "zcr-evidence/1",
+  "task_id": "T06",
+  "label": "green-search-debug",
+  "command": "zig build test -Dtest-group=search -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-green-search-debug",
+  "exit_code": 0,
+  "source_commit": "71ec6b27cda6d34c171b4b1460f8434f7c0948af",
+  "source_tree": "bc6789d8b70af40713b875364be6eddb7b64f3ca",
+  "worktree_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/task-t06",
+  "binary_path": "/Users/guribbong/code/ZCR-state/tasks/T06/out-green-search-debug/bin/T06-test",
+  "binary_sha256": "b1abb69877a0efec88fa5078bed89f6f9f422e46e8f3bca3088ac2767b424dd5",
+  "recorded_at_unix_ms": 1789140723013
+}

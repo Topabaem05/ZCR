@@ -1,0 +1,18 @@
+test
++- run test T06-test 10 pass, 1 fail (11 total)
+error: 't06_test.test.SR-005 match, output and deadline caps stop the search honestly without allocating' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:615:14: 0x1008eabbf in expect (T06-test)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /Users/guribbong/code/ZCR-state/tasks/T06/tmp/mutants/m10-no-output-budget/tests/t06_test.zig:355:5: 0x1008ebc4f in test.SR-005 match, output and deadline caps stop the search honestly without allocating (T06-test)
+           try testing.expect(returned <= 20);
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache/o/a01a16c232ce6f195bfd8de07aa57022/T06-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache --seed=0xb8ecba28 --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 10/11 tests passed (1 failed)
+test transitive failure
++- run test T06-test 10 pass, 1 fail (11 total)
+   +- compile test T06-test Debug native success 3s MaxRSS:271M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache/o/ce59de40176ab3ab39ded0a6edd5fd7e/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T06/tmp/mutants/m10-no-output-budget /Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T06/zig-global-cache --seed 0xb8ecba28 -Z5dd749a8fa6af70d test -Dtest-group=search --summary all
