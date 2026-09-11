@@ -1,0 +1,18 @@
+test
++- run test T03-test 11 pass, 1 fail (12 total)
+error: 't03_test.test.ME-003 oversized requests are refused at admission and the tracked cap stays untouched' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:615:14: 0x100521847 in expect (T03-test)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /Users/guribbong/code/ZCR-state/tasks/T03/tmp/mutants/m6-patch-without-file-bytes/tests/t03_test.zig:61:5: 0x10054bb57 in test.ME-003 oversized requests are refused at admission and the tracked cap stays untouched (T03-test)
+           try testing.expect((try patch_cost.totalBytes()) > 32 * MiB);
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache/o/7179beffaa181f9f2ef1de300ffcd1fb/T03-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache --seed=0xbbed976e --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 11/12 tests passed (1 failed)
+test transitive failure
++- run test T03-test 11 pass, 1 fail (12 total)
+   +- compile test T03-test Debug native success 9s MaxRSS:167M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache/o/c850a37cb4f46cd01dfc71be12bb7085/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T03/tmp/mutants/m6-patch-without-file-bytes /Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T03/zig-global-cache --seed 0xbbed976e -Z01c60b5fda1785d5 test -Dtest-group=memory --summary all

@@ -1,0 +1,112 @@
+test
++- run test T03-test 0 pass, 12 fail (12 total)
+error: 't03_test.test.ME-003 oversized requests are refused at admission and the tracked cap stays untouched' failed:
+       expected 33554432, found 0
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x1003c18f3 in expectEqualInner__anon_36466 (T03-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x1003dc477 in expectEqual (T03-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t03/tests/t03_test.zig:40:5: 0x1003dc533 in test.ME-003 oversized requests are refused at admission and the tracked cap stays untouched (T03-test)
+           try testing.expectEqual(@as(u64, 32 * MiB), budget.caps.bytes);
+           ^
+error: 't03_test.test.ME-003 output beyond the budget's output share is refused' failed:
+       expected error.OutputBudgetExceeded, found error.ResourceExhausted
+       /Users/guribbong/code/ZCR-worktrees/task-t03/src/memory/budget.zig:41:9: 0x1003c29a3 in reserve (T03-test)
+               return error.ResourceExhausted;
+               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x1003d5f43 in expectError__anon_39099 (T03-test)
+                   return error.TestUnexpectedError;
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/task-t03/tests/t03_test.zig:82:5: 0x1003dc087 in test.ME-003 output beyond the budget's output share is refused (T03-test)
+           try testing.expectError(error.OutputBudgetExceeded, budget.reserve(session(1), .{ .output_bytes = 2 * MiB }));
+           ^
+error: 't03_test.test.ME-003 concurrent reservations never exceed the hard tracked cap' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:615:14: 0x1003c1847 in expect (T03-test)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /Users/guribbong/code/ZCR-worktrees/task-t03/tests/t03_test.zig:120:5: 0x1003db24b in test.ME-003 concurrent reservations never exceed the hard tracked cap (T03-test)
+           try testing.expect(ctx.successes.load(.acquire) > 0);
+           ^
+error: 't03_test.test.ME-003 reservation-bound allocation never falls back to an untracked allocator' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t03/src/memory/budget.zig:41:9: 0x1003c29a3 in reserve (T03-test)
+               return error.ResourceExhausted;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t03/tests/t03_test.zig:129:23: 0x1003d942f in test.ME-003 reservation-bound allocation never falls back to an untracked allocator (T03-test)
+           var reservation = try budget.reserve(session(1), .{ .scratch_bytes = 64 * KiB });
+                             ^
+error: 't03_test.test.ME-003 admission evicts once and then reports exhaustion' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t03/src/memory/budget.zig:41:9: 0x1003c29a3 in reserve (T03-test)
+               return error.ResourceExhausted;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t03/tests/t03_test.zig:171:60: 0x1003d88db in test.ME-003 admission evicts once and then reports exhaustion (T03-test)
+           var cache: HeldEvictor = .{ .budget = &budget, .held = try budget.reserve(session(9), .{ .parser_bytes = 30 * MiB }) };
+                                                                  ^
+error: 't03_test.test.ME-003 admission bounds in-flight requests per session and globally' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t03/src/scheduler/admission.zig:38:9: 0x1003c6a17 in reserve (T03-test)
+               return error.ResourceExhausted;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t03/tests/t03_test.zig:197:27: 0x1003d621b in test.ME-003 admission bounds in-flight requests per session and globally (T03-test)
+                   held[count] = try gate.reserve(session(@intCast(s + 1)), .{ .input_bytes = 1 * KiB });
+                                 ^
+error: 't03_test.test.ME-001 an Nth allocation failure in any phase leaves the original and returns every reservation' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t03/src/scheduler/admission.zig:20:5: 0x1003c70fb in estimate (T03-test)
+           return error.InvalidArgument;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t03/tests/t03_test.zig:229:22: 0x1003c9ff7 in run (T03-test)
+               const cost = try admission.estimate(.{ .operation = .patch, .frame_bytes = 4 * KiB, .decoded_bytes = 1 * KiB, .file_bytes = 64 * KiB, .output_bytes = 4 * KiB });
+                            ^
+       /Users/guribbong/code/ZCR-worktrees/task-t03/tests/t03_test.zig:271:5: 0x1003cafc7 in test.ME-001 an Nth allocation failure in any phase leaves the original and returns every reservation (T03-test)
+           try pipeline.run(&probe);
+           ^
+error: 't03_test.test.ME-002 a request arena is not freed while a child is pending, even after cancellation' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t03/src/memory/budget.zig:41:9: 0x1003c29a3 in reserve (T03-test)
+               return error.ResourceExhausted;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t03/tests/t03_test.zig:310:23: 0x1003c8847 in test.ME-002 a request arena is not freed while a child is pending, even after cancellation (T03-test)
+           var reservation = try budget.reserve(session(1), .{ .scratch_bytes = 1 * MiB });
+                             ^
+error: 't03_test.test.ME-002 release waits for a child on another thread to drain' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t03/src/memory/budget.zig:41:9: 0x1003c29a3 in reserve (T03-test)
+               return error.ResourceExhausted;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t03/tests/t03_test.zig:353:23: 0x1003c7437 in test.ME-002 release waits for a child on another thread to drain (T03-test)
+           var reservation = try budget.reserve(session(1), .{ .scratch_bytes = 1 * MiB });
+                             ^
+error: 't03_test.test.ME-007 10k read and cancel cycles return to idle without leak growth' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t03/src/scheduler/admission.zig:20:5: 0x1003c70fb in estimate (T03-test)
+           return error.InvalidArgument;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t03/tests/t03_test.zig:386:18: 0x1003c580b in test.ME-007 10k read and cancel cycles return to idle without leak growth (T03-test)
+           const cost = try admission.estimate(.{ .operation = .read, .frame_bytes = 2 * KiB, .output_bytes = 64 * KiB });
+                        ^
+error: 't03_test.test.T03 profiles map RAM to caps and budgets release exactly once' failed:
+       expected 8, found null
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:192:21: 0x1003c2c73 in expectEqualInner__anon_36634 (T03-test)
+                           return error.TestExpectedEqual;
+                           ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x1003c305f in expectEqual (T03-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t03/tests/t03_test.zig:432:5: 0x1003c30f3 in test.T03 profiles map RAM to caps and budgets release exactly once (T03-test)
+           try testing.expectEqual(@as(?u32, 8), memory.profileForRam(8 * GiB).ram_upper_gib);
+           ^
+error: 't03_test.test.T03 accounting reports live allocation, retained capacity and process footprint separately' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t03/src/memory/budget.zig:41:9: 0x1003c29a3 in reserve (T03-test)
+               return error.ResourceExhausted;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t03/tests/t03_test.zig:458:23: 0x1003c1abb in test.T03 accounting reports live allocation, retained capacity and process footprint separately (T03-test)
+           var reservation = try budget.reserve(session(1), .{ .scratch_bytes = 4 * MiB });
+                             ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache/o/e5f6867d5e691e45c03f01899981b86c/T03-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache --seed=0x13b8d7bb --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 0/12 tests passed (12 failed)
+test transitive failure
++- install T03-test success
+|  +- compile test T03-test Debug native cached 79ms MaxRSS:31M
++- run test T03-test 0 pass, 12 fail (12 total)
+   +- compile test T03-test Debug native (reused)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache/o/c850a37cb4f46cd01dfc71be12bb7085/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-worktrees/task-t03 /Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T03/zig-global-cache --seed 0x13b8d7bb -Zbb218931f3855949 test -Dtest-group=memory -Doptimize=Debug -Dinstall-tests=true --prefix /Users/guribbong/code/ZCR-state/tasks/T03/out-red --summary all

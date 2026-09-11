@@ -1,0 +1,22 @@
+test
++- run test T03-test 11 pass, 1 fail (12 total)
+error: 't03_test.test.ME-003 oversized requests are refused at admission and the tracked cap stays untouched' failed:
+       expected 0, found 1
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x104ac8343 in expectEqualInner__anon_36838 (T03-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x104aefbf3 in expectEqual (T03-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T03/tmp/mutants/m4-no-never-fits/tests/t03_test.zig:64:5: 0x104aefc77 in test.ME-003 oversized requests are refused at admission and the tracked cap stays untouched (T03-test)
+           try testing.expectEqual(@as(u32, 0), evictions); // a request that can never fit is not worth evicting for
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache/o/0afcfca294527325bd946915a087fcec/T03-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache --seed=0x3ef5abd0 --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 11/12 tests passed (1 failed)
+test transitive failure
++- run test T03-test 11 pass, 1 fail (12 total)
+   +- compile test T03-test Debug native success 12s MaxRSS:170M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache/o/c850a37cb4f46cd01dfc71be12bb7085/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T03/tmp/mutants/m4-no-never-fits /Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T03/zig-global-cache --seed 0x3ef5abd0 -Z0abe0e4f063394da test -Dtest-group=memory --summary all
