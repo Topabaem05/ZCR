@@ -1,0 +1,13 @@
+{
+  "schema_version": "zcr-evidence/1",
+  "task_id": "T05",
+  "label": "green-fs-debug",
+  "command": "zig build test -Dtest-group=fs -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-green-fs-debug",
+  "exit_code": 0,
+  "source_commit": "a3ad5db87a7a9cce18a6703b422cc3449530d190",
+  "source_tree": "bb229d6ac0e3ca6870063464ef2ff8f8a4171157",
+  "worktree_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/task-t05",
+  "binary_path": "/Users/guribbong/code/ZCR-state/tasks/T05/out-green-fs-debug/bin/T05-test",
+  "binary_sha256": "a4445b19045b120a4abf5a5d7c5fa6c06558cd828383f03f9d6ac5f7876c8fdf",
+  "recorded_at_unix_ms": 1789134064085
+}

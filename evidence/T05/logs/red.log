@@ -1,0 +1,109 @@
+test
++- run test T05-test 0 pass, 10 fail (10 total)
+error: 't05_test.test.FS-001 nested .gitignore files and negations give Git's file set' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t05/src/fs/traverse.zig:55:9: 0x100890933 in enumerate (T05-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t05/tests/t05_test.zig:130:9: 0x10088ea8f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t05/tests/t05_test.zig:206:22: 0x1008c258b in test.FS-001 nested .gitignore files and negations give Git's file set (T05-test)
+           const coverage = try h.enumerate(all_hidden, &collector);
+                            ^
+error: 't05_test.test.FS-002 a file under an excluded directory cannot be re-included, contents of a pattern-excluded directory can' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t05/src/fs/traverse.zig:55:9: 0x100890933 in enumerate (T05-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t05/tests/t05_test.zig:130:9: 0x10088ea8f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t05/tests/t05_test.zig:229:9: 0x1008c1aa7 in test.FS-002 a file under an excluded directory cannot be re-included, contents of a pattern-excluded directory can (T05-test)
+           _ = try h.enumerate(all_hidden, &collector);
+               ^
+error: 't05_test.test.FS-003 hidden files, .git and escaped, comment and trailing-space patterns follow the policy' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t05/src/fs/traverse.zig:55:9: 0x100890933 in enumerate (T05-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t05/tests/t05_test.zig:130:9: 0x10088ea8f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t05/tests/t05_test.zig:251:9: 0x1008c0dcf in test.FS-003 hidden files, .git and escaped, comment and trailing-space patterns follow the policy (T05-test)
+           _ = try h.enumerate(all_hidden, &with_hidden);
+               ^
+error: 't05_test.test.FS-001 single ignore patterns match git check-ignore' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t05/src/fs/ignore.zig:14:9: 0x1008bbcef in pushFile (T05-test)
+               return error.NotImplemented;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t05/tests/t05_test.zig:293:9: 0x1008bc56f in test.FS-001 single ignore patterns match git check-ignore (T05-test)
+               try rules.pushFile("", line);
+               ^
+error: 't05_test.test.FS-004 streaming traversal memory is fixed at init and does not grow with file count' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t05/src/fs/traverse.zig:55:9: 0x100890933 in enumerate (T05-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t05/tests/t05_test.zig:377:26: 0x1008b9dfb in test.FS-004 streaming traversal memory is fixed at init and does not grow with file count (T05-test)
+               const coverage = try traverser.enumerate(io, capability_all,
+error: 't05_test.test.FS-005 symlink loops are not followed and an unreadable directory makes the result incomplete' failed:
+        .{ .glob = corpus.needle }, needle.sink(), .{ .requested = &flag });
+                                ^
+       /Users/guribbong/code/ZCR-worktrees/task-t05/src/fs/traverse.zig:55:9: 0x100890933 in enumerate (T05-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t05/tests/t05_test.zig:130:9: 0x10088ea8f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t05/tests/t05_test.zig:418:22: 0x1008b7807 in test.FS-005 symlink loops are not followed and an unreadable directory makes the result incomplete (T05-test)
+           const coverage = try h.enumerate(all_hidden, &collector);
+                            ^
+error: 't05_test.test.FS-006 Unicode names come back byte for byte and unsupported names are counted, not dropped silently' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t05/src/fs/traverse.zig:55:9: 0x100890933 in enumerate (T05-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t05/tests/t05_test.zig:130:9: 0x10088ea8f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t05/tests/t05_test.zig:445:22: 0x1008b64c3 in test.FS-006 Unicode names come back byte for byte and unsupported names are counted, not dropped silently (T05-test)
+           const coverage = try h.enumerate(all_hidden, &collector);
+                            ^
+error: 't05_test.test.T05 sorted order, glob filter and result limit' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t05/src/fs/traverse.zig:55:9: 0x100890933 in enumerate (T05-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t05/tests/t05_test.zig:130:9: 0x10088ea8f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t05/tests/t05_test.zig:467:9: 0x1008b584b in test.T05 sorted order, glob filter and result limit (T05-test)
+           _ = try h.enumerate(.{ .order = .path_then_offset, .limit = 100 }, &sorted);
+               ^
+error: 't05_test.test.T05 capability, spec, cancellation and sink backpressure are enforced' failed:
+       expected error.OutOfScope, found error.Unsupported
+       /Users/guribbong/code/ZCR-worktrees/task-t05/src/fs/traverse.zig:55:9: 0x100890933 in enumerate (T05-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x1008b00f3 in expectError__anon_39025 (T05-test)
+                   return error.TestUnexpectedError;
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/task-t05/tests/t05_test.zig:493:5: 0x1008b07b3 in test.T05 capability, spec, cancellation and sink backpressure are enforced (T05-test)
+           try testing.expectError(error.OutOfScope, h.traverser.enumerate(io, read_cap, .{}, collector.sink(), h.cancel()));
+           ^
+error: 't05_test.test.T05 ignore files beyond the size or rule limit exclude their subtree and are reported' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t05/src/fs/traverse.zig:55:9: 0x100890933 in enumerate (T05-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t05/tests/t05_test.zig:130:9: 0x10088ea8f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t05/tests/t05_test.zig:542:22: 0x10088f58b in test.T05 ignore files beyond the size or rule limit exclude their subtree and are reported (T05-test)
+           const coverage = try h.enumerate(all_hidden, &collector);
+                            ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache/o/36518c26f576a0d7056549479622b8b7/T05-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache --seed=0xaafabf18 --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 0/10 tests passed (10 failed)
+test transitive failure
++- install T05-test success
+|  +- compile test T05-test Debug native cached 309ms MaxRSS:31M
++- run test T05-test 0 pass, 10 fail (10 total)
+   +- compile test T05-test Debug native (reused)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache/o/5141f98b72c01d7e7e7d84fd5e561ea8/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-worktrees/task-t05 /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T05/zig-global-cache --seed 0xaafabf18 -Z5becbe2d1b935218 test -Dtest-group=fs -Doptimize=Debug -Dinstall-tests=true --prefix /Users/guribbong/code/ZCR-state/tasks/T05/out-red --summary all

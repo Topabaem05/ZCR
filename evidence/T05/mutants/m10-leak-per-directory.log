@@ -1,0 +1,1606 @@
+test
++- run test T05-test 8 pass, 2 fail (10 total); 61 leaks
+error: 't05_test.test.FS-001 nested .gitignore files and negations give Git's file set' leaked 9 allocations:
+       [DebugAllocator] (err): memory address 0x107dc0000 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:238:26: 0x102ed37f7 in walk (T05-test)
+               try self.enterDir(io, start_dir, start_len, spec);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:206:37: 0x102f0df6b in test.FS-001 nested .gitignore files and negations give Git's file set (T05-test)
+           const coverage = try h.enumerate(all_hidden, &collector);
+                                           ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x107dc0001 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:206:37: 0x102f0df6b in test.FS-001 nested .gitignore files and negations give Git's file set (T05-test)
+           const coverage = try h.enumerate(all_hidden, &collector);
+                                           ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x107dc0002 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:206:37: 0x102f0df6b in test.FS-001 nested .gitignore files and negations give Git's file set (T05-test)
+           const coverage = try h.enumerate(all_hidden, &collector);
+                                           ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x107dc0003 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:206:37: 0x102f0df6b in test.FS-001 nested .gitignore files and negations give Git's file set (T05-test)
+           const coverage = try h.enumerate(all_hidden, &collector);
+                                           ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x107dc0004 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:206:37: 0x102f0df6b in test.FS-001 nested .gitignore files and negations give Git's file set (T05-test)
+           const coverage = try h.enumerate(all_hidden, &collector);
+                                           ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x107dc0005 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:206:37: 0x102f0df6b in test.FS-001 nested .gitignore files and negations give Git's file set (T05-test)
+           const coverage = try h.enumerate(all_hidden, &collector);
+                                           ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x107dc0006 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:206:37: 0x102f0df6b in test.FS-001 nested .gitignore files and negations give Git's file set (T05-test)
+           const coverage = try h.enumerate(all_hidden, &collector);
+                                           ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x107dc0007 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:206:37: 0x102f0df6b in test.FS-001 nested .gitignore files and negations give Git's file set (T05-test)
+           const coverage = try h.enumerate(all_hidden, &collector);
+                                           ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x107dc0008 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:206:37: 0x102f0df6b in test.FS-001 nested .gitignore files and negations give Git's file set (T05-test)
+           const coverage = try h.enumerate(all_hidden, &collector);
+                                           ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+error: 't05_test.test.FS-002 a file under an excluded directory cannot be re-included, contents of a pattern-excluded directory can' leaked 4 allocations:
+       [DebugAllocator] (err): memory address 0x109f00000 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:238:26: 0x102ed37f7 in walk (T05-test)
+               try self.enterDir(io, start_dir, start_len, spec);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:229:24: 0x102f0d4af in test.FS-002 a file under an excluded directory cannot be re-included, contents of a pattern-excluded directory can (T05-test)
+           _ = try h.enumerate(all_hidden, &collector);
+                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x109f00001 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:229:24: 0x102f0d4af in test.FS-002 a file under an excluded directory cannot be re-included, contents of a pattern-excluded directory can (T05-test)
+           _ = try h.enumerate(all_hidden, &collector);
+                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x109f00002 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:229:24: 0x102f0d4af in test.FS-002 a file under an excluded directory cannot be re-included, contents of a pattern-excluded directory can (T05-test)
+           _ = try h.enumerate(all_hidden, &collector);
+                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x109f00003 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:229:24: 0x102f0d4af in test.FS-002 a file under an excluded directory cannot be re-included, contents of a pattern-excluded directory can (T05-test)
+           _ = try h.enumerate(all_hidden, &collector);
+                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+error: 't05_test.test.FS-003 hidden files, .git and escaped, comment and trailing-space patterns follow the policy' leaked 3 allocations:
+       [DebugAllocator] (err): memory address 0x109f20000 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:238:26: 0x102ed37f7 in walk (T05-test)
+               try self.enterDir(io, start_dir, start_len, spec);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:251:24: 0x102f0c7d7 in test.FS-003 hidden files, .git and escaped, comment and trailing-space patterns follow the policy (T05-test)
+           _ = try h.enumerate(all_hidden, &with_hidden);
+                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x109f20001 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:251:24: 0x102f0c7d7 in test.FS-003 hidden files, .git and escaped, comment and trailing-space patterns follow the policy (T05-test)
+           _ = try h.enumerate(all_hidden, &with_hidden);
+                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x109f20002 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:238:26: 0x102ed37f7 in walk (T05-test)
+               try self.enterDir(io, start_dir, start_len, spec);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:257:24: 0x102f0cb17 in test.FS-003 hidden files, .git and escaped, comment and trailing-space patterns follow the policy (T05-test)
+           _ = try h.enumerate(.{ .include_hidden = false, .limit = 10_000 }, &without_hidden);
+                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+error: 't05_test.test.FS-004 streaming traversal memory is fixed at init and does not grow with file count' failed:
+       expected 3745880, found 3745901
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x102ec6e3f in expectEqualInner__anon_37731 (T05-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x102f05f23 in expectEqual (T05-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:383:9: 0x102f060a7 in test.FS-004 streaming traversal memory is fixed at init and does not grow with file count (T05-test)
+               try testing.expectEqual(after_init, reserved.liveBytes());
+               ^
+       [DebugAllocator] (err): memory address 0x10a060000 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:238:26: 0x102ed37f7 in walk (T05-test)
+               try self.enterDir(io, start_dir, start_len, spec);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:377:49: 0x102f056eb in test.FS-004 streaming traversal memory is fixed at init and does not grow with file count (T05-test)
+               const coverage = try traverser.enumerate(io, capability_all, .{ .glob = corpus.needle }, needle.sink(), .{ .requested = &flag });
+                                                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a060001 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:377:49: 0x102f056eb in test.FS-004 streaming traversal memory is fixed at init and does not grow with file count (T05-test)
+               const coverage = try traverser.enumerate(io, capability_all, .{ .glob = corpus.needle }, needle.sink(), .{ .requested = &flag });
+                                                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a060002 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:377:49: 0x102f056eb in test.FS-004 streaming traversal memory is fixed at init and does not grow with file count (T05-test)
+               const coverage = try traverser.enumerate(io, capability_all, .{ .glob = corpus.needle }, needle.sink(), .{ .requested = &flag });
+                                                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a060003 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:377:49: 0x102f056eb in test.FS-004 streaming traversal memory is fixed at init and does not grow with file count (T05-test)
+               const coverage = try traverser.enumerate(io, capability_all, .{ .glob = corpus.needle }, needle.sink(), .{ .requested = &flag });
+                                                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a060004 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:377:49: 0x102f056eb in test.FS-004 streaming traversal memory is fixed at init and does not grow with file count (T05-test)
+               const coverage = try traverser.enumerate(io, capability_all, .{ .glob = corpus.needle }, needle.sink(), .{ .requested = &flag });
+                                                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a060005 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:377:49: 0x102f056eb in test.FS-004 streaming traversal memory is fixed at init and does not grow with file count (T05-test)
+               const coverage = try traverser.enumerate(io, capability_all, .{ .glob = corpus.needle }, needle.sink(), .{ .requested = &flag });
+                                                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a060006 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:377:49: 0x102f056eb in test.FS-004 streaming traversal memory is fixed at init and does not grow with file count (T05-test)
+               const coverage = try traverser.enumerate(io, capability_all, .{ .glob = corpus.needle }, needle.sink(), .{ .requested = &flag });
+                                                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a060007 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:377:49: 0x102f056eb in test.FS-004 streaming traversal memory is fixed at init and does not grow with file count (T05-test)
+               const coverage = try traverser.enumerate(io, capability_all, .{ .glob = corpus.needle }, needle.sink(), .{ .requested = &flag });
+                                                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a060008 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:377:49: 0x102f056eb in test.FS-004 streaming traversal memory is fixed at init and does not grow with file count (T05-test)
+               const coverage = try traverser.enumerate(io, capability_all, .{ .glob = corpus.needle }, needle.sink(), .{ .requested = &flag });
+                                                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a060009 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:377:49: 0x102f056eb in test.FS-004 streaming traversal memory is fixed at init and does not grow with file count (T05-test)
+               const coverage = try traverser.enumerate(io, capability_all, .{ .glob = corpus.needle }, needle.sink(), .{ .requested = &flag });
+                                                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a06000a leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:377:49: 0x102f056eb in test.FS-004 streaming traversal memory is fixed at init and does not grow with file count (T05-test)
+               const coverage = try traverser.enumerate(io, capability_all, .{ .glob = corpus.needle }, needle.sink(), .{ .requested = &flag });
+                                                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a06000b leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:377:49: 0x102f056eb in test.FS-004 streaming traversal memory is fixed at init and does not grow with file count (T05-test)
+               const coverage = try traverser.enumerate(io, capability_all, .{ .glob = corpus.needle }, needle.sink(), .{ .requested = &flag });
+                                                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a06000c leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:377:49: 0x102f056eb in test.FS-004 streaming traversal memory is fixed at init and does not grow with file count (T05-test)
+               const coverage = try traverser.enumerate(io, capability_all, .{ .glob = corpus.needle }, needle.sink(), .{ .requested = &flag });
+                                                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a06000d leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:377:49: 0x102f056eb in test.FS-004 streaming traversal memory is fixed at init and does not grow with file count (T05-test)
+               const coverage = try traverser.enumerate(io, capability_all, .{ .glob = corpus.needle }, needle.sink(), .{ .requested = &flag });
+                                                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a06000e leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:377:49: 0x102f056eb in test.FS-004 streaming traversal memory is fixed at init and does not grow with file count (T05-test)
+               const coverage = try traverser.enumerate(io, capability_all, .{ .glob = corpus.needle }, needle.sink(), .{ .requested = &flag });
+                                                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a06000f leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:377:49: 0x102f056eb in test.FS-004 streaming traversal memory is fixed at init and does not grow with file count (T05-test)
+               const coverage = try traverser.enumerate(io, capability_all, .{ .glob = corpus.needle }, needle.sink(), .{ .requested = &flag });
+                                                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a060010 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:377:49: 0x102f056eb in test.FS-004 streaming traversal memory is fixed at init and does not grow with file count (T05-test)
+               const coverage = try traverser.enumerate(io, capability_all, .{ .glob = corpus.needle }, needle.sink(), .{ .requested = &flag });
+                                                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a060011 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:377:49: 0x102f056eb in test.FS-004 streaming traversal memory is fixed at init and does not grow with file count (T05-test)
+               const coverage = try traverser.enumerate(io, capability_all, .{ .glob = corpus.needle }, needle.sink(), .{ .requested = &flag });
+                                                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a060012 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:377:49: 0x102f056eb in test.FS-004 streaming traversal memory is fixed at init and does not grow with file count (T05-test)
+               const coverage = try traverser.enumerate(io, capability_all, .{ .glob = corpus.needle }, needle.sink(), .{ .requested = &flag });
+                                                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a060013 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:377:49: 0x102f056eb in test.FS-004 streaming traversal memory is fixed at init and does not grow with file count (T05-test)
+               const coverage = try traverser.enumerate(io, capability_all, .{ .glob = corpus.needle }, needle.sink(), .{ .requested = &flag });
+                                                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a060014 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:377:49: 0x102f056eb in test.FS-004 streaming traversal memory is fixed at init and does not grow with file count (T05-test)
+               const coverage = try traverser.enumerate(io, capability_all, .{ .glob = corpus.needle }, needle.sink(), .{ .requested = &flag });
+                                                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+error: 't05_test.test.FS-005 symlink loops are not followed and an unreadable directory makes the result incomplete' leaked 2 allocations:
+       [DebugAllocator] (err): memory address 0x10a3e0000 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:238:26: 0x102ed37f7 in walk (T05-test)
+               try self.enterDir(io, start_dir, start_len, spec);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:418:37: 0x102f02fe3 in test.FS-005 symlink loops are not followed and an unreadable directory makes the result incomplete (T05-test)
+           const coverage = try h.enumerate(all_hidden, &collector);
+                                           ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a3e0001 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:418:37: 0x102f02fe3 in test.FS-005 symlink loops are not followed and an unreadable directory makes the result incomplete (T05-test)
+           const coverage = try h.enumerate(all_hidden, &collector);
+                                           ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+error: 't05_test.test.FS-006 Unicode names come back byte for byte and unsupported names are counted, not dropped silently' leaked 2 allocations:
+       [DebugAllocator] (err): memory address 0x10a560000 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:238:26: 0x102ed37f7 in walk (T05-test)
+               try self.enterDir(io, start_dir, start_len, spec);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:446:37: 0x102f01d13 in test.FS-006 Unicode names come back byte for byte and unsupported names are counted, not dropped silently (T05-test)
+           const coverage = try h.enumerate(all_hidden, &collector);
+                                           ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a560001 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:446:37: 0x102f01d13 in test.FS-006 Unicode names come back byte for byte and unsupported names are counted, not dropped silently (T05-test)
+           const coverage = try h.enumerate(all_hidden, &collector);
+                                           ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+error: 't05_test.test.T05 sorted order, glob filter and result limit' leaked 11 allocations:
+       [DebugAllocator] (err): memory address 0x10a8e0000 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:238:26: 0x102ed37f7 in walk (T05-test)
+               try self.enterDir(io, start_dir, start_len, spec);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:468:24: 0x102f00f9f in test.T05 sorted order, glob filter and result limit (T05-test)
+           _ = try h.enumerate(.{ .order = .path_then_offset, .limit = 100 }, &sorted);
+                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a8e0001 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:468:24: 0x102f00f9f in test.T05 sorted order, glob filter and result limit (T05-test)
+           _ = try h.enumerate(.{ .order = .path_then_offset, .limit = 100 }, &sorted);
+                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a8e0002 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:468:24: 0x102f00f9f in test.T05 sorted order, glob filter and result limit (T05-test)
+           _ = try h.enumerate(.{ .order = .path_then_offset, .limit = 100 }, &sorted);
+                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a8e0003 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:468:24: 0x102f00f9f in test.T05 sorted order, glob filter and result limit (T05-test)
+           _ = try h.enumerate(.{ .order = .path_then_offset, .limit = 100 }, &sorted);
+                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a8e0004 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:238:26: 0x102ed37f7 in walk (T05-test)
+               try self.enterDir(io, start_dir, start_len, spec);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:474:24: 0x102f012d7 in test.T05 sorted order, glob filter and result limit (T05-test)
+           _ = try h.enumerate(.{ .glob = "**/*.zig", .order = .path_then_offset }, &zig_only);
+                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a8e0005 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:474:24: 0x102f012d7 in test.T05 sorted order, glob filter and result limit (T05-test)
+           _ = try h.enumerate(.{ .glob = "**/*.zig", .order = .path_then_offset }, &zig_only);
+                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a8e0006 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:474:24: 0x102f012d7 in test.T05 sorted order, glob filter and result limit (T05-test)
+           _ = try h.enumerate(.{ .glob = "**/*.zig", .order = .path_then_offset }, &zig_only);
+                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a8e0007 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:474:24: 0x102f012d7 in test.T05 sorted order, glob filter and result limit (T05-test)
+           _ = try h.enumerate(.{ .glob = "**/*.zig", .order = .path_then_offset }, &zig_only);
+                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a8e0008 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:238:26: 0x102ed37f7 in walk (T05-test)
+               try self.enterDir(io, start_dir, start_len, spec);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:478:37: 0x102f01487 in test.T05 sorted order, glob filter and result limit (T05-test)
+           const coverage = try h.enumerate(.{ .order = .path_then_offset, .limit = 2 }, &limited);
+                                           ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a8e0009 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:478:37: 0x102f01487 in test.T05 sorted order, glob filter and result limit (T05-test)
+           const coverage = try h.enumerate(.{ .order = .path_then_offset, .limit = 2 }, &limited);
+                                           ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10a8e000a leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:478:37: 0x102f01487 in test.T05 sorted order, glob filter and result limit (T05-test)
+           const coverage = try h.enumerate(.{ .order = .path_then_offset, .limit = 2 }, &limited);
+                                           ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+error: 't05_test.test.T05 capability, spec, cancellation and sink backpressure are enforced' failed:
+       expected 4036187, found 4036189
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x102ec6e3f in expectEqualInner__anon_37731 (T05-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x102efd2ff in expectEqual (T05-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:525:5: 0x102efd3e3 in test.T05 capability, spec, cancellation and sink backpressure are enforced (T05-test)
+           try testing.expectEqual(live, h.reserved.liveBytes());
+           ^
+       [DebugAllocator] (err): memory address 0x10aa60000 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:238:26: 0x102ed37f7 in walk (T05-test)
+               try self.enterDir(io, start_dir, start_len, spec);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:508:34: 0x102efc9f3 in test.T05 capability, spec, cancellation and sink backpressure are enforced (T05-test)
+           _ = try h.traverser.enumerate(io, sub_cap, .{ .limit = 100 }, sub.sink(), h.cancel());
+                                        ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10aa60001 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:238:26: 0x102ed37f7 in walk (T05-test)
+               try self.enterDir(io, start_dir, start_len, spec);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:517:62: 0x102efcf0b in test.T05 capability, spec, cancellation and sink backpressure are enforced (T05-test)
+           try testing.expectError(error.Busy, h.traverser.enumerate(io, cap, .{}, slow.sink(), h.cancel()));
+                                                                    ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10aa60002 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:517:62: 0x102efcf0b in test.T05 capability, spec, cancellation and sink backpressure are enforced (T05-test)
+           try testing.expectError(error.Busy, h.traverser.enumerate(io, cap, .{}, slow.sink(), h.cancel()));
+                                                                    ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10aa60003 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:238:26: 0x102ed37f7 in walk (T05-test)
+               try self.enterDir(io, start_dir, start_len, spec);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:523:24: 0x102efd0e7 in test.T05 capability, spec, cancellation and sink backpressure are enforced (T05-test)
+           _ = try h.enumerate(.{ .limit = 100 }, &again);
+                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10aa60004 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:523:24: 0x102efd0e7 in test.T05 capability, spec, cancellation and sink backpressure are enforced (T05-test)
+           _ = try h.enumerate(.{ .limit = 100 }, &again);
+                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+error: 't05_test.test.T05 ignore files beyond the size or rule limit exclude their subtree and are reported' leaked 4 allocations:
+       [DebugAllocator] (err): memory address 0x10aa80000 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:238:26: 0x102ed37f7 in walk (T05-test)
+               try self.enterDir(io, start_dir, start_len, spec);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:543:37: 0x102ec74c7 in test.T05 ignore files beyond the size or rule limit exclude their subtree and are reported (T05-test)
+           const coverage = try h.enumerate(all_hidden, &collector);
+                                           ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10aa80001 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:543:37: 0x102ec74c7 in test.T05 ignore files beyond the size or rule limit exclude their subtree and are reported (T05-test)
+           const coverage = try h.enumerate(all_hidden, &collector);
+                                           ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10aa80002 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:543:37: 0x102ec74c7 in test.T05 ignore files beyond the size or rule limit exclude their subtree and are reported (T05-test)
+           const coverage = try h.enumerate(all_hidden, &collector);
+                                           ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x10aa80003 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:357:33: 0x102ed9c83 in enterDir (T05-test)
+               _ = self.allocator.alloc(u8, 1) catch {};
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:282:38: 0x102ed3e67 in walk (T05-test)
+                           try self.enterDir(io, child, rel_len, spec);
+                                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/src/fs/traverse.zig:177:26: 0x102ec8df7 in enumerate (T05-test)
+                   try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:130:37: 0x102ec6a4f in enumerate (T05-test)
+               return h.traverser.enumerate(io, capability, spec, collector.sink(), h.cancel());
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory/tests/t05_test.zig:543:37: 0x102ec74c7 in test.T05 ignore files beyond the size or rule limit exclude their subtree and are reported (T05-test)
+           const coverage = try h.enumerate(all_hidden, &collector);
+                                           ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102ea312f in mainServer (T05-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102ea37df in main (T05-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102ea15a3 in callMain (T05-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache/o/99c2de8a11fe2fcabdb9400a793a71f4/T05-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache --seed=0xcbb0b452 --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 8/10 tests passed (2 failed)
+test transitive failure
++- run test T05-test 8 pass, 2 fail (10 total); 61 leaks
+   +- compile test T05-test Debug native success 5s MaxRSS:249M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache/o/5141f98b72c01d7e7e7d84fd5e561ea8/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m10-leak-per-directory /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T05/zig-global-cache --seed 0xcbb0b452 -Z52542b788170244d test -Dtest-group=fs --summary all

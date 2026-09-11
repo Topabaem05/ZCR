@@ -1,0 +1,22 @@
+test
++- run test T05-test 10 pass, 1 fail (11 total)
+error: 't05_test.test.T05 capability, spec, cancellation and sink backpressure are enforced' failed:
+       expected 50, found 51
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x1030776eb in expectEqualInner__anon_40044 (T05-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x10307899b in expectEqual (T05-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m15-no-ancestor-ignore/tests/t05_test.zig:512:5: 0x103078a3b in test.T05 capability, spec, cancellation and sink backpressure are enforced (T05-test)
+           try testing.expectEqual(@as(usize, 50), sub.paths.items.len); // root .gitignore still hides d/x.tmp
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache/o/e3e9aa7e88674cde89062a41c6ac3caa/T05-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache --seed=0x3514433f --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 10/11 tests passed (1 failed)
+test transitive failure
++- run test T05-test 10 pass, 1 fail (11 total)
+   +- compile test T05-test Debug native success 4s MaxRSS:250M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache/o/5141f98b72c01d7e7e7d84fd5e561ea8/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m15-no-ancestor-ignore /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T05/zig-global-cache --seed 0x3514433f -Za82b56bac447ed96 test -Dtest-group=fs --summary all

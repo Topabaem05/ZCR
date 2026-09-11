@@ -1,0 +1,18 @@
+test
++- run test T05-test 9 pass, 1 fail (10 total)
+error: 't05_test.test.FS-006 Unicode names come back byte for byte and unsupported names are counted, not dropped silently' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:615:14: 0x102ac2eab in expect (T05-test)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m7-no-name-validation/tests/t05_test.zig:448:5: 0x102afdf3b in test.FS-006 Unicode names come back byte for byte and unsupported names are counted, not dropped silently (T05-test)
+           try testing.expect(!contains(collector.paths.items, "back\\slash.txt"));
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache/o/393c36a1a3f3154394cb5e85e3d946c4/T05-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache --seed=0x60be1820 --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 9/10 tests passed (1 failed)
+test transitive failure
++- run test T05-test 9 pass, 1 fail (10 total)
+   +- compile test T05-test Debug native success 6s MaxRSS:262M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache/o/5141f98b72c01d7e7e7d84fd5e561ea8/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m7-no-name-validation /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T05/zig-global-cache --seed 0x60be1820 -Zc58a468aa963f5e0 test -Dtest-group=fs --summary all

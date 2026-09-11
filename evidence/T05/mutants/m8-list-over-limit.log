@@ -1,0 +1,26 @@
+test
++- run test T05-test 9 pass, 1 fail (10 total)
+error: 't05_test.test.T05 ignore files beyond the size or rule limit exclude their subtree and are reported' failed:
+       expected (2):
+         ok/.gitignore
+         ok/a.txt
+       actual (4):
+         big/.gitignore
+         big/c.txt
+         ok/.gitignore
+         ok/a.txt
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m8-list-over-limit/tests/t05_test.zig:174:9: 0x102b52d17 in expectSameSet (T05-test)
+               return error.TestExpectedEqual;
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m8-list-over-limit/tests/t05_test.zig:545:5: 0x102b5369b in test.T05 ignore files beyond the size or rule limit exclude their subtree and are reported (T05-test)
+           try expectSameSet(&.{ "ok/.gitignore", "ok/a.txt" }, collector.sorted());
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache/o/02a3cad9fdd633626d07a9dff532a425/T05-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache --seed=0xf31f4566 --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 9/10 tests passed (1 failed)
+test transitive failure
++- run test T05-test 9 pass, 1 fail (10 total)
+   +- compile test T05-test Debug native success 5s MaxRSS:259M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache/o/5141f98b72c01d7e7e7d84fd5e561ea8/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m8-list-over-limit /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T05/zig-global-cache --seed 0xf31f4566 -Zcbfa76f5fc865311 test -Dtest-group=fs --summary all

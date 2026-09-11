@@ -1,0 +1,30 @@
+test
++- run test T05-test 8 pass, 2 fail (10 total)
+error: 't05_test.test.FS-002 a file under an excluded directory cannot be re-included, contents of a pattern-excluded directory can' failed:
+       expected (3):
+         .gitignore
+         cache/keep.txt
+         vendor/keep/a.txt
+       actual (2):
+         .gitignore
+         cache/keep.txt
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m3-trailing-starstar-zero/tests/t05_test.zig:174:9: 0x1049c2d17 in expectSameSet (T05-test)
+               return error.TestExpectedEqual;
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m3-trailing-starstar-zero/tests/t05_test.zig:230:5: 0x104a09627 in test.FS-002 a file under an excluded directory cannot be re-included, contents of a pattern-excluded directory can (T05-test)
+           try expectSameSet(oracle, collector.sorted());
+           ^
+error: 't05_test.test.FS-001 single ignore patterns match git check-ignore' failed:
+       pattern lib/** path lib: git=false zcr=true
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m3-trailing-starstar-zero/tests/t05_test.zig:299:17: 0x104a04263 in test.FS-001 single ignore patterns match git check-ignore (T05-test)
+                       return error.TestExpectedEqual;
+                       ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache/o/d3dd539610ea50c4d5c5ac98acdc1f3c/T05-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache --seed=0xbc397d3a --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 8/10 tests passed (2 failed)
+test transitive failure
++- run test T05-test 8 pass, 2 fail (10 total)
+   +- compile test T05-test Debug native success 6s MaxRSS:260M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache/o/5141f98b72c01d7e7e7d84fd5e561ea8/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m3-trailing-starstar-zero /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T05/zig-global-cache --seed 0xbc397d3a -Z85a55ebb8c95402e test -Dtest-group=fs --summary all
