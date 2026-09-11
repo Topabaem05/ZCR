@@ -383,6 +383,37 @@ test "SR-005 internal first-match time and delivery time are recorded separately
     try testing.expectEqual(@as(u64, 1), report.matches);
 }
 
+const CancelOnChunk = struct {
+    flag: *std.atomic.Value(bool),
+    last_chunk: u32 = 0,
+
+    fn afterChunk(context: ?*anyopaque, chunk: u32) void {
+        const self: *CancelOnChunk = @ptrCast(@alignCast(context.?));
+        self.last_chunk = chunk;
+        if (chunk == 1) self.flag.store(true, .release);
+    }
+};
+
+test "SR-005 cancellation inside a large file is observed at the next chunk" {
+    var arena_state = std.heap.ArenaAllocator.init(testing.allocator);
+    defer arena_state.deinit();
+    const h = try Harness.init(arena_state.allocator(), .{ .chunk_bytes = 4 * KiB });
+    defer h.deinit();
+    const bytes = try h.arena.alloc(u8, 1 * MiB);
+    for (bytes, 0..) |*b, i| b.* = if (i % 64 == 63) '\n' else 'q';
+    @memcpy(bytes[bytes.len - 7 ..][0..6], "needle");
+    try h.write("long.txt", bytes);
+
+    var on_chunk: CancelOnChunk = .{ .flag = &h.cancel_flag };
+    var fault: search.SearchFault = .{ .after_chunk = CancelOnChunk.afterChunk, .context = &on_chunk };
+    h.searcher.fault = &fault;
+    var collector: Collector = .{ .arena = h.arena };
+    try testing.expectError(error.Cancelled, h.run(.{ .literal = "needle" }, &collector));
+    try testing.expectEqual(@as(u32, 1), on_chunk.last_chunk);
+    h.searcher.fault = null;
+    h.cancel_flag.store(false, .release);
+}
+
 // ------------------------------------------------------------------ SR-006
 
 const Rewrite = struct {
@@ -396,6 +427,56 @@ const Rewrite = struct {
         self.h.write(path, "inserted line\ninserted line\nkey = value\nkey again\n") catch unreachable;
     }
 };
+
+/// Rewrites a file with same-size content after the scan, optionally restoring its mtime
+/// so that only the projection's byte check can notice the change.
+const SameSize = struct {
+    h: *Harness,
+    content: []const u8,
+    restore_mtime: bool,
+    done: bool = false,
+
+    fn afterScan(context: ?*anyopaque, path: []const u8) void {
+        const self: *SameSize = @ptrCast(@alignCast(context.?));
+        if (self.done) return;
+        self.done = true;
+        const before = self.h.tmp.dir.statFile(io, path, .{}) catch unreachable;
+        std.debug.assert(before.size == self.content.len);
+        const file = self.h.tmp.dir.openFile(io, path, .{ .mode = .read_write }) catch unreachable;
+        defer file.close(io);
+        file.writePositionalAll(io, self.content, 0) catch unreachable;
+        if (self.restore_mtime) file.setTimestamps(io, .{ .modify_timestamp = .{ .new = before.mtime } }) catch unreachable;
+    }
+};
+
+test "SR-006 same-size rewrites are caught by the version check or by the match bytes" {
+    var arena_state = std.heap.ArenaAllocator.init(testing.allocator);
+    defer arena_state.deinit();
+    const h = try Harness.init(arena_state.allocator(), .{});
+    defer h.deinit();
+    const original = "key = 1\nplain\nother\n";
+
+    // Same size, new mtime, one more match: the version check must retry.
+    const more = "key = 1\nplain\nkey=3\n";
+    try h.write("a.txt", original);
+    var add: SameSize = .{ .h = h, .content = more, .restore_mtime = false };
+    var fault: search.SearchFault = .{ .after_scan = SameSize.afterScan, .context = &add };
+    h.searcher.fault = &fault;
+    var retried: Collector = .{ .arena = h.arena };
+    _ = try h.run(.{ .literal = "key", .context_lines = 0 }, &retried);
+    try expectFileMatchesOracle(h.arena, retried.find("a.txt").?, more, "key", 0);
+
+    // Same size, mtime restored, match bytes gone: only the byte check can notice.
+    const gone = "kez = 1\nplain\nother\n";
+    try h.write("a.txt", original);
+    var hide: SameSize = .{ .h = h, .content = gone, .restore_mtime = true };
+    fault = .{ .after_scan = SameSize.afterScan, .context = &hide };
+    var none: Collector = .{ .arena = h.arena };
+    _ = try h.run(.{ .literal = "key", .context_lines = 0 }, &none);
+    try testing.expectEqual(@as(usize, 0), none.files.items.len);
+    try testing.expectEqual(@as(u64, 1), h.searcher.report().retries);
+    h.searcher.fault = null;
+}
 
 test "SR-006 a file that changes between scan and context read is retried once or skipped, never mixed" {
     var arena_state = std.heap.ArenaAllocator.init(testing.allocator);
