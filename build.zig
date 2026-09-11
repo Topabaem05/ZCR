@@ -21,7 +21,7 @@ comptime {
 
 pub const TestGroup = enum { io, fs, search, batch, write, mcp, isolation, broker, watch, observe, ast, scheduler, memory, perf, dev, security };
 
-const Import = enum { core, evidence, caps, build_options, policy, guard, memory, admission, fs_read, fs_traverse, search };
+const Import = enum { core, evidence, caps, build_options, policy, guard, memory, admission, fs_read, fs_traverse, search, batch, projection };
 
 const TestFile = struct {
     task: []const u8,
@@ -39,6 +39,7 @@ const test_files = [_]TestFile{
     .{ .task = "T04", .path = "tests/t04_test.zig", .group = .io, .imports = &.{ .core, .policy, .memory, .admission, .fs_read } },
     .{ .task = "T05", .path = "tests/t05_test.zig", .group = .fs, .imports = &.{ .core, .policy, .memory, .fs_traverse, .evidence } },
     .{ .task = "T06", .path = "tests/t06_test.zig", .group = .search, .imports = &.{ .core, .policy, .memory, .fs_read, .fs_traverse, .search } },
+    .{ .task = "T07", .path = "tests/t07_test.zig", .group = .batch, .imports = &.{ .core, .policy, .memory, .admission, .fs_read, .batch, .projection } },
 };
 
 /// Exit code for CLI roles that exist in the contract but are not built yet (EX_UNAVAILABLE).
@@ -163,6 +164,27 @@ pub fn build(b: *std.Build) void {
             .{ .name = "zcr_fs_traverse", .module = fs_traverse_module },
         },
     });
+    // T07: batch read (I06) and the common compact output projection.
+    const batch_module = b.createModule(.{
+        .root_source_file = b.path("src/batch/read.zig"),
+        .target = target,
+        .optimize = optimize,
+        .imports = &.{
+            .{ .name = "zcr_core", .module = core },
+            .{ .name = "zcr_policy", .module = policy_module },
+            .{ .name = "zcr_memory", .module = memory_module },
+            .{ .name = "zcr_admission", .module = admission_module },
+            .{ .name = "zcr_fs_read", .module = fs_read_module },
+        },
+    });
+    const projection_module = b.createModule(.{
+        .root_source_file = b.path("src/protocol/projection.zig"),
+        .target = target,
+        .optimize = optimize,
+        .imports = &.{
+            .{ .name = "zcr_core", .module = core },
+        },
+    });
     // A tool is installed once its owning task has delivered the source file.
     if (sourceExists(b, "tools/dev/guard.zig")) {
         b.installArtifact(b.addExecutable(.{ .name = "zcr-dev-guard", .root_module = guard_module }));
@@ -211,6 +233,8 @@ pub fn build(b: *std.Build) void {
             .fs_read => module.addImport("zcr_fs_read", fs_read_module),
             .fs_traverse => module.addImport("zcr_fs_traverse", fs_traverse_module),
             .search => module.addImport("zcr_search", search_module),
+            .batch => module.addImport("zcr_batch", batch_module),
+            .projection => module.addImport("zcr_projection", projection_module),
             .caps => module.addImport("caps", caps_module orelse blk: {
                 caps_module = capsModule(b, target, optimize);
                 break :blk caps_module.?;
