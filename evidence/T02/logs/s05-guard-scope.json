@@ -1,0 +1,42 @@
+{
+  "task": "T02",
+  "role": "task",
+  "violations": [],
+  "changes": [
+    {
+      "kind": "added",
+      "path": "src/policy/capability.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "src/policy/paths.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "src/policy/scope.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "tests/t02_test.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "tools/dev/guard.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    }
+  ]
+}

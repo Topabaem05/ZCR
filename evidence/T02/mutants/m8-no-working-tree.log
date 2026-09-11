@@ -1,0 +1,30 @@
+test
++- run test T02-test 10 pass, 2 fail (12 total)
+error: 't02_test.test.DV-002 out-of-scope new, renamed, deleted, staged and committed files are all rejected' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:615:14: 0x10451af83 in expect (T02-test)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /Users/guribbong/code/ZCR-state/tasks/T02/tmp/mutants/m8-no-working-tree/tests/t02_test.zig:390:5: 0x104536f03 in test.DV-002 out-of-scope new, renamed, deleted, staged and committed files are all rejected (T02-test)
+           try testing.expect(hasViolation(report, "docs/readme.md", .outside_owned_paths)); // deleted
+           ^
+error: 't02_test.test.DV-002 changes inside owned paths pass and ownership matches whole path components' failed:
+       expected 1, found 0
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x1044f297b in expectEqualInner__anon_36537 (T02-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x1045356bf in expectEqual (T02-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T02/tmp/mutants/m8-no-working-tree/tests/t02_test.zig:415:5: 0x104535773 in test.DV-002 changes inside owned paths pass and ownership matches whole path components (T02-test)
+           try testing.expectEqual(@as(usize, 1), clean.changes.len);
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T02/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T02/zig-local-cache/o/afcee10eaecd9f7c5f5e652268a5fa1b/T02-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T02/zig-local-cache --seed=0x9e7d553a --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 10/12 tests passed (2 failed)
+test transitive failure
++- run test T02-test 10 pass, 2 fail (12 total)
+   +- compile test T02-test Debug native success 1s MaxRSS:257M
+      +- options success
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T02/zig-local-cache/o/9eba755f0f9193364046b96ceb76bdad/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T02/tmp/mutants/m8-no-working-tree /Users/guribbong/code/ZCR-state/tasks/T02/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T02/zig-global-cache --seed 0x9e7d553a -Z8a3e822db8695b18 test -Dtest-group=isolation --summary all

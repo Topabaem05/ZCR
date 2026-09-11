@@ -1,0 +1,19 @@
+test
++- run test T02-test 11 pass, 1 fail (12 total)
+error: 't02_test.test.DV-003 two tasks editing the same shared contract are rejected unless the integrator makes the change' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:615:14: 0x104472f83 in expect (T02-test)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /Users/guribbong/code/ZCR-state/tasks/T02/tmp/mutants/m6-no-integrator-paths/tests/t02_test.zig:449:5: 0x104479e2f in test.DV-003 two tasks editing the same shared contract are rejected unless the integrator makes the change (T02-test)
+           try testing.expect(hasViolation(t98, "contracts/api.json", .integrator_owned));
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T02/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T02/zig-local-cache/o/560ea760ba0001b1dff4e3f6363a37dd/T02-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T02/zig-local-cache --seed=0xd33ccc1b --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 11/12 tests passed (1 failed)
+test transitive failure
++- run test T02-test 11 pass, 1 fail (12 total)
+   +- compile test T02-test Debug native success 1s MaxRSS:266M
+      +- options success
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T02/zig-local-cache/o/9eba755f0f9193364046b96ceb76bdad/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T02/tmp/mutants/m6-no-integrator-paths /Users/guribbong/code/ZCR-state/tasks/T02/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T02/zig-global-cache --seed 0xd33ccc1b -Z3aeeaaf32b1bbed8 test -Dtest-group=isolation --summary all

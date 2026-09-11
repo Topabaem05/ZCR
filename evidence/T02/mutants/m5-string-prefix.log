@@ -1,0 +1,20 @@
+test
++- run test T02-test 11 pass, 1 fail (12 total)
+error: 't02_test.test.IS-003 allowed operations inside scope yield distinct immutable capabilities' failed:
+       expected error.OutOfScope, found .{ .handle = @enumFromInt(6), .operation = .patch, .workspace_id = .{ .registry_uuid = { 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17 }, .incarnation = { 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34 } }, .task_id = .{ .uuid = { 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51 } }, .policy_digest = { 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68 }, .path = .{ .bytes = { 115, 114, 99, 50, 47, 120, 46, 122, 105, 103 } } }
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:65:9: 0x102d4ec37 in expectError__anon_49358 (T02-test)
+               return error.TestExpectedError;
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T02/tmp/mutants/m5-string-prefix/tests/t02_test.zig:270:5: 0x102d5bdcf in test.IS-003 allowed operations inside scope yield distinct immutable capabilities (T02-test)
+           try testing.expectError(error.OutOfScope, authorizer.authorize(io, session(), .patch, rel("src2/x.zig")));
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T02/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T02/zig-local-cache/o/217c41c4fb85b2649cee24ef20a07dd0/T02-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T02/zig-local-cache --seed=0xd5ee95ba --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 11/12 tests passed (1 failed)
+test transitive failure
++- run test T02-test 11 pass, 1 fail (12 total)
+   +- compile test T02-test Debug native success 1s MaxRSS:272M
+      +- options success
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T02/zig-local-cache/o/9eba755f0f9193364046b96ceb76bdad/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T02/tmp/mutants/m5-string-prefix /Users/guribbong/code/ZCR-state/tasks/T02/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T02/zig-global-cache --seed 0xd5ee95ba -Z8fc7dfd31eff2def test -Dtest-group=isolation --summary all

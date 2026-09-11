@@ -1,0 +1,26 @@
+test
++- run test T02-test 11 pass, 1 fail (12 total)
+error: 't02_test.test.IS-004 the linked worktree .git file is neither writable nor readable' failed:
+       expected error.OutOfScope, found error.NotFound
+       /Users/guribbong/code/ZCR-state/tasks/T02/tmp/mutants/m7b/src/policy/paths.zig:114:39: 0x100614403 in resolve (T02-test)
+               if (entry.kind != .directory) return error.NotFound;
+                                             ^
+       /Users/guribbong/code/ZCR-state/tasks/T02/tmp/mutants/m7b/src/policy/capability.zig:95:30: 0x10060fc27 in authorize (T02-test)
+                   const resolved = try paths.resolve(io, self.root.dir, path.bytes);
+                                    ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x10060ece3 in expectError__anon_49358 (T02-test)
+                   return error.TestUnexpectedError;
+                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T02/tmp/mutants/m7b/tests/t02_test.zig:294:5: 0x10061a9eb in test.IS-004 the linked worktree .git file is neither writable nor readable (T02-test)
+           try testing.expectError(error.OutOfScope, authorizer.authorize(io, session(), .create, rel(".git/hooks/pre-commit")));
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T02/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T02/zig-local-cache/o/68649a4afa3e05eaaf7cd2de3e327759/T02-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T02/zig-local-cache --seed=0x4cea4b34 --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 11/12 tests passed (1 failed)
+test transitive failure
++- run test T02-test 11 pass, 1 fail (12 total)
+   +- compile test T02-test Debug native success 2s MaxRSS:267M
+      +- options success
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T02/zig-local-cache/o/9eba755f0f9193364046b96ceb76bdad/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T02/tmp/mutants/m7b /Users/guribbong/code/ZCR-state/tasks/T02/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T02/zig-global-cache --seed 0x4cea4b34 -Z4e5a2a2cec56a3a9 test -Dtest-group=isolation --summary all
