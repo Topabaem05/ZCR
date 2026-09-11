@@ -56,14 +56,37 @@ pub const ErrorInfo = struct {
 };
 
 pub fn wireCode(err: Error) WireCode {
-    _ = @errorName(err);
-    return .E_INTERNAL; // S02 RED placeholder
+    return switch (err) {
+        error.InvalidArgument => .E_INVALID_ARGUMENT,
+        error.Unsupported => .E_UNSUPPORTED,
+        // docs/06 names E_MANIFEST_UNBOUND, but response.schema.json has no such code.
+        // Until the integrator changes the contract, an unbound manifest is a scope refusal.
+        error.ManifestUnbound => .E_SCOPE,
+        error.OutOfScope => .E_SCOPE,
+        error.PathEscape => .E_PATH_ESCAPE,
+        error.OutOfMemory, error.ResourceExhausted => .E_RESOURCE,
+        error.Busy => .E_BUSY,
+        error.OutputBudgetExceeded => .E_OUTPUT_BUDGET,
+        error.Cancelled => .E_CANCELLED,
+        error.DeadlineExceeded => .E_DEADLINE,
+        error.VersionConflict => .E_VERSION_CONFLICT,
+        error.LeaseExpired => .E_LEASE,
+        error.FenceMismatch => .E_FENCE,
+        error.NotFound => .E_NOT_FOUND,
+        error.NotRegular => .E_NOT_REGULAR,
+        error.IoFailure => .E_IO,
+        error.DurabilityFailed => .E_DURABILITY,
+        error.RecoveryRequired => .E_RECOVERY_REQUIRED,
+        error.InvariantViolation => .E_INTERNAL,
+    };
 }
 
 /// Default `retryable` flag for a code. Only queue and resource exhaustion is
 /// retryable with bounded backoff; everything else needs a changed request, a
 /// re-read, a host rebind or a receipt check first (docs/08 §3).
 pub fn defaultRetryable(code: WireCode) bool {
-    _ = code;
-    return true; // S02 RED placeholder
+    return switch (code) {
+        .E_BUSY, .E_RESOURCE => true,
+        else => false,
+    };
 }

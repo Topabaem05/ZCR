@@ -151,6 +151,7 @@ pub fn build(b: *std.Build) void {
         const unavailable = b.addRunArtifact(zcr);
         unavailable.addArg("mcp");
         unavailable.expectExitCode(exit_unavailable);
+        unavailable.expectStdErrEqual("zcr: 'mcp' is not implemented in this build (T08); no tools are served\n");
         unavailable.has_side_effects = true;
         test_step.dependOn(&unavailable.step);
         selected += 1;

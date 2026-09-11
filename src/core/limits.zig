@@ -137,6 +137,6 @@ pub const scheduler = struct {
 
 /// `hardware_ceiling_formula`: CPU permits ZCR allows itself, not reserved cores.
 pub fn hardwareCeiling(usable_physical_cpus: u32) u32 {
-    _ = usable_physical_cpus;
-    return 0; // S02 RED placeholder
+    const reserve: u32 = if (usable_physical_cpus >= 8) 2 else 1;
+    return if (usable_physical_cpus > reserve) usable_physical_cpus - reserve else 1;
 }

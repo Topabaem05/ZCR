@@ -112,8 +112,14 @@ pub const RelativePath = struct {
     bytes: []const u8,
 
     pub fn init(bytes: []const u8) error{InvalidArgument}!RelativePath {
-        _ = bytes;
-        return error.InvalidArgument; // S02 RED placeholder
+        if (bytes.len == 0 or bytes.len > limits.values.path_max_utf8_bytes) return error.InvalidArgument;
+        if (!std.unicode.utf8ValidateSlice(bytes)) return error.InvalidArgument;
+        if (bytes[0] == '/' or std.mem.indexOfScalar(u8, bytes, 0) != null) return error.InvalidArgument;
+        var components = std.mem.splitScalar(u8, bytes, '/');
+        while (components.next()) |component| {
+            if (std.mem.eql(u8, component, "..")) return error.InvalidArgument;
+        }
+        return .{ .bytes = bytes };
     }
 };
 
@@ -123,8 +129,8 @@ pub const ByteSpan = struct {
     end: u64,
 
     pub fn init(start: u64, end: u64) error{InvalidArgument}!ByteSpan {
-        _ = .{ start, end };
-        return error.InvalidArgument; // S02 RED placeholder
+        if (start > end) return error.InvalidArgument;
+        return .{ .start = start, .end = end };
     }
 
     pub fn len(span: ByteSpan) u64 {
@@ -138,8 +144,9 @@ pub const LineRange = struct {
     count: u32,
 
     pub fn init(first: u32, count: u32) error{InvalidArgument}!LineRange {
-        _ = .{ first, count };
-        return error.InvalidArgument; // S02 RED placeholder
+        if (first == 0 or count == 0 or count > limits.values.max_read_lines) return error.InvalidArgument;
+        _ = std.math.add(u32, first, count - 1) catch return error.InvalidArgument;
+        return .{ .first = first, .count = count };
     }
 };
 
@@ -194,8 +201,11 @@ pub const ResourceCost = struct {
 
     /// Sum of all byte fields; overflow is an invalid request, not a wrap.
     pub fn totalBytes(cost: ResourceCost) error{InvalidArgument}!u64 {
-        _ = cost;
-        return 0; // S02 RED placeholder
+        var total: u64 = 0;
+        for ([_]u64{ cost.input_bytes, cost.scratch_bytes, cost.output_bytes, cost.write_temp_bytes, cost.parser_bytes, cost.journal_bytes }) |bytes| {
+            total = std.math.add(u64, total, bytes) catch return error.InvalidArgument;
+        }
+        return total;
     }
 };
 
@@ -209,7 +219,9 @@ pub const Reservation = struct {
     released: bool = false,
 
     pub fn take(r: *Reservation) Reservation {
-        return r.*; // S02 RED placeholder
+        const moved = r.*;
+        r.* = .{ .budget_id = r.budget_id, .bytes = 0, .fd = 0, .cpu = 0, .output = 0, .released = true };
+        return moved;
     }
 };
 

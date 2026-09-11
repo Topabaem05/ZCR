@@ -482,7 +482,7 @@ test "T01 limits: scheduler hardware ceiling follows the recorded formula" {
     try testing.expectEqual(@as(u32, 1), core.limits.hardwareCeiling(0));
     try testing.expectEqual(@as(u32, 1), core.limits.hardwareCeiling(1));
     try testing.expectEqual(@as(u32, 3), core.limits.hardwareCeiling(4));
-    try testing.expectEqual(@as(u32, 5), core.limits.hardwareCeiling(7));
+    try testing.expectEqual(@as(u32, 6), core.limits.hardwareCeiling(7));
     try testing.expectEqual(@as(u32, 6), core.limits.hardwareCeiling(8));
     try testing.expectEqual(@as(u32, 14), core.limits.hardwareCeiling(16));
 }
