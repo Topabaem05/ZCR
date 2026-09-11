@@ -982,8 +982,11 @@ test "T07 a real batch result projects within its output budget" {
         try dir.writeFile(io, .{ .sub_path = "batch_read.json", .data = response.bytes });
         const read_response = try project(h.arena, envelope, .{ .read = r.items()[0].result.ok }, r.items()[0].result.ok.status, 256 * KiB);
         try dir.writeFile(io, .{ .sub_path = "read.json", .data = read_response.bytes });
-        const small = try project(h.arena, envelope, .{ .batch_read = r.owned.value }, r.owned.value.status, 1 * KiB);
+        // 32 item error forms alone take about 4 KiB; 8 KiB keeps some items and replaces others.
+        const small = try project(h.arena, envelope, .{ .batch_read = r.owned.value }, r.owned.value.status, 8 * KiB);
+        try testing.expect(small.truncated and small.omitted > 0);
         try dir.writeFile(io, .{ .sub_path = "batch_read_truncated.json", .data = small.bytes });
+        try testing.expectError(error.OutputBudgetExceeded, project(h.arena, envelope, .{ .batch_read = r.owned.value }, r.owned.value.status, 1 * KiB));
         const info: core.errors.ErrorInfo = .{ .code = .E_OUTPUT_BUDGET, .message = "output \"budget\"", .retryable = false };
         const buffer = try h.arena.alloc(u8, @intCast(projection.failureBufferBytes(envelope, info)));
         try dir.writeFile(io, .{ .sub_path = "failure.json", .data = (try projection.failure(buffer, envelope, info)).bytes });
