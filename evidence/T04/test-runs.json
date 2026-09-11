@@ -1,0 +1,227 @@
+{
+  "schema_version": "zcr-t04-test-runs/0",
+  "task_id": "T04",
+  "state_dir": "$STATE=/Users/guribbong/code/ZCR-state/tasks/T04",
+  "runs": [
+    {
+      "label": "red",
+      "optimize": "Debug",
+      "source_commit": "ee868227d6fa0fac35fcf0d6592aa25a02351567",
+      "source_tree": "5093d088d6e3254e9e1700c1e13d7ee90be31a33",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build test -Dtest-group=io -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-red --summary all",
+      "exit_code": 1,
+      "summary": "Build Summary: 2/4 steps succeeded (1 failed); 0/10 tests passed (10 failed)",
+      "installed_test_binaries_sha256": {
+        "T04-test": "d1f6f6b8ca94396dddc760ebcc43f0c688c6d9044e390dc4212c3f1b858a6406"
+      },
+      "log": "logs/red.log",
+      "log_sha256": "fa8324c116c7a59bc73afce4672e9317101857989e9b77cbb057ab23b0ec03d6"
+    },
+    {
+      "label": "green-io-debug",
+      "optimize": "Debug",
+      "source_commit": "363899e7b7197ba00e5bd5770989e538822d455d",
+      "source_tree": "aae6d32ca182c4ff2b0e60870350b2c82f1503f0",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build test -Dtest-group=io -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-green-io-debug --summary all",
+      "exit_code": 0,
+      "summary": "Build Summary: 4/4 steps succeeded; 10/10 tests passed",
+      "installed_test_binaries_sha256": {
+        "T04-test": "8a2451e923ad83fae58fe985a9c25fcf69e16086d8ea6e25c0398ab3cae7f280"
+      },
+      "log": "logs/green-io-debug.log",
+      "log_sha256": "bb70c8e51dbfd78f013cd65f0af0b39c850ba03b3479ca54274d262533f28af7"
+    },
+    {
+      "label": "green-io-releasesafe",
+      "optimize": "ReleaseSafe",
+      "source_commit": "363899e7b7197ba00e5bd5770989e538822d455d",
+      "source_tree": "aae6d32ca182c4ff2b0e60870350b2c82f1503f0",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build test -Dtest-group=io -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix $STATE/out-green-io-releasesafe --summary all",
+      "exit_code": 0,
+      "summary": "Build Summary: 4/4 steps succeeded; 10/10 tests passed",
+      "installed_test_binaries_sha256": {
+        "T04-test": "ae8e96736123fd8a667b9e191382692e062a8861cec22f22f36b3b356e9f7193"
+      },
+      "log": "logs/green-io-releasesafe.log",
+      "log_sha256": "b3a283e0f1e75defe40c5dde6dac9b4d1f69f7bdd306d306cee7d32a822f55b5"
+    },
+    {
+      "label": "regression-all-debug",
+      "optimize": "Debug",
+      "source_commit": "363899e7b7197ba00e5bd5770989e538822d455d",
+      "source_tree": "aae6d32ca182c4ff2b0e60870350b2c82f1503f0",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build test -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-regression-all-debug --summary all",
+      "exit_code": 0,
+      "summary": "Build Summary: 20/20 steps succeeded; 63/63 tests passed",
+      "installed_test_binaries_sha256": {
+        "T00-test": "fdb18d49a6cf9f690967c867033229e3f43819c66d789de1c752c5ac79c1b0e3",
+        "T01-test": "e559de3206d4310e85ada2a19b91fafb862a77e455c5f136a6a2c6b31048794e",
+        "T02-test": "a77680e2cb4ceca717c8383788770833a7393484a3832bb801252cf282ca26e1",
+        "T03-test": "a2819b5a0657685f3e77cf85537b1bf8dd090281be3dc2768cbae81d3b92b266",
+        "T04-test": "8a2451e923ad83fae58fe985a9c25fcf69e16086d8ea6e25c0398ab3cae7f280"
+      },
+      "log": "logs/regression-all-debug.log",
+      "log_sha256": "2748c2539128a194610c1e60293cc30fcf41535977b95284ae38283372edbab6"
+    },
+    {
+      "label": "verify-contracts",
+      "optimize": "Debug",
+      "source_commit": "363899e7b7197ba00e5bd5770989e538822d455d",
+      "source_tree": "aae6d32ca182c4ff2b0e60870350b2c82f1503f0",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build verify-contracts -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-verify-contracts --summary all",
+      "exit_code": 0,
+      "summary": "Build Summary: 3/3 steps succeeded",
+      "installed_test_binaries_sha256": {},
+      "log": "logs/verify-contracts.log",
+      "log_sha256": "595443c45beb16f57bc8df1527344327f42833c41d41a873eef638e2d4276a7e"
+    }
+  ],
+  "first_implementation_run": {
+    "log": "logs/s03-try.log",
+    "result": "9/10; IO-005 short-read test failed on the finish() helper asserting global budget usage while two results were held"
+  },
+  "mutation_checks": {
+    "results": [
+      {
+        "mutant": "m1-no-metadata-recheck",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 9/10 tests passed (1 failed)",
+        "failed_tests": [
+          "IO-005 a change after open is retried once and never mixes versions"
+        ],
+        "killed": true
+      },
+      {
+        "mutant": "m10-short-read-as-complete",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 9/10 tests passed (1 failed)",
+        "failed_tests": [
+          "IO-005 short reads and interrupted reads give the same result as a plain read"
+        ],
+        "killed": true
+      },
+      {
+        "mutant": "m11-scratch-leak",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 1/10 tests passed (9 failed)",
+        "failed_tests": [
+          "IO-001 two lines come back with exact byte offsets and no phantom EOF line",
+          "IO-002 empty files have no lines and an unterminated last line is one line",
+          "IO-003 BOM, CRLF, mixed newlines and Hangul keep raw bytes and the whole-file SHA-256",
+          "IO-004 5000 lines, a line longer than a chunk and small output budgets stay bounded",
+          "IO-005 short reads and interrupted reads give the same result as a plain read",
+          "IO-005 a change after open is retried once and never mixes versions",
+          "IO-006 write intent hashes the whole 8 MiB file and every descriptor and byte is returned",
+          "T04 cancellation before open and between chunks closes the file and frees scratch",
+          "T04 capability, reservation and consistency must match the request"
+        ],
+        "killed": true
+      },
+      {
+        "mutant": "m12-no-open-identity",
+        "summary": "Build Summary: 3/3 steps succeeded; 10/10 tests passed",
+        "failed_tests": [],
+        "killed": false
+      },
+      {
+        "mutant": "m2-no-path-identity",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 9/10 tests passed (1 failed)",
+        "failed_tests": [
+          "IO-005 a change after open is retried once and never mixes versions"
+        ],
+        "killed": true
+      },
+      {
+        "mutant": "m3-hash-over-limit",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 9/10 tests passed (1 failed)",
+        "failed_tests": [
+          "IO-006 write intent hashes the whole 8 MiB file and every descriptor and byte is returned"
+        ],
+        "killed": true
+      },
+      {
+        "mutant": "m4-stop-before-eof-hash",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 9/10 tests passed (1 failed)",
+        "failed_tests": [
+          "IO-006 write intent hashes the whole 8 MiB file and every descriptor and byte is returned"
+        ],
+        "killed": true
+      },
+      {
+        "mutant": "m5-phantom-line",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 7/10 tests passed (3 failed)",
+        "failed_tests": [
+          "IO-001 two lines come back with exact byte offsets and no phantom EOF line",
+          "IO-002 empty files have no lines and an unterminated last line is one line",
+          "IO-005 a change after open is retried once and never mixes versions"
+        ],
+        "killed": true
+      },
+      {
+        "mutant": "m6-no-binary-check",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 9/10 tests passed (1 failed)",
+        "failed_tests": [
+          "T04 capability, reservation and consistency must match the request"
+        ],
+        "killed": true
+      },
+      {
+        "mutant": "m7b-no-cancel-in-scan",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 9/10 tests passed (1 failed)",
+        "failed_tests": [
+          "T04 cancellation before open and between chunks closes the file and frees scratch"
+        ],
+        "killed": true
+      },
+      {
+        "mutant": "m8-partial-first-line",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 9/10 tests passed (1 failed)",
+        "failed_tests": [
+          "IO-004 5000 lines, a line longer than a chunk and small output budgets stay bounded"
+        ],
+        "killed": true
+      },
+      {
+        "mutant": "m9-no-capability-path",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 9/10 tests passed (1 failed)",
+        "failed_tests": [
+          "T04 capability, reservation and consistency must match the request"
+        ],
+        "killed": true
+      }
+    ],
+    "survivors": [
+      {
+        "mutant": "m12-no-open-identity",
+        "reason": "post-open identity check is redundant with the post-read path identity check: a path swapped between resolve and open is still refused or retried before any bytes are returned; no deterministic test hook exists between resolve and open"
+      }
+    ],
+    "test_strengthened": {
+      "mutant": "m7b-no-cancel-in-scan",
+      "before": "survived: cancellation was only asserted as the final error, which a check after the scan still produced",
+      "after": "killed: the test asserts scanning stops at chunk 1"
+    },
+    "not_run": [
+      "removing the regular-file check was not mutated: it would open a FIFO and block the test run"
+    ]
+  },
+  "cross_compile_only": [
+    {
+      "target": "x86_64-linux-musl",
+      "exit_code": 0,
+      "log": "logs/s03-compile-x86_64-linux-musl.log"
+    },
+    {
+      "target": "aarch64-linux-musl",
+      "exit_code": 0,
+      "log": "logs/s03-compile-aarch64-linux-musl.log"
+    },
+    {
+      "target": "x86_64-macos",
+      "exit_code": 0,
+      "log": "logs/s03-compile-x86_64-macos.log"
+    }
+  ]
+}

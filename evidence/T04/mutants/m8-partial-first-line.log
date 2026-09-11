@@ -1,0 +1,19 @@
+test
++- run test T04-test 9 pass, 1 fail (10 total)
+error: 't04_test.test.IO-004 5000 lines, a line longer than a chunk and small output budgets stay bounded' failed:
+       expected OutputBudgetExceeded, read succeeded
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m8-partial-first-line/tests/t04_test.zig:131:13: 0x1008ae667 in expectReadError (T04-test)
+                   return error.TestUnexpectedSuccess;
+                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m8-partial-first-line/tests/t04_test.zig:299:5: 0x1008de6fb in test.IO-004 5000 lines, a line longer than a chunk and small output budgets stay bounded (T04-test)
+           try h.expectReadError(error.OutputBudgetExceeded, too_small);
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache/o/02a0dc6d606b252a3a8ea6036619c329/T04-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache --seed=0x35e907e7 --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 9/10 tests passed (1 failed)
+test transitive failure
++- run test T04-test 9 pass, 1 fail (10 total)
+   +- compile test T04-test Debug native success 7s MaxRSS:197M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache/o/12ecb60e287f5a624443e3faa2ba9fc4/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m8-partial-first-line /Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T04/zig-global-cache --seed 0x35e907e7 -Z42c3d59a8766dc0b test -Dtest-group=io --summary all

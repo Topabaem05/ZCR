@@ -1,0 +1,164 @@
+{
+  "schema_version": "zcr-handoff/1",
+  "state": "completed",
+  "task_id": "T04",
+  "step": "S06",
+  "base_commit": "c7c5518e160031748944a379f92b0b27a65f799a",
+  "base_note": "integration after INT-003 (T03 merged, T04 registered)",
+  "head_commit": "363899e7b7197ba00e5bd5770989e538822d455d",
+  "head_commit_note": "source commit of GREEN evidence; evidence files follow in the S06 commit",
+  "contract_digest": "8aa53314410fe471f0e070c522766684286f60e1ad4d9785c292bb709ea370a4",
+  "source_tree_digest": "aae6d32ca182c4ff2b0e60870350b2c82f1503f0",
+  "binary_sha256": "8a2451e923ad83fae58fe985a9c25fcf69e16086d8ea6e25c0398ab3cae7f280",
+  "owned_paths": [
+    "src/fs/read.zig",
+    "src/fs/metadata.zig",
+    "tests/t04_test.zig",
+    "evidence/T04/"
+  ],
+  "changed_files": [
+    "src/fs/read.zig",
+    "src/fs/metadata.zig",
+    "tests/t04_test.zig",
+    "evidence/T04/*"
+  ],
+  "test_evidence": [
+    {
+      "id": "IO-001",
+      "status": "PASS",
+      "tests": 1
+    },
+    {
+      "id": "IO-002",
+      "status": "PASS",
+      "tests": 1
+    },
+    {
+      "id": "IO-003",
+      "status": "PASS",
+      "tests": 1
+    },
+    {
+      "id": "IO-004",
+      "status": "PASS",
+      "tests": 1
+    },
+    {
+      "id": "IO-005",
+      "status": "PASS",
+      "tests": 2
+    },
+    {
+      "id": "IO-006",
+      "status": "PASS",
+      "tests": 1
+    },
+    {
+      "id": "T04 handles/cancel/contracts",
+      "status": "PASS",
+      "tests": 3
+    },
+    {
+      "id": "regression T00-T03 (full zig build test)",
+      "status": "PASS",
+      "summary": "Build Summary: 20/20 steps succeeded; 63/63 tests passed"
+    },
+    {
+      "runs": [
+        {
+          "label": "red",
+          "optimize": "Debug",
+          "source_commit": "ee868227d6fa0fac35fcf0d6592aa25a02351567",
+          "exit_code": 1,
+          "summary": "Build Summary: 2/4 steps succeeded (1 failed); 0/10 tests passed (10 failed)",
+          "installed_test_binaries_sha256": {
+            "T04-test": "d1f6f6b8ca94396dddc760ebcc43f0c688c6d9044e390dc4212c3f1b858a6406"
+          }
+        },
+        {
+          "label": "green-io-debug",
+          "optimize": "Debug",
+          "source_commit": "363899e7b7197ba00e5bd5770989e538822d455d",
+          "exit_code": 0,
+          "summary": "Build Summary: 4/4 steps succeeded; 10/10 tests passed",
+          "installed_test_binaries_sha256": {
+            "T04-test": "8a2451e923ad83fae58fe985a9c25fcf69e16086d8ea6e25c0398ab3cae7f280"
+          }
+        },
+        {
+          "label": "green-io-releasesafe",
+          "optimize": "ReleaseSafe",
+          "source_commit": "363899e7b7197ba00e5bd5770989e538822d455d",
+          "exit_code": 0,
+          "summary": "Build Summary: 4/4 steps succeeded; 10/10 tests passed",
+          "installed_test_binaries_sha256": {
+            "T04-test": "ae8e96736123fd8a667b9e191382692e062a8861cec22f22f36b3b356e9f7193"
+          }
+        },
+        {
+          "label": "regression-all-debug",
+          "optimize": "Debug",
+          "source_commit": "363899e7b7197ba00e5bd5770989e538822d455d",
+          "exit_code": 0,
+          "summary": "Build Summary: 20/20 steps succeeded; 63/63 tests passed",
+          "installed_test_binaries_sha256": {
+            "T00-test": "fdb18d49a6cf9f690967c867033229e3f43819c66d789de1c752c5ac79c1b0e3",
+            "T01-test": "e559de3206d4310e85ada2a19b91fafb862a77e455c5f136a6a2c6b31048794e",
+            "T02-test": "a77680e2cb4ceca717c8383788770833a7393484a3832bb801252cf282ca26e1",
+            "T03-test": "a2819b5a0657685f3e77cf85537b1bf8dd090281be3dc2768cbae81d3b92b266",
+            "T04-test": "8a2451e923ad83fae58fe985a9c25fcf69e16086d8ea6e25c0398ab3cae7f280"
+          }
+        },
+        {
+          "label": "verify-contracts",
+          "optimize": "Debug",
+          "source_commit": "363899e7b7197ba00e5bd5770989e538822d455d",
+          "exit_code": 0,
+          "summary": "Build Summary: 3/3 steps succeeded",
+          "installed_test_binaries_sha256": {}
+        }
+      ]
+    }
+  ],
+  "test_changes_after_red": [
+    "capability test: forged patch capability derived from a read capability (policy had no write paths; authorize refused the fixture itself)",
+    "finish(): asserts the budget drops by the released reservation instead of reaching 0 (IO-005 holds two results)",
+    "cancellation test: asserts scanning stops at the next chunk boundary (added after mutant m7b survived)"
+  ],
+  "semantics": {
+    "line_span": "[start,end) including the line terminator; texts of all lines concatenate to the file bytes; no line after a final newline",
+    "truncation": "stops before a line that would exceed output_bytes or the reservation payload; complete=false, truncated=true, coverage.reasons says which; a first line that does not fit is OutputBudgetExceeded (output) or ResourceExhausted (reservation)",
+    "whole_file_digest": "write_intent and size <= 8 MiB: SHA-256 of all bytes in the same attempt; otherwise null (with a reason when write_intent was requested); never a range hash",
+    "consistency": "checked_live only; managed_generation and bounded_stale are Unsupported until T10/T14",
+    "retry": "one retry on size/mtime/identity change or path replacement; then VersionConflict",
+    "binary": "returned text with NUL or invalid UTF-8 is Unsupported"
+  },
+  "exports": [
+    "zcr_fs_read (src/fs/read.zig): Reader{init, readRange (core.ReadRangeFn), fault}, ReadFault, max_attempts, reason_* strings",
+    "zcr_fs_read.metadata: Snapshot, snapshot, sameVersion, fileVersion, openRegular, pathIdentity, OpenError"
+  ],
+  "limitations": [
+    "a write that keeps size, mtime and identity identical during the read cannot be detected without hashing",
+    "lines before the range are scanned from byte 0 on every read; there is no line index yet (T13)",
+    "Reader.generation is supplied by the caller; T10 owns real workspace generations",
+    "hard-linked files are read like any regular file; provenance through aliases is not checked (docs/09 §5)",
+    "Linux and Intel macOS are cross-compiled only"
+  ],
+  "interface_change_proposals": [
+    {
+      "target": "src/scheduler/admission.zig estimate (T03-owned) or core.Owned",
+      "issue": "Owned(T) forces std.heap.ArenaAllocator, whose fresh nodes are about 1.5x the request, and the read estimate reserves frame + chunk + output without line metadata; T04 truncates with a reservation reason instead of overrunning",
+      "needs": "add line metadata (count x @sizeOf(Line)) and arena growth to the read estimate, or allow Owned results that are one exact child allocation"
+    },
+    {
+      "target": "tests/catalog.json",
+      "issue": "IO-001..IO-006 execution_status still not_run",
+      "needs": "integrator update after re-test"
+    }
+  ],
+  "remaining_gates": [
+    "integrator re-test of task-t04 on integration",
+    "MANIFEST.sha256 AGENTS.md mismatch (T01) open",
+    "E_MANIFEST_UNBOUND decision open"
+  ]
+}

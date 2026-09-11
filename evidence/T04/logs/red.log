@@ -1,0 +1,125 @@
+test
++- run test T04-test 0 pass, 10 fail (10 total)
+);
+        ^
+error: 't04_test.test.IO-001 two lines come back with exact byte offsets and no phantom EOF line' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t04/src/fs/read.zig:40:9: 0x102ae0687 in readRange (T04-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t04/tests/t04_test.zig:106:23: 0x102adad1f in read (T04-test)
+               const owned = try h.reader.readRange(io, reserved.allocator(), capability, s, &reservation, h.cancel());
+                             ^
+       /Users/guribbong/code/ZCR-worktrees/task-t04/tests/t04_test.zig:163:13: 0x102b08a13 in test.IO-001 two lines come back with exact byte offsets and no phantom EOF line (T04-test)
+           var r = try h.read(Harness.spec("a.txt", 1, 2));
+                   ^
+error: 't04_test.test.IO-002 empty files have no lines and an unterminated last line is one line' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t04/src/fs/read.zig:40:9: 0x102ae0687 in readRange (T04-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t04/tests/t04_test.zig:106:23: 0x102adad1f in read (T04-test)
+               const owned = try h.reader.readRange(io, reserved.allocator(), capability, s, &reservation, h.cancel());
+                             ^
+       /Users/guribbong/code/ZCR-worktrees/task-t04/tests/t04_test.zig:195:17: 0x102b07acb in test.IO-002 empty files have no lines and an unterminated last line is one line (T04-test)
+           var empty = try h.read(Harness.spec("empty.txt", 1, 200));
+                       ^
+error: 't04_test.test.IO-003 BOM, CRLF, mixed newlines and Hangul keep raw bytes and the whole-file SHA-256' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t04/src/fs/read.zig:40:9: 0x102ae0687 in readRange (T04-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t04/tests/t04_test.zig:106:23: 0x102adad1f in read (T04-test)
+               const owned = try h.reader.readRange(io, reserved.allocator(), capability, s, &reservation, h.cancel());
+                             ^
+       /Users/guribbong/code/ZCR-worktrees/task-t04/tests/t04_test.zig:226:13: 0x102b06b7f in test.IO-003 BOM, CRLF, mixed newlines and Hangul keep raw bytes and the whole-file SHA-256 (T04-test)
+           var r = try h.read(s);
+                   ^
+error: 't04_test.test.IO-004 5000 lines, a line longer than a chunk and small output budgets stay bounded' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t04/src/fs/read.zig:40:9: 0x102ae0687 in readRange (T04-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t04/tests/t04_test.zig:106:23: 0x102adad1f in read (T04-test)
+               const owned = try h.reader.readRange(io, reserved.allocator(), capability, s, &reservation, h.cancel());
+                             ^
+       /Users/guribbong/code/ZCR-worktrees/task-t04/tests/t04_test.zig:259:15: 0x102b04eb3 in test.IO-004 5000 lines, a line longer than a chunk and small output budgets stay bounded (T04-test)
+           var all = try h.read(s);
+                     ^
+error: 't04_test.test.IO-005 short reads and interrupted reads give the same result as a plain read' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t04/src/fs/read.zig:40:9: 0x102ae0687 in readRange (T04-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t04/tests/t04_test.zig:106:23: 0x102adad1f in read (T04-test)
+               const owned = try h.reader.readRange(io, reserved.allocator(), capability, s, &reservation, h.cancel());
+                             ^
+       /Users/guribbong/code/ZCR-worktrees/task-t04/tests/t04_test.zig:331:17: 0x102b03c43 in test.IO-005 short reads and interrupted reads give the same result as a plain read (T04-test)
+           var plain = try h.read(Harness.spec("rows.txt", 100, 50));
+                       ^
+error: 't04_test.test.IO-005 a change after open is retried once and never mixes versions' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t04/src/fs/read.zig:40:9: 0x102ae0687 in readRange (T04-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t04/tests/t04_test.zig:106:23: 0x102adad1f in read (T04-test)
+               const owned = try h.reader.readRange(io, reserved.allocator(), capability, s, &reservation, h.cancel());
+                             ^
+       /Users/guribbong/code/ZCR-worktrees/task-t04/tests/t04_test.zig:360:19: 0x102b02087 in test.IO-005 a change after open is retried once and never mixes versions (T04-test)
+           var retried = try h.read(Harness.spec("c.txt", 1, 10));
+                         ^
+error: 't04_test.test.IO-006 write intent hashes the whole 8 MiB file and every descriptor and byte is returned' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t04/src/fs/read.zig:40:9: 0x102ae0687 in readRange (T04-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t04/tests/t04_test.zig:106:23: 0x102adad1f in read (T04-test)
+               const owned = try h.reader.readRange(io, reserved.allocator(), capability, s, &reservation, h.cancel());
+                             ^
+       /Users/guribbong/code/ZCR-worktrees/task-t04/tests/t04_test.zig:401:18: 0x102afee8f in test.IO-006 write intent hashes the whole 8 MiB file and every descriptor and byte is
+error: 't04_test.test.T04 only regular files are opened; directories, FIFOs and symlinks are refused' failed:
+        returned (T04-test)
+           var hashed = try h.read(with_intent);
+                        ^
+       expected error.NotRegular, found error.Unsupported
+       /Users/guribbong/code/ZCR-worktrees/task-t04/src/fs/read.zig:40:9: 0x102ae0687 in readRange (T04-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x102ada147 in expectError__anon_37538 (T04-test)
+                   return error.TestUnexpectedError;
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/task-t04/tests/t04_test.zig:459:9: 0x102afd4a7 in test.T04 only regular files are opened; directories, FIFOs and symlinks are refused (T04-test)
+error: 't04_test.test.T04 cancellation before open and between chunks closes the file and frees scratch' failed:
+               try testing.expectError(case.err, result);
+               ^
+       expected error.Cancelled, found error.Unsupported
+       /Users/guribbong/code/ZCR-worktrees/task-t04/src/fs/read.zig:40:9: 0x102ae0687 in readRange (T04-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x102ada217 in expectEqualInner__anon_37619 (T04-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x102ada727 in expectEqual (T04-test)
+           r
+error: 't04_test.test.T04 capability, reservation and consistency must match the request' failed:
+       eturn expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t04/tests/t04_test.zig:131:13: 0x102ada79f in expectReadError (T04-test)
+                   try testing.expectEqual(expected, @as(anyerror, err));
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/task-t04/tests/t04_test.zig:485:5: 0x102afae47 in test.T04 cancellation before open and between chunks closes the file and frees scratch (T04-test)
+           try h.expectReadError(error.Cancelled, Harness.spec("big.txt", 20_000, 10));
+           ^
+       expected error.OutOfScope, found error.Unsupported
+       /Users/guribbong/code/ZCR-worktrees/task-t04/src/fs/read.zig:40:9: 0x102ae0687 in readRange (T04-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x102ada147 in expectError__anon_37538 (T04-test)
+                   return error.TestUnexpectedError;
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/task-t04/tests/t04_test.zig:519:9: 0x102adbb33 in test.T04 capability, reservation and consistency must match the request (T04-test)
+               try testing.expectError(error.OutOfScope, h.reader.readRange(io, reserved.allocator(), capability, s, &reservation, h.cancel())
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache/o/1b255624ac3bf293f5b9284ac263608c/T04-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache --seed=0xe9e37272 --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 0/10 tests passed (10 failed)
+test transitive failure
++- install T04-test success
+|  +- compile test T04-test Debug native cached 238ms MaxRSS:31M
++- run test T04-test 0 pass, 10 fail (10 total)
+   +- compile test T04-test Debug native (reused)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache/o/12ecb60e287f5a624443e3faa2ba9fc4/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-worktrees/task-t04 /Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T04/zig-global-cache --seed 0xe9e37272 -Z08d56573571cdd7f test -Dtest-group=io -Doptimize=Debug -Dinstall-tests=true --prefix /Users/guribbong/code/ZCR-state/tasks/T04/out-red --summary all

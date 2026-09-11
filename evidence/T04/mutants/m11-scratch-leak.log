@@ -1,0 +1,515 @@
+test
++- run test T04-test 1 pass, 9 fail (10 total); 12 leaks
+error: 't04_test.test.IO-001 two lines come back with exact byte offsets and no phantom EOF line' failed:
+       expected 0, found 11
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x100eca2df in expectEqualInner__anon_37642 (T04-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x100ecb047 in expectEqual (T04-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:113:9: 0x100ecb0ff in finish (T04-test)
+               try testing.expectEqual(@as(u64, 0), r.reserved.liveBytes());
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:180:5: 0x100efdac7 in test.IO-001 two lines come back with exact byte offsets and no phantom EOF line (T04-test)
+           try h.finish(&r);
+           ^
+       [DebugAllocator] (err): memory address 0x1010c0000 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:214:44: 0x100ee2977 in scan (T04-test)
+               const scratch = try allocator.alloc(u8, scratch_len);
+                                                  ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:136:35: 0x100ed0e8b in readOnce (T04-test)
+               const plan = try self.scan(io, allocator, opened.file, before.size, spec, reservation, cancel, hash_whole);
+                                         ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:86:26: 0x100ed0963 in readRange (T04-test)
+                   self.readOnce(io, allocator, &owned, spec, reservation, cancel, attempt) catch |err| switch (err) {
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:106:45: 0x100ecab9b in read (T04-test)
+               const owned = try h.reader.readRange(io, reserved.allocator(), capability, s, &reservation, h.cancel());
+                                                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:165:23: 0x100efcc1b in test.IO-001 two lines come back with exact byte offsets and no phantom EOF line (T04-test)
+           var r = try h.read(Harness.spec("a.txt", 1, 2));
+                             ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x100ea712f in mainServer (T04-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x100ea77df in main (T04-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x100ea55a3 in callMain (T04-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+error: 't04_test.test.IO-002 empty files have no lines and an unterminated last line is one line' failed:
+       expected 0, found 1
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x100eca2df in expectEqualInner__anon_37642 (T04-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x100ecb047 in expectEqual (T04-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:113:9: 0x100ecb0ff in finish (T04-test)
+               try testing.expectEqual(@as(u64, 0), r.reserved.liveBytes());
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:201:5: 0x100efc10b in test.IO-002 empty files have no lines and an unterminated last line is one line (T04-test)
+           try h.finish(&empty);
+           ^
+       [DebugAllocator] (err): memory address 0x107a40000 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:214:44: 0x100ee2977 in scan (T04-test)
+               const scratch = try allocator.alloc(u8, scratch_len);
+                                                  ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:136:35: 0x100ed0e8b in readOnce (T04-test)
+               const plan = try self.scan(io, allocator, opened.file, before.size, spec, reservation, cancel, hash_whole);
+                                         ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:86:26: 0x100ed0963 in readRange (T04-test)
+                   self.readOnce(io, allocator, &owned, spec, reservation, cancel, attempt) catch |err| switch (err) {
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:106:45: 0x100ecab9b in read (T04-test)
+               const owned = try h.reader.readRange(io, reserved.allocator(), capability, s, &reservation, h.cancel());
+                                                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:197:27: 0x100efbcdb in test.IO-002 empty files have no lines and an unterminated last line is one line (T04-test)
+           var empty = try h.read(Harness.spec("empty.txt", 1, 200));
+                                 ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x100ea712f in mainServer (T04-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x100ea77df in main (T04-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x100ea55a3 in callMain (T04-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+error: 't04_test.test.IO-003 BOM, CRLF, mixed newlines and Hangul keep raw bytes and the whole-file SHA-256' failed:
+       expected 0, found 42
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x100eca2df in expectEqualInner__anon_37642 (T04-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x100ecb047 in expectEqual (T04-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:113:9: 0x100ecb0ff in finish (T04-test)
+               try testing.expectEqual(@as(u64, 0), r.reserved.liveBytes());
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:245:5: 0x100efb9ff in test.IO-003 BOM, CRLF, mixed newlines and Hangul keep raw bytes and the whole-file SHA-256 (T04-test)
+           try h.finish(&r);
+           ^
+       [DebugAllocator] (err): memory address 0x107a80000 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:214:44: 0x100ee2977 in scan (T04-test)
+               const scratch = try allocator.alloc(u8, scratch_len);
+                                                  ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:136:35: 0x100ed0e8b in readOnce (T04-test)
+               const plan = try self.scan(io, allocator, opened.file, before.size, spec, reservation, cancel, hash_whole);
+                                         ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:86:26: 0x100ed0963 in readRange (T04-test)
+                   self.readOnce(io, allocator, &owned, spec, reservation, cancel, attempt) catch |err| switch (err) {
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:106:45: 0x100ecab9b in read (T04-test)
+               const owned = try h.reader.readRange(io, reserved.allocator(), capability, s, &reservation, h.cancel());
+                                                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:228:23: 0x100efad87 in test.IO-003 BOM, CRLF, mixed newlines and Hangul keep raw bytes and the whole-file SHA-256 (T04-test)
+           var r = try h.read(s);
+                             ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x100ea712f in mainServer (T04-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x100ea77df in main (T04-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x100ea55a3 in callMain (T04-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+error: 't04_test.test.IO-004 5000 lines, a line longer than a chunk and small output budgets stay bounded' failed:
+       expected 0, found 55000
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x100eca2df in expectEqualInner__anon_37642 (T04-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x100ecb047 in expectEqual (T04-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:113:9: 0x100ecb0ff in finish (T04-test)
+               try testing.expectEqual(@as(u64, 0), r.reserved.liveBytes());
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:265:5: 0x100ef952f in test.IO-004 5000 lines, a line longer than a chunk and small output budgets stay bounded (T04-test)
+           try h.finish(&all);
+           ^
+       [DebugAllocator] (err): memory address 0x107b6c000 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:214:44: 0x100ee2977 in scan (T04-test)
+               const scratch = try allocator.alloc(u8, scratch_len);
+                                                  ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:136:35: 0x100ed0e8b in readOnce (T04-test)
+               const plan = try self.scan(io, allocator, opened.file, before.size, spec, reservation, cancel, hash_whole);
+                                         ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:86:26: 0x100ed0963 in readRange (T04-test)
+                   self.readOnce(io, allocator, &owned, spec, reservation, cancel, attempt) catch |err| switch (err) {
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:106:45: 0x100ecab9b in read (T04-test)
+               const owned = try h.reader.readRange(io, reserved.allocator(), capability, s, &reservation, h.cancel());
+                                                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:261:25: 0x100ef90b3 in test.IO-004 5000 lines, a line longer than a chunk and small output budgets stay bounded (T04-test)
+           var all = try h.read(s);
+                               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x100ea712f in mainServer (T04-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x100ea77df in main (T04-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x100ea55a3 in callMain (T04-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+error: 't04_test.test.IO-005 short reads and interrupted reads give the same result as a plain read' failed:
+       expected 0, found 6790
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x100eca2df in expectEqualInner__anon_37642 (T04-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x100ecb047 in expectEqual (T04-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:113:9: 0x100ecb0ff in finish (T04-test)
+               try testing.expectEqual(@as(u64, 0), r.reserved.liveBytes());
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:346:5: 0x100ef85d7 in test.IO-005 short reads and interrupted reads give the same result as a plain read (T04-test)
+           try h.finish(&plain);
+           ^
+       [DebugAllocator] (err): memory address 0x107b02000 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:214:44: 0x100ee2977 in scan (T04-test)
+               const scratch = try allocator.alloc(u8, scratch_len);
+                                                  ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:136:35: 0x100ed0e8b in readOnce (T04-test)
+               const plan = try self.scan(io, allocator, opened.file, before.size, spec, reservation, cancel, hash_whole);
+                                         ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:86:26: 0x100ed0963 in readRange (T04-test)
+                   self.readOnce(io, allocator, &owned, spec, reservation, cancel, attempt) catch |err| switch (err) {
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:106:45: 0x100ecab9b in read (T04-test)
+               const owned = try h.reader.readRange(io, reserved.allocator(), capability, s, &reservation, h.cancel());
+                                                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:333:27: 0x100ef7dfb in test.IO-005 short reads and interrupted reads give the same result as a plain read (T04-test)
+           var plain = try h.read(Harness.spec("rows.txt", 100, 50));
+                                 ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x100ea712f in mainServer (T04-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x100ea77df in main (T04-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x100ea55a3 in callMain (T04-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x107b06000 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:214:44: 0x100ee2977 in scan (T04-test)
+               const scratch = try allocator.alloc(u8, scratch_len);
+                                                  ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:136:35: 0x100ed0e8b in readOnce (T04-test)
+               const plan = try self.scan(io, allocator, opened.file, before.size, spec, reservation, cancel, hash_whole);
+                                         ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:86:26: 0x100ed0963 in readRange (T04-test)
+                   self.readOnce(io, allocator, &owned, spec, reservation, cancel, attempt) catch |err| switch (err) {
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:106:45: 0x100ecab9b in read (T04-test)
+               const owned = try h.reader.readRange(io, reserved.allocator(), capability, s, &reservation, h.cancel());
+                                                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:336:28: 0x100ef7f43 in test.IO-005 short reads and interrupted reads give the same result as a plain read (T04-test)
+           var faulty = try h.read(Harness.spec("rows.txt", 100, 50));
+                                  ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x100ea712f in mainServer (T04-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x100ea77df in main (T04-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x100ea55a3 in callMain (T04-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x107b08000 leaked: 
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x100dce30f in rawAlloc (T04-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:286:40: 0x100dd7bd7 in allocWithSizeAndAlignment__anon_9797 (T04-test)
+           return self.allocBytesWithAlignment(alignment, byte_count, return_address);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:274:89: 0x100dd79f3 in allocAdvancedWithRetAddr (T04-test)
+           const ptr: [*]align(a.toByteUnits()) T = @ptrCast(try self.allocWithSizeAndAlignment(@sizeOf(T), a, n, return_address));
+                                                                                               ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:157:63: 0x100ed12e3 in readOnce (T04-test)
+               const block = try owned.arena.allocator().alignedAlloc(u8, .of(core.Line), total);
+                                                                     ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:86:26: 0x100ed0963 in readRange (T04-test)
+                   self.readOnce(io, allocator, &owned, spec, reservation, cancel, attempt) catch |err| switch (err) {
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:106:45: 0x100ecab9b in read (T04-test)
+               const owned = try h.reader.readRange(io, reserved.allocator(), capability, s, &reservation, h.cancel());
+                                                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:336:28: 0x100ef7f43 in test.IO-005 short reads and interrupted reads give the same result as a plain read (T04-test)
+           var faulty = try h.read(Harness.spec("rows.txt", 100, 50));
+                                  ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x100ea712f in mainServer (T04-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x100ea77df in main (T04-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x100ea55a3 in callMain (T04-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       (additional stack frames may have been skipped...)
+error: 't04_test.test.IO-005 a change after open is retried once and never mixes versions' failed:
+       expected 0, found 64
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x100eca2df in expectEqualInner__anon_37642 (T04-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x100ecb047 in expectEqual (T04-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:113:9: 0x100ecb0ff in finish (T04-test)
+               try testing.expectEqual(@as(u64, 0), r.reserved.liveBytes());
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:367:5: 0x100ef6867 in test.IO-005 a change after open is retried once and never mixes versions (T04-test)
+           try h.finish(&retried);
+           ^
+       [DebugAllocator] (err): memory address 0x107b20000 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:214:44: 0x100ee2977 in scan (T04-test)
+               const scratch = try allocator.alloc(u8, scratch_len);
+                                                  ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:136:35: 0x100ed0e8b in readOnce (T04-test)
+               const plan = try self.scan(io, allocator, opened.file, before.size, spec, reservation, cancel, hash_whole);
+                                         ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:86:26: 0x100ed0963 in readRange (T04-test)
+                   self.readOnce(io, allocator, &owned, spec, reservation, cancel, attempt) catch |err| switch (err) {
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:106:45: 0x100ecab9b in read (T04-test)
+               const owned = try h.reader.readRange(io, reserved.allocator(), capability, s, &reservation, h.cancel());
+                                                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:362:29: 0x100ef62af in test.IO-005 a change after open is retried once and never mixes versions (T04-test)
+           var retried = try h.read(Harness.spec("c.txt", 1, 10));
+                                   ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x100ea712f in mainServer (T04-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x100ea77df in main (T04-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x100ea55a3 in callMain (T04-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       
+       [DebugAllocator] (err): memory address 0x107b80000 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:214:44: 0x100ee2977 in scan (T04-test)
+               const scratch = try allocator.alloc(u8, scratch_len);
+                                                  ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:136:35: 0x100ed0e8b in readOnce (T04-test)
+               const plan = try self.scan(io, allocator, opened.file, before.size, spec, reservation, cancel, hash_whole);
+                                         ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:86:26: 0x100ed0963 in readRange (T04-test)
+                   self.readOnce(io, allocator, &owned, spec, reservation, cancel, attempt) catch |err| switch (err) {
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:106:45: 0x100ecab9b in read (T04-test)
+               const owned = try h.reader.readRange(io, reserved.allocator(), capability, s, &reservation, h.cancel());
+                                                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:362:29: 0x100ef62af in test.IO-005 a change after open is retried once and never mixes versions (T04-test)
+           var retried = try h.read(Harness.spec("c.txt", 1, 10));
+                                   ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x100ea712f in mainServer (T04-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x100ea77df in main (T04-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x100ea55a3 in callMain (T04-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+error: 't04_test.test.IO-006 write intent hashes the whole 8 MiB file and every descriptor and byte is returned' failed:
+       expected 0, found 262144
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x100eca2df in expectEqualInner__anon_37642 (T04-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x100ecb047 in expectEqual (T04-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:113:9: 0x100ecb0ff in finish (T04-test)
+               try testing.expectEqual(@as(u64, 0), r.reserved.liveBytes());
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:408:5: 0x100ef4947 in test.IO-006 write intent hashes the whole 8 MiB file and every descriptor and byte is returned (T04-test)
+           try h.finish(&hashed);
+           ^
+       [DebugAllocator] (err): memory address 0x1087c8000 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:214:44: 0x100ee2977 in scan (T04-test)
+               const scratch = try allocator.alloc(u8, scratch_len);
+                                                  ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:136:35: 0x100ed0e8b in readOnce (T04-test)
+               const plan = try self.scan(io, allocator, opened.file, before.size, spec, reservation, cancel, hash_whole);
+                                         ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:86:26: 0x100ed0963 in readRange (T04-test)
+                   self.readOnce(io, allocator, &owned, spec, reservation, cancel, attempt) catch |err| switch (err) {
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:106:45: 0x100ecab9b in read (T04-test)
+               const owned = try h.reader.readRange(io, reserved.allocator(), capability, s, &reservation, h.cancel());
+                                                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:403:28: 0x100ef4397 in test.IO-006 write intent hashes the whole 8 MiB file and every descriptor and byte is returned (T04-test)
+           var hashed = try h.read(with_intent);
+                                  ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x100ea712f in mainServer (T04-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x100ea77df in main (T04-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x100ea55a3 in callMain (T04-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+error: 't04_test.test.T04 cancellation before open and between chunks closes the file and frees scratch' failed:
+       expected 0, found 262144
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/metadata.zig:51:33: 0x100ee4f9f in openRegular (T04-test)
+           if (entry.kind != .regular) return error.NotRegular;
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:130:24: 0x100ed0dd3 in readOnce (T04-test)
+               const opened = try metadata.openRegular(io, self.root.dir, spec.path.bytes);
+                              ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:92:29: 0x100ed0af3 in readRange (T04-test)
+                       else => |e| return e,
+                                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/metadata.zig:51:33: 0x100ee4f9f in openRegular (T04-test)
+           if (entry.kind != .regular) return error.NotRegular;
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:130:24: 0x100ed0dd3 in readOnce (T04-test)
+               const opened = try metadata.openRegular(io, self.root.dir, spec.path.bytes);
+                              ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:92:29: 0x100ed0af3 in readRange (T04-test)
+                       else => |e| return e,
+                                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/policy/paths.zig:112:37: 0x100edeccf in resolve (T04-test)
+               if (entry.kind == .symlink) return error.PathEscape;
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/metadata.zig:72:71: 0x100ede0b3 in resolveFinal (T04-test)
+           const resolved = policy.paths.resolve(io, root, path) catch |err| return switch (err) {
+                                                                             ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/metadata.zig:49:22: 0x100ee4eb7 in openRegular (T04-test)
+           const resolved = try resolveFinal(io, root, path);
+                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:130:24: 0x100ed0dd3 in readOnce (T04-test)
+               const opened = try metadata.openRegular(io, self.root.dir, spec.path.bytes);
+                              ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:92:29: 0x100ed0af3 in readRange (T04-test)
+                       else => |e| return e,
+                                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/metadata.zig:50:35: 0x100ee4f17 in openRegular (T04-test)
+           const entry = resolved orelse return error.NotFound;
+                                         ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:130:24: 0x100ed0dd3 in readOnce (T04-test)
+               const opened = try metadata.openRegular(io, self.root.dir, spec.path.bytes);
+                              ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:92:29: 0x100ed0af3 in readRange (T04-test)
+                       else => |e| return e,
+                                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:235:39: 0x100ee2bab in scan (T04-test)
+                   if (cancel.isRequested()) return error.Cancelled;
+                                             ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:136:22: 0x100ed0f6b in readOnce (T04-test)
+               const plan = try self.scan(io, allocator, opened.file, before.size, spec, reservation, cancel, hash_whole);
+                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:92:29: 0x100ed0af3 in readRange (T04-test)
+                       else => |e| return e,
+                                   ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x100eca2df in expectEqualInner__anon_37642 (T04-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x100eca7cf in expectEqual (T04-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:135:9: 0x100eca843 in expectReadError (T04-test)
+               try testing.expectEqual(@as(u64, 0), reserved.liveBytes());
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:493:5: 0x100ef063b in test.T04 cancellation before open and between chunks closes the file and frees scratch (T04-test)
+           try h.expectReadError(error.Cancelled, Harness.spec("big.txt", 20_000, 10));
+           ^
+       [DebugAllocator] (err): memory address 0x108b44000 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:214:44: 0x100ee2977 in scan (T04-test)
+               const scratch = try allocator.alloc(u8, scratch_len);
+                                                  ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:136:35: 0x100ed0e8b in readOnce (T04-test)
+               const plan = try self.scan(io, allocator, opened.file, before.size, spec, reservation, cancel, hash_whole);
+                                         ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:86:26: 0x100ed0963 in readRange (T04-test)
+                   self.readOnce(io, allocator, &owned, spec, reservation, cancel, attempt) catch |err| switch (err) {
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:125:42: 0x100eca51f in expectReadError (T04-test)
+               const result = h.reader.readRange(io, reserved.allocator(), capability, s, &reservation, h.cancel());
+                                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:493:26: 0x100ef0547 in test.T04 cancellation before open and between chunks closes the file and frees scratch (T04-test)
+           try h.expectReadError(error.Cancelled, Harness.spec("big.txt", 20_000, 10));
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x100ea712f in mainServer (T04-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x100ea77df in main (T04-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x100ea55a3 in callMain (T04-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+error: 't04_test.test.T04 capability, reservation and consistency must match the request' failed:
+       expected 0, found 7
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:168:31: 0x100ed1853 in readOnce (T04-test)
+               if (!validText(text)) return error.Unsupported;
+                                     ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:92:29: 0x100ed0af3 in readRange (T04-test)
+                       else => |e| return e,
+                                   ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x100eca2df in expectEqualInner__anon_37642 (T04-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x100eca7cf in expectEqual (T04-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:135:9: 0x100eca843 in expectReadError (T04-test)
+               try testing.expectEqual(@as(u64, 0), reserved.liveBytes());
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:540:5: 0x100ecc487 in test.T04 capability, reservation and consistency must match the request (T04-test)
+           try h.expectReadError(error.Unsupported, Harness.spec("bin.dat", 1, 2));
+           ^
+       [DebugAllocator] (err): memory address 0x108b00000 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:214:44: 0x100ee2977 in scan (T04-test)
+               const scratch = try allocator.alloc(u8, scratch_len);
+                                                  ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:136:35: 0x100ed0e8b in readOnce (T04-test)
+               const plan = try self.scan(io, allocator, opened.file, before.size, spec, reservation, cancel, hash_whole);
+                                         ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/src/fs/read.zig:86:26: 0x100ed0963 in readRange (T04-test)
+                   self.readOnce(io, allocator, &owned, spec, reservation, cancel, attempt) catch |err| switch (err) {
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:125:42: 0x100eca51f in expectReadError (T04-test)
+               const result = h.reader.readRange(io, reserved.allocator(), capability, s, &reservation, h.cancel());
+                                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak/tests/t04_test.zig:540:26: 0x100ecc33f in test.T04 capability, reservation and consistency must match the request (T04-test)
+           try h.expectReadError(error.Unsupported, Harness.spec("bin.dat", 1, 2));
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x100ea712f in mainServer (T04-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x100ea77df in main (T04-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x100ea55a3 in callMain (T04-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache/o/29ff9a801d626de7a08b351a3f1b524b/T04-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache --seed=0x5cca52c0 --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 1/10 tests passed (9 failed)
+test transitive failure
++- run test T04-test 1 pass, 9 fail (10 total); 12 leaks
+   +- compile test T04-test Debug native success 6s MaxRSS:197M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache/o/12ecb60e287f5a624443e3faa2ba9fc4/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m11-scratch-leak /Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T04/zig-global-cache --seed 0x5cca52c0 -Z2e88495d369c976f test -Dtest-group=io --summary all
