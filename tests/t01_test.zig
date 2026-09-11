@@ -450,18 +450,20 @@ test "T01 core: every internal error has exactly one wire code" {
     try testing.expect(!core.errors.defaultRetryable(.E_RECOVERY_REQUIRED));
 }
 
-test "T01 core: interface table declares I01 to I19 with frozen signatures" {
+test "T01 core: interface table declares I01 to I19 with receiver-generic signatures" {
+    const Receiver = struct {};
     try testing.expectEqual(@as(usize, 19), core.interfaces.len);
     inline for (core.interfaces, 1..) |entry, n| {
         var buf: [3]u8 = undefined;
         const id = try std.fmt.bufPrint(&buf, "I{d:0>2}", .{n});
         try testing.expectEqualStrings(id, entry.id);
+        const Signature = entry.Signature(Receiver);
         if (n == 19) {
             // I19 is the JournalStore vtable: prepare, record, lookup.
-            const fields = @typeInfo(entry.signature).@"struct".fields;
-            try testing.expectEqual(@as(usize, 3), fields.len);
+            try testing.expectEqual(@as(usize, 3), @typeInfo(Signature).@"struct".fields.len);
         } else {
-            try testing.expect(@typeInfo(entry.signature) == .@"fn");
+            const info = @typeInfo(Signature).@"fn";
+            try testing.expect(info.params[0].type.? == *Receiver);
         }
     }
 }

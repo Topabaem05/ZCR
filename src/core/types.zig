@@ -346,6 +346,15 @@ pub const BatchResult = struct { items: []const BatchItem, status: ResultStatus 
 
 pub const TrustedRoot = struct { dir: Io.Dir, canonical_path: []const u8 };
 
+/// Git locations from trusted discovery (T10), as canonical absolute paths.
+/// Both are protected from writes even when they sit outside the root.
+pub const GitMetadata = struct {
+    /// Per-worktree git dir (`git rev-parse --absolute-git-dir`); null outside Git.
+    git_dir: ?[]const u8,
+    /// Shared git dir (`git rev-parse --path-format=absolute --git-common-dir`).
+    common_dir: ?[]const u8,
+};
+
 /// Approved, immutable policy snapshot. Scope changes issue a new policy.
 pub const Policy = struct {
     digest: PolicyDigest,
@@ -521,70 +530,115 @@ pub const InvalidateError = errors.ResourceError || errors.IntegrityError;
 pub const HealthError = errors.ResourceError;
 pub const ServeError = errors.ContractError || errors.ResourceError || errors.InterruptError || errors.FileError;
 
+// Each signature takes the implementing object as its first parameter so that
+// trusted state (policy snapshot, root handle, budgets, executor) is explicit
+// instead of global. Check an implementation with
+// `comptime core.conforms(core.AuthorizeFn(Authorizer), Authorizer.authorize);`.
+
 /// I01 capability is immutable and cannot widen the root.
-pub const AuthorizeFn = fn (Io, SessionContext, Operation, RelativePath) AuthorizeError!Capability;
+pub fn AuthorizeFn(comptime Self: type) type {
+    return fn (*Self, Io, SessionContext, Operation, RelativePath) AuthorizeError!Capability;
+}
 /// I02 no allocation before the reservation succeeds.
-pub const ReserveFn = fn (SessionContext, ResourceCost) ReserveError!Reservation;
+pub fn ReserveFn(comptime Self: type) type {
+    return fn (*Self, SessionContext, ResourceCost) ReserveError!Reservation;
+}
 /// I03 FD and scratch are returned on success and cancellation.
-pub const ReadRangeFn = fn (Io, Allocator, Capability, ReadSpec, *Reservation, Cancel) ReadError!Owned(ReadResult);
+pub fn ReadRangeFn(comptime Self: type) type {
+    return fn (*Self, Io, Allocator, Capability, ReadSpec, *Reservation, Cancel) ReadError!Owned(ReadResult);
+}
 /// I04 respects sink backpressure.
-pub const EnumerateFn = fn (Io, Capability, FileSpec, Sink(RelativePath), Cancel) ReadError!Coverage;
+pub fn EnumerateFn(comptime Self: type) type {
+    return fn (*Self, Io, Capability, FileSpec, Sink(RelativePath), Cancel) ReadError!Coverage;
+}
 /// I05 byte spans identical to the scalar oracle.
-pub const SearchLiteralFn = fn (Io, Capability, SearchSpec, Sink(SearchFileResult), Cancel) ReadError!Coverage;
+pub fn SearchLiteralFn(comptime Self: type) type {
+    return fn (*Self, Io, Capability, SearchSpec, Sink(SearchFileResult), Cancel) ReadError!Coverage;
+}
 /// I06 input order kept, errors per item.
-pub const BatchReadFn = fn (Io, Allocator, SessionContext, []const BatchReadItem, *Reservation) ReadError!Owned(BatchResult);
+pub fn BatchReadFn(comptime Self: type) type {
+    return fn (*Self, Io, Allocator, SessionContext, []const BatchReadItem, *Reservation) ReadError!Owned(BatchResult);
+}
 /// I07 on success the executor owns the envelope.
-pub const SubmitFn = fn (*JobEnvelope) SubmitError!JobHandle;
+pub fn SubmitFn(comptime Self: type) type {
+    return fn (*Self, *JobEnvelope) SubmitError!JobHandle;
+}
 /// I08 creates or verifies the incarnation.
-pub const RegisterWorkspaceFn = fn (Io, TrustedRoot, Policy) RegisterError!WorkspaceId;
+pub fn RegisterWorkspaceFn(comptime Self: type) type {
+    return fn (*Self, Io, TrustedRoot, Policy) RegisterError!WorkspaceId;
+}
 /// I09 monotonic fence, one active writer.
-pub const AcquireWriterFn = fn (TaskContext, WorkspaceId) LeaseError!WriterLease;
+pub fn AcquireWriterFn(comptime Self: type) type {
+    return fn (*Self, TaskContext, WorkspaceId) LeaseError!WriterLease;
+}
 /// I10 exact expected digest, single-file commit.
-pub const ApplyPatchFn = fn (Io, Capability, *const WriterLease, PatchSpec) WriteError!Receipt;
+pub fn ApplyPatchFn(comptime Self: type) type {
+    return fn (*Self, Io, Capability, *const WriterLease, PatchSpec) WriteError!Receipt;
+}
 /// I11 no-overwrite publish.
-pub const CreateFileFn = fn (Io, Capability, *const WriterLease, CreateSpec) WriteError!Receipt;
+pub fn CreateFileFn(comptime Self: type) type {
+    return fn (*Self, Io, Capability, *const WriterLease, CreateSpec) WriteError!Receipt;
+}
 /// I12 ambiguous state quarantines writes.
-pub const RecoverFn = fn (Io, Allocator, WorkspaceId, JournalStore) RecoverError!Owned(RecoveryReport);
+pub fn RecoverFn(comptime Self: type) type {
+    return fn (*Self, Io, Allocator, WorkspaceId, JournalStore) RecoverError!Owned(RecoveryReport);
+}
 /// I13 authorization first, immutable key, unpin mandatory.
-pub const CacheGetFn = fn (ContentHash, Capability, PinBudget) CacheError!?PinnedEntry;
+pub fn CacheGetFn(comptime Self: type) type {
+    return fn (*Self, ContentHash, Capability, PinBudget) CacheError!?PinnedEntry;
+}
 /// I14 never hides uncertain or dropped events.
-pub const InvalidateFn = fn (WorkspaceId, WatchEvent) InvalidateError!IndexState;
+pub fn InvalidateFn(comptime Self: type) type {
+    return fn (*Self, WorkspaceId, WatchEvent) InvalidateError!IndexState;
+}
 /// I15 cannot raise limits above hard caps.
-pub const UpdatePolicyFn = fn (ResourceSignals) AdmissionLimits;
+pub fn UpdatePolicyFn(comptime Self: type) type {
+    return fn (*Self, ResourceSignals) AdmissionLimits;
+}
 /// I16 syntax candidates, not references.
-pub const OutlineFn = fn (Io, Allocator, Capability, ParserSpec) ReadError!Owned(OutlineCandidates);
+pub fn OutlineFn(comptime Self: type) type {
+    return fn (*Self, Io, Allocator, Capability, ParserSpec) ReadError!Owned(OutlineCandidates);
+}
 /// I17 never exposes other sessions' sources or tokens.
-pub const HealthFn = fn (SessionContext) HealthError!HealthSnapshot;
+pub fn HealthFn(comptime Self: type) type {
+    return fn (*Self, SessionContext) HealthError!HealthSnapshot;
+}
 /// I18 request and output lifetimes are separate.
-pub const ServeFrameFn = fn (Io, *Connection, BoundedBytes) ServeError!EncodedToolResult;
+pub fn ServeFrameFn(comptime Self: type) type {
+    return fn (*Self, Io, *Connection, BoundedBytes) ServeError!EncodedToolResult;
+}
+/// I19 is a vtable (prepare/record/lookup); the receiver is `JournalStore.context`.
+pub fn JournalStoreVTable(comptime Self: type) type {
+    _ = Self;
+    return JournalStore.VTable;
+}
 
-pub const InterfaceEntry = struct { id: []const u8, name: []const u8, signature: type };
+pub const InterfaceEntry = struct { id: []const u8, name: []const u8, Signature: fn (comptime type) type };
 
-/// docs/17 §3. I19 is the JournalStore vtable (prepare/record/lookup).
+/// docs/17 §3.
 pub const interfaces = [_]InterfaceEntry{
-    .{ .id = "I01", .name = "authorize", .signature = AuthorizeFn },
-    .{ .id = "I02", .name = "reserve", .signature = ReserveFn },
-    .{ .id = "I03", .name = "readRange", .signature = ReadRangeFn },
-    .{ .id = "I04", .name = "enumerate", .signature = EnumerateFn },
-    .{ .id = "I05", .name = "searchLiteral", .signature = SearchLiteralFn },
-    .{ .id = "I06", .name = "batchRead", .signature = BatchReadFn },
-    .{ .id = "I07", .name = "submit", .signature = SubmitFn },
-    .{ .id = "I08", .name = "registerWorkspace", .signature = RegisterWorkspaceFn },
-    .{ .id = "I09", .name = "acquireWriter", .signature = AcquireWriterFn },
-    .{ .id = "I10", .name = "applyPatch", .signature = ApplyPatchFn },
-    .{ .id = "I11", .name = "createFile", .signature = CreateFileFn },
-    .{ .id = "I12", .name = "recover", .signature = RecoverFn },
-    .{ .id = "I13", .name = "cacheGet", .signature = CacheGetFn },
-    .{ .id = "I14", .name = "invalidate", .signature = InvalidateFn },
-    .{ .id = "I15", .name = "updatePolicy", .signature = UpdatePolicyFn },
-    .{ .id = "I16", .name = "outline", .signature = OutlineFn },
-    .{ .id = "I17", .name = "health", .signature = HealthFn },
-    .{ .id = "I18", .name = "serveFrame", .signature = ServeFrameFn },
-    .{ .id = "I19", .name = "JournalStore", .signature = JournalStore.VTable },
+    .{ .id = "I01", .name = "authorize", .Signature = AuthorizeFn },
+    .{ .id = "I02", .name = "reserve", .Signature = ReserveFn },
+    .{ .id = "I03", .name = "readRange", .Signature = ReadRangeFn },
+    .{ .id = "I04", .name = "enumerate", .Signature = EnumerateFn },
+    .{ .id = "I05", .name = "searchLiteral", .Signature = SearchLiteralFn },
+    .{ .id = "I06", .name = "batchRead", .Signature = BatchReadFn },
+    .{ .id = "I07", .name = "submit", .Signature = SubmitFn },
+    .{ .id = "I08", .name = "registerWorkspace", .Signature = RegisterWorkspaceFn },
+    .{ .id = "I09", .name = "acquireWriter", .Signature = AcquireWriterFn },
+    .{ .id = "I10", .name = "applyPatch", .Signature = ApplyPatchFn },
+    .{ .id = "I11", .name = "createFile", .Signature = CreateFileFn },
+    .{ .id = "I12", .name = "recover", .Signature = RecoverFn },
+    .{ .id = "I13", .name = "cacheGet", .Signature = CacheGetFn },
+    .{ .id = "I14", .name = "invalidate", .Signature = InvalidateFn },
+    .{ .id = "I15", .name = "updatePolicy", .Signature = UpdatePolicyFn },
+    .{ .id = "I16", .name = "outline", .Signature = OutlineFn },
+    .{ .id = "I17", .name = "health", .Signature = HealthFn },
+    .{ .id = "I18", .name = "serveFrame", .Signature = ServeFrameFn },
+    .{ .id = "I19", .name = "JournalStore", .Signature = JournalStoreVTable },
 };
 
-/// Compile-time check that an implementation matches its frozen signature:
-/// `comptime core.conforms(core.ReadRangeFn, readRange);`
+/// Compile-time check that an implementation matches its frozen signature.
 pub fn conforms(comptime Signature: type, comptime function: anytype) void {
     if (@TypeOf(function) != Signature) {
         @compileError("signature mismatch: expected " ++ @typeName(Signature) ++ ", found " ++ @typeName(@TypeOf(function)));

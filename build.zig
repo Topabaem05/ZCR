@@ -21,7 +21,7 @@ comptime {
 
 pub const TestGroup = enum { io, fs, search, batch, write, mcp, isolation, broker, watch, observe, ast, scheduler, memory, perf, dev, security };
 
-const Import = enum { core, evidence, caps, build_options };
+const Import = enum { core, evidence, caps, build_options, policy, guard };
 
 const TestFile = struct {
     task: []const u8,
@@ -34,6 +34,7 @@ const TestFile = struct {
 const test_files = [_]TestFile{
     .{ .task = "T00", .path = "tests/t00_test.zig", .group = .perf, .imports = &.{.caps} },
     .{ .task = "T01", .path = "tests/t01_test.zig", .group = .dev, .imports = &.{ .core, .evidence, .build_options } },
+    .{ .task = "T02", .path = "tests/t02_test.zig", .group = .isolation, .imports = &.{ .core, .policy, .guard, .evidence, .build_options } },
 };
 
 /// Exit code for CLI roles that exist in the contract but are not built yet (EX_UNAVAILABLE).
@@ -90,6 +91,28 @@ pub fn build(b: *std.Build) void {
     const evidence_tool = b.addExecutable(.{ .name = "zcr-dev-evidence", .root_module = evidence_module });
     b.installArtifact(evidence_tool);
 
+    // T02: capability, path and task-scope checks (I01).
+    const policy_module = b.createModule(.{
+        .root_source_file = b.path("src/policy/capability.zig"),
+        .target = target,
+        .optimize = optimize,
+        .imports = &.{.{ .name = "zcr_core", .module = core }},
+    });
+    // T02: development scope and ownership guard.
+    const guard_module = b.createModule(.{
+        .root_source_file = b.path("tools/dev/guard.zig"),
+        .target = target,
+        .optimize = optimize,
+        .imports = &.{
+            .{ .name = "zcr_core", .module = core },
+            .{ .name = "evidence", .module = evidence_module },
+        },
+    });
+    // A tool is installed once its owning task has delivered the source file.
+    if (sourceExists(b, "tools/dev/guard.zig")) {
+        b.installArtifact(b.addExecutable(.{ .name = "zcr-dev-guard", .root_module = guard_module }));
+    }
+
     const verify_contracts = b.addRunArtifact(evidence_tool);
     verify_contracts.addArgs(&.{ "verify-contracts", "--root" });
     verify_contracts.addDirectoryArg(b.path("."));
@@ -109,6 +132,11 @@ pub fn build(b: *std.Build) void {
 
     for (test_files) |file| {
         if (test_group) |group| if (group != file.group) continue;
+        if (!sourceExists(b, file.path)) {
+            test_step.dependOn(&b.addFail(b.fmt("registered test file {s} is missing ({s} not delivered yet)", .{ file.path, file.task })).step);
+            selected += 1;
+            continue;
+        }
         if (test_id) |id| if (!declaresTest(b, file.path, id)) continue;
         selected += 1;
 
@@ -121,6 +149,8 @@ pub fn build(b: *std.Build) void {
             .core => module.addImport("zcr_core", core),
             .evidence => module.addImport("evidence", evidence_module),
             .build_options => module.addImport("build_options", options_module),
+            .policy => module.addImport("zcr_policy", policy_module),
+            .guard => module.addImport("dev_guard", guard_module),
             .caps => module.addImport("caps", caps_module orelse blk: {
                 caps_module = capsModule(b, target, optimize);
                 break :blk caps_module.?;
@@ -163,6 +193,11 @@ pub fn build(b: *std.Build) void {
             .{ if (test_group) |g| @tagName(g) else "-", test_id orelse "-" },
         )).step);
     }
+}
+
+fn sourceExists(b: *std.Build, path: []const u8) bool {
+    b.build_root.handle.access(b.graph.io, path, .{}) catch return false;
+    return true;
 }
 
 /// True when the test file declares a test whose name contains `id`.
