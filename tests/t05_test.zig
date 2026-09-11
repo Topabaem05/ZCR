@@ -431,7 +431,8 @@ test "FS-006 Unicode names come back byte for byte and unsupported names are cou
     const h = try Harness.init(arena_state.allocator(), .{});
     defer h.deinit();
 
-    const unicode = [_][]const u8{ "한글.txt", "e\u{301}.txt", "\u{e9}.txt", "😀/emoji.txt", "newline\nname.txt" };
+    // One normalization form only: APFS treats e + U+0301 and U+00E9 as the same name.
+    const unicode = [_][]const u8{ "한글.txt", "e\u{301}.txt", "😀/emoji.txt", "newline\nname.txt" };
     for (unicode) |name| try h.write(name, "x\n");
     try h.write("back\\slash.txt", "x\n");
 
@@ -487,6 +488,9 @@ test "T05 capability, spec, cancellation and sink backpressure are enforced" {
     const h = try Harness.init(arena_state.allocator(), .{});
     defer h.deinit();
     for (0..50) |i| try h.write(try std.fmt.allocPrint(h.arena, "d/f{d}.txt", .{i}), "x\n");
+    try h.write(".gitignore", "*.tmp\nignored-dir/\n");
+    try h.write("d/x.tmp", "x\n");
+    try h.write("ignored-dir/y.txt", "x\n");
 
     var collector: Collector = .{ .arena = h.arena };
     var read_cap = try h.authorizer.authorize(io, session(), .read, .{ .bytes = "d/f1.txt" });
@@ -505,8 +509,17 @@ test "T05 capability, spec, cancellation and sink backpressure are enforced" {
     const sub_cap = try h.authorizer.authorize(io, session(), .enumerate, .{ .bytes = "d" });
     var sub: Collector = .{ .arena = h.arena };
     _ = try h.traverser.enumerate(io, sub_cap, .{ .limit = 100 }, sub.sink(), h.cancel());
-    try testing.expectEqual(@as(usize, 50), sub.paths.items.len);
+    try testing.expectEqual(@as(usize, 50), sub.paths.items.len); // root .gitignore still hides d/x.tmp
     try testing.expect(std.mem.startsWith(u8, sub.paths.items[0], "d/f"));
+    try testing.expect(!contains(sub.paths.items, "d/x.tmp"));
+
+    // A start directory that an ancestor .gitignore excludes lists nothing and says why.
+    const ignored_cap = try h.authorizer.authorize(io, session(), .enumerate, .{ .bytes = "ignored-dir" });
+    var none: Collector = .{ .arena = h.arena };
+    const ignored_coverage = try h.traverser.enumerate(io, ignored_cap, .{ .limit = 100 }, none.sink(), h.cancel());
+    try testing.expectEqual(@as(usize, 0), none.paths.items.len);
+    try testing.expect(h.traverser.report().start_ignored);
+    try testing.expect(ignored_coverage.reasons.len > 0);
 
     h.cancel_flag.store(true, .release);
     try testing.expectError(error.Cancelled, h.traverser.enumerate(io, cap, .{}, collector.sink(), h.cancel()));
@@ -522,6 +535,33 @@ test "T05 capability, spec, cancellation and sink backpressure are enforced" {
     _ = try h.enumerate(.{ .limit = 100 }, &again);
     try testing.expectEqual(@as(usize, 50), again.paths.items.len);
     try testing.expectEqual(live, h.reserved.liveBytes());
+}
+
+const CancelOnPush = struct {
+    collector: Collector,
+    flag: *std.atomic.Value(bool),
+
+    fn push(context: *anyopaque, item: core.RelativePath) core.SinkError!void {
+        const self: *CancelOnPush = @ptrCast(@alignCast(context));
+        self.flag.store(true, .release);
+        return Collector.push(&self.collector, item);
+    }
+};
+
+test "T05 cancellation requested during a walk stops it within a bounded number of entries" {
+    var arena_state = std.heap.ArenaAllocator.init(testing.allocator);
+    defer arena_state.deinit();
+    const h = try Harness.init(arena_state.allocator(), .{});
+    defer h.deinit();
+    for (0..2000) |i| try h.write(try std.fmt.allocPrint(h.arena, "many/f{d:0>4}.txt", .{i}), "");
+
+    var cancelling: CancelOnPush = .{ .collector = .{ .arena = h.arena }, .flag = &h.cancel_flag };
+    const cap = try h.authorizer.authorize(io, session(), .enumerate, .{ .bytes = "." });
+    const sink: core.Sink(core.RelativePath) = .{ .context = &cancelling, .push_fn = CancelOnPush.push };
+    try testing.expectError(error.Cancelled, h.traverser.enumerate(io, cap, .{ .limit = 10_000 }, sink, h.cancel()));
+    try testing.expect(cancelling.collector.paths.items.len < 2000);
+    try testing.expect(h.traverser.report().entries_seen <= 2 * 256);
+    h.cancel_flag.store(false, .release);
 }
 
 test "T05 ignore files beyond the size or rule limit exclude their subtree and are reported" {
