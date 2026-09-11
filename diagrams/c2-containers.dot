@@ -1,0 +1,19 @@
+digraph G {
+graph [rankdir=LR, bgcolor="transparent", pad="0.22", nodesep="0.38", ranksep="0.55", fontname="Helvetica", fontsize=17, labelloc="t", label="C2 | One binary, two deployment modes"];
+node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=11, color="#28766C", fillcolor="#E6F2EF", fontcolor="#183741", penwidth=1.2, margin="0.14,0.09"];
+edge [fontname="Helvetica", fontsize=9, color="#758895", fontcolor="#526570", arrowsize=0.7, penwidth=1.1];
+h1 [label="One agent host",shape=box,fillcolor="#F0EDF5",color="#806591"];
+single [label="Standalone ZCR process\nMCP + core + state",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+h2 [label="Multiple agent hosts",shape=box,fillcolor="#F0EDF5",color="#806591"];
+bridge [label="ZCR bridge processes\nOne per host connection",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+broker [label="Explicit ZCR broker\nCore + shared budgets",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+roots [label="Approved worktrees",shape=cylinder,fillcolor="#FFF4D8",color="#B08B31"];
+state [label="Private cache / journal\nOutside source roots",shape=cylinder,fillcolor="#FFF4D8",color="#B08B31"];
+h1 -> single [label="stdio"];
+single -> roots [label="authorized I/O"];
+single -> state [label="private state"];
+h2 -> bridge [label="stdio"];
+bridge -> broker [label="authenticated local IPC"];
+broker -> roots [label="authorized I/O"];
+broker -> state [label="private state"];
+}

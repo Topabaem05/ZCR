@@ -1,0 +1,22 @@
+digraph G {
+graph [rankdir=TB, bgcolor="transparent", pad="0.22", nodesep="0.38", ranksep="0.55", fontname="Helvetica", fontsize=17, labelloc="t", label="Apple Silicon | Work intent, not guaranteed core affinity"];
+node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=11, color="#28766C", fillcolor="#E6F2EF", fontcolor="#183741", penwidth=1.2, margin="0.14,0.09"];
+edge [fontname="Helvetica", fontsize=9, color="#758895", fontcolor="#526570", arrowsize=0.7, penwidth=1.1];
+fg [label="Foreground read/search\nUSER_INITIATED",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+bulk [label="Maintenance scan\nUTILITY",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+bg [label="Idle prefetch\nBACKGROUND",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+admit [label="Global permits + fair queue\nNo per-file thread explosion",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+gcd [label="Public GCD queues\nOne concurrency owner",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+os [label="macOS scheduler\nQoS + thermal + power state",shape=box,fillcolor="#F0EDF5",color="#806591"];
+topology [label="Detected CPU topology\nP/E or super/P or unknown",shape=cylinder,fillcolor="#FFF4D8",color="#B08B31"];
+cpu [label="OS-selected available cores\nNo hard pinning guarantee",shape=ellipse,fillcolor="#E7EFF9",color="#466585"];
+model [label="Local LLM coexist budget\nCPU / memory / bandwidth guard",shape=box,fillcolor="#F9E9E5",color="#A65842"];
+fg -> admit [label="short/bulk class"];
+bulk -> admit [label="bounded maintenance"];
+bg -> admit [label="optional"];
+model -> admit [label="lower limits"];
+admit -> gcd [label="owned jobs"];
+gcd -> os [label="QoS intent"];
+topology -> admit [label="conservative limits"];
+os -> cpu [label="actual placement"];
+}

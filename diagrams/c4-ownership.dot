@@ -1,0 +1,28 @@
+digraph G {
+graph [rankdir=TB, bgcolor="transparent", pad="0.22", nodesep="0.38", ranksep="0.55", fontname="Helvetica", fontsize=17, labelloc="t", label="C4 | Code-level ownership and lifetime"];
+node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=11, color="#28766C", fillcolor="#E6F2EF", fontcolor="#183741", penwidth=1.2, margin="0.14,0.09"];
+edge [fontname="Helvetica", fontsize=9, color="#758895", fontcolor="#526570", arrowsize=0.7, penwidth=1.1];
+runtime [label="Runtime\nowns global services",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+budget [label="BudgetGovernor\nGroup reservations",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+scheduler [label="Scheduler\nQueued JobEnvelope",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+registry [label="WorkspaceRegistry",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+workspace [label="Workspace\nRoot handle / incarnation / generation",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+session [label="SessionContext\nBound workspace + task",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+request [label="RequestContext\nDeadline / cancel / result arena",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+job [label="JobEnvelope\nOwned callback + scratch",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+content [label="ContentEntry\nImmutable, pinned sharing",shape=cylinder,fillcolor="#FFF4D8",color="#B08B31"];
+path [label="PathEntry\nWorkspace-private mutable link",shape=cylinder,fillcolor="#FFF4D8",color="#B08B31"];
+write [label="WriteIntent\nExpected digest + fence",shape=box,fillcolor="#F9E9E5",color="#A65842"];
+runtime -> budget [label="owns"];
+runtime -> scheduler [label="owns"];
+runtime -> registry [label="owns"];
+registry -> workspace [label="owns"];
+session -> workspace [label="bound reference"];
+session -> request [label="creates"];
+request -> job [label="lifetime / drain"];
+scheduler -> job [label="executes owned job"];
+workspace -> path [label="owns"];
+path -> content [label="authorized association"];
+request -> write [label="optional"];
+budget -> request [label="move-only reservation"];
+}

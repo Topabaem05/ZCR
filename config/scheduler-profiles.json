@@ -1,0 +1,50 @@
+{
+  "status": "initial_policy_unmeasured",
+  "hardware_ceiling": "max(1,usable_physical_cpus - (2 if usable_physical_cpus>=8 else 1))",
+  "qos": {
+    "foreground": "user_initiated",
+    "maintenance": "utility",
+    "prefetch": "background"
+  },
+  "profiles": {
+    "latency": {
+      "cpu_initial": 2,
+      "cpu_max": 4,
+      "io_initial": 2,
+      "io_max": 4
+    },
+    "balanced": {
+      "cpu_initial": 2,
+      "cpu_max": 4,
+      "io_initial": 2,
+      "io_max": 4
+    },
+    "throughput": {
+      "cpu_initial": 4,
+      "cpu_max": 8,
+      "io_initial": 4,
+      "io_max": 8
+    },
+    "model_coexist": {
+      "cpu_initial": 1,
+      "cpu_max": 2,
+      "io_initial": 1,
+      "io_max": 2
+    },
+    "critical": {
+      "cpu_initial": 1,
+      "cpu_max": 1,
+      "io_initial": 1,
+      "io_max": 1
+    }
+  },
+  "all_cpu_counts_clamped_to_hardware_ceiling": true,
+  "foreground_short_reserved_permits": 2,
+  "foreground_to_maintenance_weight": [
+    4,
+    1
+  ],
+  "normal_stable_recovery_ms": 10000,
+  "recovery_step_ms": 5000,
+  "recovery_step_percentage_points": 10
+}

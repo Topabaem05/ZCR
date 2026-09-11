@@ -1,0 +1,20 @@
+digraph G {
+graph [rankdir=LR, bgcolor="transparent", pad="0.22", nodesep="0.38", ranksep="0.55", fontname="Helvetica", fontsize=17, labelloc="t", label="C1 | ZCR in its environment"];
+node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=11, color="#28766C", fillcolor="#E6F2EF", fontcolor="#183741", penwidth=1.2, margin="0.14,0.09"];
+edge [fontname="Helvetica", fontsize=9, color="#758895", fontcolor="#526570", arrowsize=0.7, penwidth=1.1];
+dev [label="Developer\nIntent + approval",shape=ellipse,fillcolor="#E7EFF9",color="#466585"];
+host [label="Agent host\nCodex / Claude",shape=box,fillcolor="#F0EDF5",color="#806591"];
+model [label="Local or remote model\nUntrusted generated intent",shape=box,fillcolor="#F0EDF5",color="#806591"];
+zcr [label="ZCR\nAuthorized local code tools",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+fs [label="Dedicated worktrees\nSource files",shape=cylinder,fillcolor="#FFF4D8",color="#B08B31"];
+os [label="Operating system\nScheduling / pressure / events",shape=box,fillcolor="#F0EDF5",color="#806591"];
+ed [label="Other editors / Git\nExternal writers",shape=box,fillcolor="#F9E9E5",color="#A65842"];
+dev -> host [label="approve scope"];
+host -> model [label="model context"];
+model -> host [label="tool intent"];
+host -> zcr [label="MCP stdio"];
+zcr -> host [label="bounded verified result"];
+zcr -> fs [label="handle-relative I/O"];
+os -> zcr [label="advisory signals"];
+ed -> fs [label="uncoordinated changes"];
+}

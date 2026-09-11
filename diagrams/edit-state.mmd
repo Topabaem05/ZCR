@@ -1,0 +1,24 @@
+flowchart TB
+  auth["Authorize + writer fence"]
+  check["Read full bytes<br/>Check expected SHA-256"]
+  temp["Create same-parent temp<br/>Apply spans + metadata"]
+  prepare["PREPARED journal<br/>old / new hashes"]
+  commit["Atomic replace<br/>COMMIT POINT"]
+  persist["Persistence level + receipt"]
+  done["COMMITTED<br/>applied=true"]
+  abort["ABORTED<br/>source unchanged"]
+  recover["Crash recovery<br/>old/new/uncertain comparison"]
+  quarantine["UNCERTAIN<br/>write quarantine"]
+  auth -->|"valid lease"| check
+  check -->|"digest matches"| temp
+  temp -->|"complete new bytes"| prepare
+  prepare -->|"final fence / version check"| commit
+  commit -->|"applied"| persist
+  persist -->|"record outcome"| done
+  check -->|"conflict / cancel"| abort
+  prepare -->|"pre-commit cancel"| abort
+  prepare -->|"restart"| recover
+  commit -->|"restart"| recover
+  recover -->|"new hash confirmed"| done
+  recover -->|"old hash confirmed"| abort
+  recover -->|"neither / identity changed"| quarantine

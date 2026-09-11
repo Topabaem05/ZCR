@@ -1,0 +1,213 @@
+{
+  "as_of": "2026-09-11",
+  "sources": [
+    {
+      "id": "R01",
+      "title": "Zig downloads / stable release",
+      "url": "https://ziglang.org/download/",
+      "supports": "Zig 0.16.0 stable, release date 2026-04-13",
+      "type": "official release index",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": "R02",
+      "title": "Zig 0.16.0 Release Notes",
+      "url": "https://ziglang.org/download/0.16.0/release-notes.html",
+      "supports": "std.Io migration, Threaded, experimental Evented/Uring/Kqueue/Dispatch",
+      "type": "official release notes",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": "R03",
+      "title": "Zig 0.16.0 Language Reference",
+      "url": "https://ziglang.org/documentation/0.16.0/",
+      "supports": "explicit allocator and developer-owned lifetime",
+      "type": "official documentation",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": "R04",
+      "title": "Apple debuts M5 Pro and M5 Max",
+      "url": "https://www.apple.com/newsroom/2026/03/apple-debuts-m5-pro-and-m5-max-to-supercharge-the-most-demanding-pro-workflows/",
+      "supports": "18-core example: six super cores and twelve performance cores",
+      "type": "official announcement",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": "R05",
+      "title": "Explore the new system architecture of Apple silicon Macs",
+      "url": "https://developer.apple.com/videos/play/wwdc2020/10686/",
+      "supports": "heterogeneous scheduling, QoS/GCD",
+      "type": "official developer presentation",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": "R06",
+      "title": "Tune CPU job scheduling for Apple silicon games",
+      "url": "https://developer.apple.com/videos/play/tech-talks/110147/",
+      "supports": "perflevel sysctl, scheduler cooperation, task granularity",
+      "type": "official developer presentation",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": "R07",
+      "title": "Prioritize Work at the Task Level",
+      "url": "https://developer.apple.com/library/archive/documentation/Performance/Conceptual/EnergyGuide-iOS/PrioritizeWorkWithQoS.html",
+      "supports": "QoS semantics and GCD queue intent; no iOS-only behavior assumed on Mac",
+      "type": "official archived guide",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": "R08",
+      "title": "Using the File System Events API",
+      "url": "https://developer.apple.com/library/archive/documentation/Darwin/Conceptual/FSEvents_ProgGuide/UsingtheFSEventsFramework/UsingtheFSEventsFramework.html",
+      "supports": "watch before scan, coalescing, drop/rescan, root changes",
+      "type": "official archived guide",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": "R09",
+      "title": "DispatchSourceMemoryPressure",
+      "url": "https://developer.apple.com/documentation/dispatch/dispatchsourcememorypressure",
+      "supports": "API existence; exact SDK availability remains gate G03",
+      "type": "official API reference; dynamic page",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": "R10",
+      "title": "ProcessInfo thermalState",
+      "url": "https://developer.apple.com/documentation/foundation/processinfo/thermalstate",
+      "supports": "API existence; exact SDK availability remains gate G03",
+      "type": "official API reference; dynamic page",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": "R11",
+      "title": "ProcessInfo isLowPowerModeEnabled",
+      "url": "https://developer.apple.com/documentation/foundation/processinfo/islowpowermodeenabled",
+      "supports": "API existence; exact SDK availability remains gate G03",
+      "type": "official API reference; dynamic page",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": "R12",
+      "title": "Codex MCP documentation",
+      "url": "https://developers.openai.com/codex/mcp/",
+      "supports": "stdio server registration and configuration; redirected official documentation",
+      "type": "official OpenAI documentation",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": "R13",
+      "title": "Claude Code MCP documentation",
+      "url": "https://code.claude.com/docs/en/mcp",
+      "supports": "stdio configuration, client roots, host integration",
+      "type": "official Anthropic documentation",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": "R14",
+      "title": "MCP 2025-11-25 Transports",
+      "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic/transports",
+      "supports": "newline-delimited JSON-RPC, stdout/stderr",
+      "type": "official pinned specification",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": "R15",
+      "title": "MCP 2025-11-25 Tools",
+      "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/tools",
+      "supports": "schema, structured content compatibility, tool annotations",
+      "type": "official pinned specification",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": "R16",
+      "title": "git-worktree",
+      "url": "https://git-scm.com/docs/git-worktree",
+      "supports": "shared and per-worktree state, worktree list/identity",
+      "type": "official Git documentation",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": "R17",
+      "title": "gitignore",
+      "url": "https://git-scm.com/docs/gitignore",
+      "supports": "ignore pattern precedence/negation/parent exclusion",
+      "type": "official Git documentation",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": "R18",
+      "title": "Linux Pressure Stall Information",
+      "url": "https://docs.kernel.org/accounting/psi.html",
+      "supports": "pressure signals",
+      "type": "official kernel documentation",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": "R19",
+      "title": "Linux Control Group v2",
+      "url": "https://docs.kernel.org/admin-guide/cgroup-v2.html",
+      "supports": "effective memory and CPU restrictions",
+      "type": "official kernel documentation",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": "R20",
+      "title": "openat2(2)",
+      "url": "https://man7.org/linux/man-pages/man2/openat2.2.html",
+      "supports": "descriptor-relative path resolution flags and errors",
+      "type": "Linux man-pages project",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": "R21",
+      "title": "Windows Quality of Service",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/procthread/quality-of-service",
+      "supports": "EcoQoS and scheduling hints",
+      "type": "official Microsoft documentation",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": "R22",
+      "title": "C4 model diagrams",
+      "url": "https://c4model.com/diagrams",
+      "supports": "Context/Container/Component/Code model",
+      "type": "C4 model primary source",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": "R23",
+      "title": "Tree-sitter: Using parsers",
+      "url": "https://tree-sitter.github.io/tree-sitter/using-parsers/",
+      "supports": "parser C API and syntax representation",
+      "type": "official project documentation",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": "R24",
+      "title": "ripgrep",
+      "url": "https://github.com/BurntSushi/ripgrep",
+      "supports": "native baseline, filtering and behavior",
+      "type": "official project repository",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": "R25",
+      "title": "fsync(2), Apple archived man page",
+      "url": "https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man2/fsync.2.html",
+      "supports": "fsync vs F_FULLFSYNC; platform validation required",
+      "type": "official archived man page",
+      "accessed": "2026-09-11"
+    },
+    {
+      "id": "R26",
+      "title": "mmap(2)",
+      "url": "https://man7.org/linux/man-pages/man2/mmap.2.html",
+      "supports": "mapping lifetime/truncation faults and memory semantics",
+      "type": "Linux man-pages project",
+      "accessed": "2026-09-11"
+    }
+  ]
+}

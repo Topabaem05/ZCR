@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "zcr": {
+      "type": "stdio",
+      "command": "/absolute/path/to/zcr",
+      "args": [
+        "mcp",
+        "--standalone",
+        "--policy",
+        "/absolute/path/to/approved-policy.json"
+      ]
+    }
+  }
+}

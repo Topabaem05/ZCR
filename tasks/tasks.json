@@ -1,0 +1,808 @@
+{
+  "schema_version": "zcr-tasks/1",
+  "tasks": [
+    {
+      "id": "T00",
+      "title": "측정 기준선과 플랫폼 spike",
+      "depends_on": [],
+      "owns": [
+        "bench/spikes/caps.zig",
+        "bench/spikes/darwin_abi.c",
+        "bench/baseline.md"
+      ],
+      "consumes": [
+        "R01–R11, R16",
+        "approved benchmark environment"
+      ],
+      "produces": [
+        "baseline manifest",
+        "G01/G03/G04/G06 probe evidence"
+      ],
+      "test_group": "perf",
+      "tests": [
+        "PF-001"
+      ],
+      "optional": false,
+      "document": "tasks/T00.md"
+    },
+    {
+      "id": "T01",
+      "title": "계약·build runner·개발 scope 기준선",
+      "depends_on": [
+        "T00"
+      ],
+      "owns": [
+        "build.zig",
+        "build.zig.zon",
+        "src/main.zig",
+        "src/core/types.zig",
+        "src/core/errors.zig",
+        "src/core/limits.zig",
+        "AGENTS.md",
+        "tools/dev/evidence.zig"
+      ],
+      "consumes": [
+        "all schemas v1",
+        "T00 toolchain evidence"
+      ],
+      "produces": [
+        "I01–I19 declarations",
+        "test runner flags",
+        "contract digest and step ledger"
+      ],
+      "test_group": "dev",
+      "tests": [
+        "DV-001",
+        "DV-004",
+        "DV-005"
+      ],
+      "optional": false,
+      "document": "tasks/T01.md"
+    },
+    {
+      "id": "T02",
+      "title": "Capability·경로·개발 소유권 guard",
+      "depends_on": [
+        "T01"
+      ],
+      "owns": [
+        "src/policy/capability.zig",
+        "src/policy/paths.zig",
+        "src/policy/scope.zig",
+        "tools/dev/guard.zig"
+      ],
+      "consumes": [
+        "I01 SessionContext/Capability",
+        "trusted policy schema"
+      ],
+      "produces": [
+        "authorize I01",
+        "tracked/untracked path guard"
+      ],
+      "test_group": "isolation",
+      "tests": [
+        "IS-003",
+        "IS-004",
+        "DV-002",
+        "DV-003"
+      ],
+      "optional": false,
+      "document": "tasks/T02.md"
+    },
+    {
+      "id": "T03",
+      "title": "예산 allocator와 admission",
+      "depends_on": [
+        "T01"
+      ],
+      "owns": [
+        "src/memory/budget.zig",
+        "src/memory/arena.zig",
+        "src/memory/accounting.zig",
+        "src/scheduler/admission.zig"
+      ],
+      "consumes": [
+        "I02 Reservation",
+        "RAM profiles/limits"
+      ],
+      "produces": [
+        "reserve I02",
+        "move-only reservation and request arena policy"
+      ],
+      "test_group": "memory",
+      "tests": [
+        "ME-001",
+        "ME-002",
+        "ME-003",
+        "ME-007"
+      ],
+      "optional": false,
+      "document": "tasks/T03.md"
+    },
+    {
+      "id": "T04",
+      "title": "정확하고 제한된 범위 Read",
+      "depends_on": [
+        "T02",
+        "T03"
+      ],
+      "owns": [
+        "src/fs/read.zig",
+        "src/fs/metadata.zig"
+      ],
+      "consumes": [
+        "I01 Capability",
+        "I02 Reservation",
+        "ReadSpec"
+      ],
+      "produces": [
+        "readRange I03",
+        "FileVersion/whole-file digest behavior"
+      ],
+      "test_group": "io",
+      "tests": [
+        "IO-001",
+        "IO-002",
+        "IO-003",
+        "IO-004",
+        "IO-005",
+        "IO-006"
+      ],
+      "optional": false,
+      "document": "tasks/T04.md"
+    },
+    {
+      "id": "T05",
+      "title": "Git-aware 탐색과 ignore",
+      "depends_on": [
+        "T02",
+        "T03"
+      ],
+      "owns": [
+        "src/fs/traverse.zig",
+        "src/fs/ignore.zig"
+      ],
+      "consumes": [
+        "I01/I02",
+        "FileSpec + Sink"
+      ],
+      "produces": [
+        "enumerate I04",
+        "effective filters and coverage"
+      ],
+      "test_group": "fs",
+      "tests": [
+        "FS-001",
+        "FS-002",
+        "FS-003",
+        "FS-004",
+        "FS-005",
+        "FS-006"
+      ],
+      "optional": false,
+      "document": "tasks/T05.md"
+    },
+    {
+      "id": "T06",
+      "title": "Scalar literal 검색과 문맥 투영",
+      "depends_on": [
+        "T04",
+        "T05"
+      ],
+      "owns": [
+        "src/search/literal.zig",
+        "src/search/scalar.zig",
+        "src/search/context.zig"
+      ],
+      "consumes": [
+        "I03/I04",
+        "SearchSpec and bounded Sink"
+      ],
+      "produces": [
+        "searchLiteral I05",
+        "match spans and unioned context"
+      ],
+      "test_group": "search",
+      "tests": [
+        "SR-001",
+        "SR-002",
+        "SR-003",
+        "SR-004",
+        "SR-005",
+        "SR-006"
+      ],
+      "optional": false,
+      "document": "tasks/T06.md"
+    },
+    {
+      "id": "T07",
+      "title": "Batch read와 공통 output projection",
+      "depends_on": [
+        "T04",
+        "T06"
+      ],
+      "owns": [
+        "src/batch/read.zig",
+        "src/protocol/projection.zig"
+      ],
+      "consumes": [
+        "I03 ReadResult",
+        "logical output contract"
+      ],
+      "produces": [
+        "batchRead I06",
+        "bounded compact response data"
+      ],
+      "test_group": "batch",
+      "tests": [
+        "BA-001",
+        "BA-002",
+        "BA-003"
+      ],
+      "optional": false,
+      "document": "tasks/T07.md"
+    },
+    {
+      "id": "T08",
+      "title": "Direct stdio MCP adapter",
+      "depends_on": [
+        "T02",
+        "T07"
+      ],
+      "owns": [
+        "src/protocol/mcp.zig",
+        "src/protocol/framing.zig",
+        "src/protocol/codec.zig"
+      ],
+      "consumes": [
+        "I18",
+        "contracts/tools.json",
+        "I03–I06"
+      ],
+      "produces": [
+        "MCP initialize/tools/list/tools/call",
+        "text_v1 encoded result"
+      ],
+      "test_group": "mcp",
+      "tests": [
+        "MC-001",
+        "MC-002",
+        "MC-003",
+        "MC-004"
+      ],
+      "optional": false,
+      "document": "tasks/T08.md"
+    },
+    {
+      "id": "T09",
+      "title": "Bounded scheduler와 Darwin GCD",
+      "depends_on": [
+        "T03",
+        "T01"
+      ],
+      "owns": [
+        "src/scheduler/queue.zig",
+        "src/scheduler/executor.zig",
+        "src/platform/darwin.zig",
+        "c/darwin_shim.h",
+        "c/darwin_shim.c"
+      ],
+      "consumes": [
+        "I07 JobEnvelope",
+        "I02 permits",
+        "T00 ABI probes"
+      ],
+      "produces": [
+        "submit I07",
+        "QoS adapter and threaded fallback"
+      ],
+      "test_group": "scheduler",
+      "tests": [
+        "SC-001",
+        "SC-002",
+        "SC-003",
+        "SC-004"
+      ],
+      "optional": false,
+      "document": "tasks/T09.md"
+    },
+    {
+      "id": "T10",
+      "title": "Workspace identity와 writer lease",
+      "depends_on": [
+        "T02",
+        "T01"
+      ],
+      "owns": [
+        "src/workspace/registry.zig",
+        "src/workspace/identity.zig",
+        "src/workspace/lease.zig"
+      ],
+      "consumes": [
+        "I08/I09",
+        "Git discovery result",
+        "trusted root handles"
+      ],
+      "produces": [
+        "registerWorkspace I08",
+        "acquireWriter I09",
+        "workspace generation"
+      ],
+      "test_group": "isolation",
+      "tests": [
+        "IS-001",
+        "IS-002",
+        "IS-005",
+        "IS-008"
+      ],
+      "optional": false,
+      "document": "tasks/T10.md"
+    },
+    {
+      "id": "T11",
+      "title": "단일파일 atomic patch/create",
+      "depends_on": [
+        "T04",
+        "T10"
+      ],
+      "owns": [
+        "src/fs/edit.zig",
+        "src/fs/publish.zig"
+      ],
+      "consumes": [
+        "I03 FileVersion",
+        "I09 WriterLease",
+        "I19 JournalStore interface"
+      ],
+      "produces": [
+        "applyPatch I10",
+        "createFile I11",
+        "commit-point receipt"
+      ],
+      "test_group": "write",
+      "tests": [
+        "WR-001",
+        "WR-002",
+        "WR-003",
+        "WR-004",
+        "WR-007",
+        "WR-009",
+        "WR-010",
+        "IS-007"
+      ],
+      "optional": false,
+      "document": "tasks/T11.md"
+    },
+    {
+      "id": "T12",
+      "title": "Journal·crash recovery·idempotency",
+      "depends_on": [
+        "T11"
+      ],
+      "owns": [
+        "src/storage/journal.zig",
+        "src/storage/recovery.zig",
+        "src/storage/receipts.zig"
+      ],
+      "consumes": [
+        "I19 journal interface",
+        "I10/I11 commit point"
+      ],
+      "produces": [
+        "recover I12",
+        "persistent receipts and ambiguous-state quarantine"
+      ],
+      "test_group": "write",
+      "tests": [
+        "WR-005",
+        "WR-006",
+        "WR-008"
+      ],
+      "optional": false,
+      "document": "tasks/T12.md"
+    },
+    {
+      "id": "T13",
+      "title": "Immutable content·line cache",
+      "depends_on": [
+        "T04",
+        "T10",
+        "T03"
+      ],
+      "owns": [
+        "src/cache/content.zig",
+        "src/cache/lines.zig",
+        "src/cache/association.zig"
+      ],
+      "consumes": [
+        "I13",
+        "ContentHash/FileVersion",
+        "I02 budget"
+      ],
+      "produces": [
+        "cacheGet I13",
+        "second-touch cache and shared accounting"
+      ],
+      "test_group": "memory",
+      "tests": [
+        "ME-004",
+        "IS-006"
+      ],
+      "optional": false,
+      "document": "tasks/T13.md"
+    },
+    {
+      "id": "T14",
+      "title": "Watcher invalidation와 live fallback",
+      "depends_on": [
+        "T05",
+        "T10",
+        "T13"
+      ],
+      "owns": [
+        "src/watch/core.zig",
+        "src/watch/darwin.zig",
+        "src/watch/linux.zig"
+      ],
+      "consumes": [
+        "I14",
+        "workspace generation",
+        "I04 traversal"
+      ],
+      "produces": [
+        "invalidate I14",
+        "uncertain/dirty index state"
+      ],
+      "test_group": "watch",
+      "tests": [
+        "WA-001",
+        "WA-002",
+        "WA-003",
+        "WA-004",
+        "WA-005",
+        "WA-006"
+      ],
+      "optional": false,
+      "document": "tasks/T14.md"
+    },
+    {
+      "id": "T15",
+      "title": "명시적 broker와 다중세션 budget",
+      "depends_on": [
+        "T08",
+        "T09",
+        "T10",
+        "T13"
+      ],
+      "owns": [
+        "src/broker/server.zig",
+        "src/broker/bridge.zig",
+        "src/broker/auth.zig"
+      ],
+      "consumes": [
+        "I18 framing",
+        "I07 scheduler",
+        "I08 registry",
+        "I13 cache"
+      ],
+      "produces": [
+        "authenticated UDS broker",
+        "group resource accounting"
+      ],
+      "test_group": "broker",
+      "tests": [
+        "BR-001",
+        "BR-002",
+        "BR-003",
+        "BR-004",
+        "BR-005"
+      ],
+      "optional": false,
+      "document": "tasks/T15.md"
+    },
+    {
+      "id": "T16",
+      "title": "Pressure·thermal·LLM 공존 governor",
+      "depends_on": [
+        "T09",
+        "T13",
+        "T15"
+      ],
+      "owns": [
+        "src/governor/controller.zig",
+        "src/governor/pressure.zig",
+        "c/darwin_power_shim.h",
+        "c/darwin_power_shim.m"
+      ],
+      "consumes": [
+        "I15 ResourceSignals",
+        "I02 accounting",
+        "I07 permits"
+      ],
+      "produces": [
+        "updatePolicy I15",
+        "hysteresis and model_coexist profile"
+      ],
+      "test_group": "scheduler",
+      "tests": [
+        "SC-005",
+        "SC-006",
+        "ME-005",
+        "ME-006"
+      ],
+      "optional": false,
+      "document": "tasks/T16.md"
+    },
+    {
+      "id": "T17",
+      "title": "Linux x86-64 backend",
+      "depends_on": [
+        "T04",
+        "T05",
+        "T09",
+        "T12",
+        "T14"
+      ],
+      "owns": [
+        "src/platform/interface.zig",
+        "src/platform/linux.zig",
+        "src/platform/linux_pressure.zig"
+      ],
+      "consumes": [
+        "I03/I04/I07/I10–I12",
+        "common platform types"
+      ],
+      "produces": [
+        "Linux baseline implementation",
+        "cgroup-aware effective limits"
+      ],
+      "test_group": "memory",
+      "tests": [
+        "ME-008"
+      ],
+      "optional": false,
+      "document": "tasks/T17.md"
+    },
+    {
+      "id": "T18",
+      "title": "Windows 확장 — 선택",
+      "depends_on": [
+        "T17",
+        "T15"
+      ],
+      "owns": [
+        "src/platform/windows.zig",
+        "src/watch/windows.zig",
+        "src/broker/windows_pipe.zig"
+      ],
+      "consumes": [
+        "common platform types",
+        "I14/I18"
+      ],
+      "produces": [
+        "optional Windows capabilities",
+        "current-user named-pipe and reparse policy"
+      ],
+      "test_group": "security",
+      "tests": [],
+      "optional": true,
+      "document": "tasks/T18.md"
+    },
+    {
+      "id": "T19",
+      "title": "ARM64/x86 SIMD 선택 가속",
+      "depends_on": [
+        "T06",
+        "T17"
+      ],
+      "owns": [
+        "src/search/dispatch.zig",
+        "src/search/simd_arm64.zig",
+        "src/search/simd_x86.zig"
+      ],
+      "consumes": [
+        "scalar oracle",
+        "I05 exact match semantics"
+      ],
+      "produces": [
+        "ISA-dispatched scanner",
+        "fallback and feature probes"
+      ],
+      "test_group": "perf",
+      "tests": [
+        "PF-005"
+      ],
+      "optional": false,
+      "document": "tasks/T19.md"
+    },
+    {
+      "id": "T20",
+      "title": "Tree-sitter outline — 선택",
+      "depends_on": [
+        "T13",
+        "T06"
+      ],
+      "owns": [
+        "src/parser/outline.zig",
+        "src/parser/treesitter.zig",
+        "deps/parser-manifest.json"
+      ],
+      "consumes": [
+        "I16",
+        "I13 immutable cache",
+        "parser budget"
+      ],
+      "produces": [
+        "outline I16",
+        "syntax-only candidate capability"
+      ],
+      "test_group": "ast",
+      "tests": [
+        "AS-001",
+        "AS-002",
+        "AS-003",
+        "AS-004"
+      ],
+      "optional": true,
+      "document": "tasks/T20.md"
+    },
+    {
+      "id": "T21",
+      "title": "재현 가능한 전체 벤치마크 하네스",
+      "depends_on": [
+        "T07",
+        "T09",
+        "T12",
+        "T13",
+        "T15",
+        "T16",
+        "T17"
+      ],
+      "owns": [
+        "bench/runner.zig",
+        "bench/corpus.zig",
+        "bench/trace.zig",
+        "bench/report.zig"
+      ],
+      "consumes": [
+        "T00 baseline",
+        "functional oracle",
+        "all runtime telemetry"
+      ],
+      "produces": [
+        "paired trace evidence",
+        "p50/p95/CI/E2E comparison"
+      ],
+      "test_group": "perf",
+      "tests": [
+        "PF-002",
+        "PF-003",
+        "PF-004",
+        "PF-006",
+        "PF-007"
+      ],
+      "optional": false,
+      "document": "tasks/T21.md"
+    },
+    {
+      "id": "T22",
+      "title": "Bounded telemetry와 health",
+      "depends_on": [
+        "T08",
+        "T10",
+        "T15",
+        "T16"
+      ],
+      "owns": [
+        "src/observe/metrics.zig",
+        "src/observe/health.zig",
+        "src/observe/trace.zig"
+      ],
+      "consumes": [
+        "I17 HealthSnapshot",
+        "budget/scheduler counters"
+      ],
+      "produces": [
+        "health I17",
+        "redacted traces and session status"
+      ],
+      "test_group": "observe",
+      "tests": [
+        "OB-001",
+        "OB-002",
+        "OB-003",
+        "OB-004"
+      ],
+      "optional": false,
+      "document": "tasks/T22.md"
+    },
+    {
+      "id": "T23",
+      "title": "Codex/Claude 실제 라우팅 검증",
+      "depends_on": [
+        "T08",
+        "T12",
+        "T21",
+        "T22"
+      ],
+      "owns": [
+        "src/host/routing.zig",
+        "integration/codex.md",
+        "integration/claude.md",
+        "integration/traces/README.md"
+      ],
+      "consumes": [
+        "MCP tools and policy",
+        "actual installed clients"
+      ],
+      "produces": [
+        "host compatibility evidence",
+        "approved routing instructions"
+      ],
+      "test_group": "mcp",
+      "tests": [
+        "MC-005",
+        "MC-006"
+      ],
+      "optional": false,
+      "document": "tasks/T23.md"
+    },
+    {
+      "id": "T24",
+      "title": "패키징과 실제 지원 행렬",
+      "depends_on": [
+        "T17",
+        "T22",
+        "T23"
+      ],
+      "owns": [
+        "release/package.zig",
+        "release/support-matrix.json",
+        "release/SBOM.json",
+        "release/README.md"
+      ],
+      "consumes": [
+        "actual platform test evidence",
+        "dependency manifest"
+      ],
+      "produces": [
+        "signed/verified release artifacts as configured",
+        "truthful support matrix"
+      ],
+      "test_group": "dev",
+      "tests": [],
+      "optional": false,
+      "document": "tasks/T24.md"
+    },
+    {
+      "id": "T25",
+      "title": "최종 통합·격리·성능 release gate",
+      "depends_on": [
+        "T24",
+        "T21",
+        "T19",
+        "T12"
+      ],
+      "owns": [
+        "release/acceptance.md",
+        "release/evidence-index.json",
+        "release/risks.md"
+      ],
+      "consumes": [
+        "all mandatory task evidence",
+        "requirements traceability"
+      ],
+      "produces": [
+        "go/no-go decision",
+        "released capabilities and residual risks"
+      ],
+      "test_group": "perf",
+      "tests": [
+        "PF-008",
+        "DV-006"
+      ],
+      "optional": false,
+      "document": "tasks/T25.md"
+    }
+  ]
+}

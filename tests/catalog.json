@@ -1,0 +1,742 @@
+{
+  "schema_version": "zcr-test-catalog/1",
+  "status": "design_only",
+  "tests": [
+    {
+      "id": "IO-001",
+      "owner_task": "T04",
+      "given": "UTF-8 fixture bytes alpha\\nbeta\\n",
+      "when": "read lines 1..2",
+      "then": "두 줄과 원본 byte offsets가 정확하며 EOF phantom line 없음",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "IO-002",
+      "owner_task": "T04",
+      "given": "빈 파일과 trailing newline 없는 파일",
+      "when": "동일 범위 read",
+      "then": "빈 파일0줄, 비종결 마지막 줄1개, complete=true",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "IO-003",
+      "owner_task": "T04",
+      "given": "BOM·CRLF·혼합 newline·한글 파일",
+      "when": "write_intent read",
+      "then": "raw bytes와 SHA-256을 유지, normalization 없음",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "IO-004",
+      "owner_task": "T04",
+      "given": "최대5000줄·매우 긴 한 줄·64KiB 파일",
+      "when": "작은 output budget read",
+      "then": "명확한 truncation 또는 E_OUTPUT_BUDGET, buffer overflow 없음",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "IO-005",
+      "owner_task": "T04",
+      "given": "short read/EINTR/change-after-open 주입",
+      "when": "bounded read",
+      "then": "안전 재시도 또는 changed 오류, 다른 버전 snippet 결합 없음",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "IO-006",
+      "owner_task": "T04",
+      "given": "8MiB 파일의 중간200줄",
+      "when": "write_intent=true/false 비교",
+      "then": "true는 전체hash, false는 whole hash null 허용; FD/arena 회수",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "FS-001",
+      "owner_task": "T05",
+      "given": "nested .gitignore와 negation",
+      "when": "파일 나열",
+      "then": "Git 규칙 oracle과 effective policy 내 동일 file set",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "FS-002",
+      "owner_task": "T05",
+      "given": "ignored parent 아래 reinclude child",
+      "when": "나열",
+      "then": "parent 제외 제약 유지",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "FS-003",
+      "owner_task": "T05",
+      "given": "hidden/.git/escaped # !/space 패턴",
+      "when": "나열",
+      "then": "policy 정확 적용, .git write scope 없음",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "FS-004",
+      "owner_task": "T05",
+      "given": "200k-file corpus와 작은 path cap",
+      "when": "streaming traversal",
+      "then": "전체 index 할당 없이 bounded memory와 coverage 유지",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "FS-005",
+      "owner_task": "T05",
+      "given": "symlink loop·unreadable directory",
+      "when": "나열",
+      "then": "loop 없음, unreadable 때문에 complete=false",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "FS-006",
+      "owner_task": "T05",
+      "given": "valid Unicode와 non-UTF8 path",
+      "when": "나열",
+      "then": "문자 손실 없음, 미지원 이름 누락을 coverage에 표시",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "SR-001",
+      "owner_task": "T06",
+      "given": "chunk boundary를 가로지르는 literal",
+      "when": "search",
+      "then": "scalar oracle과 동일 spans, overlap duplicate0",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "SR-002",
+      "owner_task": "T06",
+      "given": "같은 줄 여러 match와 겹치는 context",
+      "when": "search context2",
+      "then": "한 번의 line bytes+모든 match spans",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "SR-003",
+      "owner_task": "T06",
+      "given": "빈 pattern 및 regex-looking literal",
+      "when": "search",
+      "then": "빈 패턴 거부, .* 등은 문자 그대로",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "SR-004",
+      "owner_task": "T06",
+      "given": "NUL/binary·oversize·UTF8 invalid 파일",
+      "when": "search",
+      "then": "정의된 skip/error와 정확한 coverage",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "SR-005",
+      "owner_task": "T06",
+      "given": "최대matches/출력/deadline cap",
+      "when": "search",
+      "then": "cap 이상 allocation 없음, complete/truncated 정직",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "SR-006",
+      "owner_task": "T06",
+      "given": "검색후 context reread 사이 변경",
+      "when": "search",
+      "then": "한 번 재시도 또는 changed, 버전 섞임 없음",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "BA-001",
+      "owner_task": "T07",
+      "given": "32개항목·중복range·존재하지 않는파일",
+      "when": "batch read",
+      "then": "입력순서/항목ID·부분오류 유지",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "BA-002",
+      "owner_task": "T07",
+      "given": "33개항목 및 다른workspace path",
+      "when": "batch read",
+      "then": "첫 경우 argument 거부, root 탈출 차단",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "BA-003",
+      "owner_task": "T07",
+      "given": "8MiB shared output 예산을 요구하는32항목",
+      "when": "작은group cap",
+      "then": "동시32 buffers 없음, E_OUTPUT_BUDGET 명시",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "WR-001",
+      "owner_task": "T11",
+      "given": "old digest와 두 nonoverlap spans",
+      "when": "patch",
+      "then": "완성 새bytes와 일치, unchanged region byte-identical",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "WR-002",
+      "owner_task": "T11",
+      "given": "read후 다른mediated writer가 변경",
+      "when": "patch oldhash",
+      "then": "E_VERSION_CONFLICT, 새파일 미변경",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "WR-003",
+      "owner_task": "T11",
+      "given": "overlap/overflow/UTF8중간span",
+      "when": "patch",
+      "then": "commit 전 E_INVALID_ARGUMENT",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "WR-004",
+      "owner_task": "T11",
+      "given": "취소 commit 이전/이후 주입",
+      "when": "patch",
+      "then": "이전 미변경, 이후 applied receipt 보존",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "WR-005",
+      "owner_task": "T12",
+      "given": "rename 앞뒤 등10개crashpoint",
+      "when": "kill/restart",
+      "then": "old/new 완성파일 또는 UNCERTAIN, partial target 없음",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "WR-006",
+      "owner_task": "T12",
+      "given": "동일key 같은/다른payload",
+      "when": "재전송",
+      "then": "같은payload 기존receipt, 다른payload 거부",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "WR-007",
+      "owner_task": "T11",
+      "given": "ENOSPC/ACL복제실패/read-only volume",
+      "when": "patch",
+      "then": "교체전 실패 또는 applied+durability 실패 명확",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "WR-008",
+      "owner_task": "T12",
+      "given": "journal과target이 모두다른hash",
+      "when": "recover",
+      "then": "경로write quarantine, 자동덮어쓰기 없음",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "WR-009",
+      "owner_task": "T11",
+      "given": "기존path에create",
+      "when": "create",
+      "then": "E_VERSION_CONFLICT 또는 존재오류, 원본보존",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "WR-010",
+      "owner_task": "T11",
+      "given": "두세션이같은새path create",
+      "when": "동시publish",
+      "then": "정확히하나만성공, partial bytes 노출없음",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "MC-001",
+      "owner_task": "T08",
+      "given": "supported/unsupported protocol versions",
+      "when": "initialize",
+      "then": "협상성공또는명시거부, capability정확",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "MC-002",
+      "owner_task": "T08",
+      "given": "partial frames·newline escape·concurrent jobs",
+      "when": "stdio traffic",
+      "then": "1record1message, stdout log없음",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "MC-003",
+      "owner_task": "T08",
+      "given": "duplicate keys·deep JSON·16MiB초과",
+      "when": "decode",
+      "then": "선행제한, bounded allocation",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "MC-004",
+      "owner_task": "T08",
+      "given": "cancel notification·느린stdout",
+      "when": "read/search",
+      "then": "요청별취소/backpressure, deadlock없음",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "MC-005",
+      "owner_task": "T23",
+      "given": "MCP roots 추가·모델이scope바꾸려함",
+      "when": "toolcall",
+      "then": "trustedpolicy 교집합만허용",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "MC-006",
+      "owner_task": "T23",
+      "given": "실제Codex/Claude와text/structured profile",
+      "when": "workflow",
+      "then": "호출trace확인, 중복tooltext와fallback정량화",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "IS-001",
+      "owner_task": "T10",
+      "given": "같은repo 다른worktree의동일relativepath",
+      "when": "readcache",
+      "then": "서로다른dirtybytes가섞이지않음",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "IS-002",
+      "owner_task": "T10",
+      "given": "삭제후같은path 재생성worktree",
+      "when": "oldcapability사용",
+      "then": "incarnation mismatch거부",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "IS-003",
+      "owner_task": "T02",
+      "given": "../absolute/symlink/UNC 경로",
+      "when": "authorize",
+      "then": "경계밖접근거부",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "IS-004",
+      "owner_task": "T02",
+      "given": "worktree .git파일과commongitdir",
+      "when": "writeauthorize",
+      "then": "공용gitmetadata수정거부",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "IS-005",
+      "owner_task": "T10",
+      "given": "lease만료·renew·fence증가",
+      "when": "latecallback commit",
+      "then": "구fence거부, drain전새writer미승인",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "IS-006",
+      "owner_task": "T13",
+      "given": "동일hash 다른securitydomain",
+      "when": "cachehit",
+      "then": "다시auth, domaincross누출없음",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "IS-007",
+      "owner_task": "T11",
+      "given": "hardlink파일·movedparent·specialfile",
+      "when": "write",
+      "then": "기본hardlink/special거부, hostile환경경계명시",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "IS-008",
+      "owner_task": "T10",
+      "given": "shared editor외부동시변경",
+      "when": "strictwrite 요청",
+      "then": "전용writer조건없으면proposal/read-only",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "BR-001",
+      "owner_task": "T15",
+      "given": "4clients와128MiB profile",
+      "when": "simultaneousqueries",
+      "then": "group총budget안에서cache공유/요청제한",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "BR-002",
+      "owner_task": "T15",
+      "given": "16sessions와17번째client",
+      "when": "connect",
+      "then": "17번째유계거부, 기존client지속",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "BR-003",
+      "owner_task": "T15",
+      "given": "느린bridge와빠른client",
+      "when": "output backpressure",
+      "then": "세션별격리, 전체backlog cap",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "BR-004",
+      "owner_task": "T15",
+      "given": "다른사용자/잘못된token/다른sandbox",
+      "when": "brokerconnect/root요청",
+      "then": "인증실패 또는 scope교집합, privilege상승0",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "BR-005",
+      "owner_task": "T15",
+      "given": "commit후broker crash",
+      "when": "bridge reconnect",
+      "then": "write맹목재전송없고receipt조회",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "WA-001",
+      "owner_task": "T14",
+      "given": "scan중파일신규생성",
+      "when": "watch→scan→reconcile",
+      "then": "generation에변경반영, lostnewfile없음",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "WA-002",
+      "owner_task": "T14",
+      "given": "coalesced event",
+      "when": "invalidate",
+      "then": "해당범위rescan",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "WA-003",
+      "owner_task": "T14",
+      "given": "kernel/user dropped event",
+      "when": "requestlatest",
+      "then": "uncertain+livefallback, falsecomplete없음",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "WA-004",
+      "owner_task": "T14",
+      "given": "root moved/event counter wrapped",
+      "when": "watchupdate",
+      "then": "identity재확인/fullrescan",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "WA-005",
+      "owner_task": "T14",
+      "given": "dirtyqueue초과eventstorm",
+      "when": "ingest",
+      "then": "workspace전체dirty, bounded queue",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "WA-006",
+      "owner_task": "T14",
+      "given": "watch정보가낡음",
+      "when": "checked_live files/search",
+      "then": "live traversal로후보확인",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "OB-001",
+      "owner_task": "T22",
+      "given": "관측signal부재플랫폼",
+      "when": "health",
+      "then": "unknown/unsupported정확표시",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "OB-002",
+      "owner_task": "T22",
+      "given": "query/source/token포함요청",
+      "when": "defaultlogs",
+      "then": "소스원문·token노출0",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "OB-003",
+      "owner_task": "T22",
+      "given": "10krequests traceenabled",
+      "when": "metrics",
+      "then": "bounded ring와정확한p50/p95입력",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "OB-004",
+      "owner_task": "T22",
+      "given": "broker+bridges",
+      "when": "memoryreport",
+      "then": "group집계와allocator/RSS분리",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "AS-001",
+      "owner_task": "T20",
+      "given": "고정grammar와한함수fixture",
+      "when": "outline",
+      "then": "정확한syntaxnode범위",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "AS-002",
+      "owner_task": "T20",
+      "given": "동일bytes 다른grammar/options",
+      "when": "cachelookup",
+      "then": "다른key, 재파싱",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "AS-003",
+      "owner_task": "T20",
+      "given": "대형/깊은parseinput 및lowRAM",
+      "when": "outline",
+      "then": "parserbudget거부/취소, main read유지",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "AS-004",
+      "owner_task": "T20",
+      "given": "같은이름다른scope의symbol",
+      "when": "queryrefs",
+      "then": "exact refs로표시하지않고syntaxcandidate만",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "SC-001",
+      "owner_task": "T09",
+      "given": "foregroundread와backgroundscan",
+      "when": "dispatch",
+      "then": "foreground dependency QoS강등없음",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "SC-002",
+      "owner_task": "T09",
+      "given": "8tasks mixedchunks",
+      "when": "schedule",
+      "then": "globalpermits초과0, starvationbounded",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "SC-003",
+      "owner_task": "T09",
+      "given": "cancel과callbackteardown race",
+      "when": "drain",
+      "then": "UAF/doublefree0",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "SC-004",
+      "owner_task": "T09",
+      "given": "GCD executor와nestedsubmit",
+      "when": "parallelwork",
+      "then": "별도unboundedpool안생김",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "SC-005",
+      "owner_task": "T16",
+      "given": "thermalserious/critical·lowpower",
+      "when": "governor",
+      "then": "동시성감소와hysteresis복구",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "SC-006",
+      "owner_task": "T16",
+      "given": "5swindow3회 tok/s>5%drop",
+      "when": "coexistmode",
+      "then": "speculative정지/permits감소, disable가능",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "ME-001",
+      "owner_task": "T03",
+      "given": "allocation N번째실패",
+      "when": "각read/writephase",
+      "then": "미커밋원본보존·예약회수",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "ME-002",
+      "owner_task": "T03",
+      "given": "requestarena childpending",
+      "when": "cancel/reset",
+      "then": "childdrain이전free금지",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "ME-003",
+      "owner_task": "T03",
+      "given": "oversized input/batchoutput",
+      "when": "admission",
+      "then": "hardtrackedcap초과0",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "ME-004",
+      "owner_task": "T13",
+      "given": "동일content4workspace pin",
+      "when": "account/evict",
+      "then": "group한번집계, pin중해제0",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "ME-005",
+      "owner_task": "T16",
+      "given": "warning/criticalsignals",
+      "when": "pressureloop",
+      "then": "cache축소/큰요청거부/긴급응답가능",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "ME-006",
+      "owner_task": "T16",
+      "given": "critical후정상signal",
+      "when": "recover",
+      "then": "10s안정+5s마다10%p 회복",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "ME-007",
+      "owner_task": "T03",
+      "given": "10kread/cancelcycles",
+      "when": "steady-state",
+      "then": "live reservation수정상복귀, leak증가없음",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "ME-008",
+      "owner_task": "T17",
+      "given": "작은cgroupmemorymax/cpuquota",
+      "when": "Linuxinit",
+      "then": "hostRAM보다작은유효상한적용",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "PF-001",
+      "owner_task": "T00",
+      "given": "B0/B1환경",
+      "when": "baselinecapture",
+      "then": "compiler/OS/corpus/cache/power정보기록",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "PF-002",
+      "owner_task": "T21",
+      "given": "B1/B2동일query",
+      "when": "oraclecomparison",
+      "then": "matches/filter/output동일후성능비교",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "PF-003",
+      "owner_task": "T21",
+      "given": "30warmruns A/B",
+      "when": "aggregation",
+      "then": "p50/p95/max/CI와rawtrace보존",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "PF-004",
+      "owner_task": "T21",
+      "given": "20codingtasks pairedruns",
+      "when": "E2E",
+      "then": "성공률/criticalpath/toolbytes함께보고",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "PF-005",
+      "owner_task": "T19",
+      "given": "scalar/NEON/AVX inputvectors",
+      "when": "differentialfuzz",
+      "then": "경계포함결과100%동일",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "PF-006",
+      "owner_task": "T21",
+      "given": "localLLM고정decode/prefill",
+      "when": "mixedrun",
+      "then": "baseline과모델tok/s영향보고",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "PF-007",
+      "owner_task": "T21",
+      "given": "coldcache통제불가",
+      "when": "benchmarklabel",
+      "then": "unknown표기, cold라고홍보금지",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "PF-008",
+      "owner_task": "T25",
+      "given": "releasecandidate별플랫폼",
+      "when": "releasegate",
+      "then": "미실행NOT_RUN, source/binaryhash증거일치",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "DV-001",
+      "owner_task": "T01",
+      "given": "dirtybaseworktree",
+      "when": "taskpreflight",
+      "then": "사용자변경보존, 자동stash/reset금지",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "DV-002",
+      "owner_task": "T02",
+      "given": "허용범위밖newfile/rename/delete",
+      "when": "scopeguard",
+      "then": "tracked/untracked모두reject",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "DV-003",
+      "owner_task": "T02",
+      "given": "두task같은공유contract편집",
+      "when": "ownershipguard",
+      "then": "통합자외변경reject",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "DV-004",
+      "owner_task": "T01",
+      "given": "다른worktree의binaryevidence",
+      "when": "handoff",
+      "then": "source/hash불일치reject",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "DV-005",
+      "owner_task": "T01",
+      "given": "모델세션재시작",
+      "when": "stepresume",
+      "then": "state/base/contracts읽고재검증",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "DV-006",
+      "owner_task": "T25",
+      "given": "requirements/task/tests연결",
+      "when": "finalaudit",
+      "then": "미연결필수요구사항0",
+      "execution_status": "not_run"
+    }
+  ]
+}

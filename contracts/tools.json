@@ -1,0 +1,525 @@
+{
+  "schema_version": "zcr/1",
+  "mcp_compatibility_baseline": "2025-11-25",
+  "default_output_profile": "text_v1",
+  "discovery_note": "Advertise enabled tools only. Patch/create remain disabled until T12 and host policy approval. No outputSchema in text_v1.",
+  "tools": [
+    {
+      "name": "zcr_read",
+      "description": "Read a bounded UTF-8 file range in the bound workspace. Use write_intent=true to obtain the whole-file digest needed for an exact patch.",
+      "inputSchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096,
+            "description": "Relative UTF-8 path; byte length<=4096 and OS limit enforced at runtime; no .., absolute, NUL, or policy escape."
+          },
+          "start_line": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 4294967295,
+            "default": 1
+          },
+          "line_count": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5000,
+            "default": 200
+          },
+          "write_intent": {
+            "type": "boolean",
+            "default": false
+          },
+          "consistency": {
+            "type": "string",
+            "enum": [
+              "checked_live",
+              "managed_generation",
+              "bounded_stale"
+            ],
+            "default": "checked_live",
+            "description": "Other modes are not exposed by v1 input; managed/stale require enabled capability and explicit policy."
+          },
+          "output_bytes": {
+            "type": "integer",
+            "minimum": 1024,
+            "maximum": 2097152,
+            "default": 262144
+          },
+          "deadline_ms": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 60000,
+            "default": 5000
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "zcr_files",
+      "description": "List matching paths under the approved root, with ignore filtering and explicit coverage. Live traversal is the default.",
+      "inputSchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "glob": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096,
+            "default": "**/*"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10000,
+            "default": 1000
+          },
+          "include_hidden": {
+            "type": "boolean",
+            "default": false
+          },
+          "order": {
+            "enum": [
+              "discovery",
+              "path_then_offset"
+            ],
+            "default": "discovery"
+          },
+          "consistency": {
+            "type": "string",
+            "enum": [
+              "checked_live",
+              "managed_generation",
+              "bounded_stale"
+            ],
+            "default": "checked_live",
+            "description": "Other modes are not exposed by v1 input; managed/stale require enabled capability and explicit policy."
+          },
+          "max_stale_ms": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 60000,
+            "default": 0
+          },
+          "output_bytes": {
+            "type": "integer",
+            "minimum": 1024,
+            "maximum": 2097152,
+            "default": 262144
+          },
+          "deadline_ms": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 60000,
+            "default": 5000
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "zcr_search",
+      "description": "Find an exact case-sensitive literal with limited surrounding context. Prefer a narrow glob; results report completeness and original byte spans.",
+      "inputSchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "literal": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          },
+          "glob": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096,
+            "default": "**/*"
+          },
+          "context_lines": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 20,
+            "default": 2
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000,
+            "default": 100
+          },
+          "max_file_bytes": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1073741824,
+            "default": 33554432
+          },
+          "include_hidden": {
+            "type": "boolean",
+            "default": false
+          },
+          "order": {
+            "enum": [
+              "discovery",
+              "path_then_offset"
+            ],
+            "default": "discovery"
+          },
+          "consistency": {
+            "type": "string",
+            "enum": [
+              "checked_live",
+              "managed_generation",
+              "bounded_stale"
+            ],
+            "default": "checked_live",
+            "description": "Other modes are not exposed by v1 input; managed/stale require enabled capability and explicit policy."
+          },
+          "max_stale_ms": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 60000,
+            "default": 0
+          },
+          "output_bytes": {
+            "type": "integer",
+            "minimum": 1024,
+            "maximum": 2097152,
+            "default": 262144
+          },
+          "deadline_ms": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 60000,
+            "default": 5000
+          }
+        },
+        "required": [
+          "literal"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "zcr_batch_read",
+      "description": "Read up to 32 independent ranges from one bound workspace in one call. Per-item errors and input order are retained.",
+      "inputSchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 32,
+            "items": {
+              "type": "object",
+              "properties": {
+                "item_id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 64
+                },
+                "path": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 4096,
+                  "description": "Relative UTF-8 path; byte length<=4096 and OS limit enforced at runtime; no .., absolute, NUL, or policy escape."
+                },
+                "start_line": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 4294967295,
+                  "default": 1
+                },
+                "line_count": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 5000,
+                  "default": 200
+                },
+                "write_intent": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "consistency": {
+                  "type": "string",
+                  "enum": [
+                    "checked_live",
+                    "managed_generation",
+                    "bounded_stale"
+                  ],
+                  "default": "checked_live",
+                  "description": "Other modes are not exposed by v1 input; managed/stale require enabled capability and explicit policy."
+                }
+              },
+              "required": [
+                "item_id",
+                "path"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "output_bytes": {
+            "type": "integer",
+            "minimum": 1024,
+            "maximum": 2097152,
+            "default": 262144
+          },
+          "deadline_ms": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 60000,
+            "default": 5000
+          }
+        },
+        "required": [
+          "items"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "zcr_patch",
+      "description": "Replace exact original byte spans in one existing UTF-8 file. Requires approved writer lease and a fresh whole-file expected SHA-256.",
+      "inputSchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096,
+            "description": "Relative UTF-8 path; byte length<=4096 and OS limit enforced at runtime; no .., absolute, NUL, or policy escape."
+          },
+          "expected_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "replacements": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 1024,
+            "items": {
+              "type": "object",
+              "properties": {
+                "start": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 8388608
+                },
+                "end": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 8388608
+                },
+                "text": {
+                  "type": "string",
+                  "maxLength": 8388608
+                }
+              },
+              "required": [
+                "start",
+                "end",
+                "text"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "idempotency_key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[ -~]+$"
+          },
+          "durability": {
+            "enum": [
+              "process",
+              "durable",
+              "strongest_available"
+            ],
+            "default": "process"
+          },
+          "output_bytes": {
+            "type": "integer",
+            "minimum": 1024,
+            "maximum": 2097152,
+            "default": 262144
+          },
+          "deadline_ms": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 60000,
+            "default": 5000
+          }
+        },
+        "required": [
+          "path",
+          "expected_sha256",
+          "replacements",
+          "idempotency_key"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "zcr_create",
+      "description": "Create one new UTF-8 file without overwriting an existing path. Requires an approved create scope and writer lease.",
+      "inputSchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096,
+            "description": "Relative UTF-8 path; byte length<=4096 and OS limit enforced at runtime; no .., absolute, NUL, or policy escape."
+          },
+          "content": {
+            "type": "string",
+            "maxLength": 8388608
+          },
+          "idempotency_key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[ -~]+$"
+          },
+          "durability": {
+            "enum": [
+              "process",
+              "durable",
+              "strongest_available"
+            ],
+            "default": "process"
+          },
+          "output_bytes": {
+            "type": "integer",
+            "minimum": 1024,
+            "maximum": 2097152,
+            "default": 262144
+          },
+          "deadline_ms": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 60000,
+            "default": 5000
+          }
+        },
+        "required": [
+          "path",
+          "content",
+          "idempotency_key"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "zcr_status",
+      "description": "Inspect only the bound task/workspace status or a receipt from the current security domain.",
+      "inputSchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "receipt_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "output_bytes": {
+            "type": "integer",
+            "minimum": 1024,
+            "maximum": 2097152,
+            "default": 262144
+          },
+          "deadline_ms": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 60000,
+            "default": 5000
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "zcr_health",
+      "description": "Report actual enabled capabilities, resource limits, and available pressure signals without exposing source text or other sessions.",
+      "inputSchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "output_bytes": {
+            "type": "integer",
+            "minimum": 1024,
+            "maximum": 2097152,
+            "default": 262144
+          },
+          "deadline_ms": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 60000,
+            "default": 5000
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    }
+  ]
+}

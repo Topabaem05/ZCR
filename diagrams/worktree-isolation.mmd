@@ -1,0 +1,17 @@
+flowchart LR
+  a["Session A / Task A<br/>Root A + fence A"]
+  b["Session B / Task B<br/>Root B + fence B"]
+  wa["Workspace A actor<br/>Incarnation A / generation A"]
+  wb["Workspace B actor<br/>Incarnation B / generation B"]
+  fa["Worktree A source<br/>Private dirty files"]
+  fb["Worktree B source<br/>Private dirty files"]
+  cache["Immutable content cache<br/>Same hash + domain + authorization"]
+  git["Git common metadata<br/>Shared; write forbidden"]
+  a -->|"bound capability"| wa
+  b -->|"bound capability"| wb
+  wa -->|"single writer"| fa
+  wb -->|"single writer"| fb
+  wa -->|"authorized pin"| cache
+  wb -->|"authorized pin"| cache
+  fa -->|"linked worktree"| git
+  fb -->|"linked worktree"| git

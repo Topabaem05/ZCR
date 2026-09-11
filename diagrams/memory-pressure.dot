@@ -1,0 +1,20 @@
+digraph G {
+graph [rankdir=TB, bgcolor="transparent", pad="0.22", nodesep="0.38", ranksep="0.55", fontname="Helvetica", fontsize=17, labelloc="t", label="State | Pressure controls admission, not live-pointer safety"];
+node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=11, color="#28766C", fillcolor="#E6F2EF", fontcolor="#183741", penwidth=1.2, margin="0.14,0.09"];
+edge [fontname="Helvetica", fontsize=9, color="#758895", fontcolor="#526570", arrowsize=0.7, penwidth=1.1];
+normal [label="NORMAL\nTracked <70%",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+soft [label="SOFT\n>=70% / reduced headroom",shape=cylinder,fillcolor="#FFF4D8",color="#B08B31"];
+warning [label="WARNING\nOS warning / >=85%",shape=box,fillcolor="#F9E9E5",color="#A65842"];
+critical [label="CRITICAL\nOS critical / >=95%",shape=box,fillcolor="#F9E9E5",color="#A65842"];
+recovery [label="RECOVERY\n10s stable; +10pp / 5s",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+pins [label="Pinned / committing work\nDrain before release",shape=box,fillcolor="#F0EDF5",color="#806591"];
+normal -> soft [label="pressure rises"];
+soft -> warning [label="shrink target"];
+warning -> critical [label="reject bulk"];
+critical -> recovery [label="signals stable"];
+warning -> recovery [label="signals stable"];
+soft -> recovery [label="signals stable"];
+recovery -> normal [label="baseline restored"];
+recovery -> warning [label="pressure returns"];
+critical -> pins [label="preserve lifetime"];
+}

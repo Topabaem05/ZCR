@@ -1,0 +1,28 @@
+{
+  "schema_version": "zcr-bench/1",
+  "status": "not_run",
+  "source_commit": null,
+  "binary_sha256": null,
+  "machine": null,
+  "os_build": null,
+  "zig_version": "0.16.0",
+  "corpus_sha256": null,
+  "config_sha256": null,
+  "cache_state": "unknown",
+  "warm_repetitions_planned": 30,
+  "metrics": {
+    "backend_p50_us": null,
+    "backend_p95_us": null,
+    "tool_p95_us": null,
+    "critical_path_tool_ms": null,
+    "agent_task_ms": null,
+    "tool_bytes": null,
+    "tool_tokens": null,
+    "peak_footprint_bytes": null,
+    "group_peak_bytes": null,
+    "model_decode_tok_s": null,
+    "energy_joules": null
+  },
+  "correctness_status": "not_run",
+  "raw_trace_files": []
+}

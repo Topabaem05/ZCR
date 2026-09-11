@@ -1,0 +1,24 @@
+{
+  "schema_version": "zcr-handoff/1",
+  "state": "planned",
+  "task_id": "T04",
+  "step": "S01",
+  "base_commit": null,
+  "head_commit": null,
+  "contract_digest": null,
+  "source_tree_digest": null,
+  "binary_sha256": null,
+  "owned_paths": [
+    "src/fs/read.zig",
+    "src/fs/metadata.zig",
+    "tests/t04_test.zig"
+  ],
+  "changed_files": [],
+  "test_evidence": [],
+  "exports": [
+    "I03 readRange"
+  ],
+  "remaining_gates": [
+    "task implementation and runtime tests not executed"
+  ]
+}

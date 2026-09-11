@@ -1,0 +1,71 @@
+{
+  "status": "design_caps_not_preallocated_or_measured",
+  "profiles": [
+    {
+      "ram_upper_gib": 8,
+      "group_mib": 128,
+      "tracked_mib": 96,
+      "base_mib": 16,
+      "emergency_mib": 8,
+      "paths_mib": 24,
+      "content_mib": 16,
+      "ast_mib": 0,
+      "inflight_mib": 32
+    },
+    {
+      "ram_upper_gib": 16,
+      "group_mib": 256,
+      "tracked_mib": 192,
+      "base_mib": 16,
+      "emergency_mib": 8,
+      "paths_mib": 48,
+      "content_mib": 48,
+      "ast_mib": 16,
+      "inflight_mib": 56
+    },
+    {
+      "ram_upper_gib": 24,
+      "group_mib": 384,
+      "tracked_mib": 288,
+      "base_mib": 16,
+      "emergency_mib": 8,
+      "paths_mib": 64,
+      "content_mib": 80,
+      "ast_mib": 32,
+      "inflight_mib": 88
+    },
+    {
+      "ram_upper_gib": 32,
+      "group_mib": 512,
+      "tracked_mib": 384,
+      "base_mib": 24,
+      "emergency_mib": 8,
+      "paths_mib": 80,
+      "content_mib": 104,
+      "ast_mib": 64,
+      "inflight_mib": 104
+    },
+    {
+      "ram_upper_gib": 64,
+      "group_mib": 768,
+      "tracked_mib": 576,
+      "base_mib": 24,
+      "emergency_mib": 8,
+      "paths_mib": 128,
+      "content_mib": 144,
+      "ast_mib": 112,
+      "inflight_mib": 160
+    },
+    {
+      "ram_upper_gib": null,
+      "group_mib": 1024,
+      "tracked_mib": 768,
+      "base_mib": 32,
+      "emergency_mib": 16,
+      "paths_mib": 160,
+      "content_mib": 208,
+      "ast_mib": 160,
+      "inflight_mib": 192
+    }
+  ]
+}

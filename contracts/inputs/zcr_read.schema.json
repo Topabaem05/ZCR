@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "path": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "description": "Relative UTF-8 path; byte length<=4096 and OS limit enforced at runtime; no .., absolute, NUL, or policy escape."
+    },
+    "start_line": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4294967295,
+      "default": 1
+    },
+    "line_count": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5000,
+      "default": 200
+    },
+    "write_intent": {
+      "type": "boolean",
+      "default": false
+    },
+    "consistency": {
+      "type": "string",
+      "enum": [
+        "checked_live",
+        "managed_generation",
+        "bounded_stale"
+      ],
+      "default": "checked_live",
+      "description": "Other modes are not exposed by v1 input; managed/stale require enabled capability and explicit policy."
+    },
+    "output_bytes": {
+      "type": "integer",
+      "minimum": 1024,
+      "maximum": 2097152,
+      "default": 262144
+    },
+    "deadline_ms": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 60000,
+      "default": 5000
+    }
+  },
+  "required": [
+    "path"
+  ],
+  "additionalProperties": false
+}

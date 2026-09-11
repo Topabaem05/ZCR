@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "zcr-task/1"
+    },
+    "state": {
+      "enum": [
+        "planned",
+        "ready",
+        "active",
+        "completed",
+        "revoked"
+      ]
+    },
+    "task_id": {
+      "type": "string",
+      "pattern": "^T[0-9]{2}$"
+    },
+    "workspace_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "base_commit": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^(?:[0-9a-f]{40}|[0-9a-f]{64})$"
+    },
+    "contract_digest": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "fence": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1
+    },
+    "expires_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "read_paths": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 4096,
+        "description": "Relative UTF-8 path; byte length<=4096 and OS limit enforced at runtime; no .., absolute, NUL, or policy escape."
+      }
+    },
+    "write_paths": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 4096,
+        "description": "Relative UTF-8 path; byte length<=4096 and OS limit enforced at runtime; no .., absolute, NUL, or policy escape."
+      }
+    },
+    "immutable_paths": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 4096,
+        "description": "Relative UTF-8 path; byte length<=4096 and OS limit enforced at runtime; no .., absolute, NUL, or policy escape."
+      }
+    },
+    "operations": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "read",
+          "enumerate",
+          "search",
+          "batch_read",
+          "patch",
+          "create",
+          "status",
+          "health"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "max_changed_files": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 256
+    }
+  },
+  "required": [
+    "schema_version",
+    "state",
+    "task_id",
+    "workspace_id",
+    "base_commit",
+    "contract_digest",
+    "fence",
+    "expires_at",
+    "read_paths",
+    "write_paths",
+    "immutable_paths",
+    "operations",
+    "max_changed_files"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "enum": [
+              "ready",
+              "active"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "workspace_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "base_commit": {
+            "type": "string",
+            "pattern": "^(?:[0-9a-f]{40}|[0-9a-f]{64})$"
+          },
+          "contract_digest": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "fence": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  ]
+}

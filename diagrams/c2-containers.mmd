@@ -1,0 +1,15 @@
+flowchart LR
+  h1["One agent host"]
+  single["Standalone ZCR process<br/>MCP + core + state"]
+  h2["Multiple agent hosts"]
+  bridge["ZCR bridge processes<br/>One per host connection"]
+  broker["Explicit ZCR broker<br/>Core + shared budgets"]
+  roots["Approved worktrees"]
+  state["Private cache / journal<br/>Outside source roots"]
+  h1 -->|"stdio"| single
+  single -->|"authorized I/O"| roots
+  single -->|"private state"| state
+  h2 -->|"stdio"| bridge
+  bridge -->|"authenticated local IPC"| broker
+  broker -->|"authorized I/O"| roots
+  broker -->|"private state"| state

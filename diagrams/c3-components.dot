@@ -1,0 +1,29 @@
+digraph G {
+graph [rankdir=TB, bgcolor="transparent", pad="0.22", nodesep="0.38", ranksep="0.55", fontname="Helvetica", fontsize=17, labelloc="t", label="C3 | Authorization before work and before cache return"];
+node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=11, color="#28766C", fillcolor="#E6F2EF", fontcolor="#183741", penwidth=1.2, margin="0.14,0.09"];
+edge [fontname="Helvetica", fontsize=9, color="#758895", fontcolor="#526570", arrowsize=0.7, penwidth=1.1];
+transport [label="Transport / codec\nBounded framing",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+policy [label="Policy + workspace binding\nCapabilities / fence",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+adm [label="Admission\nMemory / FD / CPU / output",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+sched [label="Fair scheduler\nBounded jobs",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+read [label="FS + literal search\nScalar correctness first",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+edit [label="Edit coordinator\nExpected hash + journal",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+project [label="Projection / output\nContext union + limits",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+cache [label="Immutable cache\nContent keys + pins",shape=cylinder,fillcolor="#FFF4D8",color="#B08B31"];
+workspace [label="Workspace actor\nMutable generation",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+watch [label="Watcher\nHints, not authority",shape=box,fillcolor="#F0EDF5",color="#806591"];
+gov [label="Resource governor\nPressure / thermal",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+transport -> policy [label="typed intent"];
+policy -> adm [label="authorized request"];
+adm -> sched [label="reservation"];
+sched -> read [label="read-only job"];
+sched -> edit [label="writer lease"];
+read -> project [label="bounded findings"];
+edit -> project [label="receipt"];
+project -> transport [label="one result"];
+read -> cache [label="authorized lookup"];
+cache -> workspace [label="associations"];
+watch -> workspace [label="dirty / uncertain"];
+gov -> adm [label="adjust limits"];
+policy -> workspace [label="identity check"];
+}

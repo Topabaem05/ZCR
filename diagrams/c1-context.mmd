@@ -1,0 +1,16 @@
+flowchart LR
+  dev["Developer<br/>Intent + approval"]
+  host["Agent host<br/>Codex / Claude"]
+  model["Local or remote model<br/>Untrusted generated intent"]
+  zcr["ZCR<br/>Authorized local code tools"]
+  fs["Dedicated worktrees<br/>Source files"]
+  os["Operating system<br/>Scheduling / pressure / events"]
+  ed["Other editors / Git<br/>External writers"]
+  dev -->|"approve scope"| host
+  host -->|"model context"| model
+  model -->|"tool intent"| host
+  host -->|"MCP stdio"| zcr
+  zcr -->|"bounded verified result"| host
+  zcr -->|"handle-relative I/O"| fs
+  os -->|"advisory signals"| zcr
+  ed -->|"uncoordinated changes"| fs

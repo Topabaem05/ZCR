@@ -1,0 +1,252 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zcr.invalid/contracts/response.schema.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "zcr/1"
+    },
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "workspace_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "generation": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "ok": {
+      "type": "boolean"
+    },
+    "complete": {
+      "type": "boolean"
+    },
+    "truncated": {
+      "type": "boolean"
+    },
+    "consistency": {
+      "enum": [
+        "checked_live",
+        "managed_generation",
+        "bounded_stale",
+        "immutable_snapshot",
+        "not_applicable"
+      ]
+    },
+    "coverage": {
+      "type": "object",
+      "properties": {
+        "scope": {
+          "type": "string"
+        },
+        "skipped": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9223372036854775807
+        },
+        "index_state": {
+          "enum": [
+            "live",
+            "managed",
+            "stale",
+            "uncertain",
+            "not_applicable"
+          ]
+        },
+        "filters": {
+          "type": "object"
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "scope",
+        "skipped",
+        "index_state"
+      ],
+      "additionalProperties": false
+    },
+    "data": {
+      "type": "object"
+    },
+    "error": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "code": {
+              "enum": [
+                "E_INVALID_ARGUMENT",
+                "E_SCOPE",
+                "E_PATH_ESCAPE",
+                "E_UNSUPPORTED",
+                "E_NOT_FOUND",
+                "E_NOT_REGULAR",
+                "E_VERSION_CONFLICT",
+                "E_LEASE",
+                "E_FENCE",
+                "E_BUSY",
+                "E_RESOURCE",
+                "E_OUTPUT_BUDGET",
+                "E_CANCELLED",
+                "E_DEADLINE",
+                "E_IO",
+                "E_DURABILITY",
+                "E_RECOVERY_REQUIRED",
+                "E_INTERNAL"
+              ]
+            },
+            "message": {
+              "type": "string",
+              "maxLength": 4096
+            },
+            "retryable": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "code",
+            "message",
+            "retryable"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "elapsed_us": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9223372036854775807
+        },
+        "returned_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2097152
+        },
+        "cache": {
+          "enum": [
+            "hit",
+            "partial",
+            "miss",
+            "not_applicable"
+          ]
+        }
+      },
+      "required": [
+        "returned_bytes"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "request_id",
+    "workspace_id",
+    "generation",
+    "ok",
+    "complete",
+    "truncated",
+    "consistency",
+    "coverage",
+    "data",
+    "error",
+    "meta"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "ok": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "error": {
+            "type": "null"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "error": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "enum": [
+                  "E_INVALID_ARGUMENT",
+                  "E_SCOPE",
+                  "E_PATH_ESCAPE",
+                  "E_UNSUPPORTED",
+                  "E_NOT_FOUND",
+                  "E_NOT_REGULAR",
+                  "E_VERSION_CONFLICT",
+                  "E_LEASE",
+                  "E_FENCE",
+                  "E_BUSY",
+                  "E_RESOURCE",
+                  "E_OUTPUT_BUDGET",
+                  "E_CANCELLED",
+                  "E_DEADLINE",
+                  "E_IO",
+                  "E_DURABILITY",
+                  "E_RECOVERY_REQUIRED",
+                  "E_INTERNAL"
+                ]
+              },
+              "message": {
+                "type": "string",
+                "maxLength": 4096
+              },
+              "retryable": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "code",
+              "message",
+              "retryable"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "truncated": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "complete": {
+            "const": false
+          }
+        }
+      }
+    }
+  ]
+}

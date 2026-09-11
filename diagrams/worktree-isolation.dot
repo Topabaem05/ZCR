@@ -1,0 +1,21 @@
+digraph G {
+graph [rankdir=LR, bgcolor="transparent", pad="0.22", nodesep="0.38", ranksep="0.55", fontname="Helvetica", fontsize=17, labelloc="t", label="Worktrees | Share immutable bytes, never mutable task authority"];
+node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=11, color="#28766C", fillcolor="#E6F2EF", fontcolor="#183741", penwidth=1.2, margin="0.14,0.09"];
+edge [fontname="Helvetica", fontsize=9, color="#758895", fontcolor="#526570", arrowsize=0.7, penwidth=1.1];
+a [label="Session A / Task A\nRoot A + fence A",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+b [label="Session B / Task B\nRoot B + fence B",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+wa [label="Workspace A actor\nIncarnation A / generation A",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+wb [label="Workspace B actor\nIncarnation B / generation B",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+fa [label="Worktree A source\nPrivate dirty files",shape=cylinder,fillcolor="#FFF4D8",color="#B08B31"];
+fb [label="Worktree B source\nPrivate dirty files",shape=cylinder,fillcolor="#FFF4D8",color="#B08B31"];
+cache [label="Immutable content cache\nSame hash + domain + authorization",shape=cylinder,fillcolor="#FFF4D8",color="#B08B31"];
+git [label="Git common metadata\nShared; write forbidden",shape=box,fillcolor="#F9E9E5",color="#A65842"];
+a -> wa [label="bound capability"];
+b -> wb [label="bound capability"];
+wa -> fa [label="single writer"];
+wb -> fb [label="single writer"];
+wa -> cache [label="authorized pin"];
+wb -> cache [label="authorized pin"];
+fa -> git [label="linked worktree"];
+fb -> git [label="linked worktree"];
+}

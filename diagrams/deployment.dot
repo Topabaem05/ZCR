@@ -1,0 +1,20 @@
+digraph G {
+graph [rankdir=LR, bgcolor="transparent", pad="0.22", nodesep="0.38", ranksep="0.55", fontname="Helvetica", fontsize=17, labelloc="t", label="Deployment | OS backend is separate from CPU ISA"];
+node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=11, color="#28766C", fillcolor="#E6F2EF", fontcolor="#183741", penwidth=1.2, margin="0.14,0.09"];
+edge [fontname="Helvetica", fontsize=9, color="#758895", fontcolor="#526570", arrowsize=0.7, penwidth=1.1];
+core [label="Shared Zig core\nContracts / policy / cache / search",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+darwin [label="Darwin adapter\nGCD / FSEvents / FS",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+linux [label="Linux adapter\nBounded workers / inotify / cgroup",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+windows [label="Windows adapter [optional]\nWorkers / pipe ACL / native FS",shape=box,fillcolor="#F0EDF5",color="#806591"];
+arm [label="macOS arm64\nScalar / NEON",shape=ellipse,fillcolor="#E7EFF9",color="#466585"];
+intel [label="macOS x86-64\nScalar / optional SIMD",shape=ellipse,fillcolor="#E7EFF9",color="#466585"];
+lx [label="Linux x86-64\nBaseline CPU dispatch",shape=ellipse,fillcolor="#E7EFF9",color="#466585"];
+win [label="Windows x86-64\nCapability-gated",shape=ellipse,fillcolor="#E7EFF9",color="#466585"];
+core -> darwin [label="platform interfaces"];
+core -> linux [label="platform interfaces"];
+core -> windows [label="later capability"];
+darwin -> arm [label="same OS services"];
+darwin -> intel [label="same OS services"];
+linux -> lx [label="ISA dispatch"];
+windows -> win [label="ISA dispatch"];
+}

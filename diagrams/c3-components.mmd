@@ -1,0 +1,25 @@
+flowchart TB
+  transport["Transport / codec<br/>Bounded framing"]
+  policy["Policy + workspace binding<br/>Capabilities / fence"]
+  adm["Admission<br/>Memory / FD / CPU / output"]
+  sched["Fair scheduler<br/>Bounded jobs"]
+  read["FS + literal search<br/>Scalar correctness first"]
+  edit["Edit coordinator<br/>Expected hash + journal"]
+  project["Projection / output<br/>Context union + limits"]
+  cache["Immutable cache<br/>Content keys + pins"]
+  workspace["Workspace actor<br/>Mutable generation"]
+  watch["Watcher<br/>Hints, not authority"]
+  gov["Resource governor<br/>Pressure / thermal"]
+  transport -->|"typed intent"| policy
+  policy -->|"authorized request"| adm
+  adm -->|"reservation"| sched
+  sched -->|"read-only job"| read
+  sched -->|"writer lease"| edit
+  read -->|"bounded findings"| project
+  edit -->|"receipt"| project
+  project -->|"one result"| transport
+  read -->|"authorized lookup"| cache
+  cache -->|"associations"| workspace
+  watch -->|"dirty / uncertain"| workspace
+  gov -->|"adjust limits"| adm
+  policy -->|"identity check"| workspace

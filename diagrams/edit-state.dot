@@ -1,0 +1,28 @@
+digraph G {
+graph [rankdir=TB, bgcolor="transparent", pad="0.22", nodesep="0.38", ranksep="0.55", fontname="Helvetica", fontsize=17, labelloc="t", label="Dynamic | Single-file commit and recovery"];
+node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=11, color="#28766C", fillcolor="#E6F2EF", fontcolor="#183741", penwidth=1.2, margin="0.14,0.09"];
+edge [fontname="Helvetica", fontsize=9, color="#758895", fontcolor="#526570", arrowsize=0.7, penwidth=1.1];
+auth [label="Authorize + writer fence",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+check [label="Read full bytes\nCheck expected SHA-256",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+temp [label="Create same-parent temp\nApply spans + metadata",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+prepare [label="PREPARED journal\nold / new hashes",shape=cylinder,fillcolor="#FFF4D8",color="#B08B31"];
+commit [label="Atomic replace\nCOMMIT POINT",shape=box,fillcolor="#F9E9E5",color="#A65842"];
+persist [label="Persistence level + receipt",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+done [label="COMMITTED\napplied=true",shape=cylinder,fillcolor="#FFF4D8",color="#B08B31"];
+abort [label="ABORTED\nsource unchanged",shape=box,fillcolor="#F0EDF5",color="#806591"];
+recover [label="Crash recovery\nold/new/uncertain comparison",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+quarantine [label="UNCERTAIN\nwrite quarantine",shape=box,fillcolor="#F9E9E5",color="#A65842"];
+auth -> check [label="valid lease"];
+check -> temp [label="digest matches"];
+temp -> prepare [label="complete new bytes"];
+prepare -> commit [label="final fence / version check"];
+commit -> persist [label="applied"];
+persist -> done [label="record outcome"];
+check -> abort [label="conflict / cancel"];
+prepare -> abort [label="pre-commit cancel"];
+prepare -> recover [label="restart"];
+commit -> recover [label="restart"];
+recover -> done [label="new hash confirmed"];
+recover -> abort [label="old hash confirmed"];
+recover -> quarantine [label="neither / identity changed"];
+}

@@ -1,0 +1,16 @@
+flowchart LR
+  core["Shared Zig core<br/>Contracts / policy / cache / search"]
+  darwin["Darwin adapter<br/>GCD / FSEvents / FS"]
+  linux["Linux adapter<br/>Bounded workers / inotify / cgroup"]
+  windows["Windows adapter [optional]<br/>Workers / pipe ACL / native FS"]
+  arm["macOS arm64<br/>Scalar / NEON"]
+  intel["macOS x86-64<br/>Scalar / optional SIMD"]
+  lx["Linux x86-64<br/>Baseline CPU dispatch"]
+  win["Windows x86-64<br/>Capability-gated"]
+  core -->|"platform interfaces"| darwin
+  core -->|"platform interfaces"| linux
+  core -->|"later capability"| windows
+  darwin -->|"same OS services"| arm
+  darwin -->|"same OS services"| intel
+  linux -->|"ISA dispatch"| lx
+  windows -->|"ISA dispatch"| win

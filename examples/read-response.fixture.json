@@ -1,0 +1,42 @@
+{
+  "schema_version": "zcr/1",
+  "request_id": "fixture-request-01",
+  "workspace_id": "fixture-workspace-A",
+  "generation": 7,
+  "ok": true,
+  "complete": true,
+  "truncated": false,
+  "consistency": "checked_live",
+  "coverage": {
+    "scope": "requested_files",
+    "skipped": 0,
+    "index_state": "live"
+  },
+  "data": {
+    "path": "fixture.txt",
+    "lines": [
+      {
+        "number": 1,
+        "start": 0,
+        "end": 6,
+        "text": "alpha\n"
+      },
+      {
+        "number": 2,
+        "start": 6,
+        "end": 11,
+        "text": "beta\n"
+      }
+    ],
+    "version": {
+      "size": 11,
+      "file_id": "fixture-file-1",
+      "sha256": "e49c81e2d2f84e259d40e2fb8192f3bcd198b355184845d76d8f58807d0d78ee"
+    }
+  },
+  "error": null,
+  "meta": {
+    "returned_bytes": 253,
+    "cache": "miss"
+  }
+}

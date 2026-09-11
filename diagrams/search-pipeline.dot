@@ -1,0 +1,20 @@
+digraph G {
+graph [rankdir=TB, bgcolor="transparent", pad="0.22", nodesep="0.38", ranksep="0.55", fontname="Helvetica", fontsize=17, labelloc="t", label="Dynamic | Search-to-model critical path"];
+node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=11, color="#28766C", fillcolor="#E6F2EF", fontcolor="#183741", penwidth=1.2, margin="0.14,0.09"];
+edge [fontname="Helvetica", fontsize=9, color="#758895", fontcolor="#526570", arrowsize=0.7, penwidth=1.1];
+req [label="Tool intent\nliteral + glob + context limit",shape=box,fillcolor="#F0EDF5",color="#806591"];
+auth [label="Bind + authorize\nworkspace / policy",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+admit [label="Reserve bounded resources",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+candidates [label="Candidate discovery\nlive by default",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+scan [label="Read chunks + scalar/SIMD\n256 KiB, overlap m-1",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+context [label="Version-checked context\nUnion overlapping ranges",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+bound [label="Bounded projection\ncoverage / complete / truncated",shape=box,fillcolor="#E6F2EF",color="#28766C"];
+out [label="Final MCP tool result\nNot internal first-match timing",shape=box,fillcolor="#F0EDF5",color="#806591"];
+req -> auth [label="parse"];
+auth -> admit [label="valid"];
+admit -> candidates [label="permits"];
+candidates -> scan [label="regular files"];
+scan -> context [label="match spans"];
+context -> bound [label="same-version bytes"];
+bound -> out [label="serialized once"];
+}

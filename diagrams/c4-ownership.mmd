@@ -1,0 +1,24 @@
+flowchart TB
+  runtime["Runtime<br/>owns global services"]
+  budget["BudgetGovernor<br/>Group reservations"]
+  scheduler["Scheduler<br/>Queued JobEnvelope"]
+  registry["WorkspaceRegistry"]
+  workspace["Workspace<br/>Root handle / incarnation / generation"]
+  session["SessionContext<br/>Bound workspace + task"]
+  request["RequestContext<br/>Deadline / cancel / result arena"]
+  job["JobEnvelope<br/>Owned callback + scratch"]
+  content["ContentEntry<br/>Immutable, pinned sharing"]
+  path["PathEntry<br/>Workspace-private mutable link"]
+  write["WriteIntent<br/>Expected digest + fence"]
+  runtime -->|"owns"| budget
+  runtime -->|"owns"| scheduler
+  runtime -->|"owns"| registry
+  registry -->|"owns"| workspace
+  session -->|"bound reference"| workspace
+  session -->|"creates"| request
+  request -->|"lifetime / drain"| job
+  scheduler -->|"executes owned job"| job
+  workspace -->|"owns"| path
+  path -->|"authorized association"| content
+  request -->|"optional"| write
+  budget -->|"move-only reservation"| request

@@ -1,0 +1,93 @@
+flowchart TB
+  T00["T00<br/>Baseline"]
+  T01["T01<br/>Contracts"]
+  T02["T02<br/>Policy / scope"]
+  T03["T03<br/>Budget"]
+  T04["T04<br/>Read"]
+  T05["T05<br/>Traversal"]
+  T06["T06<br/>Search"]
+  T07["T07<br/>Batch"]
+  T08["T08<br/>MCP"]
+  T09["T09<br/>GCD scheduler"]
+  T10["T10<br/>Workspace"]
+  T11["T11<br/>Atomic edit"]
+  T12["T12<br/>Recovery"]
+  T13["T13<br/>Cache"]
+  T14["T14<br/>Watcher"]
+  T15["T15<br/>Broker"]
+  T16["T16<br/>Governor"]
+  T17["T17<br/>Linux"]
+  T18["T18<br/>Windows opt."]
+  T19["T19<br/>SIMD"]
+  T20["T20<br/>AST opt."]
+  T21["T21<br/>Benchmarks"]
+  T22["T22<br/>Telemetry"]
+  T23["T23<br/>Host routing"]
+  T24["T24<br/>Packaging"]
+  T25["T25<br/>Release gate"]
+  T00 -->|"flow"| T01
+  T01 -->|"flow"| T02
+  T01 -->|"flow"| T03
+  T02 -->|"flow"| T04
+  T03 -->|"flow"| T04
+  T02 -->|"flow"| T05
+  T03 -->|"flow"| T05
+  T04 -->|"flow"| T06
+  T05 -->|"flow"| T06
+  T04 -->|"flow"| T07
+  T06 -->|"flow"| T07
+  T02 -->|"flow"| T08
+  T07 -->|"flow"| T08
+  T03 -->|"flow"| T09
+  T01 -->|"flow"| T09
+  T02 -->|"flow"| T10
+  T01 -->|"flow"| T10
+  T04 -->|"flow"| T11
+  T10 -->|"flow"| T11
+  T11 -->|"flow"| T12
+  T04 -->|"flow"| T13
+  T10 -->|"flow"| T13
+  T03 -->|"flow"| T13
+  T05 -->|"flow"| T14
+  T10 -->|"flow"| T14
+  T13 -->|"flow"| T14
+  T08 -->|"flow"| T15
+  T09 -->|"flow"| T15
+  T10 -->|"flow"| T15
+  T13 -->|"flow"| T15
+  T09 -->|"flow"| T16
+  T13 -->|"flow"| T16
+  T15 -->|"flow"| T16
+  T04 -->|"flow"| T17
+  T05 -->|"flow"| T17
+  T09 -->|"flow"| T17
+  T12 -->|"flow"| T17
+  T14 -->|"flow"| T17
+  T17 -->|"flow"| T18
+  T15 -->|"flow"| T18
+  T06 -->|"flow"| T19
+  T17 -->|"flow"| T19
+  T13 -->|"flow"| T20
+  T06 -->|"flow"| T20
+  T07 -->|"flow"| T21
+  T09 -->|"flow"| T21
+  T12 -->|"flow"| T21
+  T13 -->|"flow"| T21
+  T15 -->|"flow"| T21
+  T16 -->|"flow"| T21
+  T17 -->|"flow"| T21
+  T08 -->|"flow"| T22
+  T10 -->|"flow"| T22
+  T15 -->|"flow"| T22
+  T16 -->|"flow"| T22
+  T08 -->|"flow"| T23
+  T12 -->|"flow"| T23
+  T21 -->|"flow"| T23
+  T22 -->|"flow"| T23
+  T17 -->|"flow"| T24
+  T22 -->|"flow"| T24
+  T23 -->|"flow"| T24
+  T24 -->|"flow"| T25
+  T21 -->|"flow"| T25
+  T19 -->|"flow"| T25
+  T12 -->|"flow"| T25

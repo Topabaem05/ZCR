@@ -1,0 +1,18 @@
+flowchart TB
+  fg["Foreground read/search<br/>USER_INITIATED"]
+  bulk["Maintenance scan<br/>UTILITY"]
+  bg["Idle prefetch<br/>BACKGROUND"]
+  admit["Global permits + fair queue<br/>No per-file thread explosion"]
+  gcd["Public GCD queues<br/>One concurrency owner"]
+  os["macOS scheduler<br/>QoS + thermal + power state"]
+  topology["Detected CPU topology<br/>P/E or super/P or unknown"]
+  cpu["OS-selected available cores<br/>No hard pinning guarantee"]
+  model["Local LLM coexist budget<br/>CPU / memory / bandwidth guard"]
+  fg -->|"short/bulk class"| admit
+  bulk -->|"bounded maintenance"| admit
+  bg -->|"optional"| admit
+  model -->|"lower limits"| admit
+  admit -->|"owned jobs"| gcd
+  gcd -->|"QoS intent"| os
+  topology -->|"conservative limits"| admit
+  os -->|"actual placement"| cpu

@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "path": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "description": "Relative UTF-8 path; byte length<=4096 and OS limit enforced at runtime; no .., absolute, NUL, or policy escape."
+    },
+    "expected_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "replacements": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1024,
+      "items": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 8388608
+          },
+          "end": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 8388608
+          },
+          "text": {
+            "type": "string",
+            "maxLength": 8388608
+          }
+        },
+        "required": [
+          "start",
+          "end",
+          "text"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "idempotency_key": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[ -~]+$"
+    },
+    "durability": {
+      "enum": [
+        "process",
+        "durable",
+        "strongest_available"
+      ],
+      "default": "process"
+    },
+    "output_bytes": {
+      "type": "integer",
+      "minimum": 1024,
+      "maximum": 2097152,
+      "default": 262144
+    },
+    "deadline_ms": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 60000,
+      "default": 5000
+    }
+  },
+  "required": [
+    "path",
+    "expected_sha256",
+    "replacements",
+    "idempotency_key"
+  ],
+  "additionalProperties": false
+}

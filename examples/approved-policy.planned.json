@@ -1,0 +1,12 @@
+{
+  "status": "example_not_authorized",
+  "root": "/absolute/path/to/dedicated-worktree",
+  "task_manifest": "/absolute/path/to/task-manifest.json",
+  "write_mode": "read_only",
+  "memory_profile": "auto",
+  "profile": "balanced",
+  "broker_allowed": false,
+  "additional_roots": [],
+  "network_allowed": false,
+  "arbitrary_exec_allowed": false
+}

@@ -1,0 +1,115 @@
+{
+  "status": "fixtures_not_runtime_results",
+  "line_rule": "LF ends a line; no phantom trailing line; empty file has zero lines; CR and BOM remain bytes",
+  "fixtures": [
+    {
+      "id": "empty",
+      "text": "",
+      "lines": [],
+      "byte_length": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "lf",
+      "text": "alpha\nbeta\n",
+      "lines": [
+        {
+          "start": 0,
+          "end": 6
+        },
+        {
+          "start": 6,
+          "end": 11
+        }
+      ],
+      "byte_length": 11,
+      "sha256": "e49c81e2d2f84e259d40e2fb8192f3bcd198b355184845d76d8f58807d0d78ee"
+    },
+    {
+      "id": "no-final-newline",
+      "text": "alpha\nbeta",
+      "lines": [
+        {
+          "start": 0,
+          "end": 6
+        },
+        {
+          "start": 6,
+          "end": 10
+        }
+      ],
+      "byte_length": 10,
+      "sha256": "bbfb79e82216bd2db1ad2c507d44ddf80aeb12f64f9562056afe93aad43154d9"
+    },
+    {
+      "id": "crlf",
+      "text": "a\r\nb\r\n",
+      "lines": [
+        {
+          "start": 0,
+          "end": 3
+        },
+        {
+          "start": 3,
+          "end": 6
+        }
+      ],
+      "byte_length": 6,
+      "sha256": "58055bdcc73787eb88c78d36f0b4939e9c5dc1c3ad17e25cc85a6833cf1a0cab"
+    },
+    {
+      "id": "utf8",
+      "text": "한\n글",
+      "lines": [
+        {
+          "start": 0,
+          "end": 4
+        },
+        {
+          "start": 4,
+          "end": 7
+        }
+      ],
+      "byte_length": 7,
+      "sha256": "57808e86694d12c056e41790e6bc0c20bd80b38a072dbd386a5e0ab0122294c4"
+    },
+    {
+      "id": "single-blank",
+      "text": "\n",
+      "lines": [
+        {
+          "start": 0,
+          "end": 1
+        }
+      ],
+      "byte_length": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    }
+  ],
+  "patch_vectors": [
+    {
+      "id": "patch-beta",
+      "source_fixture": "lf",
+      "replacements": [
+        {
+          "start": 6,
+          "end": 10,
+          "text": "B"
+        }
+      ],
+      "expected_text": "alpha\nB\n"
+    },
+    {
+      "id": "utf8-split-rejected",
+      "source_fixture": "utf8",
+      "replacements": [
+        {
+          "start": 1,
+          "end": 2,
+          "text": "X"
+        }
+      ],
+      "expected_error": "E_INVALID_ARGUMENT"
+    }
+  ]
+}

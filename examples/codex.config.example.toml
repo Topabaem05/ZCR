@@ -1,0 +1,4 @@
+# Example only. Paths must be bound by the trusted host; no installation performed.
+[mcp_servers.zcr]
+command = "/absolute/path/to/zcr"
+args = ["mcp", "--standalone", "--policy", "/absolute/path/to/approved-policy.json"]

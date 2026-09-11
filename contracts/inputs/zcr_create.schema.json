@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "path": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "description": "Relative UTF-8 path; byte length<=4096 and OS limit enforced at runtime; no .., absolute, NUL, or policy escape."
+    },
+    "content": {
+      "type": "string",
+      "maxLength": 8388608
+    },
+    "idempotency_key": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[ -~]+$"
+    },
+    "durability": {
+      "enum": [
+        "process",
+        "durable",
+        "strongest_available"
+      ],
+      "default": "process"
+    },
+    "output_bytes": {
+      "type": "integer",
+      "minimum": 1024,
+      "maximum": 2097152,
+      "default": 262144
+    },
+    "deadline_ms": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 60000,
+      "default": 5000
+    }
+  },
+  "required": [
+    "path",
+    "content",
+    "idempotency_key"
+  ],
+  "additionalProperties": false
+}

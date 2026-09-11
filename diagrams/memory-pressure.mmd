@@ -1,0 +1,16 @@
+flowchart TB
+  normal["NORMAL<br/>Tracked <70%"]
+  soft["SOFT<br/>>=70% / reduced headroom"]
+  warning["WARNING<br/>OS warning / >=85%"]
+  critical["CRITICAL<br/>OS critical / >=95%"]
+  recovery["RECOVERY<br/>10s stable; +10pp / 5s"]
+  pins["Pinned / committing work<br/>Drain before release"]
+  normal -->|"pressure rises"| soft
+  soft -->|"shrink target"| warning
+  warning -->|"reject bulk"| critical
+  critical -->|"signals stable"| recovery
+  warning -->|"signals stable"| recovery
+  soft -->|"signals stable"| recovery
+  recovery -->|"baseline restored"| normal
+  recovery -->|"pressure returns"| warning
+  critical -->|"preserve lifetime"| pins

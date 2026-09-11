@@ -1,0 +1,16 @@
+flowchart TB
+  req["Tool intent<br/>literal + glob + context limit"]
+  auth["Bind + authorize<br/>workspace / policy"]
+  admit["Reserve bounded resources"]
+  candidates["Candidate discovery<br/>live by default"]
+  scan["Read chunks + scalar/SIMD<br/>256 KiB, overlap m-1"]
+  context["Version-checked context<br/>Union overlapping ranges"]
+  bound["Bounded projection<br/>coverage / complete / truncated"]
+  out["Final MCP tool result<br/>Not internal first-match timing"]
+  req -->|"parse"| auth
+  auth -->|"valid"| admit
+  admit -->|"permits"| candidates
+  candidates -->|"regular files"| scan
+  scan -->|"match spans"| context
+  context -->|"same-version bytes"| bound
+  bound -->|"serialized once"| out
