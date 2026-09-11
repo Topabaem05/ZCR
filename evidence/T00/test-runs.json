@@ -1,0 +1,61 @@
+{
+  "schema_version": "zcr-t00-test-runs/0",
+  "task_id": "T00",
+  "test_ids": [
+    "PF-001"
+  ],
+  "state_dir": "$STATE=/Users/guribbong/code/ZCR-state/tasks/T00",
+  "runs": [
+    {
+      "label": "red",
+      "optimize": "Debug",
+      "source_commit": "6406fa7a10526fb82312e7f47b48cb9e22ce092b",
+      "worktree_dirty_bytes": 0,
+      "build_command": "$HOME/.local/share/zig/0.16.0/zig test --test-no-exec -femit-bin=$STATE/bin/t00_test-red -ODebug --dep caps -Mroot=tests/t00_test.zig -lc -framework Foundation -framework IOKit -framework CoreFoundation -ODebug bench/spikes/darwin_abi.c -Mcaps=bench/spikes/caps.zig",
+      "run_command": "(cd $STATE/tmp && $STATE/bin/t00_test-red)",
+      "compile_exit": 0,
+      "run_exit": 1,
+      "binary_sha256": "05f0a46d895c4061983bc777a5704c71260d84939b3f2b1c854c2ffd068cb89e",
+      "summary": "0 passed; 0 skipped; 11 failed.",
+      "compile_log": "logs/red-compile.log",
+      "compile_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "run_log": "logs/red-run.log",
+      "run_log_sha256": "2e57bd1bdd7cabca763b51d5293d540b26ca52b6195a7309fa44f113d9558b17",
+      "expected": "RED (all PF-001/G03/G04/G06 tests fail on NotImplemented stubs)"
+    },
+    {
+      "label": "green-debug",
+      "optimize": "Debug",
+      "source_commit": "4dbd5e9397e6c0f5b2dcd9acdeff51ec5c4ef0bb",
+      "worktree_dirty_bytes": 0,
+      "build_command": "$HOME/.local/share/zig/0.16.0/zig test --test-no-exec -femit-bin=$STATE/bin/t00_test-green-debug -ODebug --dep caps -Mroot=tests/t00_test.zig -lc -framework Foundation -framework IOKit -framework CoreFoundation -ODebug bench/spikes/darwin_abi.c -Mcaps=bench/spikes/caps.zig",
+      "run_command": "(cd $STATE/tmp && $STATE/bin/t00_test-green-debug)",
+      "compile_exit": 0,
+      "run_exit": 0,
+      "binary_sha256": "bbb8c4dd348859f2859701ca8f19e31a2e4f4b4d746bc81b576f121601eeb732",
+      "summary": "All 11 tests passed.",
+      "compile_log": "logs/green-debug-compile.log",
+      "compile_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "run_log": "logs/green-debug-run.log",
+      "run_log_sha256": "e332835599aae5202a23ea7a6a0aa5af1bc5960773a0365e5811cc80f76164f8",
+      "expected": "GREEN"
+    },
+    {
+      "label": "green-releasesafe",
+      "optimize": "ReleaseSafe",
+      "source_commit": "4dbd5e9397e6c0f5b2dcd9acdeff51ec5c4ef0bb",
+      "worktree_dirty_bytes": 0,
+      "build_command": "$HOME/.local/share/zig/0.16.0/zig test --test-no-exec -femit-bin=$STATE/bin/t00_test-green-releasesafe -OReleaseSafe --dep caps -Mroot=tests/t00_test.zig -lc -framework Foundation -framework IOKit -framework CoreFoundation -OReleaseSafe bench/spikes/darwin_abi.c -Mcaps=bench/spikes/caps.zig",
+      "run_command": "(cd $STATE/tmp && $STATE/bin/t00_test-green-releasesafe)",
+      "compile_exit": 0,
+      "run_exit": 0,
+      "binary_sha256": "9c5aa1d13a5b2d1e6d86e80130aa7ce5289269393b98ee74d4c4053e50236f76",
+      "summary": "All 11 tests passed.",
+      "compile_log": "logs/green-releasesafe-compile.log",
+      "compile_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "run_log": "logs/green-releasesafe-run.log",
+      "run_log_sha256": "e332835599aae5202a23ea7a6a0aa5af1bc5960773a0365e5811cc80f76164f8",
+      "expected": "GREEN"
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+1/11 t00_test.test.PF-001 baseline capture records compiler, OS, corpus, cache and power...FAIL (NotImplemented)
+/Users/guribbong/code/ZCR-worktrees/task-t00/bench/spikes/caps.zig:144:5: 0x10308d11f in capture (root)
+    return error.NotImplemented;
+    ^
+/Users/guribbong/code/ZCR-worktrees/task-t00/tests/t00_test.zig:64:22: 0x1030b8193 in test.PF-001 baseline capture records compiler, OS, corpus, cache and power (root)
+    const baseline = try caps.capture(arena, io, .{
+                     ^
+2/11 t00_test.test.PF-001 corpus not provided is recorded explicitly...FAIL (NotImplemented)
+/Users/guribbong/code/ZCR-worktrees/task-t00/bench/spikes/caps.zig:144:5: 0x10308d11f in capture (root)
+    return error.NotImplemented;
+    ^
+/Users/guribbong/code/ZCR-worktrees/task-t00/tests/t00_test.zig:124:22: 0x1030b74df in test.PF-001 corpus not provided is recorded explicitly (root)
+    const baseline = try caps.capture(arena, io, .{ .environ = &env });
+                     ^
+3/11 t00_test.test.PF-001 unavailable corpus path is an error, not an empty corpus...expected error.CorpusUnavailable, found error.NotImplemented
+FAIL (TestUnexpectedError)
+/Users/guribbong/code/ZCR-worktrees/task-t00/bench/spikes/caps.zig:144:5: 0x10308d11f in capture (root)
+    return error.NotImplemented;
+    ^
+/Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x1030a387b in expectError__anon_39672 (root)
+            return error.TestUnexpectedError;
+            ^
+/Users/guribbong/code/ZCR-worktrees/task-t00/tests/t00_test.zig:141:5: 0x1030a3d2b in test.PF-001 unavailable corpus path is an error, not an empty corpus (root)
+    try testing.expectError(error.CorpusUnavailable, caps.capture(arena, io, .{
+    ^
+4/11 t00_test.test.PF-001 corpus limits are enforced...expected error.CorpusTooLarge, found error.NotImplemented
+FAIL (TestUnexpectedError)
+/Users/guribbong/code/ZCR-worktrees/task-t00/bench/spikes/caps.zig:159:5: 0x1030a0d47 in digestCorpus (root)
+    return error.NotImplemented;
+    ^
+/Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x1030a0f03 in expectError__anon_39465 (root)
+            return error.TestUnexpectedError;
+            ^
+/Users/guribbong/code/ZCR-worktrees/task-t00/tests/t00_test.zig:157:5: 0x1030a127f in test.PF-001 corpus limits are enforced (root)
+    try testing.expectError(error.CorpusTooLarge, caps.digestCorpus(arena, io, corpus_path, .{ .max_files = 2 }));
+    ^
+5/11 t00_test.test.PF-001 validate rejects cold-cache claims without control evidence...FAIL (NotImplemented)
+/Users/guribbong/code/ZCR-worktrees/task-t00/bench/spikes/caps.zig:144:5: 0x10308d11f in capture (root)
+    return error.NotImplemented;
+    ^
+/Users/guribbong/code/ZCR-worktrees/task-t00/tests/t00_test.zig:167:20: 0x1030a0a57 in test.PF-001 validate rejects cold-cache claims without control evidence (root)
+    var baseline = try caps.capture(arena, io, .{ .environ = &env });
+                   ^
+6/11 t00_test.test.PF-001 validate rejects a baseline without every T00 gate...FAIL (NotImplemented)
+/Users/guribbong/code/ZCR-worktrees/task-t00/bench/spikes/caps.zig:144:5: 0x10308d11f in capture (root)
+    return error.NotImplemented;
+    ^
+/Users/guribbong/code/ZCR-worktrees/task-t00/tests/t00_test.zig:179:20: 0x10309f77b in test.PF-001 validate rejects a baseline without every T00 gate (root)
+    var baseline = try caps.capture(arena, io, .{ .environ = &env });
+                   ^
+7/11 t00_test.test.PF-001 validate rejects a wrong compiler version...FAIL (NotImplemented)
+/Users/guribbong/code/ZCR-worktrees/task-t00/bench/spikes/caps.zig:144:5: 0x10308d11f in capture (root)
+    return error.NotImplemented;
+    ^
+/Users/guribbong/code/ZCR-worktrees/task-t00/tests/t00_test.zig:194:20: 0x10309eb57 in test.PF-001 validate rejects a wrong compiler version (root)
+    var baseline = try caps.capture(arena, io, .{ .environ = &env });
+                   ^
+8/11 t00_test.test.G04 sysctl probe distinguishes present and absent keys...expected .present, found .failed
+FAIL (TestExpectedEqual)
+/Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x103085bf3 in expectEqualInner__anon_36360 (root)
+                return error.TestExpectedEqual;
+                ^
+/Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x10309daaf in expectEqual (root)
+    return expectEqualInner(T, expected, actual);
+    ^
+/Users/guribbong/code/ZCR-worktrees/task-t00/tests/t00_test.zig:204:5: 0x10309db4b in test.G04 sysctl probe distinguishes present and absent keys (root)
+    try testing.expectEqual(caps.ProbeStatus.present, caps.probeSysctlKey("hw.ncpu"));
+    ^
+9/11 t00_test.test.G06 git probe identifies main and linked worktrees...FAIL (NotImplemented)
+/Users/guribbong/code/ZCR-worktrees/task-t00/bench/spikes/caps.zig:174:5: 0x103090a73 in probeGit (root)
+    return error.NotImplemented;
+    ^
+/Users/guribbong/code/ZCR-worktrees/task-t00/tests/t00_test.zig:259:24: 0x1030918d3 in test.G06 git probe identifies main and linked worktrees (root)
+    const main_probe = try caps.probeGit(arena, io, &env, repo);
+                       ^
+10/11 t00_test.test.G03 darwin probes report a known state or an explicit unknown...FAIL (NotImplemented)
+/Users/guribbong/code/ZCR-worktrees/task-t00/bench/spikes/caps.zig:144:5: 0x10308d11f in capture (root)
+    return error.NotImplemented;
+    ^
+/Users/guribbong/code/ZCR-worktrees/task-t00/tests/t00_test.zig:280:22: 0x10308d6fb in test.G03 darwin probes report a known state or an explicit unknown (root)
+    const baseline = try caps.capture(arena, io, .{ .environ = &env });
+                     ^
+11/11 t00_test.test.B0/B1 tool probe reports absent tools explicitly...FAIL (NotImplemented)
+/Users/guribbong/code/ZCR-worktrees/task-t00/bench/spikes/caps.zig:179:5: 0x103085b0f in probeTool (root)
+    return error.NotImplemented;
+    ^
+/Users/guribbong/code/ZCR-worktrees/task-t00/tests/t00_test.zig:307:21: 0x103085f8f in test.B0/B1 tool probe reports absent tools explicitly (root)
+    const missing = try caps.probeTool(arena, io, &env, "zcr-t00-definitely-missing-tool", &.{"--version"});
+                    ^
+0 passed; 0 skipped; 11 failed.
