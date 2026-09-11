@@ -1,0 +1,25 @@
+test
++- run test T07-test 15 pass, 2 fail (17 total)
+error: 't07_test.test.T07 projection keeps whole lines within output_bytes and says the result is truncated' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:615:14: 0x1047e3733 in expect (T07-test)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-p3-truncated-can-be-complete/tests/t07_test.zig:789:5: 0x10483f3ff in test.T07 projection keeps whole lines within output_bytes and says the result is truncated (T07-test)
+           try testing.expect(response.truncated and !response.complete and response.ok);
+           ^
+error: 't07_test.test.T07 projection refuses a bad envelope and a buffer that is too small' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:615:14: 0x1047e3733 in expect (T07-test)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-p3-truncated-can-be-complete/tests/t07_test.zig:912:5: 0x104834bb3 in test.T07 projection refuses a bad envelope and a buffer that is too small (T07-test)
+           try testing.expect(!response.complete and response.truncated);
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache/o/bc1d7cb76e87ed3977007d3db802eaf0/T07-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache --seed=0xfa24eac9 --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 15/17 tests passed (2 failed)
+test transitive failure
++- run test T07-test 15 pass, 2 fail (17 total)
+   +- compile test T07-test Debug native success 11s MaxRSS:224M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache/o/2759f0ba666e46dcb034eb08a284d1a7/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-p3-truncated-can-be-complete /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T07/zig-global-cache --seed 0xfa24eac9 -Z4dc2abdbd937ee69 test -Dtest-group=batch --summary all

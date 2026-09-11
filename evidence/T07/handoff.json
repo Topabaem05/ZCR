@@ -1,0 +1,193 @@
+{
+  "schema_version": "zcr-handoff/1",
+  "state": "completed",
+  "task_id": "T07",
+  "step": "S06",
+  "base_commit": "4bcf01d981047ce7e8e99e436b7dec5767032e1f",
+  "base_note": "integration after INT-006 (T06 merged, T07 registered)",
+  "head_commit": "f370f27191f55b4612a58e530f2c6d8f38608862",
+  "head_commit_note": "source commit of GREEN evidence; evidence files follow in the S06 commit",
+  "contract_digest": "8aa53314410fe471f0e070c522766684286f60e1ad4d9785c292bb709ea370a4",
+  "source_tree_digest": "3c6fc3b0d755793eacd77d8657d60c396ca82b7a",
+  "binary_sha256": "90c72f5b8391ad4b6807c2070a739bb5c6b3229fc565047f9efd97a7248e2b8e",
+  "owned_paths": [
+    "src/batch/read.zig",
+    "src/protocol/projection.zig",
+    "tests/t07_test.zig",
+    "evidence/T07/"
+  ],
+  "changed_files": [
+    "src/batch/read.zig",
+    "src/protocol/projection.zig",
+    "tests/t07_test.zig",
+    "evidence/T07/*"
+  ],
+  "test_evidence": [
+    {
+      "id": "BA-001",
+      "status": "PASS",
+      "tests": 2,
+      "oracle": "each of 32 items read alone through Authorizer.authorize (I01) and Reader.readRange (I03): same lines, spans, text, version, status and reasons, or the same wire error code"
+    },
+    {
+      "id": "BA-002",
+      "status": "PASS",
+      "tests": 2
+    },
+    {
+      "id": "BA-003",
+      "status": "PASS",
+      "tests": 2,
+      "note": "32 items x 256 KiB wanted, 2 MiB shared output, reservation for two full reads: 8 items complete, 24 E_OUTPUT_BUDGET, peak concurrency within the memory pool; store-only and too-small reservations"
+    },
+    {
+      "id": "T07 failure paths",
+      "status": "PASS",
+      "tests": 4,
+      "note": "cancellation during a read, cancellation between reads, version conflict per item, allocation failure at every allocation"
+    },
+    {
+      "id": "T07 projection",
+      "status": "PASS",
+      "tests": 7,
+      "note": "exact compact JSON, escaping, whole-line truncation, batch item replacement, files/search, refusals, real batch result; samples validated against contracts/response.schema.json and data.schema.json"
+    },
+    {
+      "id": "T07 contracts",
+      "status": "PASS",
+      "tests": 1
+    },
+    {
+      "id": "regression T00-T06 (full zig build test)",
+      "status": "PASS",
+      "summary": "Build Summary: 29/29 steps succeeded; 103/103 tests passed"
+    },
+    {
+      "runs": [
+        {
+          "label": "red",
+          "optimize": "Debug",
+          "source_commit": "2f6f0ea7473dea1f17ee3b76f6d35845b8cde474",
+          "exit_code": 1,
+          "summary": "Build Summary: 2/4 steps succeeded (1 failed); 1/17 tests passed (16 failed)",
+          "installed_test_binaries_sha256": {
+            "T07-test": "01557639fc21a83e59e1962f9fc767906547ebdd3f7f1c35d2d7912f8e6c83e9"
+          }
+        },
+        {
+          "label": "green-batch-debug",
+          "optimize": "Debug",
+          "source_commit": "f370f27191f55b4612a58e530f2c6d8f38608862",
+          "exit_code": 0,
+          "summary": "Build Summary: 4/4 steps succeeded; 18/18 tests passed",
+          "installed_test_binaries_sha256": {
+            "T07-test": "90c72f5b8391ad4b6807c2070a739bb5c6b3229fc565047f9efd97a7248e2b8e"
+          }
+        },
+        {
+          "label": "green-batch-releasesafe",
+          "optimize": "ReleaseSafe",
+          "source_commit": "f370f27191f55b4612a58e530f2c6d8f38608862",
+          "exit_code": 0,
+          "summary": "Build Summary: 4/4 steps succeeded; 18/18 tests passed",
+          "installed_test_binaries_sha256": {
+            "T07-test": "d397adf18749a1a855d58def92d6d865fe41ab6f6824c89fdf20c19dac3dcc3f"
+          }
+        },
+        {
+          "label": "regression-all-debug",
+          "optimize": "Debug",
+          "source_commit": "f370f27191f55b4612a58e530f2c6d8f38608862",
+          "exit_code": 0,
+          "summary": "Build Summary: 29/29 steps succeeded; 103/103 tests passed",
+          "installed_test_binaries_sha256": {
+            "T00-test": "53b6c4b110c74a9e64be2faff4e7ee1291d7e6ccf52cd8a2b09bf581aacd04f4",
+            "T01-test": "f9fb2c27c3ea6ce404253a555fe8690c6ca00bb89c8a993b45eb7cf42fb20b43",
+            "T02-test": "479b54118f52129f92c77fd93cbf3c0da5c1d98c26b02520345624928be9309c",
+            "T03-test": "70a7185eb0ddf08fa3a80a3b4693b30a4b6015de8f07c7df1d37fb19e3ed895f",
+            "T04-test": "92d61455e297cfe8e179eb1f8fe9a7a5a42a53c86a7fea7af002b87d2cc8224d",
+            "T05-test": "ef40f3d00ee96a0a7153f7ca97b28c9afa634d62a4e12f5681563324b625f186",
+            "T06-test": "e24a9bf4808c70d5e3ce9ae18357ea537ee93158d3496aebd31e2f043bdfb5ac",
+            "T07-test": "90c72f5b8391ad4b6807c2070a739bb5c6b3229fc565047f9efd97a7248e2b8e"
+          }
+        },
+        {
+          "label": "verify-contracts",
+          "optimize": "Debug",
+          "source_commit": "f370f27191f55b4612a58e530f2c6d8f38608862",
+          "exit_code": 0,
+          "summary": "Build Summary: 3/3 steps succeeded",
+          "installed_test_binaries_sha256": {}
+        }
+      ]
+    }
+  ],
+  "test_changes_after_red": [
+    "test: no read starts after cancellation is requested between reads (mutant m15-no-dispatch-cancel survived)",
+    "projection: a budget that holds the fixed parts but not the first line or path is OutputBudgetExceeded; an empty read still fits (mutant p4-zero-entries-allowed survived)",
+    "projection: non-UTF-8 failure messages and lines are InvalidArgument (mutant p5-no-utf8-check survived)",
+    "f370f27: the ZCR_T07_SAMPLES branch asked for a 1 KiB batch projection, which is correctly refused; it now uses 8 KiB and asserts the refusal"
+  ],
+  "semantics": {
+    "request_refusals": "InvalidArgument for 0 or more than 32 items, empty, >64-byte, non-UTF-8 or repeated item_id, invalid line range, output_bytes 0 or > 2 MiB; OutOfScope when the session is bound to another workspace; ResourceExhausted for a released reservation, no handles, or a reservation smaller than the result store; all before any read or allocation",
+    "per_item_errors": "authorization and read errors map to ErrorInfo with errors.wireCode and defaultRetryable; other items are unaffected",
+    "order": "items keep input order; item ids, paths, lines and text are copied into the result arena",
+    "dedupe_merge": "same path, write_intent and consistency with overlapping or touching ranges share one union read of at most 5,000 lines; each item takes its own lines and applies its own output_bytes, matching a single read",
+    "shared_output": "reservation.output is the batch text cap; reads are granted output in item order; an item whose read was shortened because the grant was smaller than its own output_bytes fails with E_OUTPUT_BUDGET; unused grant returns to the pool",
+    "concurrency": "min(Caps.max_concurrency, reads, reservation.fd) workers; a read starts only when its memory (jobBytes) fits what the store leaves of the reservation and, for a partial output grant, when no earlier read is running; results do not depend on concurrency",
+    "memory": "one store allocation sized by storeCharge; per read one scratch chunk then one result block (T04 Reader); a read's memory returns to the pool only after it is freed",
+    "cancellation": "Batcher.cancel is checked before dispatching each read and by the reader per chunk; Cancelled is returned after all reads finish and the arena is freed",
+    "batch_status": "complete only when every item is complete; truncated when any item is truncated or failed with E_OUTPUT_BUDGET; coverage.skipped counts failed items; reasons name shared-budget refusals and item errors",
+    "projection": "output_bytes bounds the serialized data payload (= meta.returned_bytes); whole lines, paths or search files are dropped from the end, batch items that do not fit are replaced by E_OUTPUT_BUDGET item errors; truncation sets complete=false and adds a reason; a payload that cannot hold its first entry is OutputBudgetExceeded and the caller sends failure(); workspace_id is '<registry hex>:<incarnation hex>', file_id is '<device>:<inode>'"
+  },
+  "exports": [
+    "zcr_batch (src/batch/read.zig): Caps, BatchFault, JobEvent, Report, Batcher{init, batchRead (core.BatchReadFn), report, cancel, fault}, plannedCost, storeCharge, jobBytes, max_item_id_bytes, reason_output_refused, reason_item_errors",
+    "zcr_projection (src/protocol/projection.zig): Envelope, Data{read, batch_read, files, search}, FilesData, SearchData, Response, Error, success, failure, bufferBytes, failureBufferBytes, max_request_id_bytes, reason_output_budget, message_item_output_budget"
+  ],
+  "limitations": [
+    "deadline_ms is carried but not enforced (the T04 reader does not enforce it either); a deadline must be expressed through Batcher.cancel",
+    "an item that starts after the first line of a merged union that alone exceeds all members' output_bytes fails with E_OUTPUT_BUDGET, where a single read of that item might succeed",
+    "the result store reserves min(sum of requested lines, text cap) line records, which over-reserves for long lines",
+    "whether reads ran in parallel depends on std.Io.Group.concurrent; peak concurrency is recorded, latency is not measured (docs/12 batch 8x small read p95 target is T21)",
+    "Report.output_refused counts only shared-pool refusals, not items whose first line exceeds their own output_bytes",
+    "ReadFault hooks on a shared Reader are not thread-safe; tests that use them run with max_concurrency 1",
+    "projection does not implement structured_compat or coverage.filters; envelope bytes are not counted in output_bytes",
+    "Linux and Intel macOS are cross-compiled only"
+  ],
+  "interface_change_proposals": [
+    {
+      "target": "core.BatchReadFn (I06)",
+      "issue": "no Cancel or deadline parameter, unlike I03-I05",
+      "needs": "integrator decision to add Cancel; T07 keeps a Cancel in Batcher meanwhile"
+    },
+    {
+      "target": "src/scheduler/admission.zig estimate (T03-owned)",
+      "issue": "batch_read cost counts chunk x workers and output, not the result store or union reads",
+      "needs": "use zcr_batch.plannedCost for batch reservations or move its sizing into estimate"
+    },
+    {
+      "target": "contracts/tools.json zcr_batch_read -> core.BatchReadItem",
+      "issue": "the tool has one batch output_bytes and deadline_ms; items have none, while ReadSpec carries per-item output_bytes (default 256 KiB)",
+      "needs": "T08 mapping: reservation.output = batch output_bytes, item ReadSpec defaults"
+    },
+    {
+      "target": "contracts/response.schema.json / data.schema.json",
+      "issue": "string formats of workspace_id and file_id are not specified",
+      "needs": "integrator to confirm '<registry hex>:<incarnation hex>' and '<device>:<inode>' or define others"
+    },
+    {
+      "target": "tests/catalog.json",
+      "issue": "BA-001..BA-003 execution_status still not_run",
+      "needs": "integrator update after re-test"
+    }
+  ],
+  "remaining_gates": [
+    "integrator re-test of task-t07 on integration",
+    "MANIFEST.sha256 AGENTS.md mismatch (T01) open",
+    "E_MANIFEST_UNBOUND decision open",
+    "read cost estimate proposal (T04) open",
+    "core.Coverage filters proposal (T05) open",
+    "SearchSpec output_bytes/deadline proposal (T06) open"
+  ],
+  "host_note": "during T07 the data volume had 5.3-9.9 GiB free while swap grew from 2.2 to 5 GiB; ZCR-state was about 890 MiB"
+}

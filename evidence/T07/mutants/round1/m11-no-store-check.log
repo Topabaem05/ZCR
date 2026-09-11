@@ -1,0 +1,32 @@
+test
++- run test T07-test 16 pass, 1 crash (17 total)
+error: 't07_test.test.BA-003 a reservation without room for the store or any item is refused honestly' terminated with signal ABRT with stderr:
+       thread 27302402 panic: integer overflow
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m11-no-store-check/src/batch/read.zig:307:45: 0x102de9dcb in batchRead (T07-test)
+               run.memory_pool = reservation.bytes - store_bytes;
+                                                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m11-no-store-check/tests/t07_test.zig:131:43: 0x102e16e5b in expectBatchError (T07-test)
+               const result = h.batcher.batchRead(io, reserved.allocator(), context, items, &reservation);
+                                                 ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m11-no-store-check/tests/t07_test.zig:572:27: 0x102e19187 in test.BA-003 a reservation without room for the store or any item is refused honestly (T07-test)
+           try h.expectBatchError(error.ResourceExhausted, session(), &items, .{ .scratch_bytes = store -| (1 + output), .output_bytes = output, .fds = 32 });
+                                 ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102d8f12f in mainServer (T07-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102d8f7df in main (T07-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102d8d5a3 in callMain (T07-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache/o/6afedb1a6fb357ac45953399c398c928/T07-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache --seed=0x7fa0c0ad --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 16/17 tests passed (1 crashed)
+test transitive failure
++- run test T07-test 16 pass, 1 crash (17 total)
+   +- compile test T07-test Debug native success 10s MaxRSS:208M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache/o/2759f0ba666e46dcb034eb08a284d1a7/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m11-no-store-check /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T07/zig-global-cache --seed 0x7fa0c0ad -Z37d3bb6ae5c3da70 test -Dtest-group=batch --summary all

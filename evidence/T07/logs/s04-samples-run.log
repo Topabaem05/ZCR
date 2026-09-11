@@ -1,0 +1,19 @@
+1/18 t07_test.test.BA-001 32 items keep input order, item ids and per-item errors, and match single reads...OK
+2/18 t07_test.test.BA-001 results do not depend on how many items run at once...OK
+3/18 t07_test.test.BA-002 more than 32 items, bad item ids and another workspace are refused before any read...OK
+4/18 t07_test.test.BA-002 paths that leave the root fail only their own item...OK
+5/18 t07_test.test.BA-003 32 items asking for 8 MiB share a 2 MiB output cap under a small group budget...OK
+6/18 t07_test.test.BA-003 a reservation without room for the store or any item is refused honestly...OK
+7/18 t07_test.test.T07 cancellation during a batch returns Cancelled after every job has stopped...OK
+8/18 t07_test.test.T07 no read starts after cancellation is requested between reads...OK
+9/18 t07_test.test.T07 a file that keeps changing fails its item with a version conflict, others succeed...OK
+10/18 t07_test.test.T07 an allocation failure at any point fails an item or the batch and leaks nothing...OK
+11/18 t07_test.test.T07 batch contracts...OK
+12/18 t07_test.test.T07 projection writes compact read data with exact offsets and the zcr/1 envelope...OK
+13/18 t07_test.test.T07 projection escapes JSON text and keeps bytes, CR and non-ASCII exact...OK
+14/18 t07_test.test.T07 projection keeps whole lines within output_bytes and says the result is truncated...OK
+15/18 t07_test.test.T07 batch projection keeps every item id in order and marks items that do not fit...OK
+16/18 t07_test.test.T07 files and search projection keep whole entries within output_bytes...OK
+17/18 t07_test.test.T07 projection refuses a bad envelope and a buffer that is too small...OK
+18/18 t07_test.test.T07 a real batch result projects within its output budget...OK
+All 18 tests passed.

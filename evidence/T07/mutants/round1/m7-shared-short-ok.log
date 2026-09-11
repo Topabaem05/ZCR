@@ -1,0 +1,48 @@
+test
++- run test T07-test 16 pass, 1 fail (17 total); 1 leaks
+error: 't07_test.test.BA-003 32 items asking for 8 MiB share a 2 MiB output cap under a small group budget' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:615:14: 0x100943733 in expect (T07-test)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m7-shared-short-ok/tests/t07_test.zig:533:17: 0x1009aa72f in test.BA-003 32 items asking for 8 MiB share a 2 MiB output cap under a small group budget (T07-test)
+                       try testing.expect(res.status.complete);
+                       ^
+       [DebugAllocator] (err): memory address 0x105c40000 leaked: 
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x10084630f in rawAlloc (T07-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:286:40: 0x10084fbd7 in allocWithSizeAndAlignment__anon_9797 (T07-test)
+           return self.allocBytesWithAlignment(alignment, byte_count, return_address);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:274:89: 0x10084f9f3 in allocAdvancedWithRetAddr (T07-test)
+           const ptr: [*]align(a.toByteUnits()) T = @ptrCast(try self.allocWithSizeAndAlignment(@sizeOf(T), a, n, return_address));
+                                                                                               ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m7-shared-short-ok/src/batch/read.zig:311:63: 0x100979ed7 in batchRead (T07-test)
+               const store = try owned.arena.allocator().alignedAlloc(u8, .of(Line), @intCast(storeBytes(items, run.output_pool)));
+                                                                     ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m7-shared-short-ok/tests/t07_test.zig:115:46: 0x10094304f in runWithCost (T07-test)
+               const owned = try h.batcher.batchRead(io, reserved.allocator(), session(), items, &reservation);
+                                                    ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m7-shared-short-ok/tests/t07_test.zig:515:30: 0x1009a9d87 in test.BA-003 32 items asking for 8 MiB share a 2 MiB output cap under a small group budget (T07-test)
+           var r = try h.runWithCost(&items, cost, null);
+                                    ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x10091f12f in mainServer (T07-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x10091f7df in main (T07-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x10091d5a3 in callMain (T07-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       (additional stack frames may have been skipped...)
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache/o/47132f148d8b37cd584dcf414ea59e5e/T07-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache --seed=0xa2eb38d3 --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 16/17 tests passed (1 failed)
+test transitive failure
++- run test T07-test 16 pass, 1 fail (17 total); 1 leaks
+   +- compile test T07-test Debug native success 22s MaxRSS:201M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache/o/2759f0ba666e46dcb034eb08a284d1a7/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m7-shared-short-ok /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T07/zig-global-cache --seed 0xa2eb38d3 -Zb524dc2be477ac65 test -Dtest-group=batch --summary all

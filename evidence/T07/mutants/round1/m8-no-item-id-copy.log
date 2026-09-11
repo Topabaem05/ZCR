@@ -1,0 +1,64 @@
+test
++- run test T07-test 16 pass, 1 fail (17 total); 1 leaks
+error: 't07_test.test.BA-001 32 items keep input order, item ids and per-item errors, and match single reads' failed:
+       ====== expected this output: =========
+       item-0␃
+       
+       ======== instead found this: =========
+       XXXXXX␃
+       
+       ======================================
+       First difference occurs on line 1:
+       expected:
+       item-0
+       ^ ('\x69')
+       found:
+       XXXXXX
+       ^ ('\x58')
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:682:9: 0x104f73a3b in expectEqualStrings (T07-test)
+               return error.TestExpectedEqual;
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m8-no-item-id-copy/tests/t07_test.zig:317:9: 0x104ff3c3b in test.BA-001 32 items keep input order, item ids and per-item errors, and match single reads (T07-test)
+               try testing.expectEqualStrings(id, got.item_id);
+               ^
+       [DebugAllocator] (err): memory address 0x109c6c000 leaked: 
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x104e7630f in rawAlloc (T07-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:286:40: 0x104e7fbd7 in allocWithSizeAndAlignment__anon_9797 (T07-test)
+           return self.allocBytesWithAlignment(alignment, byte_count, return_address);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:274:89: 0x104e7f9f3 in allocAdvancedWithRetAddr (T07-test)
+           const ptr: [*]align(a.toByteUnits()) T = @ptrCast(try self.allocWithSizeAndAlignment(@sizeOf(T), a, n, return_address));
+                                                                                               ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m8-no-item-id-copy/src/batch/read.zig:311:63: 0x104fa9ed7 in batchRead (T07-test)
+               const store = try owned.arena.allocator().alignedAlloc(u8, .of(Line), @intCast(storeBytes(items, run.output_pool)));
+                                                                     ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m8-no-item-id-copy/tests/t07_test.zig:115:46: 0x104f7304f in runWithCost (T07-test)
+               const owned = try h.batcher.batchRead(io, reserved.allocator(), session(), items, &reservation);
+                                                    ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m8-no-item-id-copy/tests/t07_test.zig:105:29: 0x104f732e3 in run (T07-test)
+               return h.runWithCost(items, cost, null);
+                                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m8-no-item-id-copy/tests/t07_test.zig:304:22: 0x104ff343b in test.BA-001 32 items keep input order, item ids and per-item errors, and match single reads (T07-test)
+           var r = try h.run(&items, 1 * MiB, 4);
+                            ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x104f4f12f in mainServer (T07-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x104f4f7df in main (T07-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x104f4d5a3 in callMain (T07-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       (additional stack frames may have been skipped...)
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache/o/e4317639d35d0008ee3449e4cd89d8db/T07-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache --seed=0x8348e3e8 --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 16/17 tests passed (1 failed)
+test transitive failure
++- run test T07-test 16 pass, 1 fail (17 total); 1 leaks
+   +- compile test T07-test Debug native success 10s MaxRSS:225M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache/o/2759f0ba666e46dcb034eb08a284d1a7/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m8-no-item-id-copy /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T07/zig-global-cache --seed 0x8348e3e8 -Z4438d95e3f5ae1bf test -Dtest-group=batch --summary all

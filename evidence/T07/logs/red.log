@@ -1,0 +1,168 @@
+test
++- run test T07-test 1 pass, 16 fail (17 total)
+error: 't07_test.test.BA-001 32 items keep input order, item ids and per-item errors, and match single reads' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t07/src/batch/read.zig:54:5: 0x1049e825f in plannedCost (T07-test)
+           return error.InvalidArgument;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t07/tests/t07_test.zig:104:22: 0x1049bb33b in run (T07-test)
+               const cost = try batch.plannedCost(items, output, concurrency);
+                            ^
+       /Users/guribbong/code/ZCR-worktrees/task-t07/tests/t07_test.zig:304:13: 0x104a2440b in test.BA-001 32 items keep input order, item ids and per-item errors, and match single reads (T07-test)
+           var r = try h.run(&items, 1 * MiB, 4);
+                   ^
+error: 't07_test.test.BA-001 results do not depend on how many items run at once' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t07/src/batch/read.zig:54:5: 0x1049e825f in plannedCost (T07-test)
+           return error.InvalidArgument;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t07/tests/t07_test.zig:104:22: 0x1049bb33b in run (T07-test)
+               const cost = try batch.plannedCost(items, output, concurrency);
+                            ^
+       /Users/guribbong/code/ZCR-worktrees/task-t07/tests/t07_test.zig:357:18: 0x104a1e65f in test.BA-001 results do not depend on how many items run at once (T07-test)
+           var serial = try h.run(&items, 1 * MiB, 1);
+                        ^
+error: 't07_test.test.BA-002 more than 32 items, bad item ids and another workspace are refused before any read' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t07/src/batch/read.zig:54:5: 0x1049e825f in plannedCost (T07-test)
+           return error.InvalidArgument;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t07/tests/t07_test.zig:390:18: 0x104a0d9eb in test.BA-002 more than 32 items, bad item ids and another workspace are refused before any read (T07-test)
+           const cost = try batch.plannedCost(many[0..32], 64 * KiB, 2);
+                        ^
+error: 't07_test.test.BA-002 paths that leave the root fail only their own item' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t07/src/batch/read.zig:54:5: 0x1049e825f in plannedCost (T07-test)
+           return error.InvalidArgument;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t07/tests/t07_test.zig:104:22: 0x1049bb33b in run (T07-test)
+               const cost = try batch.plannedCost(items, output, concurrency);
+                            ^
+       /Users/guribbong/code/ZCR-worktrees/task-t07/tests/t07_test.zig:441:13: 0x104a0c793 in test.BA-002 paths that leave the root fail only their own item (T07-test)
+           var r = try h.run(&items, 64 * KiB, 2);
+                   ^
+error: 't07_test.test.BA-003 32 items asking for 8 MiB share a 2 MiB output cap under a small group budget' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t07/src/batch/read.zig:54:5: 0x1049e825f in plannedCost (T07-test)
+           return error.InvalidArgument;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t07/tests/t07_test.zig:513:16: 0x104a0a77b in test.BA-003 32 items asking for 8 MiB share a 2 MiB output cap under a small group budget (T07-test)
+           var cost = try batch.plannedCost(&items, output, 2);
+                      ^
+error: 't07_test.test.BA-003 a reservation without room for the store or any item is refused honestly' failed:
+       expected error.ResourceExhausted, found error.Unsupported
+       /Users/guribbong/code/ZCR-worktrees/task-t07/src/batch/read.zig:87:9: 0x1049e7167 in batchRead (T07-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x104a07677 in expectEqualInner__anon_49057 (T07-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x104a07a27 in expectEqual (T07-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t07/tests/t07_test.zig:139:13: 0x104a07a9f in expectBatchError (T07-test)
+                   try testing.expectEqual(expected, @as(anyerror, err));
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/task-t07/tests/t07_test.zig:572:5: 0x104a09c5f in test.BA-003 a reservation without room for the store or any item is refused honestly (T07-test)
+           try h.expectBatchError(error.ResourceExhausted, session(), &items, .{ .scratch_bytes = store -| (1 + output), .output_bytes = output, .fds = 32 });
+           ^
+error: 't07_test.test.T07 cancellation during a batch returns Cancelled after every job has stopped' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t07/src/batch/read.zig:54:5: 0x1049e825f in plannedCost (T07-test)
+           return error.InvalidArgument;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t07/tests/t07_test.zig:598:64: 0x104a07fe3 in test.T07 cancellation during a batch returns Cancelled after every job has stopped (T07-test)
+           try h.expectBatchError(error.Cancelled, session(), &items, try batch.plannedCost(&items, 2 * MiB, 2));
+                                                                      ^
+error: 't07_test.test.T07 a file that keeps changing fails its item with a version conflict, others succeed' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t07/src/batch/read.zig:54:5: 0x1049e825f in plannedCost (T07-test)
+           return error.InvalidArgument;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t07/tests/t07_test.zig:104:22: 0x1049bb33b in run (T07-test)
+               const cost = try batch.plannedCost(items, output, concurrency);
+                            ^
+       /Users/guribbong/code/ZCR-worktrees/task-t07/tests/t07_test.zig:632:13: 0x104a0669f in test.T07 a file that keeps changing fails its item with a version conflict, others succeed (T07-test)
+           var r = try h.run(&items, 64 * KiB, 1);
+                   ^
+error: 't07_test.test.T07 an allocation failure at any point fails an item or the batch and leaks nothing' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t07/src/batch/read.zig:54:5: 0x1049e825f in plannedCost (T07-test)
+           return error.InvalidArgument;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t07/tests/t07_test.zig:650:18: 0x104a047c7 in test.T07 an allocation failure at any point fails an item or the batch and leaks nothing (T07-test)
+           const cost = try batch.plannedCost(&items, 64 * KiB, 1);
+                        ^
+error: 't07_test.test.T07 projection writes compact read data with exact offsets and the zcr/1 envelope' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t07/src/protocol/projection.zig:63:5: 0x1049e70ff in success (T07-test)
+           return error.InvalidArgument;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t07/tests/t07_test.zig:719:5: 0x1049bb4fb in project (T07-test)
+           return projection.success(buffer, env, data, status, output);
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t07/tests/t07_test.zig:729:22: 0x104a03047 in test.T07 projection writes compact read data with exact offsets and the zcr/1 envelope (T07-test)
+           const response = try project(arena, envelope, .{ .read = result }, result.status, 256 * KiB);
+                            ^
+error: 't07_test.test.T07 projection escapes JSON text and keeps bytes, CR and non-ASCII exact' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t07/src/protocol/projection.zig:63:5: 0x1049e70ff in success (T07-test)
+           return error.InvalidArgument;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t07/tests/t07_test.zig:719:5: 0x1049bb4fb in project (T07-test)
+           return projection.success(buffer, env, data, status, output);
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t07/tests/t07_test.zig:759:22: 0x104a01cd3 in test.T07 projection escapes JSON text and keeps bytes, CR and non-ASCII exact (T07-test)
+           const response = try project(arena, envelope, .{ .read = result }, result.status, 256 * KiB);
+                            ^
+error: 't07_test.test.T07 projection keeps whole lines within output_bytes and says the result is truncated' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t07/src/protocol/projection.zig:63:5: 0x1049e70ff in success (T07-test)
+           return error.InvalidArgument;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t07/tests/t07_test.zig:719:5: 0x1049bb4fb in project (T07-test)
+           return projection.success(buffer, env, data, status, output);
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t07/tests/t07_test.zig:786:22: 0x1049ff883 in test.T07 projection keeps whole lines within output_bytes and says the result is truncated (T07-test)
+           const response = try project(arena, envelope, .{ .read = result }, result.status, budget);
+                            ^
+error: 't07_test.test.T07 batch projection keeps every item id in order and marks items that do not fit' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t07/src/protocol/projection.zig:63:5: 0x1049e70ff in success (T07-test)
+           return error.InvalidArgument;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t07/tests/t07_test.zig:719:5: 0x1049bb4fb in project (T07-test)
+           return projection.success(buffer, env, data, status, output);
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t07/tests/t07_test.zig:836:22: 0x1049fd443 in test.T07 batch projection keeps every item id in order and marks items that do not fit (T07-test)
+           const response = try project(arena, envelope, .{ .batch_read = value }, value.status, budget);
+                            ^
+error: 't07_test.test.T07 files and search projection keep whole entries within output_bytes' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t07/src/protocol/projection.zig:63:5: 0x1049e70ff in success (T07-test)
+           return error.InvalidArgument;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t07/tests/t07_test.zig:719:5: 0x1049bb4fb in project (T07-test)
+           return projection.success(buffer, env, data, status, output);
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t07/tests/t07_test.zig:873:19: 0x1049f96af in test.T07 files and search projection keep whole entries within output_bytes (T07-test)
+           const files = try project(arena, envelope, .{ .files = .{ .paths = &paths, .order = .path_then_offset } }, files_status, 1 * KiB);
+                         ^
+error: 't07_test.test.T07 projection refuses a bad envelope and a buffer that is too small' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t07/src/protocol/projection.zig:63:5: 0x1049e70ff in success (T07-test)
+           return error.InvalidArgument;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t07/tests/t07_test.zig:719:5: 0x1049bb4fb in project (T07-test)
+           return projection.success(buffer, env, data, status, output);
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t07/tests/t07_test.zig:911:22: 0x1049f518f in test.T07 projection refuses a bad envelope and a buffer that is too small (T07-test)
+           const response = try project(arena, envelope, .{ .read = result }, odd, 1 * KiB);
+                            ^
+error: 't07_test.test.T07 a real batch result projects within its output budget' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t07/src/batch/read.zig:54:5: 0x1049e825f in plannedCost (T07-test)
+           return error.InvalidArgument;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t07/tests/t07_test.zig:104:22: 0x1049bb33b in run (T07-test)
+               const cost = try batch.plannedCost(items, output, concurrency);
+                            ^
+       /Users/guribbong/code/ZCR-worktrees/task-t07/tests/t07_test.zig:921:13: 0x1049bbf93 in test.T07 a real batch result projects within its output budget (T07-test)
+           var r = try h.run(&items, 1 * MiB, 4);
+                   ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache/o/51515a8d8ebad0f46a4993924b983f47/T07-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache --seed=0xc1dbfa51 --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 1/17 tests passed (16 failed)
+test transitive failure
++- install T07-test success
+|  +- compile test T07-test Debug native cached 654ms MaxRSS:31M
++- run test T07-test 1 pass, 16 fail (17 total)
+   +- compile test T07-test Debug native (reused)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache/o/2759f0ba666e46dcb034eb08a284d1a7/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-worktrees/task-t07 /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T07/zig-global-cache --seed 0xc1dbfa51 -Z62e369fef4d8efd3 test -Dtest-group=batch -Doptimize=Debug -Dinstall-tests=true --prefix /Users/guribbong/code/ZCR-state/tasks/T07/out-red --summary all
