@@ -1,0 +1,37 @@
+test
++- fail failure
+error: registered test file tests/t05_test.zig is missing (T05 not delivered yet)
+
+Build Summary: 19/21 steps succeeded (1 failed); 63/63 tests passed
+test transitive failure
++- install T00-test success
+|  +- compile test T00-test Debug native cached 3s MaxRSS:30M
++- run test T00-test 11 pass (11 total) 9s MaxRSS:10M
+|  +- compile test T00-test Debug native (reused)
++- install T01-test success
+|  +- compile test T01-test Debug native cached 2s MaxRSS:30M
+|     +- options cached
++- run test T01-test 18 pass (18 total) 46s MaxRSS:10M
+|  +- compile test T01-test Debug native (+1 more reused dependencies)
++- install T02-test success
+|  +- compile test T02-test Debug native cached 2s MaxRSS:30M
+|     +- options (reused)
++- run test T02-test 12 pass (12 total) 23s MaxRSS:11M
+|  +- compile test T02-test Debug native (+1 more reused dependencies)
++- install T03-test success
+|  +- compile test T03-test Debug native cached 2s MaxRSS:30M
++- run test T03-test 12 pass (12 total) 14s MaxRSS:8M
+|  +- compile test T03-test Debug native (reused)
++- install T04-test success
+|  +- compile test T04-test Debug native success 31s MaxRSS:181M
++- run test T04-test 10 pass (10 total) 8s MaxRSS:20M
+|  +- compile test T04-test Debug native (reused)
++- fail failure
++- run exe zcr success 246ms
+|  +- compile exe zcr Debug native cached 2s MaxRSS:30M
+|     +- options (reused)
++- run exe zcr success 465ms
+   +- compile exe zcr Debug native (+1 more reused dependencies)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/integration/zig-local-cache/o/491759c2df8d1909891cd9b8999d4633/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-worktrees/integration /Users/guribbong/code/ZCR-state/integration/zig-local-cache /Users/guribbong/code/ZCR-state/integration/zig-global-cache --seed 0x60203b80 -Z586fd113aba13050 test -Doptimize=Debug -Dinstall-tests=true --prefix /Users/guribbong/code/ZCR-state/integration/out-int4-all-debug --summary all

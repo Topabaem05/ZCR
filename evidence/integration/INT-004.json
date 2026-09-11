@@ -1,0 +1,61 @@
+{
+  "schema_version": "zcr-integration-record/0",
+  "id": "INT-004",
+  "source_commit": "449b18843929cc3fe1ad073f623e0e31a39a6585",
+  "branch": "integration",
+  "changes": [
+    "fast-forward integration to task-t04 b933c3a (T04 S06)",
+    "build.zig: register T05 (tests/t05_test.zig group fs; zcr_fs_traverse module)"
+  ],
+  "retest_of": [
+    "T00",
+    "T01",
+    "T02",
+    "T03",
+    "T04 IO-001..IO-006 (Debug and ReleaseSafe)"
+  ],
+  "runs": [
+    {
+      "label": "int4-all-debug",
+      "command": "zig build test -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-int4-all-debug",
+      "expected": "63/63 tests pass; step fails only because tests/t05_test.zig is registered but not delivered",
+      "summary": "Build Summary: 19/21 steps succeeded (1 failed); 63/63 tests passed",
+      "log": "logs/int4-all-debug.log",
+      "log_sha256": "7efd38b2dbb58342bd0d0edbbb7813c06767a286982ff4d5bbcf4b7d82c7ca6c",
+      "installed_test_binaries_sha256": {
+        "T00-test": "3d66f177b768707b08c97c5088a9ee326b2e67f2e0c3078b889cab80aca4eff7",
+        "T01-test": "89ce3df9dc6167aba7df22ad509bae9e1f36ca3aa8cf43bbe2afaf3d3cabad70",
+        "T02-test": "fc6df69913eccb555e835d366e82a8ff4292ede0d2fff6c9c8409f672d7fae3a",
+        "T03-test": "cf62069c65592b6f2a8acaeb7119e2e0fc95fe5eefb123e3b7c8b1ca9aced163",
+        "T04-test": "5a6ad4ca7d9884028df8a7259fc850acec448733d1d30284e5ce6de0c2ca5f71"
+      }
+    },
+    {
+      "label": "int4-io-releasesafe",
+      "command": "zig build test -Dtest-group=io -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix $STATE/out-int4-io-releasesafe",
+      "expected": "pass",
+      "summary": "Build Summary: 4/4 steps succeeded; 10/10 tests passed",
+      "log": "logs/int4-io-releasesafe.log",
+      "log_sha256": "dc87bfa943e5062cae03766e325db8fad7a74564e8869e59a0ead561e13f6dd7",
+      "installed_test_binaries_sha256": {
+        "T04-test": "82e764dae6e99a39cc807c742359f7e469ee389f102d39f002bc6ff403726ebd"
+      }
+    },
+    {
+      "label": "int4-verify-contracts",
+      "command": "zig build verify-contracts -Dinstall-tests=true --prefix $STATE/out-int4-verify-contracts",
+      "expected": "pass",
+      "summary": "Build Summary: 3/3 steps succeeded",
+      "log": "logs/int4-verify-contracts.log",
+      "log_sha256": "8825ceaf723da212f293e8d00d457b05d12140fe4b4da362a972f06fa5a1138a",
+      "installed_test_binaries_sha256": {}
+    }
+  ],
+  "not_done": [
+    "main branch not updated",
+    "MANIFEST.sha256 AGENTS.md mismatch open",
+    "E_MANIFEST_UNBOUND decision open",
+    "read cost estimate proposal from T04 open",
+    "tasks.json/catalog proposals open"
+  ]
+}
