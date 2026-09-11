@@ -461,6 +461,7 @@ const Running = struct {
     peak: std.atomic.Value(u32) = .init(0),
     starts: std.atomic.Value(u32) = .init(0),
     cancel_on_start: ?*std.atomic.Value(bool) = null,
+    cancel_on_end: ?*std.atomic.Value(bool) = null,
 
     fn onJob(context: ?*anyopaque, event: batch.JobEvent) void {
         const self: *Running = @ptrCast(@alignCast(context.?));
@@ -472,6 +473,7 @@ const Running = struct {
             if (self.cancel_on_start) |flag| flag.store(true, .release);
         } else {
             _ = self.current.fetchSub(1, .monotonic);
+            if (self.cancel_on_end) |flag| flag.store(true, .release);
         }
     }
 };
@@ -599,6 +601,28 @@ test "T07 cancellation during a batch returns Cancelled after every job has stop
     try testing.expectEqual(@as(u32, 0), running.current.load(.monotonic));
     try testing.expect(running.starts.load(.monotonic) < 32);
     try testing.expectEqual(fds_before, try openFdCount());
+    h.cancel_flag.store(false, .release);
+}
+
+test "T07 no read starts after cancellation is requested between reads" {
+    var arena_state = std.heap.ArenaAllocator.init(testing.allocator);
+    defer arena_state.deinit();
+    const h = try Harness.init(arena_state.allocator(), .{ .max_concurrency = 1 });
+    defer h.deinit();
+    var items: [4]core.BatchReadItem = undefined;
+    for (&items, 0..) |*it, i| {
+        const path = try std.fmt.allocPrint(h.arena, "c{d}.txt", .{i});
+        try h.write(path, "one\ntwo\n");
+        it.* = item(try std.fmt.allocPrint(h.arena, "c{d}", .{i}), path, 1, 2);
+    }
+
+    // The first read completes normally; cancellation arrives as it ends.
+    var running: Running = .{ .cancel_on_end = &h.cancel_flag };
+    var fault: batch.BatchFault = .{ .on_job = Running.onJob, .context = &running };
+    h.batcher.fault = &fault;
+    try h.expectBatchError(error.Cancelled, session(), &items, try batch.plannedCost(&items, 64 * KiB, 1));
+    try testing.expectEqual(@as(u32, 1), running.starts.load(.monotonic));
+    try testing.expectEqual(@as(u32, 0), running.current.load(.monotonic));
     h.cancel_flag.store(false, .release);
 }
 
@@ -797,10 +821,21 @@ test "T07 projection keeps whole lines within output_bytes and says the result i
     const reasons = root.object.get("coverage").?.object.get("reasons").?.array.items;
     try testing.expectEqualStrings(projection.reason_output_budget, reasons[reasons.len - 1].string);
 
-    // One more byte of budget never loses a line; a budget below the first line is an error.
+    // More budget never loses a line; a budget that holds the fixed parts but not the
+    // first line is an error, not an empty success.
     const wider = try project(arena, envelope, .{ .read = result }, result.status, budget + 64);
     try testing.expect(wider.omitted <= response.omitted);
     try testing.expectError(error.OutputBudgetExceeded, project(arena, envelope, .{ .read = result }, result.status, 60));
+    const long_line = try arena.alloc(u8, 600);
+    @memset(long_line, 'w');
+    long_line[long_line.len - 1] = '\n';
+    const one_long: core.ReadResult = .{ .path = .{ .bytes = "w.txt" }, .lines = try linesOf(arena, long_line), .version = version(600), .status = liveStatus("w.txt") };
+    try testing.expectError(error.OutputBudgetExceeded, project(arena, envelope, .{ .read = one_long }, one_long.status, 300));
+    const empty: core.ReadResult = .{ .path = .{ .bytes = "w.txt" }, .lines = &.{}, .version = version(0), .status = liveStatus("w.txt") };
+    const empty_response = try project(arena, envelope, .{ .read = empty }, empty.status, 300);
+    try testing.expect(empty_response.complete and empty_response.omitted == 0);
+    var wide_paths: [3]core.RelativePath = @splat(.{ .bytes = "p" ** 400 });
+    try testing.expectError(error.OutputBudgetExceeded, project(arena, envelope, .{ .files = .{ .paths = &wide_paths, .order = .discovery } }, liveStatus("."), 300));
 
     const info: core.errors.ErrorInfo = .{ .code = .E_OUTPUT_BUDGET, .message = "first line exceeds output_bytes", .retryable = false };
     const buffer = try arena.alloc(u8, @intCast(projection.failureBufferBytes(envelope, info)));
@@ -904,6 +939,13 @@ test "T07 projection refuses a bad envelope and a buffer that is too small" {
     try testing.expectError(error.InvalidArgument, project(arena, envelope, .{ .read = result }, result.status, core.limits.values.max_output_bytes + 1));
     var tiny: [16]u8 = undefined;
     try testing.expectError(error.InvalidArgument, projection.success(&tiny, envelope, .{ .read = result }, result.status, 1 * KiB));
+
+    // Text that is not UTF-8 cannot be written as a JSON string.
+    const bad_info: core.errors.ErrorInfo = .{ .code = .E_IO, .message = "bad \xff byte", .retryable = false };
+    const bad_buffer = try arena.alloc(u8, @intCast(projection.failureBufferBytes(envelope, bad_info)));
+    try testing.expectError(error.InvalidArgument, projection.failure(bad_buffer, envelope, bad_info));
+    const bad_line: core.ReadResult = .{ .path = .{ .bytes = "a.txt" }, .lines = try linesOf(arena, "ok\n\xfe\n"), .version = version(5), .status = liveStatus("a.txt") };
+    try testing.expectError(error.InvalidArgument, project(arena, envelope, .{ .read = bad_line }, bad_line.status, 1 * KiB));
 
     // A status that claims completeness with truncation is written as incomplete.
     var odd = result.status;
