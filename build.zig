@@ -21,7 +21,7 @@ comptime {
 
 pub const TestGroup = enum { io, fs, search, batch, write, mcp, isolation, broker, watch, observe, ast, scheduler, memory, perf, dev, security };
 
-const Import = enum { core, evidence, caps, build_options, policy, guard };
+const Import = enum { core, evidence, caps, build_options, policy, guard, memory, admission };
 
 const TestFile = struct {
     task: []const u8,
@@ -35,6 +35,7 @@ const test_files = [_]TestFile{
     .{ .task = "T00", .path = "tests/t00_test.zig", .group = .perf, .imports = &.{.caps} },
     .{ .task = "T01", .path = "tests/t01_test.zig", .group = .dev, .imports = &.{ .core, .evidence, .build_options } },
     .{ .task = "T02", .path = "tests/t02_test.zig", .group = .isolation, .imports = &.{ .core, .policy, .guard, .evidence, .build_options } },
+    .{ .task = "T03", .path = "tests/t03_test.zig", .group = .memory, .imports = &.{ .core, .memory, .admission } },
 };
 
 /// Exit code for CLI roles that exist in the contract but are not built yet (EX_UNAVAILABLE).
@@ -108,6 +109,24 @@ pub fn build(b: *std.Build) void {
             .{ .name = "evidence", .module = evidence_module },
         },
     });
+    // T03: budgets, reservation-bound allocation, request arenas, accounting.
+    const memory_module = b.createModule(.{
+        .root_source_file = b.path("src/memory/budget.zig"),
+        .target = target,
+        .optimize = optimize,
+        .link_libc = target.result.os.tag.isDarwin(),
+        .imports = &.{.{ .name = "zcr_core", .module = core }},
+    });
+    // T03: admission control in front of the in-flight budget (I02).
+    const admission_module = b.createModule(.{
+        .root_source_file = b.path("src/scheduler/admission.zig"),
+        .target = target,
+        .optimize = optimize,
+        .imports = &.{
+            .{ .name = "zcr_core", .module = core },
+            .{ .name = "zcr_memory", .module = memory_module },
+        },
+    });
     // A tool is installed once its owning task has delivered the source file.
     if (sourceExists(b, "tools/dev/guard.zig")) {
         b.installArtifact(b.addExecutable(.{ .name = "zcr-dev-guard", .root_module = guard_module }));
@@ -151,6 +170,8 @@ pub fn build(b: *std.Build) void {
             .build_options => module.addImport("build_options", options_module),
             .policy => module.addImport("zcr_policy", policy_module),
             .guard => module.addImport("dev_guard", guard_module),
+            .memory => module.addImport("zcr_memory", memory_module),
+            .admission => module.addImport("zcr_admission", admission_module),
             .caps => module.addImport("caps", caps_module orelse blk: {
                 caps_module = capsModule(b, target, optimize);
                 break :blk caps_module.?;
