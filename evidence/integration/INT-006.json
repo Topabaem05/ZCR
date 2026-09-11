@@ -1,0 +1,67 @@
+{
+  "schema_version": "zcr-integration-record/0",
+  "id": "INT-006",
+  "source_commit": "2f8e05ee4d3edd32493fd6fbb7afcfc50645056d",
+  "branch": "integration",
+  "changes": [
+    "fast-forward integration to task-t06 13ee271 (T06 S06)",
+    "build.zig: register T07 (tests/t07_test.zig group batch; zcr_batch and zcr_projection modules)"
+  ],
+  "retest_of": [
+    "T00",
+    "T01",
+    "T02",
+    "T03",
+    "T04",
+    "T05",
+    "T06 SR-001..SR-006 (Debug and ReleaseSafe)"
+  ],
+  "runs": [
+    {
+      "label": "int6-all-debug",
+      "command": "zig build test -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-int6-all-debug",
+      "expected": "85/85 tests pass; step fails only because tests/t07_test.zig is registered but not delivered",
+      "summary": "Build Summary: 25/27 steps succeeded (1 failed); 85/85 tests passed",
+      "log": "logs/int6-all-debug.log",
+      "log_sha256": "31bc4c90535befab8d99862d1580a54f99a2042bb74b302accde878b7916bbd2",
+      "installed_test_binaries_sha256": {
+        "T00-test": "821dea0ff1f6dafa90901f3cbf94e20739fbd5050eddc73b246628fce65b2301",
+        "T01-test": "f8e52c0b98706cfe0d73185902b2b6de05ce7d9a2d000792dd65cc8c8b84ebf5",
+        "T02-test": "2e0896110d48e6c1b42b0c04dc54a440fe0eef52b86c813a6f2953bf6e780de6",
+        "T03-test": "af9dac79ba76d514c62d1773b67a8a31ea6ed3d24327bb16a713b110796a83fc",
+        "T04-test": "e1c6dc891b8df4c429e70da8b77a94b94445882e488998e191d3438199565451",
+        "T05-test": "90865c220c6d2e7c57897a4eb6eba7fd9424892d65dc5202ea0ca41d5dff2837",
+        "T06-test": "db6a638b75446c6729635d79a92d1dc981679a017201b822907a938a0569a0cb"
+      }
+    },
+    {
+      "label": "int6-search-releasesafe",
+      "command": "zig build test -Dtest-group=search -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix $STATE/out-int6-search-releasesafe",
+      "expected": "pass",
+      "summary": "Build Summary: 4/4 steps succeeded; 11/11 tests passed",
+      "log": "logs/int6-search-releasesafe.log",
+      "log_sha256": "a63d1efba83996f46ce1fa7f46073126fc60713ffc8ddf182c4fffe7e5d5e878",
+      "installed_test_binaries_sha256": {
+        "T06-test": "d0fd5ef5a2b606b207d23b189bed9672c50ccca58e6254e9289d8cf32aeb124f"
+      }
+    },
+    {
+      "label": "int6-verify-contracts",
+      "command": "zig build verify-contracts -Dinstall-tests=true --prefix $STATE/out-int6-verify-contracts",
+      "expected": "pass",
+      "summary": "Build Summary: 3/3 steps succeeded",
+      "log": "logs/int6-verify-contracts.log",
+      "log_sha256": "885cd8114e0b539cdabfb8555be44a0659c728fc142c7fba7c9d2e498ad43838",
+      "installed_test_binaries_sha256": {}
+    }
+  ],
+  "not_done": [
+    "main branch not updated",
+    "MANIFEST.sha256 AGENTS.md mismatch open",
+    "E_MANIFEST_UNBOUND decision open",
+    "read cost estimate proposal (T04) open",
+    "Coverage filters proposal (T05) open",
+    "SearchSpec output_bytes/deadline proposal (T06) open",
+    "tasks.json/catalog proposals open"
+  ]
+}
