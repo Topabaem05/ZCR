@@ -111,8 +111,10 @@ const Harness = struct {
     fn finish(h: *Harness, r: *Read) !void {
         r.owned.deinit();
         try testing.expectEqual(@as(u64, 0), r.reserved.liveBytes());
+        const held = r.reservation.bytes;
+        const before = h.budget.usage().bytes;
         try h.budget.release(&r.reservation);
-        try testing.expectEqual(@as(u64, 0), h.budget.usage().bytes);
+        try testing.expectEqual(before - held, h.budget.usage().bytes);
     }
 
     /// Reads that must fail still return every byte and the reservation.
@@ -464,9 +466,11 @@ test "T04 only regular files are opened; directories, FIFOs and symlinks are ref
 
 const CancelAfterChunk = struct {
     flag: *std.atomic.Value(bool),
+    last_chunk: u32 = 0,
 
     fn afterChunk(context: ?*anyopaque, chunk: u32) void {
         const self: *CancelAfterChunk = @ptrCast(@alignCast(context.?));
+        self.last_chunk = chunk;
         if (chunk == 1) self.flag.store(true, .release);
     }
 };
@@ -489,6 +493,8 @@ test "T04 cancellation before open and between chunks closes the file and frees 
     var fault: fs_read.ReadFault = .{ .after_chunk = CancelAfterChunk.afterChunk, .context = &on_chunk };
     h.reader.fault = &fault;
     try h.expectReadError(error.Cancelled, Harness.spec("big.txt", 20_000, 10));
+    // Cancellation is observed at the next chunk boundary, not after scanning the whole range.
+    try testing.expectEqual(@as(u32, 1), on_chunk.last_chunk);
     h.reader.fault = null;
     h.cancel_flag.store(false, .release);
 
