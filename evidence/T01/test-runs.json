@@ -1,0 +1,127 @@
+{
+  "schema_version": "zcr-t01-test-runs/0",
+  "task_id": "T01",
+  "state_dir": "$STATE=/Users/guribbong/code/ZCR-state/tasks/T01",
+  "negative_runner_checks": [
+    {
+      "command": "zig build test -Dtest-group=io",
+      "exit_code": 1,
+      "expected": "fail: empty selection is not a pass"
+    },
+    {
+      "command": "zig build test -Dtest-id=ZZ-999",
+      "exit_code": 1,
+      "expected": "fail: no test named ZZ-999"
+    },
+    {
+      "command": "zig build bench -Dcorpus=C-medium -Dvariant=scalar",
+      "exit_code": 1,
+      "expected": "fail: harness owned by T21"
+    },
+    {
+      "command": "zcr-dev-evidence verify-contracts --root <copy with max_batch_items=33 and E_MANIFEST_UNBOUND added>",
+      "exit_code": 1,
+      "expected": "2 of 128 checks fail"
+    },
+    {
+      "command": "zcr-dev-evidence verify --worktree <task-t00> --evidence evidence/T01/evidence-green-dev-debug.json",
+      "exit_code": 1,
+      "expected": "rejected: WorktreeMismatch"
+    },
+    {
+      "command": "zcr-dev-evidence preflight --worktree <task-t01 with uncommitted S03 edits>",
+      "exit_code": 1,
+      "expected": "7 entries reported, tree unchanged"
+    }
+  ],
+  "runs": [
+    {
+      "label": "red",
+      "optimize": "Debug",
+      "source_commit": "7d73cdbda087129807a1ca35944297190730397b",
+      "source_tree": "f88b6f27665ff88a1c117180e88d1052d0633c38",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build test -Dtest-group=dev -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-red --summary all",
+      "exit_code": 1,
+      "summary": "Build Summary: 4/8 steps succeeded (3 failed); 1/18 tests passed (17 failed)",
+      "installed_test_binaries_sha256": {
+        "T01-test": "b099a9a53ca4209a01f9193662786626ee9208f007279368d33e9d2592c1efc0"
+      },
+      "log": "logs/red.log",
+      "log_sha256": "37d9922c3d5d7f9c631612fc58fec12b9b72114ec9e6300320a8e0266154129d"
+    },
+    {
+      "label": "green-dev-debug",
+      "optimize": "Debug",
+      "source_commit": "a744a4e3e915ae89701aed3870078f325fbee53a",
+      "source_tree": "142c5ad8534d0be5de4da2ce0fbdafec5b12378e",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build test -Dtest-group=dev -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-green-dev-debug --summary all",
+      "exit_code": 0,
+      "summary": "Build Summary: 8/8 steps succeeded; 18/18 tests passed",
+      "installed_test_binaries_sha256": {
+        "T01-test": "48c959b0aec582fef8dde4afbd781664c3fd881a310067dc79e989663cd06eae"
+      },
+      "log": "logs/green-dev-debug.log",
+      "log_sha256": "6f6d5dcc52ec105e42eeb4f773580bd60d810349ad89cf9226dc6f8f6e41fed4"
+    },
+    {
+      "label": "green-dev-releasesafe",
+      "optimize": "ReleaseSafe",
+      "source_commit": "a744a4e3e915ae89701aed3870078f325fbee53a",
+      "source_tree": "142c5ad8534d0be5de4da2ce0fbdafec5b12378e",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build test -Dtest-group=dev -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix $STATE/out-green-dev-releasesafe --summary all",
+      "exit_code": 0,
+      "summary": "Build Summary: 8/8 steps succeeded; 18/18 tests passed",
+      "installed_test_binaries_sha256": {
+        "T01-test": "2bacab710a1095963119d618c22deb08a5dbf93aa25b45198afb433e532ea188"
+      },
+      "log": "logs/green-dev-releasesafe.log",
+      "log_sha256": "ee9538ed653dc17963b1eb36735a1e8b31fc143bb39027f3b98203d7d57e8ae6"
+    },
+    {
+      "label": "regression-perf-debug",
+      "optimize": "Debug",
+      "source_commit": "a744a4e3e915ae89701aed3870078f325fbee53a",
+      "source_tree": "142c5ad8534d0be5de4da2ce0fbdafec5b12378e",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build test -Dtest-group=perf -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-regression-perf-debug --summary all",
+      "exit_code": 0,
+      "summary": "Build Summary: 4/4 steps succeeded; 11/11 tests passed",
+      "installed_test_binaries_sha256": {
+        "T00-test": "e3db1aa81e3bc525f0e426ffdc706242c95d5b38d693a4e59ac0e940a9d53786"
+      },
+      "log": "logs/regression-perf-debug.log",
+      "log_sha256": "78df55939c237829c4700e665c41ab61bdafa2d5eba3deb3eb676d33e2facc0d"
+    },
+    {
+      "label": "fault-injection-dv004",
+      "optimize": "Debug",
+      "source_commit": "a744a4e3e915ae89701aed3870078f325fbee53a",
+      "source_tree": "142c5ad8534d0be5de4da2ce0fbdafec5b12378e",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build test -Dtest-id=DV-004 -Dfault-injection=true -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-fault-injection-dv004 --summary all",
+      "exit_code": 0,
+      "summary": "Build Summary: 5/5 steps succeeded; 5/5 tests passed",
+      "installed_test_binaries_sha256": {
+        "T01-test": "32277daf9d9079df732bc204ebf56606a509a243096f6646ce7c57581d6bbba6"
+      },
+      "log": "logs/fault-injection-dv004.log",
+      "log_sha256": "6ce135a77c19da91b962bea68d216ef56b86e59042efdd64e6314dd709cae415"
+    },
+    {
+      "label": "verify-contracts",
+      "optimize": "Debug",
+      "source_commit": "a744a4e3e915ae89701aed3870078f325fbee53a",
+      "source_tree": "142c5ad8534d0be5de4da2ce0fbdafec5b12378e",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build verify-contracts -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-verify-contracts --summary all",
+      "exit_code": 0,
+      "summary": "Build Summary: 3/3 steps succeeded",
+      "installed_test_binaries_sha256": {},
+      "log": "logs/verify-contracts.log",
+      "log_sha256": "67dc5c0b8045adb3e8faab9bd33ed798080e5baef845d7be41cd089f20db6bc3"
+    }
+  ]
+}

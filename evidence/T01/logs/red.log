@@ -1,0 +1,196 @@
+test
++- run exe zcr failure
+error: process exited with code 1 (expected exited with code 69)
+failed command: /Users/guribbong/code/ZCR-state/tasks/T01/zig-local-cache/o/130a4888c9add7b0f4e5b6b9fd2dbb14/zcr mcp
+
+test
++- run exe zcr failure
+error: ========= expected this stdout: =========
+       zcr 0.1.0-dev schema=zcr/1 zig=0.16.0
+       
+       ========= but found: ====================
+       
+failed command: /Users/guribbong/code/ZCR-state/tasks/T01/zig-local-cache/o/130a4888c9add7b0f4e5b6b9fd2dbb14/zcr --version
+
+test
++- run test T01-test 1 pass, 17 fail (18 total)
+error: 't01_test.test.DV-001 dirty base worktree fails preflight and user changes are preserved' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tools/dev/evidence.zig:84:5: 0x102d5fa5b in findGit (T01-test)
+           return error.NotImplemented;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tests/t01_test.zig:35:17: 0x102d601a7 in init (T01-test)
+               f.git = try evidence.findGit(arena, io, &f.env);
+                       ^
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tests/t01_test.zig:114:15: 0x102d80677 in test.DV-001 dirty base worktree fails preflight and user changes are preserved (T01-test)
+           const f = try Fixture.init(arena_state.allocator());
+                     ^
+error: 't01_test.test.DV-001 clean task worktree passes preflight with its identity recorded' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tools/dev/evidence.zig:84:5: 0x102d5fa5b in findGit (T01-test)
+           return error.NotImplemented;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tests/t01_test.zig:35:17: 0x102d601a7 in init (T01-test)
+               f.git = try evidence.findGit(arena, io, &f.env);
+                       ^
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tests/t01_test.zig:151:15: 0x102d7fc7b in test.DV-001 clean task worktree passes preflight with its identity recorded (T01-test)
+           const f = try Fixture.init(arena_state.allocator());
+                     ^
+error: 't01_test.test.DV-004 evidence produced in another worktree is rejected' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tools/dev/evidence.zig:84:5: 0x102d5fa5b in findGit (T01-test)
+           return error.NotImplemented;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tests/t01_test.zig:35:17: 0x102d601a7 in init (T01-test)
+               f.git = try evidence.findGit(arena, io, &f.env);
+                       ^
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tests/t01_test.zig:174:15: 0x102d7f077 in test.DV-004 evidence produced in another worktree is rejected (T01-test)
+           const f = try Fixture.init(arena_state.allocator());
+                     ^
+error: 't01_test.test.DV-004 evidence for an older source commit is rejected' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tools/dev/evidence.zig:84:5: 0x102d5fa5b in findGit (T01-test)
+           return error.NotImplemented;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tests/t01_test.zig:35:17: 0x102d601a7 in init (T01-test)
+               f.git = try evidence.findGit(arena, io, &f.env);
+                       ^
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tests/t01_test.zig:197:15: 0x102d7e927 in test.DV-004 evidence for an older source commit is rejected (T01-test)
+           const f = try Fixture.init(arena_state.allocator());
+                     ^
+error: 't01_test.test.DV-004 evidence whose binary was replaced is rejected' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tools/dev/evidence.zig:84:5: 0x102d5fa5b in findGit (T01-test)
+           return error.NotImplemented;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tests/t01_test.zig:35:17: 0x102d601a7 in init (T01-test)
+               f.git = try evidence.findGit(arena, io, &f.env);
+                       ^
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tests/t01_test.zig:216:15: 0x102d7e1ff in test.DV-004 evidence whose binary was replaced is rejected (T01-test)
+           const f = try Fixture.init(arena_state.allocator());
+                     ^
+error: 't01_test.test.DV-004 evidence is neither recorded nor accepted on a dirty worktree' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tools/dev/evidence.zig:84:5: 0x102d5fa5b in findGit (T01-test)
+           return error.NotImplemented;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tests/t01_test.zig:35:17: 0x102d601a7 in init (T01-test)
+               f.git = try evidence.findGit(arena, io, &f.env);
+                       ^
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tests/t01_test.zig:235:15: 0x102d7b14f in test.DV-004 evidence is neither recorded nor accepted on a dirty worktree (T01-test)
+           const f = try Fixture.init(arena_state.allocator());
+                     ^
+error: 't01_test.test.DV-004 evidence survives a JSON round trip and still binds to its source' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tools/dev/evidence.zig:84:5: 0x102d5fa5b in findGit (T01-test)
+           return error.NotImplemented;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tests/t01_test.zig:35:17: 0x102d601a7 in init (T01-test)
+               f.git = try evidence.findGit(arena, io, &f.env);
+                       ^
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tests/t01_test.zig:257:15: 0x102d7a1ff in test.DV-004 evidence survives a JSON round trip and still binds to its source (T01-test)
+           const f = try Fixture.init(arena_state.allocator());
+                     ^
+error: 't01_test.test.DV-005 resume after a session restart re-validates the ledger and continues' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tools/dev/evidence.zig:84:5: 0x102d5fa5b in findGit (T01-test)
+           return error.NotImplemented;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tests/t01_test.zig:35:17: 0x102d601a7 in init (T01-test)
+               f.git = try evidence.findGit(arena, io, &f.env);
+                       ^
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tests/t01_test.zig:300:15: 0x102d78e63 in test.DV-005 resume after a session restart re-validates the ledger and continues (T01-test)
+           const f = try Fixture.init(arena_state.allocator());
+                     ^
+error: 't01_test.test.DV-005 resume rejects commits made after the last recorded step' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tools/dev/evidence.zig:84:5: 0x102d5fa5b in findGit (T01-test)
+           return error.NotImplemented;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tests/t01_test.zig:35:17: 0x102d601a7 in init (T01-test)
+               f.git = try evidence.findGit(arena, io, &f.env);
+                       ^
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tests/t01_test.zig:320:15: 0x102d786cb in test.DV-005 resume rejects commits made after the last recorded step (T01-test)
+           const f = try Fixture.init(arena_state.allocator());
+                     ^
+error: 't01_test.test.DV-005 resume and step recording reject a changed contract digest' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tools/dev/evidence.zig:84:5: 0x102d5fa5b in findGit (T01-test)
+           return error.NotImplemented;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tests/t01_test.zig:35:17: 0x102d601a7 in init (T01-test)
+               f.git = try evidence.findGit(arena, io, &f.env);
+                       ^
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tests/t01_test.zig:333:15: 0x102d763af in test.DV-005 resume and step recording reject a changed contract digest (T01-test)
+           const f = try Fixture.init(arena_state.allocator());
+                     ^
+error: 't01_test.test.DV-005 resume rejects dirty trees, foreign worktrees, unrelated bases and skipped steps' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tools/dev/evidence.zig:84:5: 0x102d5fa5b in findGit (T01-test)
+           return error.NotImplemented;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tests/t01_test.zig:35:17: 0x102d601a7 in init (T01-test)
+               f.git = try evidence.findGit(arena, io, &f.env);
+                       ^
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tests/t01_test.zig:354:15: 0x102d73c5f in test.DV-005 resume rejects dirty trees, foreign worktrees, unrelated bases and skipped steps (T01-test)
+           const f = try Fixture.init(arena_state.allocator());
+                     ^
+error: 't01_test.test.T01 contract: core declarations match contracts/ and config/' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tools/dev/evidence.zig:149:5: 0x102d72363 in verifyContracts (T01-test)
+           return error.NotImplemented;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tests/t01_test.zig:387:20: 0x102d724cb in test.T01 contract: core declarations match contracts/ and config/ (T01-test)
+           const report = try evidence.verifyContracts(arena, io, build_options.repo_root);
+                          ^
+error: 't01_test.test.T01 contract: contract digest matches the recorded T00 method' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tools/dev/evidence.zig:84:5: 0x102d5fa5b in findGit (T01-test)
+           return error.NotImplemented;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tests/t01_test.zig:35:17: 0x102d601a7 in init (T01-test)
+               f.git = try evidence.findGit(arena, io, &f.env);
+                       ^
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tests/t01_test.zig:398:15: 0x102d6109b in test.T01 contract: contract digest matches the recorded T00 method (T01-test)
+           const f = try Fixture.init(arena_state.allocator());
+                     ^
+error: 't01_test.test.T01 core: ByteSpan, LineRange and RelativePath reject invalid input' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t01/src/core/types.zig:127:9: 0x102d5d277 in init (T01-test)
+               return error.InvalidArgument; // S02 RED placeholder
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tests/t01_test.zig:417:43: 0x102d5c6d7 in test.T01 core: ByteSpan, LineRange and RelativePath reject invalid input (T01-test)
+           try testing.expectEqual(@as(u64, 0), (try core.ByteSpan.init(3, 3)).len());
+                                                 ^
+error: 't01_test.test.T01 core: every internal error has exactly one wire code' failed:
+       expected .E_RESOURCE, found .E_INTERNAL
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x102d5af37 in expectEqualInner__anon_38212 (T01-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x102d5aff3 in expectEqual (T01-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tests/t01_test.zig:436:5: 0x102d5b077 in test.T01 core: every internal error has exactly one wire code (T01-test)
+           try testing.expectEqual(core.errors.WireCode.E_RESOURCE, core.errors.wireCode(error.OutOfMemory));
+           ^
+error: 't01_test.test.T01 core: a reservation is moved, not copied' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:615:14: 0x102d52263 in expect (T01-test)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tests/t01_test.zig:474:5: 0x102d526ef in test.T01 core: a reservation is moved, not copied (T01-test)
+           try testing.expect(original.released);
+           ^
+error: 't01_test.test.T01 limits: scheduler hardware ceiling follows the recorded formula' failed:
+       expected 1, found 0
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x102d518a3 in expectEqualInner__anon_36318 (T01-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x102d5193f in expectEqual (T01-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t01/tests/t01_test.zig:482:5: 0x102d519a7 in test.T01 limits: scheduler hardware ceiling follows the recorded formula (T01-test)
+           try testing.expectEqual(@as(u32, 1), core.limits.hardwareCeiling(0));
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T01/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T01/zig-local-cache/o/88ea56a3487c7c0c7c7ef8189cd82cb8/T01-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T01/zig-local-cache --seed=0x76d0da7f --listen=-
+
+Build Summary: 4/8 steps succeeded (3 failed); 1/18 tests passed (17 failed)
+test transitive failure
++- install T01-test success
+|  +- compile test T01-test Debug native cached 277ms MaxRSS:31M
+|     +- options cached
++- run test T01-test 1 pass, 17 fail (18 total)
+|  +- compile test T01-test Debug native (+1 more reused dependencies)
++- run exe zcr failure
+|  +- compile exe zcr Debug native cached 276ms MaxRSS:31M
+|     +- options (reused)
++- run exe zcr failure
+   +- compile exe zcr Debug native (+1 more reused dependencies)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T01/zig-local-cache/o/0b428bf58422d9b5234bbfcc62bf2213/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-worktrees/task-t01 /Users/guribbong/code/ZCR-state/tasks/T01/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T01/zig-global-cache --seed 0x76d0da7f -Z3fbe47ece1350a4f test -Dtest-group=dev -Doptimize=Debug -Dinstall-tests=true --prefix /Users/guribbong/code/ZCR-state/tasks/T01/out-red --summary all

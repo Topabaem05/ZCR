@@ -1,0 +1,44 @@
+{
+  "schema_version": "zcr-step-ledger/1",
+  "task_id": "T01",
+  "worktree_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/task-t01",
+  "base_commit": "ede012a350023ece805b71a0417e9627dac21ca2",
+  "contract_paths": [
+    "contracts"
+  ],
+  "contract_digest": "8aa53314410fe471f0e070c522766684286f60e1ad4d9785c292bb709ea370a4",
+  "steps": [
+    {
+      "step_id": "S01",
+      "result": "pass",
+      "head_commit": "ede012a350023ece805b71a0417e9627dac21ca2",
+      "recorded_at_unix_ms": 0,
+      "evidence": []
+    },
+    {
+      "step_id": "S02",
+      "result": "pass",
+      "head_commit": "7d73cdbda087129807a1ca35944297190730397b",
+      "recorded_at_unix_ms": 0,
+      "evidence": [
+        "evidence/T01/red.json"
+      ]
+    },
+    {
+      "step_id": "S03",
+      "result": "pass",
+      "head_commit": "a744a4e3e915ae89701aed3870078f325fbee53a",
+      "recorded_at_unix_ms": 0,
+      "evidence": []
+    },
+    {
+      "step_id": "S04",
+      "result": "pass",
+      "head_commit": "a744a4e3e915ae89701aed3870078f325fbee53a",
+      "recorded_at_unix_ms": 1789122806409,
+      "evidence": [
+        "evidence/T01/test-runs.json"
+      ]
+    }
+  ]
+}
