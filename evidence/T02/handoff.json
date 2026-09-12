@@ -1,0 +1,175 @@
+{
+  "schema_version": "zcr-handoff/1",
+  "state": "completed",
+  "task_id": "T02",
+  "step": "S06",
+  "base_commit": "77d13f0650522c0670c745a4e03ef73b100bcd99",
+  "base_note": "integration branch after INT-001 (receiver-generic I01, GitMetadata, T02 registration); includes T00 and T01",
+  "head_commit": "103a49fc0a4f9f1d626be04e82f4f73712680a2c",
+  "head_commit_note": "source commit of GREEN evidence; evidence files are added in the following S06 commit",
+  "contract_digest": "8aa53314410fe471f0e070c522766684286f60e1ad4d9785c292bb709ea370a4",
+  "source_tree_digest": "b95ca4379ec658e9893e2db5bfdfca48dac431f2",
+  "binary_sha256": "8e19b72d6f0c4b4b30c5c1122169898617de4f2f91d5c66b3f5d9d4d2e1f697e",
+  "binary_note": "T02-test Debug binary; rebuilds are not bit-reproducible, binaries retained under $STATE/out-*",
+  "owned_paths": [
+    "src/policy/capability.zig",
+    "src/policy/paths.zig",
+    "src/policy/scope.zig",
+    "tools/dev/guard.zig",
+    "tests/t02_test.zig",
+    "evidence/T02/"
+  ],
+  "changed_files": [
+    "src/policy/capability.zig",
+    "src/policy/paths.zig",
+    "src/policy/scope.zig",
+    "tools/dev/guard.zig",
+    "tests/t02_test.zig",
+    "evidence/T02/*"
+  ],
+  "test_evidence": [
+    {
+      "id": "IS-003",
+      "status": "PASS",
+      "tests": 4
+    },
+    {
+      "id": "IS-004",
+      "status": "PASS",
+      "tests": 3
+    },
+    {
+      "id": "DV-002",
+      "status": "PASS",
+      "tests": 2
+    },
+    {
+      "id": "DV-003",
+      "status": "PASS",
+      "tests": 3
+    },
+    {
+      "id": "regression T00+T01 (full zig build test)",
+      "status": "PASS",
+      "summary": "Build Summary: 14/14 steps succeeded; 41/41 tests passed"
+    },
+    {
+      "runs": [
+        {
+          "label": "red",
+          "optimize": "Debug",
+          "source_commit": "3edf2836bc03b9e873a421030b0c0286a0a9bee4",
+          "exit_code": 1,
+          "summary": "Build Summary: 3/5 steps succeeded (1 failed); 0/12 tests passed (12 failed)",
+          "installed_test_binaries_sha256": {
+            "T02-test": "a9f3967cbf96cefb171ade4e0d54d1b2eb76ce6762559723bf22e9bb6b69005c"
+          }
+        },
+        {
+          "label": "green-isolation-debug",
+          "optimize": "Debug",
+          "source_commit": "103a49fc0a4f9f1d626be04e82f4f73712680a2c",
+          "exit_code": 0,
+          "summary": "Build Summary: 5/5 steps succeeded; 12/12 tests passed",
+          "installed_test_binaries_sha256": {
+            "T02-test": "8e19b72d6f0c4b4b30c5c1122169898617de4f2f91d5c66b3f5d9d4d2e1f697e"
+          }
+        },
+        {
+          "label": "green-isolation-releasesafe",
+          "optimize": "ReleaseSafe",
+          "source_commit": "103a49fc0a4f9f1d626be04e82f4f73712680a2c",
+          "exit_code": 0,
+          "summary": "Build Summary: 5/5 steps succeeded; 12/12 tests passed",
+          "installed_test_binaries_sha256": {
+            "T02-test": "def1036a97908b451896a72edcb19358da4abdaed9eb28ba5fef66cdc8aad94c"
+          }
+        },
+        {
+          "label": "regression-dev-debug",
+          "optimize": "Debug",
+          "source_commit": "103a49fc0a4f9f1d626be04e82f4f73712680a2c",
+          "exit_code": 0,
+          "summary": "Build Summary: 8/8 steps succeeded; 18/18 tests passed",
+          "installed_test_binaries_sha256": {
+            "T01-test": "45a83d295445c1d330c04031b96d260e94793eb74b524cea47d82475361f1efd"
+          }
+        },
+        {
+          "label": "regression-perf-debug",
+          "optimize": "Debug",
+          "source_commit": "103a49fc0a4f9f1d626be04e82f4f73712680a2c",
+          "exit_code": 0,
+          "summary": "Build Summary: 4/4 steps succeeded; 11/11 tests passed",
+          "installed_test_binaries_sha256": {
+            "T00-test": "fd81027caa651b7b04dfd3ca8110a3765a6803e75bf669ce628c17d2209355e3"
+          }
+        },
+        {
+          "label": "regression-all-debug",
+          "optimize": "Debug",
+          "source_commit": "103a49fc0a4f9f1d626be04e82f4f73712680a2c",
+          "exit_code": 0,
+          "summary": "Build Summary: 14/14 steps succeeded; 41/41 tests passed",
+          "installed_test_binaries_sha256": {
+            "T00-test": "fd81027caa651b7b04dfd3ca8110a3765a6803e75bf669ce628c17d2209355e3",
+            "T01-test": "45a83d295445c1d330c04031b96d260e94793eb74b524cea47d82475361f1efd",
+            "T02-test": "8e19b72d6f0c4b4b30c5c1122169898617de4f2f91d5c66b3f5d9d4d2e1f697e"
+          }
+        },
+        {
+          "label": "verify-contracts",
+          "optimize": "Debug",
+          "source_commit": "103a49fc0a4f9f1d626be04e82f4f73712680a2c",
+          "exit_code": 0,
+          "summary": "Build Summary: 3/3 steps succeeded",
+          "installed_test_binaries_sha256": {}
+        }
+      ]
+    }
+  ],
+  "exports": [
+    "zcr_policy (src/policy/capability.zig): Authorizer.init(arena, io, TrustedRoot, WorkspaceId, TaskId, Policy, GitMetadata), Authorizer.authorize conforming to core.AuthorizeFn(Authorizer); InitError",
+    "zcr_policy.paths: validate, resolve -> Resolved{entries, exists, parentExists, final}, statAt, statHandle, Identity, Entry, Kind, SyntaxError, StatError, ResolveError",
+    "zcr_policy.scope: accessFor, covers, coveredByAny, namesGitMetadata, checkState, allowsOperation, check",
+    "dev_guard (tools/dev/guard.zig): scopeGuard, collectChanges, parseRawDiff, checkChanges, loadTasks, rulesFor, roleFor, findOwnershipOverlaps, covers, default_integrator_paths, integrator_tasks; CLI zcr-dev-guard scope|ownership"
+  ],
+  "error_mapping": {
+    "PathEscape": "absolute, .., UNC, drive, backslash, symlink component, component swapped between stat and open",
+    "InvalidArgument": "empty, NUL, invalid UTF-8, empty or . component, too long or too deep",
+    "OutOfScope": "session binding mismatch, operation not in policy, outside read/write scope, immutable, .git name, Git metadata identity, completed/revoked manifest, permission denied during walk",
+    "ManifestUnbound": "planned or ready manifest",
+    "NotFound": "missing target (read/patch/enumerate/search), missing parent (create), non-directory used as directory",
+    "NotRegular": "read/patch on non-regular file; enumerate/search on non-file non-directory"
+  },
+  "limitations": [
+    "authorize is a check, not an open handle: T04/T11 must reopen handle-relative with no-follow and re-verify identity and type; a same-UID process can still race between check and use (docs/11 §1-2)",
+    "immutable identities are captured at Authorizer.init; a case alias of an immutable path created later is refused only by the string rule",
+    "hard links to protected files are not detected (IS-007 belongs to T11)",
+    "Git metadata is refused for reads as well; narrow Git helper access needs its own approval (T10)",
+    "Linux and Intel macOS branches are cross-compiled only; Windows not implemented (NOT_RUN)",
+    "guard default integrator paths include config/ and .github/ beyond docs/13's list; integrator to confirm",
+    "component-wise covers() exists in both src/policy/scope.zig and tools/dev/guard.zig because the dev tool does not import the runtime policy module"
+  ],
+  "interface_change_proposals": [
+    {
+      "target": "tasks/tasks.json",
+      "issue": "guard.loadTasks adds tests/<id>_test.zig and evidence/<ID>/ by convention because owns omits them",
+      "needs": "integrator adds them to owns"
+    },
+    {
+      "target": "tests/catalog.json",
+      "issue": "IS-003, IS-004, DV-002, DV-003 execution_status still not_run",
+      "needs": "integrator update after re-test"
+    },
+    {
+      "target": "build.zig",
+      "issue": "none required; INT-001 registration was sufficient"
+    }
+  ],
+  "remaining_gates": [
+    "integrator re-test of task-t02 on the integration branch",
+    "MANIFEST.sha256 AGENTS.md mismatch (from T01) still open",
+    "E_MANIFEST_UNBOUND wire code decision still open"
+  ]
+}

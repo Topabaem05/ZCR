@@ -58,7 +58,7 @@ writer lease는 30초 TTL, 10초 갱신의 초기값을 사용한다. lease를 �
 
 Task manifest는 `base_commit`, `workspace_id`, `allowed_read_paths`, `allowed_write_paths`, `immutable_paths`, `operations`, `max_changed_files`, `contract_digest`, `fence`, `expires_at`을 가진다. 허용/거부가 겹치면 immutable/deny가 우선한다. scope 변경은 기존 manifest 수정이 아니라 새 policy version 발급이다.
 
-`TaskId`나 `WorkspaceId`를 JSON 인자로 받더라도 transport의 바인딩과 같아야 한다. 다른 task ID를 전달해 권한을 얻지 못한다. 미바인딩 planned manifest는 실행에 사용하지 않으며 E_MANIFEST_UNBOUND다.
+`TaskId`나 `WorkspaceId`를 JSON 인자로 받더라도 transport의 바인딩과 같아야 한다. 다른 task ID를 전달해 권한을 얻지 못한다. 미바인딩 planned manifest는 실행에 사용하지 않으며 `E_SCOPE`다(내부 오류 `ManifestUnbound`; zcr/1 wire enum을 따른다).
 
 ## 7. 구현 과정의 오염 방지
 

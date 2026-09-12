@@ -1,0 +1,174 @@
+{
+  "schema_version": "zcr-baseline/1",
+  "captured_at_unix_ms": 1789215495521,
+  "source": {
+    "repo_path": "/home/runner/work/ZCR/ZCR/source",
+    "head_commit": "b6475a041b9cbee8263eb2d91138f544d3c04862",
+    "dirty": false
+  },
+  "compiler": {
+    "zig_version": "0.16.0",
+    "target": "x86_64-linux-gnu",
+    "optimize": "ReleaseSafe",
+    "zig_exe": "/home/runner/work/_temp/zcr-native-34692959158-1-x86_64-linux/toolchain/zig-x86_64-linux-0.16.0/zig",
+    "zig_exe_sha256": "2317bbb91798556d9d0f38aabdac23db83f0979b25f767259ae474546724087c"
+  },
+  "os": {
+    "tag": "linux",
+    "kernel_release": "6.17.0-1022-azure",
+    "product_version": null,
+    "build": null,
+    "model": null
+  },
+  "cpu": {
+    "arch": "x86_64",
+    "brand": null,
+    "ncpu": 4,
+    "physicalcpu": null,
+    "logicalcpu": null,
+    "nperflevels": null,
+    "perflevels": []
+  },
+  "memory": {
+    "total_bytes": null,
+    "page_size": null,
+    "vm_pressure_level": null,
+    "dispatch_pressure_source": "not_applicable"
+  },
+  "power": {
+    "source": "not_applicable",
+    "low_power_mode": "not_applicable",
+    "thermal_state": "not_applicable"
+  },
+  "gcd": {
+    "status": "not_applicable",
+    "callback_ran": false,
+    "timed_out": false,
+    "requested_qos": "",
+    "observed_qos": ""
+  },
+  "cache": {
+    "page_cache_state": "unknown",
+    "control_evidence": null,
+    "zig_global_cache_dir": "/home/runner/work/_temp/zcr-native-34692959158-1-x86_64-linux/ReleaseSafe/global-cache",
+    "zig_local_cache_dir": "/home/runner/work/_temp/zcr-native-34692959158-1-x86_64-linux/ReleaseSafe/local-cache",
+    "tmpdir": "/home/runner/work/_temp/zcr-native-34692959158-1-x86_64-linux/ReleaseSafe/tmp"
+  },
+  "corpus": {
+    "status": "measured",
+    "id": "checked-out-contracts",
+    "path": "/home/runner/work/ZCR/ZCR/source/contracts",
+    "file_count": 13,
+    "total_bytes": 52893,
+    "skipped_non_regular": 0,
+    "sha256": "add4312b2c5f5d2d90ed2b56c2d0c44b120b4198a9979e4b04762a1d17603030",
+    "digest_method": "sha256 over sorted lines '<sha256hex>  <relative/path>\\n' of regular files",
+    "excluded_names": [
+      ".git",
+      ".zig-cache",
+      "zig-out"
+    ]
+  },
+  "sdk": {
+    "macos_min_required": null,
+    "macos_max_allowed": null,
+    "foundation_version": null
+  },
+  "tools": [
+    {
+      "name": "git",
+      "status": "present",
+      "path": "/usr/bin/git",
+      "version": "git version 2.55.0",
+      "sha256": "d4d2ba562243015206d4248edfec871a74786499292d00ed072dbca2f5ae8073"
+    },
+    {
+      "name": "rg",
+      "status": "absent",
+      "path": null,
+      "version": null,
+      "sha256": null
+    },
+    {
+      "name": "fd",
+      "status": "absent",
+      "path": null,
+      "version": null,
+      "sha256": null
+    }
+  ],
+  "git": {
+    "status": "present",
+    "repo_path": "/home/runner/work/ZCR/ZCR/source",
+    "toplevel": "/home/runner/work/ZCR/ZCR/source",
+    "absolute_git_dir": "/home/runner/work/ZCR/ZCR/source/.git",
+    "common_dir": "/home/runner/work/ZCR/ZCR/source/.git",
+    "head_commit": "b6475a041b9cbee8263eb2d91138f544d3c04862",
+    "is_linked_worktree": false,
+    "dot_git_kind": "directory",
+    "worktree_count": 1,
+    "dirty": false,
+    "commands": [
+      {
+        "argv": "git -C <repo> rev-parse --show-toplevel",
+        "exit_code": 0,
+        "stdout_sha256": "5e399516290d895c68bb1e55be1a5f92df2e5d246fe63e9b2720f93e7ce5710b"
+      },
+      {
+        "argv": "git -C <repo> rev-parse --absolute-git-dir",
+        "exit_code": 0,
+        "stdout_sha256": "2c352d0f80617837b3626a92c4e1e2d302966b55a1fc7a9a245667b1002afd70"
+      },
+      {
+        "argv": "git -C <repo> rev-parse --path-format=absolute --git-common-dir",
+        "exit_code": 0,
+        "stdout_sha256": "2c352d0f80617837b3626a92c4e1e2d302966b55a1fc7a9a245667b1002afd70"
+      },
+      {
+        "argv": "git -C <repo> rev-parse HEAD",
+        "exit_code": 0,
+        "stdout_sha256": "017d86b9070c49c753b84b7bfa09e202c034c51382d6e929441ea508e9d326cb"
+      },
+      {
+        "argv": "git -C <repo> worktree list --porcelain -z",
+        "exit_code": 0,
+        "stdout_sha256": "aef9544ed4969b56d742283fc377a4b8982707e8d481be73c8241dc3b60bb2b9"
+      },
+      {
+        "argv": "git -C <repo> status --porcelain=v2 -z --untracked-files=all",
+        "exit_code": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  },
+  "sysctl_keys": [],
+  "gates": [
+    {
+      "id": "G01",
+      "status": "not_run",
+      "detail": "not a macOS host"
+    },
+    {
+      "id": "G03",
+      "status": "not_run",
+      "detail": "not a macOS host"
+    },
+    {
+      "id": "G04",
+      "status": "not_run",
+      "detail": "not a macOS host"
+    },
+    {
+      "id": "G06",
+      "status": "pass",
+      "detail": "git version 2.55.0; probe=present linked_worktree=false dot_git=directory worktrees=1 dirty=false"
+    }
+  ],
+  "not_run": [
+    "B0 host built-in tool latency trace (Codex/Claude Read/Grep/Glob) is not captured; --host-tools records host versions only",
+    "page cache state is not controlled on macOS and is recorded as unknown",
+    "physical energy measurement",
+    "Intel Mac, x86-64 Linux and Windows runtime probes",
+    "G11 macOS 11 legacy compatibility"
+  ]
+}

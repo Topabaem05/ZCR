@@ -1,0 +1,110 @@
+test
++- run test T06-test 0 pass, 9 fail (9 total)
+error: 't06_test.test.SR-001 a literal across the 256 KiB chunk boundary matches the scalar oracle exactly once' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t06/src/search/literal.zig:67:9: 0x10225083b in search (T06-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t06/tests/t06_test.zig:134:9: 0x10224e417 in run (T06-test)
+               return h.searcher.search(io, capability, spec, collector.sink(), h.cancel());
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t06/tests/t06_test.zig:213:22: 0x10226f753 in test.SR-001 a literal across the 256 KiB chunk boundary matches the scalar oracle exactly once (T06-test)
+           const coverage = try h.run(.{ .literal = literal, .context_lines = 1 }, &collector);
+                            ^
+error: 't06_test.test.SR-001 tiny chunks over random files never duplicate or miss a match' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t06/src/search/literal.zig:67:9: 0x10225083b in search (T06-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t06
+error: 't06_test.test.SR-002 several matches on one line and overlapping context return each line once' failed:
+       /tests/t06_test.zig:134:9: 0x10224e417 in run (T06-test)
+               return h.searcher.search(io, capability, spec, collector.sink(), h.cancel());
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t06/tests/t06_test.zig:235:17: 0x10226db9b in test.SR-001 tiny chunks over random files never duplicate or miss a match (T06-test)
+                   _ = try h.run(.{ .literal = literal, .context_lines = 2, .limit = 1000 }, &collector);
+                       ^
+       /Users/guribbong/code/ZCR-worktrees/task-t06/src/search/literal.zig:67:9: 0x10225083b in search (T06-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t06/tests/t06_test.zig:134:9: 0x10224e417 in run (T06-test)
+               return h.searcher.search(io, capability, spec, collector.sink(), h.cancel());
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t06/tests/t06_test.zig:261:9: 0x10226ce37 in test.SR-002 several matches on one line and overlapping context return each line once (T06-test)
+           _ = try h.run(.{ .literal = "foo", .context_lines = 2 }, &collector);
+               ^
+error: 't06_test.test.SR-003 empty literals are refused and regex-looking literals match as plain bytes' failed:
+       expected error.InvalidArgument, found error.Unsupported
+       /Users/guribbong/code/ZCR-worktrees/task-t06/src/search/literal.zig:67:9: 0x10225083b in search (T06-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t06/tests/t06_test.zig:134:9: 0x10224e417 in run (T06-test)
+               return h.searcher.search(io, capability, spec, collector.sink(), h.cancel());
+               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x10224e59b in expectError__anon_37622 (T06-test)
+                   return error.TestUnexpectedError;
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/task-t06/tests/t06_test.zig:287:5: 0x10226c4cf in test.SR-003 empty literals are refused and regex-looking literals match as plain bytes (T06-test)
+           try testing.expectError(error.InvalidArgument, h.run(.{ .literal = "" }, &collector));
+           ^
+error: 't06_test.test.SR-004 binary, invalid UTF-8 and oversized files are skipped with exact coverage' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t06/src/search/literal.zig:67:9: 0x10225083b in search (T06-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t06/tests/t06_test.zig:134:9: 0x10224e417 in run (T06-test)
+               return h.searcher.search(io, capability, spec, collector.sink(), h.cancel());
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t06/tests/t06_test.zig:316:22: 0x10226ba3f in test.SR-004 binary, invalid UTF-8 and oversized files are skipped with exact coverage (T06-test)
+           const co
+error: 't06_test.test.SR-005 match, output and deadline caps stop the search honestly without allocating' failed:
+       verage = try h.run(.{ .literal = "needle", .max_file_bytes = 128 }, &collector);
+                            ^
+       /Users/guribbong/code/ZCR-worktrees/task-t06/src/search/literal.zig:67:9: 0x10225083b in search (T06-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t06/tests/t06_test.zig:134:9: 0x10224e417 in run (T06-test)
+               return h.searcher.search(io, capability, spec, collector.sink(), h.cancel());
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t06/tests/t06_test.zig:341:22: 0x10226a2df in test.SR-005 match, output and deadline caps stop the search honestly without allocating (T06-test)
+           const coverage = try h.run(.{ .literal = "hit", .limit = 3, .order = .path_then_offset, .context_lines = 0 }, &limited);
+                            ^
+error: 't06_test.test.SR-005 internal first-match time and delivery time are recorded separately' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t06/src/search/literal.zig:67:9: 0x10225083b in search (T06-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t06/tests/t06_test.zig:134:9: 0x10224e417 in run (T06-test)
+               return h.searcher.search(io, capability, spec, collector.sink(), h.cancel());
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t06/tests/t06_test.zig:378:9: 0x102269b07 in test.SR-005 internal first-match time and delivery time are recorded separately (T06-test)
+           _ = try h.run(.{ .literal = "target" }, &collector);
+               ^
+error: 't06_test.test.SR-006 a file that changes between scan and context read is retried once or skipped, never mixed' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t06/src/search/literal.zig:67:9: 0x10225083b in search (T06-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t06/tests/t06_test.zig:134:9: 0x10224e417 in run (T06-test)
+               return h.searcher.search(io, capability, spec, collector.sink(), h.cancel());
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t06/tests/t06_test.zig:413:9: 0x1022634d7 in test.SR-006 a file that changes between scan and context read is retried once or skipped, never mixed (T06-test)
+           _ = try h.run(.{ .literal = "key", .context_lines = 1 }, &retried);
+               ^
+error: 't06_test.test.T06 capability and search spec are validated' failed:
+       expected error.OutOfScope, found error.Unsupported
+       /Users/guribbong/code/ZCR-worktrees/task-t06/src/search/literal.zig:67:9: 0x10225083b in search (T06-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x10224e223 in expectError__anon_37579 (T06-test)
+                   return error.TestUnexpectedError;
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/task-t06/tests/t06_test.zig:440:5: 0x10224ecdb in test.T06 capability and search spec are validated (T06-test)
+           try testing.expectError(error.OutOfScope, h.searcher.search(io, read_cap, .{ .literal = "x" }, collector.sink(), h.cancel()));
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache/o/1a1fe51c8555978445c85ca6eb62030a/T06-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache --seed=0xf0941751 --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 0/9 tests passed (9 failed)
+test transitive failure
++- install T06-test success
+|  +- compile test T06-test Debug native cached 571ms MaxRSS:31M
++- run test T06-test 0 pass, 9 fail (9 total)
+   +- compile test T06-test Debug native (reused)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache/o/d0af1c8ebc02c58b7811fb1e8ffa7827/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-worktrees/task-t06 /Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T06/zig-global-cache --seed 0xf0941751 -Zfc8001546376d1c2 test -Dtest-group=search -Doptimize=Debug -Dinstall-tests=true --prefix /Users/guribbong/code/ZCR-state/tasks/T06/out-red --summary all

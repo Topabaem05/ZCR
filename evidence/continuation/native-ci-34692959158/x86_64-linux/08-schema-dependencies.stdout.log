@@ -1,0 +1,14 @@
+Collecting jsonschema==4.25.1 (from -r /home/runner/work/ZCR/ZCR/source/tools/ci/requirements.txt (line 4))
+  Downloading jsonschema-4.25.1-py3-none-any.whl (90 kB)
+Collecting attrs==25.3.0 (from -r /home/runner/work/ZCR/ZCR/source/tools/ci/requirements.txt (line 5))
+  Downloading attrs-25.3.0-py3-none-any.whl (63 kB)
+Collecting referencing==0.36.2 (from -r /home/runner/work/ZCR/ZCR/source/tools/ci/requirements.txt (line 6))
+  Downloading referencing-0.36.2-py3-none-any.whl (26 kB)
+Collecting jsonschema-specifications==2025.9.1 (from -r /home/runner/work/ZCR/ZCR/source/tools/ci/requirements.txt (line 7))
+  Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl (18 kB)
+Collecting typing-extensions==4.15.0 (from -r /home/runner/work/ZCR/ZCR/source/tools/ci/requirements.txt (line 8))
+  Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+Collecting rpds-py==0.27.1 (from -r /home/runner/work/ZCR/ZCR/source/tools/ci/requirements.txt (line 9))
+  Downloading rpds_py-0.27.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (386 kB)
+Installing collected packages: typing-extensions, rpds-py, attrs, referencing, jsonschema-specifications, jsonschema
+Successfully installed attrs-25.3.0 jsonschema-4.25.1 jsonschema-specifications-2025.9.1 referencing-0.36.2 rpds-py-0.27.1 typing-extensions-4.15.0

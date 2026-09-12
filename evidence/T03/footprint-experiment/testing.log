@@ -1,0 +1,11 @@
+test
++- run test T03-test w
+
+FOOTPRINT testing before_1k=2736440 after_10k=17760592 growth=15024152
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache/o/adc92835bb0190badeba064368533d6e/T03-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache --seed=0xe0e94ad8 --listen=-
+
+Build Summary: 3/3 steps succeeded; 1/1 tests passed
+test success
++- run test T03-test 1 pass (1 total) 4s MaxRSS:19M
+   +- compile test T03-test Debug native success 8s MaxRSS:185M
+

@@ -1,0 +1,17 @@
+test
++- run test T12-test 0 pass, 1 fail (1 total)
+error: 't12_test.test.WR-005 authenticated persistent frame survives serialization' failed:
+       /workspace/scratch/3f4ab65dfb82/ZCR-T12/src/storage/receipts.zig:28:5: 0x122c9b2 in encode__anon_43007 (journal.zig)
+           return error.InvalidArgument;
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T12/tests/t12_test.zig:5:21: 0x122c888 in test.WR-005 authenticated persistent frame survives serialization (t12_test.zig)
+           const encoded = try storage.receipts.encode(struct { durable: bool }, .{ .durable = true }, &buffer);
+                           ^
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/T12/cache && /workspace/scratch/3f4ab65dfb82/state/T12/cache/o/7c6400dc45904fed9254005aba1e4844/T12-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/T12/cache --seed=0x74841759 --listen=-
+
+Build Summary: 4/6 steps succeeded (1 failed); 0/1 tests passed (1 failed)
+test transitive failure
++- run test T12-test 0 pass, 1 fail (1 total)
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/T12/cache/o/de94d8b23d3f88fd829df252bfc22c95/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-T12 /workspace/scratch/3f4ab65dfb82/state/T12/cache /workspace/scratch/3f4ab65dfb82/state/T12/global-cache --seed 0x74841759 -Zf6cc9dd0b3ebe261 test -Dtest-group=write -Dtest-id=WR-005 -Doptimize=Debug --prefix /workspace/scratch/3f4ab65dfb82/state/T12/out

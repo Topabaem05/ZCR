@@ -1,0 +1,163 @@
+{
+  "schema_version": "zcr-handoff/1",
+  "state": "completed",
+  "task_id": "T03",
+  "step": "S06",
+  "base_commit": "5760d8a670772409aadd97069a0044c50b9ac618",
+  "base_note": "integration after INT-002 (T02 merged, T03 registered)",
+  "head_commit": "20f0589e524235171c90d87c0577d2e83d197962",
+  "head_commit_note": "source commit of GREEN evidence; evidence files follow in the S06 commit",
+  "contract_digest": "8aa53314410fe471f0e070c522766684286f60e1ad4d9785c292bb709ea370a4",
+  "source_tree_digest": "4713fbf5908149141967ef8e08889241374fe5cc",
+  "binary_sha256": "325c7cfa7f75bf28ba52aee97f165ea8472678361d5d01d657ddd0a8328a7af7",
+  "owned_paths": [
+    "src/memory/budget.zig",
+    "src/memory/arena.zig",
+    "src/memory/accounting.zig",
+    "src/scheduler/admission.zig",
+    "tests/t03_test.zig",
+    "evidence/T03/"
+  ],
+  "changed_files": [
+    "src/memory/budget.zig",
+    "src/memory/arena.zig",
+    "src/memory/accounting.zig",
+    "src/scheduler/admission.zig",
+    "tests/t03_test.zig",
+    "evidence/T03/*"
+  ],
+  "test_evidence": [
+    {
+      "id": "ME-001",
+      "status": "PASS",
+      "tests": 1
+    },
+    {
+      "id": "ME-002",
+      "status": "PASS",
+      "tests": 2
+    },
+    {
+      "id": "ME-003",
+      "status": "PASS",
+      "tests": 6
+    },
+    {
+      "id": "ME-007",
+      "status": "PASS",
+      "tests": 1
+    },
+    {
+      "id": "T03 profiles/accounting",
+      "status": "PASS",
+      "tests": 2
+    },
+    {
+      "id": "regression T00+T01+T02 (full zig build test)",
+      "status": "PASS",
+      "summary": "Build Summary: 17/17 steps succeeded; 53/53 tests passed"
+    },
+    {
+      "runs": [
+        {
+          "label": "red",
+          "optimize": "Debug",
+          "source_commit": "ea476f7d4db34876235fc1c85c83c7168d78fce5",
+          "exit_code": 1,
+          "summary": "Build Summary: 2/4 steps succeeded (1 failed); 0/12 tests passed (12 failed)",
+          "installed_test_binaries_sha256": {
+            "T03-test": "24cf1e13ac1079baabd51d335744788f7d3e83f0817639b4528e5f1695e11b30"
+          }
+        },
+        {
+          "label": "green-memory-debug",
+          "optimize": "Debug",
+          "source_commit": "20f0589e524235171c90d87c0577d2e83d197962",
+          "exit_code": 0,
+          "summary": "Build Summary: 4/4 steps succeeded; 12/12 tests passed",
+          "installed_test_binaries_sha256": {
+            "T03-test": "325c7cfa7f75bf28ba52aee97f165ea8472678361d5d01d657ddd0a8328a7af7"
+          }
+        },
+        {
+          "label": "green-memory-releasesafe",
+          "optimize": "ReleaseSafe",
+          "source_commit": "20f0589e524235171c90d87c0577d2e83d197962",
+          "exit_code": 0,
+          "summary": "Build Summary: 4/4 steps succeeded; 12/12 tests passed",
+          "installed_test_binaries_sha256": {
+            "T03-test": "20b8386658b7c39b28cd2cccb4d80e6571a6d5c95532d77ac6060cca50001f95"
+          }
+        },
+        {
+          "label": "fault-injection-me001",
+          "optimize": "Debug",
+          "source_commit": "20f0589e524235171c90d87c0577d2e83d197962",
+          "exit_code": 0,
+          "summary": "Build Summary: 4/4 steps succeeded; 1/1 tests passed",
+          "installed_test_binaries_sha256": {
+            "T03-test": "474cb8bf1306f891de5066fc3f759c3ce397c6e22bb7313a72ceca4533cb2e72"
+          }
+        },
+        {
+          "label": "regression-all-debug",
+          "optimize": "Debug",
+          "source_commit": "20f0589e524235171c90d87c0577d2e83d197962",
+          "exit_code": 0,
+          "summary": "Build Summary: 17/17 steps succeeded; 53/53 tests passed",
+          "installed_test_binaries_sha256": {
+            "T00-test": "184c6025bbc3f43804f8f952700812fc26c93c8ae2e596763eca7c6cfaa50d0f",
+            "T01-test": "a85b9b3e08b4dae5ecf294a67b46fd9e0995a07a0380bb582309b89798645fe1",
+            "T02-test": "7ef370dde623ad7e4e654a3ce19ae7105fb4d5621fe262046657c8c14a1e0991",
+            "T03-test": "325c7cfa7f75bf28ba52aee97f165ea8472678361d5d01d657ddd0a8328a7af7"
+          }
+        },
+        {
+          "label": "verify-contracts",
+          "optimize": "Debug",
+          "source_commit": "20f0589e524235171c90d87c0577d2e83d197962",
+          "exit_code": 0,
+          "summary": "Build Summary: 3/3 steps succeeded",
+          "installed_test_binaries_sha256": {}
+        }
+      ]
+    }
+  ],
+  "test_changes_after_red": [
+    "ME-007: footprint observation moved from testing.allocator to std.heap.smp_allocator (growth 15,024,152 bytes vs 0 bytes measured); leak detection and counter assertions stay on testing.allocator; slack tightened from 8 MiB to 1 MiB"
+  ],
+  "exports": [
+    "zcr_memory (src/memory/budget.zig): Caps, Bucket, profileForRam, capsFor, FaultPlan, SpinLock, Budget{init, reserve (core.ReserveFn), release, usage, peakBytes}, ReservedAllocator{init, allocator, liveBytes}, RequestArena, ChildToken",
+    "zcr_memory.arena: RequestArena{init, allocator, beginChild, endChild, requestCancel, isCancelRequested, pendingChildren, release, memoryReport}, ReleaseReport, MemoryReport, initial_bytes, retained_limit_bytes",
+    "zcr_memory.accounting: Counters, Snapshot, Footprint, Overhead, processFootprint, overhead",
+    "zcr_admission (src/scheduler/admission.zig): CostInput, estimate, Evictor, Admission{init, reserve (core.ReserveFn), release, releaseSlot, inFlight}, journal_estimate_bytes"
+  ],
+  "limitations": [
+    "Budget caps count bytes; they do not bound process RSS or footprint",
+    "FaultPlan fails alloc calls only; resize/remap failures are not injected",
+    "arena reuse with retained capacity (64 KiB) is a constant only; release frees everything to the child allocator, which may or may not return pages to the OS",
+    "worker scratch has no dedicated type: a worker takes its own reservation and ReservedAllocator (T09 executor to own it)",
+    "per-task fair shares (available_inflight / active_tasks) and pressure-driven cap changes are not implemented (T09, T16)",
+    "Budget uses a spin lock sized for counter updates; contention under many threads is not measured",
+    "process footprint probe exists on macOS only; Linux RSS/PSS/cgroup is T17; Linux and Intel macOS are cross-compiled only",
+    "journal_estimate_bytes (64 KiB) is a placeholder for T12"
+  ],
+  "interface_change_proposals": [
+    {
+      "target": "tests/catalog.json",
+      "issue": "ME-001, ME-002, ME-003, ME-007 execution_status still not_run",
+      "needs": "integrator update after re-test"
+    },
+    {
+      "target": "core.ReserveFn",
+      "issue": "no Io parameter, so budget locking cannot use std.Io.Mutex; a spin lock is used",
+      "needs": "integrator to decide whether I02 should take Io once contention is measured"
+    }
+  ],
+  "remaining_gates": [
+    "integrator re-test of task-t03 on integration",
+    "MANIFEST.sha256 AGENTS.md mismatch (T01) open",
+    "E_MANIFEST_UNBOUND decision open",
+    "G09 memory caps and total process footprint (T15/T16) not measured"
+  ]
+}

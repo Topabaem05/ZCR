@@ -1,0 +1,24 @@
+test
++- run test T09-test 0 pass, 1 fail (1 total)
+error: 't09_test.test.IO-004 native scheduler rejects an expired deadline without taking ownership' failed:
+       expected error.DeadlineExceeded, found error.Cancelled
+       /workspace/scratch/3f4ab65dfb82/ZCR-work/src/scheduler/executor.zig:92:39: 0x1230700 in submit (executor.zig)
+               if (job.cancel.isRequested()) return error.Cancelled;
+                                             ^
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:72:13: 0x122e2ee in expectError__anon_43269 (std.zig)
+                   return error.TestUnexpectedError;
+                   ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-work/tests/t09_test.zig:36:5: 0x122e80c in test.IO-004 native scheduler rejects an expired deadline without taking ownership (t09_test.zig)
+           try t.expectError(error.DeadlineExceeded, executor.submit(job));
+           ^
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/integration/cache-scheduler && /workspace/scratch/3f4ab65dfb82/state/integration/cache-scheduler/o/9f957ffbc8e67d92b14440cc0a9fc857/T09-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/integration/cache-scheduler --seed=0x74236050 --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 0/1 tests passed (1 failed)
+test transitive failure
++- install T09-test success
+|  +- compile test T09-test Debug native success 608ms MaxRSS:174M
++- run test T09-test 0 pass, 1 fail (1 total)
+   +- compile test T09-test Debug native (reused)
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/integration/cache-scheduler/o/fdca125f0b8dca6576be50b47965ed65/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-work /workspace/scratch/3f4ab65dfb82/state/integration/cache-scheduler /workspace/scratch/3f4ab65dfb82/state/integration/global-cache --seed 0x74236050 -Z38bc834bf41213a7 test -Dtest-group=scheduler -Dtest-id=IO-004 -Doptimize=Debug -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/integration/deadline-red-scheduler --summary all

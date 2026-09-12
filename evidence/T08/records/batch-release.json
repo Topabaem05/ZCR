@@ -1,0 +1,13 @@
+{
+  "schema_version": "zcr-evidence/1",
+  "task_id": "T08",
+  "label": "batch-release",
+  "command": "/workspace/scratch/3f4ab65dfb82/state/T08/regression-release/bin/T07-test",
+  "exit_code": 0,
+  "source_commit": "48d2e8b61a83af444f0914379f8bc75f169413f3",
+  "source_tree": "32e0f1c7db627bfcdf45a8acf475b41e8be718bb",
+  "worktree_git_dir": "/workspace/scratch/3f4ab65dfb82/ZCR/.git/worktrees/ZCR-T08",
+  "binary_path": "/workspace/scratch/3f4ab65dfb82/state/T08/regression-release/bin/T07-test",
+  "binary_sha256": "3827d5785b2c31b98d902f6a281b208607ef6c0551d1aa1d5b97481f36915d90",
+  "recorded_at_unix_ms": 1789196393516
+}

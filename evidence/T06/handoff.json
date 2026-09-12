@@ -1,0 +1,193 @@
+{
+  "schema_version": "zcr-handoff/1",
+  "state": "completed",
+  "task_id": "T06",
+  "step": "S06",
+  "base_commit": "46b16d573784c52889e2e95a38195746f49eb4f3",
+  "base_note": "integration after INT-005 (T05 merged, T06 registered)",
+  "head_commit": "71ec6b27cda6d34c171b4b1460f8434f7c0948af",
+  "head_commit_note": "source commit of GREEN evidence; evidence files follow in the S06 commit",
+  "contract_digest": "8aa53314410fe471f0e070c522766684286f60e1ad4d9785c292bb709ea370a4",
+  "source_tree_digest": "bc6789d8b70af40713b875364be6eddb7b64f3ca",
+  "binary_sha256": "b1abb69877a0efec88fa5078bed89f6f9f422e46e8f3bca3088ac2767b424dd5",
+  "owned_paths": [
+    "src/search/literal.zig",
+    "src/search/context.zig",
+    "src/search/scalar.zig",
+    "tests/t06_test.zig",
+    "evidence/T06/"
+  ],
+  "changed_files": [
+    "src/search/literal.zig",
+    "src/search/context.zig",
+    "src/search/scalar.zig",
+    "tests/t06_test.zig",
+    "evidence/T06/*"
+  ],
+  "test_evidence": [
+    {
+      "id": "SR-001",
+      "status": "PASS",
+      "tests": 2,
+      "oracle": "whole-file std.mem.indexOfPos scan (non-overlapping, leftmost) with newline counting; random files with chunk sizes down to a few bytes"
+    },
+    {
+      "id": "SR-002",
+      "status": "PASS",
+      "tests": 1
+    },
+    {
+      "id": "SR-003",
+      "status": "PASS",
+      "tests": 1
+    },
+    {
+      "id": "SR-004",
+      "status": "PASS",
+      "tests": 1
+    },
+    {
+      "id": "SR-005",
+      "status": "PASS",
+      "tests": 3,
+      "note": "caps, first-match versus first-delivery timing, cancellation inside a large file"
+    },
+    {
+      "id": "SR-006",
+      "status": "PASS",
+      "tests": 2,
+      "note": "change between scan and context read (retry, then skip); same-size rewrites with and without mtime change"
+    },
+    {
+      "id": "T06 capability and search spec validation",
+      "status": "PASS",
+      "tests": 1
+    },
+    {
+      "id": "regression T00-T05 (full zig build test)",
+      "status": "PASS",
+      "summary": "Build Summary: 26/26 steps succeeded; 85/85 tests passed"
+    },
+    {
+      "runs": [
+        {
+          "label": "red",
+          "optimize": "Debug",
+          "source_commit": "8a7a970e4bc22f869675588f67c6fd1d9361c6c6",
+          "exit_code": 1,
+          "summary": "Build Summary: 2/4 steps succeeded (1 failed); 0/9 tests passed (9 failed)",
+          "installed_test_binaries_sha256": {
+            "T06-test": "ca4a267109f2d652ccfd38e3283583851ba9b16c543f3d5ec4ad928a95d2065f"
+          }
+        },
+        {
+          "label": "green-search-debug",
+          "optimize": "Debug",
+          "source_commit": "71ec6b27cda6d34c171b4b1460f8434f7c0948af",
+          "exit_code": 0,
+          "summary": "Build Summary: 4/4 steps succeeded; 11/11 tests passed",
+          "installed_test_binaries_sha256": {
+            "T06-test": "b1abb69877a0efec88fa5078bed89f6f9f422e46e8f3bca3088ac2767b424dd5"
+          }
+        },
+        {
+          "label": "green-search-releasesafe",
+          "optimize": "ReleaseSafe",
+          "source_commit": "71ec6b27cda6d34c171b4b1460f8434f7c0948af",
+          "exit_code": 0,
+          "summary": "Build Summary: 4/4 steps succeeded; 11/11 tests passed",
+          "installed_test_binaries_sha256": {
+            "T06-test": "3ee2387b86684d76814c30b08fa63bf02517f2e3d0bf274ed1866c8abdc0a82e"
+          }
+        },
+        {
+          "label": "regression-all-debug",
+          "optimize": "Debug",
+          "source_commit": "71ec6b27cda6d34c171b4b1460f8434f7c0948af",
+          "exit_code": 0,
+          "summary": "Build Summary: 26/26 steps succeeded; 85/85 tests passed",
+          "installed_test_binaries_sha256": {
+            "T00-test": "705e302463ddb039372f7245d2c6ef863258f56ee61bf0357cb8929fe9bb96a5",
+            "T01-test": "0e4989749b58e2169ae32542a8efcc345ec914cc2ac15bd7ac39f826f996f49a",
+            "T02-test": "8001cc6fff963d14a16b5e222fe06d04eeb612d8ee3683e12011475c48525539",
+            "T03-test": "6bc89365b706c842e150982d23937c1223425447c71ace598ca722a76f494ca3",
+            "T04-test": "49d843eb3c9d5bd5b5dc1611d97d9e472948f1091f5c0a0d189fea2fe6b9d578",
+            "T05-test": "74f06becba2e16912f207df317baa035eb35e8ceef5e620567dfd45a368ec524",
+            "T06-test": "b1abb69877a0efec88fa5078bed89f6f9f422e46e8f3bca3088ac2767b424dd5"
+          }
+        },
+        {
+          "label": "verify-contracts",
+          "optimize": "Debug",
+          "source_commit": "71ec6b27cda6d34c171b4b1460f8434f7c0948af",
+          "exit_code": 0,
+          "summary": "Build Summary: 3/3 steps succeeded",
+          "installed_test_binaries_sha256": {}
+        }
+      ]
+    }
+  ],
+  "test_changes_after_red": [
+    "SearchFault.after_chunk hook and a test that cancels inside a large file (gap shown by mutant m11-no-scan-cancel)",
+    "SR-006 same-size rewrite test: one rewrite changes mtime, one restores it, so the version recheck and the match-byte check are each exercised alone (gap shown by mutant m8b-no-projection-validation)",
+    "same-size fixture content fixed to equal length (key=3)"
+  ],
+  "commit_message_correction": {
+    "commit": "71ec6b27cda6d34c171b4b1460f8434f7c0948af",
+    "says": "mutants m7b and m8b each survived the original SR-006 test",
+    "verified": "m7b-no-version-recheck is killed by the SR-006 test of 8a7a970; only m8b-no-projection-validation survives it (logs: mutants/original-tests/)",
+    "why_not_amended": "the commit is recorded as S03 in the step ledger; rewriting it would invalidate the ledger"
+  },
+  "semantics": {
+    "matches": "byte-exact, case-sensitive, non-overlapping, leftmost; spans are global file offsets; line numbers are 1-based",
+    "literal": "1..path_max_utf8_bytes bytes of valid UTF-8; a literal containing a newline is Unsupported; regex metacharacters are plain bytes",
+    "chunking": "chunk_bytes new bytes per window plus literal.len - 1 bytes carried from the previous window; matches starting before the end of the previous match are dropped",
+    "skips": "NUL byte -> binary; invalid UTF-8 anywhere (validated across chunk boundaries) -> invalid_utf8; size > max_file_bytes -> oversize; open failure -> open_failed; all counted in Coverage.skipped",
+    "context": "windows [line - c, line + c] that overlap or touch are merged; each line is returned once; context_lines <= 20",
+    "consistency": "checked_live only (other modes Unsupported); after projection size, mtime, identity and path identity are rechecked and every match's literal bytes are checked in the re-read text; a changed file is retried once and then skipped; lines from two versions are never combined",
+    "caps": "limit counts matches across files; output budget counts context text bytes; either cap ends the search with truncated = true; Searcher.output_bytes lowers the budget per call",
+    "cancellation": "checked per candidate file and per scanned chunk",
+    "timing": "Report.first_match_ns (first match found by the scan) and first_push_ns (first result delivered to the sink) are separate",
+    "candidates": "one traversal limited to max_file_results (10,000) files; glob, hidden and ignore rules from T05 apply",
+    "allocation": "Searcher.init allocates every buffer; search allocates nothing"
+  },
+  "exports": [
+    "zcr_search (src/search/literal.zig): Caps{defaultBytes}, SearchFault{after_scan, after_chunk}, Report{searchSkipped}, Searcher{init, deinit, report, search (core.SearchLiteralFn), readAt, output_bytes, fault}",
+    "zcr_search.context: FileMatch, Interval, buildIntervals, Projection, project, max_context_lines",
+    "zcr_search.scalar: find (reference kernel for T19)"
+  ],
+  "limitations": [
+    "scalar kernel only; SIMD kernels are T19 and must reproduce scalar.find spans",
+    "literals with newlines are Unsupported",
+    "case-insensitive search and regex are not implemented",
+    "more than 10,000 candidate files are reported as truncated by the traversal, not searched",
+    "a deadline is expressed only through Cancel; SearchSpec has no deadline field",
+    "a same-size rewrite that restores mtime and keeps the literal bytes at every match position is not detected",
+    "Linux and Intel macOS are cross-compiled only"
+  ],
+  "interface_change_proposals": [
+    {
+      "target": "core.SearchSpec",
+      "issue": "no output_bytes or deadline field; docs/07 describes a request deadline, bounded output, and a deadline check per read/search chunk",
+      "needs": "integrator decision to add them; T06 uses Searcher.output_bytes and Cancel meanwhile"
+    },
+    {
+      "target": "core.limits max_file_results for search",
+      "issue": "search candidates share the enumerate limit of 10,000 files",
+      "needs": "decision whether search needs its own candidate cap or pagination"
+    },
+    {
+      "target": "tests/catalog.json",
+      "issue": "SR-001..SR-006 execution_status still not_run",
+      "needs": "integrator update after re-test"
+    }
+  ],
+  "remaining_gates": [
+    "integrator re-test of task-t06 on integration",
+    "MANIFEST.sha256 AGENTS.md mismatch (T01) open",
+    "E_MANIFEST_UNBOUND decision open",
+    "read cost estimate proposal (T04) open",
+    "core.Coverage filters proposal (T05) open"
+  ],
+  "host_note": "T06 paused after S03 while the host data volume had 205-595 MiB free with swap at 9.15 of 9.73 GiB; S04-S06 ran after the user freed memory (9.9 GiB free, swap 2.2 GiB used)"
+}

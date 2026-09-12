@@ -1,0 +1,64 @@
+{
+  "schema_version": "zcr-continuation-handoff/1",
+  "task_id": "T07",
+  "state": "implemented_pending_independent_review",
+  "base_commit": "9897f27a18c66c310ae6dda3ee854f7fdcdcfa3d",
+  "red_source_commit": "4ff110105218ba3da8b7881f65d901a237083793",
+  "head_commit": "fa80da7edde09fff635ec79db21300323f7a10d5",
+  "head_commit_note": "Clean source commit used for GREEN and standard evidence verification; the following evidence-only commit packages these records.",
+  "workspace_id": "b6e63cbf-b094-4780-ad91-643bc9c7f09a",
+  "contract_digest": "8aa53314410fe471f0e070c522766684286f60e1ad4d9785c292bb709ea370a4",
+  "manifest_sha256": "f831f40e0076400743bd0a734bc80973864a4d48b9261d3f932234588ad97287",
+  "source_tree": "f5b17b4aaa5e17c6190509fec593d3cbec9f72a8",
+  "source_digest": "18106339c49eccd404fff8f61382c3ccee10a43fa3a126dedbedbecb454d8316",
+  "config_sha256": "46455460654d62a5c76c7c37dace030c83c142f60d78deea8753c3d9f46781ac",
+  "corpus_sha256": "fe47ccf77d5bf63a335ab95da6f1ac5f2afff1306177b41b59433932ed5e5247",
+  "changed_source_files": [
+    "src/batch/read.zig",
+    "src/protocol/projection.zig",
+    "tests/t07_test.zig"
+  ],
+  "exports": "No public export signatures changed; I03 and I06 conformance checks remain intact. Report.merged remains present and is zero.",
+  "red_failures": 7,
+  "green_results": [
+    {
+      "label": "green-batch-debug",
+      "exit_code": 0,
+      "summary": "Build Summary: 4/4 steps succeeded; 24/24 tests passed"
+    },
+    {
+      "label": "green-batch-safe",
+      "exit_code": 0,
+      "summary": "Build Summary: 4/4 steps succeeded; 24/24 tests passed"
+    },
+    {
+      "label": "failure-batch-debug",
+      "exit_code": 0,
+      "summary": "Build Summary: 4/4 steps succeeded; 24/24 tests passed"
+    },
+    {
+      "label": "regression-all-debug",
+      "exit_code": 0,
+      "summary": "Build Summary: 29/29 steps succeeded; 109/109 tests passed"
+    },
+    {
+      "label": "regression-all-safe",
+      "exit_code": 0,
+      "summary": "Build Summary: 29/29 steps succeeded; 109/109 tests passed"
+    },
+    {
+      "label": "verify-contracts",
+      "exit_code": 0,
+      "summary": "Build Summary: 3/3 steps succeeded"
+    }
+  ],
+  "failure_paths": "Normal/invalid/missing/non-regular/out-of-scope reads, output/memory budget refusal, cancellation during and between reads, repeated version conflict, and allocation failure at each allocation point execute in the batch suite. Fault hooks are unconditional in these tests; the explicit fault-enabled build also passes.",
+  "limits_and_remaining_gates": [
+    "Deadline plumbing remains inherited and deferred to the next cross-cutting task: ReadSpec.deadline_ms is carried but T04 does not enforce it, and I06 has no explicit cancellation/deadline parameter. This repair only prevents grouping unequal deadline values; no public API changed.",
+    "Unequal ranges and output caps no longer coalesce, so some requests perform more reads. The existing 32-item fixture uses 28 jobs instead of 25, retains one exact duplicate, and stays within the same memory/output/concurrency caps.",
+    "macOS, Windows, host-client integration and performance/energy measurements are NOT_RUN in this Linux session.",
+    "The inherited openFdCount helper only enumerates macOS /dev/fd; Linux OS-level descriptor counts are NOT_RUN. Linux tests do verify cancellation/drain and zero tracked allocation lifetime.",
+    "Independent spec/quality review and integration-binary validation belong to the integrator and remain pending at this handoff."
+  ],
+  "history": "All pre-existing evidence/T07 records remain unchanged and are historical evidence."
+}

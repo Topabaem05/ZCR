@@ -1,0 +1,24 @@
+test
++- fail failure
+error: registered test file tests/t02_test.zig is missing (T02 not delivered yet)
+
+Build Summary: 10/12 steps succeeded (1 failed); 29/29 tests passed
+test transitive failure
++- install T00-test success
+|  +- compile test T00-test Debug native cached 200ms MaxRSS:31M
++- run test T00-test 11 pass (11 total) 1s MaxRSS:10M
+|  +- compile test T00-test Debug native (reused)
++- install T01-test success
+|  +- compile test T01-test Debug native cached 153ms MaxRSS:31M
+|     +- options cached
++- run test T01-test 18 pass (18 total) 10s MaxRSS:11M
+|  +- compile test T01-test Debug native (+1 more reused dependencies)
++- fail failure
++- run exe zcr success 48ms
+|  +- compile exe zcr Debug native cached 153ms MaxRSS:31M
+|     +- options (reused)
++- run exe zcr success 28ms
+   +- compile exe zcr Debug native (+1 more reused dependencies)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/integration/zig-local-cache/o/9eba755f0f9193364046b96ceb76bdad/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-worktrees/integration /Users/guribbong/code/ZCR-state/integration/zig-local-cache /Users/guribbong/code/ZCR-state/integration/zig-global-cache --seed 0xdb66845a -Z7d7ba9c3a2b9831c test -Doptimize=Debug -Dinstall-tests=true --prefix /Users/guribbong/code/ZCR-state/integration/out-int-all-debug --summary all

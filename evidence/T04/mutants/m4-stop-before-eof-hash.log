@@ -1,0 +1,21 @@
+test
++- run test T04-test 9 pass, 1 fail (10 total)
+error: 't04_test.test.IO-006 write intent hashes the whole 8 MiB file and every descriptor and byte is returned' failed:
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m4-stop-before-eof-hash/src/fs/read.zig:96:9: 0x102d3c8a7 in readRange (T04-test)
+               return error.VersionConflict;
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m4-stop-before-eof-hash/tests/t04_test.zig:106:23: 0x102d36d1f in read (T04-test)
+               const owned = try h.reader.readRange(io, reserved.allocator(), capability, s, &reservation, h.cancel());
+                             ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m4-stop-before-eof-hash/tests/t04_test.zig:403:18: 0x102d60577 in test.IO-006 write intent hashes the whole 8 MiB file and every descriptor and byte is returned (T04-test)
+           var hashed = try h.read(with_intent);
+                        ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache/o/bc2a20e8fe920a6f410a858672df63bc/T04-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache --seed=0x6bc36453 --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 9/10 tests passed (1 failed)
+test transitive failure
++- run test T04-test 9 pass, 1 fail (10 total)
+   +- compile test T04-test Debug native success 6s MaxRSS:240M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache/o/12ecb60e287f5a624443e3faa2ba9fc4/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m4-stop-before-eof-hash /Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T04/zig-global-cache --seed 0x6bc36453 -Z2e2fe8f6398f64a7 test -Dtest-group=io --summary all

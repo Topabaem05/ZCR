@@ -1,0 +1,16 @@
+test
++- run test T05-test
+   +- compile test T05-test Debug native 1 errors
+src/fs/traverse.zig:344:73: error: unused function parameter
+    fn enterDir(self: *Traverser, io: Io, dir: Io.Dir, path_len: usize, spec: core.FileSpec) core.ReadError!void {
+                                                                        ^~~~
+error: 1 compilation errors
+failed command: /Users/guribbong/.local/share/zig/0.16.0/zig test -ODebug --dep zcr_core --dep zcr_policy --dep zcr_memory --dep zcr_fs_traverse --dep evidence -Mroot=/Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m9-no-sort/tests/t05_test.zig -ODebug -Mzcr_core=/Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m9-no-sort/src/core/types.zig -ODebug --dep zcr_core -Mzcr_policy=/Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m9-no-sort/src/policy/capability.zig -ODebug --dep zcr_core -Mzcr_memory=/Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m9-no-sort/src/memory/budget.zig -ODebug --dep zcr_core --dep zcr_policy -Mzcr_fs_traverse=/Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m9-no-sort/src/fs/traverse.zig -ODebug --dep zcr_core -Mevidence=/Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m9-no-sort/tools/dev/evidence.zig -lc --cache-dir /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache --global-cache-dir /Users/guribbong/code/ZCR-state/tasks/T05/zig-global-cache --name T05-test --zig-lib-dir /Users/guribbong/.local/share/zig/0.16.0/lib/ --listen=-
+
+Build Summary: 0/3 steps succeeded (1 failed)
+test transitive failure
++- run test T05-test transitive failure
+   +- compile test T05-test Debug native 1 errors
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache/o/5141f98b72c01d7e7e7d84fd5e561ea8/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m9-no-sort /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T05/zig-global-cache --seed 0x356a7da9 -Zb0a69bd1180b300d test -Dtest-group=fs --summary all

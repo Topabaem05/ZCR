@@ -1,0 +1,36 @@
+{
+  "command": [
+    "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+    "build",
+    "test",
+    "-Dtest-group=batch",
+    "-Doptimize=Debug",
+    "-Dinstall-tests=true",
+    "--prefix",
+    "/workspace/scratch/3f4ab65dfb82/state/runtime-cache/out-regression-batch-Debug",
+    "--summary",
+    "all"
+  ],
+  "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-cache",
+  "head": "b5fe273bb58bd9518bf7711446f164ef5e4bbd62",
+  "exit": 0,
+  "log": "/workspace/scratch/3f4ab65dfb82/state/runtime-cache/logs/regression-batch-Debug.log",
+  "log_sha256": "157b098da845f62ac3c5466de86bbff9e7d6fec8a1156a25a2b86a196e122b90",
+  "env_overrides": {
+    "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/runtime-cache/zig-global-cache",
+    "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/runtime-cache/zig-local-cache",
+    "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/runtime-cache/tmp"
+  },
+  "passed": 25,
+  "failed": 0,
+  "skipped": 0,
+  "source_manifest_sha256": "1b31952519944ff07886138a7567f5021b7accbac1f9d7a5508b7181936ebfa1",
+  "config_manifest_sha256": "bf13907909e42fecbe9bc89a71a07de4bebfa3b024ad0de78306427c0e46c0e9",
+  "corpus_manifest_sha256": "6a7931cc9ac237db2d67b9e852d58be27b8f638e4dca0024db29364cc003f956",
+  "binaries": [
+    {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-cache/out-regression-batch-Debug/bin/T07-test",
+      "sha256": "16c1ab8cf9897eb6e3cf78fe1d458c8765497e2636711ee99c6bd794291d552b"
+    }
+  ]
+}

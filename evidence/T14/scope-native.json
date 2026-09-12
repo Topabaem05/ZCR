@@ -1,0 +1,273 @@
+{
+  "task": "T14",
+  "role": "task",
+  "violations": [],
+  "changes": [
+    {
+      "kind": "added",
+      "path": "evidence/T14/authorization.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T14/behavioral-red.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T14/contracts.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T14/darwin-abi-aarch64.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T14/darwin-abi-probe.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T14/darwin-abi-x86_64.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T14/darwin-callback-debug.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T14/darwin-callback-releasesafe.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T14/fault-debug-standard.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T14/fault-debug.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T14/green-debug-standard.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T14/green-debug.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T14/green-safe-standard.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T14/green-safe.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T14/handoff.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T14/manifest.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T14/preflight.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T14/red.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T14/references.md",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T14/regression-fs.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T14/regression-isolation.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T14/regression-memory.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T14/report.md",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T14/runs.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T14/runtime-hooks-absent.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T14/runtime-hooks-absent.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T14/scope-native.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T14/standard-verification.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T14/steps.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "src/watch/core.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "src/watch/darwin.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "src/watch/linux.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "tests/t14_test.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "modified",
+      "path": "evidence/T14/handoff.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "working_tree"
+    },
+    {
+      "kind": "modified",
+      "path": "evidence/T14/report.md",
+      "orig_path": null,
+      "symlink": false,
+      "source": "working_tree"
+    },
+    {
+      "kind": "modified",
+      "path": "evidence/T14/steps.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "working_tree"
+    },
+    {
+      "kind": "untracked",
+      "path": "evidence/T14/review-evidence-check.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "working_tree"
+    },
+    {
+      "kind": "untracked",
+      "path": "evidence/T14/review.md",
+      "orig_path": null,
+      "symlink": false,
+      "source": "working_tree"
+    }
+  ]
+}

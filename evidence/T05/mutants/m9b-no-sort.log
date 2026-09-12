@@ -1,0 +1,39 @@
+test
++- run test T05-test 9 pass, 2 fail (11 total)
+error: 't05_test.test.FS-004 streaming traversal memory is fixed at init and does not grow with file count' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:615:14: 0x10465aeab in expect (T05-test)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m9b-no-sort/tests/t05_test.zig:389:9: 0x104690413 in test.FS-004 streaming traversal memory is fixed at init and does not grow with file count (T05-test)
+               try testing.expect(traverser.report().order_fallback);
+               ^
+error: 't05_test.test.T05 sorted order, glob filter and result limit' failed:
+       expected (6):
+         B.zig
+         a/b.zig
+         a/c/d.zig
+         a-c/x.zig
+         a.txt
+         z.md
+       actual (6):
+         z.md
+         a/b.zig
+         a/c/d.zig
+         a-c/x.zig
+         a.txt
+         B.zig
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m9b-no-sort/tests/t05_test.zig:174:9: 0x10465ad17 in expectSameSet (T05-test)
+               return error.TestExpectedEqual;
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m9b-no-sort/tests/t05_test.zig:470:5: 0x10468b2b7 in test.T05 sorted order, glob filter and result limit (T05-test)
+           try expectSameSet(&.{ "B.zig", "a/b.zig", "a/c/d.zig", "a-c/x.zig", "a.txt", "z.md" }, sorted.paths.items);
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache/o/c473be5eb841bcc1f502a656c50b1a12/T05-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache --seed=0xdd0ac988 --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 9/11 tests passed (2 failed)
+test transitive failure
++- run test T05-test 9 pass, 2 fail (11 total)
+   +- compile test T05-test Debug native success 5s MaxRSS:256M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache/o/5141f98b72c01d7e7e7d84fd5e561ea8/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m9b-no-sort /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T05/zig-global-cache --seed 0xdd0ac988 -Zbca4b7a5f67017b8 test -Dtest-group=fs --summary all

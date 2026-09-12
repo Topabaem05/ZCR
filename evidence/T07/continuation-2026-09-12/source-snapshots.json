@@ -1,0 +1,656 @@
+{
+  "task": "T07",
+  "base_commit": "9897f27a18c66c310ae6dda3ee854f7fdcdcfa3d",
+  "red_source_commit": "4ff110105218ba3da8b7881f65d901a237083793",
+  "green_source_commit": "fa80da7edde09fff635ec79db21300323f7a10d5",
+  "worktree": "/workspace/scratch/3f4ab65dfb82/ZCR-T07",
+  "branch": "codex/t07-corrections",
+  "git_dir": "/workspace/scratch/3f4ab65dfb82/ZCR/.git/worktrees/ZCR-T07",
+  "manifest": {
+    "schema_version": "zcr-task/1",
+    "state": "active",
+    "task_id": "T07",
+    "workspace_id": "b6e63cbf-b094-4780-ad91-643bc9c7f09a",
+    "base_commit": "9897f27a18c66c310ae6dda3ee854f7fdcdcfa3d",
+    "contract_digest": "8aa53314410fe471f0e070c522766684286f60e1ad4d9785c292bb709ea370a4",
+    "fence": 1,
+    "expires_at": "2026-09-19T00:00:00Z",
+    "read_paths": [
+      "."
+    ],
+    "write_paths": [
+      "src/batch/read.zig",
+      "src/protocol/projection.zig",
+      "tests/t07_test.zig",
+      "evidence/T07"
+    ],
+    "immutable_paths": [
+      "build.zig",
+      "build.zig.zon",
+      "src/core",
+      "contracts"
+    ],
+    "operations": [
+      "read",
+      "enumerate",
+      "search",
+      "batch_read",
+      "patch",
+      "create",
+      "status",
+      "health"
+    ],
+    "max_changed_files": 32,
+    "authorization": "Full repository continuation requested by user; scope assigned by integrator."
+  },
+  "manifest_sha256": "f831f40e0076400743bd0a734bc80973864a4d48b9261d3f932234588ad97287",
+  "contract_digest": "8aa53314410fe471f0e070c522766684286f60e1ad4d9785c292bb709ea370a4",
+  "config_sha256": "46455460654d62a5c76c7c37dace030c83c142f60d78deea8753c3d9f46781ac",
+  "toolchain": {
+    "path": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+    "version": "0.16.0",
+    "sha256": "2317bbb91798556d9d0f38aabdac23db83f0979b25f767259ae474546724087c"
+  },
+  "host": "Linux-6.18.35-x86_64-with-glibc2.39",
+  "snapshots": {
+    "9897f27a18c66c310ae6dda3ee854f7fdcdcfa3d": {
+      "tree": "3fd62f78ff4bd6807ffe75179611b3681d5b461f",
+      "files": [
+        {
+          "path": "build.zig",
+          "sha256": "d8ab596171444e1c86b2725ed57eaa437411a4f00eb4217b3cc14364341ba4ed"
+        },
+        {
+          "path": "build.zig.zon",
+          "sha256": "2ad2381bdb29d5669c6d2ac4807c124c2afe6d007daf7ea2b507fdc64bf44e52"
+        },
+        {
+          "path": "config/limits.json",
+          "sha256": "d7b3db8b6956c0f8b1e6f399e6e432fb4eadb8aa033f39d303e31edbe539154c"
+        },
+        {
+          "path": "config/memory-profiles.json",
+          "sha256": "7f925fb57bc0453f2505b3c10856a4e74322bcb8cc3417070ec7693e847804b7"
+        },
+        {
+          "path": "config/scheduler-profiles.json",
+          "sha256": "3f3b7d88264c94ac84ea0969da47ff1aee46ad4ba51f4899742ee2c1603b57a8"
+        },
+        {
+          "path": "contracts/README.md",
+          "sha256": "453e7755c71d38f0d456f42796e88dc7f326da2dcc1a10d6a6482e5bdb97904b"
+        },
+        {
+          "path": "contracts/data.schema.json",
+          "sha256": "5c3932867cf4e16729cd6b959c16b9a143308aa5396f79a7f0e56f6563d314f5"
+        },
+        {
+          "path": "contracts/inputs/zcr_batch_read.schema.json",
+          "sha256": "50c4b12c0575660e6d030acabd8a3fb60ec9e3b4a620426cea79133ec011f15d"
+        },
+        {
+          "path": "contracts/inputs/zcr_create.schema.json",
+          "sha256": "821b9bdb7e74db3c5456e06ee6ceb0cf5105fa13ab39786ef0f4fd024b1812ca"
+        },
+        {
+          "path": "contracts/inputs/zcr_files.schema.json",
+          "sha256": "8f7680bc92ad4ef9a1a34e7a9756cbca4f286452387a246de33cb13073890eb4"
+        },
+        {
+          "path": "contracts/inputs/zcr_health.schema.json",
+          "sha256": "9e78382dc9325d9dafba3edbadf843f670505c5e19d8a2ee0a168147862d9538"
+        },
+        {
+          "path": "contracts/inputs/zcr_patch.schema.json",
+          "sha256": "77d27a7cb46a2d7765f245f85f2e47560df5ea82e406e049e1e387d38f543f99"
+        },
+        {
+          "path": "contracts/inputs/zcr_read.schema.json",
+          "sha256": "fdd23867b862977d19bf3b3d45183ead856d58ec4742d41ec3e970751e524bdc"
+        },
+        {
+          "path": "contracts/inputs/zcr_search.schema.json",
+          "sha256": "ed9109d79358aa095c54fe6c70260be99f4ba9c68aef4d4539319562f8567211"
+        },
+        {
+          "path": "contracts/inputs/zcr_status.schema.json",
+          "sha256": "a46793fa818ba7ce90931a0dece57235aaa5aebbd010bbc3606fb3a8cb0cc5b1"
+        },
+        {
+          "path": "contracts/response.schema.json",
+          "sha256": "587ba596c5ca9a3c30d820905aaf4d91b388325ededddbd468534c9119f91060"
+        },
+        {
+          "path": "contracts/task-manifest.schema.json",
+          "sha256": "d65a9082b5b4896e6e1017d4bfa6a37dc12efe88b362ed809491a5f3b2c965cc"
+        },
+        {
+          "path": "contracts/tools.json",
+          "sha256": "6537c0961f85dd623cf76c195dab534f583052c31eff2eda54727e97083a0b4b"
+        },
+        {
+          "path": "src/batch/read.zig",
+          "sha256": "0fad72be97b11e850f291b1c9aa36babef700cf60f1cd5dc6079f51693c57ed5"
+        },
+        {
+          "path": "src/core/errors.zig",
+          "sha256": "4166c1278c889e703cebc67925acfa9e768f5a4119fe42bfb8e29084a4752f1c"
+        },
+        {
+          "path": "src/core/limits.zig",
+          "sha256": "41771a1b441e7710a5c27ac6d5cc92170f023764b74ace4e5519e28161a65137"
+        },
+        {
+          "path": "src/core/types.zig",
+          "sha256": "16347affe942c1393bdbe28c053a0e5813888b6f141b4a157b3c7068ae12500c"
+        },
+        {
+          "path": "src/fs/ignore.zig",
+          "sha256": "4d398d96174d7a52d4a895494ba5c75a17205146518be3feef38d60f4c8379cd"
+        },
+        {
+          "path": "src/fs/metadata.zig",
+          "sha256": "b880195fdf035cddfc80974ad8510c5a41a4e5a4de4fcd9e027d6fef95041205"
+        },
+        {
+          "path": "src/fs/read.zig",
+          "sha256": "fc44afef6757b72701169a2b13c146ecb6c2b8f2a02249104a7158abbe0352b1"
+        },
+        {
+          "path": "src/fs/traverse.zig",
+          "sha256": "3418fc6b915b0fa8ffd8bafb3f2c7fd0adb1911a9371a1527d8f659ee83737cb"
+        },
+        {
+          "path": "src/main.zig",
+          "sha256": "6bfd82031464a63bd986b528b6ed350803765eb1ebb7996d0afb6cf59e480d19"
+        },
+        {
+          "path": "src/memory/accounting.zig",
+          "sha256": "c71ff2d39979bd03b3dd73d93285ba9dbc97d41fe2437e3fbc156c5a9e0fd654"
+        },
+        {
+          "path": "src/memory/arena.zig",
+          "sha256": "6c2b911849041d5935f434a110b858ad590331e82653eca9a9502b2c308b00fc"
+        },
+        {
+          "path": "src/memory/budget.zig",
+          "sha256": "51394d108231fd049bfc88e3fa3468d75a33a9d5d9e9e3e2b2c0e60ce14aa4c0"
+        },
+        {
+          "path": "src/policy/capability.zig",
+          "sha256": "11a77a83e45aab973e54e69e3d5f953d74efc1a1193fdf74006e4119772183c9"
+        },
+        {
+          "path": "src/policy/paths.zig",
+          "sha256": "af8e8c6ec7af13f79c25ff4641d12ccaf0d6c3d60720fdd5416c9512a6edfb31"
+        },
+        {
+          "path": "src/policy/scope.zig",
+          "sha256": "ff9b6246f4451a851d406cdcb82ad805f3668e40455ce0782d1f7d5ab641696c"
+        },
+        {
+          "path": "src/protocol/projection.zig",
+          "sha256": "afa3198b2b0479049399ba259427c1f0c52c37363fd1cce6754b555c88a05f2f"
+        },
+        {
+          "path": "src/scheduler/admission.zig",
+          "sha256": "f43b872ca0648998a9b1f805ae080ad0fb2fe2181134b0018977f528281f9b6f"
+        },
+        {
+          "path": "src/search/context.zig",
+          "sha256": "652a55be86aea519e133fead3621256afa0d24fcf7159f140364e7735afcb0d0"
+        },
+        {
+          "path": "src/search/literal.zig",
+          "sha256": "2c3bc92b02bda3e712b2e670ddc98821169f85ab584b087eaca49fe35a019700"
+        },
+        {
+          "path": "src/search/scalar.zig",
+          "sha256": "aef984f53852ce28f41c7f5eca940db422511890941053e2e81bc362b746c3bd"
+        },
+        {
+          "path": "tests/catalog.json",
+          "sha256": "4e9f6bc90389fecd71a95caf3461816197aa5d10fbf5685d4e1d9132f2651ddc"
+        },
+        {
+          "path": "tests/t00_test.zig",
+          "sha256": "b8037603d16639028d6d4554760d6cbc9325ea2c50498a15376f29eb68cd469a"
+        },
+        {
+          "path": "tests/t01_test.zig",
+          "sha256": "bfaac4f21be8e21c863922b504bbefb4ada21f19f83a6b2f53646e2745ede324"
+        },
+        {
+          "path": "tests/t02_test.zig",
+          "sha256": "7c68a2bd70a5e9f4e07c9d4ac9e39c4da49fdb9d1e6062aac280ada03347d6c0"
+        },
+        {
+          "path": "tests/t03_test.zig",
+          "sha256": "fbeb29d611edc6325f8eae5bfb12fffae45959e84d3252d1d9d04435f8d72d26"
+        },
+        {
+          "path": "tests/t04_test.zig",
+          "sha256": "f29f74d3e0f2e9824a75e976216c563d1bea176666543d0f388d6427d29b96ba"
+        },
+        {
+          "path": "tests/t05_test.zig",
+          "sha256": "c903afffdcc6a72e3c89848c697d4220137cb3fb73a6671f0672c6b42f722f72"
+        },
+        {
+          "path": "tests/t06_test.zig",
+          "sha256": "617c7a9390586aa3a81a9f590f5ce56b4196d2148c60d4892a02c8ab2f8e712e"
+        },
+        {
+          "path": "tests/t07_test.zig",
+          "sha256": "faeddad4a63a5aa16d551fb4b597d55024f71b0071eddd6b544d428d6899ad5b"
+        },
+        {
+          "path": "tests/vectors.json",
+          "sha256": "ee87aa75003969e71c27e9790fc083a071f6d97c63acceb64245a2bf2c5f7ad8"
+        }
+      ],
+      "source_digest": "b8365f9b37c4c8475d035bc9942b51160915d81efd2ba120f203c6d2cc1baad5"
+    },
+    "4ff110105218ba3da8b7881f65d901a237083793": {
+      "tree": "fbe1f8eaa41e6975cf28ef4816ff4e7ffb744728",
+      "files": [
+        {
+          "path": "build.zig",
+          "sha256": "d8ab596171444e1c86b2725ed57eaa437411a4f00eb4217b3cc14364341ba4ed"
+        },
+        {
+          "path": "build.zig.zon",
+          "sha256": "2ad2381bdb29d5669c6d2ac4807c124c2afe6d007daf7ea2b507fdc64bf44e52"
+        },
+        {
+          "path": "config/limits.json",
+          "sha256": "d7b3db8b6956c0f8b1e6f399e6e432fb4eadb8aa033f39d303e31edbe539154c"
+        },
+        {
+          "path": "config/memory-profiles.json",
+          "sha256": "7f925fb57bc0453f2505b3c10856a4e74322bcb8cc3417070ec7693e847804b7"
+        },
+        {
+          "path": "config/scheduler-profiles.json",
+          "sha256": "3f3b7d88264c94ac84ea0969da47ff1aee46ad4ba51f4899742ee2c1603b57a8"
+        },
+        {
+          "path": "contracts/README.md",
+          "sha256": "453e7755c71d38f0d456f42796e88dc7f326da2dcc1a10d6a6482e5bdb97904b"
+        },
+        {
+          "path": "contracts/data.schema.json",
+          "sha256": "5c3932867cf4e16729cd6b959c16b9a143308aa5396f79a7f0e56f6563d314f5"
+        },
+        {
+          "path": "contracts/inputs/zcr_batch_read.schema.json",
+          "sha256": "50c4b12c0575660e6d030acabd8a3fb60ec9e3b4a620426cea79133ec011f15d"
+        },
+        {
+          "path": "contracts/inputs/zcr_create.schema.json",
+          "sha256": "821b9bdb7e74db3c5456e06ee6ceb0cf5105fa13ab39786ef0f4fd024b1812ca"
+        },
+        {
+          "path": "contracts/inputs/zcr_files.schema.json",
+          "sha256": "8f7680bc92ad4ef9a1a34e7a9756cbca4f286452387a246de33cb13073890eb4"
+        },
+        {
+          "path": "contracts/inputs/zcr_health.schema.json",
+          "sha256": "9e78382dc9325d9dafba3edbadf843f670505c5e19d8a2ee0a168147862d9538"
+        },
+        {
+          "path": "contracts/inputs/zcr_patch.schema.json",
+          "sha256": "77d27a7cb46a2d7765f245f85f2e47560df5ea82e406e049e1e387d38f543f99"
+        },
+        {
+          "path": "contracts/inputs/zcr_read.schema.json",
+          "sha256": "fdd23867b862977d19bf3b3d45183ead856d58ec4742d41ec3e970751e524bdc"
+        },
+        {
+          "path": "contracts/inputs/zcr_search.schema.json",
+          "sha256": "ed9109d79358aa095c54fe6c70260be99f4ba9c68aef4d4539319562f8567211"
+        },
+        {
+          "path": "contracts/inputs/zcr_status.schema.json",
+          "sha256": "a46793fa818ba7ce90931a0dece57235aaa5aebbd010bbc3606fb3a8cb0cc5b1"
+        },
+        {
+          "path": "contracts/response.schema.json",
+          "sha256": "587ba596c5ca9a3c30d820905aaf4d91b388325ededddbd468534c9119f91060"
+        },
+        {
+          "path": "contracts/task-manifest.schema.json",
+          "sha256": "d65a9082b5b4896e6e1017d4bfa6a37dc12efe88b362ed809491a5f3b2c965cc"
+        },
+        {
+          "path": "contracts/tools.json",
+          "sha256": "6537c0961f85dd623cf76c195dab534f583052c31eff2eda54727e97083a0b4b"
+        },
+        {
+          "path": "src/batch/read.zig",
+          "sha256": "0fad72be97b11e850f291b1c9aa36babef700cf60f1cd5dc6079f51693c57ed5"
+        },
+        {
+          "path": "src/core/errors.zig",
+          "sha256": "4166c1278c889e703cebc67925acfa9e768f5a4119fe42bfb8e29084a4752f1c"
+        },
+        {
+          "path": "src/core/limits.zig",
+          "sha256": "41771a1b441e7710a5c27ac6d5cc92170f023764b74ace4e5519e28161a65137"
+        },
+        {
+          "path": "src/core/types.zig",
+          "sha256": "16347affe942c1393bdbe28c053a0e5813888b6f141b4a157b3c7068ae12500c"
+        },
+        {
+          "path": "src/fs/ignore.zig",
+          "sha256": "4d398d96174d7a52d4a895494ba5c75a17205146518be3feef38d60f4c8379cd"
+        },
+        {
+          "path": "src/fs/metadata.zig",
+          "sha256": "b880195fdf035cddfc80974ad8510c5a41a4e5a4de4fcd9e027d6fef95041205"
+        },
+        {
+          "path": "src/fs/read.zig",
+          "sha256": "fc44afef6757b72701169a2b13c146ecb6c2b8f2a02249104a7158abbe0352b1"
+        },
+        {
+          "path": "src/fs/traverse.zig",
+          "sha256": "3418fc6b915b0fa8ffd8bafb3f2c7fd0adb1911a9371a1527d8f659ee83737cb"
+        },
+        {
+          "path": "src/main.zig",
+          "sha256": "6bfd82031464a63bd986b528b6ed350803765eb1ebb7996d0afb6cf59e480d19"
+        },
+        {
+          "path": "src/memory/accounting.zig",
+          "sha256": "c71ff2d39979bd03b3dd73d93285ba9dbc97d41fe2437e3fbc156c5a9e0fd654"
+        },
+        {
+          "path": "src/memory/arena.zig",
+          "sha256": "6c2b911849041d5935f434a110b858ad590331e82653eca9a9502b2c308b00fc"
+        },
+        {
+          "path": "src/memory/budget.zig",
+          "sha256": "51394d108231fd049bfc88e3fa3468d75a33a9d5d9e9e3e2b2c0e60ce14aa4c0"
+        },
+        {
+          "path": "src/policy/capability.zig",
+          "sha256": "11a77a83e45aab973e54e69e3d5f953d74efc1a1193fdf74006e4119772183c9"
+        },
+        {
+          "path": "src/policy/paths.zig",
+          "sha256": "af8e8c6ec7af13f79c25ff4641d12ccaf0d6c3d60720fdd5416c9512a6edfb31"
+        },
+        {
+          "path": "src/policy/scope.zig",
+          "sha256": "ff9b6246f4451a851d406cdcb82ad805f3668e40455ce0782d1f7d5ab641696c"
+        },
+        {
+          "path": "src/protocol/projection.zig",
+          "sha256": "afa3198b2b0479049399ba259427c1f0c52c37363fd1cce6754b555c88a05f2f"
+        },
+        {
+          "path": "src/scheduler/admission.zig",
+          "sha256": "f43b872ca0648998a9b1f805ae080ad0fb2fe2181134b0018977f528281f9b6f"
+        },
+        {
+          "path": "src/search/context.zig",
+          "sha256": "652a55be86aea519e133fead3621256afa0d24fcf7159f140364e7735afcb0d0"
+        },
+        {
+          "path": "src/search/literal.zig",
+          "sha256": "2c3bc92b02bda3e712b2e670ddc98821169f85ab584b087eaca49fe35a019700"
+        },
+        {
+          "path": "src/search/scalar.zig",
+          "sha256": "aef984f53852ce28f41c7f5eca940db422511890941053e2e81bc362b746c3bd"
+        },
+        {
+          "path": "tests/catalog.json",
+          "sha256": "4e9f6bc90389fecd71a95caf3461816197aa5d10fbf5685d4e1d9132f2651ddc"
+        },
+        {
+          "path": "tests/t00_test.zig",
+          "sha256": "b8037603d16639028d6d4554760d6cbc9325ea2c50498a15376f29eb68cd469a"
+        },
+        {
+          "path": "tests/t01_test.zig",
+          "sha256": "bfaac4f21be8e21c863922b504bbefb4ada21f19f83a6b2f53646e2745ede324"
+        },
+        {
+          "path": "tests/t02_test.zig",
+          "sha256": "7c68a2bd70a5e9f4e07c9d4ac9e39c4da49fdb9d1e6062aac280ada03347d6c0"
+        },
+        {
+          "path": "tests/t03_test.zig",
+          "sha256": "fbeb29d611edc6325f8eae5bfb12fffae45959e84d3252d1d9d04435f8d72d26"
+        },
+        {
+          "path": "tests/t04_test.zig",
+          "sha256": "f29f74d3e0f2e9824a75e976216c563d1bea176666543d0f388d6427d29b96ba"
+        },
+        {
+          "path": "tests/t05_test.zig",
+          "sha256": "c903afffdcc6a72e3c89848c697d4220137cb3fb73a6671f0672c6b42f722f72"
+        },
+        {
+          "path": "tests/t06_test.zig",
+          "sha256": "617c7a9390586aa3a81a9f590f5ce56b4196d2148c60d4892a02c8ab2f8e712e"
+        },
+        {
+          "path": "tests/t07_test.zig",
+          "sha256": "98d0965c2512474d466034a8dd7289c5079dea451cd27d28edd4d206b9dd0b15"
+        },
+        {
+          "path": "tests/vectors.json",
+          "sha256": "ee87aa75003969e71c27e9790fc083a071f6d97c63acceb64245a2bf2c5f7ad8"
+        }
+      ],
+      "source_digest": "354e2165416685c88f1e0360f1c024dc650a83042797d85a11d1e7f0c390ba4e"
+    },
+    "fa80da7edde09fff635ec79db21300323f7a10d5": {
+      "tree": "f5b17b4aaa5e17c6190509fec593d3cbec9f72a8",
+      "files": [
+        {
+          "path": "build.zig",
+          "sha256": "d8ab596171444e1c86b2725ed57eaa437411a4f00eb4217b3cc14364341ba4ed"
+        },
+        {
+          "path": "build.zig.zon",
+          "sha256": "2ad2381bdb29d5669c6d2ac4807c124c2afe6d007daf7ea2b507fdc64bf44e52"
+        },
+        {
+          "path": "config/limits.json",
+          "sha256": "d7b3db8b6956c0f8b1e6f399e6e432fb4eadb8aa033f39d303e31edbe539154c"
+        },
+        {
+          "path": "config/memory-profiles.json",
+          "sha256": "7f925fb57bc0453f2505b3c10856a4e74322bcb8cc3417070ec7693e847804b7"
+        },
+        {
+          "path": "config/scheduler-profiles.json",
+          "sha256": "3f3b7d88264c94ac84ea0969da47ff1aee46ad4ba51f4899742ee2c1603b57a8"
+        },
+        {
+          "path": "contracts/README.md",
+          "sha256": "453e7755c71d38f0d456f42796e88dc7f326da2dcc1a10d6a6482e5bdb97904b"
+        },
+        {
+          "path": "contracts/data.schema.json",
+          "sha256": "5c3932867cf4e16729cd6b959c16b9a143308aa5396f79a7f0e56f6563d314f5"
+        },
+        {
+          "path": "contracts/inputs/zcr_batch_read.schema.json",
+          "sha256": "50c4b12c0575660e6d030acabd8a3fb60ec9e3b4a620426cea79133ec011f15d"
+        },
+        {
+          "path": "contracts/inputs/zcr_create.schema.json",
+          "sha256": "821b9bdb7e74db3c5456e06ee6ceb0cf5105fa13ab39786ef0f4fd024b1812ca"
+        },
+        {
+          "path": "contracts/inputs/zcr_files.schema.json",
+          "sha256": "8f7680bc92ad4ef9a1a34e7a9756cbca4f286452387a246de33cb13073890eb4"
+        },
+        {
+          "path": "contracts/inputs/zcr_health.schema.json",
+          "sha256": "9e78382dc9325d9dafba3edbadf843f670505c5e19d8a2ee0a168147862d9538"
+        },
+        {
+          "path": "contracts/inputs/zcr_patch.schema.json",
+          "sha256": "77d27a7cb46a2d7765f245f85f2e47560df5ea82e406e049e1e387d38f543f99"
+        },
+        {
+          "path": "contracts/inputs/zcr_read.schema.json",
+          "sha256": "fdd23867b862977d19bf3b3d45183ead856d58ec4742d41ec3e970751e524bdc"
+        },
+        {
+          "path": "contracts/inputs/zcr_search.schema.json",
+          "sha256": "ed9109d79358aa095c54fe6c70260be99f4ba9c68aef4d4539319562f8567211"
+        },
+        {
+          "path": "contracts/inputs/zcr_status.schema.json",
+          "sha256": "a46793fa818ba7ce90931a0dece57235aaa5aebbd010bbc3606fb3a8cb0cc5b1"
+        },
+        {
+          "path": "contracts/response.schema.json",
+          "sha256": "587ba596c5ca9a3c30d820905aaf4d91b388325ededddbd468534c9119f91060"
+        },
+        {
+          "path": "contracts/task-manifest.schema.json",
+          "sha256": "d65a9082b5b4896e6e1017d4bfa6a37dc12efe88b362ed809491a5f3b2c965cc"
+        },
+        {
+          "path": "contracts/tools.json",
+          "sha256": "6537c0961f85dd623cf76c195dab534f583052c31eff2eda54727e97083a0b4b"
+        },
+        {
+          "path": "src/batch/read.zig",
+          "sha256": "6c6172025043f3908c67435cf87ebf6fa7fbb4a3a6df78f10869293c0446d0a9"
+        },
+        {
+          "path": "src/core/errors.zig",
+          "sha256": "4166c1278c889e703cebc67925acfa9e768f5a4119fe42bfb8e29084a4752f1c"
+        },
+        {
+          "path": "src/core/limits.zig",
+          "sha256": "41771a1b441e7710a5c27ac6d5cc92170f023764b74ace4e5519e28161a65137"
+        },
+        {
+          "path": "src/core/types.zig",
+          "sha256": "16347affe942c1393bdbe28c053a0e5813888b6f141b4a157b3c7068ae12500c"
+        },
+        {
+          "path": "src/fs/ignore.zig",
+          "sha256": "4d398d96174d7a52d4a895494ba5c75a17205146518be3feef38d60f4c8379cd"
+        },
+        {
+          "path": "src/fs/metadata.zig",
+          "sha256": "b880195fdf035cddfc80974ad8510c5a41a4e5a4de4fcd9e027d6fef95041205"
+        },
+        {
+          "path": "src/fs/read.zig",
+          "sha256": "fc44afef6757b72701169a2b13c146ecb6c2b8f2a02249104a7158abbe0352b1"
+        },
+        {
+          "path": "src/fs/traverse.zig",
+          "sha256": "3418fc6b915b0fa8ffd8bafb3f2c7fd0adb1911a9371a1527d8f659ee83737cb"
+        },
+        {
+          "path": "src/main.zig",
+          "sha256": "6bfd82031464a63bd986b528b6ed350803765eb1ebb7996d0afb6cf59e480d19"
+        },
+        {
+          "path": "src/memory/accounting.zig",
+          "sha256": "c71ff2d39979bd03b3dd73d93285ba9dbc97d41fe2437e3fbc156c5a9e0fd654"
+        },
+        {
+          "path": "src/memory/arena.zig",
+          "sha256": "6c2b911849041d5935f434a110b858ad590331e82653eca9a9502b2c308b00fc"
+        },
+        {
+          "path": "src/memory/budget.zig",
+          "sha256": "51394d108231fd049bfc88e3fa3468d75a33a9d5d9e9e3e2b2c0e60ce14aa4c0"
+        },
+        {
+          "path": "src/policy/capability.zig",
+          "sha256": "11a77a83e45aab973e54e69e3d5f953d74efc1a1193fdf74006e4119772183c9"
+        },
+        {
+          "path": "src/policy/paths.zig",
+          "sha256": "af8e8c6ec7af13f79c25ff4641d12ccaf0d6c3d60720fdd5416c9512a6edfb31"
+        },
+        {
+          "path": "src/policy/scope.zig",
+          "sha256": "ff9b6246f4451a851d406cdcb82ad805f3668e40455ce0782d1f7d5ab641696c"
+        },
+        {
+          "path": "src/protocol/projection.zig",
+          "sha256": "f197f4c136a0b16f393760aca1b15e057191103e03504dbce8b7babe8e8a4bcf"
+        },
+        {
+          "path": "src/scheduler/admission.zig",
+          "sha256": "f43b872ca0648998a9b1f805ae080ad0fb2fe2181134b0018977f528281f9b6f"
+        },
+        {
+          "path": "src/search/context.zig",
+          "sha256": "652a55be86aea519e133fead3621256afa0d24fcf7159f140364e7735afcb0d0"
+        },
+        {
+          "path": "src/search/literal.zig",
+          "sha256": "2c3bc92b02bda3e712b2e670ddc98821169f85ab584b087eaca49fe35a019700"
+        },
+        {
+          "path": "src/search/scalar.zig",
+          "sha256": "aef984f53852ce28f41c7f5eca940db422511890941053e2e81bc362b746c3bd"
+        },
+        {
+          "path": "tests/catalog.json",
+          "sha256": "4e9f6bc90389fecd71a95caf3461816197aa5d10fbf5685d4e1d9132f2651ddc"
+        },
+        {
+          "path": "tests/t00_test.zig",
+          "sha256": "b8037603d16639028d6d4554760d6cbc9325ea2c50498a15376f29eb68cd469a"
+        },
+        {
+          "path": "tests/t01_test.zig",
+          "sha256": "bfaac4f21be8e21c863922b504bbefb4ada21f19f83a6b2f53646e2745ede324"
+        },
+        {
+          "path": "tests/t02_test.zig",
+          "sha256": "7c68a2bd70a5e9f4e07c9d4ac9e39c4da49fdb9d1e6062aac280ada03347d6c0"
+        },
+        {
+          "path": "tests/t03_test.zig",
+          "sha256": "fbeb29d611edc6325f8eae5bfb12fffae45959e84d3252d1d9d04435f8d72d26"
+        },
+        {
+          "path": "tests/t04_test.zig",
+          "sha256": "f29f74d3e0f2e9824a75e976216c563d1bea176666543d0f388d6427d29b96ba"
+        },
+        {
+          "path": "tests/t05_test.zig",
+          "sha256": "c903afffdcc6a72e3c89848c697d4220137cb3fb73a6671f0672c6b42f722f72"
+        },
+        {
+          "path": "tests/t06_test.zig",
+          "sha256": "617c7a9390586aa3a81a9f590f5ce56b4196d2148c60d4892a02c8ab2f8e712e"
+        },
+        {
+          "path": "tests/t07_test.zig",
+          "sha256": "b1d1b61250f56b325bbd217d7c4356fdd2aef78a94932d1bfae575cfdc43e458"
+        },
+        {
+          "path": "tests/vectors.json",
+          "sha256": "ee87aa75003969e71c27e9790fc083a071f6d97c63acceb64245a2bf2c5f7ad8"
+        }
+      ],
+      "source_digest": "18106339c49eccd404fff8f61382c3ccee10a43fa3a126dedbedbecb454d8316"
+    }
+  },
+  "environment": {
+    "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T07/zig-global-cache",
+    "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T07/zig-local-cache",
+    "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T07/tmp"
+  }
+}

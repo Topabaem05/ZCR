@@ -1,0 +1,91 @@
+test
++- run test T04-test 9 pass, 1 fail (10 total); 1 leaks
+error: 't04_test.test.T04 capability, reservation and consistency must match the request' failed:
+       expected error.OutOfScope, found .{ .value = .{ .path = .{ .bytes = { ... } }, .lines = { .{ ... } }, .version = .{ .workspace_id = .{ ... }, .file_id = .{ ... }, .generation = 7, .size = 6, .mtime_ns = 1789129635890164104, .sha256 = null }, .status = .{ .complete = true, .truncated = false, .consistency = .checked_live, .coverage = .{ ... } } }, .arena = .{ .child_allocator = .{ .ptr = anyopaque@16b1a0258, .vtable = .{ ... } }, .state = .{ .used_list = .{ ... }, .free_list = null } } }
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m9-no-capability-path/src/fs/metadata.zig:51:33: 0x104d9905f in openRegular (T04-test)
+           if (entry.kind != .regular) return error.NotRegular;
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m9-no-capability-path/src/fs/read.zig:130:24: 0x104d84dd3 in readOnce (T04-test)
+               const opened = try metadata.openRegular(io, self.root.dir, spec.path.bytes);
+                              ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m9-no-capability-path/src/fs/read.zig:92:29: 0x104d84af3 in readRange (T04-test)
+                       else => |e| return e,
+                                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m9-no-capability-path/src/fs/metadata.zig:51:33: 0x104d9905f in openRegular (T04-test)
+           if (entry.kind != .regular) return error.NotRegular;
+                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m9-no-capability-path/src/fs/read.zig:130:24: 0x104d84dd3 in readOnce (T04-test)
+               const opened = try metadata.openRegular(io, self.root.dir, spec.path.bytes);
+                              ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m9-no-capability-path/src/fs/read.zig:92:29: 0x104d84af3 in readRange (T04-test)
+                       else => |e| return e,
+                                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m9-no-capability-path/src/policy/paths.zig:112:37: 0x104d92ccf in resolve (T04-test)
+               if (entry.kind == .symlink) return error.PathEscape;
+                                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m9-no-capability-path/src/fs/metadata.zig:72:71: 0x104d920b3 in resolveFinal (T04-test)
+           const resolved = policy.paths.resolve(io, root, path) catch |err| return switch (err) {
+                                                                             ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m9-no-capability-path/src/fs/metadata.zig:49:22: 0x104d98f77 in openRegular (T04-test)
+           const resolved = try resolveFinal(io, root, path);
+                            ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m9-no-capability-path/src/fs/read.zig:130:24: 0x104d84dd3 in readOnce (T04-test)
+               const opened = try metadata.openRegular(io, self.root.dir, spec.path.bytes);
+                              ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m9-no-capability-path/src/fs/read.zig:92:29: 0x104d84af3 in readRange (T04-test)
+                       else => |e| return e,
+                                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m9-no-capability-path/src/fs/metadata.zig:50:35: 0x104d98fd7 in openRegular (T04-test)
+           const entry = resolved orelse return error.NotFound;
+                                         ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m9-no-capability-path/src/fs/read.zig:130:24: 0x104d84dd3 in readOnce (T04-test)
+               const opened = try metadata.openRegular(io, self.root.dir, spec.path.bytes);
+                              ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m9-no-capability-path/src/fs/read.zig:92:29: 0x104d84af3 in readRange (T04-test)
+                       else => |e| return e,
+                                   ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:65:9: 0x104d7e09b in expectError__anon_37539 (T04-test)
+               return error.TestExpectedError;
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m9-no-capability-path/tests/t04_test.zig:521:9: 0x104d7fbab in test.T04 capability, reservation and consistency must match the request (T04-test)
+               try testing.expectError(error.OutOfScope, h.reader.readRange(io, reserved.allocator(), capability, s, &reservation, h.cancel()));
+               ^
+       [DebugAllocator] (err): memory address 0x10bea0000 leaked: 
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x104c8230f in rawAlloc (T04-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:286:40: 0x104c8bbd7 in allocWithSizeAndAlignment__anon_9797 (T04-test)
+           return self.allocBytesWithAlignment(alignment, byte_count, return_address);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:274:89: 0x104c8b9f3 in allocAdvancedWithRetAddr (T04-test)
+           const ptr: [*]align(a.toByteUnits()) T = @ptrCast(try self.allocWithSizeAndAlignment(@sizeOf(T), a, n, return_address));
+                                                                                               ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m9-no-capability-path/src/fs/read.zig:157:63: 0x104d852e3 in readOnce (T04-test)
+               const block = try owned.arena.allocator().alignedAlloc(u8, .of(core.Line), total);
+                                                                     ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m9-no-capability-path/src/fs/read.zig:86:26: 0x104d84963 in readRange (T04-test)
+                   self.readOnce(io, allocator, &owned, spec, reservation, cancel, attempt) catch |err| switch (err) {
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m9-no-capability-path/tests/t04_test.zig:521:69: 0x104d7fa77 in test.T04 capability, reservation and consistency must match the request (T04-test)
+               try testing.expectError(error.OutOfScope, h.reader.readRange(io, reserved.allocator(), capability, s, &reservation, h.cancel()));
+                                                                           ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x104d5b12f in mainServer (T04-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x104d5b7df in main (T04-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x104d595a3 in callMain (T04-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       (additional stack frames may have been skipped...)
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache/o/7014cd2a144e1376bb3c856db1c5761a/T04-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache --seed=0x14c02788 --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 9/10 tests passed (1 failed)
+test transitive failure
++- run test T04-test 9 pass, 1 fail (10 total); 1 leaks
+   +- compile test T04-test Debug native success 6s MaxRSS:244M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache/o/12ecb60e287f5a624443e3faa2ba9fc4/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m9-no-capability-path /Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T04/zig-global-cache --seed 0x14c02788 -Z281b7891a2b2bdb4 test -Dtest-group=io --summary all

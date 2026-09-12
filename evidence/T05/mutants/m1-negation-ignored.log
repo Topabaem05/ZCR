@@ -1,0 +1,52 @@
+test
++- run test T05-test 9 pass, 2 fail (11 total)
+error: 't05_test.test.FS-001 nested .gitignore files and negations give Git's file set' failed:
+       expected (11):
+         .gitignore
+         deep/nested/.gitignore
+         deep/nested/c.log
+         docs/keep.md
+         important.log
+         keep.txt
+         src/.gitignore
+         src/debug.log
+         src/sub/local.txt
+         src/top-only.txt
+         src/z.zig
+       actual (8):
+         .gitignore
+         deep/nested/.gitignore
+         docs/keep.md
+         keep.txt
+         src/.gitignore
+         src/sub/local.txt
+         src/top-only.txt
+         src/z.zig
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m1-negation-ignored/tests/t05_test.zig:174:9: 0x10448ed17 in expectSameSet (T05-test)
+               return error.TestExpectedEqual;
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m1-negation-ignored/tests/t05_test.zig:207:5: 0x1044d750b in test.FS-001 nested .gitignore files and negations give Git's file set (T05-test)
+           try expectSameSet(oracle, collector.sorted());
+           ^
+error: 't05_test.test.FS-002 a file under an excluded directory cannot be re-included, contents of a pattern-excluded directory can' failed:
+       expected (3):
+         .gitignore
+         cache/keep.txt
+         vendor/keep/a.txt
+       actual (1):
+         .gitignore
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m1-negation-ignored/tests/t05_test.zig:174:9: 0x10448ed17 in expectSameSet (T05-test)
+               return error.TestExpectedEqual;
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m1-negation-ignored/tests/t05_test.zig:230:5: 0x1044d6a57 in test.FS-002 a file under an excluded directory cannot be re-included, contents of a pattern-excluded directory can (T05-test)
+           try expectSameSet(oracle, collector.sorted());
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache/o/efbcd2b830d88c3d96c89729717f3613/T05-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache --seed=0xa95c58b --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 9/11 tests passed (2 failed)
+test transitive failure
++- run test T05-test 9 pass, 2 fail (11 total)
+   +- compile test T05-test Debug native success 5s MaxRSS:262M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache/o/5141f98b72c01d7e7e7d84fd5e561ea8/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m1-negation-ignored /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T05/zig-global-cache --seed 0xa95c58b -Ze19fd62b331a2f42 test -Dtest-group=fs --summary all

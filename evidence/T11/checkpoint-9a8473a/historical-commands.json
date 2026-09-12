@@ -1,0 +1,93 @@
+[
+  {
+    "log": "green-debug-2.log",
+    "sha256": "05e8587e6c3cb7feb261a5fede3eaec2c0d7a64efd98351e708aa9743e1a7d2d",
+    "exit_code": 0,
+    "command": "zig build test -Dtest-group=write -Doptimize=Debug -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T11/out-debug --summary all",
+    "status": "historical intermediate state; not evidence of final source"
+  },
+  {
+    "log": "green-debug-3.log",
+    "sha256": "c5ada2efbdf275d28789bc2a8fa68c5bd994a4282feb95385fb653dad5c9677c",
+    "exit_code": 0,
+    "command": "zig build test -Dtest-group=write -Doptimize=Debug -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T11/out-debug --summary all",
+    "status": "historical intermediate state; not evidence of final source"
+  },
+  {
+    "log": "green-debug-initial.log",
+    "sha256": "7a75609bc715898e4802eeee78dce04cc5ab8dfaf3aeb41daea15cf05986724a",
+    "exit_code": 1,
+    "command": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache/o/81f38b490921d3ae2c610102b61a3558/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-T11 /workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache /workspace/scratch/3f4ab65dfb82/state/T11/zig-global-cache --seed 0x8819097 -Zf407db14adc13e7f test -Dtest-group=write -Doptimize=Debug -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T11/out-debug --summary all",
+    "status": "historical intermediate state; not evidence of final source"
+  },
+  {
+    "log": "green-releasesafe.log",
+    "sha256": "0047281f6d24cb7069f5dfb7d3c181a550ba4566e670c1b7aee2458d73dc124f",
+    "exit_code": 0,
+    "command": "zig build test -Dtest-group=write -Doptimize=ReleaseSafe -Dfault-injection=true -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T11/out-releasesafe --summary all",
+    "status": "historical intermediate state; not evidence of final source"
+  },
+  {
+    "log": "implementation-compile-1.log",
+    "sha256": "9cafa9d8bbd601cc391556c14cd332852270edddd75a9c3fdd9d1442f581f916",
+    "exit_code": 1,
+    "command": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache/o/81f38b490921d3ae2c610102b61a3558/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-T11 /workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache /workspace/scratch/3f4ab65dfb82/state/T11/zig-global-cache --seed 0x3c6c5cbe -Z804a35d4414d4ac4 test -Dtest-group=write -Doptimize=Debug --summary all",
+    "status": "historical intermediate state; not evidence of final source"
+  },
+  {
+    "log": "implementation-compile-2.log",
+    "sha256": "44c9062d72d488803eb7481802f8247ded3e597cd2d19a8be3995fcaa4987bc6",
+    "exit_code": 1,
+    "command": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache/o/81f38b490921d3ae2c610102b61a3558/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-T11 /workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache /workspace/scratch/3f4ab65dfb82/state/T11/zig-global-cache --seed 0x876ce154 -Z1b17fe69d68bef50 test -Dtest-group=write -Doptimize=Debug --summary all",
+    "status": "historical intermediate state; not evidence of final source"
+  },
+  {
+    "log": "primitive-debug-1.log",
+    "sha256": "d76b6ec23871240241fe0824b0c1e228a8104bac6c9d65b0c91f0dd7a09eca4f",
+    "exit_code": 1,
+    "command": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache/o/81f38b490921d3ae2c610102b61a3558/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-T11 /workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache /workspace/scratch/3f4ab65dfb82/state/T11/zig-global-cache --seed 0x5c5044c7 -Z7758378c20147e47 test -Dtest-group=write -Dtest-id=primitive -Doptimize=Debug --summary all",
+    "status": "historical intermediate state; not evidence of final source"
+  },
+  {
+    "log": "primitive-debug-2.log",
+    "sha256": "945e56de2d202734f9be3d5afebdfc8ed22567baff58547001c6b3d78761aa00",
+    "exit_code": 0,
+    "command": "zig build test -Dtest-group=write -Dtest-id=primitive -Doptimize=Debug -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T11/out-primitives --summary all",
+    "status": "historical intermediate state; not evidence of final source"
+  },
+  {
+    "log": "primitive-debug-3.log",
+    "sha256": "2c5f0615cdb1b66c57e37640e3e7d9cf4607552f6f2b2a39706606d20ba8cc20",
+    "exit_code": 0,
+    "command": "zig build test -Dtest-group=write -Dtest-id=primitive -Doptimize=Debug --summary all",
+    "status": "historical intermediate state; not evidence of final source"
+  },
+  {
+    "log": "primitive-debug-4.log",
+    "sha256": "b33431077c18b58343e00e0e59e32c52e5ed86abebbc4513a1df645ffedc3331",
+    "exit_code": 0,
+    "command": "zig build test -Dtest-group=write -Dtest-id=primitive -Doptimize=Debug --summary all",
+    "status": "historical intermediate state; not evidence of final source"
+  },
+  {
+    "log": "primitive-debug.log",
+    "sha256": "9dcf7a02a9721a3cf5426a5122ac910016f9778b4a6e3d6ad845e55522870469",
+    "exit_code": 1,
+    "command": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache/o/81f38b490921d3ae2c610102b61a3558/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-T11 /workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache /workspace/scratch/3f4ab65dfb82/state/T11/zig-global-cache --seed 0x11ca8f2b -Zbcf8d0c13dac890d test -Dtest-group=write -Dtest-id=primitive -Doptimize=Debug -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T11/out-primitives --summary all",
+    "status": "historical intermediate state; not evidence of final source"
+  },
+  {
+    "log": "red-initial.log",
+    "sha256": "1f96243e69f6253816e263fabd8f9fd5c26f5ae2eb177bef1479049c0a4da474",
+    "exit_code": 1,
+    "command": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache/o/81f38b490921d3ae2c610102b61a3558/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-T11 /workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache /workspace/scratch/3f4ab65dfb82/state/T11/zig-global-cache --seed 0xc027a4da -Z724865f9f6e9c040 test -Dtest-group=write -Doptimize=Debug -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T11/out-red --summary all",
+    "status": "historical intermediate state; not evidence of final source"
+  },
+  {
+    "log": "red.log",
+    "sha256": "be67827aa9cb583250c3d3ed4480849fcb052bf8ca22cf20e88f1aa9b3625cea",
+    "exit_code": 1,
+    "command": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache/o/81f38b490921d3ae2c610102b61a3558/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-T11 /workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache /workspace/scratch/3f4ab65dfb82/state/T11/zig-global-cache --seed 0x8a26cea4 -Z188013c0c087d436 test -Dtest-group=write -Doptimize=Debug -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T11/out-red --summary all",
+    "status": "historical intermediate state; not evidence of final source"
+  }
+]

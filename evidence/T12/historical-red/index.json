@@ -1,0 +1,38 @@
+[
+  {
+    "artifact": "historical-red/red.log",
+    "sha256": "03ea28b5541f6ea6b624972b08645aa7e60a6d0c07b3b6dc4ab365a839fbc886",
+    "source_commit": "f75b69b",
+    "provenance": "initial committed functional RED",
+    "binary_hashes_when_preserved": {
+      "/workspace/scratch/3f4ab65dfb82/state/T12/cache/o/7c6400dc45904fed9254005aba1e4844/T12-test": "b8ee94b45063d79f5718271e0ecb55c2e15042b279be5e8b3a3434e7898ec0cb"
+    }
+  },
+  {
+    "artifact": "historical-red/inode-reuse-red.log",
+    "sha256": "ce2582a8f85fcae39abb621caf9bfbf2d4ea3c7d9453dda417d1869ecb555db0",
+    "source_commit": null,
+    "provenance": "preserved functional RED; uncommitted source snapshot unavailable",
+    "binary_hashes_when_preserved": {
+      "/workspace/scratch/3f4ab65dfb82/state/T12/cache/o/1575200bbda660dad37943969afffc0b/T12-test": "8d46219424f315da862e5abdc6b75931b1f8dc783de2178ebafc952fdfd7ab48"
+    }
+  },
+  {
+    "artifact": "historical-red/chain-drift-red.log",
+    "sha256": "dc0e61e46146ede1e1b639f965798d1db03386edaea95f3cafecb9903c6c1712",
+    "source_commit": null,
+    "provenance": "preserved functional RED; uncommitted source snapshot unavailable",
+    "binary_hashes_when_preserved": {
+      "/workspace/scratch/3f4ab65dfb82/state/T12/cache/o/2325ce3ad7eeb1a2189557a95b4131aa/T12-test": "e8fce41129b8957f949b9bac5fe5dd0ab75d0c6ce46b1e25439ff10e72898215"
+    }
+  },
+  {
+    "artifact": "historical-red/successive-tail-red.log",
+    "sha256": "9428ddff9dfb63cb54992d1d6210cd4949fa0a38d2a9c22d32304e7557356c47",
+    "source_commit": null,
+    "provenance": "preserved functional RED; uncommitted source snapshot unavailable",
+    "binary_hashes_when_preserved": {
+      "/workspace/scratch/3f4ab65dfb82/state/T12/cache/o/d164ca3ad061556ca658c52b12d9805d/T12-test": "c25aed3736d1c07741563e520275355e92fe667ed68b3dc842b33c55210fd3d6"
+    }
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "schema_version": "zcr-evidence/1",
+  "task_id": "T03",
+  "label": "green-memory-debug",
+  "command": "zig build test -Dtest-group=memory -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-green-memory-debug",
+  "exit_code": 0,
+  "source_commit": "20f0589e524235171c90d87c0577d2e83d197962",
+  "source_tree": "4713fbf5908149141967ef8e08889241374fe5cc",
+  "worktree_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/task-t03",
+  "binary_path": "/Users/guribbong/code/ZCR-state/tasks/T03/out-green-memory-debug/bin/T03-test",
+  "binary_sha256": "325c7cfa7f75bf28ba52aee97f165ea8472678361d5d01d657ddd0a8328a7af7",
+  "recorded_at_unix_ms": 1789128283126
+}

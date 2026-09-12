@@ -1,0 +1,28 @@
+{
+  "task": "T04",
+  "role": "task",
+  "violations": [],
+  "changes": [
+    {
+      "kind": "added",
+      "path": "src/fs/metadata.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "src/fs/read.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "tests/t04_test.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    }
+  ]
+}

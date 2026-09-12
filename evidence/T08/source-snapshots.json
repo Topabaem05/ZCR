@@ -1,0 +1,19 @@
+{
+  "source_commit": "48d2e8b61a83af444f0914379f8bc75f169413f3",
+  "source_tree": "32e0f1c7db627bfcdf45a8acf475b41e8be718bb",
+  "files": {
+    "src/protocol/mcp.zig": "953cba2a4ed12fe5071ff65c1b1af6e0f480da6b8e956c53fde1efb728942264",
+    "src/protocol/framing.zig": "893d41b3fbed837ec856596bbe9ba04ec5d22d8a122b00fb39f1231197e20aeb",
+    "src/protocol/codec.zig": "f3af32c8682d0afa0b39bcbc39edeb7bd92beef8946fc0c335671c90444188c0",
+    "tests/t08_test.zig": "b136134593756a6707b6699d67157b2a4c41148dae831e5dde151fb15e989be2",
+    "src/batch/read.zig": "6c6172025043f3908c67435cf87ebf6fa7fbb4a3a6df78f10869293c0446d0a9",
+    "src/protocol/projection.zig": "f197f4c136a0b16f393760aca1b15e057191103e03504dbce8b7babe8e8a4bcf",
+    "src/fs/read.zig": "fc44afef6757b72701169a2b13c146ecb6c2b8f2a02249104a7158abbe0352b1",
+    "src/fs/traverse.zig": "3418fc6b915b0fa8ffd8bafb3f2c7fd0adb1911a9371a1527d8f659ee83737cb",
+    "src/search/literal.zig": "2c3bc92b02bda3e712b2e670ddc98821169f85ab584b087eaca49fe35a019700",
+    "src/policy/capability.zig": "11a77a83e45aab973e54e69e3d5f953d74efc1a1193fdf74006e4119772183c9",
+    "src/core/types.zig": "16347affe942c1393bdbe28c053a0e5813888b6f141b4a157b3c7068ae12500c",
+    "src/memory/budget.zig": "51394d108231fd049bfc88e3fa3468d75a33a9d5d9e9e3e2b2c0e60ce14aa4c0",
+    "contracts/tools.json": "6537c0961f85dd623cf76c195dab534f583052c31eff2eda54727e97083a0b4b"
+  }
+}

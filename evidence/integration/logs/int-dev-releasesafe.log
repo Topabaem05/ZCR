@@ -1,0 +1,13 @@
+Build Summary: 8/8 steps succeeded; 18/18 tests passed
+test success
++- install T01-test success
+|  +- compile test T01-test ReleaseSafe native success 31s MaxRSS:340M
+|     +- options cached
++- run test T01-test 18 pass (18 total) 8s MaxRSS:10M
+|  +- compile test T01-test ReleaseSafe native (+1 more reused dependencies)
++- run exe zcr success 696ms
+|  +- compile exe zcr ReleaseSafe native success 23s MaxRSS:237M
+|     +- options (reused)
++- run exe zcr success 695ms
+   +- compile exe zcr ReleaseSafe native (+1 more reused dependencies)
+

@@ -1,0 +1,15 @@
+{
+  "schema_version": "zcr-t08-red/1",
+  "base_commit": "9897f27a18c66c310ae6dda3ee854f7fdcdcfa3d",
+  "source_state": "uncommitted initial owned-source RED; exact files preserved under red-source",
+  "command": "zig test --dep zcr_mcp -Mroot=tests/t08_test.zig -Mzcr_mcp=src/protocol/mcp.zig -femit-bin=/workspace/scratch/3f4ab65dfb82/state/T08/out/red-test",
+  "exit_code": 1,
+  "expected_failure": "TestUnexpectedResult at supportedVersion(2025-11-25); valid test compiled, no compiler/toolchain error",
+  "binary_sha256": "cb77bf02c8b5b8ccedb7477c35006cbc8fb1a40c84174aa93bb7cb4c5c3c3757",
+  "output_artifact": "evidence/T08/logs/red.log",
+  "output_sha256": "457535254be8838b02865ea6a6a5096182a32ede2bda85b7528ec7807dbca5d9",
+  "source_sha256": {
+    "t08_test.zig": "b8788f1f25b032ed78873ea20accaa739119c8c5abb0812b45e1909404366010",
+    "mcp.zig": "c803d36ce6541be2b8da0f467c9e20bd495c92685843851ff1a3d905fbf4bf00"
+  }
+}

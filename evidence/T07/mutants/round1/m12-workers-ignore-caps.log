@@ -1,0 +1,93 @@
+test
++- run test T07-test 15 pass, 2 fail (17 total); 2 leaks
+error: 't07_test.test.BA-001 32 items keep input order, item ids and per-item errors, and match single reads' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:615:14: 0x10440b733 in expect (T07-test)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m12-workers-ignore-caps/tests/t07_test.zig:344:5: 0x10448dd97 in test.BA-001 32 items keep input order, item ids and per-item errors, and match single reads (T07-test)
+           try testing.expect(rep.peak_running <= 4);
+           ^
+       [DebugAllocator] (err): memory address 0x1091b0000 leaked: 
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x10430e30f in rawAlloc (T07-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:286:40: 0x104317bd7 in allocWithSizeAndAlignment__anon_9797 (T07-test)
+           return self.allocBytesWithAlignment(alignment, byte_count, return_address);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:274:89: 0x1043179f3 in allocAdvancedWithRetAddr (T07-test)
+           const ptr: [*]align(a.toByteUnits()) T = @ptrCast(try self.allocWithSizeAndAlignment(@sizeOf(T), a, n, return_address));
+                                                                                               ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m12-workers-ignore-caps/src/batch/read.zig:311:63: 0x104441ed7 in batchRead (T07-test)
+               const store = try owned.arena.allocator().alignedAlloc(u8, .of(Line), @intCast(storeBytes(items, run.output_pool)));
+                                                                     ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m12-workers-ignore-caps/tests/t07_test.zig:115:46: 0x10440b04f in runWithCost (T07-test)
+               const owned = try h.batcher.batchRead(io, reserved.allocator(), session(), items, &reservation);
+                                                    ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m12-workers-ignore-caps/tests/t07_test.zig:105:29: 0x10440b2e3 in run (T07-test)
+               return h.runWithCost(items, cost, null);
+                                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m12-workers-ignore-caps/tests/t07_test.zig:304:22: 0x10448b50b in test.BA-001 32 items keep input order, item ids and per-item errors, and match single reads (T07-test)
+           var r = try h.run(&items, 1 * MiB, 4);
+                            ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x1043e712f in mainServer (T07-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x1043e77df in main (T07-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x1043e55a3 in callMain (T07-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       (additional stack frames may have been skipped...)
+error: 't07_test.test.BA-001 results do not depend on how many items run at once' failed:
+       expected 1, found 2
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x104460bc3 in expectEqualInner__anon_49759 (T07-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x1044859f3 in expectEqual (T07-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m12-workers-ignore-caps/tests/t07_test.zig:358:5: 0x104485ab7 in test.BA-001 results do not depend on how many items run at once (T07-test)
+           try testing.expectEqual(@as(u32, 1), h.batcher.report().peak_running);
+           ^
+       [DebugAllocator] (err): memory address 0x10b524000 leaked: 
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x10430e30f in rawAlloc (T07-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:286:40: 0x104317bd7 in allocWithSizeAndAlignment__anon_9797 (T07-test)
+           return self.allocBytesWithAlignment(alignment, byte_count, return_address);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:274:89: 0x1043179f3 in allocAdvancedWithRetAddr (T07-test)
+           const ptr: [*]align(a.toByteUnits()) T = @ptrCast(try self.allocWithSizeAndAlignment(@sizeOf(T), a, n, return_address));
+                                                                                               ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m12-workers-ignore-caps/src/batch/read.zig:311:63: 0x104441ed7 in batchRead (T07-test)
+               const store = try owned.arena.allocator().alignedAlloc(u8, .of(Line), @intCast(storeBytes(items, run.output_pool)));
+                                                                     ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m12-workers-ignore-caps/tests/t07_test.zig:115:46: 0x10440b04f in runWithCost (T07-test)
+               const owned = try h.batcher.batchRead(io, reserved.allocator(), session(), items, &reservation);
+                                                    ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m12-workers-ignore-caps/tests/t07_test.zig:105:29: 0x10440b2e3 in run (T07-test)
+               return h.runWithCost(items, cost, null);
+                                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m12-workers-ignore-caps/tests/t07_test.zig:357:27: 0x10448585b in test.BA-001 results do not depend on how many items run at once (T07-test)
+           var serial = try h.run(&items, 1 * MiB, 1);
+                                 ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x1043e712f in mainServer (T07-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x1043e77df in main (T07-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x1043e55a3 in callMain (T07-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       (additional stack frames may have been skipped...)
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache/o/6127a6609c02ff90f57d160f662bc4d7/T07-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache --seed=0xecf840ba --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 15/17 tests passed (2 failed)
+test transitive failure
++- run test T07-test 15 pass, 2 fail (17 total); 2 leaks
+   +- compile test T07-test Debug native success 10s MaxRSS:223M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache/o/2759f0ba666e46dcb034eb08a284d1a7/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m12-workers-ignore-caps /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T07/zig-global-cache --seed 0xecf840ba -Zde799278fc8544e3 test -Dtest-group=batch --summary all

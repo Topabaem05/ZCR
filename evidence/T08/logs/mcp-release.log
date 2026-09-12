@@ -1,0 +1,16 @@
+1/15 t08_test.test.MC-001 supported version negotiates exact capabilities and schema discovery...OK
+2/15 t08_test.test.MC-002 exact text_v1 real read files search batch status health and ids...OK
+3/15 t08_test.test.MC-003 malformed JSON fields numeric bounds unsupported capabilities are classified...OK
+4/15 t08_test.test.MC-002 partial frames preserve escaped newline and drain oversized records...OK
+5/15 t08_test.test.MC-004 request cancellation remains local and authority revalidation rejects stale root...OK
+6/15 t08_test.test.MC-002 direct stdio worker emits complete records within 32 MiB native budget...OK
+7/15 t08_test.test.MC-004 real partial pipe input cancellation and slow output drain without interleaving...OK
+8/15 t08_test.test.MC-004 deadline watcher interrupts before filesystem work and output failure drains...OK
+9/15 t08_test.test.MC-003 policy enabled discovery filters and complete serialized output budget...OK
+10/15 t08_test.test.MC-003 depth64 keys and flat-value parser caps are enforced before DOM allocation...OK
+11/15 t08_test.test.MC-002 enumerate and search are admitted on native32MiB profile...OK
+12/15 t08_test.test.MC-003 oversized unknown fields reject before DOM allocation and preserve RPC id...OK
+13/15 t08_test.test.MC-004 stdout failure stops even when peer keeps stdin open...OK
+14/15 t08_test.test.MC-004 retiring tool id is detached before gated arena teardown...OK
+15/15 t08_test.test.MC-004 pre-reserved health control credit survives ordinary budget exhaustion...OK
+All 15 tests passed.

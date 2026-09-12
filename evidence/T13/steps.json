@@ -1,0 +1,67 @@
+{
+  "schema_version": "zcr-t13-step-state/1",
+  "note": "Artifact-backed step-state snapshot, not a retroactively generated zcr-step-ledger transition log. Source commits and commands are retained separately.",
+  "task_id": "T13",
+  "base_commit": "98c722ebc906321b94bc3e9c8b60522f3305faa7",
+  "source_commit": "8a4d74fe6f87a1f5427c6d0f94dd0b01fe082efd",
+  "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+  "steps": [
+    {
+      "step": "S01",
+      "status": "PASS",
+      "evidence": [
+        "manifest.json",
+        "authorization.json",
+        "preflight.json"
+      ],
+      "note": "Bound dedicated worktree/caches and allowed scope; clean final source preflight recorded."
+    },
+    {
+      "step": "S02",
+      "status": "PASS",
+      "head": "29c732a4ccab3971ad371f87a0e7da0f0dbfd17f",
+      "evidence": [
+        "red.json",
+        "red.log",
+        "red-isolation.log"
+      ]
+    },
+    {
+      "step": "S03",
+      "status": "PASS",
+      "head": "8a4d74fe6f87a1f5427c6d0f94dd0b01fe082efd",
+      "evidence": [
+        "review.md",
+        "handoff.json"
+      ]
+    },
+    {
+      "step": "S04",
+      "status": "PASS",
+      "evidence": [
+        "runs.json",
+        "green-debug.log",
+        "fault-debug.log"
+      ]
+    },
+    {
+      "step": "S05",
+      "status": "PASS",
+      "evidence": [
+        "green-safe.log",
+        "regression-io.log",
+        "regression-isolation.log",
+        "contracts.log",
+        "standard-verification.json"
+      ]
+    },
+    {
+      "step": "S06",
+      "status": "READY_FOR_INTEGRATION",
+      "evidence": [
+        "handoff.json",
+        "review.md"
+      ]
+    }
+  ]
+}

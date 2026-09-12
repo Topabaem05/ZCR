@@ -1,0 +1,38 @@
+test
++- run test T14-test 0 pass, 3 fail (3 total)
+error: 't14_test.test.WA-001 native Linux starts watching before a file created during initial scan' failed:
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:615:14: 0x122c7c9 in expect (std.zig)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T14/tests/t14_test.zig:24:5: 0x122e376 in test.WA-001 native Linux starts watching before a file created during initial scan (t14_test.zig)
+           try t.expect(try backend.poll(io, .{ .requested = &cancel_flag }) > 0);
+           ^
+error: 't14_test.test.WA-003 dropped events mark the workspace uncertain before latest requests' failed:
+       expected .uncertain, found .live
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:118:17: 0x122c824 in expectEqualInner__anon_43090 (std.zig)
+                       return error.TestExpectedEqual;
+                       ^
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:83:5: 0x122db9a in expectEqual (t14_test.zig)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T14/tests/t14_test.zig:29:5: 0x122dbf3 in test.WA-003 dropped events mark the workspace uncertain before latest requests (t14_test.zig)
+           try t.expectEqual(core.IndexState.uncertain, try index.invalidate(id, .{ .kind = .dropped, .path = null, .cursor = 1 }));
+           ^
+error: 't14_test.test.WA-005 event storm promotes the bounded queue to whole workspace dirty' failed:
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:615:14: 0x122c7c9 in expect (std.zig)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T14/tests/t14_test.zig:37:5: 0x122cb6e in test.WA-005 event storm promotes the bounded queue to whole workspace dirty (t14_test.zig)
+           try t.expect(index.snapshot().full_dirty);
+           ^
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/T14/zig-local-cache && /workspace/scratch/3f4ab65dfb82/state/T14/zig-local-cache/o/c9fe9eab9e7b709448fee04581201bce/T14-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/T14/zig-local-cache --seed=0xfb19fa12 --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 0/3 tests passed (3 failed)
+test transitive failure
++- install T14-test success
+|  +- compile test T14-test Debug native success 422ms MaxRSS:171M
++- run test T14-test 0 pass, 3 fail (3 total)
+   +- compile test T14-test Debug native (reused)
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/T14/zig-local-cache/o/9a392ec49f52064f8d4b70dcbb7a5090/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-T14 /workspace/scratch/3f4ab65dfb82/state/T14/zig-local-cache /workspace/scratch/3f4ab65dfb82/state/T14/zig-global-cache --seed 0xfb19fa12 -Zaccb83a4feac43d6 test -Dtest-group=watch -Doptimize=Debug -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T14/out-behavioral-red --summary all

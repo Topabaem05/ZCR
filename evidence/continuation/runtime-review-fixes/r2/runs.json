@@ -1,0 +1,1113 @@
+{
+  "generated": "2026-09-12",
+  "limitations": [
+    "Historical RED dirty source/test snapshots were not retained; their known clean bases, exact binaries, logs, and commands are recorded without claiming full source reproducibility.",
+    "The historical focused budget build logs are empty and are not promoted to independently reconstructable run records; the non-empty full memory direct logs cover the same test in both configurations.",
+    "Native AF_UNIX broker runs were executed and failed 9 socket tests in each configuration; they remain environment blocked and are never counted as PASS."
+  ],
+  "manifests": {
+    "binaries.json": "01e20e2585cd4460d0c1d2de715d1c90adc9f48a1fe5ab39d2a9a8df2dd0d867",
+    "cli-corpus.json": "acf683c21f95a2825a7c317fa381e3638f0560ba5b1f3b8b295182d4cff46392",
+    "config.json": "879356f99cef6eee94fc8544bd14f4f87e9d94568035987360656d1647fa58b7",
+    "source-final-5ad.json": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+    "source-r1-953.json": "0e4789cef65ccc0aff094e309cc9bbf4770cb431aec13ba9c95274d3de85c142"
+  },
+  "python": {
+    "path": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "sha256": "fa67443527ed9647f760d807e2a38f26340757123e643c4639cf273ed15d5ea7",
+    "version": "3.12.14"
+  },
+  "runs": [
+    {
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=memory",
+        "-Dtest-id=ME-005",
+        "-Doptimize=Debug"
+      ],
+      "binary": {
+        "bytes": 13017912,
+        "label": "budget-focused-debug",
+        "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/final-debug-local/o/b4f1a403e67f47a8e4da236ac621f427/T03-test",
+        "sha256": "0fd58dd62223a58eaae287dce63ff140a5ff79d6a521f5be39dac5ffba610d29"
+      },
+      "config": {
+        "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+        "path": "r2/manifests/config.json",
+        "sha256": "879356f99cef6eee94fc8544bd14f4f87e9d94568035987360656d1647fa58b7"
+      },
+      "corpus": {
+        "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+        "corpus_path": "r2/manifests/source-final-5ad.json",
+        "corpus_sha256": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+        "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+      },
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes",
+      "environment": {
+        "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/tmp",
+        "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/final-debug-global",
+        "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/final-debug-local"
+      },
+      "exit": 0,
+      "failed": 0,
+      "kind": "zig-build-test",
+      "label": "budget-focused-debug",
+      "log": {
+        "bytes": 0,
+        "path": "r2/logs/final-budget-debug.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "note": "successful focused build output is empty; full non-empty T03 direct log independently includes ME-005",
+      "passed": 1,
+      "source": {
+        "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+        "corpus_path": "r2/manifests/source-final-5ad.json",
+        "corpus_sha256": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+        "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+      },
+      "status": "PASS"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=memory",
+        "-Dtest-id=ME-005",
+        "-Doptimize=ReleaseSafe"
+      ],
+      "binary": {
+        "bytes": 3856696,
+        "label": "budget-focused-safe",
+        "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/final-safe-local/o/c76d7af856ee349356d0def8184a564b/T03-test",
+        "sha256": "3d82e395c7f86eb170799a7f952c7b8db449239b7428b4524d6ea664765a9bed"
+      },
+      "config": {
+        "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+        "path": "r2/manifests/config.json",
+        "sha256": "879356f99cef6eee94fc8544bd14f4f87e9d94568035987360656d1647fa58b7"
+      },
+      "corpus": {
+        "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+        "corpus_path": "r2/manifests/source-final-5ad.json",
+        "corpus_sha256": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+        "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+      },
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes",
+      "environment": {
+        "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/tmp",
+        "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/final-safe-global",
+        "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/final-safe-local"
+      },
+      "exit": 0,
+      "failed": 0,
+      "kind": "zig-build-test",
+      "label": "budget-focused-safe",
+      "log": {
+        "bytes": 0,
+        "path": "r2/logs/final-budget-safe.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "note": "successful focused build output is empty; full non-empty T03 direct log independently includes ME-005",
+      "passed": 1,
+      "source": {
+        "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+        "corpus_path": "r2/manifests/source-final-5ad.json",
+        "corpus_sha256": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+        "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+      },
+      "status": "PASS"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/memory-debug/bin/T03-test"
+      ],
+      "binary": {
+        "bytes": 15280821,
+        "label": "memory-debug-T03",
+        "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/memory-debug/bin/T03-test",
+        "sha256": "0e9962c4671c350be778ee9859c5f8e5d239ab9cea090ba2a8770682c38746a4"
+      },
+      "config": {
+        "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+        "path": "r2/manifests/config.json",
+        "sha256": "879356f99cef6eee94fc8544bd14f4f87e9d94568035987360656d1647fa58b7"
+      },
+      "corpus": {
+        "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+        "corpus_path": "r2/manifests/source-final-5ad.json",
+        "corpus_sha256": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+        "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+      },
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes",
+      "environment": {},
+      "exit": 0,
+      "failed": 0,
+      "kind": "direct-test-binary",
+      "label": "memory-debug-T03",
+      "log": {
+        "bytes": 1600,
+        "path": "logs/direct-memory-debug-T03.log",
+        "sha256": "56b5e0a344e427466e28e2f5b018dd9264f5ccb22a2484026fcaee9cf1004919"
+      },
+      "passed": 16,
+      "source": {
+        "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+        "corpus_path": "r2/manifests/source-final-5ad.json",
+        "corpus_sha256": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+        "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+      },
+      "status": "PASS"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/memory-debug/bin/T13-test"
+      ],
+      "binary": {
+        "bytes": 25456930,
+        "label": "memory-debug-T13",
+        "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/memory-debug/bin/T13-test",
+        "sha256": "a1d1d4abe39f930cea35f8e1dde9c91d8f9b2aff457b195073099dd9de1047d1"
+      },
+      "config": {
+        "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+        "path": "r2/manifests/config.json",
+        "sha256": "879356f99cef6eee94fc8544bd14f4f87e9d94568035987360656d1647fa58b7"
+      },
+      "corpus": {
+        "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+        "corpus_path": "r2/manifests/source-final-5ad.json",
+        "corpus_sha256": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+        "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+      },
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes",
+      "environment": {},
+      "exit": 0,
+      "failed": 0,
+      "kind": "direct-test-binary",
+      "label": "memory-debug-T13",
+      "log": {
+        "bytes": 1641,
+        "path": "logs/direct-memory-debug-T13.log",
+        "sha256": "b6a6a750e06cf226150777f5eae7681b48537e9fe86508c5a85e1370d51dd2eb"
+      },
+      "passed": 15,
+      "source": {
+        "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+        "corpus_path": "r2/manifests/source-final-5ad.json",
+        "corpus_sha256": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+        "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+      },
+      "status": "PASS"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/memory-safe/bin/T03-test"
+      ],
+      "binary": {
+        "bytes": 4143232,
+        "label": "memory-safe-T03",
+        "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/memory-safe/bin/T03-test",
+        "sha256": "fd7e8e606648b399be92b970e991b1a53040ff472a719e6131e8281b22546baf"
+      },
+      "config": {
+        "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+        "path": "r2/manifests/config.json",
+        "sha256": "879356f99cef6eee94fc8544bd14f4f87e9d94568035987360656d1647fa58b7"
+      },
+      "corpus": {
+        "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+        "corpus_path": "r2/manifests/source-final-5ad.json",
+        "corpus_sha256": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+        "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+      },
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes",
+      "environment": {},
+      "exit": 0,
+      "failed": 0,
+      "kind": "direct-test-binary",
+      "label": "memory-safe-T03",
+      "log": {
+        "bytes": 1600,
+        "path": "logs/direct-memory-safe-T03.log",
+        "sha256": "56b5e0a344e427466e28e2f5b018dd9264f5ccb22a2484026fcaee9cf1004919"
+      },
+      "passed": 16,
+      "source": {
+        "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+        "corpus_path": "r2/manifests/source-final-5ad.json",
+        "corpus_sha256": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+        "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+      },
+      "status": "PASS"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/memory-safe/bin/T13-test"
+      ],
+      "binary": {
+        "bytes": 4898640,
+        "label": "memory-safe-T13",
+        "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/memory-safe/bin/T13-test",
+        "sha256": "cf86484751d221f3156fdbd1cef6a0a9b50c8cd799c4feec85d853cc726c7abf"
+      },
+      "config": {
+        "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+        "path": "r2/manifests/config.json",
+        "sha256": "879356f99cef6eee94fc8544bd14f4f87e9d94568035987360656d1647fa58b7"
+      },
+      "corpus": {
+        "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+        "corpus_path": "r2/manifests/source-final-5ad.json",
+        "corpus_sha256": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+        "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+      },
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes",
+      "environment": {},
+      "exit": 0,
+      "failed": 0,
+      "kind": "direct-test-binary",
+      "label": "memory-safe-T13",
+      "log": {
+        "bytes": 1641,
+        "path": "logs/direct-memory-safe-T13.log",
+        "sha256": "b6a6a750e06cf226150777f5eae7681b48537e9fe86508c5a85e1370d51dd2eb"
+      },
+      "passed": 15,
+      "source": {
+        "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+        "corpus_path": "r2/manifests/source-final-5ad.json",
+        "corpus_sha256": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+        "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+      },
+      "status": "PASS"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/mcp-debug/bin/T08-test"
+      ],
+      "binary": {
+        "bytes": 28827085,
+        "label": "mcp-debug-T08",
+        "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/mcp-debug/bin/T08-test",
+        "sha256": "75766d9ba3762953e23c592b6b404d1cc9e8153fd24d5bce987f9c29f1ef383e"
+      },
+      "config": {
+        "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+        "path": "r2/manifests/config.json",
+        "sha256": "879356f99cef6eee94fc8544bd14f4f87e9d94568035987360656d1647fa58b7"
+      },
+      "corpus": {
+        "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+        "corpus_path": "r2/manifests/source-final-5ad.json",
+        "corpus_sha256": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+        "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+      },
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes",
+      "environment": {},
+      "exit": 0,
+      "failed": 0,
+      "kind": "direct-test-binary",
+      "label": "mcp-debug-T08",
+      "log": {
+        "bytes": 2809,
+        "path": "logs/direct-mcp-debug-T08.log",
+        "sha256": "77a14211168adad16cd3c582877120146017b107ebfc50380ca6076bd6fad4a1"
+      },
+      "passed": 27,
+      "source": {
+        "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+        "corpus_path": "r2/manifests/source-final-5ad.json",
+        "corpus_sha256": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+        "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+      },
+      "status": "PASS"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/mcp-debug/bin/T08-launch-test"
+      ],
+      "binary": {
+        "bytes": 13052813,
+        "label": "mcp-debug-launch",
+        "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/mcp-debug/bin/T08-launch-test",
+        "sha256": "793036bec881dc03e5728b16a08bea1f2d770e6cd405ea38948f2934a1751898"
+      },
+      "config": {
+        "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+        "path": "r2/manifests/config.json",
+        "sha256": "879356f99cef6eee94fc8544bd14f4f87e9d94568035987360656d1647fa58b7"
+      },
+      "corpus": {
+        "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+        "corpus_path": "r2/manifests/source-final-5ad.json",
+        "corpus_sha256": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+        "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+      },
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes",
+      "environment": {},
+      "exit": 0,
+      "failed": 0,
+      "kind": "direct-test-binary",
+      "label": "mcp-debug-launch",
+      "log": {
+        "bytes": 210,
+        "path": "logs/direct-mcp-debug-launch.log",
+        "sha256": "0007680df6c8d8b9dc1cf83b3c0e1fe86dcb94513ec7b5b0bc98405ee0203a38"
+      },
+      "passed": 2,
+      "source": {
+        "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+        "corpus_path": "r2/manifests/source-final-5ad.json",
+        "corpus_sha256": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+        "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+      },
+      "status": "PASS"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/mcp-safe/bin/T08-test"
+      ],
+      "binary": {
+        "bytes": 6330056,
+        "label": "mcp-safe-T08",
+        "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/mcp-safe/bin/T08-test",
+        "sha256": "515785eb417dba4e8186c11c147aa43e680199472299f32c9bf831ec46c12940"
+      },
+      "config": {
+        "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+        "path": "r2/manifests/config.json",
+        "sha256": "879356f99cef6eee94fc8544bd14f4f87e9d94568035987360656d1647fa58b7"
+      },
+      "corpus": {
+        "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+        "corpus_path": "r2/manifests/source-final-5ad.json",
+        "corpus_sha256": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+        "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+      },
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes",
+      "environment": {},
+      "exit": 0,
+      "failed": 0,
+      "kind": "direct-test-binary",
+      "label": "mcp-safe-T08",
+      "log": {
+        "bytes": 2809,
+        "path": "logs/direct-mcp-safe-T08.log",
+        "sha256": "77a14211168adad16cd3c582877120146017b107ebfc50380ca6076bd6fad4a1"
+      },
+      "passed": 27,
+      "source": {
+        "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+        "corpus_path": "r2/manifests/source-final-5ad.json",
+        "corpus_sha256": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+        "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+      },
+      "status": "PASS"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/mcp-safe/bin/T08-launch-test"
+      ],
+      "binary": {
+        "bytes": 3796456,
+        "label": "mcp-safe-launch",
+        "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/mcp-safe/bin/T08-launch-test",
+        "sha256": "59d80f40beae58fff386e8aba9c01a2beb916aec22741767ef3c534aaa6181b1"
+      },
+      "config": {
+        "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+        "path": "r2/manifests/config.json",
+        "sha256": "879356f99cef6eee94fc8544bd14f4f87e9d94568035987360656d1647fa58b7"
+      },
+      "corpus": {
+        "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+        "corpus_path": "r2/manifests/source-final-5ad.json",
+        "corpus_sha256": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+        "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+      },
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes",
+      "environment": {},
+      "exit": 0,
+      "failed": 0,
+      "kind": "direct-test-binary",
+      "label": "mcp-safe-launch",
+      "log": {
+        "bytes": 210,
+        "path": "logs/direct-mcp-safe-launch.log",
+        "sha256": "0007680df6c8d8b9dc1cf83b3c0e1fe86dcb94513ec7b5b0bc98405ee0203a38"
+      },
+      "passed": 2,
+      "source": {
+        "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+        "corpus_path": "r2/manifests/source-final-5ad.json",
+        "corpus_sha256": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+        "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+      },
+      "status": "PASS"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/broker-debug/bin/T15-test",
+        "--cache-dir=/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/c"
+      ],
+      "binary": {
+        "bytes": 26723192,
+        "label": "broker-filtered-debug",
+        "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/broker-debug/bin/T15-test",
+        "sha256": "5d8f0d5b4baa5b570cad01b2623b6570608d4226ddda78743e68efc2944597ad"
+      },
+      "config": {
+        "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+        "path": "r2/manifests/config.json",
+        "sha256": "879356f99cef6eee94fc8544bd14f4f87e9d94568035987360656d1647fa58b7"
+      },
+      "corpus": {
+        "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+        "corpus_path": "r2/manifests/source-final-5ad.json",
+        "corpus_sha256": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+        "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+      },
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes",
+      "environment": {},
+      "exit": 0,
+      "failed": 0,
+      "kind": "direct-test-binary",
+      "label": "broker-filtered-debug",
+      "log": {
+        "bytes": 1969,
+        "path": "logs/direct-broker-unit-debug.log",
+        "sha256": "8e36d65d98cab36d682d4ae567e0b2a87fd67360d1bfbce659d355d2bea23cdd"
+      },
+      "passed": 19,
+      "source": {
+        "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+        "corpus_path": "r2/manifests/source-final-5ad.json",
+        "corpus_sha256": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+        "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+      },
+      "status": "PASS"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/broker-safe/bin/T15-test",
+        "--cache-dir=/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/c2"
+      ],
+      "binary": {
+        "bytes": 5778848,
+        "label": "broker-filtered-safe",
+        "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/broker-safe/bin/T15-test",
+        "sha256": "100cb85dd5b83017060ae5184bb7ef2cbe43da595e3e6b520b564954cc7144aa"
+      },
+      "config": {
+        "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+        "path": "r2/manifests/config.json",
+        "sha256": "879356f99cef6eee94fc8544bd14f4f87e9d94568035987360656d1647fa58b7"
+      },
+      "corpus": {
+        "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+        "corpus_path": "r2/manifests/source-final-5ad.json",
+        "corpus_sha256": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+        "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+      },
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes",
+      "environment": {},
+      "exit": 0,
+      "failed": 0,
+      "kind": "direct-test-binary",
+      "label": "broker-filtered-safe",
+      "log": {
+        "bytes": 1969,
+        "path": "logs/direct-broker-unit-safe.log",
+        "sha256": "8e36d65d98cab36d682d4ae567e0b2a87fd67360d1bfbce659d355d2bea23cdd"
+      },
+      "passed": 19,
+      "source": {
+        "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+        "corpus_path": "r2/manifests/source-final-5ad.json",
+        "corpus_sha256": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+        "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+      },
+      "status": "PASS"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/broker-full-debug/bin/T15-test",
+        "--cache-dir=/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/c3"
+      ],
+      "binary": {
+        "bytes": 27394914,
+        "label": "broker-full-debug",
+        "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/broker-full-debug/bin/T15-test",
+        "sha256": "580a89391615391fac08c550f2e803c3f5aa12c2c135c92e7d2231cf8e174416"
+      },
+      "blocked": "AF_UNIX socket creation returns EPERM/IoFailure; not PASS",
+      "config": {
+        "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+        "path": "r2/manifests/config.json",
+        "sha256": "879356f99cef6eee94fc8544bd14f4f87e9d94568035987360656d1647fa58b7"
+      },
+      "corpus": {
+        "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+        "corpus_path": "r2/manifests/source-final-5ad.json",
+        "corpus_sha256": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+        "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+      },
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes",
+      "environment": {},
+      "exit": 1,
+      "failed": 9,
+      "kind": "direct-test-binary",
+      "label": "broker-full-debug",
+      "log": {
+        "bytes": 8113,
+        "path": "logs/direct-broker-full-debug.log",
+        "sha256": "230953cbc4d9ad93ef0ff897b14896415beea10df67a44ded6860dcb126d65cf"
+      },
+      "passed": 19,
+      "source": {
+        "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+        "corpus_path": "r2/manifests/source-final-5ad.json",
+        "corpus_sha256": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+        "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+      },
+      "status": "ENVIRONMENT_BLOCKED"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/broker-full-safe/bin/T15-test",
+        "--cache-dir=/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/c4"
+      ],
+      "binary": {
+        "bytes": 6096408,
+        "label": "broker-full-safe",
+        "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/broker-full-safe/bin/T15-test",
+        "sha256": "5f0970a63c28972aa6d3e9472782ce6e4157f35deff8dba728e42f1b20a5e727"
+      },
+      "blocked": "AF_UNIX socket creation returns EPERM/IoFailure; not PASS",
+      "config": {
+        "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+        "path": "r2/manifests/config.json",
+        "sha256": "879356f99cef6eee94fc8544bd14f4f87e9d94568035987360656d1647fa58b7"
+      },
+      "corpus": {
+        "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+        "corpus_path": "r2/manifests/source-final-5ad.json",
+        "corpus_sha256": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+        "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+      },
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes",
+      "environment": {},
+      "exit": 1,
+      "failed": 9,
+      "kind": "direct-test-binary",
+      "label": "broker-full-safe",
+      "log": {
+        "bytes": 3038,
+        "path": "logs/direct-broker-full-safe.log",
+        "sha256": "eab73fbaa617e509eb8cc903e95d3026ff193e207a72da16643b536d0c00fd70"
+      },
+      "passed": 19,
+      "source": {
+        "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+        "corpus_path": "r2/manifests/source-final-5ad.json",
+        "corpus_sha256": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+        "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+      },
+      "status": "ENVIRONMENT_BLOCKED"
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/cli/run_pressure.py",
+        "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/cli-debug/bin/zcr",
+        "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/cli/proof-debug.json"
+      ],
+      "binary": {
+        "bytes": 21414029,
+        "label": "cli-debug",
+        "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/cli-debug/bin/zcr",
+        "sha256": "b3225a35e2be2161faa8c1607cd8c4d31d001b30b9e27dcd754157bcacf620b1"
+      },
+      "checks": 35,
+      "config": {
+        "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+        "path": "r2/manifests/config.json",
+        "sha256": "879356f99cef6eee94fc8544bd14f4f87e9d94568035987360656d1647fa58b7"
+      },
+      "corpus": {
+        "path": "r2/manifests/cli-corpus.json",
+        "sha256": "acf683c21f95a2825a7c317fa381e3638f0560ba5b1f3b8b295182d4cff46392"
+      },
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes",
+      "driver": {
+        "path": "r2/cli/run_pressure.py",
+        "sha256": "b397a0ce501984fbc68853944b0d5ec49b8df89c74a2b9861b9bb28a95673874"
+      },
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit": 0,
+      "kind": "cli-pressure",
+      "label": "cli-pressure-debug",
+      "log": {
+        "bytes": 312,
+        "path": "logs/cli-pressure-debug.log",
+        "sha256": "deb63a33495761bf26c63a147b42a023544f2913fb7c3ca4cf2648b8c6df5f31"
+      },
+      "proof": {
+        "path": "r2/cli/proof-debug.json",
+        "sha256": "fb794ef690d859a7ff671308f82b67ab90a69389c79bb2928f76fadacdb4d65f"
+      },
+      "source": {
+        "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+        "corpus_path": "r2/manifests/source-final-5ad.json",
+        "corpus_sha256": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+        "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+      },
+      "status": "PASS"
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/cli/run_pressure.py",
+        "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/cli-safe/bin/zcr",
+        "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/cli/proof-safe.json"
+      ],
+      "binary": {
+        "bytes": 5928696,
+        "label": "cli-safe",
+        "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/cli-safe/bin/zcr",
+        "sha256": "53ca2f895da0b990ec1fd28c3457519f35026118de1c06a9fb24fb508ca5c88f"
+      },
+      "checks": 35,
+      "config": {
+        "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+        "path": "r2/manifests/config.json",
+        "sha256": "879356f99cef6eee94fc8544bd14f4f87e9d94568035987360656d1647fa58b7"
+      },
+      "corpus": {
+        "path": "r2/manifests/cli-corpus.json",
+        "sha256": "acf683c21f95a2825a7c317fa381e3638f0560ba5b1f3b8b295182d4cff46392"
+      },
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes",
+      "driver": {
+        "path": "r2/cli/run_pressure.py",
+        "sha256": "b397a0ce501984fbc68853944b0d5ec49b8df89c74a2b9861b9bb28a95673874"
+      },
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit": 0,
+      "kind": "cli-pressure",
+      "label": "cli-pressure-safe",
+      "log": {
+        "bytes": 312,
+        "path": "logs/cli-pressure-safe.log",
+        "sha256": "6c063bd14017efbccf98011b343caf2890c06bc4f16f98f929cb48dcb90fb3ac"
+      },
+      "proof": {
+        "path": "r2/cli/proof-safe.json",
+        "sha256": "322778f467c0de6c919d5f6c84dd721d69d8744800739b16c35c0fb84b54c14a"
+      },
+      "source": {
+        "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+        "corpus_path": "r2/manifests/source-final-5ad.json",
+        "corpus_sha256": "a299a2e53744adcec97e5fc1aacccae65840893e4f5b2cee43e85237380f79da",
+        "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+      },
+      "status": "PASS"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-id=ME-005",
+        "-Doptimize=Debug"
+      ],
+      "binary": {
+        "bytes": 13013432,
+        "label": "budget-red-debug",
+        "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/zig-local-cache/o/c343c2441e8e6de98a1253bd818e113e/T03-test",
+        "sha256": "76884ce3f2fbe2e35a17d6158f719b7057cdd41e16fd0f3e0b37986f69b25097"
+      },
+      "config": {
+        "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+        "path": "r2/manifests/config.json",
+        "sha256": "879356f99cef6eee94fc8544bd14f4f87e9d94568035987360656d1647fa58b7"
+      },
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes",
+      "exit": 1,
+      "kind": "functional-red",
+      "label": "budget-red-debug",
+      "log": {
+        "bytes": 2179,
+        "path": "logs/budget-red-debug.log",
+        "sha256": "46c5adae74956d93e233ae790d576cea91453fe8c6fc3435c2df70b5d76b6bd8"
+      },
+      "result": "expected ResourceExhausted, found OutputBudgetExceeded; registry also lacked root-owned T12",
+      "source": {
+        "base_commit": "a4e8957ff58accef322e6ea67719e5346148bac2",
+        "complete_snapshot_retained": false,
+        "dirty_worktree": true,
+        "limitation": "compiled binary and failure log are retained; the exact dirty source/test snapshot was not preserved and is not claimed"
+      },
+      "status": "EXPECTED_FAIL"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=mcp",
+        "-Dtest-id=runtime cache pressure preserves",
+        "-Doptimize=Debug"
+      ],
+      "binary": {
+        "bytes": 27727672,
+        "label": "cache-red-debug",
+        "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/cache-red5-local/o/fa0812cbf1f042bab5a732d866d290dc/T08-test",
+        "sha256": "22dc65cfafe47238c86ebb8e7f2dca72969445fe1a626b133e96a45e1ec75d0c"
+      },
+      "config": {
+        "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+        "path": "r2/manifests/config.json",
+        "sha256": "879356f99cef6eee94fc8544bd14f4f87e9d94568035987360656d1647fa58b7"
+      },
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes",
+      "exit": 1,
+      "kind": "functional-red",
+      "label": "cache-red-debug",
+      "log": {
+        "bytes": 1714,
+        "path": "logs/cache-red5-debug.log",
+        "sha256": "27bbb8a05f096979205e5454ac53c505a55cd11bd73af32d98d21d491f334e29"
+      },
+      "result": "warmed actual MCP request returned ok=false",
+      "source": {
+        "base_commit": "762afa8fdd246631bd95bbe9ae03aa7b77aa9a38",
+        "complete_snapshot_retained": false,
+        "dirty_worktree": true,
+        "limitation": "compiled binary and failure log are retained; the exact dirty source/test snapshot was not preserved and is not claimed"
+      },
+      "status": "EXPECTED_FAIL"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=broker",
+        "-Dtest-id=pre-submit cancellation preserves",
+        "-Doptimize=Debug"
+      ],
+      "binary": {
+        "bytes": 28074210,
+        "label": "broker-red-debug",
+        "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/broker-red2-local/o/3813a748f12b3027e3526bca9771b7c1/T15-test",
+        "sha256": "a5e872a20d7491a3fae146ec48e9efdd4713335457b16605a500d10d8470e228"
+      },
+      "config": {
+        "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+        "path": "r2/manifests/config.json",
+        "sha256": "879356f99cef6eee94fc8544bd14f4f87e9d94568035987360656d1647fa58b7"
+      },
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes",
+      "exit": 1,
+      "kind": "functional-red",
+      "label": "broker-red-debug",
+      "log": {
+        "bytes": 1752,
+        "path": "logs/broker-red2-debug.log",
+        "sha256": "e8d2916265477b39f066df5020de6d402e644e1ade8b764dbb33143c8d6f46b0"
+      },
+      "result": "response omitted original id 2",
+      "source": {
+        "base_commit": "384a690e7890cb328dcbba6f9f6aeb471e91a129",
+        "complete_snapshot_retained": false,
+        "dirty_worktree": true,
+        "limitation": "compiled binary and failure log are retained; the exact dirty source/test snapshot was not preserved and is not claimed"
+      },
+      "status": "EXPECTED_FAIL"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=broker",
+        "-Dtest-id=saved cancellation crosses production",
+        "-Doptimize=Debug"
+      ],
+      "binary": {
+        "bytes": 26108216,
+        "label": "r1-red-debug",
+        "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/r1-red-c/o/76ad3472d74cc3b0df57576380a7c7f1/T15-test",
+        "sha256": "b9f982d271198bc61493d4c5101746e473e73f7b73ed7681f06c87144e037dc3"
+      },
+      "config": {
+        "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+        "path": "r2/manifests/config.json",
+        "sha256": "879356f99cef6eee94fc8544bd14f4f87e9d94568035987360656d1647fa58b7"
+      },
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes",
+      "environment": {
+        "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/tmp",
+        "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/r1-red-g",
+        "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/r1-red-c"
+      },
+      "exit": 1,
+      "failed": 1,
+      "kind": "functional-red",
+      "label": "r1-boundary-red-debug",
+      "log": {
+        "bytes": 2500,
+        "path": "r2/logs/r1-boundary-red-debug.log",
+        "sha256": "68536eebccc76a25f208c63434c569d55c356c9ba67c8369516eae4a28f56780"
+      },
+      "passed": 0,
+      "result": "Executor.submit returned Cancelled and the production boundary substituted ResourceExhausted",
+      "source": {
+        "base_commit": "c61ac06201b34e62d51e805bb71a6ca2fee8457e",
+        "complete_snapshot_retained": false,
+        "dirty_worktree": true,
+        "limitation": "binary and intended runtime failure are retained; exact deliberate old-catch dirty snapshot was not committed"
+      },
+      "status": "EXPECTED_FAIL"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=broker",
+        "-Dtest-id=saved cancellation crosses production",
+        "-Doptimize=Debug"
+      ],
+      "binary": {
+        "bytes": 26120930,
+        "label": "r1-green-debug",
+        "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/r1-green-debug-c/o/6525b8cff0bc1f9caf63196c4df922cc/T15-test",
+        "sha256": "adddedd24d6b8fdaa6c324f09ec0efe9002076ed74721896954f7a034886c99e"
+      },
+      "config": {
+        "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+        "path": "r2/manifests/config.json",
+        "sha256": "879356f99cef6eee94fc8544bd14f4f87e9d94568035987360656d1647fa58b7"
+      },
+      "corpus": {
+        "commit": "95352af44fd4c84574e3ae4e190f00654f8ec520",
+        "corpus_path": "r2/manifests/source-r1-953.json",
+        "corpus_sha256": "0e4789cef65ccc0aff094e309cc9bbf4770cb431aec13ba9c95274d3de85c142",
+        "tree": "364ec8fcc24b9c35782d8f2ef9cd38d293f5dab7"
+      },
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes",
+      "environment": {
+        "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/tmp",
+        "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/r1-green-debug-g",
+        "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/r1-green-debug-c"
+      },
+      "exit": 0,
+      "failed": 0,
+      "kind": "zig-build-test",
+      "label": "r1-boundary-build-debug",
+      "log": {
+        "bytes": 0,
+        "path": "r2/logs/r1-boundary-green-debug.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "note": "successful zig build output is empty; paired direct run below retains non-empty test output",
+      "passed": 1,
+      "source": {
+        "commit": "95352af44fd4c84574e3ae4e190f00654f8ec520",
+        "corpus_path": "r2/manifests/source-r1-953.json",
+        "corpus_sha256": "0e4789cef65ccc0aff094e309cc9bbf4770cb431aec13ba9c95274d3de85c142",
+        "tree": "364ec8fcc24b9c35782d8f2ef9cd38d293f5dab7"
+      },
+      "status": "PASS"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/r1-green-debug-c/o/6525b8cff0bc1f9caf63196c4df922cc/T15-test",
+        "--cache-dir=/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/r1d"
+      ],
+      "binary": {
+        "bytes": 26120930,
+        "label": "r1-green-debug",
+        "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/r1-green-debug-c/o/6525b8cff0bc1f9caf63196c4df922cc/T15-test",
+        "sha256": "adddedd24d6b8fdaa6c324f09ec0efe9002076ed74721896954f7a034886c99e"
+      },
+      "config": {
+        "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+        "path": "r2/manifests/config.json",
+        "sha256": "879356f99cef6eee94fc8544bd14f4f87e9d94568035987360656d1647fa58b7"
+      },
+      "corpus": {
+        "commit": "95352af44fd4c84574e3ae4e190f00654f8ec520",
+        "corpus_path": "r2/manifests/source-r1-953.json",
+        "corpus_sha256": "0e4789cef65ccc0aff094e309cc9bbf4770cb431aec13ba9c95274d3de85c142",
+        "tree": "364ec8fcc24b9c35782d8f2ef9cd38d293f5dab7"
+      },
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes",
+      "environment": {},
+      "exit": 0,
+      "failed": 0,
+      "kind": "direct-test-binary",
+      "label": "r1-boundary-direct-debug",
+      "log": {
+        "bytes": 124,
+        "path": "r2/logs/r1-boundary-direct-debug.log",
+        "sha256": "b5eaa618e9621a7eb4f6baccaa31d0e59a3986dbaf5c1113caeec957489a6aec"
+      },
+      "passed": 1,
+      "source": {
+        "commit": "95352af44fd4c84574e3ae4e190f00654f8ec520",
+        "corpus_path": "r2/manifests/source-r1-953.json",
+        "corpus_sha256": "0e4789cef65ccc0aff094e309cc9bbf4770cb431aec13ba9c95274d3de85c142",
+        "tree": "364ec8fcc24b9c35782d8f2ef9cd38d293f5dab7"
+      },
+      "status": "PASS"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=broker",
+        "-Dtest-id=saved cancellation crosses production",
+        "-Doptimize=ReleaseSafe"
+      ],
+      "binary": {
+        "bytes": 5586456,
+        "label": "r1-green-safe",
+        "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/r1-green-safe-c/o/d2f7b7a66f99df2a21a26d6c3e94f44b/T15-test",
+        "sha256": "7f6a8965cf8ecb6c085577608ae9fc21177650a2de831096677f85e7aa23e9b2"
+      },
+      "config": {
+        "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+        "path": "r2/manifests/config.json",
+        "sha256": "879356f99cef6eee94fc8544bd14f4f87e9d94568035987360656d1647fa58b7"
+      },
+      "corpus": {
+        "commit": "95352af44fd4c84574e3ae4e190f00654f8ec520",
+        "corpus_path": "r2/manifests/source-r1-953.json",
+        "corpus_sha256": "0e4789cef65ccc0aff094e309cc9bbf4770cb431aec13ba9c95274d3de85c142",
+        "tree": "364ec8fcc24b9c35782d8f2ef9cd38d293f5dab7"
+      },
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes",
+      "environment": {
+        "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/tmp",
+        "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/r1-green-safe-g",
+        "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/r1-green-safe-c"
+      },
+      "exit": 0,
+      "failed": 0,
+      "kind": "zig-build-test",
+      "label": "r1-boundary-build-safe",
+      "log": {
+        "bytes": 0,
+        "path": "r2/logs/r1-boundary-green-safe.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "note": "successful zig build output is empty; paired direct run below retains non-empty test output",
+      "passed": 1,
+      "source": {
+        "commit": "95352af44fd4c84574e3ae4e190f00654f8ec520",
+        "corpus_path": "r2/manifests/source-r1-953.json",
+        "corpus_sha256": "0e4789cef65ccc0aff094e309cc9bbf4770cb431aec13ba9c95274d3de85c142",
+        "tree": "364ec8fcc24b9c35782d8f2ef9cd38d293f5dab7"
+      },
+      "status": "PASS"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/r1-green-safe-c/o/d2f7b7a66f99df2a21a26d6c3e94f44b/T15-test",
+        "--cache-dir=/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/r1s"
+      ],
+      "binary": {
+        "bytes": 5586456,
+        "label": "r1-green-safe",
+        "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/r1-green-safe-c/o/d2f7b7a66f99df2a21a26d6c3e94f44b/T15-test",
+        "sha256": "7f6a8965cf8ecb6c085577608ae9fc21177650a2de831096677f85e7aa23e9b2"
+      },
+      "config": {
+        "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+        "path": "r2/manifests/config.json",
+        "sha256": "879356f99cef6eee94fc8544bd14f4f87e9d94568035987360656d1647fa58b7"
+      },
+      "corpus": {
+        "commit": "95352af44fd4c84574e3ae4e190f00654f8ec520",
+        "corpus_path": "r2/manifests/source-r1-953.json",
+        "corpus_sha256": "0e4789cef65ccc0aff094e309cc9bbf4770cb431aec13ba9c95274d3de85c142",
+        "tree": "364ec8fcc24b9c35782d8f2ef9cd38d293f5dab7"
+      },
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes",
+      "environment": {},
+      "exit": 0,
+      "failed": 0,
+      "kind": "direct-test-binary",
+      "label": "r1-boundary-direct-safe",
+      "log": {
+        "bytes": 124,
+        "path": "r2/logs/r1-boundary-direct-safe.log",
+        "sha256": "b5eaa618e9621a7eb4f6baccaa31d0e59a3986dbaf5c1113caeec957489a6aec"
+      },
+      "passed": 1,
+      "source": {
+        "commit": "95352af44fd4c84574e3ae4e190f00654f8ec520",
+        "corpus_path": "r2/manifests/source-r1-953.json",
+        "corpus_sha256": "0e4789cef65ccc0aff094e309cc9bbf4770cb431aec13ba9c95274d3de85c142",
+        "tree": "364ec8fcc24b9c35782d8f2ef9cd38d293f5dab7"
+      },
+      "status": "PASS"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/cli-debug/bin/zcr-dev-evidence",
+        "contract-digest",
+        "--worktree",
+        "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes",
+        "--contracts",
+        "contracts"
+      ],
+      "binary": {
+        "bytes": 18006968,
+        "label": "evidence-cli-debug",
+        "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/cli-debug/bin/zcr-dev-evidence",
+        "sha256": "1b903764e58145414d9c31df3c7acf3ae3ef0ad6921587c013959c5c642445b6"
+      },
+      "config": {
+        "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+        "path": "r2/manifests/config.json",
+        "sha256": "879356f99cef6eee94fc8544bd14f4f87e9d94568035987360656d1647fa58b7"
+      },
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes",
+      "digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+      "exit": 0,
+      "kind": "contract-digest",
+      "label": "contract-digest-r2",
+      "log": {
+        "bytes": 65,
+        "path": "r2/logs/contract-digest-r2.log",
+        "sha256": "1f1ca0a42a52ddde8654ae8694f7a35f817d5a2b494a019d00464bd676d0405f"
+      },
+      "note": "executable was built at source5ad; contracts are byte-identical at source953",
+      "source": {
+        "commit": "95352af44fd4c84574e3ae4e190f00654f8ec520",
+        "corpus_path": "r2/manifests/source-r1-953.json",
+        "corpus_sha256": "0e4789cef65ccc0aff094e309cc9bbf4770cb431aec13ba9c95274d3de85c142",
+        "tree": "364ec8fcc24b9c35782d8f2ef9cd38d293f5dab7"
+      },
+      "status": "PASS"
+    }
+  ],
+  "schema": "zcr-runtime-review-fixes-evidence/2",
+  "toolchain": {
+    "path": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+    "sha256": "2317bbb91798556d9d0f38aabdac23db83f0979b25f767259ae474546724087c",
+    "version": "0.16.0"
+  }
+}

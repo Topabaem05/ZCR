@@ -1,0 +1,106 @@
+{
+  "schema_version": "zcr-handoff/1",
+  "state": "completed",
+  "task_id": "T00",
+  "step": "S06",
+  "base_commit": "7eeab60012f5521900aa721f6fd388df4809517c",
+  "head_commit": "4dbd5e9397e6c0f5b2dcd9acdeff51ec5c4ef0bb",
+  "head_commit_note": "source commit that produced the GREEN and baseline evidence; evidence and bench/baseline.md are added in the following S06 commit",
+  "contract_digest": "8aa53314410fe471f0e070c522766684286f60e1ad4d9785c292bb709ea370a4",
+  "contract_digest_method": "sha256 of: git ls-files -z contracts | sort -z | xargs -0 shasum -a 256",
+  "source_tree_digest": "c0dd7c5a2ce8f60a8119d0c04f5bb13505221f34",
+  "source_tree_digest_method": "git tree object id of head_commit",
+  "binary_sha256": "2c7a637a00ac6312d2ee82746d3617a129801633ef5b1b2d419c6749d94dfe10",
+  "binary_note": "caps ReleaseSafe binary used for evidence/T00/baseline.json; rebuilds are not bit-reproducible (LC_UUID and ad-hoc signature differ), binaries retained under $STATE/bin",
+  "toolchain": {
+    "zig_version": "0.16.0",
+    "zig_sha256": "e6cd688d25664983833aae272f501d4bceeae304875b8f1741209d15fd13a4ec",
+    "source": "https://ziglang.org/download/0.16.0/zig-aarch64-macos-0.16.0.tar.xz",
+    "tarball_sha256": "b23d70deaa879b5c2d486ed3316f7eaa53e84acf6fc9cc747de152450d401489"
+  },
+  "owned_paths": [
+    "bench/spikes/caps.zig",
+    "bench/spikes/darwin_abi.c",
+    "bench/baseline.md",
+    "tests/t00_test.zig",
+    "evidence/T00/"
+  ],
+  "changed_files": [
+    "bench/spikes/caps.zig",
+    "bench/spikes/darwin_abi.c",
+    "bench/baseline.md",
+    "tests/t00_test.zig",
+    "evidence/T00/baseline.json",
+    "evidence/T00/baseline-run.json",
+    "evidence/T00/test-runs.json",
+    "evidence/T00/handoff.json",
+    "evidence/T00/logs/*.log"
+  ],
+  "test_evidence": [
+    {
+      "id": "PF-001",
+      "status": "PASS",
+      "runs": [
+        {
+          "label": "red",
+          "source_commit": "6406fa7a10526fb82312e7f47b48cb9e22ce092b",
+          "binary_sha256": "05f0a46d895c4061983bc777a5704c71260d84939b3f2b1c854c2ffd068cb89e",
+          "compile_exit": 0,
+          "run_exit": 1,
+          "summary": "0 passed; 0 skipped; 11 failed."
+        },
+        {
+          "label": "green-debug",
+          "source_commit": "4dbd5e9397e6c0f5b2dcd9acdeff51ec5c4ef0bb",
+          "binary_sha256": "bbb8c4dd348859f2859701ca8f19e31a2e4f4b4d746bc81b576f121601eeb732",
+          "compile_exit": 0,
+          "run_exit": 0,
+          "summary": "All 11 tests passed."
+        },
+        {
+          "label": "green-releasesafe",
+          "source_commit": "4dbd5e9397e6c0f5b2dcd9acdeff51ec5c4ef0bb",
+          "binary_sha256": "9c5aa1d13a5b2d1e6d86e80130aa7ce5289269393b98ee74d4c4053e50236f76",
+          "compile_exit": 0,
+          "run_exit": 0,
+          "summary": "All 11 tests passed."
+        }
+      ]
+    }
+  ],
+  "gate_evidence": [
+    {
+      "id": "G01",
+      "status": "PASS",
+      "detail": "zig=0.16.0 target=aarch64-macos-none optimize=ReleaseSafe macos_min_required=260602 macos_max_allowed=260500 foundation_version=5026.6 gcd_callback_ran=true"
+    },
+    {
+      "id": "G03",
+      "status": "PASS",
+      "detail": "dispatch_memorypressure_source=present vm_pressure_level=2 thermal_state=nominal low_power_mode=disabled power_source=ac"
+    },
+    {
+      "id": "G04",
+      "status": "PASS",
+      "detail": "nperflevels=2 physicalcpu=8 logicalcpu=8 perflevel0=Performance:4/4 perflevel1=Efficiency:4/4"
+    },
+    {
+      "id": "G06",
+      "status": "PASS",
+      "detail": "git version 2.47.0; probe=present linked_worktree=true dot_git=file worktrees=2 dirty=false"
+    }
+  ],
+  "exports": [
+    "bench/spikes/caps.zig: capture, validate, toJson, digestCorpus, probeSysctlKey, probeCpu, probeGit, probeTool, Baseline (zcr-baseline/1)",
+    "bench/spikes/darwin_abi.c: zcr_probe_gcd, zcr_probe_memory_pressure_source, zcr_probe_thermal_state, zcr_probe_low_power_mode, zcr_probe_power_source, zcr_probe_sdk_versions, zcr_probe_foundation_version"
+  ],
+  "exports_note": "spike-only exports for T01/T09/T16/T21 reference; not a frozen src/core contract",
+  "remaining_gates": [
+    "B0 host built-in tool latency trace not captured (versions only); method to be fixed in T21/T23",
+    "GCD probe timeout/cancellation path not deterministically tested",
+    "NOT_RUN: Intel Mac, x86-64 Linux, Windows, G11 macOS 11, physical energy, controlled cold cache",
+    "integrator decision: tests/t00_test.zig is required by tasks/T00.md but missing from tasks.json T00 owns",
+    "integrator decision: tests/catalog.json PF-001 execution_status not updated (not T00-owned)",
+    "T24: pin macOS deployment target (native build used min 26.6.2 > SDK 26.5)"
+  ]
+}

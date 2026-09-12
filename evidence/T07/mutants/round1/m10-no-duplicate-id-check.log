@@ -1,0 +1,16 @@
+test
++- run test T07-test
+   +- compile test T07-test Debug native 1 errors
+src/batch/read.zig:382:33: error: unused capture
+        for (items, 0..) |item, i| {
+                                ^
+error: 1 compilation errors
+failed command: /Users/guribbong/.local/share/zig/0.16.0/zig test -ODebug --dep zcr_core --dep zcr_policy --dep zcr_memory --dep zcr_admission --dep zcr_fs_read --dep zcr_batch --dep zcr_projection -Mroot=/Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m10-no-duplicate-id-check/tests/t07_test.zig -ODebug -Mzcr_core=/Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m10-no-duplicate-id-check/src/core/types.zig -ODebug --dep zcr_core -Mzcr_policy=/Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m10-no-duplicate-id-check/src/policy/capability.zig -ODebug --dep zcr_core -Mzcr_memory=/Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m10-no-duplicate-id-check/src/memory/budget.zig -ODebug --dep zcr_core --dep zcr_memory -Mzcr_admission=/Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m10-no-duplicate-id-check/src/scheduler/admission.zig -ODebug --dep zcr_core --dep zcr_policy --dep zcr_memory -Mzcr_fs_read=/Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m10-no-duplicate-id-check/src/fs/read.zig -ODebug --dep zcr_core --dep zcr_policy --dep zcr_memory --dep zcr_admission --dep zcr_fs_read -Mzcr_batch=/Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m10-no-duplicate-id-check/src/batch/read.zig -ODebug --dep zcr_core -Mzcr_projection=/Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m10-no-duplicate-id-check/src/protocol/projection.zig -lc --cache-dir /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache --global-cache-dir /Users/guribbong/code/ZCR-state/tasks/T07/zig-global-cache --name T07-test --zig-lib-dir /Users/guribbong/.local/share/zig/0.16.0/lib/ --listen=-
+
+Build Summary: 0/3 steps succeeded (1 failed)
+test transitive failure
++- run test T07-test transitive failure
+   +- compile test T07-test Debug native 1 errors
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache/o/2759f0ba666e46dcb034eb08a284d1a7/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m10-no-duplicate-id-check /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T07/zig-global-cache --seed 0x6a42584d -Z0c809a4237e9bbe3 test -Dtest-group=batch --summary all

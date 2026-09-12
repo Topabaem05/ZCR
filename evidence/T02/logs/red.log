@@ -1,0 +1,123 @@
+test
++- run test T02-test 0 pass, 12 fail (12 total)
+error: 't02_test.test.IS-003 traversal, absolute, UNC, drive-letter and backslash paths are refused' failed:
+       expected error.PathEscape, found error.Unsupported
+       path not refused as escape: ../outside.txt
+       /Users/guribbong/code/ZCR-worktrees/task-t02/src/policy/capability.zig:38:9: 0x1029927db in authorize (T02-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x102991cb7 in expectError__anon_39882 (T02-test)
+                   return error.TestUnexpectedError;
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/task-t02/tests/t02_test.zig:182:13: 0x10299b36f in test.IS-003 traversal, absolute, UNC, drive-letter and backslash paths are refused (T02-test)
+                   return err;
+                   ^
+error: 't02_test.test.IS-003 symlinks are refused as final or intermediate components, even when they point inside the root' failed:
+       expected error.PathEscape, found error.Unsupported
+       /Users/guribbong/code/ZCR-worktrees/task-t02/src/policy/capability.zig:38:9: 0x1029927db in authorize (T02-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x102991cb7 in expectError__anon_39882 (T02-test)
+                   return error.TestUnexpectedError;
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/task-t02/tests/t02_test.zig:207:5: 0x10299ab03 in test.IS-003 symlinks are refused as final or intermediate components, even when they point inside the root (T02-test)
+           try testing.expectError(error.PathEscape, authorizer.authorize(io, session(), .read, rel("src/escape-dir/secret.txt")));
+           ^
+error: 't02_test.test.IS-003 model arguments cannot switch workspace, task, policy or operation' failed:
+       expected error.OutOfScope, found error.Unsupported
+       /Users/guribbong/code/ZCR-worktrees/task-t02/src/policy/capability.zig:38:9: 0x1029927db in authorize (T02-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x102991cb7 in expectError__anon_39882 (T02-test)
+                   return error.TestUnexpectedError;
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/task-t02/tests/t02_test.zig:225:5: 0x10299999b in test.IS-003 model arguments cannot switch workspace, task, policy or operation (T02-test)
+           try testing.expectError(error.OutOfScope, authorizer.authorize(io, other_workspace, .read, target));
+           ^
+error: 't02_test.test.IS-003 allowed operations inside scope yield distinct immutable capabilities' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t02/src/policy/capability.zig:38:9: 0x1029927db in authorize (T02-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t02/tests/t02_test.zig:253:19: 0x102997d6b in test.IS-003 allowed operations inside scope yield distinct immutable capabilities (T02-test)
+           const first = try authorizer.authorize(io, session(), .read, rel("src/policy/a.zig"));
+                         ^
+error: 't02_test.test.IS-004 the linked worktree .git file is neither writable nor readable' failed:
+       expected error.OutOfScope, found error.Unsupported
+       /Users/guribbong/code/ZCR-worktrees/task-t02/src/policy/capability.zig:38:9: 0x1029927db in authorize (T02-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x102991cb7 in expectError__anon_39882 (T02-test)
+                   return error.TestUnexpectedError;
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/task-t02/tests/t02_test.zig:292:5: 0x10299734b in test.IS-004 the linked worktree .git file is neither writable nor readable (T02-test)
+           try testing.expectError(error.OutOfScope, authorizer.authorize(io, session(), .patch, rel(".git")));
+           ^
+error: 't02_test.test.IS-004 the main .git directory is refused by name and a common git dir under the root by identity' failed:
+       expected error.OutOfScope, found error.Unsupported
+       /Users/guribbong/code/ZCR-worktrees/task-t02/src/policy/capability.zig:38:9: 0x1029927db in authorize (T02-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x102991cb7 in expectError__anon_39882 (T02-test)
+                   return error.TestUnexpectedError;
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/task-t02/tests/t02_test.zig:307:5: 0x10299610f in test.IS-004 the main .git directory is refused by name and a common git dir under the root by identity (T02-test)
+           try testing.expectError(error.OutOfScope, main_root.authorize(io, session(), .patch, rel(".git/config")));
+           ^
+error: 't02_test.test.IS-004 immutable paths are compared by filesystem identity, not spelling' failed:
+       expected error.OutOfScope, found error.Unsupported
+       /Users/guribbong/code/ZCR-worktrees/task-t02/src/policy/capability.zig:38:9: 0x1029927db in authorize (T02-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x102991cb7 in expectError__anon_39882 (T02-test)
+                   return error.TestUnexpectedError;
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/task-t02/tests/t02_test.zig:334:5: 0x10299210f in test.IS-004 immutable paths are compared by filesystem identity, not spelling (T02-test)
+           try testing.expectError(error.OutOfScope, authorizer.authorize(io, session(), .patch, rel("src/core/types.zig")));
+           ^
+error: 't02_test.test.DV-002 out-of-scope new, renamed, deleted, staged and committed files are all rejected' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t02/tools/dev/guard.zig:45:5: 0x10297b5eb in scopeGuard (T02-test)
+           return error.NotImplemented;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t02/tests/t02_test.zig:385:20: 0x10298e803 in test.DV-002 out-of-scope new, renamed, deleted, staged and committed files are all rejected (T02-test)
+           const report = try guard.scopeGuard(f.arena, io, f.git, try f.path("repo"), base, rules, .task);
+                          ^
+error: 't02_test.test.DV-002 changes inside owned paths pass and ownership matches whole path components' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t02/tools/dev/guard.zig:45:5: 0x10297b5eb in scopeGuard (T02-test)
+           return error.NotImplemented;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t02/tests/t02_test.zig:413:19: 0x10298d1cb in test.DV-002 changes inside owned paths pass and ownership matches whole path components (T02-test)
+           const clean = try guard.scopeGuard(f.arena, io, f.git, try f.path("repo"), base, rules, .task);
+                         ^
+error: 't02_test.test.DV-003 two tasks editing the same shared contract are rejected unless the integrator makes the change' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t02/tools/dev/guard.zig:45:5: 0x10297b5eb in scopeGuard (T02-test)
+           return error.NotImplemented;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t02/tests/t02_test.zig:448:17: 0x10297c46f in test.DV-003 two tasks editing the same shared contract are rejected unless the integrator makes the change (T02-test)
+           const t98 = try guard.scopeGuard(f.arena, io, f.git, try f.path("t98"), base, .{ .task_id = "T98", .owned_paths = &.{"src/a.zig"} }, .task);
+                       ^
+error: 't02_test.test.DV-003 overlapping task ownership is detected' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t02/tools/dev/guard.zig:65:5: 0x102975933 in findOwnershipOverlaps (T02-test)
+           return error.NotImplemented;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t02/tests/t02_test.zig:472:22: 0x1029796c3 in test.DV-003 overlapping task ownership is detected (T02-test)
+           const overlaps = try guard.findOwnershipOverlaps(arena, &tasks);
+                            ^
+error: 't02_test.test.DV-003 the repository task table assigns every path to one owner' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t02/tools/dev/guard.zig:50:5: 0x102975827 in loadTasks (T02-test)
+           return error.NotImplemented;
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t02/tests/t02_test.zig:490:19: 0x102975e6f in test.DV-003 the repository task table assigns every path to one owner (T02-test)
+           const tasks = try guard.loadTasks(arena, io, tasks_path);
+                         ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T02/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T02/zig-local-cache/o/2d258b38853dde441d84fe0a28b6001d/T02-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T02/zig-local-cache --seed=0x317e0b22 --listen=-
+
+Build Summary: 3/5 steps succeeded (1 failed); 0/12 tests passed (12 failed)
+test transitive failure
++- install T02-test success
+|  +- compile test T02-test Debug native cached 72ms MaxRSS:31M
+|     +- options cached
++- run test T02-test 0 pass, 12 fail (12 total)
+   +- compile test T02-test Debug native (+1 more reused dependencies)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T02/zig-local-cache/o/9eba755f0f9193364046b96ceb76bdad/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-worktrees/task-t02 /Users/guribbong/code/ZCR-state/tasks/T02/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T02/zig-global-cache --seed 0x317e0b22 -Z7dcf8ca9b50bade9 test -Dtest-group=isolation -Doptimize=Debug -Dinstall-tests=true --prefix /Users/guribbong/code/ZCR-state/tasks/T02/out-red --summary all

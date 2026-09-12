@@ -1,0 +1,42 @@
+Build Summary: 29/29 steps succeeded; 109/109 tests passed
+test success
++- install T00-test success
+|  +- compile test T00-test Debug native success 1s MaxRSS:183M
++- run test T00-test 11 pass (11 total) 1s MaxRSS:7M
+|  +- compile test T00-test Debug native (reused)
++- install T01-test success
+|  +- compile test T01-test Debug native success 1s MaxRSS:187M
+|     +- options success
++- run test T01-test 18 pass (18 total) 1s MaxRSS:7M
+|  +- compile test T01-test Debug native (+1 more reused dependencies)
++- install T02-test success
+|  +- compile test T02-test Debug native success 1s MaxRSS:183M
+|     +- options (reused)
++- run test T02-test 12 pass (12 total) 542ms MaxRSS:7M
+|  +- compile test T02-test Debug native (+1 more reused dependencies)
++- install T03-test success
+|  +- compile test T03-test Debug native success 1s MaxRSS:174M
++- run test T03-test 12 pass (12 total) 295ms MaxRSS:7M
+|  +- compile test T03-test Debug native (reused)
++- install T04-test success
+|  +- compile test T04-test Debug native success 1s MaxRSS:175M
++- run test T04-test 10 pass (10 total) 2s MaxRSS:23M
+|  +- compile test T04-test Debug native (reused)
++- install T05-test success
+|  +- compile test T05-test Debug native success 1s MaxRSS:180M
++- run test T05-test 11 pass (11 total) 1s MaxRSS:10M
+|  +- compile test T05-test Debug native (reused)
++- install T06-test success
+|  +- compile test T06-test Debug native success 1s MaxRSS:179M
++- run test T06-test 11 pass (11 total) 109ms MaxRSS:11M
+|  +- compile test T06-test Debug native (reused)
++- install T07-test success
+|  +- compile test T07-test Debug native cached 15ms MaxRSS:71M
++- run test T07-test 24 pass (24 total) 439ms MaxRSS:18M
+|  +- compile test T07-test Debug native (reused)
++- run exe zcr success 6ms
+|  +- compile exe zcr Debug native success 472ms MaxRSS:168M
+|     +- options (reused)
++- run exe zcr success 10ms
+   +- compile exe zcr Debug native (+1 more reused dependencies)
+

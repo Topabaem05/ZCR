@@ -1,0 +1,7 @@
+Build Summary: 4/4 steps succeeded; 11/11 tests passed
+test success
++- install T00-test success
+|  +- compile test T00-test Debug native success 4s MaxRSS:323M
++- run test T00-test 11 pass (11 total) 1s MaxRSS:10M
+   +- compile test T00-test Debug native (reused)
+

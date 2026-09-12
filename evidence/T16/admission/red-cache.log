@@ -1,0 +1,21 @@
+test
++- run test T13-test 0 pass, 1 fail (1 total)
+error: 't13_test.test.ME-005 persistent target prevents refill after eviction' failed:
+       expected 0, found 23
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:118:17: 0x1233b93 in expectEqualInner__anon_44509 (std.zig)
+                       return error.TestExpectedEqual;
+                       ^
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:83:5: 0x12342e0 in expectEqual (t13_test.zig)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T16-admission/tests/t13_test.zig:488:5: 0x12343cb in test.ME-005 persistent target prevents refill after eviction (t13_test.zig)
+           try t.expectEqual(@as(u64, 0), f.store.stats().content_bytes);
+           ^
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/T16-admission/cache && /workspace/scratch/3f4ab65dfb82/state/T16-admission/cache/o/f218036248d498aa8470e7e399895aee/T13-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/T16-admission/cache --seed=0xe57ba475 --listen=-
+
+Build Summary: 5/7 steps succeeded (1 failed); 1/2 tests passed (1 failed)
+test transitive failure
++- run test T13-test 0 pass, 1 fail (1 total)
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/T16-admission/cache/o/de94d8b23d3f88fd829df252bfc22c95/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-T16-admission /workspace/scratch/3f4ab65dfb82/state/T16-admission/cache /workspace/scratch/3f4ab65dfb82/state/T16-admission/global-cache --seed 0xe57ba475 -Z38fd6543e4c877df test -Dtest-group=memory -Dtest-id=ME-005 -Doptimize=Debug -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T16-admission/artifacts/red/cache

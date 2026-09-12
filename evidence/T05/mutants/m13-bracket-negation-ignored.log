@@ -1,0 +1,16 @@
+test
++- run test T05-test 9 pass, 1 fail (10 total)
+error: 't05_test.test.FS-001 single ignore patterns match git check-ignore' failed:
+       pattern [!a]y.txt path ay.txt: git=false zcr=true
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m13-bracket-negation-ignored/tests/t05_test.zig:299:17: 0x100e00263 in test.FS-001 single ignore patterns match git check-ignore (T05-test)
+                       return error.TestExpectedEqual;
+                       ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache/o/6421f418fce34a7a6099771f8adee507/T05-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache --seed=0x8366a595 --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 9/10 tests passed (1 failed)
+test transitive failure
++- run test T05-test 9 pass, 1 fail (10 total)
+   +- compile test T05-test Debug native success 6s MaxRSS:260M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache/o/5141f98b72c01d7e7e7d84fd5e561ea8/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m13-bracket-negation-ignored /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T05/zig-global-cache --seed 0x8366a595 -Zc7c013256e7152b1 test -Dtest-group=fs --summary all

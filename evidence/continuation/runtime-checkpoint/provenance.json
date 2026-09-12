@@ -1,0 +1,250 @@
+{
+  "schema_version": "zcr-continuation-evidence/1",
+  "source_commit": "b5face3bf3e3f9216694437fa4cf002a590dda4b",
+  "source_tree": "f1ecacc65a247c1c8da91f592a39c354a7d28d3f",
+  "observed_checkout_commit": "6704f9253d56cddf13aa48bf7f0120c9ba04e001",
+  "source_matches_recorded_commit": true,
+  "note": "Documentation/progress-only commits do not change any recorded build/runtime/test input. Isolated worker evidence retains its own source. Earlier initial CLI RED is diagnostic-only; final CLI proof is recorded here.",
+  "toolchain": {
+    "version": "0.16.0",
+    "path": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+    "sha256": "2317bbb91798556d9d0f38aabdac23db83f0979b25f767259ae474546724087c"
+  },
+  "inputs": {
+    "bench/spikes/caps.zig": "27a92c8e7085a5ef977d7fa0b566804cc03a93bf16350724da8efd890fba7732",
+    "bench/spikes/darwin_abi.c": "bda113a58bf045c6504fe2e0e008609ef6976382cc3b43f25459f4e5e16b4f5d",
+    "build.zig": "a242e738bb77fb196f089cc58fa55b5a1ccc88594fc08cf3fb72f3514e5856bf",
+    "build.zig.zon": "2ad2381bdb29d5669c6d2ac4807c124c2afe6d007daf7ea2b507fdc64bf44e52",
+    "c/darwin_shim.c": "47b6653ed03f75253b2d9a96120d4787cf55d5031bf74691e67f835eb10cedf8",
+    "c/darwin_shim.h": "a6b646f00583872f60487acfad72e9df39870b9c56c6a5aa76c1d7527693cf4d",
+    "config/limits.json": "d7b3db8b6956c0f8b1e6f399e6e432fb4eadb8aa033f39d303e31edbe539154c",
+    "config/memory-profiles.json": "7f925fb57bc0453f2505b3c10856a4e74322bcb8cc3417070ec7693e847804b7",
+    "config/scheduler-profiles.json": "3f3b7d88264c94ac84ea0969da47ff1aee46ad4ba51f4899742ee2c1603b57a8",
+    "contracts/README.md": "e3fb52440e84c7a9abe3f855f1423eee91222c546243b2435988c64cb325a05b",
+    "contracts/data.schema.json": "5c3932867cf4e16729cd6b959c16b9a143308aa5396f79a7f0e56f6563d314f5",
+    "contracts/inputs/zcr_batch_read.schema.json": "50c4b12c0575660e6d030acabd8a3fb60ec9e3b4a620426cea79133ec011f15d",
+    "contracts/inputs/zcr_create.schema.json": "821b9bdb7e74db3c5456e06ee6ceb0cf5105fa13ab39786ef0f4fd024b1812ca",
+    "contracts/inputs/zcr_files.schema.json": "8f7680bc92ad4ef9a1a34e7a9756cbca4f286452387a246de33cb13073890eb4",
+    "contracts/inputs/zcr_health.schema.json": "9e78382dc9325d9dafba3edbadf843f670505c5e19d8a2ee0a168147862d9538",
+    "contracts/inputs/zcr_patch.schema.json": "77d27a7cb46a2d7765f245f85f2e47560df5ea82e406e049e1e387d38f543f99",
+    "contracts/inputs/zcr_read.schema.json": "fdd23867b862977d19bf3b3d45183ead856d58ec4742d41ec3e970751e524bdc",
+    "contracts/inputs/zcr_search.schema.json": "ed9109d79358aa095c54fe6c70260be99f4ba9c68aef4d4539319562f8567211",
+    "contracts/inputs/zcr_status.schema.json": "a46793fa818ba7ce90931a0dece57235aaa5aebbd010bbc3606fb3a8cb0cc5b1",
+    "contracts/response.schema.json": "587ba596c5ca9a3c30d820905aaf4d91b388325ededddbd468534c9119f91060",
+    "contracts/task-manifest.schema.json": "d65a9082b5b4896e6e1017d4bfa6a37dc12efe88b362ed809491a5f3b2c965cc",
+    "contracts/tools.json": "6537c0961f85dd623cf76c195dab534f583052c31eff2eda54727e97083a0b4b",
+    "src/batch/read.zig": "a0627a93212db8d864deb37037a9b4c27e5bee4948f4602ed4c9da2c7339e6e6",
+    "src/core/errors.zig": "4166c1278c889e703cebc67925acfa9e768f5a4119fe42bfb8e29084a4752f1c",
+    "src/core/limits.zig": "41771a1b441e7710a5c27ac6d5cc92170f023764b74ace4e5519e28161a65137",
+    "src/core/types.zig": "339def811cdbf97f47184ce86d5577342ab13cba1ba65b68702ab16b736b2ddf",
+    "src/fs/ignore.zig": "4d398d96174d7a52d4a895494ba5c75a17205146518be3feef38d60f4c8379cd",
+    "src/fs/metadata.zig": "ecbe8d94bfed6bc6b032e811ec75941585963e4d61848cdb864004a0566fabca",
+    "src/fs/read.zig": "27fa94f79465b97d027c455665621354b42d3e23436a0306783e2ed35ab64997",
+    "src/fs/traverse.zig": "4e40d6b5ac76549174efde0c36ac5aab1bf14066fd2959e513d0eb1e6715e7a8",
+    "src/launch.zig": "62d4aa64ffbe3d7aac328d32e871fa8b83ff488b4ecf87ba178e046191586672",
+    "src/launch_ignore.zig": "58eff3d9eca3c2fe4b8a4192c1c66596333b14f6e5a2a879ab201bc55d59b127",
+    "src/main.zig": "32b77292ca22a0f4e068caf4809f63c941f311f1ffb2610f8de84a9716502b41",
+    "src/memory/accounting.zig": "c71ff2d39979bd03b3dd73d93285ba9dbc97d41fe2437e3fbc156c5a9e0fd654",
+    "src/memory/arena.zig": "6c2b911849041d5935f434a110b858ad590331e82653eca9a9502b2c308b00fc",
+    "src/memory/budget.zig": "51394d108231fd049bfc88e3fa3468d75a33a9d5d9e9e3e2b2c0e60ce14aa4c0",
+    "src/platform/darwin.zig": "9f2c8be090cee2a9fcdb9c48937e25e0b64e22430c21d611feb7fb0088321cd7",
+    "src/policy/capability.zig": "11a77a83e45aab973e54e69e3d5f953d74efc1a1193fdf74006e4119772183c9",
+    "src/policy/paths.zig": "af8e8c6ec7af13f79c25ff4641d12ccaf0d6c3d60720fdd5416c9512a6edfb31",
+    "src/policy/scope.zig": "ff9b6246f4451a851d406cdcb82ad805f3668e40455ce0782d1f7d5ab641696c",
+    "src/protocol/codec.zig": "f3af32c8682d0afa0b39bcbc39edeb7bd92beef8946fc0c335671c90444188c0",
+    "src/protocol/framing.zig": "893d41b3fbed837ec856596bbe9ba04ec5d22d8a122b00fb39f1231197e20aeb",
+    "src/protocol/mcp.zig": "4d01714480e503d94e4f4008c5c44d224b912777d9fb021601e9a0ff1d7747d2",
+    "src/protocol/projection.zig": "f197f4c136a0b16f393760aca1b15e057191103e03504dbce8b7babe8e8a4bcf",
+    "src/scheduler/admission.zig": "f43b872ca0648998a9b1f805ae080ad0fb2fe2181134b0018977f528281f9b6f",
+    "src/scheduler/executor.zig": "755e95087f966237fa255a392876f39638be80ac9fa42cbeacf55ac38e8d7aae",
+    "src/scheduler/queue.zig": "a28d5c3adc4de2e160a094470ad14ca7cb530c147e8b0a4b4ffa2301b30617c7",
+    "src/search/context.zig": "9be7eae7e6eac525f2486e8895cd8b96f648cbd10f2f5df4d6c60fcd3ac59ecd",
+    "src/search/literal.zig": "00263a5337ad0097a83961620c853bd389653bcc8dd42fe9352938eb7ff47546",
+    "src/search/scalar.zig": "aef984f53852ce28f41c7f5eca940db422511890941053e2e81bc362b746c3bd",
+    "src/workspace/identity.zig": "ea493786a52c7fb0460efb1e911293fd4ab69aac273e47bfa8d15c129ebe5c3d",
+    "src/workspace/lease.zig": "b7b19b516e2dfe25f8e38df3962659cab90600e469cc1c0623050b2016d52e60",
+    "src/workspace/registry.zig": "5fea4891bfcf2d07e14e33202643fcb3088013f63421b6ebb8048905f2a916d9",
+    "tests/catalog.json": "96fae3cfb87d975755bfafd7cf8e20a4ba07770a08c7aa1b1238ee3cfec14df5",
+    "tests/cli_smoke.py": "494268b7d807d1b0b98ab07c26b88c8fe7495387235af5712aa3d5fb3401213a",
+    "tests/launch_test.zig": "a6a3b649bce194c35c9d7daa4b35a197cf372df8f0917d097c7785e846a98fcf",
+    "tests/t00_test.zig": "e3142f5eb2a798828c7cab4994df216eed02392fb0add53ea32a77270ac92daf",
+    "tests/t01_test.zig": "83afbce2c47c90f23960eaa336d334860583ef3b208390b6da5bb4c161126b49",
+    "tests/t02_test.zig": "4085ff503526300f1f6efa7da9c8758128dbc1df4548d70023d59007586f3718",
+    "tests/t03_test.zig": "1c3d65bb118337d8510cbae77b441c780b4ca424b0715ddeda98b4fffcb2741b",
+    "tests/t04_test.zig": "a593c0876ba6ed360f5d0428c9d653a1912ce23150ddd78f74a2597a8190b81a",
+    "tests/t05_test.zig": "85ae09a13ba20facaf3d161ff7f2306d082bae46a3d232a1f197ed240f6d9217",
+    "tests/t06_test.zig": "0133b65a290f8e7c3ac46dcdc24cfb5137c9a67e2084fd21418999aebcf17ba2",
+    "tests/t07_test.zig": "d34951537c486f44bfeeb6114ecbc4f0b0f2bf55b327d50caa76f2a4bc409052",
+    "tests/t08_test.zig": "f00678f0fa4c32bcdc9a271c97b64c244f0762053e29653ba726d4240efd318f",
+    "tests/t09_test.zig": "cdea0a31ec4297db1244876e823d69f2ee963231b81be71f68644ae3ca58cf46",
+    "tests/t10_test.zig": "5d107934be99812005e265fc54b657a0abbdea5d492bfdba6a2237bef7d64327",
+    "tests/timing_test.zig": "98254b5f219d6b2d562619f5e331f9c0faf053f632b79459cc965781e99432c4",
+    "tests/vectors.json": "ee87aa75003969e71c27e9790fc083a071f6d97c63acceb64245a2bf2c5f7ad8",
+    "tools/dev/evidence.zig": "eb649db10c199fc42666590e6f02460e12c9be3a270e5d24d0386d745ecfcb97",
+    "tools/dev/guard.zig": "95ff7b968b166b560de9c5f9f39e8cb62e6bc466c01fcf928ff0b8cc2b1e1e00"
+  },
+  "green_runs": [
+    {
+      "kind": "module_regression",
+      "mode": "Debug",
+      "group": "batch",
+      "tests_passed": 25,
+      "exit_code": 0,
+      "source_commit": "b5face3bf3e3f9216694437fa4cf002a590dda4b",
+      "binaries": {
+        "/workspace/scratch/3f4ab65dfb82/state/integration/green-batch-debug/bin/T07-test": "fded2f9402ccd0b4c0af6c178ffca344fae49d5bcfc4126ad74c1622d9e53bc4"
+      },
+      "log": "green-batch-debug.log",
+      "log_sha256": "3f6da7830416df6c57bc4bb6af1411c95203a1bc7e6c2fbd90508abf0f231540",
+      "command": "TMPDIR=/workspace/scratch/3f4ab65dfb82/state/integration/tmp zig build test -Dtest-group=batch -Doptimize=Debug -Dinstall-tests=true --cache-dir /workspace/scratch/3f4ab65dfb82/state/integration/cache-batch --global-cache-dir /workspace/scratch/3f4ab65dfb82/state/integration/global-cache --prefix /workspace/scratch/3f4ab65dfb82/state/integration/green-batch-debug --summary all"
+    },
+    {
+      "kind": "module_regression",
+      "mode": "Debug",
+      "group": "mcp",
+      "tests_passed": 19,
+      "exit_code": 0,
+      "source_commit": "b5face3bf3e3f9216694437fa4cf002a590dda4b",
+      "binaries": {
+        "/workspace/scratch/3f4ab65dfb82/state/integration/green-mcp-debug/bin/T08-test": "d974719cbaad4c64030f89f9ba7f0de82188e33a6bf5a51b2f1c508d78806b50",
+        "/workspace/scratch/3f4ab65dfb82/state/integration/green-mcp-debug/bin/T08-launch-test": "17eca61650ba939990510666e7c71079a06f2dbfab4089841116017d324df212"
+      },
+      "log": "green-mcp-debug.log",
+      "log_sha256": "7e8170c00689dff8a4c7c3fb7491845e7b9a00a404a1287085f9826d64d581ee",
+      "command": "TMPDIR=/workspace/scratch/3f4ab65dfb82/state/integration/tmp zig build test -Dtest-group=mcp -Doptimize=Debug -Dinstall-tests=true --cache-dir /workspace/scratch/3f4ab65dfb82/state/integration/cache-mcp --global-cache-dir /workspace/scratch/3f4ab65dfb82/state/integration/global-cache --prefix /workspace/scratch/3f4ab65dfb82/state/integration/green-mcp-debug --summary all"
+    },
+    {
+      "kind": "module_regression",
+      "mode": "Debug",
+      "group": "scheduler",
+      "tests_passed": 15,
+      "exit_code": 0,
+      "source_commit": "b5face3bf3e3f9216694437fa4cf002a590dda4b",
+      "binaries": {
+        "/workspace/scratch/3f4ab65dfb82/state/integration/green-scheduler-debug/bin/T09-test": "09e9442aeeb16989d6a2ad51de1a235bf92462752d54dbd7276591c0bb1b0008"
+      },
+      "log": "green-scheduler-debug.log",
+      "log_sha256": "73be90b135c60c9c14aa80ea94dad54e876b66cb003cccbee1fdf950571cb39d",
+      "command": "TMPDIR=/workspace/scratch/3f4ab65dfb82/state/integration/tmp zig build test -Dtest-group=scheduler -Doptimize=Debug -Dinstall-tests=true --cache-dir /workspace/scratch/3f4ab65dfb82/state/integration/cache-scheduler --global-cache-dir /workspace/scratch/3f4ab65dfb82/state/integration/global-cache --prefix /workspace/scratch/3f4ab65dfb82/state/integration/green-scheduler-debug --summary all"
+    },
+    {
+      "kind": "native_stdio_fixture",
+      "mode": "Debug",
+      "checks_passed": 18,
+      "exit_code": 0,
+      "source_commit": "b5face3bf3e3f9216694437fa4cf002a590dda4b",
+      "binary": "/workspace/scratch/3f4ab65dfb82/state/integration/out-debug/bin/zcr",
+      "binary_sha256": "3dd3cfd745fef411de28dc48d9b74398e743559608644846e5346028ceb80528",
+      "files": {
+        "report.json": "922a7a13967249744d34072ee30865d6d3a9d81c3335ec32fbb0c90f22cf04c2",
+        "transcript.json": "1f0942e1c5301cac86c3997d990d4a4d7561ed3ca73c4fb0325caa10eb683ac4",
+        "manifest.json": "b0a949fbbd456d17ee0edb11377c093685449fbc1dcde3c9802ab03f3c145242",
+        "policy.json": "5089611453bafb3fc8124affd5e638ed8f67ee6c320c119d57dd5d60b4c01d21",
+        "global-exclude": "5744fa094400149d88cc50eee3e02c36d5e85b5c344cf4fe3c4314bd3c357d7e"
+      },
+      "log": "cli-final-debug.log",
+      "log_sha256": "121de1ecc64e1d2467611ad6b48d656651660c3f02596a970a035c22bb0b7938",
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=/workspace/scratch/3f4ab65dfb82/toolchain/doc-deps python3 tests/cli_smoke.py --binary /workspace/scratch/3f4ab65dfb82/state/integration/out-debug/bin/zcr --state /workspace/scratch/3f4ab65dfb82/state/integration/cli-final-debug"
+    },
+    {
+      "kind": "module_regression",
+      "mode": "ReleaseSafe",
+      "group": "batch",
+      "tests_passed": 25,
+      "exit_code": 0,
+      "source_commit": "b5face3bf3e3f9216694437fa4cf002a590dda4b",
+      "binaries": {
+        "/workspace/scratch/3f4ab65dfb82/state/integration/green-batch-safe/bin/T07-test": "fd57aa0e1da55c43a0bc47681876e107ba56216976c934699cc7d0b456d0df8d"
+      },
+      "log": "green-batch-safe.log",
+      "log_sha256": "0aa1efef7e61392091a85aad827c2eadc7d085ad3ab899eace04dbb4d4ee4df8",
+      "command": "TMPDIR=/workspace/scratch/3f4ab65dfb82/state/integration/tmp zig build test -Dtest-group=batch -Doptimize=ReleaseSafe -Dinstall-tests=true --cache-dir /workspace/scratch/3f4ab65dfb82/state/integration/cache-batch-safe --global-cache-dir /workspace/scratch/3f4ab65dfb82/state/integration/global-cache --prefix /workspace/scratch/3f4ab65dfb82/state/integration/green-batch-safe --summary all"
+    },
+    {
+      "kind": "module_regression",
+      "mode": "ReleaseSafe",
+      "group": "mcp",
+      "tests_passed": 19,
+      "exit_code": 0,
+      "source_commit": "b5face3bf3e3f9216694437fa4cf002a590dda4b",
+      "binaries": {
+        "/workspace/scratch/3f4ab65dfb82/state/integration/green-mcp-safe/bin/T08-test": "2fe5af4189ce9f2157f5c471754372d6c0da2a250d770d76192a3b486f6ff5ad",
+        "/workspace/scratch/3f4ab65dfb82/state/integration/green-mcp-safe/bin/T08-launch-test": "a142e231b2c75e449e3e634521bdf9e05e7c20032a5e0830f7e8018e7d3a9019"
+      },
+      "log": "green-mcp-safe.log",
+      "log_sha256": "3f9b1b26073b6fc845e99132415a9839446f1a26adb03af718a7348622f869ca",
+      "command": "TMPDIR=/workspace/scratch/3f4ab65dfb82/state/integration/tmp zig build test -Dtest-group=mcp -Doptimize=ReleaseSafe -Dinstall-tests=true --cache-dir /workspace/scratch/3f4ab65dfb82/state/integration/cache-mcp-safe --global-cache-dir /workspace/scratch/3f4ab65dfb82/state/integration/global-cache --prefix /workspace/scratch/3f4ab65dfb82/state/integration/green-mcp-safe --summary all"
+    },
+    {
+      "kind": "module_regression",
+      "mode": "ReleaseSafe",
+      "group": "scheduler",
+      "tests_passed": 15,
+      "exit_code": 0,
+      "source_commit": "b5face3bf3e3f9216694437fa4cf002a590dda4b",
+      "binaries": {
+        "/workspace/scratch/3f4ab65dfb82/state/integration/green-scheduler-safe/bin/T09-test": "8cbaceb220229a32b6e4615fcf9c7043710ef91b1fb3313c4755ab91f50e033c"
+      },
+      "log": "green-scheduler-safe.log",
+      "log_sha256": "8df94dbf22c062ec3d8753c6a95d5cfba5f6c1a03cdba626e4d9db5013065725",
+      "command": "TMPDIR=/workspace/scratch/3f4ab65dfb82/state/integration/tmp zig build test -Dtest-group=scheduler -Doptimize=ReleaseSafe -Dinstall-tests=true --cache-dir /workspace/scratch/3f4ab65dfb82/state/integration/cache-scheduler-safe --global-cache-dir /workspace/scratch/3f4ab65dfb82/state/integration/global-cache --prefix /workspace/scratch/3f4ab65dfb82/state/integration/green-scheduler-safe --summary all"
+    },
+    {
+      "kind": "native_stdio_fixture",
+      "mode": "ReleaseSafe",
+      "checks_passed": 18,
+      "exit_code": 0,
+      "source_commit": "b5face3bf3e3f9216694437fa4cf002a590dda4b",
+      "binary": "/workspace/scratch/3f4ab65dfb82/state/integration/out-safe/bin/zcr",
+      "binary_sha256": "c70e93039d82f1ddf32dd3ec3db075523023777273153c2962c83db91cb49c0c",
+      "files": {
+        "report.json": "1e2b7b195e9fd886f03afc4679e3a2a15693427faf2081263636efac80f9396b",
+        "transcript.json": "488d0a06ffb9e8755e2a16ac166853d278b4380b53e3d5d23fc9fc63c0faafb8",
+        "manifest.json": "794fbfb2e31ae71640c81237258e002f3cfb1c3239aad2833ec9cc6c02ff0a7a",
+        "policy.json": "4c47b2f196e3ecaee52dac6a27aa16b9bce6d5b293370c00e854beab4b11976c",
+        "global-exclude": "5744fa094400149d88cc50eee3e02c36d5e85b5c344cf4fe3c4314bd3c357d7e"
+      },
+      "log": "cli-final-safe.log",
+      "log_sha256": "121de1ecc64e1d2467611ad6b48d656651660c3f02596a970a035c22bb0b7938",
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=/workspace/scratch/3f4ab65dfb82/toolchain/doc-deps python3 tests/cli_smoke.py --binary /workspace/scratch/3f4ab65dfb82/state/integration/out-safe/bin/zcr --state /workspace/scratch/3f4ab65dfb82/state/integration/cli-final-safe"
+    }
+  ],
+  "red_runs": [
+    {
+      "source_commit": "578594eded4ce8eeb79389194676dd9da4f530b1",
+      "group": "mcp",
+      "exit_code": 1,
+      "binary": "/workspace/scratch/3f4ab65dfb82/state/integration/deadline-red-mcp/bin/T08-test",
+      "binary_sha256": "36f7e9c04f03a72af11a8931d5d34b66c0182f6573529953c1632d20898b92f2",
+      "log": "deadline-red-mcp.log",
+      "log_sha256": "f98c4733cc5e9a01b66b6afa1e0ef24212933848c6d6b8f373a0f33a5f8debf4",
+      "failure": "expired deadline-only token was returned as Cancelled / E_CANCELLED"
+    },
+    {
+      "source_commit": "578594eded4ce8eeb79389194676dd9da4f530b1",
+      "group": "scheduler",
+      "exit_code": 1,
+      "binary": "/workspace/scratch/3f4ab65dfb82/state/integration/deadline-red-scheduler/bin/T09-test",
+      "binary_sha256": "3ab686c0b7994921e1bb8010bcb718c00afee09e371664b1ecee4e1eb0947a60",
+      "log": "deadline-red-scheduler.log",
+      "log_sha256": "fe3af5c62f10ed828cd843790d4330d63eaa822bc8ad4ea3c60df8be7968989b",
+      "failure": "expired deadline-only token was returned as Cancelled / E_CANCELLED"
+    },
+    {
+      "source_commit": "4d14dfd05c995d2d893f8af5888fe5ef2bddcc31",
+      "group": "batch",
+      "exit_code": 1,
+      "binary": "/workspace/scratch/3f4ab65dfb82/state/integration/deadline-red-batch/bin/T07-test",
+      "binary_sha256": "49b0a3c03310db59f14c7060481f1bb2cfd283cb9a7243d95fc5c1a22a23c7fb",
+      "log": "deadline-red-batch-corrected.log",
+      "log_sha256": "757c97104d84fa0659f5e48552055575056256388657f99ec57af9b4955b7652",
+      "failure": "expired deadline-only token was returned as Cancelled / E_CANCELLED"
+    }
+  ],
+  "not_run": [
+    "actual Codex/Claude registration and tool routing",
+    "native current-source Apple Silicon/Intel Mac execution",
+    "APFS durability and model coexistence E2E",
+    "T11/T13 integrated whole-suite pending source delivery"
+  ]
+}

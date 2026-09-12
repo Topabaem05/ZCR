@@ -1,0 +1,21 @@
+{
+  "schema_version": "zcr-task-red/1",
+  "task_id": "T10",
+  "source_commit": "f2c6ba7734e03b29a31085ab70d1548f9abfcb68",
+  "exit_code": 1,
+  "reason": "Expected owned workspace module is absent; test compile identifies missing src/workspace/registry.zig. Task RED allows missing implementation symbols. Subsequent incidental compiler errors were not RED evidence.",
+  "command": "zig test -lc --dep zcr_core --dep zcr_workspace -Mroot=tests/t10_test.zig -Mzcr_core=src/core/types.zig --dep zcr_core --dep zcr_policy -Mzcr_workspace=src/workspace/registry.zig --dep zcr_core -Mzcr_policy=src/policy/capability.zig -femit-bin=<state>/out/red",
+  "binary_sha256": null,
+  "log": "/workspace/scratch/3f4ab65dfb82/state/T10/logs/red.log",
+  "log_sha256": "8bda3859090207a85a6c2361f6d0e640dade28b711177134ac63f457fdc4c707",
+  "supplemental_lease_assertion_red": {
+    "exit_code": 1,
+    "log": "/workspace/scratch/3f4ab65dfb82/state/T10/lease-logs/red.log",
+    "binary_sha256": "dd91a58472c1f9cf790fb4b5d5823b5e7fb1d7ff8c0c338a038e5b8f4f980da8",
+    "provenance_note": "Developmental uncommitted stub run; supplemental only, not source-commit-attested GREEN evidence."
+  },
+  "evidence_log_archive": {
+    "path": "evidence/T10/historical-logs.zip",
+    "member": "red.log"
+  }
+}

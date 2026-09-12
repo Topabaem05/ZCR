@@ -1,0 +1,51 @@
+{
+  "source_commit": "2ca8e314a7c06c611a2e7e315470dd21737ce0a0",
+  "checks": [
+    {
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/state/T14/zig-local-cache/o/549224efc715154f08bbe04bfc3bc80f/zcr-dev-evidence",
+        "verify",
+        "--worktree",
+        "/workspace/scratch/3f4ab65dfb82/ZCR-T14",
+        "--evidence",
+        "/workspace/scratch/3f4ab65dfb82/state/T14/green-debug-standard.json"
+      ],
+      "exit": 0,
+      "output": "verify: accepted\n"
+    },
+    {
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/state/T14/zig-local-cache/o/549224efc715154f08bbe04bfc3bc80f/zcr-dev-evidence",
+        "verify",
+        "--worktree",
+        "/workspace/scratch/3f4ab65dfb82/ZCR-T14",
+        "--evidence",
+        "/workspace/scratch/3f4ab65dfb82/state/T14/green-safe-standard.json"
+      ],
+      "exit": 0,
+      "output": "verify: accepted\n"
+    },
+    {
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/state/T14/zig-local-cache/o/549224efc715154f08bbe04bfc3bc80f/zcr-dev-evidence",
+        "verify",
+        "--worktree",
+        "/workspace/scratch/3f4ab65dfb82/ZCR-T14",
+        "--evidence",
+        "/workspace/scratch/3f4ab65dfb82/state/T14/fault-debug-standard.json"
+      ],
+      "exit": 0,
+      "output": "verify: accepted\n"
+    },
+    {
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/state/T14/zig-local-cache/o/549224efc715154f08bbe04bfc3bc80f/zcr-dev-evidence",
+        "preflight",
+        "--worktree",
+        "/workspace/scratch/3f4ab65dfb82/ZCR-T14"
+      ],
+      "exit": 0,
+      "output": "{\n  \"ok\": true,\n  \"state\": {\n    \"toplevel\": \"/workspace/scratch/3f4ab65dfb82/ZCR-T14\",\n    \"absolute_git_dir\": \"/workspace/scratch/3f4ab65dfb82/ZCR/.git/worktrees/ZCR-T14\",\n    \"common_dir\": \"/workspace/scratch/3f4ab65dfb82/ZCR/.git\",\n    \"head_commit\": \"2ca8e314a7c06c611a2e7e315470dd21737ce0a0\",\n    \"head_tree\": \"17d5f6fd328c6282081fb4cbfe0afebfd983becb\",\n    \"branch\": \"codex/t14-watch\",\n    \"entries\": []\n  },\n  \"reasons\": []\n}\n"
+    }
+  ]
+}

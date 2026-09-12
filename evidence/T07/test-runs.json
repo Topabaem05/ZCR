@@ -1,0 +1,433 @@
+{
+  "schema_version": "zcr-t07-test-runs/0",
+  "task_id": "T07",
+  "state_dir": "$STATE=/Users/guribbong/code/ZCR-state/tasks/T07",
+  "runs": [
+    {
+      "label": "red",
+      "optimize": "Debug",
+      "source_commit": "2f6f0ea7473dea1f17ee3b76f6d35845b8cde474",
+      "source_tree": "c07fce688ccb0a2d4ff3e4ee02b6fdeebb334242",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build test -Dtest-group=batch -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-red --summary all",
+      "exit_code": 1,
+      "summary": "Build Summary: 2/4 steps succeeded (1 failed); 1/17 tests passed (16 failed)",
+      "installed_test_binaries_sha256": {
+        "T07-test": "01557639fc21a83e59e1962f9fc767906547ebdd3f7f1c35d2d7912f8e6c83e9"
+      },
+      "log": "logs/red.log",
+      "log_sha256": "bceaecc0e6c14347e69de03dbc1cb7de551629736494886d84aee1a090167fa0"
+    },
+    {
+      "label": "green-batch-debug",
+      "optimize": "Debug",
+      "source_commit": "f370f27191f55b4612a58e530f2c6d8f38608862",
+      "source_tree": "3c6fc3b0d755793eacd77d8657d60c396ca82b7a",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build test -Dtest-group=batch -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-green-batch-debug --summary all",
+      "exit_code": 0,
+      "summary": "Build Summary: 4/4 steps succeeded; 18/18 tests passed",
+      "installed_test_binaries_sha256": {
+        "T07-test": "90c72f5b8391ad4b6807c2070a739bb5c6b3229fc565047f9efd97a7248e2b8e"
+      },
+      "log": "logs/green-batch-debug.log",
+      "log_sha256": "c419bbd5ad7140ec5b5945de8105d1efad71476a4e332a745f8b57bd595dd772"
+    },
+    {
+      "label": "green-batch-releasesafe",
+      "optimize": "ReleaseSafe",
+      "source_commit": "f370f27191f55b4612a58e530f2c6d8f38608862",
+      "source_tree": "3c6fc3b0d755793eacd77d8657d60c396ca82b7a",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build test -Dtest-group=batch -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix $STATE/out-green-batch-releasesafe --summary all",
+      "exit_code": 0,
+      "summary": "Build Summary: 4/4 steps succeeded; 18/18 tests passed",
+      "installed_test_binaries_sha256": {
+        "T07-test": "d397adf18749a1a855d58def92d6d865fe41ab6f6824c89fdf20c19dac3dcc3f"
+      },
+      "log": "logs/green-batch-releasesafe.log",
+      "log_sha256": "da09680d72f73d9290d253563f1c90fa4b6c2281c371b670487399a70515660b"
+    },
+    {
+      "label": "regression-all-debug",
+      "optimize": "Debug",
+      "source_commit": "f370f27191f55b4612a58e530f2c6d8f38608862",
+      "source_tree": "3c6fc3b0d755793eacd77d8657d60c396ca82b7a",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build test -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-regression-all-debug --summary all",
+      "exit_code": 0,
+      "summary": "Build Summary: 29/29 steps succeeded; 103/103 tests passed",
+      "installed_test_binaries_sha256": {
+        "T00-test": "53b6c4b110c74a9e64be2faff4e7ee1291d7e6ccf52cd8a2b09bf581aacd04f4",
+        "T01-test": "f9fb2c27c3ea6ce404253a555fe8690c6ca00bb89c8a993b45eb7cf42fb20b43",
+        "T02-test": "479b54118f52129f92c77fd93cbf3c0da5c1d98c26b02520345624928be9309c",
+        "T03-test": "70a7185eb0ddf08fa3a80a3b4693b30a4b6015de8f07c7df1d37fb19e3ed895f",
+        "T04-test": "92d61455e297cfe8e179eb1f8fe9a7a5a42a53c86a7fea7af002b87d2cc8224d",
+        "T05-test": "ef40f3d00ee96a0a7153f7ca97b28c9afa634d62a4e12f5681563324b625f186",
+        "T06-test": "e24a9bf4808c70d5e3ce9ae18357ea537ee93158d3496aebd31e2f043bdfb5ac",
+        "T07-test": "90c72f5b8391ad4b6807c2070a739bb5c6b3229fc565047f9efd97a7248e2b8e"
+      },
+      "log": "logs/regression-all-debug.log",
+      "log_sha256": "5c75c52514983272b5dcdc2a39b757e75c8ae8b9059040ee34ac64fce15aa5c4"
+    },
+    {
+      "label": "verify-contracts",
+      "optimize": "Debug",
+      "source_commit": "f370f27191f55b4612a58e530f2c6d8f38608862",
+      "source_tree": "3c6fc3b0d755793eacd77d8657d60c396ca82b7a",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build verify-contracts -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-verify-contracts --summary all",
+      "exit_code": 0,
+      "summary": "Build Summary: 3/3 steps succeeded",
+      "installed_test_binaries_sha256": {},
+      "log": "logs/verify-contracts.log",
+      "log_sha256": "61df529c3b9ff94d866fccdddbaf26db9dfbc1981be164526c4401e33b86ee54"
+    }
+  ],
+  "projection_schema_validation": {
+    "command": "ZCR_T07_SAMPLES=<dir> $STATE/out-green-batch-debug/bin/T07-test; python logs/validate_samples.py <worktree> <dir> (jsonschema Draft 2020-12)",
+    "binary_sha256": "90c72f5b8391ad4b6807c2070a739bb5c6b3229fc565047f9efd97a7248e2b8e",
+    "result": {
+      "schema_files": {
+        "response.schema.json": "587ba596c5ca9a3c30d820905aaf4d91b388325ededddbd468534c9119f91060",
+        "data.schema.json": "5c3932867cf4e16729cd6b959c16b9a143308aa5396f79a7f0e56f6563d314f5"
+      },
+      "samples": [
+        {
+          "sample": "read.json",
+          "bytes": 593,
+          "sha256": "cc1f3c77ca870485182bb03fd4abeaad09b2958127b01224ed5dc659adc0ccef",
+          "data_schema": "read",
+          "errors": [],
+          "truncated": false,
+          "complete": true,
+          "returned_bytes": 260
+        },
+        {
+          "sample": "batch_read.json",
+          "bytes": 13416,
+          "sha256": "36d045400a3850a0875d19e908db80594b6c300a23c584b71a723e2a1f15cdbb",
+          "data_schema": "batch_read",
+          "errors": [],
+          "truncated": true,
+          "complete": false,
+          "returned_bytes": 13023
+        },
+        {
+          "sample": "batch_read_truncated.json",
+          "bytes": 8594,
+          "sha256": "d4a09120e208761d63c325ff260463c7fcfa22bc915d5e2de3cd701cf870e4a1",
+          "data_schema": "batch_read",
+          "errors": [],
+          "truncated": true,
+          "complete": false,
+          "returned_bytes": 8163
+        },
+        {
+          "sample": "failure.json",
+          "bytes": 410,
+          "sha256": "59768736960be86c67552781e15fc9641273cab31059a0b9dd6e48d152f8482f",
+          "data_schema": null,
+          "errors": [],
+          "truncated": false,
+          "complete": false,
+          "returned_bytes": 2
+        }
+      ],
+      "status": "pass"
+    },
+    "samples_dir": "samples/",
+    "run_log": "logs/s04-samples-run.log"
+  },
+  "mutation_checks": {
+    "round1": [
+      {
+        "log": "mutants/round1/m1-no-output-wait.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 15/17 tests passed (2 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "BA-001 32 items keep input order, item ids and per-item errors, and match single reads",
+          "BA-001 results do not depend on how many items run at once"
+        ]
+      },
+      {
+        "log": "mutants/round1/m10-no-duplicate-id-check.log",
+        "summary": "Build Summary: 0/3 steps succeeded (1 failed)",
+        "compile_cached": false,
+        "compile_error": true,
+        "failed_tests": []
+      },
+      {
+        "log": "mutants/round1/m11-no-store-check.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 16/17 tests passed (1 crashed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "BA-003 a reservation without room for the store or any item is refused honestly"
+        ]
+      },
+      {
+        "log": "mutants/round1/m12-workers-ignore-caps.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 15/17 tests passed (2 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "BA-001 32 items keep input order, item ids and per-item errors, and match single reads",
+          "BA-001 results do not depend on how many items run at once"
+        ]
+      },
+      {
+        "log": "mutants/round1/m13-budget-error-not-truncated.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 16/17 tests passed (1 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "BA-003 32 items asking for 8 MiB share a 2 MiB output cap under a small group budget"
+        ]
+      },
+      {
+        "log": "mutants/round1/m14-no-refund.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 13/17 tests passed (4 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "BA-001 32 items keep input order, item ids and per-item errors, and match single reads",
+          "T07 a file that keeps changing fails its item with a version conflict, others succeed",
+          "T07 an allocation failure at any point fails an item or the batch and leaks nothing",
+          "T07 a real batch result projects within its output budget"
+        ]
+      },
+      {
+        "log": "mutants/round1/m15-no-dispatch-cancel.log",
+        "summary": "Build Summary: 3/3 steps succeeded; 17/17 tests passed",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": []
+      },
+      {
+        "log": "mutants/round1/m2-no-memory-wait.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 16/17 tests passed (1 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "BA-003 32 items asking for 8 MiB share a 2 MiB output cap under a small group budget"
+        ]
+      },
+      {
+        "log": "mutants/round1/m3-pool-before-free.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 16/17 tests passed (1 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "BA-003 32 items asking for 8 MiB share a 2 MiB output cap under a small group budget"
+        ]
+      },
+      {
+        "log": "mutants/round1/m4-no-dedupe.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 16/17 tests passed (1 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "BA-001 32 items keep input order, item ids and per-item errors, and match single reads"
+        ]
+      },
+      {
+        "log": "mutants/round1/m5-no-merge.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 16/17 tests passed (1 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "BA-001 32 items keep input order, item ids and per-item errors, and match single reads"
+        ]
+      },
+      {
+        "log": "mutants/round1/m6-no-own-cap.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 15/17 tests passed (2 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "BA-001 32 items keep input order, item ids and per-item errors, and match single reads",
+          "T07 a real batch result projects within its output budget"
+        ]
+      },
+      {
+        "log": "mutants/round1/m7-shared-short-ok.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 16/17 tests passed (1 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "BA-003 32 items asking for 8 MiB share a 2 MiB output cap under a small group budget"
+        ]
+      },
+      {
+        "log": "mutants/round1/m8-no-item-id-copy.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 16/17 tests passed (1 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "BA-001 32 items keep input order, item ids and per-item errors, and match single reads"
+        ]
+      },
+      {
+        "log": "mutants/round1/m9-no-workspace-check.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 16/17 tests passed (1 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "BA-002 more than 32 items, bad item ids and another workspace are refused before any read"
+        ]
+      },
+      {
+        "log": "mutants/round1/p1-no-control-escape.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 16/17 tests passed (1 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "T07 projection escapes JSON text and keeps bytes, CR and non-ASCII exact"
+        ]
+      },
+      {
+        "log": "mutants/round1/p2-batch-always-full.log",
+        "summary": "Build Summary: 0/3 steps succeeded (1 failed)",
+        "compile_cached": false,
+        "compile_error": true,
+        "failed_tests": []
+      },
+      {
+        "log": "mutants/round1/p3-truncated-can-be-complete.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 15/17 tests passed (2 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "T07 projection keeps whole lines within output_bytes and says the result is truncated",
+          "T07 projection refuses a bad envelope and a buffer that is too small"
+        ]
+      },
+      {
+        "log": "mutants/round1/p4-zero-entries-allowed.log",
+        "summary": "Build Summary: 3/3 steps succeeded; 17/17 tests passed",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": []
+      },
+      {
+        "log": "mutants/round1/p5-no-utf8-check.log",
+        "summary": "Build Summary: 3/3 steps succeeded; 17/17 tests passed",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": []
+      },
+      {
+        "log": "mutants/round1/p6-no-request-id-limit.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 16/17 tests passed (1 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "T07 projection refuses a bad envelope and a buffer that is too small"
+        ]
+      },
+      {
+        "log": "mutants/round1/p7-no-budget-reason.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 16/17 tests passed (1 crashed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "T07 projection keeps whole lines within output_bytes and says the result is truncated"
+        ]
+      },
+      {
+        "log": "mutants/round1/p8-greedy-stops.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 16/17 tests passed (1 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "T07 batch projection keeps every item id in order and marks items that do not fit"
+        ]
+      }
+    ],
+    "round1_survivors": [
+      "mutants/round1/m15-no-dispatch-cancel.log",
+      "mutants/round1/p4-zero-entries-allowed.log",
+      "mutants/round1/p5-no-utf8-check.log"
+    ],
+    "round1_not_compiled": [
+      "mutants/round1/m10-no-duplicate-id-check.log",
+      "mutants/round1/p2-batch-always-full.log"
+    ],
+    "round2": [
+      {
+        "log": "mutants/round2/m10b-no-duplicate-id-check.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 17/18 tests passed (1 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "BA-002 more than 32 items, bad item ids and another workspace are refused before any read"
+        ]
+      },
+      {
+        "log": "mutants/round2/m15-no-dispatch-cancel.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 17/18 tests passed (1 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "T07 no read starts after cancellation is requested between reads"
+        ]
+      },
+      {
+        "log": "mutants/round2/p2b-batch-always-full.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 17/18 tests passed (1 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "T07 batch projection keeps every item id in order and marks items that do not fit"
+        ]
+      },
+      {
+        "log": "mutants/round2/p4-zero-entries-allowed.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 17/18 tests passed (1 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "T07 projection keeps whole lines within output_bytes and says the result is truncated"
+        ]
+      },
+      {
+        "log": "mutants/round2/p5-no-utf8-check.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 17/18 tests passed (1 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "T07 projection refuses a bad envelope and a buffer that is too small"
+        ]
+      }
+    ],
+    "round2_survivors": [],
+    "notes": [
+      "round 1 ran the implementation of 9d774d3 against the test file before the S03 test additions",
+      "round 2 ran against the test file of 9d774d3: the three round-1 survivors and replacements for the two mutants that did not compile",
+      "m15-no-dispatch-cancel survived round 1 because the reader also checks cancellation when it starts; the new test checks that no read starts after cancellation",
+      "p4-zero-entries-allowed and p5-no-utf8-check survived round 1; new projection tests cover a budget that holds only the fixed parts and non-UTF-8 text",
+      "m10 and p2 did not compile (unused capture) and were replaced by m10b and p2b",
+      "f370f27 changed only the ZCR_T07_SAMPLES branch of one test after the mutation rounds",
+      "no mutant log shows a cached test compile step"
+    ]
+  },
+  "cross_compile_only": [
+    {
+      "target": "x86_64-linux-musl",
+      "exit_code": 0,
+      "log": "logs/s03-compile-x86_64-linux-musl.log"
+    },
+    {
+      "target": "aarch64-linux-musl",
+      "exit_code": 0,
+      "log": "logs/s03-compile-aarch64-linux-musl.log"
+    },
+    {
+      "target": "x86_64-macos",
+      "exit_code": 0,
+      "log": "logs/s03-compile-x86_64-macos.log"
+    }
+  ]
+}

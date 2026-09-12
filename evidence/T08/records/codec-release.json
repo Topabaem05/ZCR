@@ -1,0 +1,13 @@
+{
+  "schema_version": "zcr-evidence/1",
+  "task_id": "T08",
+  "label": "codec-release",
+  "command": "/workspace/scratch/3f4ab65dfb82/state/T08/out/codec-release",
+  "exit_code": 0,
+  "source_commit": "48d2e8b61a83af444f0914379f8bc75f169413f3",
+  "source_tree": "32e0f1c7db627bfcdf45a8acf475b41e8be718bb",
+  "worktree_git_dir": "/workspace/scratch/3f4ab65dfb82/ZCR/.git/worktrees/ZCR-T08",
+  "binary_path": "/workspace/scratch/3f4ab65dfb82/state/T08/out/codec-release",
+  "binary_sha256": "6e9b4227e707ecc63a3fa65b50bc277436834e65dc42e7f6f5e34cb22ad06755",
+  "recorded_at_unix_ms": 1789196392767
+}

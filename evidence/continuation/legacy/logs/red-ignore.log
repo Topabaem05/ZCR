@@ -1,0 +1,21 @@
+test
++- install T05-test
+   +- compile test T05-test Debug native 1 errors
+tests/t05_test.zig:210:17: error: no field named 'trusted_excludes' in struct 'traverse.Traverser'
+    h.traverser.trusted_excludes = .{ .git_info_exclude = info, .global_exclude = global };
+                ^~~~~~~~~~~~~~~~
+src/fs/traverse.zig:102:23: note: struct declared here
+pub const Traverser = struct {
+                      ^~~~~~
+error: 1 compilation errors
+failed command: /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig test -ODebug --dep zcr_core --dep zcr_policy --dep zcr_memory --dep zcr_fs_traverse --dep evidence -Mroot=/workspace/scratch/3f4ab65dfb82/ZCR-legacy/tests/t05_test.zig -ODebug -Mzcr_core=/workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/core/types.zig -ODebug --dep zcr_core -Mzcr_policy=/workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/policy/capability.zig -ODebug --dep zcr_core -Mzcr_memory=/workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/memory/budget.zig -ODebug --dep zcr_core --dep zcr_policy -Mzcr_fs_traverse=/workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/fs/traverse.zig -ODebug --dep zcr_core -Mevidence=/workspace/scratch/3f4ab65dfb82/ZCR-legacy/tools/dev/evidence.zig -lc --test-filter "trusted Git" --cache-dir /workspace/scratch/3f4ab65dfb82/state/legacy/zig-local-cache --global-cache-dir /workspace/scratch/3f4ab65dfb82/state/legacy/zig-global-cache --name T05-test --zig-lib-dir /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/ --listen=-
+
+Build Summary: 0/4 steps succeeded (1 failed)
+test transitive failure
++- install T05-test transitive failure
+|  +- compile test T05-test Debug native 1 errors
++- run test T05-test transitive failure
+   +- compile test T05-test Debug native (reused)
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/legacy/zig-local-cache/o/f28d12be414d247ec5da67365b4abafb/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-legacy /workspace/scratch/3f4ab65dfb82/state/legacy/zig-local-cache /workspace/scratch/3f4ab65dfb82/state/legacy/zig-global-cache --seed 0x76d25f9f -Zf5099f46b7da61ca test -Dtest-group=fs -Dtest-id=trusted Git -Dinstall-tests=true -Doptimize=Debug --prefix /workspace/scratch/3f4ab65dfb82/state/legacy/out/red-ignore

@@ -1,0 +1,13 @@
+{
+  "schema_version": "zcr-evidence/1",
+  "task_id": "T13",
+  "label": "green-safe",
+  "command": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig build test -Dtest-group=memory -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T13/out-green-safe --summary all",
+  "exit_code": 0,
+  "source_commit": "8a4d74fe6f87a1f5427c6d0f94dd0b01fe082efd",
+  "source_tree": "f15cf82ea55a06341641ca3d6b13c3c9b27f2134",
+  "worktree_git_dir": "/workspace/scratch/3f4ab65dfb82/ZCR/.git/worktrees/ZCR-T13",
+  "binary_path": "/workspace/scratch/3f4ab65dfb82/state/T13/out-green-safe/bin/T13-test",
+  "binary_sha256": "aa240aebf75ea8628fafec28e345463367b791eeaa1527f608c6ac7d7e7c8185",
+  "recorded_at_unix_ms": 1789197148291
+}

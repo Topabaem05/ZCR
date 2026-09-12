@@ -1,0 +1,13 @@
+{
+  "schema_version": "zcr-evidence/1",
+  "task_id": "T07",
+  "label": "green-batch-debug",
+  "command": "zig build test -Dtest-group=batch -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-green-batch-debug",
+  "exit_code": 0,
+  "source_commit": "f370f27191f55b4612a58e530f2c6d8f38608862",
+  "source_tree": "3c6fc3b0d755793eacd77d8657d60c396ca82b7a",
+  "worktree_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/task-t07",
+  "binary_path": "/Users/guribbong/code/ZCR-state/tasks/T07/out-green-batch-debug/bin/T07-test",
+  "binary_sha256": "90c72f5b8391ad4b6807c2070a739bb5c6b3229fc565047f9efd97a7248e2b8e",
+  "recorded_at_unix_ms": 1789144972205
+}

@@ -1,0 +1,48 @@
+test
++- run test T06-test 8 pass, 2 fail, 1 crash (11 total)
+error: 't06_test.test.SR-001 tiny chunks over random files never duplicate or miss a match' failed:
+       expected 1, found 0
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x1010ea71b in expectEqualInner__anon_37715 (T06-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x101126ffb in expectEqual (T06-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T06/tmp/mutants/m3-lines-from-window-start/tests/t06_test.zig:241:13: 0x10112709f in test.SR-001 tiny chunks over random files never duplicate or miss a match (T06-test)
+                   try testing.expectEqual(@as(usize, 1), collector.files.items.len);
+                   ^
+error: 't06_test.test.SR-002 several matches on one line and overlapping context return each line once' terminated with signal ABRT with stderr:
+       thread 27191094 panic: attempt to use null value
+       /Users/guribbong/code/ZCR-state/tasks/T06/tmp/mutants/m3-lines-from-window-start/tests/t06_test.zig:262:42: 0x1011262d7 in test.SR-002 several matches on one line and overlapping context return each line once (T06-test)
+           const hit = collector.find("ctx.txt").?;
+                                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x1010c712f in mainServer (T06-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x1010c77df in main (T06-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x1010c55a3 in callMain (T06-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+error: 't06_test.test.SR-006 a file that changes between scan and context read is retried once or skipped, never mixed' failed:
+       expected 1, found 0
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x10043671b in expectEqualInner__anon_37715 (T06-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x1004671df in expectEqual (T06-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T06/tmp/mutants/m3-lines-from-window-start/tests/t06_test.zig:495:5: 0x100467283 in test.SR-006 a file that changes between scan and context read is retried once or skipped, never mixed (T06-test)
+           try testing.expectEqual(@as(usize, 1), retried.files.items.len);
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache/o/1df48b9ae4b73bc9079aca66625055a9/T06-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache --seed=0x7a45eda0 --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 8/11 tests passed (2 failed, 1 crashed)
+test transitive failure
++- run test T06-test 8 pass, 2 fail, 1 crash (11 total)
+   +- compile test T06-test Debug native success 2s MaxRSS:300M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache/o/ce59de40176ab3ab39ded0a6edd5fd7e/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T06/tmp/mutants/m3-lines-from-window-start /Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T06/zig-global-cache --seed 0x7a45eda0 -Ze353b13c5ffb0307 test -Dtest-group=search --summary all

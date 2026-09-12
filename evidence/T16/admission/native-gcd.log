@@ -1,0 +1,7 @@
+Build Summary: 4/4 steps succeeded; 0/1 tests passed (1 skipped)
+test success
++- install T09-test success
+|  +- compile test T09-test Debug native success 417ms MaxRSS:172M
++- run test T09-test 0 pass, 1 skip (1 total) 10ms MaxRSS:5M
+   +- compile test T09-test Debug native (reused)
+

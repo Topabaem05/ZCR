@@ -1,0 +1,11 @@
+Build Summary: 7/7 steps succeeded; 15/15 tests passed
+test success
++- install T04-test success
+|  +- compile test T04-test ReleaseSafe native success 20s MaxRSS:490M
++- run test T04-test 13 pass (13 total) 302ms MaxRSS:20M
+|  +- compile test T04-test ReleaseSafe native (reused)
++- install T04-deadline-test success
+|  +- compile test T04-deadline-test ReleaseSafe native success 18s MaxRSS:450M
++- run test T04-deadline-test 2 pass (2 total) 2ms MaxRSS:5M
+   +- compile test T04-deadline-test ReleaseSafe native (reused)
+

@@ -1,0 +1,67 @@
+{
+  "authorization_sha256": "7d4be597659ed8bdfffcaafccc9484a41d414f1cad8d65ed394ade7145355195",
+  "build_config_file_hashes": {
+    "AGENTS.md": "49312c7f61e7423880cccc2e43ae9e07e300aaf10dc2278f6589658078620a9c",
+    "build.zig": "0b4e1febe65415a70621dbbf5c373a099255bd0af14e913dfb111657dbd8c55f",
+    "build.zig.zon": "2ad2381bdb29d5669c6d2ac4807c124c2afe6d007daf7ea2b507fdc64bf44e52",
+    "config/limits.json": "d7b3db8b6956c0f8b1e6f399e6e432fb4eadb8aa033f39d303e31edbe539154c",
+    "config/memory-profiles.json": "7f925fb57bc0453f2505b3c10856a4e74322bcb8cc3417070ec7693e847804b7",
+    "config/scheduler-profiles.json": "3f3b7d88264c94ac84ea0969da47ff1aee46ad4ba51f4899742ee2c1603b57a8",
+    "contracts/README.md": "e3fb52440e84c7a9abe3f855f1423eee91222c546243b2435988c64cb325a05b",
+    "contracts/data.schema.json": "5c3932867cf4e16729cd6b959c16b9a143308aa5396f79a7f0e56f6563d314f5",
+    "contracts/inputs/zcr_batch_read.schema.json": "50c4b12c0575660e6d030acabd8a3fb60ec9e3b4a620426cea79133ec011f15d",
+    "contracts/inputs/zcr_create.schema.json": "821b9bdb7e74db3c5456e06ee6ceb0cf5105fa13ab39786ef0f4fd024b1812ca",
+    "contracts/inputs/zcr_files.schema.json": "8f7680bc92ad4ef9a1a34e7a9756cbca4f286452387a246de33cb13073890eb4",
+    "contracts/inputs/zcr_health.schema.json": "9e78382dc9325d9dafba3edbadf843f670505c5e19d8a2ee0a168147862d9538",
+    "contracts/inputs/zcr_patch.schema.json": "77d27a7cb46a2d7765f245f85f2e47560df5ea82e406e049e1e387d38f543f99",
+    "contracts/inputs/zcr_read.schema.json": "fdd23867b862977d19bf3b3d45183ead856d58ec4742d41ec3e970751e524bdc",
+    "contracts/inputs/zcr_search.schema.json": "ed9109d79358aa095c54fe6c70260be99f4ba9c68aef4d4539319562f8567211",
+    "contracts/inputs/zcr_status.schema.json": "a46793fa818ba7ce90931a0dece57235aaa5aebbd010bbc3606fb3a8cb0cc5b1",
+    "contracts/response.schema.json": "587ba596c5ca9a3c30d820905aaf4d91b388325ededddbd468534c9119f91060",
+    "contracts/task-manifest.schema.json": "d65a9082b5b4896e6e1017d4bfa6a37dc12efe88b362ed809491a5f3b2c965cc",
+    "contracts/tools.json": "6537c0961f85dd623cf76c195dab534f583052c31eff2eda54727e97083a0b4b",
+    "docs/17-Data-Model-and-Interfaces.md": "958f2beca96be6edf2fff42805d69d835c4db51b23c2dfe8c0f6957e5972d2d3"
+  },
+  "delivered_coordinator_commits": [
+    "ec54829",
+    "0982152",
+    "ba47459"
+  ],
+  "delivered_lifecycle_dependencies": [
+    "a4b4c2b",
+    "d28e460",
+    "c4be790",
+    "63e0d2d",
+    "1eace0a"
+  ],
+  "explicit_journal_error_contract": "Filesystem/integrity errors and impossible tags are uncertainty: quarantine and RecoveryRequired. Contract/resource errors may propagate only when definitely side-effect-free admission refusals.",
+  "host": {
+    "machine": "x86_64",
+    "release": "6.18.35",
+    "system": "Linux"
+  },
+  "journal": "test-only bound in-memory store; no crash/power-loss claim",
+  "manifest_sha256": "319228b85d1e22c83b4158a213522990097d98bbb2b70431eefbe168072247d1",
+  "production_writes_enabled": false,
+  "quarantine_reenable_contract": "Trusted setManagedWrite(true) only after exclusive successful recovery/startup and all quarantine activity drains.",
+  "source_commit": "09422d47fcf98d95f05a36d00c304846d3e1e6f8",
+  "source_file_hashes": {
+    "src/core/errors.zig": "4166c1278c889e703cebc67925acfa9e768f5a4119fe42bfb8e29084a4752f1c",
+    "src/core/types.zig": "72bd46e53105915c52b80190aa3a90616a696892b3be542c7a285d8a8e8eb30b",
+    "src/fs/edit.zig": "0c7cd32028ef7920ad973a3226198916dfece42acb408692f82602b384f3fea2",
+    "src/fs/publish.zig": "f45814cce6f6a29e2411907230f30fd22fdaa976139c8830874d766028cbe63c",
+    "src/fs/read.zig": "fc44afef6757b72701169a2b13c146ecb6c2b8f2a02249104a7158abbe0352b1",
+    "src/memory/budget.zig": "51394d108231fd049bfc88e3fa3468d75a33a9d5d9e9e3e2b2c0e60ce14aa4c0",
+    "src/policy/capability.zig": "11a77a83e45aab973e54e69e3d5f953d74efc1a1193fdf74006e4119772183c9",
+    "src/policy/paths.zig": "af8e8c6ec7af13f79c25ff4641d12ccaf0d6c3d60720fdd5416c9512a6edfb31",
+    "src/workspace/lease.zig": "b7b19b516e2dfe25f8e38df3962659cab90600e469cc1c0623050b2016d52e60",
+    "src/workspace/registry.zig": "322e0147763b238f32a46d5a4b6921b46f2524e6d0134411b424960329ba68bf",
+    "tests/t11_test.zig": "c9659c41da6f6fca33d1dc6975808d1d3dd7e7e6f429e3de6ded137e9a3036c4"
+  },
+  "source_tree": "a7a2b494150fa319477360d1bfe18ba21268df72",
+  "task_authorization_base": "98c722ebc906321b94bc3e9c8b60522f3305faa7",
+  "toolchain": {
+    "sha256": "2317bbb91798556d9d0f38aabdac23db83f0979b25f767259ae474546724087c",
+    "version": "0.16.0"
+  }
+}

@@ -1,0 +1,45 @@
+test
++- run test T03-test 11 pass, 1 fail (12 total); 1 leaks
+error: 't03_test.test.ME-002 a request arena is not freed while a child is pending, even after cancellation' failed:
+       expected error.Cancelled, found .{ .request = .{ .reserved = .{ .child = .{ ... }, .limit = 1048576, .live = .{ ... }, .counters = .{ ... }, .fault = null }, .arena = .{ .child_allocator = .{ ... }, .state = .{ ... } }, .fault = null, .counters = .{ .live_bytes = .{ ... }, .peak_live_bytes = .{ ... }, .allocations = .{ ... }, .frees = .{ ... }, .failed_allocations = .{ ... }, .injected_failures = .{ ... }, .active_reservations = .{ ... }, .double_releases = .{ ... } }, .handed_out = .{ .raw = 4096 }, .pending = .{ .raw = 2 }, .cancel_requested = .{ .raw = true }, .state = .{ .raw = .active } } }
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:65:9: 0x102f79cd3 in expectError__anon_37603 (T03-test)
+               return error.TestExpectedError;
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T03/tmp/mutants/m9-child-after-cancel/tests/t03_test.zig:320:5: 0x102f7a28f in test.ME-002 a request arena is not freed while a child is pending, even after cancellation (T03-test)
+           try testing.expectError(error.Cancelled, request.beginChild());
+           ^
+       [DebugAllocator] (err): memory address 0x103120000 leaked: 
+       /Users/guribbong/code/ZCR-state/tasks/T03/tmp/mutants/m9-child-after-cancel/src/memory/arena.zig:142:39: 0x102f7402b in alloc (T03-test)
+               const ptr = inner.vtable.alloc(inner.ptr, len, alignment, ret_addr) orelse return null;
+                                             ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x102e65623 in rawAlloc (T03-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:286:40: 0x102e654cf in allocWithSizeAndAlignment__anon_8301 (T03-test)
+           return self.allocBytesWithAlignment(alignment, byte_count, return_address);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:274:89: 0x102e651a3 in allocAdvancedWithRetAddr (T03-test)
+           const ptr: [*]align(a.toByteUnits()) T = @ptrCast(try self.allocWithSizeAndAlignment(@sizeOf(T), a, n, return_address));
+                                                                                               ^
+       /Users/guribbong/code/ZCR-state/tasks/T03/tmp/mutants/m9-child-after-cancel/tests/t03_test.zig:315:49: 0x102f7a04f in test.ME-002 a request arena is not freed while a child is pending, even after cancellation (T03-test)
+           const buffer = try request.allocator().alloc(u8, 4 * KiB);
+                                                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102f4b12f in mainServer (T03-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102f4b7df in main (T03-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x102f495a3 in callMain (T03-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache/o/9b742919e8719c7ce58e56c5cf61909c/T03-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache --seed=0x31cc12ae --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 11/12 tests passed (1 failed)
+test transitive failure
++- run test T03-test 11 pass, 1 fail (12 total); 1 leaks
+   +- compile test T03-test Debug native success 1m MaxRSS:160M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache/o/c850a37cb4f46cd01dfc71be12bb7085/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T03/tmp/mutants/m9-child-after-cancel /Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T03/zig-global-cache --seed 0x31cc12ae -Zcd5ed9133330118e test -Dtest-group=memory --summary all

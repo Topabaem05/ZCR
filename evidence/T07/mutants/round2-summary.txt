@@ -1,0 +1,8 @@
+m10b-no-duplicate-id-check exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 17/18 tests passed (1 failed) :: BA-002 more than 32 items, bad item ids and a;
+m15-no-dispatch-cancel exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 17/18 tests passed (1 failed) :: T07 no read starts after cancellation is requ;
+p2b-batch-always-full exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 17/18 tests passed (1 failed) :: T07 batch projection keeps every item id in o;
+p4-zero-entries-allowed exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 17/18 tests passed (1 failed) :: T07 projection keeps whole lines within outpu;
+p5-no-utf8-check exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 17/18 tests passed (1 failed) :: T07 projection refuses a bad envelope and a b;
+/dev/disk3s5   460Gi   427Gi   6.5Gi    99%    4.5M   68M    6%   /System/Volumes/Data
+
+[exited with code 0]

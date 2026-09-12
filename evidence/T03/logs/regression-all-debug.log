@@ -1,0 +1,26 @@
+Build Summary: 17/17 steps succeeded; 53/53 tests passed
+test success
++- install T00-test success
+|  +- compile test T00-test Debug native success 28s MaxRSS:268M
++- run test T00-test 11 pass (11 total) 4s MaxRSS:10M
+|  +- compile test T00-test Debug native (reused)
++- install T01-test success
+|  +- compile test T01-test Debug native success 28s MaxRSS:205M
+|     +- options cached
++- run test T01-test 18 pass (18 total) 28s MaxRSS:10M
+|  +- compile test T01-test Debug native (+1 more reused dependencies)
++- install T02-test success
+|  +- compile test T02-test Debug native success 24s MaxRSS:185M
+|     +- options (reused)
++- run test T02-test 12 pass (12 total) 13s MaxRSS:11M
+|  +- compile test T02-test Debug native (+1 more reused dependencies)
++- install T03-test success
+|  +- compile test T03-test Debug native cached 1s MaxRSS:30M
++- run test T03-test 12 pass (12 total) 12s MaxRSS:5M
+|  +- compile test T03-test Debug native (reused)
++- run exe zcr success 1s
+|  +- compile exe zcr Debug native cached 1s MaxRSS:30M
+|     +- options (reused)
++- run exe zcr success 1s
+   +- compile exe zcr Debug native (+1 more reused dependencies)
+

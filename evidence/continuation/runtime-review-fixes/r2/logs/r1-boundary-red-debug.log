@@ -1,0 +1,23 @@
+test
++- run test T15-test 0 pass, 1 fail (1 total)
+error: 't15_test.test.BR-004 unit saved cancellation crosses production submit and completion boundary' failed:
+       /workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/src/core/types.zig:245:41: 0x1324c08 in check (types.zig)
+               if (c.requested.load(.acquire)) return error.Cancelled;
+                                               ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/src/scheduler/executor.zig:92:9: 0x127d637 in submit (executor.zig)
+               try job.cancel.check();
+               ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/src/broker/server.zig:643:9: 0x12789d2 in submitPreparedFrame (server.zig)
+               return error.ResourceExhausted;
+               ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/tests/t15_test.zig:662:5: 0x1279d10 in test.BR-004 unit saved cancellation crosses production submit and completion boundary (t15_test.zig)
+           try broker.submitPreparedFrame(.{ .executor = &f.executor_, .budget = &f.budget, .session = f.grants[0].config.session, .buffered_cancellations = &pending, .buffered_offset = 0, .cancel = &cancelled, .next_request = &next_request, .callback = Callback.run, .userdata = &callback_ran, .protocol = &protocol, .allocator = frame_arena.allocator(), .raw = raw, .frame_limit = 64 * 1024, .output_limit = output_limit, .job_state = &state, .output = &output });
+           ^
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/r1-red-c && /workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/r1-red-c/o/76ad3472d74cc3b0df57576380a7c7f1/T15-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/r1-red-c --seed=0x9580c7a7 --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 0/1 tests passed (1 failed)
+test transitive failure
++- run test T15-test 0 pass, 1 fail (1 total)
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/r1-red-c/o/de94d8b23d3f88fd829df252bfc22c95/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes /workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/r1-red-c /workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/r1-red-g --seed 0x9580c7a7 -Z69f206fa5f9112e8 test -Dtest-group=broker -Dtest-id=saved cancellation crosses production -Doptimize=Debug

@@ -1,0 +1,7 @@
+{
+  "scope": "implementation worktree only",
+  "authorized_by": "integrator acting under user repository-completion goal",
+  "workspace": "/workspace/scratch/3f4ab65dfb82/ZCR-T11",
+  "manifest": "/workspace/scratch/3f4ab65dfb82/state/T11/manifest.json",
+  "note": "Does not enable production runtime writes. Shared edits require integrator-origin commit."
+}

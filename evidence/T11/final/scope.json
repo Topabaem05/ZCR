@@ -1,0 +1,144 @@
+{
+  "authorization_base": "98c722ebc906321b94bc3e9c8b60522f3305faa7",
+  "source_commit": "09422d47fcf98d95f05a36d00c304846d3e1e6f8",
+  "owned_commits": [
+    {
+      "commit": "48648ae31459b3c4f367d22517341753a59bac0e",
+      "paths": [
+        "src/fs/edit.zig",
+        "tests/t11_test.zig"
+      ]
+    },
+    {
+      "commit": "9a8473ae0eed17b0d80dc5b5044ff7990ce43e72",
+      "paths": [
+        "src/fs/edit.zig",
+        "src/fs/publish.zig",
+        "tests/t11_test.zig"
+      ]
+    },
+    {
+      "commit": "38c77ffb4a22cbfc713b4eae52151edc46840dd8",
+      "paths": [
+        "evidence/T11/checkpoint-9a8473a/corpus.json",
+        "evidence/T11/checkpoint-9a8473a/final-write-debug-standard.json",
+        "evidence/T11/checkpoint-9a8473a/final-write-releasesafe-standard.json",
+        "evidence/T11/checkpoint-9a8473a/handoff.json",
+        "evidence/T11/checkpoint-9a8473a/historical-commands.json",
+        "evidence/T11/checkpoint-9a8473a/log-index.json",
+        "evidence/T11/checkpoint-9a8473a/logs.tar.gz",
+        "evidence/T11/checkpoint-9a8473a/red.json",
+        "evidence/T11/checkpoint-9a8473a/report.md",
+        "evidence/T11/checkpoint-9a8473a/run_dependencies.py",
+        "evidence/T11/checkpoint-9a8473a/run_dependencies_remaining.py",
+        "evidence/T11/checkpoint-9a8473a/run_verification.py",
+        "evidence/T11/checkpoint-9a8473a/runs.json",
+        "evidence/T11/checkpoint-9a8473a/runtime-gate.zig",
+        "evidence/T11/checkpoint-9a8473a/source-config.json",
+        "evidence/T11/checkpoint-9a8473a/standard-evidence-commands.json"
+      ]
+    },
+    {
+      "commit": "a9d7091d352338abef349734b5a1d90fba66c92c",
+      "paths": [
+        "tests/t11_test.zig"
+      ]
+    },
+    {
+      "commit": "2ea2d9d4a512ebebce8151e675207aaab85eb51a",
+      "paths": [
+        "src/fs/edit.zig"
+      ]
+    },
+    {
+      "commit": "5f02a30ceda951652e90b2a9a43c0b36f58d915b",
+      "paths": [
+        "tests/t11_test.zig"
+      ]
+    },
+    {
+      "commit": "ae47c664cd5717fb495a15978939d44346fc055c",
+      "paths": [
+        "src/fs/edit.zig",
+        "src/fs/publish.zig",
+        "tests/t11_test.zig"
+      ]
+    },
+    {
+      "commit": "39ce57716e795158870cc5e45892e2706bd66a3c",
+      "paths": [
+        "src/fs/edit.zig",
+        "src/fs/publish.zig",
+        "tests/t11_test.zig"
+      ]
+    },
+    {
+      "commit": "414b52ef995b1aa1e0520a155361d9b9c6e2cf55",
+      "paths": [
+        "tests/t11_test.zig"
+      ]
+    },
+    {
+      "commit": "09422d47fcf98d95f05a36d00c304846d3e1e6f8",
+      "paths": [
+        "src/fs/edit.zig"
+      ]
+    }
+  ],
+  "root_delivered_dependency_commits": [
+    {
+      "commit": "ec54829de3961e78ba5964e350528f73a1809750",
+      "paths": [
+        "src/workspace/registry.zig",
+        "tests/t10_test.zig"
+      ]
+    },
+    {
+      "commit": "09821525055975fec70be5da8d129c87e33837e2",
+      "paths": [
+        "src/workspace/registry.zig",
+        "tests/t10_test.zig"
+      ]
+    },
+    {
+      "commit": "ba4745994d1a823eda1e4b545c3a8633c29f8f12",
+      "paths": [
+        "src/workspace/registry.zig",
+        "tests/t10_test.zig"
+      ]
+    },
+    {
+      "commit": "a4b4c2b95644c7d8dda1751b38918c43b47b3c5e",
+      "paths": [
+        "tests/t10_test.zig"
+      ]
+    },
+    {
+      "commit": "d28e4602047854ea00fe58a2a7b93a62523ac9e0",
+      "paths": [
+        "src/workspace/registry.zig"
+      ]
+    },
+    {
+      "commit": "c4be790c9bc97c4ce1c95b47dc793900894cb8a8",
+      "paths": [
+        "docs/17-Data-Model-and-Interfaces.md",
+        "handoffs/interface-change.json",
+        "src/core/types.zig"
+      ]
+    },
+    {
+      "commit": "63e0d2db2237fc0e0eb7bd984e7a3c3ddee6b902",
+      "paths": [
+        "tests/t10_test.zig"
+      ]
+    },
+    {
+      "commit": "1eace0aee6be992cee8ef56185b629a688665784",
+      "paths": [
+        "src/workspace/registry.zig"
+      ]
+    }
+  ],
+  "packaging_paths": "evidence/T11 only; source/config remain equal to09422d4"
+}

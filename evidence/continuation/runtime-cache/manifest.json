@@ -1,0 +1,44 @@
+{
+  "schema_version": "zcr-task/1",
+  "state": "active",
+  "task_id": "T13",
+  "workspace_id": "fs:28:1069457:28:1069425:28:393230",
+  "base_commit": "278380279e7f0a8f52a1568364cfb8fe5695e997",
+  "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+  "fence": 1,
+  "expires_at": "2026-09-13T07:40:58Z",
+  "read_paths": [
+    "."
+  ],
+  "write_paths": [
+    "src/cache",
+    "src/fs/read.zig",
+    "src/protocol/mcp.zig",
+    "src/launch.zig",
+    "tests/t08_test.zig",
+    "tests/t13_test.zig",
+    "tests/launch_test.zig",
+    "tests/cli_smoke.py",
+    "evidence/continuation/runtime-cache"
+  ],
+  "immutable_paths": [
+    "build.zig",
+    "build.zig.zon",
+    "src/core",
+    "contracts",
+    "config",
+    "AGENTS.md",
+    ".github"
+  ],
+  "operations": [
+    "read",
+    "enumerate",
+    "search",
+    "batch_read",
+    "patch",
+    "create",
+    "status",
+    "health"
+  ],
+  "max_changed_files": 64
+}

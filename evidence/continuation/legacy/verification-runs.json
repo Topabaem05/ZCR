@@ -1,0 +1,274 @@
+[
+  {
+    "label": "deadline-final-io-debug",
+    "command": [
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "build",
+      "test",
+      "-Dtest-group=io",
+      "-Dinstall-tests=true",
+      "-Doptimize=Debug",
+      "--prefix",
+      "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-io-debug",
+      "--summary",
+      "all"
+    ],
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-legacy",
+    "source_commit": "a5a24a3d7f0f9bc4a840cd0a6668e70ac3a6632f",
+    "source_tree": "7e757018542321e65cd11cd5b85d01e0a00538e8",
+    "config_sha256": "c05ddd9566d84ac5cf4e54786a7201f198db8285f4435dc0bb1e0bf10d437791",
+    "started_at": "2026-09-12T06:48:44.690943+00:00",
+    "elapsed_seconds": 2.8751799089995984,
+    "exit_code": 0,
+    "binary_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-io-debug/bin/T04-test",
+    "binary_sha256": "5c3aad62a48cd9f5e9d9ebf6cc0405f16f8eec5124aec2d636928e2ad82e4750",
+    "output_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/logs/deadline-final-io-debug.log",
+    "output_sha256": "c8f7a772420e15711ae7a7a28598ef7cd56ee750078b6e76504b39b63abcaafa",
+    "corpus_sha256": null,
+    "binaries": [
+      {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-io-debug/bin/T04-deadline-test",
+        "sha256": "624d1df90c3fa5c5f4b13b2893930893d7f30091879f00881d9502fd1be14dff"
+      },
+      {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-io-debug/bin/T04-test",
+        "sha256": "5c3aad62a48cd9f5e9d9ebf6cc0405f16f8eec5124aec2d636928e2ad82e4750"
+      }
+    ]
+  },
+  {
+    "label": "deadline-final-fs-debug",
+    "command": [
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "build",
+      "test",
+      "-Dtest-group=fs",
+      "-Dinstall-tests=true",
+      "-Doptimize=Debug",
+      "--prefix",
+      "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-fs-debug",
+      "--summary",
+      "all"
+    ],
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-legacy",
+    "source_commit": "a5a24a3d7f0f9bc4a840cd0a6668e70ac3a6632f",
+    "source_tree": "7e757018542321e65cd11cd5b85d01e0a00538e8",
+    "config_sha256": "c05ddd9566d84ac5cf4e54786a7201f198db8285f4435dc0bb1e0bf10d437791",
+    "started_at": "2026-09-12T06:48:47.609009+00:00",
+    "elapsed_seconds": 21.228055286999734,
+    "exit_code": 0,
+    "binary_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-fs-debug/bin/T05-test",
+    "binary_sha256": "833715db118743c369ff207f65cf12b332e0f82f8340df738421f182ee8f7204",
+    "output_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/logs/deadline-final-fs-debug.log",
+    "output_sha256": "307420e1404ad1c36e86627a9d8efaf7d8c82f057214c0f1b66bd4d08d4fcafa",
+    "corpus_sha256": "8516686afc53e0500c9119dc68e4d62c60ab6e601af8d43a7f282bb90db6d26b",
+    "binaries": [
+      {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-fs-debug/bin/T05-test",
+        "sha256": "833715db118743c369ff207f65cf12b332e0f82f8340df738421f182ee8f7204"
+      }
+    ]
+  },
+  {
+    "label": "deadline-final-search-debug",
+    "command": [
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "build",
+      "test",
+      "-Dtest-group=search",
+      "-Dinstall-tests=true",
+      "-Doptimize=Debug",
+      "--prefix",
+      "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-search-debug",
+      "--summary",
+      "all"
+    ],
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-legacy",
+    "source_commit": "a5a24a3d7f0f9bc4a840cd0a6668e70ac3a6632f",
+    "source_tree": "7e757018542321e65cd11cd5b85d01e0a00538e8",
+    "config_sha256": "c05ddd9566d84ac5cf4e54786a7201f198db8285f4435dc0bb1e0bf10d437791",
+    "started_at": "2026-09-12T06:49:08.883492+00:00",
+    "elapsed_seconds": 2.4392924269996,
+    "exit_code": 0,
+    "binary_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-search-debug/bin/T06-test",
+    "binary_sha256": "f08778781d34c716007bcd5667cdfa8a392f139e999c67912d8a618427e0bb59",
+    "output_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/logs/deadline-final-search-debug.log",
+    "output_sha256": "0f5e7c388c7c67947c8ff0e5663c9b8a276c644d8f6232ae97458c42c42b35a2",
+    "corpus_sha256": null,
+    "binaries": [
+      {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-search-debug/bin/T06-test",
+        "sha256": "f08778781d34c716007bcd5667cdfa8a392f139e999c67912d8a618427e0bb59"
+      }
+    ]
+  },
+  {
+    "label": "deadline-final-batch-debug",
+    "command": [
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "build",
+      "test",
+      "-Dtest-group=batch",
+      "-Dinstall-tests=true",
+      "-Doptimize=Debug",
+      "--prefix",
+      "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-batch-debug",
+      "--summary",
+      "all"
+    ],
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-legacy",
+    "source_commit": "a5a24a3d7f0f9bc4a840cd0a6668e70ac3a6632f",
+    "source_tree": "7e757018542321e65cd11cd5b85d01e0a00538e8",
+    "config_sha256": "c05ddd9566d84ac5cf4e54786a7201f198db8285f4435dc0bb1e0bf10d437791",
+    "started_at": "2026-09-12T06:49:11.350827+00:00",
+    "elapsed_seconds": 0.7162162419999731,
+    "exit_code": 0,
+    "binary_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-batch-debug/bin/T07-test",
+    "binary_sha256": "c9419667563ff2c8aa066cbbf6044253b6d7bd69c8f62b30b6c91657716a2282",
+    "output_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/logs/deadline-final-batch-debug.log",
+    "output_sha256": "b8c4a9cc5fb04a791e00737c7dbdeced38d251fcd03d98c4a4034666927a1e7c",
+    "corpus_sha256": null,
+    "binaries": [
+      {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-batch-debug/bin/T07-test",
+        "sha256": "c9419667563ff2c8aa066cbbf6044253b6d7bd69c8f62b30b6c91657716a2282"
+      }
+    ]
+  },
+  {
+    "label": "deadline-final-io-releasesafe",
+    "command": [
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "build",
+      "test",
+      "-Dtest-group=io",
+      "-Dinstall-tests=true",
+      "-Doptimize=ReleaseSafe",
+      "--prefix",
+      "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-io-releasesafe",
+      "--summary",
+      "all"
+    ],
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-legacy",
+    "source_commit": "a5a24a3d7f0f9bc4a840cd0a6668e70ac3a6632f",
+    "source_tree": "7e757018542321e65cd11cd5b85d01e0a00538e8",
+    "config_sha256": "c05ddd9566d84ac5cf4e54786a7201f198db8285f4435dc0bb1e0bf10d437791",
+    "started_at": "2026-09-12T06:49:12.111184+00:00",
+    "elapsed_seconds": 16.401528078999945,
+    "exit_code": 0,
+    "binary_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-io-releasesafe/bin/T04-test",
+    "binary_sha256": "11aec3e7d4ba9e3b1afbfd9187e2b5a39611e68912f82c56652eaa39c8d5e5a9",
+    "output_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/logs/deadline-final-io-releasesafe.log",
+    "output_sha256": "8bcb839f30053758f76b55122dffa52e58d86c10d3f1222e0d739e098bb532af",
+    "corpus_sha256": null,
+    "binaries": [
+      {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-io-releasesafe/bin/T04-deadline-test",
+        "sha256": "39cc132fbdd024b4ac3de5178ccfb0467b383c88207baf67873b01a491c84812"
+      },
+      {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-io-releasesafe/bin/T04-test",
+        "sha256": "11aec3e7d4ba9e3b1afbfd9187e2b5a39611e68912f82c56652eaa39c8d5e5a9"
+      }
+    ]
+  },
+  {
+    "label": "deadline-final-fs-releasesafe",
+    "command": [
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "build",
+      "test",
+      "-Dtest-group=fs",
+      "-Dinstall-tests=true",
+      "-Doptimize=ReleaseSafe",
+      "--prefix",
+      "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-fs-releasesafe",
+      "--summary",
+      "all"
+    ],
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-legacy",
+    "source_commit": "a5a24a3d7f0f9bc4a840cd0a6668e70ac3a6632f",
+    "source_tree": "7e757018542321e65cd11cd5b85d01e0a00538e8",
+    "config_sha256": "c05ddd9566d84ac5cf4e54786a7201f198db8285f4435dc0bb1e0bf10d437791",
+    "started_at": "2026-09-12T06:49:28.548087+00:00",
+    "elapsed_seconds": 39.826542406000044,
+    "exit_code": 0,
+    "binary_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-fs-releasesafe/bin/T05-test",
+    "binary_sha256": "159a0ec642dd3137d922747586cd993e975b4b7fec23129c5afabdd69bb44277",
+    "output_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/logs/deadline-final-fs-releasesafe.log",
+    "output_sha256": "100613e73dd1d2397086ded25200b386524133bf2c32e1e1c8e5a12eb8e1cfba",
+    "corpus_sha256": "8516686afc53e0500c9119dc68e4d62c60ab6e601af8d43a7f282bb90db6d26b",
+    "binaries": [
+      {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-fs-releasesafe/bin/T05-test",
+        "sha256": "159a0ec642dd3137d922747586cd993e975b4b7fec23129c5afabdd69bb44277"
+      }
+    ]
+  },
+  {
+    "label": "deadline-final-search-releasesafe",
+    "command": [
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "build",
+      "test",
+      "-Dtest-group=search",
+      "-Dinstall-tests=true",
+      "-Doptimize=ReleaseSafe",
+      "--prefix",
+      "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-search-releasesafe",
+      "--summary",
+      "all"
+    ],
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-legacy",
+    "source_commit": "a5a24a3d7f0f9bc4a840cd0a6668e70ac3a6632f",
+    "source_tree": "7e757018542321e65cd11cd5b85d01e0a00538e8",
+    "config_sha256": "c05ddd9566d84ac5cf4e54786a7201f198db8285f4435dc0bb1e0bf10d437791",
+    "started_at": "2026-09-12T06:50:08.403133+00:00",
+    "elapsed_seconds": 22.115647348000493,
+    "exit_code": 0,
+    "binary_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-search-releasesafe/bin/T06-test",
+    "binary_sha256": "b2346ecf22328b305d3686494e4978a2367648fea0bc992d7acae658933a4a8c",
+    "output_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/logs/deadline-final-search-releasesafe.log",
+    "output_sha256": "475f9c81c520c8bbf7d8808f79b07d891beeb5f341e4d01501355d3d374d464d",
+    "corpus_sha256": null,
+    "binaries": [
+      {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-search-releasesafe/bin/T06-test",
+        "sha256": "b2346ecf22328b305d3686494e4978a2367648fea0bc992d7acae658933a4a8c"
+      }
+    ]
+  },
+  {
+    "label": "deadline-final-batch-releasesafe",
+    "command": [
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "build",
+      "test",
+      "-Dtest-group=batch",
+      "-Dinstall-tests=true",
+      "-Doptimize=ReleaseSafe",
+      "--prefix",
+      "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-batch-releasesafe",
+      "--summary",
+      "all"
+    ],
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-legacy",
+    "source_commit": "a5a24a3d7f0f9bc4a840cd0a6668e70ac3a6632f",
+    "source_tree": "7e757018542321e65cd11cd5b85d01e0a00538e8",
+    "config_sha256": "c05ddd9566d84ac5cf4e54786a7201f198db8285f4435dc0bb1e0bf10d437791",
+    "started_at": "2026-09-12T06:50:30.530638+00:00",
+    "elapsed_seconds": 39.15952262100018,
+    "exit_code": 0,
+    "binary_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-batch-releasesafe/bin/T07-test",
+    "binary_sha256": "ad0588804f0c61be5b1d5b2b68c8b0e82056dc4b5ca2e540f7bdfaeefcd76f03",
+    "output_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/logs/deadline-final-batch-releasesafe.log",
+    "output_sha256": "1d3c5149ebc01f5a581156d2a1e2d22a35c857331ce4c2c50ab8b5b391a3831a",
+    "corpus_sha256": null,
+    "binaries": [
+      {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-batch-releasesafe/bin/T07-test",
+        "sha256": "ad0588804f0c61be5b1d5b2b68c8b0e82056dc4b5ca2e540f7bdfaeefcd76f03"
+      }
+    ]
+  }
+]

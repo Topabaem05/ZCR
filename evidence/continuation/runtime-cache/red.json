@@ -1,0 +1,22 @@
+{
+  "base_commit": "278380279e7f0a8f52a1568364cfb8fe5695e997",
+  "state": "runtime RED with test-only optional Config wiring; no cache use implemented",
+  "command": "zig build test -Dtest-group=mcp -Dtest-id=\"runtime cache\" -Doptimize=Debug -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/runtime-cache/out-red --summary all",
+  "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-cache",
+  "exit": 1,
+  "passed": 0,
+  "failed": 2,
+  "expected_failures": [
+    "Repeated actual MCP reads leave cache entries at zero.",
+    "Four-workspace fixture cannot observe an admitted allocation."
+  ],
+  "source_sha256": {
+    "src/protocol/mcp.zig": "837d8d3aab42360661ca529551fbda81079ea8f7e1c5b0feb0d5db750e9927b4",
+    "tests/t08_test.zig": "fdd79d1e5d7ce5dce944a54739ae5b2a7f47469806d74624b3c00a65e343d53a",
+    "src/cache/content.zig": "a3ceaa5c9e67c2a26528e260815010e1e0799b9b800cf9c5411d65c409993de3",
+    "src/fs/read.zig": "27fa94f79465b97d027c455665621354b42d3e23436a0306783e2ed35ab64997"
+  },
+  "binary": "/workspace/scratch/3f4ab65dfb82/state/runtime-cache/out-red/bin/T08-test",
+  "binary_sha256": "fd7cf1caa6cdca5ffdf9c2411f09e87aa26e893acbdb90feec54d29752e94736",
+  "log_sha256": "2004af18f948fc8876289900cb8fb1733b745244793f1b0421fe86b2456615b9"
+}

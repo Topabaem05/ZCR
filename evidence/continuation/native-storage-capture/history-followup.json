@@ -1,0 +1,16 @@
+{
+  "source_commit": "f8e174a68438a2e23b340dd70402edafea2cb584",
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "tools/ci/test_storage_capture.py"
+  ],
+  "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-work",
+  "exit_code": 0,
+  "source_files": {
+    "tools/ci/storage_capture.py": "2a478fbf688bf76f77dff6e3fd683973313160123b1670a4e9c9e34331540626",
+    "tools/ci/test_storage_capture.py": "44cfd2e18237adac484eac4034d3aa06eb42c688ad9b01591b12c6c411372595"
+  },
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "80144f3bf12d071a1497821467ab02765712cb11da3f547a5e2b5cf79f938e9a",
+  "reason": "New integrated T12 F1 tests emit history.json containing the original two receipts; retain this explicit generated record alongside case JSON. No new runtime execution is claimed."
+}

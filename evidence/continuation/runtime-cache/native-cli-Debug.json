@@ -1,0 +1,24 @@
+{
+  "command": [
+    "python3",
+    "tests/cli_smoke.py",
+    "--binary",
+    "/workspace/scratch/3f4ab65dfb82/state/runtime-cache/out-green-cli-Debug/bin/zcr",
+    "--state",
+    "/workspace/scratch/3f4ab65dfb82/state/runtime-cache/native-cli-Debug"
+  ],
+  "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-cache",
+  "source_commit": "b5fe273bb58bd9518bf7711446f164ef5e4bbd62",
+  "exit": 0,
+  "binary": "/workspace/scratch/3f4ab65dfb82/state/runtime-cache/out-green-cli-Debug/bin/zcr",
+  "binary_sha256": "1e52ccfec032f0772e34ff2410235ca29e207c4e5695bb8d72722e44d9920417",
+  "log": "/workspace/scratch/3f4ab65dfb82/state/runtime-cache/logs/native-cli-Debug.log",
+  "log_sha256": "f049e9b1381e33ea0a1f6d116359d78a416a7126c47492d59f23bfb749c1b4fc",
+  "PYTHONPATH": "/workspace/scratch/3f4ab65dfb82/toolchain/doc-deps",
+  "state": "/workspace/scratch/3f4ab65dfb82/state/runtime-cache/native-cli-Debug",
+  "report.json_sha256": "928f13fb2406a38979e66bf64cb361653f5a045058d441f80202f9ff9f7cdaeb",
+  "transcript.json_sha256": "26a30cc41eaf4f4b34a9a6d72db5db9132decb55b2a63fc59dd3a67831e0e98d",
+  "source_manifest_sha256": "1b31952519944ff07886138a7567f5021b7accbac1f9d7a5508b7181936ebfa1",
+  "corpus_manifest_sha256": "6a7931cc9ac237db2d67b9e852d58be27b8f638e4dca0024db29364cc003f956",
+  "checks": 19
+}

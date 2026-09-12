@@ -1,0 +1,140 @@
+{
+  "schema_version": "zcr-handoff/1",
+  "task_id": "T13",
+  "state": "implemented_native_linux_verified_review_approved",
+  "step": "S06",
+  "base_commit": "98c722ebc906321b94bc3e9c8b60522f3305faa7",
+  "head_commit": "8a4d74fe6f87a1f5427c6d0f94dd0b01fe082efd",
+  "head_commit_note": "Reviewed and tested source commit; a following evidence-only commit packages these artifacts. Re-test the real integration commit.",
+  "red_commit": "29c732a4ccab3971ad371f87a0e7da0f0dbfd17f",
+  "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+  "workspace_id": "fs:28:704597:28:696941:28:393230",
+  "branch": "codex/t13-cache",
+  "changed_files": [
+    "src/cache/association.zig",
+    "src/cache/content.zig",
+    "src/cache/lines.zig",
+    "tests/t13_test.zig",
+    "evidence/T13/*"
+  ],
+  "source_manifest_sha256": "4e640edbd759716b997286990fdf47ab374a49bc3858c76dbf6a502268494cfe",
+  "config_manifest_sha256": "42fe852b713c2b81928865394e072ca2e5632032ed29120bf0e08d1348634a58",
+  "corpus_sha256": "e3095c1689414b8610578a42b1a48d37d513b8ec8682041a0290fe788efe8a1e",
+  "exports": {
+    "module": "zcr_cache",
+    "root": "src/cache/content.zig",
+    "imports": [
+      "zcr_core",
+      "zcr_policy",
+      "zcr_memory",
+      "zcr_workspace"
+    ],
+    "frozen": [
+      "Session.cacheGet(*Session,ContentHash,Capability,PinBudget) CacheError!?PinnedEntry"
+    ],
+    "supplemental": [
+      "Store.create(Allocator,Io,*Budget,SessionContext,Options) ReadError!*Store",
+      "Store.deinit(*Store) CacheError!void",
+      "Store.stats(*Store) Stats",
+      "Store.evict(*Store,u64) u64",
+      "Store.invalidateWorkspace(*Store,WorkspaceId) void",
+      "Session.init(*Store,*Registry,*Authorizer,SessionContext,Cancel) ReadError!Session",
+      "Session.observe(*Session,Capability,[]const u8,FileVersion,AccessKind) ReadError!AdmissionResult",
+      "Session.cacheGetChecked(*Session,ContentHash,Capability,PinBudget) ReadError!?PinnedEntry",
+      "Session.unpin(*Session,PinnedEntry) CacheError!void",
+      "Session.lineIndex(*Session,PinnedEntry) CacheError![]const lines.Checkpoint",
+      "lines.count/build/select; lines.stride=128; lines.newline_policy_version=1"
+    ]
+  },
+  "test_evidence": [
+    {
+      "run": "green-debug",
+      "tests": 26,
+      "t13": 14,
+      "t03": 12,
+      "status": "PASS_NATIVE_LINUX"
+    },
+    {
+      "run": "green-safe",
+      "tests": 26,
+      "t13": 14,
+      "t03": 12,
+      "status": "PASS_NATIVE_LINUX"
+    },
+    {
+      "run": "fault-debug",
+      "tests": 26,
+      "status": "PASS_NATIVE_LINUX",
+      "note": "Allocation failure enumeration and deterministic cancellation/race scenarios run in the suite even without this flag."
+    },
+    {
+      "run": "regression-io",
+      "tests": 12,
+      "status": "PASS_NATIVE_LINUX"
+    },
+    {
+      "run": "regression-isolation",
+      "tests": 37,
+      "status": "PASS_NATIVE_LINUX"
+    },
+    {
+      "run": "contracts",
+      "status": "PASS"
+    },
+    {
+      "run": "runtime-hooks-absent",
+      "status": "PASS_COMPILE_ONLY"
+    },
+    {
+      "run": "standard-verification",
+      "status": "PASS",
+      "verified_records": 3
+    }
+  ],
+  "state_byte_counts": {
+    "native_x86_64_Store_control_bytes": 295944,
+    "control_evidence": "runtime-hooks-absent.o cacheStorageBytes returns 0x48408; control reservation test asserts @sizeOf(Store)",
+    "verification_scratch_bytes_per_active_checked_call": 16384,
+    "verification_fds_per_call": 3,
+    "verification_cpu_permits_per_call": 1,
+    "checkpoint_bytes_native_x86_64": 16,
+    "content_allocation_rule": "max(1, UTF-8 byte length + checkpoint_count * sizeof(Checkpoint))",
+    "four_workspace_fixture_utf8_bytes": 12,
+    "four_workspace_fixture_one_group_content_bytes": 28,
+    "four_workspace_fixture_live_pins": 4,
+    "content_verify_reservations_and_live_bytes_after_fixture_teardown": 0
+  },
+  "review": {
+    "verdict": "APPROVE",
+    "source_commit": "8a4d74fe6f87a1f5427c6d0f94dd0b01fe082efd",
+    "path": "evidence/T13/review.md",
+    "reviewer": "independent t09_scheduler agent",
+    "requested_source_changes": []
+  },
+  "integration_preconditions": [
+    "Trusted launcher constructs Session from a validated existing Registry binding and matching Authorizer; only bound Session.context.security_domain determines shared content authority. Store.funding exists solely for shared group accounting.",
+    "Pass the existing shared content Budget to Store.create and the existing shared inflight Budget through Options.verification_budget. Do not mint independent per-request caps. Use a thread-safe allocator for concurrent calls.",
+    "Store, Registry, Authorizer, both Budgets and cancellation storage outlive every call and outstanding pin. The host stops new calls, joins every Store/Session operation (including evict/stats/invalidateWorkspace/unpin/lineIndex users), drains pins, then calls exclusive Store.deinit. Busy protects observe/get and retained pins but is not a concurrent destruction barrier.",
+    "Pin.bytes and lineIndex are borrowed immutable storage valid only while their exact owned pin remains live. Do not unpin concurrently with a borrower. Unpin deliberately works after cancellation/revocation so existing storage can drain.",
+    "cacheGet conforms exactly to frozen core.CacheGetFn(Session). Its error set cannot express Cancelled/DeadlineExceeded/version/file errors, so those fail closed to null. Callers must recheck Cancel before fallback. Prefer cacheGetChecked to preserve precise errors.",
+    "Each checked-live lookup reauthorizes and hashes the current whole rooted file before cache existence/pin. Never treat a mutable association, path, mtime or size as verified content. No managed-generation shortcut is implemented.",
+    "After a read with whole-file SHA-256, call observe with immutable complete bytes, the matching FileVersion and interactive access. bulk_scan bypasses admission. Cache bypass/refusal is an optimization outcome and the authoritative reader owns fallback semantics.",
+    "Fixed capacities default entries16/associations32/pins64/probation32; hard caps32/64/128/64. Max file size8 MiB can only be narrowed. All fixed capacity is charged even when options lower limits. PinBudget bounds cumulative per-session charged pin bytes; shared content is allocated and group-counted once per domain/hash."
+  ],
+  "limitations": [
+    "Native macOS Apple Silicon/Intel, Windows and real MCP/host integration NOT_RUN. Linux x86_64 alone is runtime-proven.",
+    "This task implements cache modules and tests; root owns runtime wiring, shared build/core/contracts and task status changes.",
+    "Every checked-live cache lookup still performs a whole-file SHA-256. This conservative implementation establishes correctness and ownership, not a speedup or performance threshold.",
+    "Only valid UTF-8 without NUL and files at most8 MiB are admitted. Content and sparse index share one bounded allocation. No persistence, mmap, daemon or network dependency."
+  ],
+  "remaining_gates": [
+    "Root must apply reviewed commits and run actual integration binaries.",
+    "Native macOS/Windows and real host runtime gates remain NOT_RUN."
+  ],
+  "evidence": [
+    "evidence/T13/runs.json",
+    "evidence/T13/red.json",
+    "evidence/T13/standard-verification.json",
+    "evidence/T13/review.md"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "source_commit": "acc2741304887825080762166f09dfe0aeb5533c",
+  "source_tree": "b467e50360e331b500f1079aee12442494e8b778",
+  "source_sha256": {
+    "src/scheduler/queue.zig": "a28d5c3adc4de2e160a094470ad14ca7cb530c147e8b0a4b4ffa2301b30617c7",
+    "src/scheduler/executor.zig": "50ce0b237a2d6881fd3c03756bd8d15eb0e95045a14b9b299406ac19949f3ee7",
+    "src/platform/darwin.zig": "9f2c8be090cee2a9fcdb9c48937e25e0b64e22430c21d611feb7fb0088321cd7",
+    "c/darwin_shim.h": "a6b646f00583872f60487acfad72e9df39870b9c56c6a5aa76c1d7527693cf4d",
+    "c/darwin_shim.c": "47b6653ed03f75253b2d9a96120d4787cf55d5031bf74691e67f835eb10cedf8",
+    "tests/t09_test.zig": "9a8bf40ea2a7cc5ea273957242034a8db472c29016298002e0e557c93bb9f8a6"
+  },
+  "config_sha256": {
+    "build.zig": "ea754b470b357acc32579824442832dca4c6ebd7ef83225293dabc932ec2558f",
+    "build.zig.zon": "2ad2381bdb29d5669c6d2ac4807c124c2afe6d007daf7ea2b507fdc64bf44e52",
+    "config/scheduler-profiles.json": "3f3b7d88264c94ac84ea0969da47ff1aee46ad4ba51f4899742ee2c1603b57a8",
+    "config/limits.json": "d7b3db8b6956c0f8b1e6f399e6e432fb4eadb8aa033f39d303e31edbe539154c",
+    "config/memory-profiles.json": "7f925fb57bc0453f2505b3c10856a4e74322bcb8cc3417070ec7693e847804b7"
+  },
+  "config_digest": "1099cffd15d9548e5b3e511613956a41200c411b029095695e1bfe8e9ab84090",
+  "config_digest_method": "SHA-256 of compact sorted-key JSON mapping config paths to SHA-256",
+  "corpus_sha256": "9a8bf40ea2a7cc5ea273957242034a8db472c29016298002e0e557c93bb9f8a6",
+  "corpus": "Deterministic scheduler fixtures: original bounds/concurrency/ownership coverage plus review R1 two-CPU maintenance/bulk and four-CPU short-foreground grants under staggered one-CPU refill; R2 active foreground short/bulk idle exclusion.",
+  "toolchain": {
+    "version": "0.16.0",
+    "binary_sha256": "2317bbb91798556d9d0f38aabdac23db83f0979b25f767259ae474546724087c"
+  }
+}

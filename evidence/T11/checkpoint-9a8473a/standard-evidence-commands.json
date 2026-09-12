@@ -1,0 +1,96 @@
+[
+  {
+    "argv": [
+      "/workspace/scratch/3f4ab65dfb82/state/T11/zcr-dev-evidence",
+      "preflight",
+      "--worktree",
+      "/workspace/scratch/3f4ab65dfb82/ZCR-T11"
+    ],
+    "exit_code": 0,
+    "log": "/workspace/scratch/3f4ab65dfb82/state/T11/logs/evidence-preflight.log",
+    "log_sha256": "99daeafb8ef042bdbadc37eff244c2f90994c92904fa476ba5f8e8bc197c93a1"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/3f4ab65dfb82/state/T11/zcr-dev-evidence",
+      "contract-digest",
+      "--worktree",
+      "/workspace/scratch/3f4ab65dfb82/ZCR-T11"
+    ],
+    "exit_code": 0,
+    "log": "/workspace/scratch/3f4ab65dfb82/state/T11/logs/contract-digest.log",
+    "log_sha256": "1f1ca0a42a52ddde8654ae8694f7a35f817d5a2b494a019d00464bd676d0405f"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/3f4ab65dfb82/state/T11/zcr-dev-evidence",
+      "record",
+      "--worktree",
+      "/workspace/scratch/3f4ab65dfb82/ZCR-T11",
+      "--task",
+      "T11",
+      "--label",
+      "final-write-debug",
+      "--command",
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig build test -Dtest-group=write -Doptimize=Debug -Dfault-injection=true -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T11/out-final-write-debug --summary all",
+      "--exit",
+      "0",
+      "--binary",
+      "/workspace/scratch/3f4ab65dfb82/state/T11/out-final-write-debug/bin/T11-test",
+      "--out",
+      "/workspace/scratch/3f4ab65dfb82/state/T11/final-write-debug-standard.json"
+    ],
+    "exit_code": 0,
+    "log": "/workspace/scratch/3f4ab65dfb82/state/T11/logs/final-write-debug-record.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/3f4ab65dfb82/state/T11/zcr-dev-evidence",
+      "verify",
+      "--worktree",
+      "/workspace/scratch/3f4ab65dfb82/ZCR-T11",
+      "--evidence",
+      "/workspace/scratch/3f4ab65dfb82/state/T11/final-write-debug-standard.json"
+    ],
+    "exit_code": 0,
+    "log": "/workspace/scratch/3f4ab65dfb82/state/T11/logs/final-write-debug-verify.log",
+    "log_sha256": "95113fb1bf87762452fddba80c56d3b0716576f5f8c8709e3f073e51f54e6b6b"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/3f4ab65dfb82/state/T11/zcr-dev-evidence",
+      "record",
+      "--worktree",
+      "/workspace/scratch/3f4ab65dfb82/ZCR-T11",
+      "--task",
+      "T11",
+      "--label",
+      "final-write-releasesafe",
+      "--command",
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig build test -Dtest-group=write -Doptimize=ReleaseSafe -Dfault-injection=true -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T11/out-final-write-releasesafe --summary all",
+      "--exit",
+      "0",
+      "--binary",
+      "/workspace/scratch/3f4ab65dfb82/state/T11/out-final-write-releasesafe/bin/T11-test",
+      "--out",
+      "/workspace/scratch/3f4ab65dfb82/state/T11/final-write-releasesafe-standard.json"
+    ],
+    "exit_code": 0,
+    "log": "/workspace/scratch/3f4ab65dfb82/state/T11/logs/final-write-releasesafe-record.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/3f4ab65dfb82/state/T11/zcr-dev-evidence",
+      "verify",
+      "--worktree",
+      "/workspace/scratch/3f4ab65dfb82/ZCR-T11",
+      "--evidence",
+      "/workspace/scratch/3f4ab65dfb82/state/T11/final-write-releasesafe-standard.json"
+    ],
+    "exit_code": 0,
+    "log": "/workspace/scratch/3f4ab65dfb82/state/T11/logs/final-write-releasesafe-verify.log",
+    "log_sha256": "95113fb1bf87762452fddba80c56d3b0716576f5f8c8709e3f073e51f54e6b6b"
+  }
+]

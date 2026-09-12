@@ -1,0 +1,7 @@
+Build Summary: 4/4 steps succeeded; 10/10 tests passed
+test success
++- install T04-test success
+|  +- compile test T04-test Debug native success 8s MaxRSS:199M
++- run test T04-test 10 pass (10 total) 3s MaxRSS:20M
+   +- compile test T04-test Debug native (reused)
+

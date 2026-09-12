@@ -1,0 +1,42 @@
+test
++- run test T07-test 17 pass, 1 fail (18 total)
+error: 't07_test.test.T07 batch projection keeps every item id in order and marks items that do not fit' failed:
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-p2b-batch-always-full/src/protocol/projection.zig:124:44: 0x102e88073 in raw (T07-test)
+                   if (b.len - o.len < bytes.len) return error.NoSpace;
+                                                  ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-p2b-batch-always-full/src/protocol/projection.zig:157:13: 0x102e88633 in string (T07-test)
+                   try o.raw(bytes[run_start..i]);
+                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-p2b-batch-always-full/src/protocol/projection.zig:187:5: 0x102eb88c3 in writeLine (T07-test)
+           try o.string(line.text);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-p2b-batch-always-full/src/protocol/projection.zig:213:9: 0x102eb8ebf in writeLines (T07-test)
+               try writeLine(o, line);
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-p2b-batch-always-full/src/protocol/projection.zig:222:5: 0x102eb966f in writeRead (T07-test)
+           try writeLines(o, result.lines[0..line_count]);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-p2b-batch-always-full/src/protocol/projection.zig:247:13: 0x102eb60d7 in writeItem (T07-test)
+                   try writeRead(o, result, result.lines.len);
+                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-p2b-batch-always-full/src/protocol/projection.zig:494:17: 0x102eb4a6f in writeSuccess (T07-test)
+                       try writeItem(o, item, plan.fits[i]);
+                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-p2b-batch-always-full/src/protocol/projection.zig:82:87: 0x102eb3433 in success (T07-test)
+           writeSuccess(&out, envelope, data, status, plan, complete, truncated) catch |err| return switch (err) {
+                                                                                             ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-p2b-batch-always-full/tests/t07_test.zig:743:5: 0x102e834fb in project (T07-test)
+           return projection.success(buffer, env, data, status, output);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-p2b-batch-always-full/tests/t07_test.zig:871:22: 0x102edd363 in test.T07 batch projection keeps every item id in order and marks items that do not fit (T07-test)
+           const response = try project(arena, envelope, .{ .batch_read = value }, value.status, budget);
+                            ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache/o/ae41a135719dd0887ccdc0430a22ef8b/T07-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache --seed=0xc88b1f9e --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 17/18 tests passed (1 failed)
+test transitive failure
++- run test T07-test 17 pass, 1 fail (18 total)
+   +- compile test T07-test Debug native success 15s MaxRSS:218M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache/o/2759f0ba666e46dcb034eb08a284d1a7/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-p2b-batch-always-full /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T07/zig-global-cache --seed 0xc88b1f9e -Z9664fba40b782d4d test -Dtest-group=batch --summary all

@@ -1,0 +1,32 @@
+test
++- run test T12-test 0 pass, 1 fail (1 total)
+error: 't12_test.test.WR-006 F1 terminal history survives actual commit commit and abort commit fresh restart' failed:
+       /workspace/scratch/3f4ab65dfb82/ZCR-T12/tests/t12_fixtures.zig:43:21: 0x125d0bc in read (t12_test.zig)
+               if (n <= 0) return error.ProtocolClosed;
+                           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T12/tests/t12_fixtures.zig:49:5: 0x1262f36 in receive__anon_45540 (t12_test.zig)
+           try read(fd, buf[0..4]);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T12/tests/t12_test.zig:937:20: 0x12647e5 in historyRecovery (t12_test.zig)
+           const result = try f.receive(child.stdout.?.handle, f.HistoryResult, repo.arena.allocator());
+                          ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T12/tests/t12_test.zig:969:21: 0x126909f in test.WR-006 F1 terminal history survives actual commit commit and abort commit fresh restart (t12_test.zig)
+               const one = try historyRecovery(&repo, fixture, &witnesses);
+                           ^
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/red-f1/cache && /workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/red-f1/cache/o/2cde1e672b3f7dfa95cc8bf4ecd911f2/T12-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/red-f1/cache --seed=0x848c2eff --listen=-
+
+Build Summary: 6/8 steps succeeded (1 failed); 0/1 tests passed (1 failed)
+test transitive failure
++- install T12-child success
+|  +- compile test T12-child Debug native success 3s MaxRSS:278M
+|     +- options success
++- install T12-test success
+|  +- compile test T12-test Debug native success 584ms MaxRSS:186M
+|     +- options (reused)
+|     +- options success
+|        +- compile test T12-child Debug native (+1 more reused dependencies)
++- run test T12-test 0 pass, 1 fail (1 total)
+   +- compile test T12-test Debug native (+2 more reused dependencies)
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/red-f1/cache/o/de94d8b23d3f88fd829df252bfc22c95/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-T12 /workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/red-f1/cache /workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/red-f1/global-cache --seed 0x848c2eff -Z48fa8b4720b015de test -Dtest-group=write -Doptimize=Debug -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/red-f1/out --summary all -Dtest-id=F1

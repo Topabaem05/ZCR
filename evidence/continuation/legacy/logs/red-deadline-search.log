@@ -1,0 +1,42 @@
+test
++- run test T06-test 14 pass, 1 fail (15 total)
+error: 't06_test.test.SR-005 deadline after scan keeps its reason and publishes no context' failed:
+       expected error.DeadlineExceeded, found error.Cancelled
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/search/literal.zig:307:48: 0x123af99 in searchFile (literal.zig)
+                   if (self.run.cancel.isRequested()) return error.Cancelled;
+                                                      ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/search/literal.zig:250:32: 0x1239691 in onFile (literal.zig)
+                   error.Cancelled => return error.Cancelled,
+                                      ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/core/types.zig:355:13: 0x124af23 in push (types.zig)
+                   return sink.push_fn(sink.context, item);
+                   ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/fs/traverse.zig:333:21: 0x124a656 in walk (traverse.zig)
+                           try sink.push(.{ .bytes = rel });
+                           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/fs/traverse.zig:217:17: 0x1239f47 in enumerateImpl (traverse.zig)
+                       try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel, search_candidates);
+                       ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/fs/traverse.zig:198:9: 0x12394ce in enumerateSearchCandidates (traverse.zig)
+               return self.enumerateImpl(io, capability, spec, sink, cancel, true);
+               ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/search/literal.zig:205:62: 0x1236ff0 in search (literal.zig)
+                   if (!(err == error.Cancelled and self.run.stop)) return err;
+                                                                    ^
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:72:13: 0x1282192 in expectError__anon_46941 (std.zig)
+                   return error.TestUnexpectedError;
+                   ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/tests/t06_test.zig:446:5: 0x12943d8 in test.SR-005 deadline after scan keeps its reason and publishes no context (t06_test.zig)
+           try testing.expectError(error.DeadlineExceeded, h.searcher.search(io, capability, .{ .literal = "key" }, collector.sink(), h.cancel().withTimeout(io, 20)));
+           ^
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/legacy/zig-local-cache && /workspace/scratch/3f4ab65dfb82/state/legacy/zig-local-cache/o/300a1f28ba2ce586a8aa0cf5a3b728fc/T06-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/legacy/zig-local-cache --seed=0xbfd73e97 --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 14/15 tests passed (1 failed)
+test transitive failure
++- install T06-test success
+|  +- compile test T06-test Debug native success 703ms MaxRSS:178M
++- run test T06-test 14 pass, 1 fail (15 total)
+   +- compile test T06-test Debug native (reused)
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/legacy/zig-local-cache/o/c36c1675aeff3d0b5c45ee8a47d29ebc/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-legacy /workspace/scratch/3f4ab65dfb82/state/legacy/zig-local-cache /workspace/scratch/3f4ab65dfb82/state/legacy/zig-global-cache --seed 0xbfd73e97 -Z1e32a02388a8fddf test -Dtest-group=search -Dinstall-tests=true -Doptimize=Debug --prefix /workspace/scratch/3f4ab65dfb82/state/legacy/out/red-deadline-search --summary all

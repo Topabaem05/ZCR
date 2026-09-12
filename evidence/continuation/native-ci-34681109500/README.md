@@ -1,0 +1,7 @@
+# Native CI checkpoint — 34681109500
+
+Executed Ubuntu 24.04 x86-64, macOS 15 Apple Silicon and Intel. Each Debug/ReleaseSafe registered suite reports **221/222 passing, one failure**; T11/T14/T15 files were also absent at this checkpoint. Overall result is **FAIL**. The failed T01 vtable-count assertion predates the approved fourth native I19 transition field. Integrator commit7115d63 updates the assertion; its local Debug dev group19/19 passed, but this archive is not relabeled.
+
+All other invoked build/contract/codec/CLI/capability commands and driver checks passed on all three targets. The actual CLI fixture has18 checks per mode. This proves this exact checkpoint only; it does not qualify later T11/T14/T15 sources, actual Codex/Claude, macOS11, power-loss/APFS qualification or model-coexistence performance. See each report's retained external gates.
+
+PR merge commit7e286e1650572122fc4a4c63522356a1f3b86324 has tree39978457c21c9e9d7639621b37e2d353a568e5d9, identical to local6d9e9f7 and remote feature headc83c098. Source was clean and unchanged before/after each job. Verification covers every archive manifest member and every archived executable against report hashes. Raw logs, reports, capability observations and source manifests are included. Original binary ZIP artifacts are linked in verification.json and retained by GitHub for14days; this checkpoint does not embed binaries in Git.

@@ -1,0 +1,122 @@
+{
+  "format": "git-bundle",
+  "sha256": "3eb884b15aa5c1f8d2ee74de6e4e3cac814f02dfa8ee0d01e75563314df9bfd6",
+  "bytes": 5222115,
+  "checkpoint_source": "146b9617645a43ea8a82157108888e49adfde3c6",
+  "refs": [
+    {
+      "sha": "146b9617645a43ea8a82157108888e49adfde3c6",
+      "ref": "refs/heads/codex/continue-runtime-20260912"
+    },
+    {
+      "sha": "ef891f0936af9042a85b4fee6ab0b7b383fe70bb",
+      "ref": "refs/heads/codex/darwin-publication-20260912"
+    },
+    {
+      "sha": "11f82d80184a7fe88361d5527a51a11602e4ba87",
+      "ref": "refs/heads/codex/legacy-search-audit"
+    },
+    {
+      "sha": "b5fe273bb58bd9518bf7711446f164ef5e4bbd62",
+      "ref": "refs/heads/codex/runtime-cache-20260912"
+    },
+    {
+      "sha": "ec9e5ad9d19d58fc0e96fe2f0ca8e3f8fa37d52f",
+      "ref": "refs/heads/codex/runtime-review-fixes-20260912"
+    },
+    {
+      "sha": "65f747e0e06442a65a7679f2cfbf64dd7a3fc7dd",
+      "ref": "refs/heads/codex/t07-corrections"
+    },
+    {
+      "sha": "774ccfe8b18114d3f7054a8db5c265f6c05b2437",
+      "ref": "refs/heads/codex/t08-mcp"
+    },
+    {
+      "sha": "49f0368b9e329d602248445031e8aaadc072eeee",
+      "ref": "refs/heads/codex/t09-scheduler"
+    },
+    {
+      "sha": "86ed075a1bf3693142c4f581d83d6bfae84e4bc3",
+      "ref": "refs/heads/codex/t10-workspace"
+    },
+    {
+      "sha": "169ea241addcc7bf7644670818745f439a6624dd",
+      "ref": "refs/heads/codex/t11-atomic-write"
+    },
+    {
+      "sha": "475960557b751a2a238477bb08dd51f689e1823b",
+      "ref": "refs/heads/codex/t12-journal"
+    },
+    {
+      "sha": "efc7fa89960c752b73f3ca13a04d134efcdc8617",
+      "ref": "refs/heads/codex/t13-cache"
+    },
+    {
+      "sha": "ecec8964f66ea4329d00dd9e071051754fb722ff",
+      "ref": "refs/heads/codex/t14-watch"
+    },
+    {
+      "sha": "98c63f8c9676032331e41ed2dea72f001526e346",
+      "ref": "refs/heads/codex/t15-broker"
+    },
+    {
+      "sha": "f5de46093c0bdac5d475321f8d5f2f5e0df55c1a",
+      "ref": "refs/heads/codex/t16-admission-20260912"
+    },
+    {
+      "sha": "1bdd428ec39a47679a49481d89ce0b32587d3d91",
+      "ref": "refs/heads/codex/test-harness-audit"
+    },
+    {
+      "sha": "7eeab60012f5521900aa721f6fd388df4809517c",
+      "ref": "refs/heads/main"
+    },
+    {
+      "sha": "7eeab60012f5521900aa721f6fd388df4809517c",
+      "ref": "refs/remotes/origin/HEAD"
+    },
+    {
+      "sha": "4bcf01d981047ce7e8e99e436b7dec5767032e1f",
+      "ref": "refs/remotes/origin/integration"
+    },
+    {
+      "sha": "7eeab60012f5521900aa721f6fd388df4809517c",
+      "ref": "refs/remotes/origin/main"
+    },
+    {
+      "sha": "ede012a350023ece805b71a0417e9627dac21ca2",
+      "ref": "refs/remotes/origin/task-t00"
+    },
+    {
+      "sha": "35321adc16557ce9fd66084af1a8ba156d03ad98",
+      "ref": "refs/remotes/origin/task-t01"
+    },
+    {
+      "sha": "f8c0cb0a0ee2a30681853725d9611edcf8476285",
+      "ref": "refs/remotes/origin/task-t02"
+    },
+    {
+      "sha": "f2fca29f07f680d05e2c1887408e1c06690e0377",
+      "ref": "refs/remotes/origin/task-t03"
+    },
+    {
+      "sha": "b933c3a668d5a213ee618ad5765cd6b860a7253d",
+      "ref": "refs/remotes/origin/task-t04"
+    },
+    {
+      "sha": "91c1b62d9a9b81c198f6c893640997e2e0bce2e7",
+      "ref": "refs/remotes/origin/task-t05"
+    },
+    {
+      "sha": "13ee2710764090e8e7ba83f4a8fc4d8c3efe1e3b",
+      "ref": "refs/remotes/origin/task-t06"
+    },
+    {
+      "sha": "531cfc378950e6ef6ac6f49cb4e2de3de56312cc",
+      "ref": "refs/remotes/origin/task-t07"
+    }
+  ],
+  "reason": "Connector publishes exact tree snapshots; this self-contained bundle preserves original tested commits and approved local development history. Active unreviewed T12 Darwin branch excluded.",
+  "restore": "git bundle verify evidence/continuation/source-history.bundle; git bundle unbundle evidence/continuation/source-history.bundle"
+}

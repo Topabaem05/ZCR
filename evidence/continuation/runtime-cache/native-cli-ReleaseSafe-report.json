@@ -1,0 +1,26 @@
+{
+  "scope": "native subprocess fixture; actual Codex/Claude integration NOT_RUN",
+  "binary_sha256": "c7c8095abd233208336b67f2c8b2a531bb0ee9a323ba0913b4b5806ff10378e3",
+  "checks": [
+    "explicit approved read-only tool advertisement",
+    "stdio/schema/byte-count read",
+    "stdio/schema/byte-count files",
+    "stdio/schema/byte-count search",
+    "stdio/schema/byte-count batch_read",
+    "stdio/schema/byte-count health",
+    "stdio/schema/byte-count status",
+    "standalone repeated reads use the shared cache with one CPU permit",
+    "model path and root authority refusal",
+    "startup refuses unbound",
+    "startup refuses wrong-workspace",
+    "startup refuses wrong-base",
+    "startup refuses wrong-contract",
+    "startup refuses expired",
+    "startup refuses zero-fence",
+    "atomic replacement refuses stale Git info/exclude binding",
+    "atomic replacement refuses stale global excludes binding",
+    "creation refuses an initially absent trusted exclude binding",
+    "live session expiry revokes subsequent tools"
+  ],
+  "transcript_sha256": "5b5499649ac404b169dda13377270b97d799794c9e4b552b8af69c765dd70383"
+}

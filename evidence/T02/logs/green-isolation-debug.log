@@ -1,0 +1,8 @@
+Build Summary: 5/5 steps succeeded; 12/12 tests passed
+test success
++- install T02-test success
+|  +- compile test T02-test Debug native cached 76ms MaxRSS:31M
+|     +- options cached
++- run test T02-test 12 pass (12 total) 1s MaxRSS:11M
+   +- compile test T02-test Debug native (+1 more reused dependencies)
+

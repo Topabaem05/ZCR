@@ -1,0 +1,145 @@
+{
+  "schema_version": "zcr-t08-runs/1",
+  "source_commit": "48d2e8b61a83af444f0914379f8bc75f169413f3",
+  "config_corpus_sha256": "24f7299c4d85acec602a617d3a2c096f97f9a116e9ab3a6acf7fd8c0bfc03fd2",
+  "runs": [
+    {
+      "label": "mcp-debug",
+      "tests": 15,
+      "exit_code": 0,
+      "record_exit": 0,
+      "verify_exit": 0,
+      "record": {
+        "schema_version": "zcr-evidence/1",
+        "task_id": "T08",
+        "label": "mcp-debug",
+        "command": "/workspace/scratch/3f4ab65dfb82/state/T08/out-debug/bin/T08-test",
+        "exit_code": 0,
+        "source_commit": "48d2e8b61a83af444f0914379f8bc75f169413f3",
+        "source_tree": "32e0f1c7db627bfcdf45a8acf475b41e8be718bb",
+        "worktree_git_dir": "/workspace/scratch/3f4ab65dfb82/ZCR/.git/worktrees/ZCR-T08",
+        "binary_path": "/workspace/scratch/3f4ab65dfb82/state/T08/out-debug/bin/T08-test",
+        "binary_sha256": "3148975616cdf65c0e17403d348798d4600a39c253b6c3885911e6dcdd726771",
+        "recorded_at_unix_ms": 1789196391139
+      },
+      "output_artifact": "evidence/T08/logs/mcp-debug.log",
+      "output_sha256": "5aae7c9586a864da5f6a91961ab0b2a16419a363a4b0a7fe2df89ee94e256668",
+      "config_corpus_sha256": "24f7299c4d85acec602a617d3a2c096f97f9a116e9ab3a6acf7fd8c0bfc03fd2"
+    },
+    {
+      "label": "mcp-release",
+      "tests": 15,
+      "exit_code": 0,
+      "record_exit": 0,
+      "verify_exit": 0,
+      "record": {
+        "schema_version": "zcr-evidence/1",
+        "task_id": "T08",
+        "label": "mcp-release",
+        "command": "/workspace/scratch/3f4ab65dfb82/state/T08/out-release/bin/T08-test",
+        "exit_code": 0,
+        "source_commit": "48d2e8b61a83af444f0914379f8bc75f169413f3",
+        "source_tree": "32e0f1c7db627bfcdf45a8acf475b41e8be718bb",
+        "worktree_git_dir": "/workspace/scratch/3f4ab65dfb82/ZCR/.git/worktrees/ZCR-T08",
+        "binary_path": "/workspace/scratch/3f4ab65dfb82/state/T08/out-release/bin/T08-test",
+        "binary_sha256": "e98c31abe75f5c0ae0c687fa53ce3ed8bb70e2abec3c5522ed750f9974672e0e",
+        "recorded_at_unix_ms": 1789196391782
+      },
+      "output_artifact": "evidence/T08/logs/mcp-release.log",
+      "output_sha256": "5aae7c9586a864da5f6a91961ab0b2a16419a363a4b0a7fe2df89ee94e256668",
+      "config_corpus_sha256": "24f7299c4d85acec602a617d3a2c096f97f9a116e9ab3a6acf7fd8c0bfc03fd2"
+    },
+    {
+      "label": "codec-debug",
+      "tests": 10,
+      "exit_code": 0,
+      "record_exit": 0,
+      "verify_exit": 0,
+      "record": {
+        "schema_version": "zcr-evidence/1",
+        "task_id": "T08",
+        "label": "codec-debug",
+        "command": "/workspace/scratch/3f4ab65dfb82/state/T08/out/codec-debug",
+        "exit_code": 0,
+        "source_commit": "48d2e8b61a83af444f0914379f8bc75f169413f3",
+        "source_tree": "32e0f1c7db627bfcdf45a8acf475b41e8be718bb",
+        "worktree_git_dir": "/workspace/scratch/3f4ab65dfb82/ZCR/.git/worktrees/ZCR-T08",
+        "binary_path": "/workspace/scratch/3f4ab65dfb82/state/T08/out/codec-debug",
+        "binary_sha256": "d244bf0c2aa5815e7d001927bf7893164049aeb7f6b2552f37ff5e5a294ee60b",
+        "recorded_at_unix_ms": 1789196392420
+      },
+      "output_artifact": "evidence/T08/logs/codec-debug.log",
+      "output_sha256": "1ef7ad3a35356665642743bd1e4ce916599b49366ba2b232a0ceb002b329cbd2",
+      "config_corpus_sha256": "24f7299c4d85acec602a617d3a2c096f97f9a116e9ab3a6acf7fd8c0bfc03fd2"
+    },
+    {
+      "label": "codec-release",
+      "tests": 10,
+      "exit_code": 0,
+      "record_exit": 0,
+      "verify_exit": 0,
+      "record": {
+        "schema_version": "zcr-evidence/1",
+        "task_id": "T08",
+        "label": "codec-release",
+        "command": "/workspace/scratch/3f4ab65dfb82/state/T08/out/codec-release",
+        "exit_code": 0,
+        "source_commit": "48d2e8b61a83af444f0914379f8bc75f169413f3",
+        "source_tree": "32e0f1c7db627bfcdf45a8acf475b41e8be718bb",
+        "worktree_git_dir": "/workspace/scratch/3f4ab65dfb82/ZCR/.git/worktrees/ZCR-T08",
+        "binary_path": "/workspace/scratch/3f4ab65dfb82/state/T08/out/codec-release",
+        "binary_sha256": "6e9b4227e707ecc63a3fa65b50bc277436834e65dc42e7f6f5e34cb22ad06755",
+        "recorded_at_unix_ms": 1789196392767
+      },
+      "output_artifact": "evidence/T08/logs/codec-release.log",
+      "output_sha256": "1ef7ad3a35356665642743bd1e4ce916599b49366ba2b232a0ceb002b329cbd2",
+      "config_corpus_sha256": "24f7299c4d85acec602a617d3a2c096f97f9a116e9ab3a6acf7fd8c0bfc03fd2"
+    },
+    {
+      "label": "batch-debug",
+      "tests": 24,
+      "exit_code": 0,
+      "record_exit": 0,
+      "verify_exit": 0,
+      "record": {
+        "schema_version": "zcr-evidence/1",
+        "task_id": "T08",
+        "label": "batch-debug",
+        "command": "/workspace/scratch/3f4ab65dfb82/state/T08/regression-debug/bin/T07-test",
+        "exit_code": 0,
+        "source_commit": "48d2e8b61a83af444f0914379f8bc75f169413f3",
+        "source_tree": "32e0f1c7db627bfcdf45a8acf475b41e8be718bb",
+        "worktree_git_dir": "/workspace/scratch/3f4ab65dfb82/ZCR/.git/worktrees/ZCR-T08",
+        "binary_path": "/workspace/scratch/3f4ab65dfb82/state/T08/regression-debug/bin/T07-test",
+        "binary_sha256": "60c71fd4a8a53a9707c4099dd25207725f2359f1a2d783ef3d910c3cde9e6d90",
+        "recorded_at_unix_ms": 1789196393158
+      },
+      "output_artifact": "evidence/T08/logs/batch-debug.log",
+      "output_sha256": "015e675860862d525e1b85de32ef5beb88ee334a8c96c5cb0757044198aa2969",
+      "config_corpus_sha256": "24f7299c4d85acec602a617d3a2c096f97f9a116e9ab3a6acf7fd8c0bfc03fd2"
+    },
+    {
+      "label": "batch-release",
+      "tests": 24,
+      "exit_code": 0,
+      "record_exit": 0,
+      "verify_exit": 0,
+      "record": {
+        "schema_version": "zcr-evidence/1",
+        "task_id": "T08",
+        "label": "batch-release",
+        "command": "/workspace/scratch/3f4ab65dfb82/state/T08/regression-release/bin/T07-test",
+        "exit_code": 0,
+        "source_commit": "48d2e8b61a83af444f0914379f8bc75f169413f3",
+        "source_tree": "32e0f1c7db627bfcdf45a8acf475b41e8be718bb",
+        "worktree_git_dir": "/workspace/scratch/3f4ab65dfb82/ZCR/.git/worktrees/ZCR-T08",
+        "binary_path": "/workspace/scratch/3f4ab65dfb82/state/T08/regression-release/bin/T07-test",
+        "binary_sha256": "3827d5785b2c31b98d902f6a281b208607ef6c0551d1aa1d5b97481f36915d90",
+        "recorded_at_unix_ms": 1789196393516
+      },
+      "output_artifact": "evidence/T08/logs/batch-release.log",
+      "output_sha256": "015e675860862d525e1b85de32ef5beb88ee334a8c96c5cb0757044198aa2969",
+      "config_corpus_sha256": "24f7299c4d85acec602a617d3a2c096f97f9a116e9ab3a6acf7fd8c0bfc03fd2"
+    }
+  ]
+}

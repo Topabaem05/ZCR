@@ -1,0 +1,196 @@
+{
+  "schema": "zcr-runtime-cache-evidence/1",
+  "worktree": "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-cache",
+  "base_commit": "278380279e7f0a8f52a1568364cfb8fe5695e997",
+  "source_commit": "b5fe273bb58bd9518bf7711446f164ef5e4bbd62",
+  "source_tree": "b21156dbca521b8c120ed8c7d569ae125746da19",
+  "clean_before_evidence": true,
+  "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+  "source_hashes": {
+    "build.zig": "1130ca7f536198100c263702a48f315d352363d632f561266fe4f44e693a24f3",
+    "build.zig.zon": "2ad2381bdb29d5669c6d2ac4807c124c2afe6d007daf7ea2b507fdc64bf44e52",
+    "config/limits.json": "d7b3db8b6956c0f8b1e6f399e6e432fb4eadb8aa033f39d303e31edbe539154c",
+    "config/memory-profiles.json": "7f925fb57bc0453f2505b3c10856a4e74322bcb8cc3417070ec7693e847804b7",
+    "config/scheduler-profiles.json": "3f3b7d88264c94ac84ea0969da47ff1aee46ad4ba51f4899742ee2c1603b57a8",
+    "contracts/README.md": "e3fb52440e84c7a9abe3f855f1423eee91222c546243b2435988c64cb325a05b",
+    "contracts/data.schema.json": "5c3932867cf4e16729cd6b959c16b9a143308aa5396f79a7f0e56f6563d314f5",
+    "contracts/inputs/zcr_batch_read.schema.json": "50c4b12c0575660e6d030acabd8a3fb60ec9e3b4a620426cea79133ec011f15d",
+    "contracts/inputs/zcr_create.schema.json": "821b9bdb7e74db3c5456e06ee6ceb0cf5105fa13ab39786ef0f4fd024b1812ca",
+    "contracts/inputs/zcr_files.schema.json": "8f7680bc92ad4ef9a1a34e7a9756cbca4f286452387a246de33cb13073890eb4",
+    "contracts/inputs/zcr_health.schema.json": "9e78382dc9325d9dafba3edbadf843f670505c5e19d8a2ee0a168147862d9538",
+    "contracts/inputs/zcr_patch.schema.json": "77d27a7cb46a2d7765f245f85f2e47560df5ea82e406e049e1e387d38f543f99",
+    "contracts/inputs/zcr_read.schema.json": "fdd23867b862977d19bf3b3d45183ead856d58ec4742d41ec3e970751e524bdc",
+    "contracts/inputs/zcr_search.schema.json": "ed9109d79358aa095c54fe6c70260be99f4ba9c68aef4d4539319562f8567211",
+    "contracts/inputs/zcr_status.schema.json": "a46793fa818ba7ce90931a0dece57235aaa5aebbd010bbc3606fb3a8cb0cc5b1",
+    "contracts/response.schema.json": "587ba596c5ca9a3c30d820905aaf4d91b388325ededddbd468534c9119f91060",
+    "contracts/task-manifest.schema.json": "d65a9082b5b4896e6e1017d4bfa6a37dc12efe88b362ed809491a5f3b2c965cc",
+    "contracts/tools.json": "6537c0961f85dd623cf76c195dab534f583052c31eff2eda54727e97083a0b4b",
+    "src/batch/read.zig": "a0627a93212db8d864deb37037a9b4c27e5bee4948f4602ed4c9da2c7339e6e6",
+    "src/cache/association.zig": "69cb402708d851060c5bc5fda6a6b77e6ef47fefced33b6556bfe646d0d358f4",
+    "src/cache/content.zig": "3313fecfd1be8ab82833cdaf6814d73c37751e9c3d034836d72478eae747552d",
+    "src/cache/lines.zig": "6e17fa2885df645fb8dce77941d7e459b7cacb8177b3552d34c974e691f2c73e",
+    "src/core/errors.zig": "4166c1278c889e703cebc67925acfa9e768f5a4119fe42bfb8e29084a4752f1c",
+    "src/core/limits.zig": "41771a1b441e7710a5c27ac6d5cc92170f023764b74ace4e5519e28161a65137",
+    "src/core/types.zig": "72bd46e53105915c52b80190aa3a90616a696892b3be542c7a285d8a8e8eb30b",
+    "src/fs/ignore.zig": "4d398d96174d7a52d4a895494ba5c75a17205146518be3feef38d60f4c8379cd",
+    "src/fs/metadata.zig": "ecbe8d94bfed6bc6b032e811ec75941585963e4d61848cdb864004a0566fabca",
+    "src/fs/read.zig": "78ce9fc92750103d73fe4b1eea68b4da2e674064c0bf533b550e68515de4b7b1",
+    "src/fs/traverse.zig": "4e40d6b5ac76549174efde0c36ac5aab1bf14066fd2959e513d0eb1e6715e7a8",
+    "src/launch.zig": "75e065d80a64717e5ecfedf1bbdddbdfc7cf8e27724f84760910c84be84fea93",
+    "src/launch_ignore.zig": "58eff3d9eca3c2fe4b8a4192c1c66596333b14f6e5a2a879ab201bc55d59b127",
+    "src/main.zig": "32b77292ca22a0f4e068caf4809f63c941f311f1ffb2610f8de84a9716502b41",
+    "src/memory/accounting.zig": "c71ff2d39979bd03b3dd73d93285ba9dbc97d41fe2437e3fbc156c5a9e0fd654",
+    "src/memory/arena.zig": "6c2b911849041d5935f434a110b858ad590331e82653eca9a9502b2c308b00fc",
+    "src/memory/budget.zig": "51394d108231fd049bfc88e3fa3468d75a33a9d5d9e9e3e2b2c0e60ce14aa4c0",
+    "src/platform/darwin.zig": "9f2c8be090cee2a9fcdb9c48937e25e0b64e22430c21d611feb7fb0088321cd7",
+    "src/policy/capability.zig": "11a77a83e45aab973e54e69e3d5f953d74efc1a1193fdf74006e4119772183c9",
+    "src/policy/paths.zig": "af8e8c6ec7af13f79c25ff4641d12ccaf0d6c3d60720fdd5416c9512a6edfb31",
+    "src/policy/scope.zig": "ff9b6246f4451a851d406cdcb82ad805f3668e40455ce0782d1f7d5ab641696c",
+    "src/protocol/codec.zig": "f3af32c8682d0afa0b39bcbc39edeb7bd92beef8946fc0c335671c90444188c0",
+    "src/protocol/framing.zig": "893d41b3fbed837ec856596bbe9ba04ec5d22d8a122b00fb39f1231197e20aeb",
+    "src/protocol/mcp.zig": "aa5d500c65dcb9ab799b7ca09c019a67d3ee22061b21e1a94c16b11f726fc1d6",
+    "src/protocol/projection.zig": "f197f4c136a0b16f393760aca1b15e057191103e03504dbce8b7babe8e8a4bcf",
+    "src/scheduler/admission.zig": "f43b872ca0648998a9b1f805ae080ad0fb2fe2181134b0018977f528281f9b6f",
+    "src/scheduler/executor.zig": "755e95087f966237fa255a392876f39638be80ac9fa42cbeacf55ac38e8d7aae",
+    "src/scheduler/queue.zig": "a28d5c3adc4de2e160a094470ad14ca7cb530c147e8b0a4b4ffa2301b30617c7",
+    "src/search/context.zig": "9be7eae7e6eac525f2486e8895cd8b96f648cbd10f2f5df4d6c60fcd3ac59ecd",
+    "src/search/literal.zig": "00263a5337ad0097a83961620c853bd389653bcc8dd42fe9352938eb7ff47546",
+    "src/search/scalar.zig": "aef984f53852ce28f41c7f5eca940db422511890941053e2e81bc362b746c3bd",
+    "src/workspace/identity.zig": "ea493786a52c7fb0460efb1e911293fd4ab69aac273e47bfa8d15c129ebe5c3d",
+    "src/workspace/lease.zig": "b7b19b516e2dfe25f8e38df3962659cab90600e469cc1c0623050b2016d52e60",
+    "src/workspace/registry.zig": "322e0147763b238f32a46d5a4b6921b46f2524e6d0134411b424960329ba68bf",
+    "tests/catalog.json": "96fae3cfb87d975755bfafd7cf8e20a4ba07770a08c7aa1b1238ee3cfec14df5",
+    "tests/cli_smoke.py": "cb36cbc8076c15061fbd141fec653a8037709a729c4f95cd6314aeea80ca634c",
+    "tests/launch_test.zig": "a6a3b649bce194c35c9d7daa4b35a197cf372df8f0917d097c7785e846a98fcf",
+    "tests/t00_test.zig": "e3142f5eb2a798828c7cab4994df216eed02392fb0add53ea32a77270ac92daf",
+    "tests/t01_test.zig": "83afbce2c47c90f23960eaa336d334860583ef3b208390b6da5bb4c161126b49",
+    "tests/t02_test.zig": "4085ff503526300f1f6efa7da9c8758128dbc1df4548d70023d59007586f3718",
+    "tests/t03_test.zig": "1c3d65bb118337d8510cbae77b441c780b4ca424b0715ddeda98b4fffcb2741b",
+    "tests/t04_test.zig": "a593c0876ba6ed360f5d0428c9d653a1912ce23150ddd78f74a2597a8190b81a",
+    "tests/t05_test.zig": "85ae09a13ba20facaf3d161ff7f2306d082bae46a3d232a1f197ed240f6d9217",
+    "tests/t06_test.zig": "0133b65a290f8e7c3ac46dcdc24cfb5137c9a67e2084fd21418999aebcf17ba2",
+    "tests/t07_test.zig": "d34951537c486f44bfeeb6114ecbc4f0b0f2bf55b327d50caa76f2a4bc409052",
+    "tests/t08_test.zig": "aa75d18a72f6748b38e97d9524654f29bc9d2bddbe615c24da1ba17b9436b2e7",
+    "tests/t09_test.zig": "cdea0a31ec4297db1244876e823d69f2ee963231b81be71f68644ae3ca58cf46",
+    "tests/t10_test.zig": "1dbdd343204dc97016954fa81ff8e1a6b387184f6dd8c314370c8b297515129c",
+    "tests/t13_test.zig": "4df3f52dcb1b9a6f5fb115185280403949425580a9d63607f85c01525072a17e",
+    "tests/timing_test.zig": "98254b5f219d6b2d562619f5e331f9c0faf053f632b79459cc965781e99432c4",
+    "tests/vectors.json": "ee87aa75003969e71c27e9790fc083a071f6d97c63acceb64245a2bf2c5f7ad8",
+    "tools/README.md": "ca1df54051ce0861fb7ec211248d3f08924591a37449afde4470407bad2c5203",
+    "tools/ci/native.py": "db63013d31ad2071eb5d670f20094634ccd381a42f763aae84e211469ab82e50",
+    "tools/ci/requirements.txt": "9e6ca5060f1d53e063a84c7387251fdda1a23f648c3a273bb6cee9637c8b4690",
+    "tools/ci/zig.lock.json": "24f9fa3b58915a2dd0aff7f43cb358841c78c36a57d1b21cb2e83544efdf461f",
+    "tools/dev/evidence.zig": "eb649db10c199fc42666590e6f02460e12c9be3a270e5d24d0386d745ecfcb97",
+    "tools/dev/guard.zig": "95ff7b968b166b560de9c5f9f39e8cb62e6bc466c01fcf928ff0b8cc2b1e1e00",
+    "tools/render_book.py": "c40c43d13a94fdddc91677395bb42134ef02907dc6a625bacf4917585d561964"
+  },
+  "source_manifest_sha256": "1b31952519944ff07886138a7567f5021b7accbac1f9d7a5508b7181936ebfa1",
+  "config_manifest_sha256": "bf13907909e42fecbe9bc89a71a07de4bebfa3b024ad0de78306427c0e46c0e9",
+  "corpus_manifest_sha256": "6a7931cc9ac237db2d67b9e852d58be27b8f638e4dca0024db29364cc003f956",
+  "toolchain": {
+    "path": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+    "version": "0.16.0",
+    "sha256": "2317bbb91798556d9d0f38aabdac23db83f0979b25f767259ae474546724087c"
+  },
+  "host": "Linux-6.18.35-x86_64-with-glibc2.39",
+  "drivers": {
+    "run.py": "f64fb07652be12f9be2eb3325c891842c566b443b6c3b4669ddb2b5ad2cc3931",
+    "run_cli.py": "87c39e98517a121b3407370fd6ea747c8113161c066d49f2dd3f280b51fcd49a"
+  },
+  "state": "/workspace/scratch/3f4ab65dfb82/state/runtime-cache",
+  "not_run": [
+    "Native macOS runtime",
+    "Native Windows runtime",
+    "Actual broker AF_UNIX query-cache runtime (owned by T15; environment EPERM)",
+    "Actual Codex/Claude host integration"
+  ],
+  "runs": [
+    {
+      "label": "green-mcp-Debug",
+      "passed": 27,
+      "exit": 0,
+      "record_sha256": "6cc872b75eecbfbddd322e2361a57d91546a34ae6a5fb916606a9408f8e37911"
+    },
+    {
+      "label": "green-mcp-ReleaseSafe",
+      "passed": 27,
+      "exit": 0,
+      "record_sha256": "444982c024d3fee2f957099d8e30f5d34701ee5519b842dcc6563cce21489243"
+    },
+    {
+      "label": "green-memory-Debug",
+      "passed": 29,
+      "exit": 0,
+      "record_sha256": "c9962d7582456e91ff5c6f22c7a3a020f4a531e032f08426fe833cc142077d1a"
+    },
+    {
+      "label": "green-memory-ReleaseSafe",
+      "passed": 29,
+      "exit": 0,
+      "record_sha256": "ae3f090741baaf3738ea2a001d5f1ec3ff14f22f35832d9e1a96391bff4de75d"
+    },
+    {
+      "label": "green-io-Debug",
+      "passed": 15,
+      "exit": 0,
+      "record_sha256": "9b5eb649fdaa4d2de2cf207e2abd5407fd40f4af2ffef9495cd870402e48a402"
+    },
+    {
+      "label": "green-io-ReleaseSafe",
+      "passed": 15,
+      "exit": 0,
+      "record_sha256": "f689e64df0f4f9808a18722b8e4e01d3a7512b61096d84e2ff4c5118550eea9d"
+    },
+    {
+      "label": "regression-batch-Debug",
+      "passed": 25,
+      "exit": 0,
+      "record_sha256": "3148c35736e9dcfccea735ffee590753ff8d17a91c566e594d49eb362c90c4e2"
+    },
+    {
+      "label": "regression-batch-ReleaseSafe",
+      "passed": 25,
+      "exit": 0,
+      "record_sha256": "cc63dbb0587831475538d83b5ccee9ca49d0a92cfdb830c7286e128c4fc4d9fb"
+    },
+    {
+      "label": "regression-search-Debug",
+      "passed": 15,
+      "exit": 0,
+      "record_sha256": "f396277156826dedbd2d8293c4925c84e55e0465614b7633be6d0e24ee4e89e9"
+    },
+    {
+      "label": "regression-search-ReleaseSafe",
+      "passed": 15,
+      "exit": 0,
+      "record_sha256": "56371e68c08938b897735388838ce76837bfc921ac81acc73190d21be5aa3f7d"
+    },
+    {
+      "label": "green-cli-Debug",
+      "exit": 0,
+      "record_sha256": "7a6039f54e65135d375829502d8d8f1e71c23ba5989f864f09f9891136580a19"
+    },
+    {
+      "label": "green-cli-ReleaseSafe",
+      "exit": 0,
+      "record_sha256": "dad1909c49a237c6a4b6de5c6ba8dfa8fe173c5244692a135d77f4b79e5dafbf"
+    },
+    {
+      "label": "contracts",
+      "exit": 0,
+      "record_sha256": "70e912c0a96c11e1945724f3ba420730eae6173ec19be8c98bc7b6b190fb2988"
+    },
+    {
+      "label": "native-cli-Debug",
+      "checks": 19,
+      "exit": 0,
+      "record_sha256": "a0f52289ce4fb609f4b55f477e202f2cf3445a4a97bd03abd61a7ee283053d97"
+    },
+    {
+      "label": "native-cli-ReleaseSafe",
+      "checks": 19,
+      "exit": 0,
+      "record_sha256": "28ce74ea65fd990697f6d31cc28bba9983091784554637350d41d496c758492a"
+    }
+  ]
+}

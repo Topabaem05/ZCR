@@ -1,0 +1,268 @@
+{
+  "schema_version": "zcr-t06-test-runs/0",
+  "task_id": "T06",
+  "state_dir": "$STATE=/Users/guribbong/code/ZCR-state/tasks/T06",
+  "runs": [
+    {
+      "label": "red",
+      "optimize": "Debug",
+      "source_commit": "8a7a970e4bc22f869675588f67c6fd1d9361c6c6",
+      "source_tree": "497d5265ea08f38bf15b9dc5c3e7a6e1fc8b8c44",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build test -Dtest-group=search -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-red --summary all",
+      "exit_code": 1,
+      "summary": "Build Summary: 2/4 steps succeeded (1 failed); 0/9 tests passed (9 failed)",
+      "installed_test_binaries_sha256": {
+        "T06-test": "ca4a267109f2d652ccfd38e3283583851ba9b16c543f3d5ec4ad928a95d2065f"
+      },
+      "log": "logs/red.log",
+      "log_sha256": "6369b2b09c6b80adb64c2ffa03bd7ab8dc93a79257c7e266a42d7dcd1689986a"
+    },
+    {
+      "label": "green-search-debug",
+      "optimize": "Debug",
+      "source_commit": "71ec6b27cda6d34c171b4b1460f8434f7c0948af",
+      "source_tree": "bc6789d8b70af40713b875364be6eddb7b64f3ca",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build test -Dtest-group=search -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-green-search-debug --summary all",
+      "exit_code": 0,
+      "summary": "Build Summary: 4/4 steps succeeded; 11/11 tests passed",
+      "installed_test_binaries_sha256": {
+        "T06-test": "b1abb69877a0efec88fa5078bed89f6f9f422e46e8f3bca3088ac2767b424dd5"
+      },
+      "log": "logs/green-search-debug.log",
+      "log_sha256": "ef949d80a65cc3de0f67b437bfcda6a5ee24faa0978e1b46e68ba017f46847c0"
+    },
+    {
+      "label": "green-search-releasesafe",
+      "optimize": "ReleaseSafe",
+      "source_commit": "71ec6b27cda6d34c171b4b1460f8434f7c0948af",
+      "source_tree": "bc6789d8b70af40713b875364be6eddb7b64f3ca",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build test -Dtest-group=search -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix $STATE/out-green-search-releasesafe --summary all",
+      "exit_code": 0,
+      "summary": "Build Summary: 4/4 steps succeeded; 11/11 tests passed",
+      "installed_test_binaries_sha256": {
+        "T06-test": "3ee2387b86684d76814c30b08fa63bf02517f2e3d0bf274ed1866c8abdc0a82e"
+      },
+      "log": "logs/green-search-releasesafe.log",
+      "log_sha256": "22742b0d6a4656730df6f4aaab8e6eb26848fae96c8550484953f93bca410a96"
+    },
+    {
+      "label": "regression-all-debug",
+      "optimize": "Debug",
+      "source_commit": "71ec6b27cda6d34c171b4b1460f8434f7c0948af",
+      "source_tree": "bc6789d8b70af40713b875364be6eddb7b64f3ca",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build test -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-regression-all-debug --summary all",
+      "exit_code": 0,
+      "summary": "Build Summary: 26/26 steps succeeded; 85/85 tests passed",
+      "installed_test_binaries_sha256": {
+        "T00-test": "705e302463ddb039372f7245d2c6ef863258f56ee61bf0357cb8929fe9bb96a5",
+        "T01-test": "0e4989749b58e2169ae32542a8efcc345ec914cc2ac15bd7ac39f826f996f49a",
+        "T02-test": "8001cc6fff963d14a16b5e222fe06d04eeb612d8ee3683e12011475c48525539",
+        "T03-test": "6bc89365b706c842e150982d23937c1223425447c71ace598ca722a76f494ca3",
+        "T04-test": "49d843eb3c9d5bd5b5dc1611d97d9e472948f1091f5c0a0d189fea2fe6b9d578",
+        "T05-test": "74f06becba2e16912f207df317baa035eb35e8ceef5e620567dfd45a368ec524",
+        "T06-test": "b1abb69877a0efec88fa5078bed89f6f9f422e46e8f3bca3088ac2767b424dd5"
+      },
+      "log": "logs/regression-all-debug.log",
+      "log_sha256": "a68cd39dae716671266d5f0e74ce39e36f9c9478256e8a788155e5bf0dd9df88"
+    },
+    {
+      "label": "verify-contracts",
+      "optimize": "Debug",
+      "source_commit": "71ec6b27cda6d34c171b4b1460f8434f7c0948af",
+      "source_tree": "bc6789d8b70af40713b875364be6eddb7b64f3ca",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build verify-contracts -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-verify-contracts --summary all",
+      "exit_code": 0,
+      "summary": "Build Summary: 3/3 steps succeeded",
+      "installed_test_binaries_sha256": {},
+      "log": "logs/verify-contracts.log",
+      "log_sha256": "8e81f40a8c03a96a597279e5b28791774e710fc9386b4627289fdd3aaf869adc"
+    }
+  ],
+  "mutation_checks": {
+    "final_round": [
+      {
+        "log": "mutants/m1-no-dedupe.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 10/11 tests passed (1 failed)",
+        "compile_cached": false,
+        "failed_tests": [
+          "SR-001 tiny chunks over random files never duplicate or miss a match"
+        ],
+        "crashed": false
+      },
+      {
+        "log": "mutants/m10-no-output-budget.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 10/11 tests passed (1 failed)",
+        "compile_cached": false,
+        "failed_tests": [
+          "SR-005 match, output and deadline caps stop the search honestly without allocating"
+        ],
+        "crashed": false
+      },
+      {
+        "log": "mutants/m11-no-scan-cancel.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 10/11 tests passed (1 failed)",
+        "compile_cached": false,
+        "failed_tests": [
+          "SR-005 cancellation inside a large file is observed at the next chunk"
+        ],
+        "crashed": false
+      },
+      {
+        "log": "mutants/m12-no-retry.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 9/11 tests passed (1 failed, 1 crashed)",
+        "compile_cached": false,
+        "failed_tests": [
+          "SR-006 same-size rewrites are caught by the version check or by the match bytes",
+          "SR-006 a file that changes between scan and context read is retried once or skipped, never mixed"
+        ],
+        "crashed": true
+      },
+      {
+        "log": "mutants/m13-no-oversize.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 10/11 tests passed (1 failed)",
+        "compile_cached": false,
+        "failed_tests": [
+          "SR-004 binary, invalid UTF-8 and oversized files are skipped with exact coverage"
+        ],
+        "crashed": false
+      },
+      {
+        "log": "mutants/m14-overlapping-matches.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 10/11 tests passed (1 failed)",
+        "compile_cached": false,
+        "failed_tests": [
+          "SR-001 tiny chunks over random files never duplicate or miss a match"
+        ],
+        "crashed": false
+      },
+      {
+        "log": "mutants/m2-no-overlap.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 8/11 tests passed (3 failed)",
+        "compile_cached": false,
+        "failed_tests": [
+          "SR-001 a literal across the 256 KiB chunk boundary matches the scalar oracle exactly once",
+          "SR-001 tiny chunks over random files never duplicate or miss a match",
+          "SR-004 binary, invalid UTF-8 and oversized files are skipped with exact coverage"
+        ],
+        "crashed": false
+      },
+      {
+        "log": "mutants/m3-lines-from-window-start.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 8/11 tests passed (2 failed, 1 crashed)",
+        "compile_cached": false,
+        "failed_tests": [
+          "SR-001 tiny chunks over random files never duplicate or miss a match",
+          "SR-002 several matches on one line and overlapping context return each line once",
+          "SR-006 a file that changes between scan and context read is retried once or skipped, never mixed"
+        ],
+        "crashed": true
+      },
+      {
+        "log": "mutants/m4-no-merge.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 8/11 tests passed (3 failed)",
+        "compile_cached": false,
+        "failed_tests": [
+          "SR-001 tiny chunks over random files never duplicate or miss a match",
+          "SR-002 several matches on one line and overlapping context return each line once",
+          "SR-006 a file that changes between scan and context read is retried once or skipped, never mixed"
+        ],
+        "crashed": false
+      },
+      {
+        "log": "mutants/m5-no-binary.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 10/11 tests passed (1 failed)",
+        "compile_cached": false,
+        "failed_tests": [
+          "SR-004 binary, invalid UTF-8 and oversized files are skipped with exact coverage"
+        ],
+        "crashed": false
+      },
+      {
+        "log": "mutants/m6-no-utf8-finish.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 10/11 tests passed (1 failed)",
+        "compile_cached": false,
+        "failed_tests": [
+          "SR-004 binary, invalid UTF-8 and oversized files are skipped with exact coverage"
+        ],
+        "crashed": false
+      },
+      {
+        "log": "mutants/m7b-no-version-recheck.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 9/11 tests passed (2 failed)",
+        "compile_cached": false,
+        "failed_tests": [
+          "SR-006 same-size rewrites are caught by the version check or by the match bytes",
+          "SR-006 a file that changes between scan and context read is retried once or skipped, never mixed"
+        ],
+        "crashed": false
+      },
+      {
+        "log": "mutants/m8b-no-projection-validation.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 10/11 tests passed (1 failed)",
+        "compile_cached": false,
+        "failed_tests": [
+          "SR-006 same-size rewrites are caught by the version check or by the match bytes"
+        ],
+        "crashed": false
+      },
+      {
+        "log": "mutants/m9b-no-match-limit.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 10/11 tests passed (1 crashed)",
+        "compile_cached": false,
+        "failed_tests": [
+          "SR-005 match, output and deadline caps stop the search honestly without allocating"
+        ],
+        "crashed": true
+      }
+    ],
+    "final_round_survivors": [],
+    "original_tests_checks": [
+      {
+        "log": "mutants/original-tests/orig-tests-m7b-no-version-recheck.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 8/9 tests passed (1 failed)",
+        "compile_cached": false,
+        "failed_tests": [
+          "SR-006 a file that changes between scan and context read is retried once or skipped, never mixed"
+        ],
+        "crashed": false
+      },
+      {
+        "log": "mutants/original-tests/orig-tests-m8b-no-projection-validation.log",
+        "summary": "Build Summary: 3/3 steps succeeded; 9/9 tests passed",
+        "compile_cached": false,
+        "failed_tests": [],
+        "crashed": false
+      }
+    ],
+    "round1_summary": "mutants/round1-summary.txt",
+    "notes": [
+      "final_round: every mutant rerun against the test file of 71ec6b2 after the S04 evidence runs; each log is checked for a cached compile step",
+      "round 1 (round1-summary.txt) ran against the S02 test file: m7, m8 and m9 did not compile (unused values) and were replaced by m7b, m8b and m9b; m11-no-scan-cancel survived and led to the after_chunk hook and the in-file cancellation test",
+      "original_tests_checks: m7b and m8b against tests/t06_test.zig from 8a7a970. m7b is killed by the original SR-006 test; m8b survives it and led to the same-size rewrite test",
+      "correction: the 71ec6b2 commit message says m7b and m8b each survived the original SR-006 test; only m8b did",
+      "the round-2 logs from the first session were deleted during host disk cleanup; the final round replaces them"
+    ]
+  },
+  "cross_compile_only": [
+    {
+      "target": "x86_64-linux-musl",
+      "exit_code": 0,
+      "log": "logs/s03-compile-x86_64-linux-musl.log"
+    },
+    {
+      "target": "aarch64-linux-musl",
+      "exit_code": 0,
+      "log": "logs/s03-compile-aarch64-linux-musl.log"
+    },
+    {
+      "target": "x86_64-macos",
+      "exit_code": 0,
+      "log": "logs/s03-compile-x86_64-macos.log"
+    }
+  ]
+}

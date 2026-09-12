@@ -1,0 +1,21 @@
+test
++- run test T06-test 0 pass, 1 fail (1 total)
+error: 't06_test.test.SR-006 a no-match file changed after scan is revalidated before complete success' failed:
+       expected 2, found 0
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:118:17: 0x122fd39 in expectEqualInner__anon_44284 (std.zig)
+                       return error.TestExpectedEqual;
+                       ^
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:83:5: 0x12302b4 in expectEqual (t06_test.zig)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/tests/t06_test.zig:492:5: 0x123035c in test.SR-006 a no-match file changed after scan is revalidated before complete success (t06_test.zig)
+           try testing.expectEqual(@as(usize, 2), collector.totalMatches());
+           ^
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/legacy/zig-local-cache && /workspace/scratch/3f4ab65dfb82/state/legacy/zig-local-cache/o/9af6815d10add4e843f52dfd2860d624/T06-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/legacy/zig-local-cache --seed=0xa92cf78d --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 0/1 tests passed (1 failed)
+test transitive failure
++- run test T06-test 0 pass, 1 fail (1 total)
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/legacy/zig-local-cache/o/f28d12be414d247ec5da67365b4abafb/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-legacy /workspace/scratch/3f4ab65dfb82/state/legacy/zig-local-cache /workspace/scratch/3f4ab65dfb82/state/legacy/zig-global-cache --seed 0xa92cf78d -Z149767f14138a827 test -Dtest-group=search -Dtest-id=no-match file -Dinstall-tests=true -Doptimize=Debug --prefix /workspace/scratch/3f4ab65dfb82/state/legacy/out/red-no-match

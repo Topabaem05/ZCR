@@ -8,9 +8,9 @@ pre{background:#f3f6f7;color:#243c49;border:1px solid #e3eaec;padding:18px;borde
 table{width:100%;border-collapse:collapse;margin:20px 0;font-size:12px;line-height:1.65;display:block;overflow-x:auto}thead{background:#e9f2f0}th,td{text-align:left;vertical-align:top;border-bottom:1px solid var(--rule);padding:10px 11px;min-width:85px}th{color:#17493f;font-weight:700}tr:nth-child(even) td{background:#fafcfc}.diagram{margin:24px 0;padding:12px;background:#fbfdfc;overflow:auto;border:1px solid #e2eae7;border-radius:5px}.diagram svg{width:100%;height:auto;min-width:600px;max-height:1500px}footer{font-size:12px;color:var(--muted);padding-top:30px}
 @media(max-width:1000px){nav{position:relative;width:auto;max-height:320px}main{margin:0;padding:28px 22px}.hero h1{font-size:32px}.diagram svg{min-width:520px}}
 @media print{nav{display:none}main{margin:0;padding:0;max-width:none}.hero h1{font-size:28px}.doc{break-before:page;padding-top:10px}h1,h2,h3{break-after:avoid}pre{white-space:pre-wrap;overflow-wrap:anywhere}table{display:table;font-size:9px}th,td{min-width:0;padding:5px}.diagram{break-inside:avoid;border:0}.diagram svg{min-width:0;max-height:820px}a{color:inherit;text-decoration:none}}
-</style></head><body><nav><div class="brand">ZCR / DESIGN</div><div class="sub">Zig 0.16.0 · 2026-09-11<br>구현 전 설계 기준선 v1.0</div><a href="#doc-README-md" class="main">ZCR · Zig Code Runtime</a><a href="#doc-docs-00-Executive-Brief-md" class="main">00 · 설계 요약과 판단 기준</a><a href="#doc-docs-01-Requirements-and-Traceability-md" class="main">01 · 요구사항과 추적성</a><a href="#doc-docs-02-SDD-md" class="main">02 · Software Design Description (SDD)</a><a href="#doc-docs-03-C4-Architecture-md" class="main">03 · C4 아키텍처</a><a href="#doc-docs-04-Apple-Silicon-Scheduling-md" class="main">04 · Apple Silicon 코어·스레드·에너지 설계</a><a href="#doc-docs-05-Memory-and-Pressure-md" class="main">05 · 메모리 예산·할당·압력 대응</a><a href="#doc-docs-06-Worktree-and-Task-Isolation-md" class="main">06 · Git worktree·동시 task·개발 오염 방지</a><a href="#doc-docs-07-Pipelines-and-Consistency-md" class="main">07 · 실행 파이프라인과 현재성 계약</a><a href="#doc-docs-08-API-and-MCP-md" class="main">08 · API · MCP 계약</a><a href="#doc-docs-09-Storage-Search-and-Edit-md" class="main">09 · 파일 엔진 · 검색 · 편집 저장 계약</a><a href="#doc-docs-10-Portability-x86-md" class="main">10 · x86 및 다른 운영체제의 작동 구성</a><a href="#doc-docs-11-Security-and-Failure-Recovery-md" class="main">11 · 보안 · 실패 · 복구</a><a href="#doc-docs-12-Performance-and-Test-Plan-md" class="main">12 · 성능 목표 · 구현 테스트 · 증거 계약</a><a href="#doc-docs-13-Implementation-Roadmap-md" class="main">13 · 구현 로드맵 · task/step 격리</a><a href="#doc-docs-14-Integration-and-Operations-md" class="main">14 · Codex/Claude 통합 · 운영</a><a href="#doc-docs-15-ADR-md" class="main">15 · Architecture Decision Records</a><a href="#doc-docs-16-Evidence-and-Open-Gates-md" class="main">16 · 외부 근거 · 아직 통과하지 않은 게이트</a><a href="#doc-docs-17-Data-Model-and-Interfaces-md" class="main">17 · 모듈 경계 · 데이터 모델 · 인터페이스</a><a href="#doc-AGENTS-md" class="main">ZCR 구현 에이전트 규칙</a><a href="#doc-tasks-INDEX-md" class="main">구현 Task 인덱스</a><a href="#doc-tasks-T00-md" class="task">T00 · 측정 기준선과 플랫폼 spike Implementation Plan</a><a href="#doc-tasks-T01-md" class="task">T01 · 계약·build runner·개발 scope 기준선 Implementation Plan</a><a href="#doc-tasks-T02-md" class="task">T02 · Capability·경로·개발 소유권 guard Implementation Plan</a><a href="#doc-tasks-T03-md" class="task">T03 · 예산 allocator와 admission Implementation Plan</a><a href="#doc-tasks-T04-md" class="task">T04 · 정확하고 제한된 범위 Read Implementation Plan</a><a href="#doc-tasks-T05-md" class="task">T05 · Git-aware 탐색과 ignore Implementation Plan</a><a href="#doc-tasks-T06-md" class="task">T06 · Scalar literal 검색과 문맥 투영 Implementation Plan</a><a href="#doc-tasks-T07-md" class="task">T07 · Batch read와 공통 output projection Implementation Plan</a><a href="#doc-tasks-T08-md" class="task">T08 · Direct stdio MCP adapter Implementation Plan</a><a href="#doc-tasks-T09-md" class="task">T09 · Bounded scheduler와 Darwin GCD Implementation Plan</a><a href="#doc-tasks-T10-md" class="task">T10 · Workspace identity와 writer lease Implementation Plan</a><a href="#doc-tasks-T11-md" class="task">T11 · 단일파일 atomic patch/create Implementation Plan</a><a href="#doc-tasks-T12-md" class="task">T12 · Journal·crash recovery·idempotency Implementation Plan</a><a href="#doc-tasks-T13-md" class="task">T13 · Immutable content·line cache Implementation Plan</a><a href="#doc-tasks-T14-md" class="task">T14 · Watcher invalidation와 live fallback Implementation Plan</a><a href="#doc-tasks-T15-md" class="task">T15 · 명시적 broker와 다중세션 budget Implementation Plan</a><a href="#doc-tasks-T16-md" class="task">T16 · Pressure·thermal·LLM 공존 governor Implementation Plan</a><a href="#doc-tasks-T17-md" class="task">T17 · Linux x86-64 backend Implementation Plan</a><a href="#doc-tasks-T18-md" class="task">T18 · Windows 확장 — 선택 Implementation Plan</a><a href="#doc-tasks-T19-md" class="task">T19 · ARM64/x86 SIMD 선택 가속 Implementation Plan</a><a href="#doc-tasks-T20-md" class="task">T20 · Tree-sitter outline — 선택 Implementation Plan</a><a href="#doc-tasks-T21-md" class="task">T21 · 재현 가능한 전체 벤치마크 하네스 Implementation Plan</a><a href="#doc-tasks-T22-md" class="task">T22 · Bounded telemetry와 health Implementation Plan</a><a href="#doc-tasks-T23-md" class="task">T23 · Codex/Claude 실제 라우팅 검증 Implementation Plan</a><a href="#doc-tasks-T24-md" class="task">T24 · 패키징과 실제 지원 행렬 Implementation Plan</a><a href="#doc-tasks-T25-md" class="task">T25 · 최종 통합·격리·성능 release gate Implementation Plan</a><a href="#doc-contracts-README-md" class="main">계약 파일 사용법</a><a href="#doc-references-SOURCES-md" class="main">출처 및 검증 범위</a></nav><main><header class="hero"><div class="eyebrow">CODE AGENT RUNTIME · DESIGN BASELINE</div><h1>빠른 모델이<br>코드 도구를 기다리지 않도록.</h1><p>Apple Silicon을 우선하는 Zig native runtime의 C4·SDD, 메모리·워크트리 격리, 처리 파이프라인, x86 이식성, 구현 Task와 검증 계약.</p><div class="meta"><span><strong>26</strong> implementation tasks</span><span><strong>8</strong> core tools</span><span><strong>11</strong> architecture diagrams</span><span><strong>미실측</strong> 성능 목표</span></div></header><section id="doc-README-md" class="doc"><div class="docpath">README.md</div><h1>ZCR · Zig Code Runtime</h1>
-<h2>Coding agent의 파일 도구 병목을 줄이는 설계 패키지</h2>
-<p><strong>문서 버전:</strong> 1.0 · <strong>기준일:</strong> 2026-09-11 · <strong>상태:</strong> 구현 전 설계 기준선</p>
+</style></head><body><nav><div class="brand">ZCR / DESIGN</div><div class="sub">Zig 0.16.0 · 2026-09-12<br>설계 · 구현 · 검증 진행 중</div><a href="#doc-README-md" class="main">ZCR · Zig Code Runtime</a><a href="#doc-docs-00-Executive-Brief-md" class="main">00 · 설계 요약과 판단 기준</a><a href="#doc-docs-01-Requirements-and-Traceability-md" class="main">01 · 요구사항과 추적성</a><a href="#doc-docs-02-SDD-md" class="main">02 · Software Design Description (SDD)</a><a href="#doc-docs-03-C4-Architecture-md" class="main">03 · C4 아키텍처</a><a href="#doc-docs-04-Apple-Silicon-Scheduling-md" class="main">04 · Apple Silicon 코어·스레드·에너지 설계</a><a href="#doc-docs-05-Memory-and-Pressure-md" class="main">05 · 메모리 예산·할당·압력 대응</a><a href="#doc-docs-06-Worktree-and-Task-Isolation-md" class="main">06 · Git worktree·동시 task·개발 오염 방지</a><a href="#doc-docs-07-Pipelines-and-Consistency-md" class="main">07 · 실행 파이프라인과 현재성 계약</a><a href="#doc-docs-08-API-and-MCP-md" class="main">08 · API · MCP 계약</a><a href="#doc-docs-09-Storage-Search-and-Edit-md" class="main">09 · 파일 엔진 · 검색 · 편집 저장 계약</a><a href="#doc-docs-10-Portability-x86-md" class="main">10 · x86 및 다른 운영체제의 작동 구성</a><a href="#doc-docs-11-Security-and-Failure-Recovery-md" class="main">11 · 보안 · 실패 · 복구</a><a href="#doc-docs-12-Performance-and-Test-Plan-md" class="main">12 · 성능 목표 · 구현 테스트 · 증거 계약</a><a href="#doc-docs-13-Implementation-Roadmap-md" class="main">13 · 구현 로드맵 · task/step 격리</a><a href="#doc-docs-14-Integration-and-Operations-md" class="main">14 · Codex/Claude 통합 · 운영</a><a href="#doc-docs-15-ADR-md" class="main">15 · Architecture Decision Records</a><a href="#doc-docs-16-Evidence-and-Open-Gates-md" class="main">16 · 외부 근거 · 아직 통과하지 않은 게이트</a><a href="#doc-docs-17-Data-Model-and-Interfaces-md" class="main">17 · 모듈 경계 · 데이터 모델 · 인터페이스</a><a href="#doc-docs-18-Merge-and-Remaining-Work-md" class="main">18 · 메인 병합 점검과 남은 작업</a><a href="#doc-docs-superpowers-plans-2026-09-12-runtime-continuation-md" class="main">ZCR Runtime Continuation Implementation Plan</a><a href="#doc-AGENTS-md" class="main">ZCR 구현 에이전트 규칙</a><a href="#doc-tasks-INDEX-md" class="main">구현 Task 인덱스</a><a href="#doc-tasks-T00-md" class="task">T00 · 측정 기준선과 플랫폼 spike Implementation Plan</a><a href="#doc-tasks-T01-md" class="task">T01 · 계약·build runner·개발 scope 기준선 Implementation Plan</a><a href="#doc-tasks-T02-md" class="task">T02 · Capability·경로·개발 소유권 guard Implementation Plan</a><a href="#doc-tasks-T03-md" class="task">T03 · 예산 allocator와 admission Implementation Plan</a><a href="#doc-tasks-T04-md" class="task">T04 · 정확하고 제한된 범위 Read Implementation Plan</a><a href="#doc-tasks-T05-md" class="task">T05 · Git-aware 탐색과 ignore Implementation Plan</a><a href="#doc-tasks-T06-md" class="task">T06 · Scalar literal 검색과 문맥 투영 Implementation Plan</a><a href="#doc-tasks-T07-md" class="task">T07 · Batch read와 공통 output projection Implementation Plan</a><a href="#doc-tasks-T08-md" class="task">T08 · Direct stdio MCP adapter Implementation Plan</a><a href="#doc-tasks-T09-md" class="task">T09 · Bounded scheduler와 Darwin GCD Implementation Plan</a><a href="#doc-tasks-T10-md" class="task">T10 · Workspace identity와 writer lease Implementation Plan</a><a href="#doc-tasks-T11-md" class="task">T11 · 단일파일 atomic patch/create Implementation Plan</a><a href="#doc-tasks-T12-md" class="task">T12 · Journal·crash recovery·idempotency Implementation Plan</a><a href="#doc-tasks-T13-md" class="task">T13 · Immutable content·line cache Implementation Plan</a><a href="#doc-tasks-T14-md" class="task">T14 · Watcher invalidation와 live fallback Implementation Plan</a><a href="#doc-tasks-T15-md" class="task">T15 · 명시적 broker와 다중세션 budget Implementation Plan</a><a href="#doc-tasks-T16-md" class="task">T16 · Pressure·thermal·LLM 공존 governor Implementation Plan</a><a href="#doc-tasks-T17-md" class="task">T17 · Linux x86-64 backend Implementation Plan</a><a href="#doc-tasks-T18-md" class="task">T18 · Windows 확장 — 선택 Implementation Plan</a><a href="#doc-tasks-T19-md" class="task">T19 · ARM64/x86 SIMD 선택 가속 Implementation Plan</a><a href="#doc-tasks-T20-md" class="task">T20 · Tree-sitter outline — 선택 Implementation Plan</a><a href="#doc-tasks-T21-md" class="task">T21 · 재현 가능한 전체 벤치마크 하네스 Implementation Plan</a><a href="#doc-tasks-T22-md" class="task">T22 · Bounded telemetry와 health Implementation Plan</a><a href="#doc-tasks-T23-md" class="task">T23 · Codex/Claude 실제 라우팅 검증 Implementation Plan</a><a href="#doc-tasks-T24-md" class="task">T24 · 패키징과 실제 지원 행렬 Implementation Plan</a><a href="#doc-tasks-T25-md" class="task">T25 · 최종 통합·격리·성능 release gate Implementation Plan</a><a href="#doc-contracts-README-md" class="main">계약 파일 사용법</a><a href="#doc-references-SOURCES-md" class="main">출처 및 검증 범위</a></nav><main><header class="hero"><div class="eyebrow">CODE AGENT RUNTIME · IMPLEMENTATION & EVIDENCE</div><h1>빠른 모델이<br>코드 도구를 기다리지 않도록.</h1><p>Apple Silicon을 우선하는 Zig native runtime의 C4·SDD, 메모리·워크트리 격리, 처리 파이프라인, x86 이식성, 구현 Task와 검증 계약.</p><div class="meta"><span><strong>26</strong> implementation tasks</span><span><strong>8</strong> core tools</span><span><strong>11</strong> architecture diagrams</span><span><strong>미실측</strong> 성능 목표</span></div></header><section id="doc-README-md" class="doc"><div class="docpath">README.md</div><h1>ZCR · Zig Code Runtime</h1>
+<h2>Coding agent의 파일 도구 병목을 줄이는 Zig 런타임</h2>
+<p><strong>기준일:</strong> 2026-09-12 · <strong>상태:</strong> 구현·검증 진행 중, 릴리스 게이트 미완료</p>
 <p><code>ZCR</code>은 이 문서에서 사용하는 작업명이다. 등록된 제품명·저장소명이라는 뜻은 아니다. 구현 언어는 <strong>Zig 0.16.0으로 고정</strong>한다. Apple Silicon을 우선하되 x86-64 Linux와 Intel Mac을 같은 코어 엔진으로 다룬다.</p>
 <p>목표는 모델 자체의 decode tok/s를 올리는 것이 아니라 <strong>유효한 코드 변경 한 건에 걸리는 전체 시간</strong>을 줄이는 것이다. 파일 I/O, 도구 대기, 검색 결과의 과다 출력, 반복 Read, 잘못된 워크트리 편집 및 재시도를 함께 측정한다.</p>
 <h3>먼저 읽을 문서</h3>
@@ -57,8 +57,13 @@ table{width:100%;border-collapse:collapse;margin:20px 0;font-size:12px;line-heig
 </table>
 <p><strong>전체 열람:</strong> <code>DESIGNBOOK.html</code>은 외부 스크립트·폰트·네트워크가 필요 없는 통합 열람본이다. Markdown이 수정 가능한 원본이며, <code>diagrams/</code>의 Mermaid와 DOT는 도식 원본이다.</p>
 <h3>패키지의 사용 경계</h3>
-<p>이 ZIP은 <strong>실행 가능한 런타임을 구현한 결과물이 아니다.</strong> API 계약, 구성 예시, 테스트 벡터, 구현 계획과 문서 자체의 검증 도구를 제공한다. <code>zcr ...</code> 및 <code>zig build ...</code> 명령은 앞으로 구현할 인터페이스의 계약이다. 실제 Mac 성능·코어 배치·에너지·클라이언트 연동 테스트는 수행하지 않았다.</p>
+<p>이 저장소는 API 계약, Zig 구현, 테스트, 실행 증거와 남은 작업 계획을 함께 관리한다. <a href="#doc-docs-superpowers-plans-2026-09-12-runtime-continuation-md">브랜치 조사와 후속 계획</a>, <a href="#doc-tasks-INDEX-md">작업 상태</a>, <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">상태 데이터</a>를 기준으로 이어간다. 각 증거는 해당 source commit·binary·실행 환경에만 적용된다. 과거 Mac probe나 현재 Linux 시험으로 최종 Mac 런타임, 실제 클라이언트 연동, 종단 성능 검증을 대신하지 않는다.</p>
+<p>Zig 구현은 <a data-package-file="src" title="편집 원본은 저장소에 포함">src</a>, 빌드 진입점은 <a data-package-file="build.zig" title="편집 원본은 저장소에 포함">build.zig</a>에 있다. 기존 작업 브랜치를 <code>main</code>으로 통합하는 <a href="https://github.com/Topabaem05/ZCR/pull/1">PR #1</a>과 <a href="#doc-docs-18-Merge-and-Remaining-Work-md">병합 점검·남은 작업</a>을 확인한다. 메인 통합은 개발 체크포인트이며 릴리스 완료를 뜻하지 않는다.</p>
 <p>설정·메모리·지연 수치는 <strong>초기 설계값 또는 합격 목표</strong>이지 실측 성능이 아니다. 계약 파일 검증 결과와 런타임 테스트 결과를 혼동하지 않는다.</p>
+<h3>현재 직접 stdio 실행</h3>
+<p>신뢰된 호스트는 <code>zcr workspace-id --root /absolute/dedicated-worktree</code>로 실제 파일시스템 정체성, HEAD, 계약 digest를 조회한다. 출력의 <code>workspace_id</code>, <code>base_commit</code>, <code>contract_digest</code>를 승인한 task manifest에 바인딩하고, <code>state: active</code>, 양수 <code>fence</code>, 미래 UTC <code>expires_at</code>과 필요한 읽기 범위를 지정한다. launch policy는 <code>status: approved</code>, 절대 <code>root</code>, 절대 <code>task_manifest</code> 경로를 사용한다. <code>examples/</code>의 planned 파일은 실행 권한을 부여하지 않는 작성 예시다.</p>
+<p><code>zcr mcp --standalone --policy /absolute/approved-policy.json</code>은 그 바인딩을 검증한 뒤 여섯 읽기 도구를 제공한다. 현재 <code>files</code>·<code>search</code>는 루트 <code>.</code> 읽기 범위가 있어야 하며 더 좁은 정책에서는 범위를 확대하지 않고 거부한다. 쓰기는 T12 복구 검증까지 비활성 상태다.</p>
+<p>Git common directory의 <code>info/exclude</code>는 자동으로 연결한다. 전역 제외 규칙은 policy의 선택적 <code>global_exclude</code> 절대 경로로만 연결하며 Git 설정이나 HOME에서 불러오지 않는다. 제외 파일을 원자적으로 교체하거나 처음 생성하면 기존 세션은 <code>E_SCOPE</code>로 거부하고 새 실행에서 다시 바인딩한다. 현재 신호 관측 전의 보수적 실행 한도는 32 MiB in-flight / CPU permit 1이다. 실제 Codex·Claude 연동 증거는 별도 T23 게이트다.</p>
 <h3>프로젝트의 절대 규칙</h3>
 <ol>
 <li>검색 속도를 이유로 권한, 워크트리 정체성, 콘텐츠 버전, 출력 제한을 생략하지 않는다.</li>
@@ -1272,7 +1277,7 @@ T_tool = T_queue + T_auth + T_discovery + T_io + T_scan_parse
 </figure></p>
 <p>macOS는 GCD/public Darwin FS API, Linux는 bounded worker pool/inotify(제어 연결은 선택적 epoll), Windows 확장은 검증된 native worker/파일 I/O를 adapter 아래에 둔다. CPU 아키텍처별 SIMD와 OS별 scheduler를 한 분기로 섞지 않는다. <code>macOS-x86_64</code>도 GCD를 사용할 수 있다.</p>
 <h2>Dynamic Diagrams</h2>
-<p><a data-package-file="diagrams/search-pipeline.mmd" title="편집 원본은 ZIP 패키지에 포함">검색 파이프라인</a>, <a data-package-file="diagrams/edit-state.mmd" title="편집 원본은 ZIP 패키지에 포함">편집 상태 기계</a>, <a data-package-file="diagrams/memory-state.mmd" title="편집 원본은 ZIP 패키지에 포함">메모리 압력 상태</a>, <a data-package-file="diagrams/task-dag.mmd" title="편집 원본은 ZIP 패키지에 포함">구현 DAG</a>를 함께 제공한다. <code>.svg</code>는 오프라인 열람용, <code>.mmd</code>와 <code>.dot</code>는 변경 가능한 원본이다.</p>
+<p><a data-package-file="diagrams/search-pipeline.mmd" title="편집 원본은 저장소에 포함">검색 파이프라인</a>, <a data-package-file="diagrams/edit-state.mmd" title="편집 원본은 저장소에 포함">편집 상태 기계</a>, <a data-package-file="diagrams/memory-state.mmd" title="편집 원본은 저장소에 포함">메모리 압력 상태</a>, <a data-package-file="diagrams/task-dag.mmd" title="편집 원본은 저장소에 포함">구현 DAG</a>를 함께 제공한다. <code>.svg</code>는 오프라인 열람용, <code>.mmd</code>와 <code>.dot</code>는 변경 가능한 원본이다.</p>
 <h2>구조 검토 체크</h2>
 <p>각 화살표는 요청 또는 데이터의 방향이다. shared cache는 write 경로가 아니며 broker authority는 OS sandbox와 동등하지 않다. 어떠한 container도 모델에 <code>run_shell</code> 권한을 제공하지 않는다. 각 workspace의 쓰기는 그 workspace actor에서 순서를 정하되 파일 I/O를 actor lock 안에서 수행하지 않는다.</p>
 </section><section id="doc-docs-04-Apple-Silicon-Scheduling-md" class="doc"><div class="docpath">docs/04-Apple-Silicon-Scheduling.md</div><h1>04 · Apple Silicon 코어·스레드·에너지 설계</h1>
@@ -2147,7 +2152,7 @@ T_tool = T_queue + T_auth + T_discovery + T_io + T_scan_parse
 <p><code>expected_sha256</code>와 lease는 참여하는 ZCR client 사이의 충돌 방어다. 외부 editor가 마지막 검사와 rename 사이에 쓰는 것을 일반 POSIX rename만으로 원자적 compare-and-swap처럼 막을 수는 없다. 엄격한 write mode는 <strong>전용 worktree에 쓰는 모든 참여자가 ZCR을 통하도록 운영되는 환경</strong>을 전제로 한다. 이를 보장할 수 없는 shared-editor mode는 기본 read/proposal-only다.</p>
 <h2>6. Scope contract</h2>
 <p>Task manifest는 <code>base_commit</code>, <code>workspace_id</code>, <code>allowed_read_paths</code>, <code>allowed_write_paths</code>, <code>immutable_paths</code>, <code>operations</code>, <code>max_changed_files</code>, <code>contract_digest</code>, <code>fence</code>, <code>expires_at</code>을 가진다. 허용/거부가 겹치면 immutable/deny가 우선한다. scope 변경은 기존 manifest 수정이 아니라 새 policy version 발급이다.</p>
-<p><code>TaskId</code>나 <code>WorkspaceId</code>를 JSON 인자로 받더라도 transport의 바인딩과 같아야 한다. 다른 task ID를 전달해 권한을 얻지 못한다. 미바인딩 planned manifest는 실행에 사용하지 않으며 E_MANIFEST_UNBOUND다.</p>
+<p><code>TaskId</code>나 <code>WorkspaceId</code>를 JSON 인자로 받더라도 transport의 바인딩과 같아야 한다. 다른 task ID를 전달해 권한을 얻지 못한다. 미바인딩 planned manifest는 실행에 사용하지 않으며 <code>E_SCOPE</code>다(내부 오류 <code>ManifestUnbound</code>; zcr/1 wire enum을 따른다).</p>
 <h2>7. 구현 과정의 오염 방지</h2>
 <p>각 implementation Task에는 독립 worktree와 branch를 만든다. T01 계약 freeze 후 module ownership을 정한다. <code>build.zig</code>, 공통 타입, wire schema, global policy는 <strong>통합자만 수정</strong>하며 다른 task는 ADR/change request를 남긴다.</p>
 <p>실행 순서는 다음과 같다.</p>
@@ -2300,7 +2305,7 @@ T_tool = T_queue + T_auth + T_discovery + T_io + T_scan_parse
 <p>초기 context는 앞뒤 2줄이고 호출자는 0~20줄을 선택한다. 기본 100 matches/256 KiB 상한에 도달하면 <code>truncated=true</code>, <code>complete=false</code>, 이유를 명시한다. 매치를 발견할 때마다 stdout을 임의 출력하지 않는다. MCP의 최종 tool result까지 모델이 부분 결과를 소비할 수 있다고 가정하지 않는다. <a href="#R14">R14</a><a href="#R15">R15</a></p>
 <p>첫 page를 빠르게 반환하는 것과 전체 검색 결과가 빨리 완성되는 것을 분리한다. <code>time_to_first_internal_match</code>는 내부 지표이고 <code>tool_result_delivered</code>와 같지 않다. strict benchmark에서는 complete 결과/동일 출력으로 비교한다.</p>
 <h2>4. Batch pipeline</h2>
-<p><code>zcr_batch_read</code> 한 번에 최대 32항목을 받지만 concurrency는 resource budget이 결정한다. 동일 <code>(workspace,path,range,version)</code> 요청을 deduplicate하고 겹치는 범위를 병합한다. 응답은 입력 순서와 item id를 유지한다. 한 파일이 없으면 그 항목만 오류며 다른 항목의 성공을 숨기지 않는다.</p>
+<p><code>zcr_batch_read</code> 한 번에 최대 32항목을 받지만 concurrency는 resource budget이 결정한다. workspace·path·range·출력 한도·deadline 등 전체 ReadSpec이 같은 요청만 deduplicate한다. 서로 다른 범위는 독립적으로 읽어 한 항목의 잘못된 UTF-8 또는 긴 줄이 다른 항목의 결과에 전파되지 않게 한다. 응답은 입력 순서와 item id를 유지한다. 한 파일이 없으면 그 항목만 오류며 다른 항목의 성공을 숨기지 않는다.</p>
 <p>batch 전체 output cap을 넘는 항목은 <code>E_OUTPUT_BUDGET</code>로 표시하거나 명시적인 continuation을 제공한다. 서로 다른 workspace 항목을 하나의 session-bound batch에 섞지 않는다. v1 batch는 read-only이며 patch/create를 섞은 transactional batch는 없다.</p>
 <h2>5. 편집 pipeline</h2>
 <p><figure class="diagram"><svg width="670pt" height="638pt"
@@ -3545,6 +3550,7 @@ Receipt = { id, op_digest, applied:bool, durable:bool,
             old_hash?, new_hash?, generation, error? }
 </code></pre>
 <p>수명 규칙: <code>Borrow</code>는 호출의 sync 범위만 유효하다. 비동기 callback에 전달하는 것은 <code>Owned JobEnvelope</code>이며 parent arena의 짧은 slice를 무보호로 보관하지 않는다. 모든 u64 size/offset 덧셈과 u32 index 변환은 overflow 검사한다.</p>
+<p><code>Cancel</code>은 공유 atomic 취소 flag와 선택적인 monotonic deadline을 가진다. <code>withTimeout(io, ms)</code>는 상위 deadline을 연장하지 않으며 <code>check()</code>는 명시 취소와 시간 초과를 각각 <code>Cancelled</code>·<code>DeadlineExceeded</code>로 구분한다. flag와 Io backend는 모든 callback이 끝날 때까지 유효해야 한다. 읽기 호출은 <code>ReadSpec.deadline_ms</code>를 이 deadline에 교차 적용한다. 파일 I/O 자체의 중단 가능성은 OS 경계에 따르며 각 chunk와 결과 공개 전에 확인한다.</p>
 <h2>3. Public function 계약</h2>
 <table>
 <thead>
@@ -3652,8 +3658,11 @@ Receipt = { id, op_digest, applied:bool, durable:bool,
 </tr>
 </tbody>
 </table>
+<p>I19의 native persistence 보완은 기존 세 signature를 유지한다. <code>PreparedRecord.publication</code>은 실제 workspace/root/parent/temp/old-file 정체성, temp basename, fence, durability, 미리 할당한 receipt ID를 담는다. 영속 store는 이를 필수로 검증하고 복사한다. 선택적 <code>transition(APPLIED receipt | ABORTED receipt)</code> vtable은 PREPARED 뒤의 상태를 영속화하며, 없는 구현은 <code>Unsupported</code>를 반환한다. 이전 fake-store 단위 시험만 필드를 생략할 수 있고 production write는 이 채널과 T12 crash/restart 증거를 모두 요구한다. <code>record(Receipt)</code>는 최종 결과를 기록하되 durability 실패나 복구 필요 상태를 성공으로 승격하지 않는다. 재시작의 새 registry incarnation은 신뢰된 호스트의 명시적 연속성 검증 없이 이전 journal namespace를 재사용하지 않는다.</p>
 <pre><code>
 구체 struct 필드 추가/오류 union 변경은 contract digest 변경이다. task는 동일 개념에 새로운 로컬 public type을 발명하지 않는다. private implementation struct는 모듈 안에서 자유롭게 바꿀 수 있다.
+
+영속 store의 `lookup`/`prepare`가 반환하는 Busy·resource·contract admission 오류는 저장 상태를 바꾸지 않은 확정 거부여야 한다. 저장 여부가 불확실하거나 파일·무결성 오류이면 editor는 workspace를 격리하고 정확한 임시 파일·저널 증거를 복구 시점까지 보존한다. 공개 후 parent sync가 실패한 경우 최종 기록에 성공해도 적용 사실과 `E_DURABILITY`를 유지하며, commit guard를 놓기 전에 추가 쓰기를 격리한다.
 
 ## 4. Lock과 소유 순서
 
@@ -3672,8 +3681,647 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <p>content SHA가 같아도 authorization 없이 cache 존재 여부/bytes를 반환하지 않는다. path casefold만으로 alias를 병합하지 않는다. semantic graph를 나중에 추가하면 compiler flags, imports, lockfile/config digests, workspace context가 별도 key로 필요하다.</p>
 <h2>6. 메모리 비용 모델</h2>
 <p><code>ResourceCost</code>는 input buffer, output budget, temporary decode, full-file old/new buffers, per-worker scratch, journal staging을 합산한다. patch8MiB는 old8MiB+new8MiB만으로 끝나지 않으므로 raw JSON/decoded replacements/output까지 더한다. 스트리밍 입출력으로 낮출 수 있는 비용과 commit 전에 반드시 필요한 bytes를 구분한다. budget 계산을 optimistic average만으로 수행하지 않는다.</p>
+</section><section id="doc-docs-18-Merge-and-Remaining-Work-md" class="doc"><div class="docpath">docs/18-Merge-and-Remaining-Work.md</div><h1>18 · 메인 병합 점검과 남은 작업</h1>
+<p><strong>점검일:</strong> 2026-09-13 · <strong>목적:</strong> 기존 구현 이력을 메인에 통합하고 다음 작업을 명확히 한다. <strong>릴리스 상태: BLOCKED.</strong></p>
+<h2>브랜치 포함 관계</h2>
+<p>원격 브랜치 전체를 가져온 뒤 <code>git merge-base --is-ancestor &lt;ref&gt; a911bf8</code>로 검사했다. 아래 모든 ref가 후속 브랜치의 조상이다. 따라서 후속 브랜치를 merge commit으로 메인에 병합하면 원본 작업 commit을 모두 보존한다. 브랜치 삭제나 force push는 필요하지 않다.</p>
+<table>
+<thead>
+<tr>
+<th>브랜치</th>
+<th>점검한 head</th>
+<th>후속 브랜치에 포함</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>main</td>
+<td>7eeab60</td>
+<td>예</td>
+</tr>
+<tr>
+<td>integration</td>
+<td>4bcf01d</td>
+<td>예</td>
+</tr>
+<tr>
+<td>task-t00</td>
+<td>ede012a</td>
+<td>예</td>
+</tr>
+<tr>
+<td>task-t01</td>
+<td>35321ad</td>
+<td>예</td>
+</tr>
+<tr>
+<td>task-t02</td>
+<td>f8c0cb0</td>
+<td>예</td>
+</tr>
+<tr>
+<td>task-t03</td>
+<td>f2fca29</td>
+<td>예</td>
+</tr>
+<tr>
+<td>task-t04</td>
+<td>b933c3a</td>
+<td>예</td>
+</tr>
+<tr>
+<td>task-t05</td>
+<td>91c1b62</td>
+<td>예</td>
+</tr>
+<tr>
+<td>task-t06</td>
+<td>13ee271</td>
+<td>예</td>
+</tr>
+<tr>
+<td>task-t07</td>
+<td>531cfc3</td>
+<td>예</td>
+</tr>
+<tr>
+<td>codex/continue-runtime-20260912</td>
+<td>a911bf8</td>
+<td>통합 기준</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://github.com/Topabaem05/ZCR/pull/1">PR #1</a>의 base를 <code>integration</code>에서 <code>main</code>으로 변경한다. 최신 사용자 요청은 메인 병합을 명시적으로 승인했다. 이전 후속 계획의 미승인 설명은 작성 당시 상태로 보존하며 이번 요청을 제한하지 않는다.</p>
+<h2>현재 구현 경계</h2>
+<ul>
+<li><code>src/</code>에는 Zig 파일 45개가 있으며 <code>build.zig</code>로 빌드한다. Zig 0.16.0을 유지한다.</li>
+<li>T00–T14는 <code>IMPLEMENTED_WITH_OPEN_GATES</code>, T15–T16은 <code>IN_PROGRESS</code>다. 구현 파일의 존재와 Task 완료를 구분한다.</li>
+<li>직접 stdio MCP는 읽기 도구 6개를 연결한다. 실행 정책에서 쓰기 및 broker 활성화를 요청하면 현재는 거부한다.</li>
+<li>T12 journal/recovery의 Linux 구현과 SIGKILL 시험은 존재한다. 현재 <code>journal.metadata</code>는 Linux 이외 OS에 <code>Unsupported</code>를 반환하며 T12 시험에도 Linux 전용 <code>statx</code> 호출이 남아 있다. Darwin port가 별도 세션에서 검토됐다는 과거 설명만으로 원격 브랜치에 구현됐다고 간주하지 않는다.</li>
+<li><code>src/watch/linux.zig</code>가 존재해도 T17 전체 backend·자원 관측·플랫폼 게이트가 완료된 것은 아니다.</li>
+</ul>
+<h2>이번 점검에서 수정한 CI 오류</h2>
+<p><a href="https://github.com/Topabaem05/ZCR/actions/runs/34697951744">이전 실행 34697951744</a>는 세 플랫폼 모두 런타임 시험 전에 종료됐다. <code>native.py</code>가 <code>storage_capture</code>를 import하면서 <code>__pycache__</code>를 생성했고, clean-source 검사에서 이를 거부했다. 자식 프로세스에만 설정한 <code>PYTHONDONTWRITEBYTECODE</code>는 이미 실행 중인 부모 interpreter의 import에 적용되지 않았다.</p>
+<p>로컬 source <code>169be18</code> / 원격 source <code>88546e8</code>은 동일 tree <code>54dba2efb586303f5b60e80bf3834c28519a223e</code>를 가진다. repository module import 전에 <code>sys.dont_write_bytecode = True</code>를 설정하고 workflow에도 환경변수를 지정했다. 소스 무결성 검사는 그대로 유지한다.</p>
+<p>새 회귀 시험은 별도 임시 소스 복사본을 일반 Python으로 실행한다. 수정 전 <code>__pycache__</code> 생성으로 실패했고 수정 후 통과했다. 기존 storage capture 검사까지 5개가 통과했다. 이 결과는 CI 도구 검사이며 Zig 런타임 PASS를 뜻하지 않는다.</p>
+<h2>이번 소스의 검증 결과</h2>
+<p>로컬 Linux에서 <code>python -B tools/ci/native.py --source &lt;clean-checkout&gt; --state &lt;fresh-external-state&gt; --target x86_64-linux --runner local-linux</code>를 실행했다. <a data-package-file="evidence/merge-20260913/local-native-report.json" title="편집 원본은 저장소에 포함">상세 보고서</a>는 command·exit code·source/tree·binary·config/contract/test-input digest와 source 전후 무변경 검사를 포함한다. 원본 로그와 복구 fixture는 <a data-package-file="evidence/merge-20260913/local-native-evidence.tar.gz" title="편집 원본은 저장소에 포함">증거 압축본</a>에 보존했다.</p>
+<table>
+<thead>
+<tr>
+<th>검증</th>
+<th>Debug</th>
+<th>ReleaseSafe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>빌드·계약 검사</td>
+<td>PASS</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>등록된 시험 356개</td>
+<td>346 PASS / 1 SKIP / 9 FAIL</td>
+<td>346 PASS / 1 SKIP / 9 FAIL</td>
+</tr>
+<tr>
+<td>별도 codec 시험</td>
+<td>10 PASS</td>
+<td>10 PASS</td>
+</tr>
+<tr>
+<td>실제 CLI subprocess 검사</td>
+<td>19 PASS</td>
+<td>19 PASS</td>
+</tr>
+<tr>
+<td>capability probe</td>
+<td>PASS</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>T12 복구 증거 수집</td>
+<td>PASS</td>
+<td>PASS</td>
+</tr>
+</tbody>
+</table>
+<p>9개 실패는 <code>AF_UNIX</code> socket 생성 시 발생했다. 이 컨테이너에서 Python으로 별도 확인한 결과도 <code>errno=1 Operation not permitted</code>였다. 1개 SKIP은 Linux에서 실행할 수 없는 native GCD 시험이다. 로컬 전체 결과는 <strong>FAIL</strong>로 보존하며 제한된 환경의 실패를 통과로 바꾸지 않는다.</p>
+<p><a href="https://github.com/Topabaem05/ZCR/actions/runs/34705666351">GitHub native 실행 34705666351</a>은 source <code>88546e8</code>을 검증한다. Linux job은 최종 <strong>SUCCESS</strong>, Apple Silicon job은 <strong>FAILURE</strong>로 확인했다. 이는 CI 시작 오류가 해결됐음을 보여주지만 Mac 지원 완료를 뜻하지 않는다. 문서만 바뀐 병합 commit에 이 실행의 source별 결과를 새 runtime PASS로 재사용하지 않는다.</p>
+<p>Apple Silicon은 Debug <strong>320 PASS / 12 SKIP / 24 FAIL</strong>, ReleaseSafe <strong>321 PASS / 12 SKIP / 23 FAIL</strong>이다. 두 모드 모두 T12의 Linux 전용 <code>Store.init</code>/<code>metadata</code>가 <code>Unsupported</code>를 반환해 23개 시험이 실패했다. Debug에서는 fixture 초기화 실패 경로의 168개 allocation leak도 보고됐다. 추가 Debug 실패 1개는 T08 <code>MC-004 retiring tool id is detached before gated arena teardown</code>의 <code>entered and accepted_during_retirement</code> assertion이며 재현·원인 분석이 필요하다. 테스트 시간 제한만 늘려 통과 처리하지 않는다. <a data-package-file="evidence/merge-20260913/mac-registered-logs.tar.gz" title="편집 원본은 저장소에 포함">Mac 원본 로그</a>와 <a data-package-file="evidence/merge-20260913/mac-native-report.json" title="편집 원본은 저장소에 포함">보고서</a>를 보존했다. Intel Mac job은 이 문서의 점검 시점에 실행 중이므로 최종 결과를 단정하지 않는다.</p>
+<h2>남은 작업과 완료 조건</h2>
+<table>
+<thead>
+<tr>
+<th>순서</th>
+<th>범위</th>
+<th>다음 작업</th>
+<th>완료 근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>T08 / T12 / native CI</td>
+<td>MC-004 Mac Debug 실패 분석, Darwin storage 이식 및 fixture 초기화 실패 시 자원 회수, Mac crash/lifecycle 검증</td>
+<td>Linux·Apple Silicon·Intel Mac에서 Debug/ReleaseSafe 결과와 raw 복구 증거</td>
+</tr>
+<tr>
+<td>2</td>
+<td>T12 / T15</td>
+<td>신뢰된 supervisor, write/reconnect 수명 관리 및 broker CLI/bridge 연결</td>
+<td>권한·fence·취소·느린 클라이언트·재접속 통합 시험; 승인 전 쓰기 비활성 유지</td>
+</tr>
+<tr>
+<td>3</td>
+<td>T16</td>
+<td>pressure/thermal 신호 수집, governor 정책, 실제 runtime 연결</td>
+<td>admission·회수·공정성 및 모델 공존 시험</td>
+</tr>
+<tr>
+<td>4</td>
+<td>T17 / T19</td>
+<td>Linux backend 완성, 필수 ARM64/x86 SIMD 경로</td>
+<td>플랫폼 자원 관측 검증, scalar 차등·경계 시험</td>
+</tr>
+<tr>
+<td>5</td>
+<td>T21 / T22</td>
+<td>전체 벤치마크 하네스, bounded telemetry/health</td>
+<td>재현 가능한 corpus·config·raw trace, 예산·민감정보 검사</td>
+</tr>
+<tr>
+<td>6</td>
+<td>T23 / T24</td>
+<td>실제 Codex/Claude 라우팅, 패키징·지원 행렬</td>
+<td>실제 클라이언트·호스트 sandbox 실행, 설치 및 지원 플랫폼 검증</td>
+</tr>
+<tr>
+<td>7</td>
+<td>T25</td>
+<td>최종 통합·격리·성능 릴리스 검토</td>
+<td>모든 필수 요구사항의 source별 증거 및 미해결 게이트 해소</td>
+</tr>
+</tbody>
+</table>
+<p>T18 Windows와 T20 Tree-sitter는 선택하지 않은 옵션이다. T19는 필수다. 실제 macOS 11, APFS ACL/xattr 및 crash durability, kernel fault/전원 손실, 실제 모델·클라이언트 E2E 게이트는 미완료 상태를 유지한다. 이 점검에서는 남은 대형 Task를 완료로 승격하지 않는다.</p>
+</section><section id="doc-docs-superpowers-plans-2026-09-12-runtime-continuation-md" class="doc"><div class="docpath">docs/superpowers/plans/2026-09-12-runtime-continuation.md</div><h1>ZCR Runtime Continuation Implementation Plan</h1>
+<blockquote>
+<p><strong>For agentic workers:</strong> REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development to implement this plan task-by-task. Steps use checkbox (<code>- [ ]</code>) syntax for tracking.</p>
+</blockquote>
+<p><strong>Goal:</strong> Audit every existing branch, repair verified defects, and implement and verify the remaining mandatory runtime tasks without weakening their release gates.</p>
+<p><strong>Architecture:</strong> Continue from task-t07 (531cfc378950e6ef6ac6f49cb4e2de3de56312cc), which contains integration and every earlier task branch. Preserve the frozen I01–I19 boundaries and use one integrator for build/core/contracts; implement each task in an isolated worktree and validate again after integration.</p>
+<p><strong>Tech Stack:</strong> Zig 0.16.0, Zig std.Io threaded baseline, public POSIX/Darwin APIs, Git. Python is restricted to development verification and packaging.</p>
+<p><strong>Spec:</strong> docs/01-Requirements-and-Traceability.md, docs/02-SDD.md, docs/06-Worktree-and-Task-Isolation.md, docs/08-API-and-MCP.md, docs/12-Performance-and-Test-Plan.md, docs/13-Implementation-Roadmap.md, docs/16-Evidence-and-Open-Gates.md, docs/17-Data-Model-and-Interfaces.md and tasks/T00.md–T25.md.</p>
+<h2>Global Constraints</h2>
+<ul>
+<li>Zig 0.16.0; protocol zcr/1; MCP 2025-11-25; text_v1 only until actual client evidence supports another profile.</li>
+<li>Raw frame 16 MiB, JSON depth 64, output default 256 KiB / maximum 2 MiB, batch 32 items, edit 8 MiB, global/session queues 64/16, broker sessions 16.</li>
+<li>Correctness → isolation → bounded resources → observability → speed. No skipped tests, fake PASS, or silently widened authority.</li>
+<li>Task worktrees, mutable compiler caches, TMPDIR and artifacts are independent and outside source. Build/core/schema/CI are integrator-owned.</li>
+<li>Every task records RED, implementation, GREEN Debug/ReleaseSafe, failure paths, source/binary/config/corpus digests and review. Old evidence remains historical evidence.</li>
+<li>Runtime never executes arbitrary shell/network/Git mutations. Production writes remain disabled until T12 crash/recovery gates pass.</li>
+<li>Missing Mac/Windows/hardware/client execution is NOT_RUN; cross-compilation is not runtime proof. Optional T18/T20 may remain unselected, but T19 is mandatory.</li>
+<li>Existing user authorization covers the full repository implementation and reversible worktrees/feature branches. No final shared-branch merge or release publication is implied.</li>
+</ul>
+<h2>Branch audit (2026-09-12)</h2>
+<table>
+<thead>
+<tr>
+<th>Branch</th>
+<th>Relationship to integration</th>
+<th>Decision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>main</td>
+<td>33 commits behind</td>
+<td>Design baseline; retain history</td>
+</tr>
+<tr>
+<td>task-t00</td>
+<td>30 behind</td>
+<td>Already integrated</td>
+</tr>
+<tr>
+<td>task-t01</td>
+<td>27 behind</td>
+<td>Already integrated</td>
+</tr>
+<tr>
+<td>task-t02</td>
+<td>22 behind</td>
+<td>Already integrated</td>
+</tr>
+<tr>
+<td>task-t03</td>
+<td>17 behind</td>
+<td>Already integrated</td>
+</tr>
+<tr>
+<td>task-t04</td>
+<td>12 behind</td>
+<td>Already integrated</td>
+</tr>
+<tr>
+<td>task-t05</td>
+<td>7 behind</td>
+<td>Already integrated</td>
+</tr>
+<tr>
+<td>task-t06</td>
+<td>2 behind</td>
+<td>Already integrated</td>
+</tr>
+<tr>
+<td>integration</td>
+<td>4bcf01d</td>
+<td>T00–T06; build already expects T07</td>
+</tr>
+<tr>
+<td>task-t07</td>
+<td>4 ahead, 0 behind</td>
+<td>Best continuation source, requires defect fixes</td>
+</tr>
+</tbody>
+</table>
+<h2>Task 0: Repair and revalidate the inherited baseline</h2>
+<p><strong>Files:</strong> build.zig; src/batch/read.zig; src/protocol/projection.zig; tests/t07_test.zig; evidence/continuation/; documentation status pages.
+<strong>Interfaces:</strong> Preserve I03/I06 and existing JSON schema; plannedCost must validate the same ReadSpec constraints as execution.</p>
+<ul>
+<li>[x] Record clean branch inventory, source baseline and pinned compiler installation.</li>
+<li>[x] Run inherited Debug suite: Linux reveals missing explicit libc linkage in POSIX T04/T05 fixtures; T07 runs 18 passing tests but reviewed edge cases are uncovered.</li>
+<li>[x] Link POSIX test roots with libc and rerun all existing tests; retain baseline failure log.</li>
+<li>[x] Add BA-001 regression: line range count=0 / u32 overflow returns InvalidArgument from plannedCost, never panics.</li>
+<li>[x] Add BA-001 regression: invalid UTF-8 or over-budget earlier line does not turn a valid later batch member into an error; compare each member against a standalone read.</li>
+<li>[x] Add BA-003 regression: projection output-budget errors update emitted coverage/status consistently.</li>
+<li>[x] Implement validated planning and safe merge/fallback behavior; run batch and full Debug/ReleaseSafe tests.</li>
+<li>[x] Review, commit and record remaining inherited gaps (including deadline plumbing) for their owning implementation task.</li>
+</ul>
+<pre><code class="language-sh">zig build test -Dtest-group=batch -Doptimize=Debug -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-debug&quot;
+zig build test -Doptimize=Debug --summary all
+zig build test -Doptimize=ReleaseSafe --summary all
+zig build verify-contracts
+</code></pre>
+<h2>Execution order and gate policy</h2>
+<p>After baseline repair, T08, T09 and T10 have independent ownership and can proceed in isolated worktrees. T11 follows T10; T12 follows T11; T13 follows T10; T14 follows T13; T15 joins T08/T09/T10/T13; T16 follows T15. T17/T19 and T21–T25 follow their exact dependencies below. Final approval remains BLOCKED while any mandatory external gate lacks execution evidence; this never prevents completing locally testable implementation work.</p>
+<p>Existing task documents already contain the authoritative detailed S01–S06 instructions, owned paths, interface signatures, Given/When/Then tests and completion gates. The entries below bind those specifications to this continuation, so they must be read alongside the named task document rather than replaced by generic implementation assumptions.</p>
+<h2>Task 1: T08 — Direct stdio MCP adapter</h2>
+<p><strong>Spec:</strong> <code>tasks/T08.md</code> (all task-specific instructions and test assertions apply).
+<strong>Files:</strong> <code>src/protocol/mcp.zig</code>, <code>src/protocol/framing.zig</code>, <code>src/protocol/codec.zig</code>, <code>tests/t08_test.zig</code>, <code>evidence/T08/</code>.
+<strong>Dependencies:</strong> T02, T07.
+<strong>Interfaces — consumes:</strong> I18; contracts/tools.json; I03–I06.
+<strong>Interfaces — produces:</strong> MCP initialize/tools/list/tools/call; text_v1 encoded result.
+<strong>Required assertions:</strong> MC-001, MC-002, MC-003, MC-004 as specified in <code>tasks/T08.md</code> and tests/catalog.json.</p>
+<ul>
+<li>[ ] S01: bind clean task worktree, base/contract hashes, approved ownership and dependency evidence.</li>
+<li>[ ] S02: implement the specified executable assertions; record the intended missing-feature/behavior failure before implementation.</li>
+<li>[ ] S03: implement the task-owned modules against the exact frozen signatures; request shared changes from the integrator.</li>
+<li>[ ] S04: run the task tests, resource/fault/cancellation cases, and preserve logs and binary hashes.</li>
+<li>[ ] S05: run Debug and ReleaseSafe plus impacted regression and scope checks; obtain independent spec/quality review.</li>
+<li>[ ] S06: commit source/evidence/handoff, integrate and rerun; explicitly retain unavailable platform/client gates as NOT_RUN.</li>
+</ul>
+<pre><code class="language-sh">zig build test -Dtest-group=mcp -Doptimize=Debug -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-debug&quot;
+zig build test -Dtest-group=mcp -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-safe&quot;
+zig build verify-contracts
+</code></pre>
+<h2>Task 2: T09 — Bounded scheduler와 Darwin GCD</h2>
+<p><strong>Spec:</strong> <code>tasks/T09.md</code> (all task-specific instructions and test assertions apply).
+<strong>Files:</strong> <code>src/scheduler/queue.zig</code>, <code>src/scheduler/executor.zig</code>, <code>src/platform/darwin.zig</code>, <code>c/darwin_shim.h</code>, <code>c/darwin_shim.c</code>, <code>tests/t09_test.zig</code>, <code>evidence/T09/</code>.
+<strong>Dependencies:</strong> T03, T01.
+<strong>Interfaces — consumes:</strong> I07 JobEnvelope; I02 permits; T00 ABI probes.
+<strong>Interfaces — produces:</strong> submit I07; QoS adapter and threaded fallback.
+<strong>Required assertions:</strong> SC-001, SC-002, SC-003, SC-004 as specified in <code>tasks/T09.md</code> and tests/catalog.json.</p>
+<ul>
+<li>[ ] S01: bind clean task worktree, base/contract hashes, approved ownership and dependency evidence.</li>
+<li>[ ] S02: implement the specified executable assertions; record the intended missing-feature/behavior failure before implementation.</li>
+<li>[ ] S03: implement the task-owned modules against the exact frozen signatures; request shared changes from the integrator.</li>
+<li>[ ] S04: run the task tests, resource/fault/cancellation cases, and preserve logs and binary hashes.</li>
+<li>[ ] S05: run Debug and ReleaseSafe plus impacted regression and scope checks; obtain independent spec/quality review.</li>
+<li>[ ] S06: commit source/evidence/handoff, integrate and rerun; explicitly retain unavailable platform/client gates as NOT_RUN.</li>
+</ul>
+<pre><code class="language-sh">zig build test -Dtest-group=scheduler -Doptimize=Debug -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-debug&quot;
+zig build test -Dtest-group=scheduler -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-safe&quot;
+zig build verify-contracts
+</code></pre>
+<h2>Task 3: T10 — Workspace identity와 writer lease</h2>
+<p><strong>Spec:</strong> <code>tasks/T10.md</code> (all task-specific instructions and test assertions apply).
+<strong>Files:</strong> <code>src/workspace/registry.zig</code>, <code>src/workspace/identity.zig</code>, <code>src/workspace/lease.zig</code>, <code>tests/t10_test.zig</code>, <code>evidence/T10/</code>.
+<strong>Dependencies:</strong> T02, T01.
+<strong>Interfaces — consumes:</strong> I08/I09; Git discovery result; trusted root handles.
+<strong>Interfaces — produces:</strong> registerWorkspace I08; acquireWriter I09; workspace generation.
+<strong>Required assertions:</strong> IS-001, IS-002, IS-005, IS-008 as specified in <code>tasks/T10.md</code> and tests/catalog.json.</p>
+<ul>
+<li>[ ] S01: bind clean task worktree, base/contract hashes, approved ownership and dependency evidence.</li>
+<li>[ ] S02: implement the specified executable assertions; record the intended missing-feature/behavior failure before implementation.</li>
+<li>[ ] S03: implement the task-owned modules against the exact frozen signatures; request shared changes from the integrator.</li>
+<li>[ ] S04: run the task tests, resource/fault/cancellation cases, and preserve logs and binary hashes.</li>
+<li>[ ] S05: run Debug and ReleaseSafe plus impacted regression and scope checks; obtain independent spec/quality review.</li>
+<li>[ ] S06: commit source/evidence/handoff, integrate and rerun; explicitly retain unavailable platform/client gates as NOT_RUN.</li>
+</ul>
+<pre><code class="language-sh">zig build test -Dtest-group=isolation -Doptimize=Debug -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-debug&quot;
+zig build test -Dtest-group=isolation -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-safe&quot;
+zig build verify-contracts
+</code></pre>
+<h2>Task 4: T11 — 단일파일 atomic patch/create</h2>
+<p><strong>Spec:</strong> <code>tasks/T11.md</code> (all task-specific instructions and test assertions apply).
+<strong>Files:</strong> <code>src/fs/edit.zig</code>, <code>src/fs/publish.zig</code>, <code>tests/t11_test.zig</code>, <code>evidence/T11/</code>.
+<strong>Dependencies:</strong> T04, T10.
+<strong>Interfaces — consumes:</strong> I03 FileVersion; I09 WriterLease; I19 JournalStore interface.
+<strong>Interfaces — produces:</strong> applyPatch I10; createFile I11; commit-point receipt.
+<strong>Required assertions:</strong> WR-001, WR-002, WR-003, WR-004, WR-007, WR-009, WR-010, IS-007 as specified in <code>tasks/T11.md</code> and tests/catalog.json.</p>
+<ul>
+<li>[ ] S01: bind clean task worktree, base/contract hashes, approved ownership and dependency evidence.</li>
+<li>[ ] S02: implement the specified executable assertions; record the intended missing-feature/behavior failure before implementation.</li>
+<li>[ ] S03: implement the task-owned modules against the exact frozen signatures; request shared changes from the integrator.</li>
+<li>[ ] S04: run the task tests, resource/fault/cancellation cases, and preserve logs and binary hashes.</li>
+<li>[ ] S05: run Debug and ReleaseSafe plus impacted regression and scope checks; obtain independent spec/quality review.</li>
+<li>[ ] S06: commit source/evidence/handoff, integrate and rerun; explicitly retain unavailable platform/client gates as NOT_RUN.</li>
+</ul>
+<pre><code class="language-sh">zig build test -Dtest-group=write -Doptimize=Debug -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-debug&quot;
+zig build test -Dtest-group=write -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-safe&quot;
+zig build verify-contracts
+</code></pre>
+<h2>Task 5: T12 — Journal·crash recovery·idempotency</h2>
+<p><strong>Spec:</strong> <code>tasks/T12.md</code> (all task-specific instructions and test assertions apply).
+<strong>Approved continuation design:</strong> <a data-package-file="docs/superpowers/designs/2026-09-12-supervised-recovery.md" title="편집 원본은 저장소에 포함">Supervised recovery and historical receipts</a>; production supervisor, native platform and kernel-fault gates remain open.
+<strong>Files:</strong> <code>src/storage/journal.zig</code>, <code>src/storage/recovery.zig</code>, <code>src/storage/receipts.zig</code>, <code>tests/t12_test.zig</code>, <code>evidence/T12/</code>.
+<strong>Dependencies:</strong> T11.
+<strong>Interfaces — consumes:</strong> I19 journal interface; I10/I11 commit point.
+<strong>Interfaces — produces:</strong> recover I12; persistent receipts and ambiguous-state quarantine.
+<strong>Required assertions:</strong> WR-005, WR-006, WR-008 as specified in <code>tasks/T12.md</code> and tests/catalog.json.</p>
+<ul>
+<li>[ ] S01: bind clean task worktree, base/contract hashes, approved ownership and dependency evidence.</li>
+<li>[ ] S02: implement the specified executable assertions; record the intended missing-feature/behavior failure before implementation.</li>
+<li>[ ] S03: implement the task-owned modules against the exact frozen signatures; request shared changes from the integrator.</li>
+<li>[ ] S04: run the task tests, resource/fault/cancellation cases, and preserve logs and binary hashes.</li>
+<li>[ ] S05: run Debug and ReleaseSafe plus impacted regression and scope checks; obtain independent spec/quality review.</li>
+<li>[ ] S06: commit source/evidence/handoff, integrate and rerun; explicitly retain unavailable platform/client gates as NOT_RUN.</li>
+</ul>
+<pre><code class="language-sh">zig build test -Dtest-group=write -Doptimize=Debug -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-debug&quot;
+zig build test -Dtest-group=write -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-safe&quot;
+zig build verify-contracts
+</code></pre>
+<h2>Task 6: T13 — Immutable content·line cache</h2>
+<p><strong>Spec:</strong> <code>tasks/T13.md</code> (all task-specific instructions and test assertions apply).
+<strong>Files:</strong> <code>src/cache/content.zig</code>, <code>src/cache/lines.zig</code>, <code>src/cache/association.zig</code>, <code>tests/t13_test.zig</code>, <code>evidence/T13/</code>.
+<strong>Dependencies:</strong> T04, T10, T03.
+<strong>Interfaces — consumes:</strong> I13; ContentHash/FileVersion; I02 budget.
+<strong>Interfaces — produces:</strong> cacheGet I13; second-touch cache and shared accounting.
+<strong>Required assertions:</strong> ME-004, IS-006 as specified in <code>tasks/T13.md</code> and tests/catalog.json.</p>
+<ul>
+<li>[ ] S01: bind clean task worktree, base/contract hashes, approved ownership and dependency evidence.</li>
+<li>[ ] S02: implement the specified executable assertions; record the intended missing-feature/behavior failure before implementation.</li>
+<li>[ ] S03: implement the task-owned modules against the exact frozen signatures; request shared changes from the integrator.</li>
+<li>[ ] S04: run the task tests, resource/fault/cancellation cases, and preserve logs and binary hashes.</li>
+<li>[ ] S05: run Debug and ReleaseSafe plus impacted regression and scope checks; obtain independent spec/quality review.</li>
+<li>[ ] S06: commit source/evidence/handoff, integrate and rerun; explicitly retain unavailable platform/client gates as NOT_RUN.</li>
+</ul>
+<pre><code class="language-sh">zig build test -Dtest-group=memory -Doptimize=Debug -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-debug&quot;
+zig build test -Dtest-group=memory -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-safe&quot;
+zig build verify-contracts
+</code></pre>
+<h2>Task 7: T14 — Watcher invalidation와 live fallback</h2>
+<p><strong>Spec:</strong> <code>tasks/T14.md</code> (all task-specific instructions and test assertions apply).
+<strong>Files:</strong> <code>src/watch/core.zig</code>, <code>src/watch/darwin.zig</code>, <code>src/watch/linux.zig</code>, <code>tests/t14_test.zig</code>, <code>evidence/T14/</code>.
+<strong>Dependencies:</strong> T05, T10, T13.
+<strong>Interfaces — consumes:</strong> I14; workspace generation; I04 traversal.
+<strong>Interfaces — produces:</strong> invalidate I14; uncertain/dirty index state.
+<strong>Required assertions:</strong> WA-001, WA-002, WA-003, WA-004, WA-005, WA-006 as specified in <code>tasks/T14.md</code> and tests/catalog.json.</p>
+<ul>
+<li>[ ] S01: bind clean task worktree, base/contract hashes, approved ownership and dependency evidence.</li>
+<li>[ ] S02: implement the specified executable assertions; record the intended missing-feature/behavior failure before implementation.</li>
+<li>[ ] S03: implement the task-owned modules against the exact frozen signatures; request shared changes from the integrator.</li>
+<li>[ ] S04: run the task tests, resource/fault/cancellation cases, and preserve logs and binary hashes.</li>
+<li>[ ] S05: run Debug and ReleaseSafe plus impacted regression and scope checks; obtain independent spec/quality review.</li>
+<li>[ ] S06: commit source/evidence/handoff, integrate and rerun; explicitly retain unavailable platform/client gates as NOT_RUN.</li>
+</ul>
+<pre><code class="language-sh">zig build test -Dtest-group=watch -Doptimize=Debug -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-debug&quot;
+zig build test -Dtest-group=watch -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-safe&quot;
+zig build verify-contracts
+</code></pre>
+<h2>Task 8: T15 — 명시적 broker와 다중세션 budget</h2>
+<p><strong>Spec:</strong> <code>tasks/T15.md</code> (all task-specific instructions and test assertions apply).
+<strong>Files:</strong> <code>src/broker/server.zig</code>, <code>src/broker/bridge.zig</code>, <code>src/broker/auth.zig</code>, <code>tests/t15_test.zig</code>, <code>evidence/T15/</code>.
+<strong>Dependencies:</strong> T08, T09, T10, T13.
+<strong>Interfaces — consumes:</strong> I18 framing; I07 scheduler; I08 registry; I13 cache.
+<strong>Interfaces — produces:</strong> authenticated UDS broker; group resource accounting.
+<strong>Required assertions:</strong> BR-001, BR-002, BR-003, BR-004, BR-005 as specified in <code>tasks/T15.md</code> and tests/catalog.json.</p>
+<ul>
+<li>[ ] S01: bind clean task worktree, base/contract hashes, approved ownership and dependency evidence.</li>
+<li>[ ] S02: implement the specified executable assertions; record the intended missing-feature/behavior failure before implementation.</li>
+<li>[ ] S03: implement the task-owned modules against the exact frozen signatures; request shared changes from the integrator.</li>
+<li>[ ] S04: run the task tests, resource/fault/cancellation cases, and preserve logs and binary hashes.</li>
+<li>[ ] S05: run Debug and ReleaseSafe plus impacted regression and scope checks; obtain independent spec/quality review.</li>
+<li>[ ] S06: commit source/evidence/handoff, integrate and rerun; explicitly retain unavailable platform/client gates as NOT_RUN.</li>
+</ul>
+<pre><code class="language-sh">zig build test -Dtest-group=broker -Doptimize=Debug -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-debug&quot;
+zig build test -Dtest-group=broker -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-safe&quot;
+zig build verify-contracts
+</code></pre>
+<h2>Task 9: T16 — Pressure·thermal·LLM 공존 governor</h2>
+<p><strong>Spec:</strong> <code>tasks/T16.md</code> (all task-specific instructions and test assertions apply).
+<strong>Files:</strong> <code>src/governor/controller.zig</code>, <code>src/governor/pressure.zig</code>, <code>c/darwin_power_shim.h</code>, <code>c/darwin_power_shim.m</code>, <code>tests/t16_test.zig</code>, <code>evidence/T16/</code>.
+<strong>Dependencies:</strong> T09, T13, T15.
+<strong>Interfaces — consumes:</strong> I15 ResourceSignals; I02 accounting; I07 permits.
+<strong>Interfaces — produces:</strong> updatePolicy I15; hysteresis and model_coexist profile.
+<strong>Required assertions:</strong> SC-005, SC-006, ME-005, ME-006 as specified in <code>tasks/T16.md</code> and tests/catalog.json.</p>
+<ul>
+<li>[ ] S01: bind clean task worktree, base/contract hashes, approved ownership and dependency evidence.</li>
+<li>[ ] S02: implement the specified executable assertions; record the intended missing-feature/behavior failure before implementation.</li>
+<li>[ ] S03: implement the task-owned modules against the exact frozen signatures; request shared changes from the integrator.</li>
+<li>[ ] S04: run the task tests, resource/fault/cancellation cases, and preserve logs and binary hashes.</li>
+<li>[ ] S05: run Debug and ReleaseSafe plus impacted regression and scope checks; obtain independent spec/quality review.</li>
+<li>[ ] S06: commit source/evidence/handoff, integrate and rerun; explicitly retain unavailable platform/client gates as NOT_RUN.</li>
+</ul>
+<pre><code class="language-sh">zig build test -Dtest-group=scheduler -Doptimize=Debug -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-debug&quot;
+zig build test -Dtest-group=scheduler -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-safe&quot;
+zig build verify-contracts
+</code></pre>
+<h2>Task 10: T17 — Linux x86-64 backend</h2>
+<p><strong>Spec:</strong> <code>tasks/T17.md</code> (all task-specific instructions and test assertions apply).
+<strong>Files:</strong> <code>src/platform/interface.zig</code>, <code>src/platform/linux.zig</code>, <code>src/platform/linux_pressure.zig</code>, <code>tests/t17_test.zig</code>, <code>evidence/T17/</code>.
+<strong>Dependencies:</strong> T04, T05, T09, T12, T14.
+<strong>Interfaces — consumes:</strong> I03/I04/I07/I10–I12; common platform types.
+<strong>Interfaces — produces:</strong> Linux baseline implementation; cgroup-aware effective limits.
+<strong>Required assertions:</strong> ME-008 as specified in <code>tasks/T17.md</code> and tests/catalog.json.</p>
+<ul>
+<li>[ ] S01: bind clean task worktree, base/contract hashes, approved ownership and dependency evidence.</li>
+<li>[ ] S02: implement the specified executable assertions; record the intended missing-feature/behavior failure before implementation.</li>
+<li>[ ] S03: implement the task-owned modules against the exact frozen signatures; request shared changes from the integrator.</li>
+<li>[ ] S04: run the task tests, resource/fault/cancellation cases, and preserve logs and binary hashes.</li>
+<li>[ ] S05: run Debug and ReleaseSafe plus impacted regression and scope checks; obtain independent spec/quality review.</li>
+<li>[ ] S06: commit source/evidence/handoff, integrate and rerun; explicitly retain unavailable platform/client gates as NOT_RUN.</li>
+</ul>
+<pre><code class="language-sh">zig build test -Dtest-group=memory -Doptimize=Debug -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-debug&quot;
+zig build test -Dtest-group=memory -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-safe&quot;
+zig build verify-contracts
+</code></pre>
+<h2>T18: Optional scope decision</h2>
+<p>Windows 확장 — 선택 is not selected for this continuation. Advertise no support and record NOT_SELECTED; retain its specification in tasks/T18.md.</p>
+<h2>Task 12: T19 — ARM64/x86 SIMD 선택 가속</h2>
+<p><strong>Spec:</strong> <code>tasks/T19.md</code> (all task-specific instructions and test assertions apply).
+<strong>Files:</strong> <code>src/search/dispatch.zig</code>, <code>src/search/simd_arm64.zig</code>, <code>src/search/simd_x86.zig</code>, <code>tests/t19_test.zig</code>, <code>evidence/T19/</code>.
+<strong>Dependencies:</strong> T06, T17.
+<strong>Interfaces — consumes:</strong> scalar oracle; I05 exact match semantics.
+<strong>Interfaces — produces:</strong> ISA-dispatched scanner; fallback and feature probes.
+<strong>Required assertions:</strong> PF-005 as specified in <code>tasks/T19.md</code> and tests/catalog.json.</p>
+<ul>
+<li>[ ] S01: bind clean task worktree, base/contract hashes, approved ownership and dependency evidence.</li>
+<li>[ ] S02: implement the specified executable assertions; record the intended missing-feature/behavior failure before implementation.</li>
+<li>[ ] S03: implement the task-owned modules against the exact frozen signatures; request shared changes from the integrator.</li>
+<li>[ ] S04: run the task tests, resource/fault/cancellation cases, and preserve logs and binary hashes.</li>
+<li>[ ] S05: run Debug and ReleaseSafe plus impacted regression and scope checks; obtain independent spec/quality review.</li>
+<li>[ ] S06: commit source/evidence/handoff, integrate and rerun; explicitly retain unavailable platform/client gates as NOT_RUN.</li>
+</ul>
+<pre><code class="language-sh">zig build test -Dtest-group=perf -Doptimize=Debug -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-debug&quot;
+zig build test -Dtest-group=perf -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-safe&quot;
+zig build verify-contracts
+</code></pre>
+<h2>T20: Optional scope decision</h2>
+<p>Tree-sitter outline — 선택 is not selected for this continuation. Advertise no support and record NOT_SELECTED; retain its specification in tasks/T20.md.</p>
+<h2>Task 14: T21 — 재현 가능한 전체 벤치마크 하네스</h2>
+<p><strong>Spec:</strong> <code>tasks/T21.md</code> (all task-specific instructions and test assertions apply).
+<strong>Files:</strong> <code>bench/runner.zig</code>, <code>bench/corpus.zig</code>, <code>bench/trace.zig</code>, <code>bench/report.zig</code>, <code>tests/t21_test.zig</code>, <code>evidence/T21/</code>.
+<strong>Dependencies:</strong> T07, T09, T12, T13, T15, T16, T17.
+<strong>Interfaces — consumes:</strong> T00 baseline; functional oracle; all runtime telemetry.
+<strong>Interfaces — produces:</strong> paired trace evidence; p50/p95/CI/E2E comparison.
+<strong>Required assertions:</strong> PF-002, PF-003, PF-004, PF-006, PF-007 as specified in <code>tasks/T21.md</code> and tests/catalog.json.</p>
+<ul>
+<li>[ ] S01: bind clean task worktree, base/contract hashes, approved ownership and dependency evidence.</li>
+<li>[ ] S02: implement the specified executable assertions; record the intended missing-feature/behavior failure before implementation.</li>
+<li>[ ] S03: implement the task-owned modules against the exact frozen signatures; request shared changes from the integrator.</li>
+<li>[ ] S04: run the task tests, resource/fault/cancellation cases, and preserve logs and binary hashes.</li>
+<li>[ ] S05: run Debug and ReleaseSafe plus impacted regression and scope checks; obtain independent spec/quality review.</li>
+<li>[ ] S06: commit source/evidence/handoff, integrate and rerun; explicitly retain unavailable platform/client gates as NOT_RUN.</li>
+</ul>
+<pre><code class="language-sh">zig build test -Dtest-group=perf -Doptimize=Debug -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-debug&quot;
+zig build test -Dtest-group=perf -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-safe&quot;
+zig build verify-contracts
+</code></pre>
+<h2>Task 15: T22 — Bounded telemetry와 health</h2>
+<p><strong>Spec:</strong> <code>tasks/T22.md</code> (all task-specific instructions and test assertions apply).
+<strong>Files:</strong> <code>src/observe/metrics.zig</code>, <code>src/observe/health.zig</code>, <code>src/observe/trace.zig</code>, <code>tests/t22_test.zig</code>, <code>evidence/T22/</code>.
+<strong>Dependencies:</strong> T08, T10, T15, T16.
+<strong>Interfaces — consumes:</strong> I17 HealthSnapshot; budget/scheduler counters.
+<strong>Interfaces — produces:</strong> health I17; redacted traces and session status.
+<strong>Required assertions:</strong> OB-001, OB-002, OB-003, OB-004 as specified in <code>tasks/T22.md</code> and tests/catalog.json.</p>
+<ul>
+<li>[ ] S01: bind clean task worktree, base/contract hashes, approved ownership and dependency evidence.</li>
+<li>[ ] S02: implement the specified executable assertions; record the intended missing-feature/behavior failure before implementation.</li>
+<li>[ ] S03: implement the task-owned modules against the exact frozen signatures; request shared changes from the integrator.</li>
+<li>[ ] S04: run the task tests, resource/fault/cancellation cases, and preserve logs and binary hashes.</li>
+<li>[ ] S05: run Debug and ReleaseSafe plus impacted regression and scope checks; obtain independent spec/quality review.</li>
+<li>[ ] S06: commit source/evidence/handoff, integrate and rerun; explicitly retain unavailable platform/client gates as NOT_RUN.</li>
+</ul>
+<pre><code class="language-sh">zig build test -Dtest-group=observe -Doptimize=Debug -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-debug&quot;
+zig build test -Dtest-group=observe -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-safe&quot;
+zig build verify-contracts
+</code></pre>
+<h2>Task 16: T23 — Codex/Claude 실제 라우팅 검증</h2>
+<p><strong>Spec:</strong> <code>tasks/T23.md</code> (all task-specific instructions and test assertions apply).
+<strong>Files:</strong> <code>src/host/routing.zig</code>, <code>integration/codex.md</code>, <code>integration/claude.md</code>, <code>integration/traces/README.md</code>, <code>tests/t23_test.zig</code>, <code>evidence/T23/</code>.
+<strong>Dependencies:</strong> T08, T12, T21, T22.
+<strong>Interfaces — consumes:</strong> MCP tools and policy; actual installed clients.
+<strong>Interfaces — produces:</strong> host compatibility evidence; approved routing instructions.
+<strong>Required assertions:</strong> MC-005, MC-006 as specified in <code>tasks/T23.md</code> and tests/catalog.json.</p>
+<ul>
+<li>[ ] S01: bind clean task worktree, base/contract hashes, approved ownership and dependency evidence.</li>
+<li>[ ] S02: implement the specified executable assertions; record the intended missing-feature/behavior failure before implementation.</li>
+<li>[ ] S03: implement the task-owned modules against the exact frozen signatures; request shared changes from the integrator.</li>
+<li>[ ] S04: run the task tests, resource/fault/cancellation cases, and preserve logs and binary hashes.</li>
+<li>[ ] S05: run Debug and ReleaseSafe plus impacted regression and scope checks; obtain independent spec/quality review.</li>
+<li>[ ] S06: commit source/evidence/handoff, integrate and rerun; explicitly retain unavailable platform/client gates as NOT_RUN.</li>
+</ul>
+<pre><code class="language-sh">zig build test -Dtest-group=mcp -Doptimize=Debug -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-debug&quot;
+zig build test -Dtest-group=mcp -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-safe&quot;
+zig build verify-contracts
+</code></pre>
+<h2>Task 17: T24 — 패키징과 실제 지원 행렬</h2>
+<p><strong>Spec:</strong> <code>tasks/T24.md</code> (all task-specific instructions and test assertions apply).
+<strong>Files:</strong> <code>release/package.zig</code>, <code>release/support-matrix.json</code>, <code>release/SBOM.json</code>, <code>release/README.md</code>, <code>tests/t24_test.zig</code>, <code>evidence/T24/</code>.
+<strong>Dependencies:</strong> T17, T22, T23.
+<strong>Interfaces — consumes:</strong> actual platform test evidence; dependency manifest.
+<strong>Interfaces — produces:</strong> signed/verified release artifacts as configured; truthful support matrix.
+<strong>Required assertions:</strong>  as specified in <code>tasks/T24.md</code> and tests/catalog.json.</p>
+<ul>
+<li>[ ] S01: bind clean task worktree, base/contract hashes, approved ownership and dependency evidence.</li>
+<li>[ ] S02: implement the specified executable assertions; record the intended missing-feature/behavior failure before implementation.</li>
+<li>[ ] S03: implement the task-owned modules against the exact frozen signatures; request shared changes from the integrator.</li>
+<li>[ ] S04: run the task tests, resource/fault/cancellation cases, and preserve logs and binary hashes.</li>
+<li>[ ] S05: run Debug and ReleaseSafe plus impacted regression and scope checks; obtain independent spec/quality review.</li>
+<li>[ ] S06: commit source/evidence/handoff, integrate and rerun; explicitly retain unavailable platform/client gates as NOT_RUN.</li>
+</ul>
+<pre><code class="language-sh">zig build test -Dtest-group=dev -Doptimize=Debug -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-debug&quot;
+zig build test -Dtest-group=dev -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-safe&quot;
+zig build verify-contracts
+</code></pre>
+<h2>Task 18: T25 — 최종 통합·격리·성능 release gate</h2>
+<p><strong>Spec:</strong> <code>tasks/T25.md</code> (all task-specific instructions and test assertions apply).
+<strong>Files:</strong> <code>release/acceptance.md</code>, <code>release/evidence-index.json</code>, <code>release/risks.md</code>, <code>tests/t25_test.zig</code>, <code>evidence/T25/</code>.
+<strong>Dependencies:</strong> T24, T21, T19, T12.
+<strong>Interfaces — consumes:</strong> all mandatory task evidence; requirements traceability.
+<strong>Interfaces — produces:</strong> go/no-go decision; released capabilities and residual risks.
+<strong>Required assertions:</strong> PF-008, DV-006 as specified in <code>tasks/T25.md</code> and tests/catalog.json.</p>
+<ul>
+<li>[ ] S01: bind clean task worktree, base/contract hashes, approved ownership and dependency evidence.</li>
+<li>[ ] S02: implement the specified executable assertions; record the intended missing-feature/behavior failure before implementation.</li>
+<li>[ ] S03: implement the task-owned modules against the exact frozen signatures; request shared changes from the integrator.</li>
+<li>[ ] S04: run the task tests, resource/fault/cancellation cases, and preserve logs and binary hashes.</li>
+<li>[ ] S05: run Debug and ReleaseSafe plus impacted regression and scope checks; obtain independent spec/quality review.</li>
+<li>[ ] S06: commit source/evidence/handoff, integrate and rerun; explicitly retain unavailable platform/client gates as NOT_RUN.</li>
+</ul>
+<pre><code class="language-sh">zig build test -Dtest-group=perf -Doptimize=Debug -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-debug&quot;
+zig build test -Dtest-group=perf -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-safe&quot;
+zig build verify-contracts
+</code></pre>
+<h2>Final acceptance</h2>
+<ul>
+<li>[ ] All mandatory requirements have implementation/test/evidence links; no PLANNED table is misrepresented as completion.</li>
+<li>[ ] Full Debug and ReleaseSafe suites and contracts pass on the final integrated source.</li>
+<li>[ ] MCP subprocess transcript validates real binary dispatch, malformed inputs, cancellation, backpressure and policy refusal.</li>
+<li>[ ] All enabled write capabilities have actual kill/restart recovery evidence; no unsupported platform capability is advertised.</li>
+<li>[ ] Final source has independent whole-branch review and fixed material findings.</li>
+<li>[ ] A feature branch and reviewable draft PR contain the plan, code, evidence and exact outstanding external gates.</li>
+<li>[ ] T25 release gate is COMPLETE only if all mandatory evidence exists, otherwise explicitly BLOCKED with reproducible next commands.</li>
+</ul>
+<h2>2026-09-12 구현 체크포인트</h2>
+<ul>
+<li>
+<p>전체10개 원본 브랜치·고유 소스·설계 및 작업 문서 감사를 완료했다. 원본 main/integration은 변경하지 않았다.</p>
+</li>
+<li>
+<p>T11source09422d4는 독립 승인 후 통합했다. 작업 소스의 Debug/ReleaseSafe 각각41write tests, 통합7bd5be8 Debug41tests가 통과했다. 생산 쓰기는 T12 및 플랫폼 복구 게이트 전까지 비활성이다.</p>
+</li>
+<li>
+<p>T14source2ca8e31은 독립 승인 후 통합했다. 각Debug/ReleaseSafe/fault19tests, 통합988dde8 Debug19tests가 통과했다. Darwin 실제FSEvents 수명·이벤트 전달은 미검증으로 유지한다.</p>
+</li>
+<li>
+<p><a data-package-file="evidence/continuation/native-ci-34681109500/README.md" title="편집 원본은 저장소에 포함">실제3플랫폼CI</a>는 이전tree39978457에서 각모드221/222tests가 통과했고 T01계약시험 및 당시 미통합T11/T14/T15로 전체FAIL이다. T01은 승인된 nativeI19 네번째필드를 검사하도록7115d63에서 수정, 로컬Debug19/19가 통과했다. 이후소스의PASS로 이 증거를 재사용하지 않는다.</p>
+</li>
+<li>
+<p>T12 초기 검토의 두 결함을 수정한 source1f12553/evidence4759605가 독립 승인됐다. Debug/ReleaseSafe 각각65/65와40 writer SIGKILL 사례를 보존했고, ad577ab에 통합한 실제 소스에서도 Debug65/65가 통과했다. 생산 supervisor, Mac, 실제 kernel fault 및 power-loss 게이트는 남아 있다.</p>
+</li>
+<li>
+<p>캐시·브로커·임시 출력 예산 지적과 후속 실제 취소 경로를 source95352af/evidenceec9e5ad에서 수정하고 독립 승인 후 dae7ddc까지 통합했다. 실제 CLI 압력 검사와 원본 요청 ID 취소 응답의 실행 증거를 보존했다.</p>
+</li>
+<li>
+<p><a data-package-file="evidence/continuation/native-ci-34692959158/README.md" title="편집 원본은 저장소에 포함">후속 실제3플랫폼 CI</a>는 공개9d6d8e55/tree1c7fbe50에서 Linux 각모드285/285, 두Mac 각모드232통과/12건너뜀을 기록했다. Mac T11컴파일 오류와 당시T12/T15미통합으로 전체FAIL이다. 총4164개 archive/source/binary 검증을 기록했다.</p>
+</li>
+<li>
+<p>T16 스케줄러·캐시 선행API source8bad59b/evidencef5de460은 독립 승인 후7b915f8에 통합했다. 작업 소스의 각모드 scheduler20통과/1플랫폼건너뜀, memory34통과를 확인했다. Governor 정책·신호·실행 경로 연결, T17/T19/T21–T25와 실제클라이언트·모델·최소OS 게이트가 남아 있다.</p>
+</li>
+<li>
+<p>Darwin T11은 독립 승인 후53b4686/c80508b에 통합했다. Linux41/41 각모드와 두Mac 대상 semantic compile을 기록했으며 실제Mac 실행은 후속 CI 대상이다. T12 Darwin 포트를 별도 작업 트리에서 진행한다.</p>
+</li>
+<li>
+<p><a data-package-file="evidence/continuation/integrated-108b906/README.md" title="편집 원본은 저장소에 포함">통합108b906 실행</a>: 각Debug/ReleaseSafe338통과/9실패, 실패는 제한된 로컬 환경의 broker AF_UNIX 사례다. 각모드 build/contracts/codec10/실제CLI19는 통과했다. 전체 등록 시험은 FAIL로 보존하며 hosted CI에서 소켓·Mac 경로를 검증한다.</p>
+</li>
+</ul>
 </section><section id="doc-AGENTS-md" class="doc"><div class="docpath">AGENTS.md</div><h1>ZCR 구현 에이전트 규칙</h1>
-<p>이 파일은 향후 runtime repository의 최상위 작업 규칙이다. 현재 패키지는 설계 문서이며 runtime 구현 완료를 의미하지 않는다.</p>
+<p>이 파일은 runtime repository의 최상위 작업 규칙이다. 구현 및 실행 증거의 현재 상태는 <code>tasks/progress.json</code>과 <code>tasks/INDEX.md</code>를 따른다. 설계의 완료 조건과 실제 시험 결과를 구분하고, 이전 commit의 증거를 현재 바이너리의 PASS로 재사용하지 않는다.</p>
 <h2>필수 시작 문서</h2>
 <p>README → docs/01 → docs/02 → docs/06 → docs/13 → 현재 tasks/Txx.md 순서로 읽는다. 구현 언어 Zig0.16.0을 다른 언어/master버전으로 임의 변경하지 않는다.</p>
 <h2>Task 격리</h2>
@@ -3684,10 +4332,31 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <p>권한·workspace identity·version·fence·allocation reservation은 최적화로 제거할 수 없다. async lifetime을 명시하고 children drain 후 arena를 반환한다. live mmap, binary RPC, private affinity, implicit daemon, network dependency는 승인된 기본이 아니다.</p>
 <h2>증거</h2>
 <p>PASS에는 command, exit code, source commit, binary digest, config/corpus digest, test output artifact가 필요하다. 다른 worktree의 binary를 사용한 결과는 무효다. 실제 실행 못 한 Mac/Windows/host integration은 NOT_RUN이다. cross-compile은 runtime proof가 아니다.</p>
+<h2>명령 (T01 기준)</h2>
+<p>Toolchain은 Zig 0.16.0이다. <code>build.zig</code>는 다른 버전에서 컴파일을 거부한다. 캐시와 임시 파일은 <code>STATE=&lt;state root&gt;/tasks/&lt;TaskId&gt;</code> 아래에 둔다. state root는 source tree 밖이다.</p>
+<pre><code class="language-sh">export ZIG_GLOBAL_CACHE_DIR=$STATE/zig-global-cache ZIG_LOCAL_CACHE_DIR=$STATE/zig-local-cache TMPDIR=$STATE/tmp
+zig build test -Dtest-group=&lt;group&gt; -Doptimize=Debug        # io fs search batch write mcp isolation broker watch observe ast scheduler memory perf dev security
+zig build test -Dtest-id=WR-005 -Dfault-injection=true      # 이름에 ID가 들어간 test만 실행
+zig build test -Dtest-group=dev -Dinstall-tests=true --prefix $STATE/out-&lt;label&gt;   # 증거용 test binary 설치
+zig build verify-contracts                                  # src/core 선언과 contracts/·config/ 대조
+</code></pre>
+<p>선택된 test가 없으면 build가 실패한다. 빈 선택은 PASS가 아니다. test 이름은 catalog ID(예: <code>&quot;WR-005 ...&quot;</code>)로 시작한다. 새 test 파일은 통합자가 <code>build.zig</code>의 <code>test_files</code>에 등록한다. <code>zig build bench</code>는 T21 전까지 실패한다.</p>
+<h2>증거·ledger 도구</h2>
+<p><code>zig build</code>가 설치하는 <code>zcr-dev-evidence</code>는 Git을 <code>-C &lt;worktree&gt;</code>로만 호출하고 worktree를 변경하지 않는다.</p>
+<pre><code class="language-sh">zcr-dev-evidence preflight --worktree &lt;task worktree&gt;                  # dirty·진행 중 merge/rebase면 exit 1, 사용자 변경 보존
+zcr-dev-evidence ledger-begin --worktree &lt;wt&gt; --task TNN --ledger $STATE/task-step.json
+zcr-dev-evidence ledger-step --worktree &lt;wt&gt; --ledger $STATE/task-step.json --step S02 --result pass --evidence evidence/TNN/red.json
+zcr-dev-evidence resume --worktree &lt;wt&gt; --ledger $STATE/task-step.json  # 새 세션은 여기서 시작
+zcr-dev-evidence record --worktree &lt;wt&gt; --task TNN --label green-debug --command &quot;&lt;cmd&gt;&quot; --exit 0 --binary &lt;test binary&gt; --out &lt;file&gt;
+zcr-dev-evidence verify --worktree &lt;wt&gt; --evidence &lt;file&gt;
+zcr-dev-evidence contract-digest --worktree &lt;wt&gt;
+</code></pre>
+<p>ledger(<code>zcr-step-ledger/1</code>)는 worktree git-dir, base commit, contract digest, step별 head commit을 기록한다. <code>resume</code>과 <code>ledger-step</code>은 다른 worktree, dirty tree, base와 무관한 HEAD, 기록 이후 추가된 commit, 바뀐 contract digest, step 건너뛰기를 거부한다. evidence(<code>zcr-evidence/1</code>)는 worktree git-dir·commit·tree·binary SHA-256이 모두 같을 때만 <code>verify</code>를 통과한다. contract digest는 <code>git ls-files -z contracts | LC_ALL=C sort -z | xargs -0 shasum -a 256 | shasum -a 256</code>과 같은 값이다.</p>
 <h2>Handoff</h2>
 <p>각 Step 종료 상태를 저장한다. task handoff에는 changed files, exports, tests, remaining gates, base/head/contract digest를 포함한다. 새로운 모델 세션은 이전 요약만 믿지 말고 ledger와 실제 tree를 확인한다. 작업 범위를 확장하는 도중 원래 Task가 완료됐다고 선언하지 않는다.</p>
 </section><section id="doc-tasks-INDEX-md" class="doc"><div class="docpath">tasks/INDEX.md</div><h1>구현 Task 인덱스</h1>
-<p><strong>26 Tasks · 각 Task S01–S06 · 모든 상태 PLANNED.</strong> 독립 branch/worktree, owned files, dependencies, inputs/outputs, RED/GREEN test, provenance handoff를 기준으로 진행한다. 단순 순서가 아니라 아래 DAG를 따른다.</p>
+<p>최신 브랜치 포함 관계, 재검증 결과와 다음 작업은 <a href="#doc-docs-18-Merge-and-Remaining-Work-md">병합 점검·남은 작업</a>에 정리했다. 메인 통합 후에도 아래 필수 Task와 외부 검증 게이트를 유지한다.</p>
+<p><strong>26 Tasks · 각 Task S01–S06.</strong> 현재 상태는 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>, 실행 순서는 <a href="#doc-docs-superpowers-plans-2026-09-12-runtime-continuation-md">후속 계획</a>을 따른다. T00–T07에는 구현과 과거 증거가 있으며, 새 통합 소스의 재검증과 남은 플랫폼 게이트를 구분한다. 독립 branch/worktree, owned files, dependencies, inputs/outputs, RED/GREEN test, provenance handoff를 기준으로 진행한다. 단순 순서가 아니라 아래 DAG를 따른다.</p>
 <table>
 <thead>
 <tr>
@@ -4442,14 +5111,14 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 </g>
 </svg>
 </figure></p>
-<p>Task의 실제 코딩은 이 문서 패키지 밖 향후 프로젝트에서 수행한다. schema와 runner 변경은 단일 integration owner가 처리한다.</p>
+<p>구현은 이 저장소에서 Task별 독립 worktree로 진행한다. schema와 runner 변경은 단일 integration owner가 처리한다.</p>
 </section><section id="doc-tasks-T00-md" class="doc"><div class="docpath">tasks/T00.md</div><h1>T00 · 측정 기준선과 플랫폼 spike Implementation Plan</h1>
 <p><strong>Goal:</strong> 측정 기준선과 플랫폼 spike를 독립 검증 가능한 모듈과 증거로 완성한다.<br />
 <strong>Architecture:</strong> <a href="#doc-docs-02-SDD-md">SDD</a>와 <a href="#doc-docs-17-Data-Model-and-Interfaces-md">공개 인터페이스</a>를 준수한다.<br />
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> 없음 — 프로젝트 시작점<br />
-<strong>Status:</strong> PLANNED — 구현·런타임 시험 미실행. 필수 Task.</p>
+<strong>Status:</strong> IMPLEMENTED_WITH_OPEN_GATES — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -4514,7 +5183,7 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T00<br />
-<strong>Status:</strong> PLANNED — 구현·런타임 시험 미실행. 필수 Task.</p>
+<strong>Status:</strong> IMPLEMENTED_WITH_OPEN_GATES — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -4596,7 +5265,7 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T01<br />
-<strong>Status:</strong> PLANNED — 구현·런타임 시험 미실행. 필수 Task.</p>
+<strong>Status:</strong> IMPLEMENTED_WITH_OPEN_GATES — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -4680,7 +5349,7 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T01<br />
-<strong>Status:</strong> PLANNED — 구현·런타임 시험 미실행. 필수 Task.</p>
+<strong>Status:</strong> IMPLEMENTED_WITH_OPEN_GATES — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -4764,7 +5433,7 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T02, T03<br />
-<strong>Status:</strong> PLANNED — 구현·런타임 시험 미실행. 필수 Task.</p>
+<strong>Status:</strong> IMPLEMENTED_WITH_OPEN_GATES — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -4858,7 +5527,7 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T02, T03<br />
-<strong>Status:</strong> PLANNED — 구현·런타임 시험 미실행. 필수 Task.</p>
+<strong>Status:</strong> IMPLEMENTED_WITH_OPEN_GATES — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -4952,7 +5621,7 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T04, T05<br />
-<strong>Status:</strong> PLANNED — 구현·런타임 시험 미실행. 필수 Task.</p>
+<strong>Status:</strong> IMPLEMENTED_WITH_OPEN_GATES — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -5047,7 +5716,7 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T04, T06<br />
-<strong>Status:</strong> PLANNED — 구현·런타임 시험 미실행. 필수 Task.</p>
+<strong>Status:</strong> IMPLEMENTED_WITH_OPEN_GATES — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -5123,7 +5792,7 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T02, T07<br />
-<strong>Status:</strong> PLANNED — 구현·런타임 시험 미실행. 필수 Task.</p>
+<strong>Status:</strong> IMPLEMENTED_WITH_OPEN_GATES — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -5206,7 +5875,7 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T03, T01<br />
-<strong>Status:</strong> PLANNED — 구현·런타임 시험 미실행. 필수 Task.</p>
+<strong>Status:</strong> IMPLEMENTED_WITH_OPEN_GATES — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -5291,7 +5960,7 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T02, T01<br />
-<strong>Status:</strong> PLANNED — 구현·런타임 시험 미실행. 필수 Task.</p>
+<strong>Status:</strong> IMPLEMENTED_WITH_OPEN_GATES — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -5374,7 +6043,7 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T04, T10<br />
-<strong>Status:</strong> PLANNED — 구현·런타임 시험 미실행. 필수 Task.</p>
+<strong>Status:</strong> IMPLEMENTED_WITH_OPEN_GATES — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -5480,7 +6149,7 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T11<br />
-<strong>Status:</strong> PLANNED — 구현·런타임 시험 미실행. 필수 Task.</p>
+<strong>Status:</strong> IMPLEMENTED_WITH_OPEN_GATES — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -5557,7 +6226,7 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T04, T10, T03<br />
-<strong>Status:</strong> PLANNED — 구현·런타임 시험 미실행. 필수 Task.</p>
+<strong>Status:</strong> IMPLEMENTED_WITH_OPEN_GATES — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -5628,7 +6297,7 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T05, T10, T13<br />
-<strong>Status:</strong> PLANNED — 구현·런타임 시험 미실행. 필수 Task.</p>
+<strong>Status:</strong> IMPLEMENTED_WITH_OPEN_GATES — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -5723,7 +6392,7 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T08, T09, T10, T13<br />
-<strong>Status:</strong> PLANNED — 구현·런타임 시험 미실행. 필수 Task.</p>
+<strong>Status:</strong> IN_PROGRESS — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -5812,7 +6481,7 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T09, T13, T15<br />
-<strong>Status:</strong> PLANNED — 구현·런타임 시험 미실행. 필수 Task.</p>
+<strong>Status:</strong> IN_PROGRESS — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -5896,7 +6565,7 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T04, T05, T09, T12, T14<br />
-<strong>Status:</strong> PLANNED — 구현·런타임 시험 미실행. 필수 Task.</p>
+<strong>Status:</strong> PENDING — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -5961,7 +6630,7 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T17, T15<br />
-<strong>Status:</strong> PLANNED — 구현·런타임 시험 미실행. 선택적 확장 Task.</p>
+<strong>Status:</strong> NOT_SELECTED — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -6026,7 +6695,7 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T06, T17<br />
-<strong>Status:</strong> PLANNED — 구현·런타임 시험 미실행. 필수 Task.</p>
+<strong>Status:</strong> PENDING — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -6091,7 +6760,7 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T13, T06<br />
-<strong>Status:</strong> PLANNED — 구현·런타임 시험 미실행. 선택적 확장 Task.</p>
+<strong>Status:</strong> NOT_SELECTED — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -6174,7 +6843,7 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T07, T09, T12, T13, T15, T16, T17<br />
-<strong>Status:</strong> PLANNED — 구현·런타임 시험 미실행. 필수 Task.</p>
+<strong>Status:</strong> PENDING — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -6264,7 +6933,7 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T08, T10, T15, T16<br />
-<strong>Status:</strong> PLANNED — 구현·런타임 시험 미실행. 필수 Task.</p>
+<strong>Status:</strong> PENDING — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -6347,7 +7016,7 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T08, T12, T21, T22<br />
-<strong>Status:</strong> PLANNED — 구현·런타임 시험 미실행. 필수 Task.</p>
+<strong>Status:</strong> PENDING — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -6419,7 +7088,7 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T17, T22, T23<br />
-<strong>Status:</strong> PLANNED — 구현·런타임 시험 미실행. 필수 Task.</p>
+<strong>Status:</strong> PENDING — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -6485,7 +7154,7 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T24, T21, T19, T12<br />
-<strong>Status:</strong> PLANNED — 구현·런타임 시험 미실행. 필수 Task.</p>
+<strong>Status:</strong> PENDING — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -6556,6 +7225,8 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <p>schema는 bytespan overlap/order, UTF-8 byte length, root scope, capability, unique item_id, whole-file hash validity, current fence, resource availability를 대신 검사하지 않는다. 이 semantic checks는 runtime 필수다. inputs의 maxLength는 JSON character limit일 뿐 byte limit 대신이 아니다.</p>
 <p><code>immutable_snapshot</code> consistency는 내부 결과/후속 capability용으로 예약되며 v1 public input에는 노출하지 않는다. 이를 외부에서 요청하면 E_UNSUPPORTED다. managed_generation/bounded_stale도 해당 단계와 policy가 활성화됐을 때만 허용한다.</p>
 <p>planning manifest는 null identity를 허용하지만 ready/active는 실제 workspace/base/contract/fence/expiry가 필수다. 예시 planned manifest는 쓰기/실행 권한을 주지 않는다. 본 ZIP의 검증기용 Python/jsonschema는 <strong>문서 제작·검증 도구</strong>이며 Zig runtime의 배포 의존성이 아니다.</p>
+<h1>Native cancellation contract</h1>
+<p>The native <code>Cancel</code> value carries a borrowed atomic flag and an optional monotonic deadline with its borrowed <code>std.Io</code> backend. <code>withTimeout(io, milliseconds)</code> may shorten an inherited deadline; <code>check()</code> distinguishes <code>Cancelled</code> from <code>DeadlineExceeded</code>. Both borrowed lifetimes extend through callback drain. This adds no wire field or permission. Native range reads intersect this deadline with <code>ReadSpec.deadline_ms</code>.</p>
 </section><section id="doc-references-SOURCES-md" class="doc"><div class="docpath">references/SOURCES.md</div><h1>출처 및 검증 범위</h1>
 <p>기준일: <strong>2026-09-11</strong>. 아래는 외부 사실의 primary source다. scheduler 수치·메모리 cap·성능 목표·task 구조는 본 설계의 제안이며 외부 자료가 보증한 성능이 아니다.</p>
 <p><a id="R01"></a></p>
@@ -6688,4 +7359,4 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <p><a href="https://man7.org/linux/man-pages/man2/mmap.2.html">mmap(2)</a><br />
 분류: Linux man-pages project · 확인일: 2026-09-11<br />
 사용 범위: mapping lifetime/truncation faults and memory semantics</p>
-</section><footer>이 통합 문서는 외부 JavaScript·폰트·이미지 요청 없이 열람할 수 있습니다. 편집 가능한 원본·계약·fixture·검증기는 ZIP에 포함되어 있습니다. 성능과 런타임 테스트는 실행하지 않았습니다.</footer></main></body></html>
+</section><footer>이 통합 문서는 외부 JavaScript·폰트·이미지 요청 없이 열람할 수 있습니다. 편집 가능한 원본·계약·fixture·검증기는 저장소에 포함되어 있습니다. 실행 상태는 작업 상태표를, 실제 시험 결과는 source·binary·환경이 기록된 evidence를 따릅니다. 문서 검증은 런타임 시험을 대신하지 않습니다.</footer></main></body></html>

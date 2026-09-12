@@ -1,0 +1,109 @@
+test
++- fail failure
+error: registered test file tests/t12_test.zig is missing (T12 not delivered yet)
+
+test
++- run test T11-test
+   +- compile test T11-test ReleaseSafe native 1 errors
+src/fs/publish.zig:263:44: error: expected type 'u16', found 'u32'
+        if (std.c.fchmod(self.file.handle, mode) != 0) return error.IoFailure;
+                                           ^~~~
+src/fs/publish.zig:263:44: note: unsigned 16-bit int cannot represent all possible unsigned 32-bit values
+/Users/runner/work/_temp/zcr-native-34692959158-1-x86_64-macos/toolchain/zig-x86_64-macos-0.16.0/lib/std/c.zig:10712:42: note: parameter type declared here
+pub extern "c" fn fchmod(fd: fd_t, mode: mode_t) c_int;
+                                         ^~~~~~
+referenced by:
+    test.WR-001 primitive preserves ordinary mode and exact source identity: tests/t11_test.zig:491:26
+error: 1 compilation errors
+failed command: /Users/runner/work/_temp/zcr-native-34692959158-1-x86_64-macos/toolchain/zig-x86_64-macos-0.16.0/zig test -OReleaseSafe --dep zcr_core --dep zcr_policy --dep zcr_memory --dep zcr_fs_read --dep zcr_workspace --dep zcr_fs_edit -Mroot=/Users/runner/work/ZCR/ZCR/source/tests/t11_test.zig -OReleaseSafe -Mzcr_core=/Users/runner/work/ZCR/ZCR/source/src/core/types.zig -OReleaseSafe --dep zcr_core -Mzcr_policy=/Users/runner/work/ZCR/ZCR/source/src/policy/capability.zig -OReleaseSafe --dep zcr_core -Mzcr_memory=/Users/runner/work/ZCR/ZCR/source/src/memory/budget.zig -OReleaseSafe --dep zcr_core --dep zcr_policy --dep zcr_memory --dep zcr_cache -Mzcr_fs_read=/Users/runner/work/ZCR/ZCR/source/src/fs/read.zig -OReleaseSafe --dep zcr_core --dep zcr_policy -Mzcr_workspace=/Users/runner/work/ZCR/ZCR/source/src/workspace/registry.zig -OReleaseSafe --dep zcr_core --dep zcr_policy --dep zcr_memory --dep zcr_fs_read --dep zcr_workspace -Mzcr_fs_edit=/Users/runner/work/ZCR/ZCR/source/src/fs/edit.zig -OReleaseSafe --dep zcr_core --dep zcr_policy --dep zcr_memory --dep zcr_workspace -Mzcr_cache=/Users/runner/work/ZCR/ZCR/source/src/cache/content.zig -lc --cache-dir /Users/runner/work/_temp/zcr-native-34692959158-1-x86_64-macos/ReleaseSafe/local-cache --global-cache-dir /Users/runner/work/_temp/zcr-native-34692959158-1-x86_64-macos/ReleaseSafe/global-cache --name T11-test --zig-lib-dir /Users/runner/work/_temp/zcr-native-34692959158-1-x86_64-macos/toolchain/zig-x86_64-macos-0.16.0/lib/ --listen=-
+
+test
++- fail failure
+error: registered test file tests/t15_test.zig is missing (T15 not delivered yet)
+
+test
++- run test T05-test w
+FS-004 corpus=small actual_files=1000 candidate_count=1000 tracked_live=3745880 tracked_peak=3745880 coverage_skipped=0 complete=true corpus_sha256=c51d1cae1ca2457bc0183a853f69ca5841ce7cc770badec767ff85cac9694d5c
+FS-004 corpus=large actual_files=200000 candidate_count=200000 tracked_live=3745880 tracked_peak=3745880 coverage_skipped=0 complete=true corpus_sha256=8516686afc53e0500c9119dc68e4d62c60ab6e601af8d43a7f282bb90db6d26b
+failed command: cd /Users/runner/work/_temp/zcr-native-34692959158-1-x86_64-macos/ReleaseSafe/local-cache && /Users/runner/work/_temp/zcr-native-34692959158-1-x86_64-macos/ReleaseSafe/local-cache/o/c3302cd7e3bbd7c90d2e955ef8165454/T05-test --cache-dir=/Users/runner/work/_temp/zcr-native-34692959158-1-x86_64-macos/ReleaseSafe/local-cache --seed=0x6b9a49e8 --listen=-
+
+Build Summary: 49/55 steps succeeded (3 failed); 232/244 tests passed (12 skipped)
+test transitive failure
++- install T00-test success
+|  +- compile test T00-test ReleaseSafe native success 53s MaxRSS:371M
++- run test T00-test 12 pass (12 total) 2s MaxRSS:3M
+|  +- compile test T00-test ReleaseSafe native (reused)
++- install T01-test success
+|  +- compile test T01-test ReleaseSafe native success 39s MaxRSS:340M
+|     +- options cached
++- run test T01-test 19 pass (19 total) 15s MaxRSS:3M
+|  +- compile test T01-test ReleaseSafe native (+1 more reused dependencies)
++- install T02-test success
+|  +- compile test T02-test ReleaseSafe native success 30s MaxRSS:313M
+|     +- options (reused)
++- run test T02-test 15 pass (15 total) 5s MaxRSS:3M
+|  +- compile test T02-test ReleaseSafe native (+1 more reused dependencies)
++- install T03-test success
+|  +- compile test T03-test ReleaseSafe native success 20s MaxRSS:277M
++- run test T03-test 16 pass (16 total) 401ms MaxRSS:1M
+|  +- compile test T03-test ReleaseSafe native (reused)
++- install T04-test success
+|  +- compile test T04-test ReleaseSafe native success 17s MaxRSS:286M
++- run test T04-test 13 pass (13 total) 946ms MaxRSS:18M
+|  +- compile test T04-test ReleaseSafe native (reused)
++- install T04-deadline-test success
+|  +- compile test T04-deadline-test ReleaseSafe native success 13s MaxRSS:266M
++- run test T04-deadline-test 2 pass (2 total) 5ms MaxRSS:864K
+|  +- compile test T04-deadline-test ReleaseSafe native (reused)
++- install T05-test success
+|  +- compile test T05-test ReleaseSafe native success 25s MaxRSS:306M
++- run test T05-test 15 pass (15 total) 59s MaxRSS:5M
+|  +- compile test T05-test ReleaseSafe native (reused)
++- install T06-test success
+|  +- compile test T06-test ReleaseSafe native success 21s MaxRSS:299M
++- run test T06-test 15 pass (15 total) 3s MaxRSS:6M
+|  +- compile test T06-test ReleaseSafe native (reused)
++- install T07-test success
+|  +- compile test T07-test ReleaseSafe native success 26s MaxRSS:330M
++- run test T07-test 25 pass (25 total) 307ms MaxRSS:8M
+|  +- compile test T07-test ReleaseSafe native (reused)
++- install T08-test success
+|  +- compile test T08-test ReleaseSafe native success 43s MaxRSS:373M
+|     +- options (reused)
++- run test T08-test 18 pass (18 total) 788ms MaxRSS:29M
+|  +- compile test T08-test ReleaseSafe native (+1 more reused dependencies)
++- install T09-test success
+|  +- compile test T09-test ReleaseSafe native success 22s MaxRSS:289M
++- run test T09-test 15 pass (15 total) 137ms MaxRSS:4M
+|  +- compile test T09-test ReleaseSafe native (reused)
++- install T08-launch-test success
+|  +- compile test T08-launch-test ReleaseSafe native success 23s MaxRSS:265M
+|     +- options (reused)
++- run test T08-launch-test 2 pass (2 total) 9ms MaxRSS:872K
+|  +- compile test T08-launch-test ReleaseSafe native (+1 more reused dependencies)
++- install T10-test success
+|  +- compile test T10-test ReleaseSafe native success 25s MaxRSS:334M
++- run test T10-test 44 pass (44 total) 13s MaxRSS:3M
+|  +- compile test T10-test ReleaseSafe native (reused)
++- install T11-test transitive failure
+|  +- compile test T11-test ReleaseSafe native 1 errors
++- run test T11-test transitive failure
+|  +- compile test T11-test ReleaseSafe native (reused)
++- fail failure
++- install T13-test success
+|  +- compile test T13-test ReleaseSafe native success 18s MaxRSS:346M
++- run test T13-test 14 pass (14 total) 4s MaxRSS:3M
+|  +- compile test T13-test ReleaseSafe native (reused)
++- install T14-test success
+|  +- compile test T14-test ReleaseSafe native success 25s MaxRSS:354M
++- run test T14-test 7 pass, 12 skip (19 total) 1s MaxRSS:7M
+|  +- compile test T14-test ReleaseSafe native (reused)
++- fail failure
++- run exe zcr success 10ms
+|  +- compile exe zcr ReleaseSafe native cached 170ms MaxRSS:21M
+|     +- options (reused)
++- run exe zcr success 7ms
+   +- compile exe zcr ReleaseSafe native (+1 more reused dependencies)
+
+error: the following build command failed with exit code 1:
+/Users/runner/work/_temp/zcr-native-34692959158-1-x86_64-macos/ReleaseSafe/local-cache/o/18af444a8e4074f926d7ecd1b8f85dd0/build /Users/runner/work/_temp/zcr-native-34692959158-1-x86_64-macos/toolchain/zig-x86_64-macos-0.16.0/zig /Users/runner/work/_temp/zcr-native-34692959158-1-x86_64-macos/toolchain/zig-x86_64-macos-0.16.0/lib /Users/runner/work/ZCR/ZCR/source /Users/runner/work/_temp/zcr-native-34692959158-1-x86_64-macos/ReleaseSafe/local-cache /Users/runner/work/_temp/zcr-native-34692959158-1-x86_64-macos/ReleaseSafe/global-cache --seed 0x6b9a49e8 -Z8453563db91c7c61 -j2 -Doptimize=ReleaseSafe --prefix /Users/runner/work/_temp/zcr-native-34692959158-1-x86_64-macos/ReleaseSafe/out --summary all test -Dinstall-tests=true

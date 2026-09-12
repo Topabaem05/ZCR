@@ -1,0 +1,12 @@
+Build Summary: 8/8 steps succeeded; 57/57 tests passed
+test success
++- install T02-test success
+|  +- compile test T02-test Debug native success 759ms MaxRSS:182M
+|     +- options success
++- run test T02-test 15 pass (15 total) 706ms MaxRSS:6M
+|  +- compile test T02-test Debug native (+1 more reused dependencies)
++- install T10-test success
+|  +- compile test T10-test Debug native success 897ms MaxRSS:182M
++- run test T10-test 42 pass (42 total) 1s MaxRSS:8M
+   +- compile test T10-test Debug native (reused)
+

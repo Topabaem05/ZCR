@@ -52,6 +52,8 @@ Receipt = { id, op_digest, applied:bool, durable:bool,
 
 수명 규칙: `Borrow`는 호출의 sync 범위만 유효하다. 비동기 callback에 전달하는 것은 `Owned JobEnvelope`이며 parent arena의 짧은 slice를 무보호로 보관하지 않는다. 모든 u64 size/offset 덧셈과 u32 index 변환은 overflow 검사한다.
 
+`Cancel`은 공유 atomic 취소 flag와 선택적인 monotonic deadline을 가진다. `withTimeout(io, ms)`는 상위 deadline을 연장하지 않으며 `check()`는 명시 취소와 시간 초과를 각각 `Cancelled`·`DeadlineExceeded`로 구분한다. flag와 Io backend는 모든 callback이 끝날 때까지 유효해야 한다. 읽기 호출은 `ReadSpec.deadline_ms`를 이 deadline에 교차 적용한다. 파일 I/O 자체의 중단 가능성은 OS 경계에 따르며 각 chunk와 결과 공개 전에 확인한다.
+
 ## 3. Public function 계약
 
 | ID | 논리 signature | 소유·오류 규칙 |
@@ -75,9 +77,13 @@ Receipt = { id, op_digest, applied:bool, durable:bool,
 | I17 | health(SessionContext) → HealthSnapshot | 타 세션 소스·토큰 노출 금지 |
 | I18 | serveFrame(Connection, BoundedBytes) → EncodedToolResult | request/output lifetime 분리 |
 | I19 | JournalStore.prepare(PreparedRecord) / record(Receipt) / lookup(Key) → JournalResult | versioned record, checksummed persistence, idempotency digest 검사 |
+
+I19의 native persistence 보완은 기존 세 signature를 유지한다. `PreparedRecord.publication`은 실제 workspace/root/parent/temp/old-file 정체성, temp basename, fence, durability, 미리 할당한 receipt ID를 담는다. 영속 store는 이를 필수로 검증하고 복사한다. 선택적 `transition(APPLIED receipt | ABORTED receipt)` vtable은 PREPARED 뒤의 상태를 영속화하며, 없는 구현은 `Unsupported`를 반환한다. 이전 fake-store 단위 시험만 필드를 생략할 수 있고 production write는 이 채널과 T12 crash/restart 증거를 모두 요구한다. `record(Receipt)`는 최종 결과를 기록하되 durability 실패나 복구 필요 상태를 성공으로 승격하지 않는다. 재시작의 새 registry incarnation은 신뢰된 호스트의 명시적 연속성 검증 없이 이전 journal namespace를 재사용하지 않는다.
 ```
 
 구체 struct 필드 추가/오류 union 변경은 contract digest 변경이다. task는 동일 개념에 새로운 로컬 public type을 발명하지 않는다. private implementation struct는 모듈 안에서 자유롭게 바꿀 수 있다.
+
+영속 store의 `lookup`/`prepare`가 반환하는 Busy·resource·contract admission 오류는 저장 상태를 바꾸지 않은 확정 거부여야 한다. 저장 여부가 불확실하거나 파일·무결성 오류이면 editor는 workspace를 격리하고 정확한 임시 파일·저널 증거를 복구 시점까지 보존한다. 공개 후 parent sync가 실패한 경우 최종 기록에 성공해도 적용 사실과 `E_DURABILITY`를 유지하며, commit guard를 놓기 전에 추가 쓰기를 격리한다.
 
 ## 4. Lock과 소유 순서
 

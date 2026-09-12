@@ -1,0 +1,33 @@
+1/14 t09_test.test.SC-001 foreground dependencies retain USER_INITIATED and pending work promotes...OK
+2/14 t09_test.test.SC-002 four foreground chunks then maintenance with workspace and task rotation...OK
+3/14 t09_test.test.SC-002 eight mixed tasks obey CPU IO and reserved foreground permits before dispatch...OK
+4/14 t09_test.test.SC-003 cancellation races callback teardown and drain keeps all owned jobs alive...OK
+5/14 t09_test.test.SC-004 nested submit uses the same bounded executor and drain detects self wait...OK
+6/14 t09_test.test.SC-002 queue saturation cancellation and invalid reservations preserve caller ownership...OK
+7/14 t09_test.test.SC-004 Darwin public callback QoS and teardown or explicit unsupported status...OK
+8/14 t09_test.test.SC-002 concurrent producers saturate bounded workers without losing jobs...OK
+9/14 t09_test.test.SC-002 executor full queue rejects without consuming its reservation...OK
+10/14 t09_test.test.SC-001 idle work waits behind blocked dependencies and impossible permits reject...OK
+11/14 t09_test.test.SC-004 partial worker creation failure joins started workers and permits retry...OK
+12/14 t09_test.test.SC-003 callback IO failure returns scratch and execution permits before idle barrier...OK
+13/14 t09_test.test.SC-002 R1 multi-permit waiter progresses under staggered foreground refill...FAIL (TestExpectedGateProgress)
+/workspace/scratch/3f4ab65dfb82/ZCR-T09/tests/t09_test.zig:504:5: 0x122f2df in waitForGate (t09_test.zig)
+    return error.TestExpectedGateProgress;
+    ^
+/workspace/scratch/3f4ab65dfb82/ZCR-T09/tests/t09_test.zig:566:13: 0x123c999 in test.SC-002 R1 multi-permit waiter progresses under staggered foreground refill (t09_test.zig)
+            try waitForGate(&waiter.entered);
+            ^
+14/14 t09_test.test.SC-001 R2 idle dispatch waits for active foreground callback completion...expected 1, found 0
+FAIL (TestExpectedEqual)
+/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:118:17: 0x122f399 in expectEqualInner__anon_43301 (std.zig)
+                return error.TestExpectedEqual;
+                ^
+/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:83:5: 0x122fca9 in expectEqual (t09_test.zig)
+    return expectEqualInner(T, expected, actual);
+    ^
+/workspace/scratch/3f4ab65dfb82/ZCR-T09/tests/t09_test.zig:603:13: 0x122fd53 in test.SC-001 R2 idle dispatch waits for active foreground callback completion (t09_test.zig)
+            try t.expectEqual(@as(usize, 1), while_foreground_active.queued);
+            ^
+12 passed; 0 skipped; 2 failed.
+error: the following test command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/T09/bin/scheduler-Debug --seed=0x301caf9a

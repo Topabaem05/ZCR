@@ -1,0 +1,18 @@
+test
++- run test T05-test 9 pass, 1 fail (10 total)
+error: 't05_test.test.FS-005 symlink loops are not followed and an unreadable directory makes the result incomplete' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:615:14: 0x100652eab in expect (T05-test)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m6-unreadable-not-counted/tests/t05_test.zig:420:5: 0x10068f203 in test.FS-005 symlink loops are not followed and an unreadable directory makes the result incomplete (T05-test)
+           try testing.expect(coverage.skipped >= 1);
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache/o/dae910aa4a3e706f854d2c9ca341b91d/T05-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache --seed=0x6fea5f4b --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 9/10 tests passed (1 failed)
+test transitive failure
++- run test T05-test 9 pass, 1 fail (10 total)
+   +- compile test T05-test Debug native success 5s MaxRSS:255M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache/o/5141f98b72c01d7e7e7d84fd5e561ea8/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m6-unreadable-not-counted /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T05/zig-global-cache --seed 0x6fea5f4b -Za3775cdae6b9497d test -Dtest-group=fs --summary all

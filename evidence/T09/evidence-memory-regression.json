@@ -1,0 +1,13 @@
+{
+  "schema_version": "zcr-evidence/1",
+  "task_id": "T09",
+  "label": "review-memory-debug",
+  "command": "/workspace/scratch/3f4ab65dfb82/state/T09/out-review-memory-debug/bin/T03-test",
+  "exit_code": 0,
+  "source_commit": "acc2741304887825080762166f09dfe0aeb5533c",
+  "source_tree": "b467e50360e331b500f1079aee12442494e8b778",
+  "worktree_git_dir": "/workspace/scratch/3f4ab65dfb82/ZCR/.git/worktrees/ZCR-T09",
+  "binary_path": "/workspace/scratch/3f4ab65dfb82/state/T09/out-review-memory-debug/bin/T03-test",
+  "binary_sha256": "cb0a8825661d48dcde1c663d7f3262aba84ae9ba1f14ded87d648b545f2190e7",
+  "recorded_at_unix_ms": 1789195662442
+}

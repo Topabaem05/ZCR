@@ -1,0 +1,31 @@
+test
++- run test T05-test 9 pass, 1 fail (10 total)
+error: 't05_test.test.FS-003 hidden files, .git and escaped, comment and trailing-space patterns follow the policy' failed:
+       expected (5):
+         # comment.txt
+         .config/tool.json
+         .env
+         .gitignore
+         visible.txt
+       actual (6):
+         # comment.txt
+         .config/tool.json
+         .env
+         .gitignore
+         trail 
+         visible.txt
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m4-trim-escaped-space/tests/t05_test.zig:174:9: 0x101066d17 in expectSameSet (T05-test)
+               return error.TestExpectedEqual;
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m4-trim-escaped-space/tests/t05_test.zig:252:5: 0x1010ac8b7 in test.FS-003 hidden files, .git and escaped, comment and trailing-space patterns follow the policy (T05-test)
+           try expectSameSet(oracle, with_hidden.sorted());
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache/o/48f99a1bf2e484c9873bea7a1a860519/T05-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache --seed=0x89568bda --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 9/10 tests passed (1 failed)
+test transitive failure
++- run test T05-test 9 pass, 1 fail (10 total)
+   +- compile test T05-test Debug native success 6s MaxRSS:257M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache/o/5141f98b72c01d7e7e7d84fd5e561ea8/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m4-trim-escaped-space /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T05/zig-global-cache --seed 0x89568bda -Zac6d35a32fdba361 test -Dtest-group=fs --summary all

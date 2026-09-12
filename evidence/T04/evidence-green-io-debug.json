@@ -1,0 +1,13 @@
+{
+  "schema_version": "zcr-evidence/1",
+  "task_id": "T04",
+  "label": "green-io-debug",
+  "command": "zig build test -Dtest-group=io -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-green-io-debug",
+  "exit_code": 0,
+  "source_commit": "363899e7b7197ba00e5bd5770989e538822d455d",
+  "source_tree": "aae6d32ca182c4ff2b0e60870350b2c82f1503f0",
+  "worktree_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/task-t04",
+  "binary_path": "/Users/guribbong/code/ZCR-state/tasks/T04/out-green-io-debug/bin/T04-test",
+  "binary_sha256": "8a2451e923ad83fae58fe985a9c25fcf69e16086d8ea6e25c0398ab3cae7f280",
+  "recorded_at_unix_ms": 1789129847551
+}

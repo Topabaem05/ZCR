@@ -1,0 +1,41 @@
+test
++- fail failure
+error: registered test file tests/t06_test.zig is missing (T06 not delivered yet)
+
+Build Summary: 22/24 steps succeeded (1 failed); 74/74 tests passed
+test transitive failure
++- install T00-test success
+|  +- compile test T00-test Debug native cached 2s MaxRSS:25M
++- run test T00-test 11 pass (11 total) 10s MaxRSS:10M
+|  +- compile test T00-test Debug native (reused)
++- install T01-test success
+|  +- compile test T01-test Debug native cached 2s MaxRSS:25M
+|     +- options cached
++- run test T01-test 18 pass (18 total) 2m MaxRSS:10M
+|  +- compile test T01-test Debug native (+1 more reused dependencies)
++- install T02-test success
+|  +- compile test T02-test Debug native cached 1s MaxRSS:31M
+|     +- options (reused)
++- run test T02-test 12 pass (12 total) 25s MaxRSS:11M
+|  +- compile test T02-test Debug native (+1 more reused dependencies)
++- install T03-test success
+|  +- compile test T03-test Debug native cached 2s MaxRSS:26M
++- run test T03-test 12 pass (12 total) 21s MaxRSS:4M
+|  +- compile test T03-test Debug native (reused)
++- install T04-test success
+|  +- compile test T04-test Debug native cached 2s MaxRSS:25M
++- run test T04-test 10 pass (10 total) 16s MaxRSS:19M
+|  +- compile test T04-test Debug native (reused)
++- install T05-test success
+|  +- compile test T05-test Debug native success 34s MaxRSS:186M
++- run test T05-test 11 pass (11 total) 2m MaxRSS:9M
+|  +- compile test T05-test Debug native (reused)
++- fail failure
++- run exe zcr success 123ms
+|  +- compile exe zcr Debug native cached 2s MaxRSS:26M
+|     +- options (reused)
++- run exe zcr success 160ms
+   +- compile exe zcr Debug native (+1 more reused dependencies)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/integration/zig-local-cache/o/ce59de40176ab3ab39ded0a6edd5fd7e/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-worktrees/integration /Users/guribbong/code/ZCR-state/integration/zig-local-cache /Users/guribbong/code/ZCR-state/integration/zig-global-cache --seed 0xaefd2001 -Zedb4ce8728101ebe test -Doptimize=Debug -Dinstall-tests=true --prefix /Users/guribbong/code/ZCR-state/integration/out-int5-all-debug --summary all

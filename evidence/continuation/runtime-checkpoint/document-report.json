@@ -1,0 +1,1412 @@
+{
+  "scope": "document/schema/fixture/package validation ONLY; no Zig runtime, Mac hardware, or actual host integration was tested",
+  "status": "pass",
+  "checks_total": 279,
+  "checks_failed": 0,
+  "counts": {
+    "main_design_docs": 18,
+    "tasks": 26,
+    "task_steps": 156,
+    "test_specifications": 94,
+    "core_tools": 8,
+    "svg_diagrams": 11,
+    "primary_sources": 26
+  },
+  "checks": [
+    {
+      "check": "all_json_parse",
+      "status": "pass",
+      "detail": "138"
+    },
+    {
+      "check": "schema:contracts/response.schema.json",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "schema:contracts/task-manifest.schema.json",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "schema:contracts/data.schema.json",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "schema:contracts/inputs/zcr_read.schema.json",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "schema:contracts/inputs/zcr_files.schema.json",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "schema:contracts/inputs/zcr_status.schema.json",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "schema:contracts/inputs/zcr_patch.schema.json",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "schema:contracts/inputs/zcr_health.schema.json",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "schema:contracts/inputs/zcr_create.schema.json",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "schema:contracts/inputs/zcr_search.schema.json",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "schema:contracts/inputs/zcr_batch_read.schema.json",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "eight_unique_tools",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "example:zcr_read",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "example:zcr_files",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "example:zcr_search",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "example:zcr_batch_read",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "example:zcr_patch",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "example:zcr_create",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "example:zcr_status",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "example:zcr_health",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "negative:empty_literal",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "negative:33_batch_items",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "negative:model_root_override",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "negative:output_limit",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "planned_manifest_schema",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "negative:unbound_active_manifest",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "read_reply_envelope",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "read_reply_data",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "read_reply_byte_count",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "negative:false_complete",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "fixture:empty",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "fixture:lf",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "fixture:no-final-newline",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "fixture:crlf",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "fixture:utf8",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "fixture:single-blank",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "patch_fixture:patch-beta",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "patch_fixture:utf8-split-rejected",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "memory_sum:8",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "memory_sum:16",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "memory_sum:24",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "memory_sum:32",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "memory_sum:64",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "memory_sum:None",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "26_unique_tasks",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "unique_test_ids",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "catalog_preserves_initial_test_specifications",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "progress_covers_all_tasks",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "progress_test_mapping",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "complete_tasks_have_current_evidence",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_dag_acyclic",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_steps:T00",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_file_ownership:T00",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:PF-001",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_steps:T01",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_file_ownership:T01",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:DV-001",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:DV-004",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:DV-005",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_steps:T02",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_file_ownership:T02",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:IS-003",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:IS-004",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:DV-002",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:DV-003",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_steps:T03",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_file_ownership:T03",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:ME-001",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:ME-002",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:ME-003",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:ME-007",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_steps:T04",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_file_ownership:T04",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:IO-001",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:IO-002",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:IO-003",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:IO-004",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:IO-005",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:IO-006",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_steps:T05",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_file_ownership:T05",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:FS-001",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:FS-002",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:FS-003",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:FS-004",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:FS-005",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:FS-006",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_steps:T06",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_file_ownership:T06",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:SR-001",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:SR-002",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:SR-003",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:SR-004",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:SR-005",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:SR-006",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_steps:T07",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_file_ownership:T07",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:BA-001",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:BA-002",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:BA-003",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_steps:T08",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_file_ownership:T08",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:MC-001",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:MC-002",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:MC-003",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:MC-004",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_steps:T09",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_file_ownership:T09",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:SC-001",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:SC-002",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:SC-003",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:SC-004",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_steps:T10",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_file_ownership:T10",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:IS-001",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:IS-002",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:IS-005",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:IS-008",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_steps:T11",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_file_ownership:T11",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:WR-001",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:WR-002",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:WR-003",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:WR-004",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:WR-007",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:WR-009",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:WR-010",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:IS-007",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_steps:T12",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_file_ownership:T12",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:WR-005",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:WR-006",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:WR-008",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_steps:T13",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_file_ownership:T13",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:ME-004",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:IS-006",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_steps:T14",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_file_ownership:T14",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:WA-001",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:WA-002",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:WA-003",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:WA-004",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:WA-005",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:WA-006",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_steps:T15",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_file_ownership:T15",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:BR-001",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:BR-002",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:BR-003",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:BR-004",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:BR-005",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_steps:T16",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_file_ownership:T16",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:SC-005",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:SC-006",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:ME-005",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:ME-006",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_steps:T17",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_file_ownership:T17",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:ME-008",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_steps:T18",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_file_ownership:T18",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:WIN-GATE",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_steps:T19",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_file_ownership:T19",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:PF-005",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_steps:T20",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_file_ownership:T20",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:AS-001",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:AS-002",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:AS-003",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:AS-004",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_steps:T21",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_file_ownership:T21",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:PF-002",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:PF-003",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:PF-004",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:PF-006",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:PF-007",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_steps:T22",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_file_ownership:T22",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:OB-001",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:OB-002",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:OB-003",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:OB-004",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_steps:T23",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_file_ownership:T23",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:MC-005",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:MC-006",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_steps:T24",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_file_ownership:T24",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:PACKAGE-GATE",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_steps:T25",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "task_file_ownership:T25",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:PF-008",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "test_link:DV-006",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "all_catalog_tests_attached_to_tasks",
+      "status": "pass",
+      "detail": "[]"
+    },
+    {
+      "check": "exclusive_declared_owned_paths",
+      "status": "pass",
+      "detail": "{}"
+    },
+    {
+      "check": "no_unfinished_markers:CLAUDE.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:AGENTS.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:README.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T04.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T16.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/INDEX.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T00.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T17.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T15.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T24.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T03.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T11.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T02.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T13.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T21.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T10.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T01.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T20.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T06.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T23.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T12.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T18.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T22.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T14.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T05.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T08.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T19.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T25.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T07.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T09.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:verification/README.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:docs/01-Requirements-and-Traceability.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:docs/03-C4-Architecture.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:docs/10-Portability-x86.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:docs/11-Security-and-Failure-Recovery.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:docs/17-Data-Model-and-Interfaces.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:docs/15-ADR.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:docs/13-Implementation-Roadmap.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:docs/07-Pipelines-and-Consistency.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:docs/12-Performance-and-Test-Plan.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:docs/14-Integration-and-Operations.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:docs/09-Storage-Search-and-Edit.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:docs/04-Apple-Silicon-Scheduling.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:docs/08-API-and-MCP.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:docs/00-Executive-Brief.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:docs/05-Memory-and-Pressure.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:docs/16-Evidence-and-Open-Gates.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:docs/02-SDD.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:docs/06-Worktree-and-Task-Isolation.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:contracts/README.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:bench/baseline.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tools/README.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:references/SOURCES.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:diagrams/README.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:docs/superpowers/plans/2026-09-12-runtime-continuation.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/T08/report.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/T07/continuation-2026-09-12/report.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/continuation/test-harness/README.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/continuation/legacy/report.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/continuation/test-harness/red/README.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:.superpowers/sdd/2026-09-12-runtime-continuation/progress.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "markdown_links_exist",
+      "status": "pass",
+      "detail": "[]"
+    },
+    {
+      "check": "source_refs_known",
+      "status": "pass",
+      "detail": "[]"
+    },
+    {
+      "check": "svg_xml:core-scheduling.svg",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "svg_xml:edit-state.svg",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "svg_xml:c4-ownership.svg",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "svg_xml:c3-components.svg",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "svg_xml:memory-pressure.svg",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "svg_xml:worktree-isolation.svg",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "svg_xml:c1-context.svg",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "svg_xml:search-pipeline.svg",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "svg_xml:task-dag.svg",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "svg_xml:deployment.svg",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "svg_xml:c2-containers.svg",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "html_unique_ids",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "html_fragment_links",
+      "status": "pass",
+      "detail": "[]"
+    },
+    {
+      "check": "html_no_external_assets",
+      "status": "pass",
+      "detail": "[]"
+    },
+    {
+      "check": "html_all_main_and_task_docs",
+      "status": "pass",
+      "detail": "50"
+    },
+    {
+      "check": "benchmark_not_fabricated",
+      "status": "pass",
+      "detail": ""
+    }
+  ]
+}

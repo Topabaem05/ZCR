@@ -1,0 +1,112 @@
+{
+  "task": "T09",
+  "role": "task",
+  "violations": [],
+  "changes": [
+    {
+      "kind": "added",
+      "path": "evidence/T09/logs/review-red.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "modified",
+      "path": "src/scheduler/executor.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "modified",
+      "path": "src/scheduler/queue.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "modified",
+      "path": "tests/t09_test.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "modified",
+      "path": "evidence/T09/digests.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "working_tree"
+    },
+    {
+      "kind": "modified",
+      "path": "evidence/T09/evidence-green-debug.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "working_tree"
+    },
+    {
+      "kind": "modified",
+      "path": "evidence/T09/evidence-green-releasesafe.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "working_tree"
+    },
+    {
+      "kind": "modified",
+      "path": "evidence/T09/evidence-memory-regression.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "working_tree"
+    },
+    {
+      "kind": "modified",
+      "path": "evidence/T09/handoff.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "working_tree"
+    },
+    {
+      "kind": "modified",
+      "path": "evidence/T09/logs/final-preflight.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "working_tree"
+    },
+    {
+      "kind": "modified",
+      "path": "evidence/T09/logs/green-debug-run.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "working_tree"
+    },
+    {
+      "kind": "modified",
+      "path": "evidence/T09/logs/green-releasesafe-run.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "working_tree"
+    },
+    {
+      "kind": "modified",
+      "path": "evidence/T09/task-step.snapshot.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "working_tree"
+    },
+    {
+      "kind": "modified",
+      "path": "evidence/T09/test-runs.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "working_tree"
+    },
+    {
+      "kind": "untracked",
+      "path": "evidence/T09/logs/regression-memory-releasesafe-run.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "working_tree"
+    }
+  ]
+}

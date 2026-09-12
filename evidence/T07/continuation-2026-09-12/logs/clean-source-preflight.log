@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "state": {
+    "toplevel": "/workspace/scratch/3f4ab65dfb82/ZCR-T07",
+    "absolute_git_dir": "/workspace/scratch/3f4ab65dfb82/ZCR/.git/worktrees/ZCR-T07",
+    "common_dir": "/workspace/scratch/3f4ab65dfb82/ZCR/.git",
+    "head_commit": "fa80da7edde09fff635ec79db21300323f7a10d5",
+    "head_tree": "f5b17b4aaa5e17c6190509fec593d3cbec9f72a8",
+    "branch": "codex/t07-corrections",
+    "entries": []
+  },
+  "reasons": []
+}

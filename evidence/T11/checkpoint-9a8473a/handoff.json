@@ -1,0 +1,24 @@
+{
+  "task_id": "T11",
+  "state": "checkpoint_pending_blocking_review_fixes",
+  "source_commit": "9a8473ae0eed17b0d80dc5b5044ff7990ce43e72",
+  "authorization_base": "98c722ebc906321b94bc3e9c8b60522f3305faa7",
+  "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+  "source_config_sha256": "154858761badbe1a14dae8b57f1db9a537e93893d1d07937f7e0fb8157890f39",
+  "corpus_sha256": "428de7abd14093eb387ea183fd3250b493a747b8962f2627de7398bc942e45ac",
+  "red_source_commit": "48648ae31459b3c4f367d22517341753a59bac0e",
+  "exports": [
+    "Editor.applyPatch I10",
+    "Editor.createFile I11",
+    "Editor.init(Options)",
+    "production_writes_enabled=false",
+    "test-only Stage/Fault hooks"
+  ],
+  "pending": [
+    "duplicate zero-width insertion RED/fix",
+    "guard.failRecovery integration",
+    "root-approved I19 metadata/transition follow-up",
+    "independent final review",
+    "T12 crash recovery before production writes"
+  ]
+}

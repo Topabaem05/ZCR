@@ -1,0 +1,26 @@
+F
+======================================================================
+FAIL: test_plain_python_launch_does_not_write_into_source (__main__.BootstrapTests.test_plain_python_launch_does_not_write_into_source)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/8fbf001214e7/ZCR/tools/ci/test_native_bootstrap.py", line 25, in test_plain_python_launch_does_not_write_into_source
+    self.assertEqual(sorted(p.name for p in source.iterdir()), sorted(before))
+AssertionError: Lists differ: ['__pycache__', 'native.py', 'storage_capture.py'] != ['native.py', 'storage_capture.py']
+
+First differing element 0:
+'__pycache__'
+'native.py'
+
+First list contains 1 additional elements.
+First extra element 2:
+'storage_capture.py'
+
+- ['__pycache__', 'native.py', 'storage_capture.py']
+?  ---------------
+
++ ['native.py', 'storage_capture.py']
+
+----------------------------------------------------------------------
+Ran 1 test in 0.149s
+
+FAILED (failures=1)

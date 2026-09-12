@@ -1,0 +1,19 @@
+test
++- run test T03-test 11 pass, 1 fail (12 total)
+error: 't03_test.test.ME-003 admission bounds in-flight requests per session and globally' failed:
+       expected error.Busy, found .{ .budget_id = 3, .bytes = 1024, .fd = 0, .cpu = 0, .output = 0, .released = false }
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:65:9: 0x100ba536f in expectError__anon_40448 (T03-test)
+               return error.TestExpectedError;
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T03/tmp/mutants/m5-no-session-limit/tests/t03_test.zig:206:5: 0x100ba5af3 in test.ME-003 admission bounds in-flight requests per session and globally (T03-test)
+           try testing.expectError(error.Busy, gate.reserve(session(1), .{ .input_bytes = 1 * KiB }));
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache/o/a2092e2cff0dd64c2efeffc739266b61/T03-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache --seed=0xd0930d80 --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 11/12 tests passed (1 failed)
+test transitive failure
++- run test T03-test 11 pass, 1 fail (12 total)
+   +- compile test T03-test Debug native success 10s MaxRSS:186M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache/o/c850a37cb4f46cd01dfc71be12bb7085/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T03/tmp/mutants/m5-no-session-limit /Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T03/zig-global-cache --seed 0xd0930d80 -Z44f7bee814dcaac4 test -Dtest-group=memory --summary all

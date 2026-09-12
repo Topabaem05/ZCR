@@ -1,0 +1,47 @@
+{
+  "commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+  "files": [
+    {
+      "git_blob": "ea0a96c7d3422eaedaaa53a2a62ea2c271178e14",
+      "path": "src/memory/budget.zig",
+      "sha256": "e23ef2d785042f30183e1c711dc55be3e223452b449ea3e3b50759f4f686397b"
+    },
+    {
+      "git_blob": "c22e236244b4cabf3ab40566dc2e3917fec54936",
+      "path": "src/protocol/mcp.zig",
+      "sha256": "8db22f6aa344bba8a65e0177326e75e6d922ffca5122dbcf9c330e2f2d4e91b0"
+    },
+    {
+      "git_blob": "c1400c88db13052500e782589b67cc93cdadc8c0",
+      "path": "src/broker/server.zig",
+      "sha256": "f462a6bb2ddca48a4a4f27f472875289aa45fa89b3b301fd5099be8d2e452712"
+    },
+    {
+      "git_blob": "4c663c9641925831161529a3fe9f50eecb66faa4",
+      "path": "tests/t03_test.zig",
+      "sha256": "690325ac40dd1f26046164384659e891c5049f5692c218b59b7175562f1f13f7"
+    },
+    {
+      "git_blob": "fe5c20c71cb479298b8b5d366e3cf69f218e19f7",
+      "path": "tests/t08_test.zig",
+      "sha256": "a38bc03ce2ea38445e4af42c9a097f3cc67795950d1ebf98a0f310babcfce3e9"
+    },
+    {
+      "git_blob": "db1ac9b2c90786cbb93bc5d4aa0badebaaf4f98a",
+      "path": "tests/t13_test.zig",
+      "sha256": "4df3f52dcb1b9a6f5fb115185280403949425580a9d63607f85c01525072a17e"
+    },
+    {
+      "git_blob": "638955931cf0c1955087d0c52a7400d346d75474",
+      "path": "tests/t15_test.zig",
+      "sha256": "3a9089a89e3b6caf8a4742403ef88637a8df193d0c0ea5710f6235be033d45d9"
+    },
+    {
+      "git_blob": "c4508fea8689688f4b0bd7a89ac86ab27c0b945c",
+      "path": "tests/launch_test.zig",
+      "sha256": "a6a3b649bce194c35c9d7daa4b35a197cf372df8f0917d097c7785e846a98fcf"
+    }
+  ],
+  "schema": "zcr-evidence-source-corpus/1",
+  "tree": "889597e35b5d3210b350fbe8f8493185d071cdbc"
+}

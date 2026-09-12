@@ -1,0 +1,12 @@
+src/platform/darwin.zig:1:1: error: unable to load 'darwin.zig': FileNotFound
+tests/t09_test.zig:8:24: note: file imported here
+const darwin = @import("zcr_darwin");
+                       ^~~~~~~~~~~~
+src/scheduler/executor.zig:1:1: error: unable to load 'executor.zig': FileNotFound
+tests/t09_test.zig:6:28: note: file imported here
+const scheduling = @import("zcr_executor");
+                           ^~~~~~~~~~~~~~
+src/scheduler/queue.zig:1:1: error: unable to load 'queue.zig': FileNotFound
+tests/t09_test.zig:7:24: note: file imported here
+const queues = @import("zcr_queue");
+                       ^~~~~~~~~~~

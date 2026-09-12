@@ -1,0 +1,30 @@
+test
++- run test T07-test 0 pass, 1 fail (1 total)
+error: 't07_test.test.IO-004 native batch preserves a deadline-only token at admission' failed:
+       expected error.DeadlineExceeded, found error.Cancelled
+       /workspace/scratch/3f4ab65dfb82/ZCR-work/src/batch/read.zig:277:40: 0x1233064 in batchRead (read.zig)
+               if (self.cancel.isRequested()) return error.Cancelled;
+                                              ^
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:118:17: 0x122f6aa in expectEqualInner__anon_44213 (std.zig)
+                       return error.TestExpectedEqual;
+                       ^
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:83:5: 0x122fce7 in expectEqual (t07_test.zig)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-work/tests/t07_test.zig:151:13: 0x122fd6f in expectBatchError (t07_test.zig)
+                   try testing.expectEqual(expected, @as(anyerror, err));
+                   ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-work/tests/t07_test.zig:31:5: 0x12306b9 in test.IO-004 native batch preserves a deadline-only token at admission (t07_test.zig)
+           try h.expectBatchError(error.DeadlineExceeded, session(), &items, try batch.plannedCost(&items, 4096, 1));
+           ^
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/integration/cache-batch && /workspace/scratch/3f4ab65dfb82/state/integration/cache-batch/o/7de461a2494d3cb73e8d3bcf2a9647d0/T07-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/integration/cache-batch --seed=0xa22fe3b3 --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 0/1 tests passed (1 failed)
+test transitive failure
++- install T07-test success
+|  +- compile test T07-test Debug native success 454ms MaxRSS:176M
++- run test T07-test 0 pass, 1 fail (1 total)
+   +- compile test T07-test Debug native (reused)
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/integration/cache-batch/o/fdca125f0b8dca6576be50b47965ed65/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-work /workspace/scratch/3f4ab65dfb82/state/integration/cache-batch /workspace/scratch/3f4ab65dfb82/state/integration/global-cache --seed 0xa22fe3b3 -Zd921f5eedf3a2167 test -Dtest-group=batch -Dtest-id=IO-004 -Doptimize=Debug -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/integration/deadline-red-batch --summary all

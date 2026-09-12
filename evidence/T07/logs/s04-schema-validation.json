@@ -1,0 +1,49 @@
+{
+  "schema_files": {
+    "response.schema.json": "587ba596c5ca9a3c30d820905aaf4d91b388325ededddbd468534c9119f91060",
+    "data.schema.json": "5c3932867cf4e16729cd6b959c16b9a143308aa5396f79a7f0e56f6563d314f5"
+  },
+  "samples": [
+    {
+      "sample": "read.json",
+      "bytes": 593,
+      "sha256": "cc1f3c77ca870485182bb03fd4abeaad09b2958127b01224ed5dc659adc0ccef",
+      "data_schema": "read",
+      "errors": [],
+      "truncated": false,
+      "complete": true,
+      "returned_bytes": 260
+    },
+    {
+      "sample": "batch_read.json",
+      "bytes": 13416,
+      "sha256": "36d045400a3850a0875d19e908db80594b6c300a23c584b71a723e2a1f15cdbb",
+      "data_schema": "batch_read",
+      "errors": [],
+      "truncated": true,
+      "complete": false,
+      "returned_bytes": 13023
+    },
+    {
+      "sample": "batch_read_truncated.json",
+      "bytes": 8594,
+      "sha256": "d4a09120e208761d63c325ff260463c7fcfa22bc915d5e2de3cd701cf870e4a1",
+      "data_schema": "batch_read",
+      "errors": [],
+      "truncated": true,
+      "complete": false,
+      "returned_bytes": 8163
+    },
+    {
+      "sample": "failure.json",
+      "bytes": 410,
+      "sha256": "59768736960be86c67552781e15fc9641273cab31059a0b9dd6e48d152f8482f",
+      "data_schema": null,
+      "errors": [],
+      "truncated": false,
+      "complete": false,
+      "returned_bytes": 2
+    }
+  ],
+  "status": "pass"
+}

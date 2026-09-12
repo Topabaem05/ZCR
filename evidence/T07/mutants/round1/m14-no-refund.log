@@ -1,0 +1,146 @@
+test
++- run test T07-test 13 pass, 4 fail (17 total); 3 leaks
+error: 't07_test.test.BA-001 32 items keep input order, item ids and per-item errors, and match single reads' failed:
+       item item-4: expected a result, got E_OUTPUT_BUDGET
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m14-no-refund/tests/t07_test.zig:204:21: 0x10227e2df in expectSameItem (T07-test)
+                           return error.TestExpectedEqual;
+                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m14-no-refund/tests/t07_test.zig:318:9: 0x10227fe67 in test.BA-001 32 items keep input order, item ids and per-item errors, and match single reads (T07-test)
+               try expectSameItem(o, got);
+               ^
+       [DebugAllocator] (err): memory address 0x106ea4000 leaked: 
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x10210230f in rawAlloc (T07-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:286:40: 0x10210bbd7 in allocWithSizeAndAlignment__anon_9797 (T07-test)
+           return self.allocBytesWithAlignment(alignment, byte_count, return_address);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:274:89: 0x10210b9f3 in allocAdvancedWithRetAddr (T07-test)
+           const ptr: [*]align(a.toByteUnits()) T = @ptrCast(try self.allocWithSizeAndAlignment(@sizeOf(T), a, n, return_address));
+                                                                                               ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m14-no-refund/src/batch/read.zig:311:63: 0x102235ed7 in batchRead (T07-test)
+               const store = try owned.arena.allocator().alignedAlloc(u8, .of(Line), @intCast(storeBytes(items, run.output_pool)));
+                                                                     ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m14-no-refund/tests/t07_test.zig:115:46: 0x1021ff04f in runWithCost (T07-test)
+               const owned = try h.batcher.batchRead(io, reserved.allocator(), session(), items, &reservation);
+                                                    ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m14-no-refund/tests/t07_test.zig:105:29: 0x1021ff2e3 in run (T07-test)
+               return h.runWithCost(items, cost, null);
+                                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m14-no-refund/tests/t07_test.zig:304:22: 0x10227f55f in test.BA-001 32 items keep input order, item ids and per-item errors, and match single reads (T07-test)
+           var r = try h.run(&items, 1 * MiB, 4);
+                            ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x1021db12f in mainServer (T07-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x1021db7df in main (T07-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x1021d95a3 in callMain (T07-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       (additional stack frames may have been skipped...)
+error: 't07_test.test.T07 a file that keeps changing fails its item with a version conflict, others succeed' failed:
+       expected .E_VERSION_CONFLICT, found .E_OUTPUT_BUDGET
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x10225fc0f in expectEqualInner__anon_50424 (T07-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x102261fc7 in expectEqual (T07-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m14-no-refund/tests/t07_test.zig:634:5: 0x10226207f in test.T07 a file that keeps changing fails its item with a version conflict, others succeed (T07-test)
+           try testing.expectEqual(core.errors.WireCode.E_VERSION_CONFLICT, r.items()[1].result.err.code);
+           ^
+       [DebugAllocator] (err): memory address 0x109560000 leaked: 
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x10210230f in rawAlloc (T07-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:286:40: 0x10210bbd7 in allocWithSizeAndAlignment__anon_9797 (T07-test)
+           return self.allocBytesWithAlignment(alignment, byte_count, return_address);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:274:89: 0x10210b9f3 in allocAdvancedWithRetAddr (T07-test)
+           const ptr: [*]align(a.toByteUnits()) T = @ptrCast(try self.allocWithSizeAndAlignment(@sizeOf(T), a, n, return_address));
+                                                                                               ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m14-no-refund/src/batch/read.zig:311:63: 0x102235ed7 in batchRead (T07-test)
+               const store = try owned.arena.allocator().alignedAlloc(u8, .of(Line), @intCast(storeBytes(items, run.output_pool)));
+                                                                     ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m14-no-refund/tests/t07_test.zig:115:46: 0x1021ff04f in runWithCost (T07-test)
+               const owned = try h.batcher.batchRead(io, reserved.allocator(), session(), items, &reservation);
+                                                    ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m14-no-refund/tests/t07_test.zig:105:29: 0x1021ff2e3 in run (T07-test)
+               return h.runWithCost(items, cost, null);
+                                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m14-no-refund/tests/t07_test.zig:632:22: 0x102261c3f in test.T07 a file that keeps changing fails its item with a version conflict, others succeed (T07-test)
+           var r = try h.run(&items, 64 * KiB, 1);
+                            ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x1021db12f in mainServer (T07-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x1021db7df in main (T07-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x1021d95a3 in callMain (T07-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       (additional stack frames may have been skipped...)
+error: 't07_test.test.T07 an allocation failure at any point fails an item or the batch and leaks nothing' failed:
+       expected .E_RESOURCE, found .E_OUTPUT_BUDGET
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x10225fc0f in expectEqualInner__anon_50424 (T07-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x1022606eb in expectEqual (T07-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m14-no-refund/tests/t07_test.zig:665:17: 0x102260787 in test.T07 an allocation failure at any point fails an item or the batch and leaks nothing (T07-test)
+                       try testing.expectEqual(core.errors.WireCode.E_RESOURCE, info.code);
+                       ^
+       [DebugAllocator] (err): memory address 0x1094c0000 leaked: 
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x10210230f in rawAlloc (T07-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:286:40: 0x10210bbd7 in allocWithSizeAndAlignment__anon_9797 (T07-test)
+           return self.allocBytesWithAlignment(alignment, byte_count, return_address);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:274:89: 0x10210b9f3 in allocAdvancedWithRetAddr (T07-test)
+           const ptr: [*]align(a.toByteUnits()) T = @ptrCast(try self.allocWithSizeAndAlignment(@sizeOf(T), a, n, return_address));
+                                                                                               ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m14-no-refund/src/batch/read.zig:311:63: 0x102235ed7 in batchRead (T07-test)
+               const store = try owned.arena.allocator().alignedAlloc(u8, .of(Line), @intCast(storeBytes(items, run.output_pool)));
+                                                                     ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m14-no-refund/tests/t07_test.zig:115:46: 0x1021ff04f in runWithCost (T07-test)
+               const owned = try h.batcher.batchRead(io, reserved.allocator(), session(), items, &reservation);
+                                                    ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m14-no-refund/tests/t07_test.zig:656:30: 0x1022601fb in test.T07 an allocation failure at any point fails an item or the batch and leaks nothing (T07-test)
+               var r = h.runWithCost(&items, cost, &plan) catch |err| {
+                                    ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x1021db12f in mainServer (T07-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x1021db7df in main (T07-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x1021d95a3 in callMain (T07-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+       (additional stack frames may have been skipped...)
+error: 't07_test.test.T07 a real batch result projects within its output budget' failed:
+       expected 5, found 25
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x1021ff597 in expectEqualInner__anon_37771 (T07-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x102200d73 in expectEqual (T07-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m14-no-refund/tests/t07_test.zig:933:5: 0x102200e67 in test.T07 a real batch result projects within its output budget (T07-test)
+           try testing.expectEqual(@as(u64, 5), @as(u64, @intCast(root.object.get("coverage").?.object.get("skipped").?.integer)));
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache/o/f3fcc5c8e7f724b5553040dbc8629fd3/T07-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache --seed=0xbbb6006b --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 13/17 tests passed (4 failed)
+test transitive failure
++- run test T07-test 13 pass, 4 fail (17 total); 3 leaks
+   +- compile test T07-test Debug native success 9s MaxRSS:218M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache/o/2759f0ba666e46dcb034eb08a284d1a7/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-m14-no-refund /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T07/zig-global-cache --seed 0xbbb6006b -Z77ba3ad46b633e41 test -Dtest-group=batch --summary all

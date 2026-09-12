@@ -1,0 +1,16 @@
+test
++- run test T07-test
+   +- compile test T07-test Debug native 1 errors
+src/protocol/projection.zig:386:51: error: unused capture
+            for (extra[0..items.len], 0..) |more, i| {
+                                                  ^
+error: 1 compilation errors
+failed command: /Users/guribbong/.local/share/zig/0.16.0/zig test -ODebug --dep zcr_core --dep zcr_policy --dep zcr_memory --dep zcr_admission --dep zcr_fs_read --dep zcr_batch --dep zcr_projection -Mroot=/Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-p2-batch-always-full/tests/t07_test.zig -ODebug -Mzcr_core=/Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-p2-batch-always-full/src/core/types.zig -ODebug --dep zcr_core -Mzcr_policy=/Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-p2-batch-always-full/src/policy/capability.zig -ODebug --dep zcr_core -Mzcr_memory=/Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-p2-batch-always-full/src/memory/budget.zig -ODebug --dep zcr_core --dep zcr_memory -Mzcr_admission=/Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-p2-batch-always-full/src/scheduler/admission.zig -ODebug --dep zcr_core --dep zcr_policy --dep zcr_memory -Mzcr_fs_read=/Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-p2-batch-always-full/src/fs/read.zig -ODebug --dep zcr_core --dep zcr_policy --dep zcr_memory --dep zcr_admission --dep zcr_fs_read -Mzcr_batch=/Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-p2-batch-always-full/src/batch/read.zig -ODebug --dep zcr_core -Mzcr_projection=/Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-p2-batch-always-full/src/protocol/projection.zig -lc --cache-dir /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache --global-cache-dir /Users/guribbong/code/ZCR-state/tasks/T07/zig-global-cache --name T07-test --zig-lib-dir /Users/guribbong/.local/share/zig/0.16.0/lib/ --listen=-
+
+Build Summary: 0/3 steps succeeded (1 failed)
+test transitive failure
++- run test T07-test transitive failure
+   +- compile test T07-test Debug native 1 errors
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache/o/2759f0ba666e46dcb034eb08a284d1a7/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-p2-batch-always-full /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T07/zig-global-cache --seed 0x549eb682 -Za109e2c27831b4d1 test -Dtest-group=batch --summary all

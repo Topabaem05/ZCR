@@ -1,0 +1,19 @@
+test
++- run test T04-test
+   +- compile test T04-test Debug native 1 errors
+tests/t04_test.zig:59:34: error: root source file struct 'metadata' has no member named 'OpenFault'
+    const fault: fs_read.metadata.OpenFault = .{ .before_open = ReplaceWithFifo.replace, .context = &swap };
+                 ~~~~~~~~~~~~~~~~^~~~~~~~~~
+src/fs/metadata.zig:1:1: note: struct declared here
+//! File metadata snapshots and regular-file opens (T04; docs/07 §2, docs/11 §2).
+^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+error: 1 compilation errors
+failed command: /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig test -ODebug --dep zcr_core --dep zcr_policy --dep zcr_memory --dep zcr_admission --dep zcr_fs_read -Mroot=/workspace/scratch/3f4ab65dfb82/ZCR-legacy/tests/t04_test.zig -ODebug -Mzcr_core=/workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/core/types.zig -ODebug --dep zcr_core -Mzcr_policy=/workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/policy/capability.zig -ODebug --dep zcr_core -Mzcr_memory=/workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/memory/budget.zig -ODebug --dep zcr_core --dep zcr_memory -Mzcr_admission=/workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/scheduler/admission.zig -ODebug --dep zcr_core --dep zcr_policy --dep zcr_memory -Mzcr_fs_read=/workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/fs/read.zig -lc --test-filter "FIFO replacement" --cache-dir /workspace/scratch/3f4ab65dfb82/state/legacy/zig-local-cache --global-cache-dir /workspace/scratch/3f4ab65dfb82/state/legacy/zig-global-cache --name T04-test --zig-lib-dir /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/ --listen=-
+
+Build Summary: 0/3 steps succeeded (1 failed)
+test transitive failure
++- run test T04-test transitive failure
+   +- compile test T04-test Debug native 1 errors
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/legacy/zig-local-cache/o/f28d12be414d247ec5da67365b4abafb/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-legacy /workspace/scratch/3f4ab65dfb82/state/legacy/zig-local-cache /workspace/scratch/3f4ab65dfb82/state/legacy/zig-global-cache --seed 0xf4c577d1 -Zc6ed05bb0f246d57 test -Dtest-group=io -Dtest-id=FIFO replacement -Doptimize=Debug

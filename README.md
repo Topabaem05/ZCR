@@ -1,7 +1,7 @@
 # ZCR · Zig Code Runtime
-## Coding agent의 파일 도구 병목을 줄이는 설계 패키지
+## Coding agent의 파일 도구 병목을 줄이는 Zig 런타임
 
-**문서 버전:** 1.0 · **기준일:** 2026-09-11 · **상태:** 구현 전 설계 기준선
+**기준일:** 2026-09-12 · **상태:** 구현·검증 진행 중, 릴리스 게이트 미완료
 
 `ZCR`은 이 문서에서 사용하는 작업명이다. 등록된 제품명·저장소명이라는 뜻은 아니다. 구현 언어는 **Zig 0.16.0으로 고정**한다. Apple Silicon을 우선하되 x86-64 Linux와 Intel Mac을 같은 코어 엔진으로 다룬다.
 
@@ -22,9 +22,19 @@
 
 ### 패키지의 사용 경계
 
-이 ZIP은 **실행 가능한 런타임을 구현한 결과물이 아니다.** API 계약, 구성 예시, 테스트 벡터, 구현 계획과 문서 자체의 검증 도구를 제공한다. `zcr ...` 및 `zig build ...` 명령은 앞으로 구현할 인터페이스의 계약이다. 실제 Mac 성능·코어 배치·에너지·클라이언트 연동 테스트는 수행하지 않았다.
+이 저장소는 API 계약, Zig 구현, 테스트, 실행 증거와 남은 작업 계획을 함께 관리한다. [브랜치 조사와 후속 계획](docs/superpowers/plans/2026-09-12-runtime-continuation.md), [작업 상태](tasks/INDEX.md), [상태 데이터](tasks/progress.json)를 기준으로 이어간다. 각 증거는 해당 source commit·binary·실행 환경에만 적용된다. 과거 Mac probe나 현재 Linux 시험으로 최종 Mac 런타임, 실제 클라이언트 연동, 종단 성능 검증을 대신하지 않는다.
+
+Zig 구현은 [src](src), 빌드 진입점은 [build.zig](build.zig)에 있다. 기존 작업 브랜치를 `main`으로 통합하는 [PR #1](https://github.com/Topabaem05/ZCR/pull/1)과 [병합 점검·남은 작업](docs/18-Merge-and-Remaining-Work.md)을 확인한다. 메인 통합은 개발 체크포인트이며 릴리스 완료를 뜻하지 않는다.
 
 설정·메모리·지연 수치는 **초기 설계값 또는 합격 목표**이지 실측 성능이 아니다. 계약 파일 검증 결과와 런타임 테스트 결과를 혼동하지 않는다.
+
+### 현재 직접 stdio 실행
+
+신뢰된 호스트는 `zcr workspace-id --root /absolute/dedicated-worktree`로 실제 파일시스템 정체성, HEAD, 계약 digest를 조회한다. 출력의 `workspace_id`, `base_commit`, `contract_digest`를 승인한 task manifest에 바인딩하고, `state: active`, 양수 `fence`, 미래 UTC `expires_at`과 필요한 읽기 범위를 지정한다. launch policy는 `status: approved`, 절대 `root`, 절대 `task_manifest` 경로를 사용한다. `examples/`의 planned 파일은 실행 권한을 부여하지 않는 작성 예시다.
+
+`zcr mcp --standalone --policy /absolute/approved-policy.json`은 그 바인딩을 검증한 뒤 여섯 읽기 도구를 제공한다. 현재 `files`·`search`는 루트 `.` 읽기 범위가 있어야 하며 더 좁은 정책에서는 범위를 확대하지 않고 거부한다. 쓰기는 T12 복구 검증까지 비활성 상태다.
+
+Git common directory의 `info/exclude`는 자동으로 연결한다. 전역 제외 규칙은 policy의 선택적 `global_exclude` 절대 경로로만 연결하며 Git 설정이나 HOME에서 불러오지 않는다. 제외 파일을 원자적으로 교체하거나 처음 생성하면 기존 세션은 `E_SCOPE`로 거부하고 새 실행에서 다시 바인딩한다. 현재 신호 관측 전의 보수적 실행 한도는 32 MiB in-flight / CPU permit 1이다. 실제 Codex·Claude 연동 증거는 별도 T23 게이트다.
 
 ### 프로젝트의 절대 규칙
 

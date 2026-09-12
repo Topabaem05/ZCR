@@ -1,0 +1,74 @@
+{
+  "source_commit": "16ad06115b3bd67fc00c192cbf54ef69429171a2",
+  "source_tree": "61c8c92da65be3294d2aabc71c81b7fec6134278",
+  "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+  "passed_per_mode": 60,
+  "failed": 0,
+  "skipped": 0,
+  "runs": [
+    {
+      "task": "T00",
+      "mode": "Debug",
+      "passed": 12,
+      "exit_code": 0,
+      "binary_sha256": "a581598d644042adec90ac7083fb2ca355f32db0d4fb672c86b196747fcfb877",
+      "log_sha256": "a3a3b66c1a95fbae91d83e0f8eafe78c0dcf37ddcd7e95043c2617bd82a28c00"
+    },
+    {
+      "task": "T00",
+      "mode": "ReleaseSafe",
+      "passed": 12,
+      "exit_code": 0,
+      "binary_sha256": "68c83ff01599716cbbf3554b70dad389e42044a5333ca517917498c205b45195",
+      "log_sha256": "a3a3b66c1a95fbae91d83e0f8eafe78c0dcf37ddcd7e95043c2617bd82a28c00"
+    },
+    {
+      "task": "T01",
+      "mode": "Debug",
+      "passed": 19,
+      "exit_code": 0,
+      "binary_sha256": "65e9d49aba7e60a983671b8a223290205b489d236f1544c1f68e15f325ac78a9",
+      "log_sha256": "c381895c1473f6e27cd7defdeacc60a89284151c48059c0c9a7da90ea9a43912"
+    },
+    {
+      "task": "T01",
+      "mode": "ReleaseSafe",
+      "passed": 19,
+      "exit_code": 0,
+      "binary_sha256": "aaf764e9075d516919ae9db2135cda819d73a3586e1b2a43ab440778479d3d60",
+      "log_sha256": "c381895c1473f6e27cd7defdeacc60a89284151c48059c0c9a7da90ea9a43912"
+    },
+    {
+      "task": "T02",
+      "mode": "Debug",
+      "passed": 15,
+      "exit_code": 0,
+      "binary_sha256": "6e4573f1d24365dc409c43e3de9dda1ae27b7f6105103b389db896ec415d4864",
+      "log_sha256": "10e48c56e20d908485478f7751ba049102c335bf30cf3467ea75ab0d732a2ff5"
+    },
+    {
+      "task": "T02",
+      "mode": "ReleaseSafe",
+      "passed": 15,
+      "exit_code": 0,
+      "binary_sha256": "c4825be95f85fe0b31abed63d0577a74b9a5335ae43b9ad3303f00e0ea4c0a57",
+      "log_sha256": "10e48c56e20d908485478f7751ba049102c335bf30cf3467ea75ab0d732a2ff5"
+    },
+    {
+      "task": "T03",
+      "mode": "Debug",
+      "passed": 14,
+      "exit_code": 0,
+      "binary_sha256": "4340a931c6aa4d15f5ce06486b8ae3f41b02e698ebe86adab27b3667348a7890",
+      "log_sha256": "db2a3b795e2e537aeab99ee957d93cfbe59c448b9be3df1ff84a23e49d681a4c"
+    },
+    {
+      "task": "T03",
+      "mode": "ReleaseSafe",
+      "passed": 14,
+      "exit_code": 0,
+      "binary_sha256": "c0df917a1a4c3f53f651d7e2d7c54622ebeb34917c57e9a51f41e643e75de89e",
+      "log_sha256": "db2a3b795e2e537aeab99ee957d93cfbe59c448b9be3df1ff84a23e49d681a4c"
+    }
+  ]
+}

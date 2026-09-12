@@ -37,7 +37,7 @@ read 결과는 `path`, `workspace_id`, `generation`, `line_range`, `byte_range`,
 
 ## 4. Batch pipeline
 
-`zcr_batch_read` 한 번에 최대 32항목을 받지만 concurrency는 resource budget이 결정한다. 동일 `(workspace,path,range,version)` 요청을 deduplicate하고 겹치는 범위를 병합한다. 응답은 입력 순서와 item id를 유지한다. 한 파일이 없으면 그 항목만 오류며 다른 항목의 성공을 숨기지 않는다.
+`zcr_batch_read` 한 번에 최대 32항목을 받지만 concurrency는 resource budget이 결정한다. workspace·path·range·출력 한도·deadline 등 전체 ReadSpec이 같은 요청만 deduplicate한다. 서로 다른 범위는 독립적으로 읽어 한 항목의 잘못된 UTF-8 또는 긴 줄이 다른 항목의 결과에 전파되지 않게 한다. 응답은 입력 순서와 item id를 유지한다. 한 파일이 없으면 그 항목만 오류며 다른 항목의 성공을 숨기지 않는다.
 
 batch 전체 output cap을 넘는 항목은 `E_OUTPUT_BUDGET`로 표시하거나 명시적인 continuation을 제공한다. 서로 다른 workspace 항목을 하나의 session-bound batch에 섞지 않는다. v1 batch는 read-only이며 patch/create를 섞은 transactional batch는 없다.
 

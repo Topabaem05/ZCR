@@ -1,0 +1,24 @@
+test
++- run test T07-test 0 pass, 1 fail (1 total)
+error: 't07_test.test.BA-003 batch projection keeps every item id and counts budget replacements in coverage' failed:
+       expected 3, found 1
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:118:17: 0x122e3e3 in expectEqualInner__anon_43376 (std.zig)
+                       return error.TestExpectedEqual;
+                       ^
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:83:5: 0x1230286 in expectEqual (t07_test.zig)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T07/tests/t07_test.zig:974:5: 0x1230314 in test.BA-003 batch projection keeps every item id and counts budget replacements in coverage (t07_test.zig)
+           try testing.expectEqual(@as(i64, 3), root.object.get("coverage").?.object.get("skipped").?.integer);
+           ^
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/T07/zig-local-cache && /workspace/scratch/3f4ab65dfb82/state/T07/zig-local-cache/o/0335bca8525bc039d82ed776c34bb684/T07-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/T07/zig-local-cache --seed=0x828613e4 --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 0/1 tests passed (1 failed)
+test transitive failure
++- install T07-test success
+|  +- compile test T07-test Debug native success 509ms MaxRSS:176M
++- run test T07-test 0 pass, 1 fail (1 total)
+   +- compile test T07-test Debug native (reused)
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/T07/zig-local-cache/o/f28d12be414d247ec5da67365b4abafb/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-T07 /workspace/scratch/3f4ab65dfb82/state/T07/zig-local-cache /workspace/scratch/3f4ab65dfb82/state/T07/zig-global-cache --seed 0x828613e4 -Z58756b7e9bba0622 test -Dtest-group=batch -Doptimize=Debug -Dtest-id=budget replacements in coverage -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T07/out-red-projection --summary all

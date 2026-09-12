@@ -1,0 +1,34 @@
+test
++- run test T03-test 10 pass, 2 fail (12 total)
+error: 't03_test.test.ME-003 concurrent reservations never exceed the hard tracked cap' failed:
+       expected 0, found 83
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x1001518f3 in expectEqualInner__anon_36481 (T03-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x10017a4a3 in expectEqual (T03-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T03/tmp
+error: 't03_test.test.ME-003 admission evicts once and then reports exhaustion' failed:
+       /mutants/m3-budget-no-cap/tests/t03_test.zig:119:5: 0x10017a523 in test.ME-003 concurrent reservations never exceed the hard tracked cap (T03-test)
+           try testing.expectEqual(@as(u64, 0), ctx.violations.load(.acquire));
+           ^
+       expected 1, found 0
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x1001542e7 in expectEqualInner__anon_36838 (T03-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x100177dc7 in expectEqual (T03-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T03/tmp/mutants/m3-budget-no-cap/tests/t03_test.zig:174:5: 0x100177e4f in test.ME-003 admission evicts once and then reports exhaustion (T03-test)
+           try testing.expectEqual(@as(u32, 1), cache.calls);
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache/o/b08823cf4668f4bd638661912006a313/T03-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache --seed=0x814bb8e8 --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 10/12 tests passed (2 failed)
+test transitive failure
++- run test T03-test 10 pass, 2 fail (12 total)
+   +- compile test T03-test Debug native success 45s MaxRSS:170M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache/o/c850a37cb4f46cd01dfc71be12bb7085/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T03/tmp/mutants/m3-budget-no-cap /Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T03/zig-global-cache --seed 0x814bb8e8 -Z7b4623e9b70d6e3f test -Dtest-group=memory --summary all

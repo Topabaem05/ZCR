@@ -584,7 +584,9 @@
         "current-user named-pipe and reparse policy"
       ],
       "test_group": "security",
-      "tests": [],
+      "tests": [
+        "WIN-GATE"
+      ],
       "optional": true,
       "document": "tasks/T18.md"
     },
@@ -770,7 +772,9 @@
         "truthful support matrix"
       ],
       "test_group": "dev",
-      "tests": [],
+      "tests": [
+        "PACKAGE-GATE"
+      ],
       "optional": false,
       "document": "tasks/T24.md"
     },

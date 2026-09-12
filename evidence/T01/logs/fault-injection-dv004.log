@@ -1,0 +1,8 @@
+Build Summary: 5/5 steps succeeded; 5/5 tests passed
+test success
++- install T01-test success
+|  +- compile test T01-test Debug native success 15s MaxRSS:203M
+|     +- options success
++- run test T01-test 5 pass (5 total) 13s MaxRSS:10M
+   +- compile test T01-test Debug native (+1 more reused dependencies)
+

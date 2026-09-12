@@ -1,0 +1,34 @@
+{
+  "schema_version": "zcr-t08-fixture/1",
+  "toolchain": "Zig 0.16.0",
+  "target": "native Linux x86_64",
+  "manifest_sha256": "ba98dd3625c71f375c404e8e4c133a7c4811c2c0babaa786e2245460eaca5b23",
+  "tools_json_sha256": "6537c0961f85dd623cf76c195dab534f583052c31eff2eda54727e97083a0b4b",
+  "test_source_sha256": "b136134593756a6707b6699d67157b2a4c41148dae831e5dde151fb15e989be2",
+  "codec_source_sha256": "f3af32c8682d0afa0b39bcbc39edeb7bd92beef8946fc0c335671c90444188c0",
+  "budgets_bytes": [
+    33554432,
+    100663296
+  ],
+  "fd_cap": 128,
+  "cpu_cap": 4,
+  "fixtures": [
+    "alpha CRLF then escaped beta LF",
+    "128 KiB single line for real stdout pipe backpressure",
+    "2 MiB unknown argument with 16 KiB response allocator",
+    "oversize/deep/duplicate/UTF8/numeric parser vectors",
+    "T07 batch and projection suite including concurrent error isolation",
+    "gated request retirement and string-ID reuse",
+    "stdout error with peer-held-open stdin",
+    "fully exhausted ordinary32MiB budget with successful reserved health response and ping"
+  ],
+  "host_integrations": "NOT_RUN",
+  "platform_runtime": [
+    "Linux x86_64"
+  ],
+  "other_platforms": "NOT_RUN",
+  "mcp_source_sha256": "953cba2a4ed12fe5071ff65c1b1af6e0f480da6b8e956c53fde1efb728942264",
+  "control_pool_bytes": 2097152,
+  "control_output_credit_bytes": 65536,
+  "stdin_failure_poll_ms": 20
+}

@@ -1,0 +1,5 @@
+Build Summary: 3/3 steps succeeded
+verify-contracts success
++- run exe zcr-dev-evidence success 66ms
+   +- compile exe zcr-dev-evidence Debug native cached 222ms MaxRSS:31M
+

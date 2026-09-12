@@ -1,0 +1,6 @@
+/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/cli-debug/bin/zcr: OK
+/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/cli-safe/bin/zcr: OK
+/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/memory-debug/bin/T03-test: OK
+/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/memory-debug/bin/T13-test: OK
+/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/mcp-debug/bin/T08-test: OK
+/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/broker-debug/bin/T15-test: OK

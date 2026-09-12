@@ -1,0 +1,5 @@
+Build Summary: 3/3 steps succeeded; 9/9 tests passed
+test success
++- run test T06-test 9 pass (9 total) 1s MaxRSS:8M
+   +- compile test T06-test Debug native success 18s MaxRSS:154M
+

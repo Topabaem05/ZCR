@@ -1,0 +1,21 @@
+test
++- run test T07-test 0 pass, 1 fail (1 total)
+error: 't07_test.test.BA-001 plannedCost validates request constraints before computing a reservation' failed:
+       expected error.InvalidArgument, found .{ .input_bytes = 0, .scratch_bytes = 295896, .output_bytes = 65536, .write_temp_bytes = 0, .parser_bytes = 0, .journal_bytes = 0, .fds = 1, .cpu_permits = 0 }
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:65:9: 0x122c8d4 in expectError__anon_43067 (std.zig)
+               return error.TestExpectedError;
+               ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T07/tests/t07_test.zig:264:9: 0x122cc53 in test.BA-001 plannedCost validates request constraints before computing a reservation (t07_test.zig)
+               try testing.expectError(error.InvalidArgument, batch.plannedCost(&items, 64 * KiB, 1));
+               ^
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/T07/zig-local-cache && /workspace/scratch/3f4ab65dfb82/state/T07/zig-local-cache/o/9f2a7d4e934392476f67f4459e9d0139/T07-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/T07/zig-local-cache --seed=0x3057c432 --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 0/1 tests passed (1 failed)
+test transitive failure
++- install T07-test success
+|  +- compile test T07-test Debug native success 416ms MaxRSS:172M
++- run test T07-test 0 pass, 1 fail (1 total)
+   +- compile test T07-test Debug native (reused)
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/T07/zig-local-cache/o/f28d12be414d247ec5da67365b4abafb/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-T07 /workspace/scratch/3f4ab65dfb82/state/T07/zig-local-cache /workspace/scratch/3f4ab65dfb82/state/T07/zig-global-cache --seed 0x3057c432 -Ze0236e5f7b65db3d test -Dtest-group=batch -Doptimize=Debug -Dtest-id=validates request constraints -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T07/out-red-validation --summary all

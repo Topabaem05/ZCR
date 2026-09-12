@@ -1,0 +1,5531 @@
+{
+  "archive": "github-actions-artifact-10298326693.zip",
+  "archive_sha256": "0ad8f56d43bacb87c659e87a35271fc9a84873ba358e1eb6d6dcfe9e4ba1841d",
+  "local_source": "d0f35ef",
+  "tree": "1c7fbe5048241cc82d0bc8b1170f7f8ab20d48bd",
+  "native_source": "b6475a041b9cbee8263eb2d91138f544d3c04862",
+  "target": "x86_64-linux",
+  "native_status": "FAIL",
+  "checks": [
+    {
+      "name": "download ZIP SHA256",
+      "pass": true
+    },
+    {
+      "name": "unique ZIP members",
+      "pass": true
+    },
+    {
+      "name": "safe member 01-git-version.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 01-git-version.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 02-filesystem.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 02-filesystem.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 03-cpu.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 03-cpu.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 04-filesystem-detail.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 04-filesystem-detail.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 05-zig-version.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 05-zig-version.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 06-zig-env.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 06-zig-env.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 07-python-venv.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 07-python-venv.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 08-schema-dependencies.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 08-schema-dependencies.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 09-python-dependencies.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 09-python-dependencies.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 10-Debug-build.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 10-Debug-build.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 11-Debug-contracts.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 11-Debug-contracts.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 12-Debug-registered-tests.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 12-Debug-registered-tests.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 13-Debug-codec-tests.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 13-Debug-codec-tests.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 14-Debug-cli-subprocess.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 14-Debug-cli-subprocess.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 15-Debug-caps-build.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 15-Debug-caps-build.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 16-Debug-caps-runtime.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 16-Debug-caps-runtime.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 17-ReleaseSafe-build.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 17-ReleaseSafe-build.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 18-ReleaseSafe-contracts.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 18-ReleaseSafe-contracts.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 19-ReleaseSafe-registered-tests.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 19-ReleaseSafe-registered-tests.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 20-ReleaseSafe-codec-tests.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 20-ReleaseSafe-codec-tests.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 21-ReleaseSafe-cli-subprocess.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 21-ReleaseSafe-cli-subprocess.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 22-ReleaseSafe-caps-build.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 22-ReleaseSafe-caps-build.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 23-ReleaseSafe-caps-runtime.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "safe member 23-ReleaseSafe-caps-runtime.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "safe member Debug/baseline.json",
+      "pass": true
+    },
+    {
+      "name": "safe member Debug/binaries.tar.gz",
+      "pass": true
+    },
+    {
+      "name": "safe member Debug/cli/expired.stderr",
+      "pass": true
+    },
+    {
+      "name": "safe member Debug/cli/fixture/.git/COMMIT_EDITMSG",
+      "pass": true
+    },
+    {
+      "name": "safe member Debug/cli/fixture/.git/HEAD",
+      "pass": true
+    },
+    {
+      "name": "safe member Debug/cli/fixture/.git/config",
+      "pass": true
+    },
+    {
+      "name": "safe member Debug/cli/fixture/.git/index",
+      "pass": true
+    },
+    {
+      "name": "safe member Debug/cli/fixture/.git/info/exclude",
+      "pass": true
+    },
+    {
+      "name": "safe member Debug/cli/fixture/.git/logs/HEAD",
+      "pass": true
+    },
+    {
+      "name": "safe member Debug/cli/fixture/.git/logs/refs/heads/main",
+      "pass": true
+    },
+    {
+      "name": "safe member Debug/cli/fixture/.git/objects/97/9d0291a5be8811db01aa76dc753f4531c90a74",
+      "pass": true
+    },
+    {
+      "name": "safe member Debug/cli/fixture/.git/objects/9f/f0bb8e1f3845b4b8ee2bf8b7b1bb0dbd03237f",
+      "pass": true
+    },
+    {
+      "name": "safe member Debug/cli/fixture/.git/objects/a3/66b3ba24cca2f99ae3f9741455806f689246b0",
+      "pass": true
+    },
+    {
+      "name": "safe member Debug/cli/fixture/.git/refs/heads/main",
+      "pass": true
+    },
+    {
+      "name": "safe member Debug/cli/fixture/a.txt",
+      "pass": true
+    },
+    {
+      "name": "safe member Debug/cli/fixture/global-hidden.txt",
+      "pass": true
+    },
+    {
+      "name": "safe member Debug/cli/fixture/ignored.txt",
+      "pass": true
+    },
+    {
+      "name": "safe member Debug/cli/manifest.json",
+      "pass": true
+    },
+    {
+      "name": "safe member Debug/cli/global-exclude",
+      "pass": true
+    },
+    {
+      "name": "safe member Debug/cli/policy.json",
+      "pass": true
+    },
+    {
+      "name": "safe member Debug/cli/report.json",
+      "pass": true
+    },
+    {
+      "name": "safe member Debug/cli/transcript.json",
+      "pass": true
+    },
+    {
+      "name": "safe member Debug/cli/unbound.stderr",
+      "pass": true
+    },
+    {
+      "name": "safe member Debug/cli/wrong-base.stderr",
+      "pass": true
+    },
+    {
+      "name": "safe member Debug/cli/wrong-contract.stderr",
+      "pass": true
+    },
+    {
+      "name": "safe member Debug/cli/wrong-workspace.stderr",
+      "pass": true
+    },
+    {
+      "name": "safe member Debug/cli/zero-fence.stderr",
+      "pass": true
+    },
+    {
+      "name": "safe member ReleaseSafe/baseline.json",
+      "pass": true
+    },
+    {
+      "name": "safe member ReleaseSafe/binaries.tar.gz",
+      "pass": true
+    },
+    {
+      "name": "safe member ReleaseSafe/cli/expired.stderr",
+      "pass": true
+    },
+    {
+      "name": "safe member ReleaseSafe/cli/fixture/.git/COMMIT_EDITMSG",
+      "pass": true
+    },
+    {
+      "name": "safe member ReleaseSafe/cli/fixture/.git/HEAD",
+      "pass": true
+    },
+    {
+      "name": "safe member ReleaseSafe/cli/fixture/.git/config",
+      "pass": true
+    },
+    {
+      "name": "safe member ReleaseSafe/cli/fixture/.git/index",
+      "pass": true
+    },
+    {
+      "name": "safe member ReleaseSafe/cli/fixture/.git/info/exclude",
+      "pass": true
+    },
+    {
+      "name": "safe member ReleaseSafe/cli/fixture/.git/logs/HEAD",
+      "pass": true
+    },
+    {
+      "name": "safe member ReleaseSafe/cli/fixture/.git/logs/refs/heads/main",
+      "pass": true
+    },
+    {
+      "name": "safe member ReleaseSafe/cli/fixture/.git/objects/5c/8cb867b0c5d7e2e40e03c6770baa35da6c0d4b",
+      "pass": true
+    },
+    {
+      "name": "safe member ReleaseSafe/cli/fixture/.git/objects/97/9d0291a5be8811db01aa76dc753f4531c90a74",
+      "pass": true
+    },
+    {
+      "name": "safe member ReleaseSafe/cli/fixture/.git/objects/a3/66b3ba24cca2f99ae3f9741455806f689246b0",
+      "pass": true
+    },
+    {
+      "name": "safe member ReleaseSafe/cli/fixture/.git/refs/heads/main",
+      "pass": true
+    },
+    {
+      "name": "safe member ReleaseSafe/cli/fixture/a.txt",
+      "pass": true
+    },
+    {
+      "name": "safe member ReleaseSafe/cli/fixture/global-hidden.txt",
+      "pass": true
+    },
+    {
+      "name": "safe member ReleaseSafe/cli/fixture/ignored.txt",
+      "pass": true
+    },
+    {
+      "name": "safe member ReleaseSafe/cli/global-exclude",
+      "pass": true
+    },
+    {
+      "name": "safe member ReleaseSafe/cli/manifest.json",
+      "pass": true
+    },
+    {
+      "name": "safe member ReleaseSafe/cli/policy.json",
+      "pass": true
+    },
+    {
+      "name": "safe member ReleaseSafe/cli/report.json",
+      "pass": true
+    },
+    {
+      "name": "safe member ReleaseSafe/cli/transcript.json",
+      "pass": true
+    },
+    {
+      "name": "safe member ReleaseSafe/cli/unbound.stderr",
+      "pass": true
+    },
+    {
+      "name": "safe member ReleaseSafe/cli/wrong-base.stderr",
+      "pass": true
+    },
+    {
+      "name": "safe member ReleaseSafe/cli/wrong-contract.stderr",
+      "pass": true
+    },
+    {
+      "name": "safe member ReleaseSafe/cli/wrong-workspace.stderr",
+      "pass": true
+    },
+    {
+      "name": "safe member ReleaseSafe/cli/zero-fence.stderr",
+      "pass": true
+    },
+    {
+      "name": "safe member artifact-sha256.json",
+      "pass": true
+    },
+    {
+      "name": "safe member pip-install.json",
+      "pass": true
+    },
+    {
+      "name": "safe member report.json",
+      "pass": true
+    },
+    {
+      "name": "safe member source-after.json",
+      "pass": true
+    },
+    {
+      "name": "safe member source-before.json",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 01-git-version.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 01-git-version.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 01-git-version.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 01-git-version.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 02-filesystem.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 02-filesystem.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 02-filesystem.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 02-filesystem.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 03-cpu.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 03-cpu.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 03-cpu.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 03-cpu.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 04-filesystem-detail.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 04-filesystem-detail.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 04-filesystem-detail.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 04-filesystem-detail.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 05-zig-version.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 05-zig-version.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 05-zig-version.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 05-zig-version.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 06-zig-env.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 06-zig-env.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 06-zig-env.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 06-zig-env.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 07-python-venv.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 07-python-venv.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 07-python-venv.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 07-python-venv.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 08-schema-dependencies.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 08-schema-dependencies.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 08-schema-dependencies.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 08-schema-dependencies.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 09-python-dependencies.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 09-python-dependencies.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 09-python-dependencies.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 09-python-dependencies.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 10-Debug-build.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 10-Debug-build.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 10-Debug-build.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 10-Debug-build.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 11-Debug-contracts.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 11-Debug-contracts.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 11-Debug-contracts.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 11-Debug-contracts.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 12-Debug-registered-tests.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 12-Debug-registered-tests.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 12-Debug-registered-tests.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 12-Debug-registered-tests.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 13-Debug-codec-tests.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 13-Debug-codec-tests.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 13-Debug-codec-tests.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 13-Debug-codec-tests.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 14-Debug-cli-subprocess.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 14-Debug-cli-subprocess.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 14-Debug-cli-subprocess.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 14-Debug-cli-subprocess.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 15-Debug-caps-build.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 15-Debug-caps-build.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 15-Debug-caps-build.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 15-Debug-caps-build.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 16-Debug-caps-runtime.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 16-Debug-caps-runtime.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 16-Debug-caps-runtime.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 16-Debug-caps-runtime.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 17-ReleaseSafe-build.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 17-ReleaseSafe-build.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 17-ReleaseSafe-build.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 17-ReleaseSafe-build.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 18-ReleaseSafe-contracts.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 18-ReleaseSafe-contracts.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 18-ReleaseSafe-contracts.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 18-ReleaseSafe-contracts.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 19-ReleaseSafe-registered-tests.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 19-ReleaseSafe-registered-tests.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 19-ReleaseSafe-registered-tests.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 19-ReleaseSafe-registered-tests.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 20-ReleaseSafe-codec-tests.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 20-ReleaseSafe-codec-tests.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 20-ReleaseSafe-codec-tests.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 20-ReleaseSafe-codec-tests.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 21-ReleaseSafe-cli-subprocess.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 21-ReleaseSafe-cli-subprocess.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 21-ReleaseSafe-cli-subprocess.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 21-ReleaseSafe-cli-subprocess.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 22-ReleaseSafe-caps-build.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 22-ReleaseSafe-caps-build.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 22-ReleaseSafe-caps-build.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 22-ReleaseSafe-caps-build.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 23-ReleaseSafe-caps-runtime.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 23-ReleaseSafe-caps-runtime.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest 23-ReleaseSafe-caps-runtime.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact size 23-ReleaseSafe-caps-runtime.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "artifact digest Debug/baseline.json",
+      "pass": true
+    },
+    {
+      "name": "artifact size Debug/baseline.json",
+      "pass": true
+    },
+    {
+      "name": "artifact digest Debug/binaries.tar.gz",
+      "pass": true
+    },
+    {
+      "name": "artifact size Debug/binaries.tar.gz",
+      "pass": true
+    },
+    {
+      "name": "artifact digest Debug/cli/expired.stderr",
+      "pass": true
+    },
+    {
+      "name": "artifact size Debug/cli/expired.stderr",
+      "pass": true
+    },
+    {
+      "name": "artifact digest Debug/cli/fixture/.git/COMMIT_EDITMSG",
+      "pass": true
+    },
+    {
+      "name": "artifact size Debug/cli/fixture/.git/COMMIT_EDITMSG",
+      "pass": true
+    },
+    {
+      "name": "artifact digest Debug/cli/fixture/.git/HEAD",
+      "pass": true
+    },
+    {
+      "name": "artifact size Debug/cli/fixture/.git/HEAD",
+      "pass": true
+    },
+    {
+      "name": "artifact digest Debug/cli/fixture/.git/config",
+      "pass": true
+    },
+    {
+      "name": "artifact size Debug/cli/fixture/.git/config",
+      "pass": true
+    },
+    {
+      "name": "artifact digest Debug/cli/fixture/.git/index",
+      "pass": true
+    },
+    {
+      "name": "artifact size Debug/cli/fixture/.git/index",
+      "pass": true
+    },
+    {
+      "name": "artifact digest Debug/cli/fixture/.git/info/exclude",
+      "pass": true
+    },
+    {
+      "name": "artifact size Debug/cli/fixture/.git/info/exclude",
+      "pass": true
+    },
+    {
+      "name": "artifact digest Debug/cli/fixture/.git/logs/HEAD",
+      "pass": true
+    },
+    {
+      "name": "artifact size Debug/cli/fixture/.git/logs/HEAD",
+      "pass": true
+    },
+    {
+      "name": "artifact digest Debug/cli/fixture/.git/logs/refs/heads/main",
+      "pass": true
+    },
+    {
+      "name": "artifact size Debug/cli/fixture/.git/logs/refs/heads/main",
+      "pass": true
+    },
+    {
+      "name": "artifact digest Debug/cli/fixture/.git/objects/97/9d0291a5be8811db01aa76dc753f4531c90a74",
+      "pass": true
+    },
+    {
+      "name": "artifact size Debug/cli/fixture/.git/objects/97/9d0291a5be8811db01aa76dc753f4531c90a74",
+      "pass": true
+    },
+    {
+      "name": "artifact digest Debug/cli/fixture/.git/objects/9f/f0bb8e1f3845b4b8ee2bf8b7b1bb0dbd03237f",
+      "pass": true
+    },
+    {
+      "name": "artifact size Debug/cli/fixture/.git/objects/9f/f0bb8e1f3845b4b8ee2bf8b7b1bb0dbd03237f",
+      "pass": true
+    },
+    {
+      "name": "artifact digest Debug/cli/fixture/.git/objects/a3/66b3ba24cca2f99ae3f9741455806f689246b0",
+      "pass": true
+    },
+    {
+      "name": "artifact size Debug/cli/fixture/.git/objects/a3/66b3ba24cca2f99ae3f9741455806f689246b0",
+      "pass": true
+    },
+    {
+      "name": "artifact digest Debug/cli/fixture/.git/refs/heads/main",
+      "pass": true
+    },
+    {
+      "name": "artifact size Debug/cli/fixture/.git/refs/heads/main",
+      "pass": true
+    },
+    {
+      "name": "artifact digest Debug/cli/fixture/a.txt",
+      "pass": true
+    },
+    {
+      "name": "artifact size Debug/cli/fixture/a.txt",
+      "pass": true
+    },
+    {
+      "name": "artifact digest Debug/cli/fixture/global-hidden.txt",
+      "pass": true
+    },
+    {
+      "name": "artifact size Debug/cli/fixture/global-hidden.txt",
+      "pass": true
+    },
+    {
+      "name": "artifact digest Debug/cli/fixture/ignored.txt",
+      "pass": true
+    },
+    {
+      "name": "artifact size Debug/cli/fixture/ignored.txt",
+      "pass": true
+    },
+    {
+      "name": "artifact digest Debug/cli/global-exclude",
+      "pass": true
+    },
+    {
+      "name": "artifact size Debug/cli/global-exclude",
+      "pass": true
+    },
+    {
+      "name": "artifact digest Debug/cli/manifest.json",
+      "pass": true
+    },
+    {
+      "name": "artifact size Debug/cli/manifest.json",
+      "pass": true
+    },
+    {
+      "name": "artifact digest Debug/cli/policy.json",
+      "pass": true
+    },
+    {
+      "name": "artifact size Debug/cli/policy.json",
+      "pass": true
+    },
+    {
+      "name": "artifact digest Debug/cli/report.json",
+      "pass": true
+    },
+    {
+      "name": "artifact size Debug/cli/report.json",
+      "pass": true
+    },
+    {
+      "name": "artifact digest Debug/cli/transcript.json",
+      "pass": true
+    },
+    {
+      "name": "artifact size Debug/cli/transcript.json",
+      "pass": true
+    },
+    {
+      "name": "artifact digest Debug/cli/unbound.stderr",
+      "pass": true
+    },
+    {
+      "name": "artifact size Debug/cli/unbound.stderr",
+      "pass": true
+    },
+    {
+      "name": "artifact digest Debug/cli/wrong-base.stderr",
+      "pass": true
+    },
+    {
+      "name": "artifact size Debug/cli/wrong-base.stderr",
+      "pass": true
+    },
+    {
+      "name": "artifact digest Debug/cli/wrong-contract.stderr",
+      "pass": true
+    },
+    {
+      "name": "artifact size Debug/cli/wrong-contract.stderr",
+      "pass": true
+    },
+    {
+      "name": "artifact digest Debug/cli/wrong-workspace.stderr",
+      "pass": true
+    },
+    {
+      "name": "artifact size Debug/cli/wrong-workspace.stderr",
+      "pass": true
+    },
+    {
+      "name": "artifact digest Debug/cli/zero-fence.stderr",
+      "pass": true
+    },
+    {
+      "name": "artifact size Debug/cli/zero-fence.stderr",
+      "pass": true
+    },
+    {
+      "name": "artifact digest ReleaseSafe/baseline.json",
+      "pass": true
+    },
+    {
+      "name": "artifact size ReleaseSafe/baseline.json",
+      "pass": true
+    },
+    {
+      "name": "artifact digest ReleaseSafe/binaries.tar.gz",
+      "pass": true
+    },
+    {
+      "name": "artifact size ReleaseSafe/binaries.tar.gz",
+      "pass": true
+    },
+    {
+      "name": "artifact digest ReleaseSafe/cli/expired.stderr",
+      "pass": true
+    },
+    {
+      "name": "artifact size ReleaseSafe/cli/expired.stderr",
+      "pass": true
+    },
+    {
+      "name": "artifact digest ReleaseSafe/cli/fixture/.git/COMMIT_EDITMSG",
+      "pass": true
+    },
+    {
+      "name": "artifact size ReleaseSafe/cli/fixture/.git/COMMIT_EDITMSG",
+      "pass": true
+    },
+    {
+      "name": "artifact digest ReleaseSafe/cli/fixture/.git/HEAD",
+      "pass": true
+    },
+    {
+      "name": "artifact size ReleaseSafe/cli/fixture/.git/HEAD",
+      "pass": true
+    },
+    {
+      "name": "artifact digest ReleaseSafe/cli/fixture/.git/config",
+      "pass": true
+    },
+    {
+      "name": "artifact size ReleaseSafe/cli/fixture/.git/config",
+      "pass": true
+    },
+    {
+      "name": "artifact digest ReleaseSafe/cli/fixture/.git/index",
+      "pass": true
+    },
+    {
+      "name": "artifact size ReleaseSafe/cli/fixture/.git/index",
+      "pass": true
+    },
+    {
+      "name": "artifact digest ReleaseSafe/cli/fixture/.git/info/exclude",
+      "pass": true
+    },
+    {
+      "name": "artifact size ReleaseSafe/cli/fixture/.git/info/exclude",
+      "pass": true
+    },
+    {
+      "name": "artifact digest ReleaseSafe/cli/fixture/.git/logs/HEAD",
+      "pass": true
+    },
+    {
+      "name": "artifact size ReleaseSafe/cli/fixture/.git/logs/HEAD",
+      "pass": true
+    },
+    {
+      "name": "artifact digest ReleaseSafe/cli/fixture/.git/logs/refs/heads/main",
+      "pass": true
+    },
+    {
+      "name": "artifact size ReleaseSafe/cli/fixture/.git/logs/refs/heads/main",
+      "pass": true
+    },
+    {
+      "name": "artifact digest ReleaseSafe/cli/fixture/.git/objects/5c/8cb867b0c5d7e2e40e03c6770baa35da6c0d4b",
+      "pass": true
+    },
+    {
+      "name": "artifact size ReleaseSafe/cli/fixture/.git/objects/5c/8cb867b0c5d7e2e40e03c6770baa35da6c0d4b",
+      "pass": true
+    },
+    {
+      "name": "artifact digest ReleaseSafe/cli/fixture/.git/objects/97/9d0291a5be8811db01aa76dc753f4531c90a74",
+      "pass": true
+    },
+    {
+      "name": "artifact size ReleaseSafe/cli/fixture/.git/objects/97/9d0291a5be8811db01aa76dc753f4531c90a74",
+      "pass": true
+    },
+    {
+      "name": "artifact digest ReleaseSafe/cli/fixture/.git/objects/a3/66b3ba24cca2f99ae3f9741455806f689246b0",
+      "pass": true
+    },
+    {
+      "name": "artifact size ReleaseSafe/cli/fixture/.git/objects/a3/66b3ba24cca2f99ae3f9741455806f689246b0",
+      "pass": true
+    },
+    {
+      "name": "artifact digest ReleaseSafe/cli/fixture/.git/refs/heads/main",
+      "pass": true
+    },
+    {
+      "name": "artifact size ReleaseSafe/cli/fixture/.git/refs/heads/main",
+      "pass": true
+    },
+    {
+      "name": "artifact digest ReleaseSafe/cli/fixture/a.txt",
+      "pass": true
+    },
+    {
+      "name": "artifact size ReleaseSafe/cli/fixture/a.txt",
+      "pass": true
+    },
+    {
+      "name": "artifact digest ReleaseSafe/cli/fixture/global-hidden.txt",
+      "pass": true
+    },
+    {
+      "name": "artifact size ReleaseSafe/cli/fixture/global-hidden.txt",
+      "pass": true
+    },
+    {
+      "name": "artifact digest ReleaseSafe/cli/fixture/ignored.txt",
+      "pass": true
+    },
+    {
+      "name": "artifact size ReleaseSafe/cli/fixture/ignored.txt",
+      "pass": true
+    },
+    {
+      "name": "artifact digest ReleaseSafe/cli/global-exclude",
+      "pass": true
+    },
+    {
+      "name": "artifact size ReleaseSafe/cli/global-exclude",
+      "pass": true
+    },
+    {
+      "name": "artifact digest ReleaseSafe/cli/manifest.json",
+      "pass": true
+    },
+    {
+      "name": "artifact size ReleaseSafe/cli/manifest.json",
+      "pass": true
+    },
+    {
+      "name": "artifact digest ReleaseSafe/cli/policy.json",
+      "pass": true
+    },
+    {
+      "name": "artifact size ReleaseSafe/cli/policy.json",
+      "pass": true
+    },
+    {
+      "name": "artifact digest ReleaseSafe/cli/report.json",
+      "pass": true
+    },
+    {
+      "name": "artifact size ReleaseSafe/cli/report.json",
+      "pass": true
+    },
+    {
+      "name": "artifact digest ReleaseSafe/cli/transcript.json",
+      "pass": true
+    },
+    {
+      "name": "artifact size ReleaseSafe/cli/transcript.json",
+      "pass": true
+    },
+    {
+      "name": "artifact digest ReleaseSafe/cli/unbound.stderr",
+      "pass": true
+    },
+    {
+      "name": "artifact size ReleaseSafe/cli/unbound.stderr",
+      "pass": true
+    },
+    {
+      "name": "artifact digest ReleaseSafe/cli/wrong-base.stderr",
+      "pass": true
+    },
+    {
+      "name": "artifact size ReleaseSafe/cli/wrong-base.stderr",
+      "pass": true
+    },
+    {
+      "name": "artifact digest ReleaseSafe/cli/wrong-contract.stderr",
+      "pass": true
+    },
+    {
+      "name": "artifact size ReleaseSafe/cli/wrong-contract.stderr",
+      "pass": true
+    },
+    {
+      "name": "artifact digest ReleaseSafe/cli/wrong-workspace.stderr",
+      "pass": true
+    },
+    {
+      "name": "artifact size ReleaseSafe/cli/wrong-workspace.stderr",
+      "pass": true
+    },
+    {
+      "name": "artifact digest ReleaseSafe/cli/zero-fence.stderr",
+      "pass": true
+    },
+    {
+      "name": "artifact size ReleaseSafe/cli/zero-fence.stderr",
+      "pass": true
+    },
+    {
+      "name": "artifact digest pip-install.json",
+      "pass": true
+    },
+    {
+      "name": "artifact size pip-install.json",
+      "pass": true
+    },
+    {
+      "name": "artifact digest report.json",
+      "pass": true
+    },
+    {
+      "name": "artifact size report.json",
+      "pass": true
+    },
+    {
+      "name": "artifact digest source-after.json",
+      "pass": true
+    },
+    {
+      "name": "artifact size source-after.json",
+      "pass": true
+    },
+    {
+      "name": "artifact digest source-before.json",
+      "pass": true
+    },
+    {
+      "name": "artifact size source-before.json",
+      "pass": true
+    },
+    {
+      "name": "same clean source before/after",
+      "pass": true
+    },
+    {
+      "name": "expected exact source tree",
+      "pass": true
+    },
+    {
+      "name": "source blob .github/workflows/native.yml",
+      "pass": true
+    },
+    {
+      "name": "source blob AGENTS.md",
+      "pass": true
+    },
+    {
+      "name": "source blob CLAUDE.md",
+      "pass": true
+    },
+    {
+      "name": "source blob DESIGNBOOK.html",
+      "pass": true
+    },
+    {
+      "name": "source blob LICENSE",
+      "pass": true
+    },
+    {
+      "name": "source blob MANIFEST.sha256",
+      "pass": true
+    },
+    {
+      "name": "source blob README.md",
+      "pass": true
+    },
+    {
+      "name": "source blob bench/baseline.md",
+      "pass": true
+    },
+    {
+      "name": "source blob bench/results-template.json",
+      "pass": true
+    },
+    {
+      "name": "source blob bench/spikes/caps.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob bench/spikes/darwin_abi.c",
+      "pass": true
+    },
+    {
+      "name": "source blob build.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob build.zig.zon",
+      "pass": true
+    },
+    {
+      "name": "source blob c/darwin_shim.c",
+      "pass": true
+    },
+    {
+      "name": "source blob c/darwin_shim.h",
+      "pass": true
+    },
+    {
+      "name": "source blob config/limits.json",
+      "pass": true
+    },
+    {
+      "name": "source blob config/memory-profiles.json",
+      "pass": true
+    },
+    {
+      "name": "source blob config/scheduler-profiles.json",
+      "pass": true
+    },
+    {
+      "name": "source blob contracts/README.md",
+      "pass": true
+    },
+    {
+      "name": "source blob contracts/data.schema.json",
+      "pass": true
+    },
+    {
+      "name": "source blob contracts/inputs/zcr_batch_read.schema.json",
+      "pass": true
+    },
+    {
+      "name": "source blob contracts/inputs/zcr_create.schema.json",
+      "pass": true
+    },
+    {
+      "name": "source blob contracts/inputs/zcr_files.schema.json",
+      "pass": true
+    },
+    {
+      "name": "source blob contracts/inputs/zcr_health.schema.json",
+      "pass": true
+    },
+    {
+      "name": "source blob contracts/inputs/zcr_patch.schema.json",
+      "pass": true
+    },
+    {
+      "name": "source blob contracts/inputs/zcr_read.schema.json",
+      "pass": true
+    },
+    {
+      "name": "source blob contracts/inputs/zcr_search.schema.json",
+      "pass": true
+    },
+    {
+      "name": "source blob contracts/inputs/zcr_status.schema.json",
+      "pass": true
+    },
+    {
+      "name": "source blob contracts/response.schema.json",
+      "pass": true
+    },
+    {
+      "name": "source blob contracts/task-manifest.schema.json",
+      "pass": true
+    },
+    {
+      "name": "source blob contracts/tools.json",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/README.md",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/c1-context.dot",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/c1-context.mmd",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/c1-context.svg",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/c2-containers.dot",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/c2-containers.mmd",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/c2-containers.svg",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/c3-components.dot",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/c3-components.mmd",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/c3-components.svg",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/c4-ownership.dot",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/c4-ownership.mmd",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/c4-ownership.svg",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/core-scheduling.dot",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/core-scheduling.mmd",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/core-scheduling.svg",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/deployment.dot",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/deployment.mmd",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/deployment.svg",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/edit-state.dot",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/edit-state.mmd",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/edit-state.svg",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/memory-pressure.dot",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/memory-pressure.mmd",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/memory-pressure.svg",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/memory-state.mmd",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/search-pipeline.dot",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/search-pipeline.mmd",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/search-pipeline.svg",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/task-dag.dot",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/task-dag.mmd",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/task-dag.svg",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/worktree-isolation.dot",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/worktree-isolation.mmd",
+      "pass": true
+    },
+    {
+      "name": "source blob diagrams/worktree-isolation.svg",
+      "pass": true
+    },
+    {
+      "name": "source blob docs/00-Executive-Brief.md",
+      "pass": true
+    },
+    {
+      "name": "source blob docs/01-Requirements-and-Traceability.md",
+      "pass": true
+    },
+    {
+      "name": "source blob docs/02-SDD.md",
+      "pass": true
+    },
+    {
+      "name": "source blob docs/03-C4-Architecture.md",
+      "pass": true
+    },
+    {
+      "name": "source blob docs/04-Apple-Silicon-Scheduling.md",
+      "pass": true
+    },
+    {
+      "name": "source blob docs/05-Memory-and-Pressure.md",
+      "pass": true
+    },
+    {
+      "name": "source blob docs/06-Worktree-and-Task-Isolation.md",
+      "pass": true
+    },
+    {
+      "name": "source blob docs/07-Pipelines-and-Consistency.md",
+      "pass": true
+    },
+    {
+      "name": "source blob docs/08-API-and-MCP.md",
+      "pass": true
+    },
+    {
+      "name": "source blob docs/09-Storage-Search-and-Edit.md",
+      "pass": true
+    },
+    {
+      "name": "source blob docs/10-Portability-x86.md",
+      "pass": true
+    },
+    {
+      "name": "source blob docs/11-Security-and-Failure-Recovery.md",
+      "pass": true
+    },
+    {
+      "name": "source blob docs/12-Performance-and-Test-Plan.md",
+      "pass": true
+    },
+    {
+      "name": "source blob docs/13-Implementation-Roadmap.md",
+      "pass": true
+    },
+    {
+      "name": "source blob docs/14-Integration-and-Operations.md",
+      "pass": true
+    },
+    {
+      "name": "source blob docs/15-ADR.md",
+      "pass": true
+    },
+    {
+      "name": "source blob docs/16-Evidence-and-Open-Gates.md",
+      "pass": true
+    },
+    {
+      "name": "source blob docs/17-Data-Model-and-Interfaces.md",
+      "pass": true
+    },
+    {
+      "name": "source blob docs/superpowers/plans/2026-09-12-runtime-continuation.md",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T00/baseline-run.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T00/baseline.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T00/handoff.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T00/logs/caps-build.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T00/logs/caps-run.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T00/logs/green-debug-compile.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T00/logs/green-debug-run.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T00/logs/green-releasesafe-compile.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T00/logs/green-releasesafe-run.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T00/logs/red-compile.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T00/logs/red-run.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T00/logs/s05-validate.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T00/test-runs.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T01/evidence-green-dev-debug.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T01/handoff.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T01/logs/fault-injection-dv004.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T01/logs/green-dev-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T01/logs/green-dev-releasesafe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T01/logs/red.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T01/logs/regression-perf-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T01/logs/s05-manifest.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T01/logs/s05-validate.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T01/logs/verify-contracts.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T01/task-step.snapshot.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T01/test-runs.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T02/evidence-green-isolation-debug.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T02/handoff.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T02/logs/green-isolation-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T02/logs/green-isolation-releasesafe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T02/logs/red.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T02/logs/regression-all-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T02/logs/regression-dev-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T02/logs/regression-perf-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T02/logs/s03-compile-aarch64-linux-musl.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T02/logs/s03-compile-x86_64-linux-musl.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T02/logs/s03-compile-x86_64-macos.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T02/logs/s05-guard-ownership.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T02/logs/s05-guard-scope.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T02/logs/s05-manifest.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T02/logs/s05-validate.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T02/logs/verify-contracts.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T02/mutants/m1-no-git-identity.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T02/mutants/m2-no-immutable-identity.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T02/mutants/m3-follow-symlink-kind.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T02/mutants/m4-ignore-rename-source.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T02/mutants/m5-string-prefix.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T02/mutants/m6-no-integrator-paths.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T02/mutants/m7b.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T02/mutants/m8-no-working-tree.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T02/test-runs.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T03/evidence-green-memory-debug.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T03/footprint-experiment/page.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T03/footprint-experiment/smp.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T03/footprint-experiment/testing.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T03/handoff.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T03/logs/fault-injection-me001.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T03/logs/green-memory-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T03/logs/green-memory-releasesafe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T03/logs/red.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T03/logs/regression-all-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T03/logs/s03-compile-aarch64-linux-musl.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T03/logs/s03-compile-x86_64-linux-musl.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T03/logs/s03-compile-x86_64-macos.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T03/logs/s03-try.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T03/logs/s05-guard-ownership.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T03/logs/s05-guard-scope.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T03/logs/s05-manifest.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T03/logs/s05-validate.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T03/logs/verify-contracts.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T03/mutants/m1-no-reservation-limit.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T03/mutants/m10-no-eviction-retry.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T03/mutants/m2-release-ignores-children.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T03/mutants/m3-budget-no-cap.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T03/mutants/m4-no-never-fits.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T03/mutants/m5-no-session-limit.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T03/mutants/m6-patch-without-file-bytes.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T03/mutants/m7-no-double-release-guard.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T03/mutants/m8-fault-off-by-one.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T03/mutants/m9-child-after-cancel.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T03/test-runs.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T04/evidence-green-io-debug.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T04/handoff.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T04/logs/green-io-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T04/logs/green-io-releasesafe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T04/logs/red.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T04/logs/regression-all-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T04/logs/s03-compile-aarch64-linux-musl.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T04/logs/s03-compile-x86_64-linux-musl.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T04/logs/s03-compile-x86_64-macos.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T04/logs/s03-try.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T04/logs/s05-guard-ownership.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T04/logs/s05-guard-scope.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T04/logs/s05-manifest.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T04/logs/s05-validate.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T04/logs/verify-contracts.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T04/mutants/m1-no-metadata-recheck.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T04/mutants/m10-short-read-as-complete.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T04/mutants/m11-scratch-leak.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T04/mutants/m12-no-open-identity.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T04/mutants/m2-no-path-identity.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T04/mutants/m3-hash-over-limit.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T04/mutants/m4-stop-before-eof-hash.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T04/mutants/m5-phantom-line.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T04/mutants/m6-no-binary-check.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T04/mutants/m7b-no-cancel-in-scan.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T04/mutants/m8-partial-first-line.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T04/mutants/m9-no-capability-path.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T04/test-runs.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/evidence-green-fs-debug.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/handoff.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/logs/green-fs-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/logs/green-fs-releasesafe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/logs/red.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/logs/regression-all-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/logs/s03-compile-aarch64-linux-musl.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/logs/s03-compile-x86_64-linux-musl.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/logs/s03-compile-x86_64-macos.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/logs/s05-guard-ownership.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/logs/s05-guard-scope.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/logs/s05-manifest.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/logs/s05-validate.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/logs/verify-contracts.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/mutants/m1-negation-ignored.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/mutants/m10-leak-per-directory.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/mutants/m11-no-truncation.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/mutants/m12-anchored-as-basename.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/mutants/m13-bracket-negation-ignored.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/mutants/m14-no-walk-cancel.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/mutants/m15-no-ancestor-ignore.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/mutants/m2-enter-ignored-dirs.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/mutants/m3-trailing-starstar-zero.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/mutants/m4-trim-escaped-space.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/mutants/m5-follow-dir-symlinks.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/mutants/m6-unreadable-not-counted.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/mutants/m7-no-name-validation.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/mutants/m8-list-over-limit.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/mutants/m9-no-sort.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/mutants/m9b-no-sort.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T05/test-runs.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/evidence-green-search-debug.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/handoff.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/logs/green-search-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/logs/green-search-releasesafe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/logs/red.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/logs/regression-all-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/logs/s03-compile-aarch64-linux-musl.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/logs/s03-compile-x86_64-linux-musl.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/logs/s03-compile-x86_64-macos.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/logs/s05-guard-ownership.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/logs/s05-guard-scope.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/logs/s05-manifest.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/logs/s05-validate.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/logs/verify-contracts.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/mutants/m1-no-dedupe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/mutants/m10-no-output-budget.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/mutants/m11-no-scan-cancel.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/mutants/m12-no-retry.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/mutants/m13-no-oversize.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/mutants/m14-overlapping-matches.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/mutants/m2-no-overlap.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/mutants/m3-lines-from-window-start.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/mutants/m4-no-merge.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/mutants/m5-no-binary.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/mutants/m6-no-utf8-finish.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/mutants/m7b-no-version-recheck.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/mutants/m8b-no-projection-validation.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/mutants/m9b-no-match-limit.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/mutants/original-tests/orig-tests-m7b-no-version-recheck.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/mutants/original-tests/orig-tests-m8b-no-projection-validation.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/mutants/round1-summary.txt",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T06/test-runs.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/continuation-2026-09-12/corpus.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/continuation-2026-09-12/evidence-green-batch-debug.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/continuation-2026-09-12/evidence-green-batch-safe.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/continuation-2026-09-12/handoff.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/continuation-2026-09-12/logs/clean-source-preflight.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/continuation-2026-09-12/logs/failure-batch-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/continuation-2026-09-12/logs/green-batch-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/continuation-2026-09-12/logs/green-batch-safe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/continuation-2026-09-12/logs/record-green-batch-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/continuation-2026-09-12/logs/record-green-batch-safe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/continuation-2026-09-12/logs/red-different-limits.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/continuation-2026-09-12/logs/red-long-line.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/continuation-2026-09-12/logs/red-overflow.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/continuation-2026-09-12/logs/red-projection.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/continuation-2026-09-12/logs/red-utf8.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/continuation-2026-09-12/logs/red-validation.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/continuation-2026-09-12/logs/red-zero.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/continuation-2026-09-12/logs/regression-all-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/continuation-2026-09-12/logs/regression-all-safe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/continuation-2026-09-12/logs/verify-contracts.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/continuation-2026-09-12/logs/verify-green-batch-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/continuation-2026-09-12/logs/verify-green-batch-safe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/continuation-2026-09-12/report.md",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/continuation-2026-09-12/source-snapshots.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/continuation-2026-09-12/test-runs.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/evidence-green-batch-debug.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/handoff.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/logs/green-batch-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/logs/green-batch-releasesafe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/logs/red.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/logs/regression-all-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/logs/s03-compile-aarch64-linux-musl.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/logs/s03-compile-x86_64-linux-musl.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/logs/s03-compile-x86_64-macos.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/logs/s04-samples-run.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/logs/s04-schema-validation.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/logs/s05-guard-ownership.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/logs/s05-guard-scope.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/logs/s05-manifest.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/logs/s05-validate.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/logs/validate_samples.py",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/logs/verify-contracts.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/mutants/round1-summary.txt",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/mutants/round1/m1-no-output-wait.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/mutants/round1/m10-no-duplicate-id-check.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/mutants/round1/m11-no-store-check.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/mutants/round1/m12-workers-ignore-caps.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/mutants/round1/m13-budget-error-not-truncated.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/mutants/round1/m14-no-refund.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/mutants/round1/m15-no-dispatch-cancel.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/mutants/round1/m2-no-memory-wait.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/mutants/round1/m3-pool-before-free.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/mutants/round1/m4-no-dedupe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/mutants/round1/m5-no-merge.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/mutants/round1/m6-no-own-cap.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/mutants/round1/m7-shared-short-ok.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/mutants/round1/m8-no-item-id-copy.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/mutants/round1/m9-no-workspace-check.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/mutants/round1/p1-no-control-escape.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/mutants/round1/p2-batch-always-full.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/mutants/round1/p3-truncated-can-be-complete.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/mutants/round1/p4-zero-entries-allowed.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/mutants/round1/p5-no-utf8-check.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/mutants/round1/p6-no-request-id-limit.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/mutants/round1/p7-no-budget-reason.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/mutants/round1/p8-greedy-stops.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/mutants/round2-summary.txt",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/mutants/round2/m10b-no-duplicate-id-check.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/mutants/round2/m15-no-dispatch-cancel.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/mutants/round2/p2b-batch-always-full.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/mutants/round2/p4-zero-entries-allowed.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/mutants/round2/p5-no-utf8-check.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/samples/batch_read.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/samples/batch_read_truncated.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/samples/failure.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/samples/read.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T07/test-runs.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T08/handoff.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T08/inputs.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T08/logs/batch-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T08/logs/batch-release.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T08/logs/clean-source-preflight.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T08/logs/codec-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T08/logs/codec-release.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T08/logs/mcp-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T08/logs/mcp-release.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T08/logs/red.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T08/logs/review-red-stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T08/logs/verify-contracts.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T08/records/batch-debug.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T08/records/batch-release.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T08/records/codec-debug.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T08/records/codec-release.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T08/records/mcp-debug.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T08/records/mcp-release.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T08/red-source/mcp.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T08/red-source/t08_test.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T08/red.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T08/report.md",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T08/review-resolution.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T08/runs.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T08/source-snapshots.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T09/digests.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T09/evidence-green-debug.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T09/evidence-green-releasesafe.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T09/evidence-memory-regression.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T09/handoff.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T09/logs/final-preflight.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T09/logs/green-debug-build.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T09/logs/green-debug-run.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T09/logs/green-releasesafe-build.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T09/logs/green-releasesafe-run.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T09/logs/macos-zig-typecheck.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T09/logs/manifest-scope-audit.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T09/logs/ownership-guard.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T09/logs/red.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T09/logs/regression-memory-build.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T09/logs/regression-memory-releasesafe-run.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T09/logs/regression-memory-run.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T09/logs/review-red.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T09/logs/scope-guard.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T09/logs/verify-contracts-report.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T09/manifest.snapshot.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T09/preflight.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T09/task-step.snapshot.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T09/test-runs.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T10/commit-isolation-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T10/commit-isolation-release-safe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T10/commit-lease-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T10/commit-lease-release-safe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T10/commit-red.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T10/commit-red.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T10/commit-runtime-hooks-absent.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T10/commit-t02-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T10/commit-t02-release-safe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T10/commit-t10-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T10/commit-t10-release-safe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T10/commit-verify-contracts.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T10/handoff.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T10/historical-log-index.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T10/historical-logs.zip",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T10/initial-runs.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T10/marker-red.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T10/marker-runs.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T10/preflight.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T10/red.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T10/review-red.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T10/review-runs.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T10/runs.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T10/runtime-hooks-absent.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T10/steps.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/checkpoint-9a8473a/corpus.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/checkpoint-9a8473a/final-write-debug-standard.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/checkpoint-9a8473a/final-write-releasesafe-standard.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/checkpoint-9a8473a/handoff.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/checkpoint-9a8473a/historical-commands.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/checkpoint-9a8473a/log-index.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/checkpoint-9a8473a/logs.tar.gz",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/checkpoint-9a8473a/red.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/checkpoint-9a8473a/report.md",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/checkpoint-9a8473a/run_dependencies.py",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/checkpoint-9a8473a/run_dependencies_remaining.py",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/checkpoint-9a8473a/run_verification.py",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/checkpoint-9a8473a/runs.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/checkpoint-9a8473a/runtime-gate.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/checkpoint-9a8473a/source-config.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/checkpoint-9a8473a/standard-evidence-commands.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/final/authorization.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/final/corpus.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/final/current-logs.tar.gz",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/final/followup-history.tar.gz",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/final/log-index.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/final/manifest.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/final/red-regressions.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/final/review-checkpoint-39ce577.tar.gz",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/final/run_final.py",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/final/runs.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/final/runtime-gate.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/final/scope.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/final/source-config.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/final/standard-evidence-commands.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/final/standard-records.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/handoff.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T11/report.md",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T13/authorization.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T13/contracts.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T13/fault-debug-standard.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T13/fault-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T13/green-debug-standard.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T13/green-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T13/green-safe-standard.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T13/green-safe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T13/handoff.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T13/manifest.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T13/preflight.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T13/red-isolation.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T13/red.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T13/red.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T13/regression-io.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T13/regression-isolation.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T13/report.md",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T13/review.md",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T13/runs.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T13/runtime-hooks-absent.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T13/runtime-hooks-absent.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T13/scope.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T13/standard-verification.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T13/steps.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/authorization.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/behavioral-red.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/contracts.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/darwin-abi-aarch64.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/darwin-abi-probe.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/darwin-abi-x86_64.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/darwin-callback-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/darwin-callback-releasesafe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/fault-debug-standard.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/fault-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/green-debug-standard.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/green-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/green-safe-standard.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/green-safe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/handoff.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/manifest.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/preflight.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/red.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/references.md",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/regression-fs.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/regression-isolation.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/regression-memory.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/report.md",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/review-evidence-check.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/review.md",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/runs.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/runtime-hooks-absent.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/runtime-hooks-absent.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/scope-native.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/standard-verification.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/T14/steps.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/SHA256SUMS",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/fixture-definitions.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/handoff.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/check-ignore.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/deadline-final-batch-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/deadline-final-batch-releasesafe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/deadline-final-fs-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/deadline-final-fs-releasesafe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/deadline-final-io-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/deadline-final-io-releasesafe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/deadline-final-search-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/deadline-final-search-releasesafe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/final-batch-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/final-batch-releasesafe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/final-fs-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/final-fs-releasesafe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/final-io-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/final-io-releasesafe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/final-search-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/final-search-releasesafe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/fmt-check.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/green-fs-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/green-ignore-race.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/green-io-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/green-search-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/red-cancel.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/red-deadline-io.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/red-deadline-search.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/red-ignore-race.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/red-ignore.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/red-no-match.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/red-read-fifo.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/red-search.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/red-unreadable.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/logs/verify-contracts.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/pre-deadline-verification-config.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/pre-deadline-verification-runs.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/pre-deadline-verify.py",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/report.md",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/verification-config.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/verification-runs.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/legacy/verify.py",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/README.md",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/01-git-version.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/01-git-version.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/02-filesystem.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/02-filesystem.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/03-os-version.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/03-os-version.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/04-sdk-version.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/04-sdk-version.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/05-sdk-path.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/05-sdk-path.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/06-filesystem-device.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/06-filesystem-device.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/07-filesystem-detail.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/07-filesystem-detail.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/08-zig-version.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/08-zig-version.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/09-zig-env.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/09-zig-env.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/10-python-venv.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/10-python-venv.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/11-schema-dependencies.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/11-schema-dependencies.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/12-python-dependencies.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/12-python-dependencies.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/13-Debug-build.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/13-Debug-build.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/14-Debug-contracts.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/14-Debug-contracts.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/15-Debug-registered-tests.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/15-Debug-registered-tests.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/16-Debug-codec-tests.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/16-Debug-codec-tests.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/17-Debug-cli-subprocess.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/17-Debug-cli-subprocess.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/18-Debug-caps-build.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/18-Debug-caps-build.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/19-Debug-caps-runtime.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/19-Debug-caps-runtime.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/20-ReleaseSafe-build.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/20-ReleaseSafe-build.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/21-ReleaseSafe-contracts.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/21-ReleaseSafe-contracts.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/22-ReleaseSafe-registered-tests.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/22-ReleaseSafe-registered-tests.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/23-ReleaseSafe-codec-tests.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/23-ReleaseSafe-codec-tests.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/24-ReleaseSafe-cli-subprocess.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/24-ReleaseSafe-cli-subprocess.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/25-ReleaseSafe-caps-build.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/25-ReleaseSafe-caps-build.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/26-ReleaseSafe-caps-runtime.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/26-ReleaseSafe-caps-runtime.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/Debug/baseline.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/Debug/cli/manifest.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/Debug/cli/policy.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/Debug/cli/report.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/Debug/cli/transcript.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/ReleaseSafe/baseline.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/ReleaseSafe/cli/manifest.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/ReleaseSafe/cli/policy.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/ReleaseSafe/cli/report.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/ReleaseSafe/cli/transcript.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/artifact-sha256.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/pip-install.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/report.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/source-after.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/aarch64-macos/source-before.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/verification.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/01-git-version.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/01-git-version.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/02-filesystem.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/02-filesystem.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/03-cpu.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/03-cpu.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/04-filesystem-detail.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/04-filesystem-detail.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/05-zig-version.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/05-zig-version.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/06-zig-env.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/06-zig-env.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/07-python-venv.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/07-python-venv.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/08-schema-dependencies.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/08-schema-dependencies.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/09-python-dependencies.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/09-python-dependencies.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/10-Debug-build.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/10-Debug-build.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/11-Debug-contracts.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/11-Debug-contracts.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/12-Debug-registered-tests.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/12-Debug-registered-tests.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/13-Debug-codec-tests.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/13-Debug-codec-tests.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/14-Debug-cli-subprocess.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/14-Debug-cli-subprocess.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/15-Debug-caps-build.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/15-Debug-caps-build.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/16-Debug-caps-runtime.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/16-Debug-caps-runtime.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/17-ReleaseSafe-build.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/17-ReleaseSafe-build.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/18-ReleaseSafe-contracts.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/18-ReleaseSafe-contracts.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/19-ReleaseSafe-registered-tests.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/19-ReleaseSafe-registered-tests.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/20-ReleaseSafe-codec-tests.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/20-ReleaseSafe-codec-tests.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/21-ReleaseSafe-cli-subprocess.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/21-ReleaseSafe-cli-subprocess.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/22-ReleaseSafe-caps-build.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/22-ReleaseSafe-caps-build.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/23-ReleaseSafe-caps-runtime.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/23-ReleaseSafe-caps-runtime.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/Debug/baseline.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/Debug/cli/manifest.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/Debug/cli/policy.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/Debug/cli/report.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/Debug/cli/transcript.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/ReleaseSafe/baseline.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/ReleaseSafe/cli/manifest.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/ReleaseSafe/cli/policy.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/ReleaseSafe/cli/report.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/ReleaseSafe/cli/transcript.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/artifact-sha256.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/pip-install.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/report.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/source-after.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-linux/source-before.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/01-git-version.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/01-git-version.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/02-filesystem.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/02-filesystem.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/03-os-version.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/03-os-version.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/04-sdk-version.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/04-sdk-version.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/05-sdk-path.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/05-sdk-path.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/06-filesystem-device.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/06-filesystem-device.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/07-filesystem-detail.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/07-filesystem-detail.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/08-zig-version.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/08-zig-version.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/09-zig-env.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/09-zig-env.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/10-python-venv.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/10-python-venv.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/11-schema-dependencies.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/11-schema-dependencies.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/12-python-dependencies.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/12-python-dependencies.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/13-Debug-build.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/13-Debug-build.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/14-Debug-contracts.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/14-Debug-contracts.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/15-Debug-registered-tests.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/15-Debug-registered-tests.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/16-Debug-codec-tests.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/16-Debug-codec-tests.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/17-Debug-cli-subprocess.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/17-Debug-cli-subprocess.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/18-Debug-caps-build.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/18-Debug-caps-build.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/19-Debug-caps-runtime.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/19-Debug-caps-runtime.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/20-ReleaseSafe-build.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/20-ReleaseSafe-build.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/21-ReleaseSafe-contracts.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/21-ReleaseSafe-contracts.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/22-ReleaseSafe-registered-tests.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/22-ReleaseSafe-registered-tests.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/23-ReleaseSafe-codec-tests.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/23-ReleaseSafe-codec-tests.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/24-ReleaseSafe-cli-subprocess.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/24-ReleaseSafe-cli-subprocess.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/25-ReleaseSafe-caps-build.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/25-ReleaseSafe-caps-build.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/26-ReleaseSafe-caps-runtime.stderr.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/26-ReleaseSafe-caps-runtime.stdout.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/Debug/baseline.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/Debug/cli/manifest.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/Debug/cli/policy.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/Debug/cli/report.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/Debug/cli/transcript.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/ReleaseSafe/baseline.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/ReleaseSafe/cli/manifest.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/ReleaseSafe/cli/policy.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/ReleaseSafe/cli/report.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/ReleaseSafe/cli/transcript.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/artifact-sha256.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/pip-install.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/report.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/source-after.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/native-ci-34681109500/x86_64-macos/source-before.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/pressure-admission/README.md",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/pressure-admission/pressure-admission-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/pressure-admission/pressure-admission-red.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/pressure-admission/pressure-admission-safe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/pressure-admission/provenance.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/pressure-admission/review.md",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/runtime-checkpoint/README.md",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/runtime-checkpoint/cli-debug/global-exclude",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/runtime-checkpoint/cli-debug/manifest.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/runtime-checkpoint/cli-debug/policy.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/runtime-checkpoint/cli-debug/report.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/runtime-checkpoint/cli-debug/transcript.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/runtime-checkpoint/cli-final-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/runtime-checkpoint/cli-final-safe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/runtime-checkpoint/cli-safe/global-exclude",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/runtime-checkpoint/cli-safe/manifest.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/runtime-checkpoint/cli-safe/policy.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/runtime-checkpoint/cli-safe/report.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/runtime-checkpoint/cli-safe/transcript.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/runtime-checkpoint/commit-coordinator-review.md",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/runtime-checkpoint/deadline-red-batch-corrected.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/runtime-checkpoint/deadline-red-mcp.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/runtime-checkpoint/deadline-red-scheduler.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/runtime-checkpoint/document-report.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/runtime-checkpoint/green-batch-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/runtime-checkpoint/green-batch-safe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/runtime-checkpoint/green-mcp-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/runtime-checkpoint/green-mcp-safe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/runtime-checkpoint/green-scheduler-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/runtime-checkpoint/green-scheduler-safe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/runtime-checkpoint/launch-review.md",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/runtime-checkpoint/provenance.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/runtime-checkpoint/t08-review.md",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/runtime-checkpoint/t10-review.md",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/runtime-checkpoint/t13-review.md",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/runtime-checkpoint/test-harness-review.md",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/source-history.bundle",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/source-history.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/test-harness/README.md",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/test-harness/authorization.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/test-harness/authorized-manifest.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/test-harness/build_options.zig.txt",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/test-harness/green-T00-Debug.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/test-harness/green-T00-Debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/test-harness/green-T00-ReleaseSafe.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/test-harness/green-T00-ReleaseSafe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/test-harness/green-T01-Debug.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/test-harness/green-T01-Debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/test-harness/green-T01-ReleaseSafe.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/test-harness/green-T01-ReleaseSafe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/test-harness/green-T02-Debug.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/test-harness/green-T02-Debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/test-harness/green-T02-ReleaseSafe.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/test-harness/green-T02-ReleaseSafe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/test-harness/green-T03-Debug.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/test-harness/green-T03-Debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/test-harness/green-T03-ReleaseSafe.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/test-harness/green-T03-ReleaseSafe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/test-harness/provenance.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/test-harness/red/README.md",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/test-harness/red/T00.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/test-harness/red/T00.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/test-harness/red/T01.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/test-harness/red/T01.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/test-harness/red/T02.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/test-harness/red/T02.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/test-harness/results.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/continuation/test-harness/run.py",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/integration/INT-001.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/integration/INT-002.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/integration/INT-003.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/integration/INT-004.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/integration/INT-005.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/integration/INT-006.json",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/integration/logs/int-all-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/integration/logs/int-dev-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/integration/logs/int-dev-releasesafe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/integration/logs/int-perf-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/integration/logs/int-verify-contracts.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/integration/logs/int2-all-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/integration/logs/int2-isolation-releasesafe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/integration/logs/int2-verify-contracts.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/integration/logs/int3-all-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/integration/logs/int3-memory-releasesafe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/integration/logs/int3-verify-contracts.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/integration/logs/int4-all-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/integration/logs/int4-io-releasesafe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/integration/logs/int4-verify-contracts.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/integration/logs/int5-all-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/integration/logs/int5-fs-releasesafe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/integration/logs/int5-verify-contracts.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/integration/logs/int6-all-debug.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/integration/logs/int6-search-releasesafe.log",
+      "pass": true
+    },
+    {
+      "name": "source blob evidence/integration/logs/int6-verify-contracts.log",
+      "pass": true
+    },
+    {
+      "name": "source blob examples/approved-policy.planned.json",
+      "pass": true
+    },
+    {
+      "name": "source blob examples/claude.mcp.example.json",
+      "pass": true
+    },
+    {
+      "name": "source blob examples/codex.config.example.toml",
+      "pass": true
+    },
+    {
+      "name": "source blob examples/handoff.template.json",
+      "pass": true
+    },
+    {
+      "name": "source blob examples/read-response.fixture.json",
+      "pass": true
+    },
+    {
+      "name": "source blob examples/task-manifest.planned.json",
+      "pass": true
+    },
+    {
+      "name": "source blob examples/tool-calls.json",
+      "pass": true
+    },
+    {
+      "name": "source blob handoffs/interface-change.json",
+      "pass": true
+    },
+    {
+      "name": "source blob references/SOURCES.md",
+      "pass": true
+    },
+    {
+      "name": "source blob references/sources.json",
+      "pass": true
+    },
+    {
+      "name": "source blob src/batch/read.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/cache/association.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/cache/content.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/cache/lines.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/core/errors.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/core/limits.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/core/types.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/fs/edit.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/fs/ignore.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/fs/metadata.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/fs/publish.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/fs/read.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/fs/traverse.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/launch.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/launch_ignore.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/main.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/memory/accounting.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/memory/arena.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/memory/budget.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/platform/darwin.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/policy/capability.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/policy/paths.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/policy/scope.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/protocol/codec.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/protocol/framing.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/protocol/mcp.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/protocol/projection.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/scheduler/admission.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/scheduler/executor.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/scheduler/queue.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/search/context.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/search/literal.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/search/scalar.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/watch/core.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/watch/darwin.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/watch/linux.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/workspace/identity.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/workspace/lease.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob src/workspace/registry.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob tasks/INDEX.md",
+      "pass": true
+    },
+    {
+      "name": "source blob tasks/T00.md",
+      "pass": true
+    },
+    {
+      "name": "source blob tasks/T01.md",
+      "pass": true
+    },
+    {
+      "name": "source blob tasks/T02.md",
+      "pass": true
+    },
+    {
+      "name": "source blob tasks/T03.md",
+      "pass": true
+    },
+    {
+      "name": "source blob tasks/T04.md",
+      "pass": true
+    },
+    {
+      "name": "source blob tasks/T05.md",
+      "pass": true
+    },
+    {
+      "name": "source blob tasks/T06.md",
+      "pass": true
+    },
+    {
+      "name": "source blob tasks/T07.md",
+      "pass": true
+    },
+    {
+      "name": "source blob tasks/T08.md",
+      "pass": true
+    },
+    {
+      "name": "source blob tasks/T09.md",
+      "pass": true
+    },
+    {
+      "name": "source blob tasks/T10.md",
+      "pass": true
+    },
+    {
+      "name": "source blob tasks/T11.md",
+      "pass": true
+    },
+    {
+      "name": "source blob tasks/T12.md",
+      "pass": true
+    },
+    {
+      "name": "source blob tasks/T13.md",
+      "pass": true
+    },
+    {
+      "name": "source blob tasks/T14.md",
+      "pass": true
+    },
+    {
+      "name": "source blob tasks/T15.md",
+      "pass": true
+    },
+    {
+      "name": "source blob tasks/T16.md",
+      "pass": true
+    },
+    {
+      "name": "source blob tasks/T17.md",
+      "pass": true
+    },
+    {
+      "name": "source blob tasks/T18.md",
+      "pass": true
+    },
+    {
+      "name": "source blob tasks/T19.md",
+      "pass": true
+    },
+    {
+      "name": "source blob tasks/T20.md",
+      "pass": true
+    },
+    {
+      "name": "source blob tasks/T21.md",
+      "pass": true
+    },
+    {
+      "name": "source blob tasks/T22.md",
+      "pass": true
+    },
+    {
+      "name": "source blob tasks/T23.md",
+      "pass": true
+    },
+    {
+      "name": "source blob tasks/T24.md",
+      "pass": true
+    },
+    {
+      "name": "source blob tasks/T25.md",
+      "pass": true
+    },
+    {
+      "name": "source blob tasks/progress.json",
+      "pass": true
+    },
+    {
+      "name": "source blob tasks/tasks.json",
+      "pass": true
+    },
+    {
+      "name": "source blob tests/catalog.json",
+      "pass": true
+    },
+    {
+      "name": "source blob tests/cli_smoke.py",
+      "pass": true
+    },
+    {
+      "name": "source blob tests/launch_test.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob tests/t00_test.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob tests/t01_test.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob tests/t02_test.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob tests/t03_test.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob tests/t04_test.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob tests/t05_test.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob tests/t06_test.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob tests/t07_test.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob tests/t08_test.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob tests/t09_test.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob tests/t10_test.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob tests/t11_test.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob tests/t13_test.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob tests/t14_test.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob tests/timing_test.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob tests/vectors.json",
+      "pass": true
+    },
+    {
+      "name": "source blob tools/README.md",
+      "pass": true
+    },
+    {
+      "name": "source blob tools/ci/native.py",
+      "pass": true
+    },
+    {
+      "name": "source blob tools/ci/requirements.txt",
+      "pass": true
+    },
+    {
+      "name": "source blob tools/ci/zig.lock.json",
+      "pass": true
+    },
+    {
+      "name": "source blob tools/dev/evidence.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob tools/dev/guard.zig",
+      "pass": true
+    },
+    {
+      "name": "source blob tools/render_book.py",
+      "pass": true
+    },
+    {
+      "name": "source blob verification/README.md",
+      "pass": true
+    },
+    {
+      "name": "source blob verification/report.json",
+      "pass": true
+    },
+    {
+      "name": "source blob verification/validate_bundle.py",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary Debug/codec/codec-test",
+      "pass": true
+    },
+    {
+      "name": "binary size Debug/codec/codec-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest Debug/codec/codec-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary Debug/out/bin/T00-test",
+      "pass": true
+    },
+    {
+      "name": "binary size Debug/out/bin/T00-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest Debug/out/bin/T00-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary Debug/out/bin/T01-test",
+      "pass": true
+    },
+    {
+      "name": "binary size Debug/out/bin/T01-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest Debug/out/bin/T01-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary Debug/out/bin/T02-test",
+      "pass": true
+    },
+    {
+      "name": "binary size Debug/out/bin/T02-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest Debug/out/bin/T02-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary Debug/out/bin/T03-test",
+      "pass": true
+    },
+    {
+      "name": "binary size Debug/out/bin/T03-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest Debug/out/bin/T03-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary Debug/out/bin/T04-deadline-test",
+      "pass": true
+    },
+    {
+      "name": "binary size Debug/out/bin/T04-deadline-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest Debug/out/bin/T04-deadline-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary Debug/out/bin/T04-test",
+      "pass": true
+    },
+    {
+      "name": "binary size Debug/out/bin/T04-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest Debug/out/bin/T04-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary Debug/out/bin/T05-test",
+      "pass": true
+    },
+    {
+      "name": "binary size Debug/out/bin/T05-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest Debug/out/bin/T05-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary Debug/out/bin/T06-test",
+      "pass": true
+    },
+    {
+      "name": "binary size Debug/out/bin/T06-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest Debug/out/bin/T06-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary Debug/out/bin/T07-test",
+      "pass": true
+    },
+    {
+      "name": "binary size Debug/out/bin/T07-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest Debug/out/bin/T07-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary Debug/out/bin/T08-launch-test",
+      "pass": true
+    },
+    {
+      "name": "binary size Debug/out/bin/T08-launch-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest Debug/out/bin/T08-launch-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary Debug/out/bin/T08-test",
+      "pass": true
+    },
+    {
+      "name": "binary size Debug/out/bin/T08-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest Debug/out/bin/T08-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary Debug/out/bin/T09-test",
+      "pass": true
+    },
+    {
+      "name": "binary size Debug/out/bin/T09-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest Debug/out/bin/T09-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary Debug/out/bin/T10-test",
+      "pass": true
+    },
+    {
+      "name": "binary size Debug/out/bin/T10-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest Debug/out/bin/T10-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary Debug/out/bin/T11-test",
+      "pass": true
+    },
+    {
+      "name": "binary size Debug/out/bin/T11-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest Debug/out/bin/T11-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary Debug/out/bin/T13-test",
+      "pass": true
+    },
+    {
+      "name": "binary size Debug/out/bin/T13-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest Debug/out/bin/T13-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary Debug/out/bin/T14-test",
+      "pass": true
+    },
+    {
+      "name": "binary size Debug/out/bin/T14-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest Debug/out/bin/T14-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary Debug/out/bin/zcr",
+      "pass": true
+    },
+    {
+      "name": "binary size Debug/out/bin/zcr",
+      "pass": true
+    },
+    {
+      "name": "binary digest Debug/out/bin/zcr",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary Debug/out/bin/zcr-dev-evidence",
+      "pass": true
+    },
+    {
+      "name": "binary size Debug/out/bin/zcr-dev-evidence",
+      "pass": true
+    },
+    {
+      "name": "binary digest Debug/out/bin/zcr-dev-evidence",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary Debug/out/bin/zcr-dev-guard",
+      "pass": true
+    },
+    {
+      "name": "binary size Debug/out/bin/zcr-dev-guard",
+      "pass": true
+    },
+    {
+      "name": "binary digest Debug/out/bin/zcr-dev-guard",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary Debug/probe/caps",
+      "pass": true
+    },
+    {
+      "name": "binary size Debug/probe/caps",
+      "pass": true
+    },
+    {
+      "name": "binary digest Debug/probe/caps",
+      "pass": true
+    },
+    {
+      "name": "complete binary set Debug",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary ReleaseSafe/codec/codec-test",
+      "pass": true
+    },
+    {
+      "name": "binary size ReleaseSafe/codec/codec-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest ReleaseSafe/codec/codec-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary ReleaseSafe/out/bin/T00-test",
+      "pass": true
+    },
+    {
+      "name": "binary size ReleaseSafe/out/bin/T00-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest ReleaseSafe/out/bin/T00-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary ReleaseSafe/out/bin/T01-test",
+      "pass": true
+    },
+    {
+      "name": "binary size ReleaseSafe/out/bin/T01-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest ReleaseSafe/out/bin/T01-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary ReleaseSafe/out/bin/T02-test",
+      "pass": true
+    },
+    {
+      "name": "binary size ReleaseSafe/out/bin/T02-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest ReleaseSafe/out/bin/T02-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary ReleaseSafe/out/bin/T03-test",
+      "pass": true
+    },
+    {
+      "name": "binary size ReleaseSafe/out/bin/T03-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest ReleaseSafe/out/bin/T03-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary ReleaseSafe/out/bin/T04-deadline-test",
+      "pass": true
+    },
+    {
+      "name": "binary size ReleaseSafe/out/bin/T04-deadline-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest ReleaseSafe/out/bin/T04-deadline-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary ReleaseSafe/out/bin/T04-test",
+      "pass": true
+    },
+    {
+      "name": "binary size ReleaseSafe/out/bin/T04-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest ReleaseSafe/out/bin/T04-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary ReleaseSafe/out/bin/T05-test",
+      "pass": true
+    },
+    {
+      "name": "binary size ReleaseSafe/out/bin/T05-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest ReleaseSafe/out/bin/T05-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary ReleaseSafe/out/bin/T06-test",
+      "pass": true
+    },
+    {
+      "name": "binary size ReleaseSafe/out/bin/T06-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest ReleaseSafe/out/bin/T06-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary ReleaseSafe/out/bin/T07-test",
+      "pass": true
+    },
+    {
+      "name": "binary size ReleaseSafe/out/bin/T07-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest ReleaseSafe/out/bin/T07-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary ReleaseSafe/out/bin/T08-launch-test",
+      "pass": true
+    },
+    {
+      "name": "binary size ReleaseSafe/out/bin/T08-launch-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest ReleaseSafe/out/bin/T08-launch-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary ReleaseSafe/out/bin/T08-test",
+      "pass": true
+    },
+    {
+      "name": "binary size ReleaseSafe/out/bin/T08-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest ReleaseSafe/out/bin/T08-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary ReleaseSafe/out/bin/T09-test",
+      "pass": true
+    },
+    {
+      "name": "binary size ReleaseSafe/out/bin/T09-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest ReleaseSafe/out/bin/T09-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary ReleaseSafe/out/bin/T10-test",
+      "pass": true
+    },
+    {
+      "name": "binary size ReleaseSafe/out/bin/T10-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest ReleaseSafe/out/bin/T10-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary ReleaseSafe/out/bin/T11-test",
+      "pass": true
+    },
+    {
+      "name": "binary size ReleaseSafe/out/bin/T11-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest ReleaseSafe/out/bin/T11-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary ReleaseSafe/out/bin/T13-test",
+      "pass": true
+    },
+    {
+      "name": "binary size ReleaseSafe/out/bin/T13-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest ReleaseSafe/out/bin/T13-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary ReleaseSafe/out/bin/T14-test",
+      "pass": true
+    },
+    {
+      "name": "binary size ReleaseSafe/out/bin/T14-test",
+      "pass": true
+    },
+    {
+      "name": "binary digest ReleaseSafe/out/bin/T14-test",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary ReleaseSafe/out/bin/zcr",
+      "pass": true
+    },
+    {
+      "name": "binary size ReleaseSafe/out/bin/zcr",
+      "pass": true
+    },
+    {
+      "name": "binary digest ReleaseSafe/out/bin/zcr",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary ReleaseSafe/out/bin/zcr-dev-evidence",
+      "pass": true
+    },
+    {
+      "name": "binary size ReleaseSafe/out/bin/zcr-dev-evidence",
+      "pass": true
+    },
+    {
+      "name": "binary digest ReleaseSafe/out/bin/zcr-dev-evidence",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary ReleaseSafe/out/bin/zcr-dev-guard",
+      "pass": true
+    },
+    {
+      "name": "binary size ReleaseSafe/out/bin/zcr-dev-guard",
+      "pass": true
+    },
+    {
+      "name": "binary digest ReleaseSafe/out/bin/zcr-dev-guard",
+      "pass": true
+    },
+    {
+      "name": "regular unique recorded binary ReleaseSafe/probe/caps",
+      "pass": true
+    },
+    {
+      "name": "binary size ReleaseSafe/probe/caps",
+      "pass": true
+    },
+    {
+      "name": "binary digest ReleaseSafe/probe/caps",
+      "pass": true
+    },
+    {
+      "name": "complete binary set ReleaseSafe",
+      "pass": true
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+test
++- fail failure
+error: registered test file tests/t12_test.zig is missing (T12 not delivered yet)
+
+test
++- fail failure
+error: registered test file tests/t15_test.zig is missing (T15 not delivered yet)
+
+test
++- run test T05-test w
+FS-004 corpus=small actual_files=1000 candidate_count=1000 tracked_live=3745880 tracked_peak=3745880 coverage_skipped=0 complete=true corpus_sha256=c51d1cae1ca2457bc0183a853f69ca5841ce7cc770badec767ff85cac9694d5c
+FS-004 corpus=large actual_files=200000 candidate_count=200000 tracked_live=3745880 tracked_peak=3745880 coverage_skipped=0 complete=true corpus_sha256=8516686afc53e0500c9119dc68e4d62c60ab6e601af8d43a7f282bb90db6d26b
+failed command: cd /home/runner/work/_temp/zcr-native-34692959158-1-x86_64-linux/Debug/local-cache && /home/runner/work/_temp/zcr-native-34692959158-1-x86_64-linux/Debug/local-cache/o/1f8303503ce5d7d12dc24fe086856ad1/T05-test --cache-dir=/home/runner/work/_temp/zcr-native-34692959158-1-x86_64-linux/Debug/local-cache --seed=0x9627ef9b --listen=-
+
+Build Summary: 52/55 steps succeeded (2 failed); 285/285 tests passed
+test transitive failure
++- install T00-test success
+|  +- compile test T00-test Debug native success 1s MaxRSS:154M
++- run test T00-test 12 pass (12 total) 431ms MaxRSS:9M
+|  +- compile test T00-test Debug native (reused)
++- install T01-test success
+|  +- compile test T01-test Debug native success 1s MaxRSS:156M
+|     +- options cached
++- run test T01-test 19 pass (19 total) 1s MaxRSS:8M
+|  +- compile test T01-test Debug native (+1 more reused dependencies)
++- install T02-test success
+|  +- compile test T02-test Debug native success 1s MaxRSS:156M
+|     +- options (reused)
++- run test T02-test 15 pass (15 total) 637ms MaxRSS:8M
+|  +- compile test T02-test Debug native (+1 more reused dependencies)
++- install T03-test success
+|  +- compile test T03-test Debug native success 1s MaxRSS:150M
++- run test T03-test 16 pass (16 total) 709ms MaxRSS:9M
+|  +- compile test T03-test Debug native (reused)
++- install T04-test success
+|  +- compile test T04-test Debug native success 861ms MaxRSS:148M
++- run test T04-test 13 pass (13 total) 2s MaxRSS:25M
+|  +- compile test T04-test Debug native (reused)
++- install T04-deadline-test success
+|  +- compile test T04-deadline-test Debug native success 857ms MaxRSS:146M
++- run test T04-deadline-test 2 pass (2 total) 14ms MaxRSS:7M
+|  +- compile test T04-deadline-test Debug native (reused)
++- install T05-test success
+|  +- compile test T05-test Debug native success 734ms MaxRSS:150M
++- run test T05-test 15 pass (15 total) 12s MaxRSS:11M
+|  +- compile test T05-test Debug native (reused)
++- install T06-test success
+|  +- compile test T06-test Debug native success 789ms MaxRSS:149M
++- run test T06-test 15 pass (15 total) 1s MaxRSS:13M
+|  +- compile test T06-test Debug native (reused)
++- install T07-test success
+|  +- compile test T07-test Debug native success 1s MaxRSS:155M
++- run test T07-test 25 pass (25 total) 234ms MaxRSS:19M
+|  +- compile test T07-test Debug native (reused)
++- install T08-test success
+|  +- compile test T08-test Debug native success 1s MaxRSS:166M
+|     +- options (reused)
++- run test T08-test 18 pass (18 total) 772ms MaxRSS:36M
+|  +- compile test T08-test Debug native (+1 more reused dependencies)
++- install T09-test success
+|  +- compile test T09-test Debug native success 785ms MaxRSS:150M
++- run test T09-test 15 pass (15 total) 65ms MaxRSS:11M
+|  +- compile test T09-test Debug native (reused)
++- install T08-launch-test success
+|  +- compile test T08-launch-test Debug native success 1s MaxRSS:146M
+|     +- options (reused)
++- run test T08-launch-test 2 pass (2 total) 22ms MaxRSS:7M
+|  +- compile test T08-launch-test Debug native (+1 more reused dependencies)
++- install T10-test success
+|  +- compile test T10-test Debug native success 1s MaxRSS:153M
++- run test T10-test 44 pass (44 total) 1s MaxRSS:11M
+|  +- compile test T10-test Debug native (reused)
++- install T11-test success
+|  +- compile test T11-test Debug native success 1s MaxRSS:155M
++- run test T11-test 41 pass (41 total) 2s MaxRSS:18M
+|  +- compile test T11-test Debug native (reused)
++- fail failure
++- install T13-test success
+|  +- compile test T13-test Debug native success 1s MaxRSS:155M
++- run test T13-test 14 pass (14 total) 637ms MaxRSS:11M
+|  +- compile test T13-test Debug native (reused)
++- install T14-test success
+|  +- compile test T14-test Debug native success 1s MaxRSS:157M
++- run test T14-test 19 pass (19 total) 491ms MaxRSS:18M
+|  +- compile test T14-test Debug native (reused)
++- fail failure
++- run exe zcr success 20ms
+|  +- compile exe zcr Debug native cached 28ms MaxRSS:41M
+|     +- options (reused)
++- run exe zcr success 25ms
+   +- compile exe zcr Debug native (+1 more reused dependencies)
+
+error: the following build command failed with exit code 1:
+/home/runner/work/_temp/zcr-native-34692959158-1-x86_64-linux/Debug/local-cache/o/41d3f49944035f93dea34cd1c6da28e3/build /home/runner/work/_temp/zcr-native-34692959158-1-x86_64-linux/toolchain/zig-x86_64-linux-0.16.0/zig /home/runner/work/_temp/zcr-native-34692959158-1-x86_64-linux/toolchain/zig-x86_64-linux-0.16.0/lib /home/runner/work/ZCR/ZCR/source /home/runner/work/_temp/zcr-native-34692959158-1-x86_64-linux/Debug/local-cache /home/runner/work/_temp/zcr-native-34692959158-1-x86_64-linux/Debug/global-cache --seed 0x9627ef9b -Z7a21b9620b066bb8 -j2 -Doptimize=Debug --prefix /home/runner/work/_temp/zcr-native-34692959158-1-x86_64-linux/Debug/out --summary all test -Dinstall-tests=true

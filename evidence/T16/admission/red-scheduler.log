@@ -1,0 +1,14 @@
+test
++- run test T09-test 0 pass, 1 fail (1 total)
+error: 't09_test.test.SC-005 prospective admission refuses fresh bulk with caller ownership' failed:
+       /workspace/scratch/3f4ab65dfb82/ZCR-T16-admission/tests/t09_test.zig:649:9: 0x122e68d in test.SC-005 prospective admission refuses fresh bulk with caller ownership (t09_test.zig)
+               return error.ExpectedProspectiveRefusal;
+               ^
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/T16-admission/cache && /workspace/scratch/3f4ab65dfb82/state/T16-admission/cache/o/b424cb2dadc90c6f46e93fc29767b933/T09-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/T16-admission/cache --seed=0x31ba7c3e --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 0/1 tests passed (1 failed)
+test transitive failure
++- run test T09-test 0 pass, 1 fail (1 total)
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/T16-admission/cache/o/de94d8b23d3f88fd829df252bfc22c95/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-T16-admission /workspace/scratch/3f4ab65dfb82/state/T16-admission/cache /workspace/scratch/3f4ab65dfb82/state/T16-admission/global-cache --seed 0x31ba7c3e -Z67c93699beec0f04 test -Dtest-group=scheduler -Dtest-id=SC-005 -Doptimize=Debug -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T16-admission/artifacts/red/scheduler

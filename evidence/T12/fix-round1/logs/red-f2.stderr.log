@@ -1,0 +1,32 @@
+test
++- run test T12-test 0 pass, 1 fail (1 total)
+error: 't12_test.test.WR-005 F2 terminal prefixes normalize incomplete uncertainty tails before replay' failed:
+       /workspace/scratch/3f4ab65dfb82/ZCR-T12/tests/t12_fixtures.zig:43:21: 0x125cc4c in read (t12_test.zig)
+               if (n <= 0) return error.ProtocolClosed;
+                           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T12/tests/t12_fixtures.zig:49:5: 0x1263516 in receive__anon_45623 (t12_test.zig)
+           try read(fd, buf[0..4]);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T12/tests/t12_test.zig:170:20: 0x126571b in recovery (t12_test.zig)
+           const result = try f.receive(child.stdout.?.handle, f.Result, a);
+                          ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T12/tests/t12_test.zig:1012:21: 0x12681c1 in test.WR-005 F2 terminal prefixes normalize incomplete uncertainty tails before replay (t12_test.zig)
+               const one = try recovery(&repo, manifest, fixture.store.options.namespace, fixture.registry.bootNonce());
+                           ^
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/red-f2/cache && /workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/red-f2/cache/o/f8844bafebb0515f13030181a757d788/T12-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/red-f2/cache --seed=0x82be3dcf --listen=-
+
+Build Summary: 6/8 steps succeeded (1 failed); 0/1 tests passed (1 failed)
+test transitive failure
++- install T12-child success
+|  +- compile test T12-child Debug native success 3s MaxRSS:280M
+|     +- options success
++- install T12-test success
+|  +- compile test T12-test Debug native success 599ms MaxRSS:187M
+|     +- options (reused)
+|     +- options success
+|        +- compile test T12-child Debug native (+1 more reused dependencies)
++- run test T12-test 0 pass, 1 fail (1 total)
+   +- compile test T12-test Debug native (+2 more reused dependencies)
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/red-f2/cache/o/de94d8b23d3f88fd829df252bfc22c95/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-T12 /workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/red-f2/cache /workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/red-f2/global-cache --seed 0x82be3dcf -Z323d3b7eaa06e191 test -Dtest-group=write -Doptimize=Debug -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/red-f2/out --summary all -Dtest-id=F2

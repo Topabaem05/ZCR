@@ -1,0 +1,18 @@
+{
+  "reviewed_source": "5482a7022fd20ce4b284b17ac48e7c93bfe33280",
+  "fixed_source": "48d2e8b61a83af444f0914379f8bc75f169413f3",
+  "findings": {
+    "R1": "retiring state detaches reader-visible arena slices under lock before cleanup; deterministic gated same-string-ID reuse test",
+    "R2": "exclusive stdin uses20ms public POSIX poll to observe stdout failure without requiring input EOF; intended RED and GREEN captured",
+    "R3": "control backing and output credit reserved at startup; health works while ordinary global Budget is fully admitted elsewhere"
+  },
+  "red_command": "zig build test -Dtest-group=mcp -Dtest-id='stdout failure stops' -Doptimize=Debug",
+  "red_exit_code": 1,
+  "red_output": "evidence/T08/logs/review-red-stdout.log",
+  "red_output_sha256": "892810015e1e9247c5c9fa8ce0c70dbcfa65d9067f6cf35349afd181aef6d135",
+  "green_tests": {
+    "mcp_debug": 15,
+    "mcp_release_safe": 15
+  },
+  "status": "all three initial-wave findings fixed; root owns delta review/integrated binary verification"
+}

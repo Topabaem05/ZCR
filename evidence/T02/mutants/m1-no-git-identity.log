@@ -1,0 +1,20 @@
+test
++- run test T02-test 11 pass, 1 fail (12 total)
+error: 't02_test.test.IS-004 the main .git directory is refused by name and a common git dir under the root by identity' failed:
+       expected error.OutOfScope, found .{ .handle = @enumFromInt(1), .operation = .patch, .workspace_id = .{ .registry_uuid = { 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17 }, .incarnation = { 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34 } }, .task_id = .{ .uuid = { 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51 } }, .policy_digest = { 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68 }, .path = .{ .bytes = { 115, 116, 111, 114, 101, 47, 99, 111, 110, 102, 105, 103 } } }
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:65:9: 0x102e1ec37 in expectError__anon_49358 (T02-test)
+               return error.TestExpectedError;
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T02/tmp/mutants/m1-no-git-identity/tests/t02_test.zig:317:5: 0x102e29e2b in test.IS-004 the main .git directory is refused by name and a common git dir under the root by identity (T02-test)
+           try testing.expectError(error.OutOfScope, separate.authorize(io, session(), .patch, rel("store/config")));
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T02/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T02/zig-local-cache/o/955fc5dc94e711a22b56c096899ac079/T02-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T02/zig-local-cache --seed=0xa185b008 --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 11/12 tests passed (1 failed)
+test transitive failure
++- run test T02-test 11 pass, 1 fail (12 total)
+   +- compile test T02-test Debug native success 1s MaxRSS:261M
+      +- options success
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T02/zig-local-cache/o/9eba755f0f9193364046b96ceb76bdad/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T02/tmp/mutants/m1-no-git-identity /Users/guribbong/code/ZCR-state/tasks/T02/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T02/zig-global-cache --seed 0xa185b008 -Z632b5640d801c31e test -Dtest-group=isolation --summary all

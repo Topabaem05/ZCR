@@ -1,0 +1,28 @@
+{
+  "schema_version": "zcr-interface-change/1",
+  "status": "approved_by_integrator",
+  "date": "2026-09-12",
+  "tasks": [
+    "T10",
+    "T11",
+    "T12"
+  ],
+  "reason": "Persistent recovery requires exact live publication identities and APPLIED/ABORTED transitions; postcommit persistence failure must atomically disable pending publications.",
+  "changes": [
+    "CommitGuard.failRecovery(): disable managed writes, revoke writer and release matching publication under the registry mutex",
+    "PreparedRecord.publication optional PublicationIdentity; mandatory for persistent production stores",
+    "JournalStore optional transition(JournalTransition) returns Unsupported if unavailable; applied/aborted receipts remain request-bound"
+  ],
+  "unchanged_contracts": [
+    "I08/I09/I10/I11/I12/I19 function signatures",
+    "JSON tool schemas and external MCP write gate"
+  ],
+  "required_proof": [
+    "real10 subprocess kill/restart checkpoints",
+    "old/new or uncertain target; exact identity cleanup only",
+    "idempotency namespace/digest isolation",
+    "concurrent pending publisher refused after recovery failure"
+  ],
+  "authorization": "User requested complete documented implementation and testing; integrator owns shared core/build/interfaces.",
+  "production_writes": "disabled until T12 verified native platform gates"
+}

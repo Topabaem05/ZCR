@@ -1,0 +1,19 @@
+test
++- run test T06-test 10 pass, 1 fail (11 total)
+error: 't06_test.test.SR-005 cancellation inside a large file is observed at the next chunk' failed:
+       expected error.Cancelled, found .{ .scope = { 46 }, .skipped = 0, .index_state = .live, .reasons = {  } }
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:65:9: 0x10456e5ab in expectError__anon_37661 (T06-test)
+               return error.TestExpectedError;
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T06/tmp/mutants/m11-no-scan-cancel/tests/t06_test.zig:411:5: 0x1045a6933 in test.SR-005 cancellation inside a large file is observed at the next chunk (T06-test)
+           try testing.expectError(error.Cancelled, h.run(.{ .literal = "needle" }, &collector));
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache/o/fce681e998ce5175e54078cf220b2206/T06-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache --seed=0x1ea727eb --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 10/11 tests passed (1 failed)
+test transitive failure
++- run test T06-test 10 pass, 1 fail (11 total)
+   +- compile test T06-test Debug native success 4s MaxRSS:237M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache/o/ce59de40176ab3ab39ded0a6edd5fd7e/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T06/tmp/mutants/m11-no-scan-cancel /Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T06/zig-global-cache --seed 0x1ea727eb -Zeec33558ed80bae5 test -Dtest-group=search --summary all

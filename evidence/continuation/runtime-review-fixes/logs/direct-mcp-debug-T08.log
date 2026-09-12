@@ -1,0 +1,28 @@
+1/27 t08_test.test.BR-001 host batch ceiling uses one funded worker and reports broker backend...OK
+2/27 t08_test.test.IO-004 native MCP preserves deadline-only failure in its envelope...OK
+3/27 t08_test.test.MC-005 authority is revalidated after execution before response publication...OK
+4/27 t08_test.test.MC-001 supported version negotiates exact capabilities and schema discovery...OK
+5/27 t08_test.test.MC-002 exact text_v1 real read files search batch status health and ids...OK
+6/27 t08_test.test.MC-003 malformed JSON fields numeric bounds unsupported capabilities are classified...OK
+7/27 t08_test.test.MC-002 partial frames preserve escaped newline and drain oversized records...OK
+8/27 t08_test.test.MC-004 request cancellation remains local and authority revalidation rejects stale root...OK
+9/27 t08_test.test.MC-002 direct stdio worker emits complete records within 32 MiB native budget...OK
+10/27 t08_test.test.MC-004 real partial pipe input cancellation and slow output drain without interleaving...OK
+11/27 t08_test.test.MC-004 deadline watcher interrupts before filesystem work and output failure drains...OK
+12/27 t08_test.test.MC-003 policy enabled discovery filters and complete serialized output budget...OK
+13/27 t08_test.test.MC-003 depth64 keys and flat-value parser caps are enforced before DOM allocation...OK
+14/27 t08_test.test.MC-002 enumerate and search are admitted on native32MiB profile...OK
+15/27 t08_test.test.MC-003 oversized unknown fields reject before DOM allocation and preserve RPC id...OK
+16/27 t08_test.test.MC-004 stdout failure stops even when peer keeps stdin open...OK
+17/27 t08_test.test.MC-004 retiring tool id is detached before gated arena teardown...OK
+18/27 t08_test.test.MC-004 pre-reserved health control credit survives ordinary budget exhaustion...OK
+19/27 t08_test.test.BR-001 runtime cache pressure preserves a previously admissible real MCP read...OK
+20/27 t08_test.test.BR-001 runtime cache pressure never evicts pinned entries or for CPU-only refusal...OK
+21/27 t08_test.test.BR-001 runtime cache repeated real reads hit with one existing CPU credit...OK
+22/27 t08_test.test.BR-001 runtime cache four workspace queries share one allocation and drain pins...OK
+23/27 t08_test.test.BR-001 runtime cache hit preserves read version line output and truncation semantics...OK
+24/27 t08_test.test.IS-006 runtime cache respects domains revocation generation and same-metadata changes...OK
+25/27 t08_test.test.BR-001 runtime cache partial reads do not admit and cancelled or failed hits drain...OK
+26/27 t08_test.test.BR-001 runtime cache Reader truncation equals the filesystem oracle and unpins before result use...OK
+27/27 t08_test.test.IS-006 runtime cache host configuration rejects foreign facades and independent budgets...OK
+All 27 tests passed.

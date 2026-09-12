@@ -1,0 +1,217 @@
+{
+  "schema_version": "zcr-t03-test-runs/0",
+  "task_id": "T03",
+  "state_dir": "$STATE=/Users/guribbong/code/ZCR-state/tasks/T03",
+  "runs": [
+    {
+      "label": "red",
+      "optimize": "Debug",
+      "source_commit": "ea476f7d4db34876235fc1c85c83c7168d78fce5",
+      "source_tree": "1a53a048f7a56c390e6bbf0eba79a42e865f5bb5",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build test -Dtest-group=memory -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-red --summary all",
+      "exit_code": 1,
+      "summary": "Build Summary: 2/4 steps succeeded (1 failed); 0/12 tests passed (12 failed)",
+      "installed_test_binaries_sha256": {
+        "T03-test": "24cf1e13ac1079baabd51d335744788f7d3e83f0817639b4528e5f1695e11b30"
+      },
+      "log": "logs/red.log",
+      "log_sha256": "ecd05cb47ca164634a6a71624ea096653246ed01e5fcfc9635610d96b771b18c"
+    },
+    {
+      "label": "green-memory-debug",
+      "optimize": "Debug",
+      "source_commit": "20f0589e524235171c90d87c0577d2e83d197962",
+      "source_tree": "4713fbf5908149141967ef8e08889241374fe5cc",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build test -Dtest-group=memory -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-green-memory-debug --summary all",
+      "exit_code": 0,
+      "summary": "Build Summary: 4/4 steps succeeded; 12/12 tests passed",
+      "installed_test_binaries_sha256": {
+        "T03-test": "325c7cfa7f75bf28ba52aee97f165ea8472678361d5d01d657ddd0a8328a7af7"
+      },
+      "log": "logs/green-memory-debug.log",
+      "log_sha256": "600ee5718f9fc0d6f391f7cf67cb492f38af462b1a6bf7fd17099565cec58de1"
+    },
+    {
+      "label": "green-memory-releasesafe",
+      "optimize": "ReleaseSafe",
+      "source_commit": "20f0589e524235171c90d87c0577d2e83d197962",
+      "source_tree": "4713fbf5908149141967ef8e08889241374fe5cc",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build test -Dtest-group=memory -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix $STATE/out-green-memory-releasesafe --summary all",
+      "exit_code": 0,
+      "summary": "Build Summary: 4/4 steps succeeded; 12/12 tests passed",
+      "installed_test_binaries_sha256": {
+        "T03-test": "20b8386658b7c39b28cd2cccb4d80e6571a6d5c95532d77ac6060cca50001f95"
+      },
+      "log": "logs/green-memory-releasesafe.log",
+      "log_sha256": "6da4c3e02cb7819a2d573e9a28b106730446b619fb4df2cbd8c2a01b6ffecb63"
+    },
+    {
+      "label": "fault-injection-me001",
+      "optimize": "Debug",
+      "source_commit": "20f0589e524235171c90d87c0577d2e83d197962",
+      "source_tree": "4713fbf5908149141967ef8e08889241374fe5cc",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build test -Dtest-id=ME-001 -Dfault-injection=true -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-fault-injection-me001 --summary all",
+      "exit_code": 0,
+      "summary": "Build Summary: 4/4 steps succeeded; 1/1 tests passed",
+      "installed_test_binaries_sha256": {
+        "T03-test": "474cb8bf1306f891de5066fc3f759c3ce397c6e22bb7313a72ceca4533cb2e72"
+      },
+      "log": "logs/fault-injection-me001.log",
+      "log_sha256": "81107ca2900251da7a5011d95380dcc8e298cff97d15171bf3861965a89f8326"
+    },
+    {
+      "label": "regression-all-debug",
+      "optimize": "Debug",
+      "source_commit": "20f0589e524235171c90d87c0577d2e83d197962",
+      "source_tree": "4713fbf5908149141967ef8e08889241374fe5cc",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build test -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-regression-all-debug --summary all",
+      "exit_code": 0,
+      "summary": "Build Summary: 17/17 steps succeeded; 53/53 tests passed",
+      "installed_test_binaries_sha256": {
+        "T00-test": "184c6025bbc3f43804f8f952700812fc26c93c8ae2e596763eca7c6cfaa50d0f",
+        "T01-test": "a85b9b3e08b4dae5ecf294a67b46fd9e0995a07a0380bb582309b89798645fe1",
+        "T02-test": "7ef370dde623ad7e4e654a3ce19ae7105fb4d5621fe262046657c8c14a1e0991",
+        "T03-test": "325c7cfa7f75bf28ba52aee97f165ea8472678361d5d01d657ddd0a8328a7af7"
+      },
+      "log": "logs/regression-all-debug.log",
+      "log_sha256": "ca2d91c73f6178875093f2dde5d54a7a19b8a2ddc820bd6e317f747441983346"
+    },
+    {
+      "label": "verify-contracts",
+      "optimize": "Debug",
+      "source_commit": "20f0589e524235171c90d87c0577d2e83d197962",
+      "source_tree": "4713fbf5908149141967ef8e08889241374fe5cc",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build verify-contracts -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-verify-contracts --summary all",
+      "exit_code": 0,
+      "summary": "Build Summary: 3/3 steps succeeded",
+      "installed_test_binaries_sha256": {},
+      "log": "logs/verify-contracts.log",
+      "log_sha256": "4a11949d6fa32ae4becbcfbde98366f23c7f1e382d4ad13bd4699dab9ff341e4"
+    }
+  ],
+  "first_implementation_run": {
+    "log": "logs/s03-try.log",
+    "result": "11/12; ME-007 footprint assertion failed on testing.allocator"
+  },
+  "footprint_experiment": {
+    "method": "ME-007 cycles on a copy of the tree, printing process phys_footprint after 1k and 10k cycles per child allocator",
+    "results": [
+      {
+        "child_allocator": "std.testing.allocator",
+        "before_1k": 2736440,
+        "after_10k": 17760592,
+        "growth_bytes": 15024152
+      },
+      {
+        "child_allocator": "std.heap.page_allocator",
+        "before_1k": 1032480,
+        "after_10k": 1032480,
+        "growth_bytes": 0
+      },
+      {
+        "child_allocator": "std.heap.smp_allocator",
+        "before_1k": 1098016,
+        "after_10k": 1098016,
+        "growth_bytes": 0
+      }
+    ],
+    "conclusion": "growth is debug bookkeeping of std.testing.allocator; tracked counters were 0 and allocations == frees in all runs"
+  },
+  "mutation_checks": [
+    {
+      "mutant": "m1-no-reservation-limit",
+      "summary": "Build Summary: 1/3 steps succeeded (1 failed); 11/12 tests passed (1 failed)",
+      "failed_tests": [
+        "ME-003 reservation-bound allocation never falls back to an untracked allocator"
+      ]
+    },
+    {
+      "mutant": "m10-no-eviction-retry",
+      "summary": "Build Summary: 1/3 steps succeeded (1 failed); 11/12 tests passed (1 failed)",
+      "failed_tests": [
+        "ME-003 admission evicts once and then reports exhaustion"
+      ]
+    },
+    {
+      "mutant": "m2-release-ignores-children",
+      "summary": "Build Summary: 1/3 steps succeeded (1 failed); 9/12 tests passed (2 failed, 1 crashed)",
+      "failed_tests": [
+        "ME-002 a request arena is not freed while a child is pending, even after cancellation",
+        "ME-007 10k read and cancel cycles return to idle without leak growth"
+      ]
+    },
+    {
+      "mutant": "m3-budget-no-cap",
+      "summary": "Build Summary: 1/3 steps succeeded (1 failed); 10/12 tests passed (2 failed)",
+      "failed_tests": [
+        "ME-003 concurrent reservations never exceed the hard tracked cap",
+        "ME-003 admission evicts once and then reports exhaustion"
+      ]
+    },
+    {
+      "mutant": "m4-no-never-fits",
+      "summary": "Build Summary: 1/3 steps succeeded (1 failed); 11/12 tests passed (1 failed)",
+      "failed_tests": [
+        "ME-003 oversized requests are refused at admission and the tracked cap stays untouched"
+      ]
+    },
+    {
+      "mutant": "m5-no-session-limit",
+      "summary": "Build Summary: 1/3 steps succeeded (1 failed); 11/12 tests passed (1 failed)",
+      "failed_tests": [
+        "ME-003 admission bounds in-flight requests per session and globally"
+      ]
+    },
+    {
+      "mutant": "m6-patch-without-file-bytes",
+      "summary": "Build Summary: 1/3 steps succeeded (1 failed); 11/12 tests passed (1 failed)",
+      "failed_tests": [
+        "ME-003 oversized requests are refused at admission and the tracked cap stays untouched"
+      ]
+    },
+    {
+      "mutant": "m7-no-double-release-guard",
+      "summary": "Build Summary: 1/3 steps succeeded (1 failed); 11/12 tests passed (1 failed)",
+      "failed_tests": [
+        "T03 profiles map RAM to caps and budgets release exactly once"
+      ]
+    },
+    {
+      "mutant": "m8-fault-off-by-one",
+      "summary": "Build Summary: 1/3 steps succeeded (1 failed); 11/12 tests passed (1 failed)",
+      "failed_tests": [
+        "ME-001 an Nth allocation failure in any phase leaves the original and returns every reservation"
+      ]
+    },
+    {
+      "mutant": "m9-child-after-cancel",
+      "summary": "Build Summary: 1/3 steps succeeded (1 failed); 11/12 tests passed (1 failed)",
+      "failed_tests": [
+        "ME-002 a request arena is not freed while a child is pending, even after cancellation"
+      ]
+    }
+  ],
+  "cross_compile_only": [
+    {
+      "target": "x86_64-linux-musl",
+      "exit_code": 0,
+      "log": "logs/s03-compile-x86_64-linux-musl.log"
+    },
+    {
+      "target": "aarch64-linux-musl",
+      "exit_code": 0,
+      "log": "logs/s03-compile-aarch64-linux-musl.log"
+    },
+    {
+      "target": "x86_64-macos",
+      "exit_code": 0,
+      "log": "logs/s03-compile-x86_64-macos.log"
+    }
+  ]
+}

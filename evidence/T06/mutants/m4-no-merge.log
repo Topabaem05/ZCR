@@ -1,0 +1,54 @@
+test
++- run test T06-test 8 pass, 3 fail (11 total)
+error: 't06_test.test.SR-001 tiny chunks over random files never duplicate or miss a match' failed:
+       expected 21, found 29
+       chunk=1 literal=aba
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x100dde71b in expectEqualInner__anon_37715 (T06-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x100e0e8b3 in expectEqual (T06-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T06/tmp/mutants/m4-no-merge/tests/t06_test.zig:188:5: 0x100e0e923 in expectFileMatchesOracle (T06-test)
+           try testing.expectEqual(context.len, hit.context.len);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T06/tmp/mutants/m4-no-merge/tests/t06_test.zig:244:17: 0x100e1af1f in test.SR-001 tiny chunks over random files never duplicate or miss a match (T06-test)
+                       return err;
+                       ^
+error: 't06_test.test.SR-002 several matches on one line and overlapping context return each line once' failed:
+       expected 11, found 24
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x100dde71b in expectEqualInner__anon_37715 (T06-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x100e0e8b3 in expectEqual (T06-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T06/tmp/mutants/m4-no-merge/tests/t06_test.zig:188:5: 0x100e0e923 in expectFileMatchesOracle (T06-test)
+           try testing.expectEqual(context.len, hit.context.len);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T06/tmp/mutants/m4-no-merge/tests/t06_test.zig:263:5: 0x100e1a0c3 in test.SR-002 several matches on one line and overlapping context return each line once (T06-test)
+           try expectFileMatchesOracle(h.arena, hit, bytes, "foo", 2);
+           ^
+error: 't06_test.test.SR-006 a file that changes between scan and context read is retried once or skipped, never mixed' failed:
+       expected 3, found 5
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x100dde71b in expectEqualInner__anon_37715 (T06-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x100e0e8b3 in expectEqual (T06-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T06/tmp/mutants/m4-no-merge/tests/t06_test.zig:188:5: 0x100e0e923 in expectFileMatchesOracle (T06-test)
+           try testing.expectEqual(context.len, hit.context.len);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T06/tmp/mutants/m4-no-merge/tests/t06_test.zig:496:5: 0x100e0f107 in test.SR-006 a file that changes between scan and context read is retried once or skipped, never mixed (T06-test)
+           try expectFileMatchesOracle(h.arena, retried.files.items[0], changed, "key", 1);
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache/o/35689221287baa693a6f775123f88969/T06-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache --seed=0x45664bc3 --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 8/11 tests passed (3 failed)
+test transitive failure
++- run test T06-test 8 pass, 3 fail (11 total)
+   +- compile test T06-test Debug native success 2s MaxRSS:300M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache/o/ce59de40176ab3ab39ded0a6edd5fd7e/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T06/tmp/mutants/m4-no-merge /Users/guribbong/code/ZCR-state/tasks/T06/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T06/zig-global-cache --seed 0x45664bc3 -Z23b30d60b38fc20c test -Dtest-group=search --summary all

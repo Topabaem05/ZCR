@@ -1,0 +1,41 @@
+test
++- run test T13-test 0 pass, 2 fail (2 total)
+error: 't13_test.test.IS-006 domain and current session authority are rechecked before cache existence or pins' failed:
+       expected .probation, found .bypassed
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:118:17: 0x1232714 in expectEqualInner__anon_44392 (std.zig)
+                       return error.TestExpectedEqual;
+                       ^
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:83:5: 0x1232a1a in expectEqual (t13_test.zig)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T13/tests/t13_test.zig:66:9: 0x1232a73 in admit (t13_test.zig)
+               try t.expectEqual(cache.AdmissionResult.probation, try c.session.observe(c.cap, text_, v, .interactive));
+               ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T13/tests/t13_test.zig:99:5: 0x127879b in test.IS-006 domain and current session authority are rechecked before cache existence or pins (t13_test.zig)
+           try f.admit(&a, "secret\n");
+           ^
+error: 't13_test.test.IS-006 same size changed bytes, missing path, and forged whole-file digest never hit' failed:
+       expected .probation, found .bypassed
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:118:17: 0x1232714 in expectEqualInner__anon_44392 (std.zig)
+                       return error.TestExpectedEqual;
+                       ^
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:83:5: 0x1232a1a in expectEqual (t13_test.zig)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T13/tests/t13_test.zig:66:9: 0x1232a73 in admit (t13_test.zig)
+               try t.expectEqual(cache.AdmissionResult.probation, try c.session.observe(c.cap, text_, v, .interactive));
+               ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T13/tests/t13_test.zig:133:5: 0x12379bb in test.IS-006 same size changed bytes, missing path, and forged whole-file digest never hit (t13_test.zig)
+           try f.admit(&c, "alpha\n");
+           ^
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/T13/zig-local-cache && /workspace/scratch/3f4ab65dfb82/state/T13/zig-local-cache/o/17e35555ea4e22f20d08f61df96ca2af/T13-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/T13/zig-local-cache --seed=0x1ef5961d --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 0/2 tests passed (2 failed)
+test transitive failure
++- install T13-test success
+|  +- compile test T13-test Debug native success 446ms MaxRSS:176M
++- run test T13-test 0 pass, 2 fail (2 total)
+   +- compile test T13-test Debug native (reused)
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/T13/zig-local-cache/o/81f38b490921d3ae2c610102b61a3558/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-T13 /workspace/scratch/3f4ab65dfb82/state/T13/zig-local-cache /workspace/scratch/3f4ab65dfb82/state/T13/zig-global-cache --seed 0x1ef5961d -Z0443db9ec094b96c test -Dtest-group=memory -Dtest-id=IS-006 -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T13/out-red-isolation --summary all

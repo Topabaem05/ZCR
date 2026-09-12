@@ -1,0 +1,26 @@
+test
++- run test T07-test 16 pass, 1 crash (17 total)
+error: 't07_test.test.T07 projection keeps whole lines within output_bytes and says the result is truncated' terminated with signal ABRT with stderr:
+       thread 27307850 panic: integer overflow
+       /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-p7-no-budget-reason/tests/t07_test.zig:798:89: 0x10426ff33 in test.T07 projection keeps whole lines within output_bytes and says the result is truncated (T07-test)
+           try testing.expectEqualStrings(projection.reason_output_budget, reasons[reasons.len - 1].string);
+                                                                                               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x1041ef12f in mainServer (T07-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x1041ef7df in main (T07-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x1041ed5a3 in callMain (T07-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache/o/bc82624b6999a554b34f2da8335e5c2f/T07-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache --seed=0x537574d7 --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 16/17 tests passed (1 crashed)
+test transitive failure
++- run test T07-test 16 pass, 1 crash (17 total)
+   +- compile test T07-test Debug native success 13s MaxRSS:227M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache/o/2759f0ba666e46dcb034eb08a284d1a7/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T07/tmp/mut-p7-no-budget-reason /Users/guribbong/code/ZCR-state/tasks/T07/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T07/zig-global-cache --seed 0x537574d7 -Ze8bd3c748b205234 test -Dtest-group=batch --summary all

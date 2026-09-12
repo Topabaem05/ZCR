@@ -1,0 +1,47 @@
+[
+  {
+    "bytes": 286,
+    "path": "01-scheduler-Debug.stderr.log",
+    "sha256": "733827b767a5a204e16d4cee468f17dfa93564811b81132de51ac89dd9e13149"
+  },
+  {
+    "bytes": 0,
+    "path": "01-scheduler-Debug.stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "bytes": 471,
+    "path": "02-memory-Debug.stderr.log",
+    "sha256": "8b0472b8982f82536038695ec37c4aa09c0a487d4842b5a516ec28107b1fdcbc"
+  },
+  {
+    "bytes": 0,
+    "path": "02-memory-Debug.stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "bytes": 587,
+    "path": "03-mcp-Debug.stderr.log",
+    "sha256": "ec87865d02998b078f4ab39786b4e47d47e7cfdfd7abb770557460fd44a46c98"
+  },
+  {
+    "bytes": 0,
+    "path": "03-mcp-Debug.stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "bytes": 8987,
+    "path": "report.json",
+    "sha256": "f3ba08e7bf92dcbbfba932ffffc976f9ec7e6203a48b3927da4cedd8b1d79766"
+  },
+  {
+    "bytes": 242279,
+    "path": "source-after.json",
+    "sha256": "3c51a56a08746c9b11a0d19250eb1397c01fbbf623fd8130f678916e51fe91ba"
+  },
+  {
+    "bytes": 242279,
+    "path": "source-before.json",
+    "sha256": "3c51a56a08746c9b11a0d19250eb1397c01fbbf623fd8130f678916e51fe91ba"
+  }
+]

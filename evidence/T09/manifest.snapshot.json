@@ -1,0 +1,40 @@
+{
+  "schema_version": "zcr-task/1",
+  "state": "active",
+  "task_id": "T09",
+  "workspace_id": "f11b4529-7945-40b7-be54-23b220e05d6e",
+  "base_commit": "9897f27a18c66c310ae6dda3ee854f7fdcdcfa3d",
+  "contract_digest": "8aa53314410fe471f0e070c522766684286f60e1ad4d9785c292bb709ea370a4",
+  "fence": 1,
+  "expires_at": "2026-09-19T00:00:00Z",
+  "read_paths": [
+    "."
+  ],
+  "write_paths": [
+    "src/scheduler/queue.zig",
+    "src/scheduler/executor.zig",
+    "src/platform/darwin.zig",
+    "c/darwin_shim.h",
+    "c/darwin_shim.c",
+    "tests/t09_test.zig",
+    "evidence/T09"
+  ],
+  "immutable_paths": [
+    "build.zig",
+    "build.zig.zon",
+    "src/core",
+    "contracts"
+  ],
+  "operations": [
+    "read",
+    "enumerate",
+    "search",
+    "batch_read",
+    "patch",
+    "create",
+    "status",
+    "health"
+  ],
+  "max_changed_files": 32,
+  "authorization": "Full repository continuation requested by user; scope assigned by integrator."
+}

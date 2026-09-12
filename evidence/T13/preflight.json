@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "state": {
+    "toplevel": "/workspace/scratch/3f4ab65dfb82/ZCR-T13",
+    "absolute_git_dir": "/workspace/scratch/3f4ab65dfb82/ZCR/.git/worktrees/ZCR-T13",
+    "common_dir": "/workspace/scratch/3f4ab65dfb82/ZCR/.git",
+    "head_commit": "8a4d74fe6f87a1f5427c6d0f94dd0b01fe082efd",
+    "head_tree": "f15cf82ea55a06341641ca3d6b13c3c9b27f2134",
+    "branch": "codex/t13-cache",
+    "entries": []
+  },
+  "reasons": []
+}

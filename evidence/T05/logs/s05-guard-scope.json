@@ -1,0 +1,28 @@
+{
+  "task": "T05",
+  "role": "task",
+  "violations": [],
+  "changes": [
+    {
+      "kind": "added",
+      "path": "src/fs/ignore.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "src/fs/traverse.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "tests/t05_test.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    }
+  ]
+}

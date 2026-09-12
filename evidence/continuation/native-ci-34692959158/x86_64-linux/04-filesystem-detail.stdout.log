@@ -1,0 +1,2 @@
+SOURCE    FSTYPE OPTIONS
+/dev/sda1 ext4   rw,relatime,discard,errors=remount-ro,commit=30

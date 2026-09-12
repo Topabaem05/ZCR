@@ -1,0 +1,176 @@
+{
+  "schema_version": "zcr-handoff/1",
+  "state": "completed",
+  "task_id": "T05",
+  "step": "S06",
+  "base_commit": "4a6dbbc99c8ddd87fbe942572c5d2c436bfd3dc2",
+  "base_note": "integration after INT-004 (T04 merged, T05 registered)",
+  "head_commit": "a3ad5db87a7a9cce18a6703b422cc3449530d190",
+  "head_commit_note": "source commit of GREEN evidence; evidence files follow in the S06 commit",
+  "contract_digest": "8aa53314410fe471f0e070c522766684286f60e1ad4d9785c292bb709ea370a4",
+  "source_tree_digest": "bb229d6ac0e3ca6870063464ef2ff8f8a4171157",
+  "binary_sha256": "a4445b19045b120a4abf5a5d7c5fa6c06558cd828383f03f9d6ac5f7876c8fdf",
+  "owned_paths": [
+    "src/fs/traverse.zig",
+    "src/fs/ignore.zig",
+    "tests/t05_test.zig",
+    "evidence/T05/"
+  ],
+  "changed_files": [
+    "src/fs/traverse.zig",
+    "src/fs/ignore.zig",
+    "tests/t05_test.zig",
+    "evidence/T05/*"
+  ],
+  "test_evidence": [
+    {
+      "id": "FS-001",
+      "status": "PASS",
+      "tests": 2,
+      "oracle": "git ls-files --others --exclude-standard; git check-ignore --no-index (15 patterns x 30 paths)"
+    },
+    {
+      "id": "FS-002",
+      "status": "PASS",
+      "tests": 1
+    },
+    {
+      "id": "FS-003",
+      "status": "PASS",
+      "tests": 1
+    },
+    {
+      "id": "FS-004",
+      "status": "PASS_AT_REDUCED_SCALE",
+      "tests": 1,
+      "note": "1,000 and 10,000 files; the 200,000-file run is NOT_RUN on this host (disk space)"
+    },
+    {
+      "id": "FS-005",
+      "status": "PASS",
+      "tests": 1
+    },
+    {
+      "id": "FS-006",
+      "status": "PASS",
+      "tests": 1
+    },
+    {
+      "id": "T05 order/glob/limit, contracts, walk cancel, ignore limits",
+      "status": "PASS",
+      "tests": 4
+    },
+    {
+      "id": "regression T00-T04 (full zig build test)",
+      "status": "PASS",
+      "summary": "Build Summary: 23/23 steps succeeded; 74/74 tests passed"
+    },
+    {
+      "runs": [
+        {
+          "label": "red",
+          "optimize": "Debug",
+          "source_commit": "842cd6b491e8c5d3f66aacb3d4b1ad382377269d",
+          "exit_code": 1,
+          "summary": "Build Summary: 2/4 steps succeeded (1 failed); 0/10 tests passed (10 failed)",
+          "installed_test_binaries_sha256": {
+            "T05-test": "c5257ff47caca652c7bed08aba5806afe43f662115abe97ca9947b0fc0cda47c"
+          }
+        },
+        {
+          "label": "green-fs-debug",
+          "optimize": "Debug",
+          "source_commit": "a3ad5db87a7a9cce18a6703b422cc3449530d190",
+          "exit_code": 0,
+          "summary": "Build Summary: 4/4 steps succeeded; 11/11 tests passed",
+          "installed_test_binaries_sha256": {
+            "T05-test": "a4445b19045b120a4abf5a5d7c5fa6c06558cd828383f03f9d6ac5f7876c8fdf"
+          }
+        },
+        {
+          "label": "green-fs-releasesafe",
+          "optimize": "ReleaseSafe",
+          "source_commit": "a3ad5db87a7a9cce18a6703b422cc3449530d190",
+          "exit_code": 0,
+          "summary": "Build Summary: 4/4 steps succeeded; 11/11 tests passed",
+          "installed_test_binaries_sha256": {
+            "T05-test": "163c3e89af08cfb37e28bf98505f4faa4f9cd8284e8a9a04842ad94cec7bdc56"
+          }
+        },
+        {
+          "label": "regression-all-debug",
+          "optimize": "Debug",
+          "source_commit": "a3ad5db87a7a9cce18a6703b422cc3449530d190",
+          "exit_code": 0,
+          "summary": "Build Summary: 23/23 steps succeeded; 74/74 tests passed",
+          "installed_test_binaries_sha256": {
+            "T00-test": "419e0af11454085bbdcf5ad9a55aecce51fd59fb132eb3544ee3d1def6eef0ee",
+            "T01-test": "0f41ec74bfc5f8e584b1918b514389c40a32cc2885f2cfb8f4518da97d4a0b65",
+            "T02-test": "0cc217ba3f46babb13d3bba60a0b9b7a34216d14d71468132c11e7641e71ad4b",
+            "T03-test": "6531549ebc97f2a5d92b347f72e34590b325140f36f4372533f4c1aca8e862e1",
+            "T04-test": "4c71fc93695152835f37c4b151f68a3e4e4af9d27adc5bc59e9cac97e6cfa2d8",
+            "T05-test": "a4445b19045b120a4abf5a5d7c5fa6c06558cd828383f03f9d6ac5f7876c8fdf"
+          }
+        },
+        {
+          "label": "verify-contracts",
+          "optimize": "Debug",
+          "source_commit": "a3ad5db87a7a9cce18a6703b422cc3449530d190",
+          "exit_code": 0,
+          "summary": "Build Summary: 3/3 steps succeeded",
+          "installed_test_binaries_sha256": {}
+        }
+      ]
+    }
+  ],
+  "test_changes_after_red": [
+    "FS-004 moved from a persistent 200k corpus to 1k/10k corpora in the test tmp dir after the 200k corpus left 174 MiB free on the host disk (done before the RED commit)",
+    "FS-006 keeps one Unicode normalization form: APFS maps e+U+0301 and U+00E9 to the same name",
+    "capability test adds a root .gitignore and an ignored start directory (gap shown by mutant m15)",
+    "new test cancels from inside the sink during a walk (gap shown by mutant m14)"
+  ],
+  "semantics": {
+    "ignore_sources": "per-directory .gitignore files from the root down; .git/info/exclude and core.excludesFile are not read; matching is case-sensitive; symlinked .gitignore files are ignored",
+    "tracked_files": "ignore rules apply whether or not a file is tracked; the Git index is not read",
+    "complete": "Report.complete = skipped == 0 and not truncated; skipped counts unreadable directories, unsupported names, ignore-limit subtrees and depth limits",
+    "policy_filters": ".git, hidden names (unless include_hidden), symlinks, special files: reported in Report, not skipped",
+    "order": "discovery = directory order; path_then_offset = component-wise byte order via per-directory sort, discovery fallback with a reason when the path cache is full",
+    "sink": "root-relative path slices valid only during push; sink errors stop the walk and are returned"
+  },
+  "exports": [
+    "zcr_fs_traverse (src/fs/traverse.zig): Caps{defaultBytes, ignorePoolBytes}, Report, Traverser{init, deinit, enumerate (core.EnumerateFn), report}",
+    "zcr_fs_traverse.ignore: Pattern, parseLine, wildmatch, Rule, RuleStack{init, deinit, mark, restore, pushFile, isIgnored}"
+  ],
+  "limitations": [
+    "200,000-file behaviour not measured on this host; memory independence was shown at 1k and 10k files",
+    "tracked-but-ignored files are omitted (differs from git ls-files --cached)",
+    "info/exclude, core.excludesFile and core.ignorecase are not applied",
+    "wildmatch is byte-wise: ? and brackets match one byte, not one code point",
+    "per-directory sort holds the entries of every directory on the current path in the cache",
+    "Linux and Intel macOS are cross-compiled only"
+  ],
+  "interface_change_proposals": [
+    {
+      "target": "core.Coverage",
+      "issue": "no complete/filters fields; completeness is Report.complete and policy filters live only in Report",
+      "needs": "integrator decision whether Coverage gains filters (response schema already has coverage.filters)"
+    },
+    {
+      "target": "tests/catalog.json",
+      "issue": "FS-001..FS-006 execution_status still not_run; FS-004 at reduced scale",
+      "needs": "integrator update after re-test"
+    },
+    {
+      "target": "docs/12 C-large and T21",
+      "issue": "a 200k-file corpus needs about two minutes and more than 1 GiB free on this host",
+      "needs": "T21 to budget corpus creation and disk space"
+    }
+  ],
+  "remaining_gates": [
+    "integrator re-test of task-t05 on integration",
+    "MANIFEST.sha256 AGENTS.md mismatch (T01) open",
+    "E_MANIFEST_UNBOUND decision open",
+    "read cost estimate proposal (T04) open"
+  ],
+  "host_note": "the host data volume was at 100% use (1.2-1.7 GiB free) during T05; build caches of finished tasks T00-T03 were deleted to make room (rebuildable)"
+}

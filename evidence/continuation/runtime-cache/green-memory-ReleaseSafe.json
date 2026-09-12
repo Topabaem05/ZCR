@@ -1,0 +1,40 @@
+{
+  "command": [
+    "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+    "build",
+    "test",
+    "-Dtest-group=memory",
+    "-Doptimize=ReleaseSafe",
+    "-Dinstall-tests=true",
+    "--prefix",
+    "/workspace/scratch/3f4ab65dfb82/state/runtime-cache/out-green-memory-ReleaseSafe",
+    "--summary",
+    "all"
+  ],
+  "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-runtime-cache",
+  "head": "b5fe273bb58bd9518bf7711446f164ef5e4bbd62",
+  "exit": 0,
+  "log": "/workspace/scratch/3f4ab65dfb82/state/runtime-cache/logs/green-memory-ReleaseSafe.log",
+  "log_sha256": "8f1f1c3846dbd2856c43f6ddd16aaee05bda58cd3c6f3b545450aebe9ca8203d",
+  "env_overrides": {
+    "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/runtime-cache/zig-global-cache",
+    "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/runtime-cache/zig-local-cache",
+    "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/runtime-cache/tmp"
+  },
+  "passed": 29,
+  "failed": 0,
+  "skipped": 0,
+  "source_manifest_sha256": "1b31952519944ff07886138a7567f5021b7accbac1f9d7a5508b7181936ebfa1",
+  "config_manifest_sha256": "bf13907909e42fecbe9bc89a71a07de4bebfa3b024ad0de78306427c0e46c0e9",
+  "corpus_manifest_sha256": "6a7931cc9ac237db2d67b9e852d58be27b8f638e4dca0024db29364cc003f956",
+  "binaries": [
+    {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-cache/out-green-memory-ReleaseSafe/bin/T03-test",
+      "sha256": "4871beff1ec462d4b34e5ac78a9bd78fcd3ff926a4809b6d559616f911d16ae0"
+    },
+    {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-cache/out-green-memory-ReleaseSafe/bin/T13-test",
+      "sha256": "b41314a82328d57cd64e760ba3ec282537c5421ce5e1492481cdf21291c367c7"
+    }
+  ]
+}

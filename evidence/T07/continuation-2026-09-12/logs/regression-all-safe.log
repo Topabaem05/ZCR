@@ -1,0 +1,42 @@
+Build Summary: 29/29 steps succeeded; 109/109 tests passed
+test success
++- install T00-test success
+|  +- compile test T00-test ReleaseSafe native success 21s MaxRSS:547M
++- run test T00-test 11 pass (11 total) 214ms MaxRSS:7M
+|  +- compile test T00-test ReleaseSafe native (reused)
++- install T01-test success
+|  +- compile test T01-test ReleaseSafe native success 20s MaxRSS:550M
+|     +- options cached
++- run test T01-test 18 pass (18 total) 690ms MaxRSS:7M
+|  +- compile test T01-test ReleaseSafe native (+1 more reused dependencies)
++- install T02-test success
+|  +- compile test T02-test ReleaseSafe native success 19s MaxRSS:507M
+|     +- options (reused)
++- run test T02-test 12 pass (12 total) 390ms MaxRSS:7M
+|  +- compile test T02-test ReleaseSafe native (+1 more reused dependencies)
++- install T03-test success
+|  +- compile test T03-test ReleaseSafe native success 17s MaxRSS:484M
++- run test T03-test 12 pass (12 total) 170ms MaxRSS:6M
+|  +- compile test T03-test ReleaseSafe native (reused)
++- install T04-test success
+|  +- compile test T04-test ReleaseSafe native success 17s MaxRSS:468M
++- run test T04-test 10 pass (10 total) 200ms MaxRSS:20M
+|  +- compile test T04-test ReleaseSafe native (reused)
++- install T05-test success
+|  +- compile test T05-test ReleaseSafe native success 19s MaxRSS:518M
++- run test T05-test 11 pass (11 total) 1s MaxRSS:7M
+|  +- compile test T05-test ReleaseSafe native (reused)
++- install T06-test success
+|  +- compile test T06-test ReleaseSafe native success 18s MaxRSS:521M
++- run test T06-test 11 pass (11 total) 76ms MaxRSS:9M
+|  +- compile test T06-test ReleaseSafe native (reused)
++- install T07-test success
+|  +- compile test T07-test ReleaseSafe native cached 20ms MaxRSS:71M
++- run test T07-test 24 pass (24 total) 122ms MaxRSS:14M
+|  +- compile test T07-test ReleaseSafe native (reused)
++- run exe zcr success 1ms
+|  +- compile exe zcr ReleaseSafe native success 18s MaxRSS:498M
+|     +- options (reused)
++- run exe zcr success 2ms
+   +- compile exe zcr ReleaseSafe native (+1 more reused dependencies)
+

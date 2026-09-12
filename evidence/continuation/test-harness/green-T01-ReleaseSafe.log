@@ -1,0 +1,20 @@
+1/19 t01_test.test.DV-001 dirty base worktree fails preflight and user changes are preserved...OK
+2/19 t01_test.test.DV-001 clean task worktree passes preflight with its identity recorded...OK
+3/19 t01_test.test.DV-004 evidence produced in another worktree is rejected...OK
+4/19 t01_test.test.DV-004 evidence for an older source commit is rejected...OK
+5/19 t01_test.test.DV-004 evidence whose binary was replaced is rejected...OK
+6/19 t01_test.test.DV-004 evidence is neither recorded nor accepted on a dirty worktree...OK
+7/19 t01_test.test.DV-004 evidence survives a JSON round trip and still binds to its source...OK
+8/19 t01_test.test.DV-005 resume after a session restart re-validates the ledger and continues...OK
+9/19 t01_test.test.DV-005 resume rejects commits made after the last recorded step...OK
+10/19 t01_test.test.DV-005 resume and step recording reject a changed contract digest...OK
+11/19 t01_test.test.DV-005 resume rejects dirty trees, foreign worktrees, unrelated bases and skipped steps...OK
+12/19 t01_test.test.T01 contract: core declarations match contracts/ and config/...OK
+13/19 t01_test.test.T01 contract: contract digest matches the recorded T00 method...OK
+14/19 t01_test.test.T01 core: ByteSpan, LineRange and RelativePath reject invalid input...OK
+15/19 t01_test.test.T01 core: every internal error has exactly one wire code...OK
+16/19 t01_test.test.T01 core: interface table declares I01 to I19 with receiver-generic signatures...OK
+17/19 t01_test.test.T01 core: a reservation is moved, not copied...OK
+18/19 t01_test.test.T01 limits: scheduler hardware ceiling follows the recorded formula...OK
+19/19 t01_test.test.DV-001 fixture hostile Git environment cannot redirect mutations into a sentinel...OK
+All 19 tests passed.

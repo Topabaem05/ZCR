@@ -1,0 +1,22 @@
+test
++- run test T05-test 9 pass, 1 fail (10 total)
+error: 't05_test.test.T05 sorted order, glob filter and result limit' failed:
+       expected 2, found 6
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x102a77a2f in expectEqualInner__anon_39629 (T05-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x102a7d533 in expectEqual (T05-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m11-no-truncation/tests/t05_test.zig:479:5: 0x102a7d5fb in test.T05 sorted order, glob filter and result limit (T05-test)
+           try testing.expectEqual(@as(usize, 2), limited.paths.items.len);
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache/o/b9df00dcbee440060d57dfa5cf01083b/T05-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache --seed=0x176043d5 --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 9/10 tests passed (1 failed)
+test transitive failure
++- run test T05-test 9 pass, 1 fail (10 total)
+   +- compile test T05-test Debug native success 6s MaxRSS:256M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache/o/5141f98b72c01d7e7e7d84fd5e561ea8/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m11-no-truncation /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T05/zig-global-cache --seed 0x176043d5 -Zbce97076b039f342 test -Dtest-group=fs --summary all

@@ -1,0 +1,42 @@
+test
++- run test T12-test w
+T12 C01 patch pid=586 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C02 patch pid=629 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C03 patch pid=672 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C04 patch pid=715 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=1
+T12 C05 patch pid=758 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C06 patch pid=801 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C07 patch pid=844 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C08 patch pid=887 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C09 patch pid=930 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C10 patch pid=973 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C01 create pid=1016 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C02 create pid=1059 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C03 create pid=1102 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C04 create pid=1145 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=1
+T12 C05 create pid=1188 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C06 create pid=1231 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C07 create pid=1274 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C08 create pid=1317 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C09 create pid=1360 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C10 create pid=1403 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 recovery append SIGKILL verified
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/T12/final-releasesafe/cache && /workspace/scratch/3f4ab65dfb82/state/T12/final-releasesafe/cache/o/d7100c7090ce25b76f87a8c2e35d2685/T12-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/T12/final-releasesafe/cache --seed=0xbdd28121 --listen=-
+
+Build Summary: 11/11 steps succeeded; 62/62 tests passed
+test success
++- install T11-test success
+|  +- compile test T11-test ReleaseSafe native success 23s MaxRSS:530M
++- run test T11-test 41 pass (41 total) 911ms MaxRSS:12M
+|  +- compile test T11-test ReleaseSafe native (reused)
++- install T12-child success
+|  +- compile test T12-child ReleaseSafe native success 26s MaxRSS:573M
+|     +- options success
++- install T12-test success
+|  +- compile test T12-test ReleaseSafe native success 25s MaxRSS:602M
+|     +- options (reused)
+|     +- options success
+|        +- compile test T12-child ReleaseSafe native (+1 more reused dependencies)
++- run test T12-test 21 pass (21 total) 5s MaxRSS:12M
+   +- compile test T12-test ReleaseSafe native (+2 more reused dependencies)
+

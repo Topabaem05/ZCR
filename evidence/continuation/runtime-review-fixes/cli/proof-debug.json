@@ -1,0 +1,289 @@
+{
+  "binary": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/cli-debug/bin/zcr",
+  "binary_sha256": "b3225a35e2be2161faa8c1607cd8c4d31d001b30b9e27dcd754157bcacf620b1",
+  "exit": 0,
+  "records": [
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 2,
+      "ok": true,
+      "output_bytes": 2097152,
+      "path": "tiny.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 3,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm0.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 4,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm0.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 5,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm1.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 6,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm1.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 7,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm2.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 8,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm2.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 9,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm3.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 10,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm3.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 11,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm4.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 12,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm4.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 13,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm5.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 14,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm5.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 15,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm6.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 16,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm6.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 17,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm7.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 18,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm7.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 19,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm8.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 20,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm8.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 21,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm9.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 22,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm9.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 23,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm10.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 24,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm10.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 25,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm11.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 26,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm11.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 27,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm12.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 28,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm12.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 29,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm13.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 30,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm13.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 31,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm14.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 32,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm14.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 33,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm15.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 34,
+      "ok": true,
+      "output_bytes": 262144,
+      "path": "warm15.txt"
+    },
+    {
+      "cache": "miss",
+      "error": null,
+      "id": 35,
+      "ok": true,
+      "output_bytes": 2097152,
+      "path": "tiny.txt"
+    },
+    {
+      "cache": "hit",
+      "error": null,
+      "id": 36,
+      "ok": true,
+      "output_bytes": 2097152,
+      "path": "tiny.txt"
+    }
+  ],
+  "source_commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+  "stderr": ""
+}

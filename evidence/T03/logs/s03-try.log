@@ -1,0 +1,18 @@
+test
++- run test T03-test 11 pass, 1 fail (12 total)
+error: 't03_test.test.ME-007 10k read and cancel cycles return to idle without leak growth' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:615:14: 0x102cb9847 in expect (T03-test)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /Users/guribbong/code/ZCR-worktrees/task-t03/tests/t03_test.zig:421:9: 0x102cc145b in test.ME-007 10k read and cancel cycles return to idle without leak growth (T03-test)
+               try testing.expect(after <= before + 8 * MiB);
+               ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache/o/f91eb859a9732e561b470ad0023de7e9/T03-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache --seed=0x8cbc7ea1 --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 11/12 tests passed (1 failed)
+test transitive failure
++- run test T03-test 11 pass, 1 fail (12 total)
+   +- compile test T03-test Debug native success 18s MaxRSS:194M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache/o/c850a37cb4f46cd01dfc71be12bb7085/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-worktrees/task-t03 /Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T03/zig-global-cache --seed 0x8cbc7ea1 -Z74bde0f716f3784f test -Dtest-group=memory -Doptimize=Debug --summary all

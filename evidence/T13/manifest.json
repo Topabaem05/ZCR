@@ -1,0 +1,40 @@
+{
+  "schema_version": "zcr-task/1",
+  "state": "active",
+  "task_id": "T13",
+  "workspace_id": "fs:28:704597:28:696941:28:393230",
+  "base_commit": "98c722ebc906321b94bc3e9c8b60522f3305faa7",
+  "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+  "fence": 1,
+  "expires_at": "2026-09-13T06:57:48Z",
+  "read_paths": [
+    "."
+  ],
+  "write_paths": [
+    "src/cache/content.zig",
+    "src/cache/lines.zig",
+    "src/cache/association.zig",
+    "tests/t13_test.zig",
+    "evidence/T13"
+  ],
+  "immutable_paths": [
+    "build.zig",
+    "build.zig.zon",
+    "src/core",
+    "contracts",
+    "config",
+    "AGENTS.md",
+    ".github"
+  ],
+  "operations": [
+    "read",
+    "enumerate",
+    "search",
+    "batch_read",
+    "patch",
+    "create",
+    "status",
+    "health"
+  ],
+  "max_changed_files": 64
+}

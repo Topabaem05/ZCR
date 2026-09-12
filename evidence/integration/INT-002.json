@@ -1,0 +1,56 @@
+{
+  "schema_version": "zcr-integration-record/0",
+  "id": "INT-002",
+  "source_commit": "4333d81ab1bfdbf21af9518ea8787f55ab54b845",
+  "branch": "integration",
+  "changes": [
+    "fast-forward integration to task-t02 f8c0cb0 (T02 S06)",
+    "build.zig: register T03 (tests/t03_test.zig group memory; zcr_memory, zcr_admission modules)"
+  ],
+  "retest_of": [
+    "T00 PF-001",
+    "T01 dev",
+    "T02 IS-003/IS-004/DV-002/DV-003 (Debug and ReleaseSafe)"
+  ],
+  "runs": [
+    {
+      "label": "int2-all-debug",
+      "command": "zig build test -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-int2-all-debug",
+      "expected": "41/41 tests pass; step fails only because tests/t03_test.zig is registered but not delivered",
+      "summary": "Build Summary: 13/15 steps succeeded (1 failed); 41/41 tests passed",
+      "log": "logs/int2-all-debug.log",
+      "log_sha256": "ec8f07aa37d75c6eb060e314b320419de83dd6860ce93ec7947b9d032ee07785",
+      "installed_test_binaries_sha256": {
+        "T00-test": "3d66f177b768707b08c97c5088a9ee326b2e67f2e0c3078b889cab80aca4eff7",
+        "T01-test": "89ce3df9dc6167aba7df22ad509bae9e1f36ca3aa8cf43bbe2afaf3d3cabad70",
+        "T02-test": "fc6df69913eccb555e835d366e82a8ff4292ede0d2fff6c9c8409f672d7fae3a"
+      }
+    },
+    {
+      "label": "int2-isolation-releasesafe",
+      "command": "zig build test -Dtest-group=isolation -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix $STATE/out-int2-isolation-releasesafe",
+      "expected": "pass",
+      "summary": "Build Summary: 5/5 steps succeeded; 12/12 tests passed",
+      "log": "logs/int2-isolation-releasesafe.log",
+      "log_sha256": "dcea665c66bce49b34e3e5e35b1d4ded01814d83b045fdd840143eee64247141",
+      "installed_test_binaries_sha256": {
+        "T02-test": "07283205967430f48ec82a484319cc45d988ee63e0f00bd4bd60e03281de645d"
+      }
+    },
+    {
+      "label": "int2-verify-contracts",
+      "command": "zig build verify-contracts -Dinstall-tests=true --prefix $STATE/out-int2-verify-contracts",
+      "expected": "pass",
+      "summary": "Build Summary: 3/3 steps succeeded",
+      "log": "logs/int2-verify-contracts.log",
+      "log_sha256": "20c374ebd5a4d36ef5aa9ffea073ca8929e1684ca018ad396b8799fb7a459f81",
+      "installed_test_binaries_sha256": {}
+    }
+  ],
+  "not_done": [
+    "main branch not updated",
+    "MANIFEST.sha256 AGENTS.md mismatch open",
+    "E_MANIFEST_UNBOUND decision open",
+    "tasks.json/catalog proposals open"
+  ]
+}

@@ -1,0 +1,66 @@
+test
++- run test T04-test 9 pass, 1 fail (10 total); 1 leaks
+error: 't04_test.test.IO-005 a change after open is retried once and never mixes versions' failed:
+       ====== expected this output: =========
+       replaced one
+       ␃
+       
+       ======== instead found this: =========
+       original one
+       ␃
+       
+       ======================================
+       First difference occurs on line 1:
+       expected:
+       replaced one
+       ^ ('\x72')
+       found:
+       original one
+       ^ ('\x6f')
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:682:9: 0x100f06ef3 in expectEqualStrings (T04-test)
+               return error.TestExpectedEqual;
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m2-no-path-identity/tests/t04_test.zig:375:5: 0x100f32c4b in test.IO-005 a change after open is retried once and never mixes versions (T04-test)
+           try testing.expectEqualStrings("replaced one\n", replaced.lines()[0].text);
+           ^
+       [DebugAllocator] (err): memory address 0x101160000 leaked: 
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x100e0a30f in rawAlloc (T04-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:286:40: 0x100e13bd7 in allocWithSizeAndAlignment__anon_9797 (T04-test)
+           return self.allocBytesWithAlignment(alignment, byte_count, return_address);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:274:89: 0x100e139f3 in allocAdvancedWithRetAddr (T04-test)
+           const ptr: [*]align(a.toByteUnits()) T = @ptrCast(try self.allocWithSizeAndAlignment(@sizeOf(T), a, n, return_address));
+                                                                                               ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m2-no-path-identity/src/fs/read.zig:157:63: 0x100f0d2e3 in readOnce (T04-test)
+               const block = try owned.arena.allocator().alignedAlloc(u8, .of(core.Line), total);
+                                                                     ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m2-no-path-identity/src/fs/read.zig:86:26: 0x100f0c963 in readRange (T04-test)
+                   self.readOnce(io, allocator, &owned, spec, reservation, cancel, attempt) catch |err| switch (err) {
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m2-no-path-identity/tests/t04_test.zig:106:45: 0x100f06b9b in read (T04-test)
+               const owned = try h.reader.readRange(io, reserved.allocator(), capability, s, &reservation, h.cancel());
+                                                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m2-no-path-identity/tests/t04_test.zig:374:30: 0x100f32a2f in test.IO-005 a change after open is retried once and never mixes versions (T04-test)
+           var replaced = try h.read(Harness.spec("r.txt", 1, 10));
+                                    ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x100ee312f in mainServer (T04-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x100ee37df in main (T04-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x100ee15a3 in callMain (T04-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       (additional stack frames may have been skipped...)
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache/o/9d53afac61ec1a0678484a439cde8bd5/T04-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache --seed=0xb0469ff8 --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 9/10 tests passed (1 failed)
+test transitive failure
++- run test T04-test 9 pass, 1 fail (10 total); 1 leaks
+   +- compile test T04-test Debug native success 7s MaxRSS:190M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache/o/12ecb60e287f5a624443e3faa2ba9fc4/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m2-no-path-identity /Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T04/zig-global-cache --seed 0xb0469ff8 -Zf425591e7cad12dc test -Dtest-group=io --summary all

@@ -1,0 +1,560 @@
+{
+  "schema_version": "zcr-continuation-runs/1",
+  "task": "T07",
+  "runs": [
+    {
+      "label": "red-zero",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=batch",
+        "-Doptimize=Debug",
+        "-Dtest-id=zero line count",
+        "-Dinstall-tests=true",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/T07/out-red-zero",
+        "--summary",
+        "all"
+      ],
+      "exit": 1,
+      "log": "/workspace/scratch/3f4ab65dfb82/state/T07/logs/red-zero.log",
+      "log_sha256": "202b3937a05c118a38f5e35c51fb0f3d66a5ec8f60a12b7cff11c104ab771e9d",
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T07/out-red-zero/bin/T07-test",
+          "sha256": "47c5117c0a744b79137111b2ba6a7775fb3ae0c6fa392fa0e1ae04f13cf4be1f"
+        }
+      ],
+      "source_commit": "4ff110105218ba3da8b7881f65d901a237083793",
+      "source_commit_note": "The regression-only commit records the exact file contents tested before implementation; test execution preceded that commit.",
+      "source_tree": "fbe1f8eaa41e6975cf28ef4816ff4e7ffb744728",
+      "source_digest": "354e2165416685c88f1e0360f1c024dc650a83042797d85a11d1e7f0c390ba4e",
+      "config_sha256": "46455460654d62a5c76c7c37dace030c83c142f60d78deea8753c3d9f46781ac",
+      "corpus_sha256": "98d0965c2512474d466034a8dd7289c5079dea451cd27d28edd4d206b9dd0b15",
+      "committed_log": "logs/red-zero.log"
+    },
+    {
+      "label": "red-overflow",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=batch",
+        "-Doptimize=Debug",
+        "-Dtest-id=overflowing line range",
+        "-Dinstall-tests=true",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/T07/out-red-overflow",
+        "--summary",
+        "all"
+      ],
+      "exit": 1,
+      "log": "/workspace/scratch/3f4ab65dfb82/state/T07/logs/red-overflow.log",
+      "log_sha256": "a22f79a9d61423328f387b754156bc70603d5a44f60c2e7a30d745428aa38dec",
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T07/out-red-overflow/bin/T07-test",
+          "sha256": "8feef99b96b2557f72b55e1461641d7aa008e5fa70005951fdb77a3ca558bee1"
+        }
+      ],
+      "source_commit": "4ff110105218ba3da8b7881f65d901a237083793",
+      "source_commit_note": "The regression-only commit records the exact file contents tested before implementation; test execution preceded that commit.",
+      "source_tree": "fbe1f8eaa41e6975cf28ef4816ff4e7ffb744728",
+      "source_digest": "354e2165416685c88f1e0360f1c024dc650a83042797d85a11d1e7f0c390ba4e",
+      "config_sha256": "46455460654d62a5c76c7c37dace030c83c142f60d78deea8753c3d9f46781ac",
+      "corpus_sha256": "98d0965c2512474d466034a8dd7289c5079dea451cd27d28edd4d206b9dd0b15",
+      "committed_log": "logs/red-overflow.log"
+    },
+    {
+      "label": "red-validation",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=batch",
+        "-Doptimize=Debug",
+        "-Dtest-id=validates request constraints",
+        "-Dinstall-tests=true",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/T07/out-red-validation",
+        "--summary",
+        "all"
+      ],
+      "exit": 1,
+      "log": "/workspace/scratch/3f4ab65dfb82/state/T07/logs/red-validation.log",
+      "log_sha256": "0aa12e5e2bda66b2e4ccc1bec1f3baaac76fabead2fd0520016d575b5e649ece",
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T07/out-red-validation/bin/T07-test",
+          "sha256": "4ff41e44838cb7fb7a2f799890cb63056b7bf74389383bb51487f39bd4b05f3f"
+        }
+      ],
+      "source_commit": "4ff110105218ba3da8b7881f65d901a237083793",
+      "source_commit_note": "The regression-only commit records the exact file contents tested before implementation; test execution preceded that commit.",
+      "source_tree": "fbe1f8eaa41e6975cf28ef4816ff4e7ffb744728",
+      "source_digest": "354e2165416685c88f1e0360f1c024dc650a83042797d85a11d1e7f0c390ba4e",
+      "config_sha256": "46455460654d62a5c76c7c37dace030c83c142f60d78deea8753c3d9f46781ac",
+      "corpus_sha256": "98d0965c2512474d466034a8dd7289c5079dea451cd27d28edd4d206b9dd0b15",
+      "committed_log": "logs/red-validation.log"
+    },
+    {
+      "label": "red-utf8",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=batch",
+        "-Doptimize=Debug",
+        "-Dtest-id=adjacent invalid UTF-8",
+        "-Dinstall-tests=true",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/T07/out-red-utf8",
+        "--summary",
+        "all"
+      ],
+      "exit": 1,
+      "log": "/workspace/scratch/3f4ab65dfb82/state/T07/logs/red-utf8.log",
+      "log_sha256": "c41c5959be74b65ad355ccbbb175df48785444384a9d001739da1d29b6220855",
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T07/out-red-utf8/bin/T07-test",
+          "sha256": "d2c8348794944b15f6f7d76a201c56ac21f41eee9233e3ddab942e6836c47895"
+        }
+      ],
+      "source_commit": "4ff110105218ba3da8b7881f65d901a237083793",
+      "source_commit_note": "The regression-only commit records the exact file contents tested before implementation; test execution preceded that commit.",
+      "source_tree": "fbe1f8eaa41e6975cf28ef4816ff4e7ffb744728",
+      "source_digest": "354e2165416685c88f1e0360f1c024dc650a83042797d85a11d1e7f0c390ba4e",
+      "config_sha256": "46455460654d62a5c76c7c37dace030c83c142f60d78deea8753c3d9f46781ac",
+      "corpus_sha256": "98d0965c2512474d466034a8dd7289c5079dea451cd27d28edd4d206b9dd0b15",
+      "committed_log": "logs/red-utf8.log"
+    },
+    {
+      "label": "red-long-line",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=batch",
+        "-Doptimize=Debug",
+        "-Dtest-id=adjacent long line",
+        "-Dinstall-tests=true",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/T07/out-red-long-line",
+        "--summary",
+        "all"
+      ],
+      "exit": 1,
+      "log": "/workspace/scratch/3f4ab65dfb82/state/T07/logs/red-long-line.log",
+      "log_sha256": "e553e00f8c862a141c5ab69aaa3bb5dfce6d479aa5acb2966196761a97cecd41",
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T07/out-red-long-line/bin/T07-test",
+          "sha256": "f864bcd4da952a694ec6b68a2bf8423ea34d2cfbe425abf33fa7ba30be2fb06a"
+        }
+      ],
+      "source_commit": "4ff110105218ba3da8b7881f65d901a237083793",
+      "source_commit_note": "The regression-only commit records the exact file contents tested before implementation; test execution preceded that commit.",
+      "source_tree": "fbe1f8eaa41e6975cf28ef4816ff4e7ffb744728",
+      "source_digest": "354e2165416685c88f1e0360f1c024dc650a83042797d85a11d1e7f0c390ba4e",
+      "config_sha256": "46455460654d62a5c76c7c37dace030c83c142f60d78deea8753c3d9f46781ac",
+      "corpus_sha256": "98d0965c2512474d466034a8dd7289c5079dea451cd27d28edd4d206b9dd0b15",
+      "committed_log": "logs/red-long-line.log"
+    },
+    {
+      "label": "red-different-limits",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=batch",
+        "-Doptimize=Debug",
+        "-Dtest-id=same range with different output",
+        "-Dinstall-tests=true",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/T07/out-red-different-limits",
+        "--summary",
+        "all"
+      ],
+      "exit": 1,
+      "log": "/workspace/scratch/3f4ab65dfb82/state/T07/logs/red-different-limits.log",
+      "log_sha256": "0ca2c79d8c305eb63cf16e8804700ed0ce47f3e95af87d07a4108a76aebad73f",
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T07/out-red-different-limits/bin/T07-test",
+          "sha256": "227ee7148d4b966fa2024dbed19fb26ececa9ddeeb213bb2c81e347d9dab6ddf"
+        }
+      ],
+      "source_commit": "4ff110105218ba3da8b7881f65d901a237083793",
+      "source_commit_note": "The regression-only commit records the exact file contents tested before implementation; test execution preceded that commit.",
+      "source_tree": "fbe1f8eaa41e6975cf28ef4816ff4e7ffb744728",
+      "source_digest": "354e2165416685c88f1e0360f1c024dc650a83042797d85a11d1e7f0c390ba4e",
+      "config_sha256": "46455460654d62a5c76c7c37dace030c83c142f60d78deea8753c3d9f46781ac",
+      "corpus_sha256": "98d0965c2512474d466034a8dd7289c5079dea451cd27d28edd4d206b9dd0b15",
+      "committed_log": "logs/red-different-limits.log"
+    },
+    {
+      "label": "red-projection",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=batch",
+        "-Doptimize=Debug",
+        "-Dtest-id=budget replacements in coverage",
+        "-Dinstall-tests=true",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/T07/out-red-projection",
+        "--summary",
+        "all"
+      ],
+      "exit": 1,
+      "log": "/workspace/scratch/3f4ab65dfb82/state/T07/logs/red-projection.log",
+      "log_sha256": "f028b14a6ba28110e92052a9b08f779d059fd2d988053d9f19138b92af0020d8",
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T07/out-red-projection/bin/T07-test",
+          "sha256": "0327598408fee6acb911be76b9da5bdce3f28cb406cf675b4ceff3bcbfd54fb5"
+        }
+      ],
+      "source_commit": "4ff110105218ba3da8b7881f65d901a237083793",
+      "source_commit_note": "The regression-only commit records the exact file contents tested before implementation; test execution preceded that commit.",
+      "source_tree": "fbe1f8eaa41e6975cf28ef4816ff4e7ffb744728",
+      "source_digest": "354e2165416685c88f1e0360f1c024dc650a83042797d85a11d1e7f0c390ba4e",
+      "config_sha256": "46455460654d62a5c76c7c37dace030c83c142f60d78deea8753c3d9f46781ac",
+      "corpus_sha256": "98d0965c2512474d466034a8dd7289c5079dea451cd27d28edd4d206b9dd0b15",
+      "committed_log": "logs/red-projection.log"
+    },
+    {
+      "label": "green-batch-debug",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=batch",
+        "-Doptimize=Debug",
+        "-Dinstall-tests=true",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/T07/out-green-batch-debug",
+        "--summary",
+        "all"
+      ],
+      "exit": 0,
+      "source_commit": "fa80da7edde09fff635ec79db21300323f7a10d5",
+      "log": "/workspace/scratch/3f4ab65dfb82/state/T07/logs/green-batch-debug.log",
+      "log_sha256": "f2d5445a07a9508223a20c8451df6969c87dc54d772000dd5183aac18f1b75d2",
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T07/out-green-batch-debug/bin/T07-test",
+          "sha256": "74a8c04cd9d98c361fa1375c713cb00c857d8a8a246a990c538c9fd8b6623ad9"
+        }
+      ],
+      "source_tree": "f5b17b4aaa5e17c6190509fec593d3cbec9f72a8",
+      "source_digest": "18106339c49eccd404fff8f61382c3ccee10a43fa3a126dedbedbecb454d8316",
+      "config_sha256": "46455460654d62a5c76c7c37dace030c83c142f60d78deea8753c3d9f46781ac",
+      "corpus_sha256": "b1d1b61250f56b325bbd217d7c4356fdd2aef78a94932d1bfae575cfdc43e458",
+      "committed_log": "logs/green-batch-debug.log"
+    },
+    {
+      "label": "green-batch-safe",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=batch",
+        "-Doptimize=ReleaseSafe",
+        "-Dinstall-tests=true",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/T07/out-green-batch-safe",
+        "--summary",
+        "all"
+      ],
+      "exit": 0,
+      "source_commit": "fa80da7edde09fff635ec79db21300323f7a10d5",
+      "log": "/workspace/scratch/3f4ab65dfb82/state/T07/logs/green-batch-safe.log",
+      "log_sha256": "097fa4818189c8462e42143c18dc772274d0f491b70de1f1d04816ec1f79d542",
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T07/out-green-batch-safe/bin/T07-test",
+          "sha256": "011cb5133a29cd33a09cf03a7e12e28259bf23980c541ca58b83eeef4e70b1ae"
+        }
+      ],
+      "source_tree": "f5b17b4aaa5e17c6190509fec593d3cbec9f72a8",
+      "source_digest": "18106339c49eccd404fff8f61382c3ccee10a43fa3a126dedbedbecb454d8316",
+      "config_sha256": "46455460654d62a5c76c7c37dace030c83c142f60d78deea8753c3d9f46781ac",
+      "corpus_sha256": "b1d1b61250f56b325bbd217d7c4356fdd2aef78a94932d1bfae575cfdc43e458",
+      "committed_log": "logs/green-batch-safe.log"
+    },
+    {
+      "label": "failure-batch-debug",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=batch",
+        "-Doptimize=Debug",
+        "-Dfault-injection=true",
+        "-Dinstall-tests=true",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/T07/out-failure-batch-debug",
+        "--summary",
+        "all"
+      ],
+      "exit": 0,
+      "source_commit": "fa80da7edde09fff635ec79db21300323f7a10d5",
+      "log": "/workspace/scratch/3f4ab65dfb82/state/T07/logs/failure-batch-debug.log",
+      "log_sha256": "9c11ac39a265a3cafdd2b19c7a581148f268595e3712b215e2cc1e1b6487fe8c",
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T07/out-failure-batch-debug/bin/T07-test",
+          "sha256": "74a8c04cd9d98c361fa1375c713cb00c857d8a8a246a990c538c9fd8b6623ad9"
+        }
+      ],
+      "source_tree": "f5b17b4aaa5e17c6190509fec593d3cbec9f72a8",
+      "source_digest": "18106339c49eccd404fff8f61382c3ccee10a43fa3a126dedbedbecb454d8316",
+      "config_sha256": "46455460654d62a5c76c7c37dace030c83c142f60d78deea8753c3d9f46781ac",
+      "corpus_sha256": "b1d1b61250f56b325bbd217d7c4356fdd2aef78a94932d1bfae575cfdc43e458",
+      "committed_log": "logs/failure-batch-debug.log"
+    },
+    {
+      "label": "regression-all-debug",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Doptimize=Debug",
+        "-Dinstall-tests=true",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/T07/out-regression-all-debug",
+        "--summary",
+        "all"
+      ],
+      "exit": 0,
+      "source_commit": "fa80da7edde09fff635ec79db21300323f7a10d5",
+      "log": "/workspace/scratch/3f4ab65dfb82/state/T07/logs/regression-all-debug.log",
+      "log_sha256": "618a6770ad7a05958edfe9ff8ce3694d8f1f52fa356a76618e1b72361e615a2e",
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T07/out-regression-all-debug/bin/T02-test",
+          "sha256": "ac14b1750fbdb280be4d8fce81d8efa647c1c96b4d8101607bb741d3ac8cad33"
+        },
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T07/out-regression-all-debug/bin/T07-test",
+          "sha256": "74a8c04cd9d98c361fa1375c713cb00c857d8a8a246a990c538c9fd8b6623ad9"
+        },
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T07/out-regression-all-debug/bin/T06-test",
+          "sha256": "bf01e8dcf1f4560ebb7ff8bee38f76073f56c7efd442ec46c1b4ab1c3486ec26"
+        },
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T07/out-regression-all-debug/bin/T05-test",
+          "sha256": "bd7e50d725158c03efe7f42a14c3174f54da20c291540457c48381ee25357568"
+        },
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T07/out-regression-all-debug/bin/T00-test",
+          "sha256": "b62ea855bffec6d096bbb8d5744a9c06e50154ce7c526cab8b9b5ceb9fb89b81"
+        },
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T07/out-regression-all-debug/bin/T04-test",
+          "sha256": "52603032a91cb1e83953da4af645b8b0117b54b9b0b708482b2a8cc34cf00acd"
+        },
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T07/out-regression-all-debug/bin/T03-test",
+          "sha256": "182e23a827d43fe36706e618dd9857997ba56d4e2e2f286c2650793c6989f27e"
+        },
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T07/out-regression-all-debug/bin/T01-test",
+          "sha256": "d5c2c3a9b800364e20c0977eaf62ba8fa52a6b3939a89c77ff3a3e7947c5e7b1"
+        }
+      ],
+      "source_tree": "f5b17b4aaa5e17c6190509fec593d3cbec9f72a8",
+      "source_digest": "18106339c49eccd404fff8f61382c3ccee10a43fa3a126dedbedbecb454d8316",
+      "config_sha256": "46455460654d62a5c76c7c37dace030c83c142f60d78deea8753c3d9f46781ac",
+      "corpus_sha256": "b1d1b61250f56b325bbd217d7c4356fdd2aef78a94932d1bfae575cfdc43e458",
+      "committed_log": "logs/regression-all-debug.log"
+    },
+    {
+      "label": "regression-all-safe",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Doptimize=ReleaseSafe",
+        "-Dinstall-tests=true",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/T07/out-regression-all-safe",
+        "--summary",
+        "all"
+      ],
+      "exit": 0,
+      "source_commit": "fa80da7edde09fff635ec79db21300323f7a10d5",
+      "log": "/workspace/scratch/3f4ab65dfb82/state/T07/logs/regression-all-safe.log",
+      "log_sha256": "1803dc9918a48e29a909879281566f4f61056198e67bee79f9630ff7cce1cdff",
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T07/out-regression-all-safe/bin/T02-test",
+          "sha256": "0d490bce94b04eb476d4c7a23c8e6b63fa6f5a1ab60df924e7a10bb7bf1ebaff"
+        },
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T07/out-regression-all-safe/bin/T07-test",
+          "sha256": "011cb5133a29cd33a09cf03a7e12e28259bf23980c541ca58b83eeef4e70b1ae"
+        },
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T07/out-regression-all-safe/bin/T06-test",
+          "sha256": "acc5ea2eefb9c4789bbab3e6f07d1d9dc96dbf0337ca0cb8e49ef42b478dbb92"
+        },
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T07/out-regression-all-safe/bin/T05-test",
+          "sha256": "001d8e8a7aa6043b15bedcdc7c7b63abb651a796f7a43d83ff51aab5d985ad22"
+        },
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T07/out-regression-all-safe/bin/T00-test",
+          "sha256": "ace214047fe6ce27c94ce23b033fb8909917c27f6d6832e6aad49f9f1a2fcd6e"
+        },
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T07/out-regression-all-safe/bin/T04-test",
+          "sha256": "4484e2f3170e71cfe4b57593e5eaa0e051948f1eb5772c940cf983bdaf52f532"
+        },
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T07/out-regression-all-safe/bin/T03-test",
+          "sha256": "04471f47df9d9e787a3e4ad707bf69ea1cc558050d1ea0dec16fea1142518af2"
+        },
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T07/out-regression-all-safe/bin/T01-test",
+          "sha256": "4fcfcc3798f250ac866bf0011f907ed6d136a1bd9df19ff253c28981fa25dcf7"
+        }
+      ],
+      "source_tree": "f5b17b4aaa5e17c6190509fec593d3cbec9f72a8",
+      "source_digest": "18106339c49eccd404fff8f61382c3ccee10a43fa3a126dedbedbecb454d8316",
+      "config_sha256": "46455460654d62a5c76c7c37dace030c83c142f60d78deea8753c3d9f46781ac",
+      "corpus_sha256": "b1d1b61250f56b325bbd217d7c4356fdd2aef78a94932d1bfae575cfdc43e458",
+      "committed_log": "logs/regression-all-safe.log"
+    },
+    {
+      "label": "verify-contracts",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "verify-contracts",
+        "--summary",
+        "all"
+      ],
+      "exit": 0,
+      "source_commit": "fa80da7edde09fff635ec79db21300323f7a10d5",
+      "log": "/workspace/scratch/3f4ab65dfb82/state/T07/logs/verify-contracts.log",
+      "log_sha256": "148a9c1001f2de357ec5354c3781981cd5c228a2bc5cf3f759b466db69091de0",
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T07/zig-local-cache/o/71d264f4ddceef9514d28550df2f37ff/zcr-dev-evidence",
+          "sha256": "a5016b50abdf960ed936b9351ddcdbf5e8e00752d8e4691de48e867a4361d94a"
+        }
+      ],
+      "source_tree": "f5b17b4aaa5e17c6190509fec593d3cbec9f72a8",
+      "source_digest": "18106339c49eccd404fff8f61382c3ccee10a43fa3a126dedbedbecb454d8316",
+      "config_sha256": "46455460654d62a5c76c7c37dace030c83c142f60d78deea8753c3d9f46781ac",
+      "corpus_sha256": "b1d1b61250f56b325bbd217d7c4356fdd2aef78a94932d1bfae575cfdc43e458",
+      "committed_log": "logs/verify-contracts.log"
+    }
+  ],
+  "provenance_checks": [
+    {
+      "label": "clean-source-preflight",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/state/T07/zig-local-cache/o/71d264f4ddceef9514d28550df2f37ff/zcr-dev-evidence",
+        "preflight",
+        "--worktree",
+        "/workspace/scratch/3f4ab65dfb82/ZCR-T07"
+      ],
+      "exit": 0,
+      "log": "/workspace/scratch/3f4ab65dfb82/state/T07/logs/clean-source-preflight.log",
+      "log_sha256": "ce93a76add86da2bd19c66ce38c10da533c93f4dd3cf8616d05701b369ae8459",
+      "binary_sha256": "a5016b50abdf960ed936b9351ddcdbf5e8e00752d8e4691de48e867a4361d94a",
+      "committed_log": "logs/clean-source-preflight.log"
+    },
+    {
+      "label": "record-green-batch-debug",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/state/T07/zig-local-cache/o/71d264f4ddceef9514d28550df2f37ff/zcr-dev-evidence",
+        "record",
+        "--worktree",
+        "/workspace/scratch/3f4ab65dfb82/ZCR-T07",
+        "--task",
+        "T07",
+        "--label",
+        "green-batch-debug",
+        "--command",
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig build test -Dtest-group=batch -Doptimize=Debug -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T07/out-green-batch-debug --summary all",
+        "--exit",
+        "0",
+        "--binary",
+        "/workspace/scratch/3f4ab65dfb82/state/T07/out-green-batch-debug/bin/T07-test",
+        "--out",
+        "/workspace/scratch/3f4ab65dfb82/state/T07/evidence-green-batch-debug.json"
+      ],
+      "exit": 0,
+      "log": "/workspace/scratch/3f4ab65dfb82/state/T07/logs/record-green-batch-debug.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binary_sha256": "a5016b50abdf960ed936b9351ddcdbf5e8e00752d8e4691de48e867a4361d94a",
+      "committed_log": "logs/record-green-batch-debug.log"
+    },
+    {
+      "label": "verify-green-batch-debug",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/state/T07/zig-local-cache/o/71d264f4ddceef9514d28550df2f37ff/zcr-dev-evidence",
+        "verify",
+        "--worktree",
+        "/workspace/scratch/3f4ab65dfb82/ZCR-T07",
+        "--evidence",
+        "/workspace/scratch/3f4ab65dfb82/state/T07/evidence-green-batch-debug.json"
+      ],
+      "exit": 0,
+      "log": "/workspace/scratch/3f4ab65dfb82/state/T07/logs/verify-green-batch-debug.log",
+      "log_sha256": "95113fb1bf87762452fddba80c56d3b0716576f5f8c8709e3f073e51f54e6b6b",
+      "binary_sha256": "a5016b50abdf960ed936b9351ddcdbf5e8e00752d8e4691de48e867a4361d94a",
+      "committed_log": "logs/verify-green-batch-debug.log"
+    },
+    {
+      "label": "record-green-batch-safe",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/state/T07/zig-local-cache/o/71d264f4ddceef9514d28550df2f37ff/zcr-dev-evidence",
+        "record",
+        "--worktree",
+        "/workspace/scratch/3f4ab65dfb82/ZCR-T07",
+        "--task",
+        "T07",
+        "--label",
+        "green-batch-safe",
+        "--command",
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig build test -Dtest-group=batch -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T07/out-green-batch-safe --summary all",
+        "--exit",
+        "0",
+        "--binary",
+        "/workspace/scratch/3f4ab65dfb82/state/T07/out-green-batch-safe/bin/T07-test",
+        "--out",
+        "/workspace/scratch/3f4ab65dfb82/state/T07/evidence-green-batch-safe.json"
+      ],
+      "exit": 0,
+      "log": "/workspace/scratch/3f4ab65dfb82/state/T07/logs/record-green-batch-safe.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binary_sha256": "a5016b50abdf960ed936b9351ddcdbf5e8e00752d8e4691de48e867a4361d94a",
+      "committed_log": "logs/record-green-batch-safe.log"
+    },
+    {
+      "label": "verify-green-batch-safe",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/state/T07/zig-local-cache/o/71d264f4ddceef9514d28550df2f37ff/zcr-dev-evidence",
+        "verify",
+        "--worktree",
+        "/workspace/scratch/3f4ab65dfb82/ZCR-T07",
+        "--evidence",
+        "/workspace/scratch/3f4ab65dfb82/state/T07/evidence-green-batch-safe.json"
+      ],
+      "exit": 0,
+      "log": "/workspace/scratch/3f4ab65dfb82/state/T07/logs/verify-green-batch-safe.log",
+      "log_sha256": "95113fb1bf87762452fddba80c56d3b0716576f5f8c8709e3f073e51f54e6b6b",
+      "binary_sha256": "a5016b50abdf960ed936b9351ddcdbf5e8e00752d8e4691de48e867a4361d94a",
+      "committed_log": "logs/verify-green-batch-safe.log"
+    }
+  ]
+}

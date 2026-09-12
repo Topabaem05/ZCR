@@ -1,0 +1,36 @@
+{
+  "files": [
+    {
+      "git_blob": "9bd481f3e1f409a7c1e457d196992571ce8eff0f",
+      "path": "build.zig",
+      "sha256": "51bbc47cd1aafc90fc865b20cc15d863b0ec19109b6d01f5ac4bf3ae75d04d64"
+    },
+    {
+      "git_blob": "37c063c863a2aa86c1dd0f5a34d13a4372e0b09b",
+      "path": "build.zig.zon",
+      "sha256": "2ad2381bdb29d5669c6d2ac4807c124c2afe6d007daf7ea2b507fdc64bf44e52"
+    },
+    {
+      "git_blob": "491aef303df6781f828b2787e449c803c83a3d9d",
+      "path": "config/limits.json",
+      "sha256": "d7b3db8b6956c0f8b1e6f399e6e432fb4eadb8aa033f39d303e31edbe539154c"
+    },
+    {
+      "git_blob": "f0a80d3929fb711e077185dd1563d540ff079b5b",
+      "path": "config/memory-profiles.json",
+      "sha256": "7f925fb57bc0453f2505b3c10856a4e74322bcb8cc3417070ec7693e847804b7"
+    },
+    {
+      "git_blob": "b90d1fbd286c3ced8bd0e93841be1e0f6fc3cc51",
+      "path": "config/scheduler-profiles.json",
+      "sha256": "3f3b7d88264c94ac84ea0969da47ff1aee46ad4ba51f4899742ee2c1603b57a8"
+    },
+    {
+      "git_blob": "2f959f5cb65a6acc58de2d813a601a76bc20bb4d",
+      "path": "contracts/tools.json",
+      "sha256": "6537c0961f85dd623cf76c195dab534f583052c31eff2eda54727e97083a0b4b"
+    }
+  ],
+  "schema": "zcr-evidence-config/1",
+  "source_commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0"
+}

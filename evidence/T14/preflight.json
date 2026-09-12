@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "state": {
+    "toplevel": "/workspace/scratch/3f4ab65dfb82/ZCR-T14",
+    "absolute_git_dir": "/workspace/scratch/3f4ab65dfb82/ZCR/.git/worktrees/ZCR-T14",
+    "common_dir": "/workspace/scratch/3f4ab65dfb82/ZCR/.git",
+    "head_commit": "2ca8e314a7c06c611a2e7e315470dd21737ce0a0",
+    "head_tree": "17d5f6fd328c6282081fb4cbfe0afebfd983becb",
+    "branch": "codex/t14-watch",
+    "entries": []
+  },
+  "reasons": []
+}

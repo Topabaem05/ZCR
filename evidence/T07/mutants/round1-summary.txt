@@ -1,0 +1,26 @@
+m1-no-output-wait exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 15/17 tests passed (2 failed) :: BA-001 32 items keep input order, item ids an;BA-001 results do not depend on how many item;
+m2-no-memory-wait exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 16/17 tests passed (1 failed) :: BA-003 32 items asking for 8 MiB share a 2 Mi;
+m3-pool-before-free exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 16/17 tests passed (1 failed) :: BA-003 32 items asking for 8 MiB share a 2 Mi;
+m4-no-dedupe exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 16/17 tests passed (1 failed) :: BA-001 32 items keep input order, item ids an;
+m5-no-merge exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 16/17 tests passed (1 failed) :: BA-001 32 items keep input order, item ids an;
+m6-no-own-cap exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 15/17 tests passed (2 failed) :: BA-001 32 items keep input order, item ids an;T07 a real batch result projects within its o;
+m7-shared-short-ok exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 16/17 tests passed (1 failed) :: BA-003 32 items asking for 8 MiB share a 2 Mi;
+m8-no-item-id-copy exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 16/17 tests passed (1 failed) :: BA-001 32 items keep input order, item ids an;
+m9-no-workspace-check exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 16/17 tests passed (1 failed) :: BA-002 more than 32 items, bad item ids and a;
+m10-no-duplicate-id-check exit=1 cached=0 Build Summary: 0/3 steps succeeded (1 failed) :: 
+m11-no-store-check exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 16/17 tests passed (1 crashed) :: BA-003 a reservation without room for the sto;
+m12-workers-ignore-caps exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 15/17 tests passed (2 failed) :: BA-001 32 items keep input order, item ids an;BA-001 results do not depend on how many item;
+m13-budget-error-not-truncated exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 16/17 tests passed (1 failed) :: BA-003 32 items asking for 8 MiB share a 2 Mi;
+m14-no-refund exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 13/17 tests passed (4 failed) :: BA-001 32 items keep input order, item ids an;T07 a file that keeps changing fails its item;T07 an allocation failure at any point fails ;T07 a real batch result projects within its o;
+m15-no-dispatch-cancel exit=0 cached=0 Build Summary: 3/3 steps succeeded; 17/17 tests passed :: 
+p1-no-control-escape exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 16/17 tests passed (1 failed) :: T07 projection escapes JSON text and keeps by;
+p2-batch-always-full exit=1 cached=0 Build Summary: 0/3 steps succeeded (1 failed) :: 
+p3-truncated-can-be-complete exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 15/17 tests passed (2 failed) :: T07 projection keeps whole lines within outpu;T07 projection refuses a bad envelope and a b;
+p4-zero-entries-allowed exit=0 cached=0 Build Summary: 3/3 steps succeeded; 17/17 tests passed :: 
+p5-no-utf8-check exit=0 cached=0 Build Summary: 3/3 steps succeeded; 17/17 tests passed :: 
+p6-no-request-id-limit exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 16/17 tests passed (1 failed) :: T07 projection refuses a bad envelope and a b;
+p7-no-budget-reason exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 16/17 tests passed (1 crashed) :: T07 projection keeps whole lines within outpu;
+p8-greedy-stops exit=1 cached=0 Build Summary: 1/3 steps succeeded (1 failed); 16/17 tests passed (1 failed) :: T07 batch projection keeps every item id in o;
+/dev/disk3s5   460Gi   427Gi   6.6Gi    99%    4.5M   69M    6%   /System/Volumes/Data
+
+[exited with code 0]

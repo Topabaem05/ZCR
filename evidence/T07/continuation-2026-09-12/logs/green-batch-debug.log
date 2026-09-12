@@ -1,0 +1,7 @@
+Build Summary: 4/4 steps succeeded; 24/24 tests passed
+test success
++- install T07-test success
+|  +- compile test T07-test Debug native success 702ms MaxRSS:185M
++- run test T07-test 24 pass (24 total) 161ms MaxRSS:18M
+   +- compile test T07-test Debug native (reused)
+

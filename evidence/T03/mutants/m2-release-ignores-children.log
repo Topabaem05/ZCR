@@ -1,0 +1,46 @@
+test
++- run test T03-test 9 pass, 2 fail, 1 crash (12 total)
+error: 't03_test.test.ME-002 a request arena is not freed while a child is pending, even after cancellation' failed:
+       expected error.ChildrenPending, found .{ .capacity_before_bytes = 6182, .tracked_after_bytes = 0 }
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:65:9: 0x1001d062b in expectError__anon_37282 (T03-test)
+               return error.TestExpectedError;
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T03/tmp/mutants/m2-release-ignores-children/tests/t03_test.zig:321:5: 0x1001d62bf in test.ME-002 a request arena is not freed while a child is pending, even after cancellation (T03-test)
+           try testing.expectError(error.ChildrenPending, request.release(&budget, &reservation));
+           ^
+error: 't03_test.test.ME-002 release waits for a child on another thread to drain' terminated with signal ABRT with stderr:
+       Segmentation fault at address 0x106a74018
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler_rt.zig:684:14: 0x1001f5b2c in memset (compiler_rt)
+                   d[0] = c;
+                    ^
+       /Users/guribbong/code/ZCR-state/tasks/T03/tmp/mutants/m2-release-ignores-children/tests/t03_test.zig:345:49: 0x1001d4c93 in run (T03-test)
+               for (0..64) |round| @memset(ctx.buffer, @intCast(round));
+                                                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/Thread.zig:422:13: 0x1001d4a03 in callFn__anon_37503 (T03-test)
+                   @call(.auto, f, args);
+                   ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/Thread.zig:752:30: 0x1001d489f in entryFn (T03-test)
+                       return callFn(f, args_ptr.*);
+                                    ^
+       ???:?:?: 0x18661bc57 in __pthread_cond_wait (/usr/lib/system/libsystem_pthread.dylib)
+       ???:?:?: 0x186616c1b in _pthread_cond_broadcast (/usr/lib/system/libsystem_pthread.dylib)
+error: 't03_test.test.ME-007 10k read and cancel cycles return to idle without leak growth' failed:
+       expected error.ChildrenPending, found .{ .capacity_before_bytes = 24614, .tracked_after_bytes = 0 }
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:65:9: 0x104e8062b in expectError__anon_37282 (T03-test)
+               return error.TestExpectedError;
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T03/tmp/mutants/m2-release-ignores-children/tests/t03_test.zig:395:13: 0x104e80cef in readCancelCycles (T03-test)
+                   try testing.expectError(error.ChildrenPending, request.release(budget, &reservation));
+                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T03/tmp/mutants/m2-release-ignores-children/tests/t03_test.zig:409:5: 0x104e80edf in test.ME-007 10k read and cancel cycles return to idle without leak growth (T03-test)
+           try readCancelCycles(testing.allocator, &counters, &budget, &gate, 0, 1_000);
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache/o/56c4c21f5545db9bd26435302b5d8dcf/T03-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache --seed=0x7b652e57 --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 9/12 tests passed (2 failed, 1 crashed)
+test transitive failure
++- run test T03-test 9 pass, 2 fail, 1 crash (12 total)
+   +- compile test T03-test Debug native success 11s MaxRSS:178M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache/o/c850a37cb4f46cd01dfc71be12bb7085/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T03/tmp/mutants/m2-release-ignores-children /Users/guribbong/code/ZCR-state/tasks/T03/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T03/zig-global-cache --seed 0x7b652e57 -Zee6c1100120425f4 test -Dtest-group=memory --summary all

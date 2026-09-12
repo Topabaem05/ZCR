@@ -1,0 +1,7 @@
+Build Summary: 4/4 steps succeeded; 15/15 tests passed
+test success
++- install T09-test success
+|  +- compile test T09-test Debug native success 845ms MaxRSS:178M
++- run test T09-test 15 pass (15 total) 66ms MaxRSS:8M
+   +- compile test T09-test Debug native (reused)
+

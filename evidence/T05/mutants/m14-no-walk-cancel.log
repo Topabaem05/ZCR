@@ -1,0 +1,19 @@
+test
++- run test T05-test 10 pass, 1 fail (11 total)
+error: 't05_test.test.T05 cancellation requested during a walk stops it within a bounded number of entries' failed:
+       expected error.Cancelled, found .{ .scope = { 46 }, .skipped = 0, .index_state = .live, .reasons = {  } }
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:65:9: 0x10427388f in expectError__anon_39587 (T05-test)
+               return error.TestExpectedError;
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m14-no-walk-cancel/tests/t05_test.zig:561:5: 0x104273ed7 in test.T05 cancellation requested during a walk stops it within a bounded number of entries (T05-test)
+           try testing.expectError(error.Cancelled, h.traverser.enumerate(io, cap, .{ .limit = 10_000 }, sink, h.cancel()));
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache/o/95c2538250ffd2c75f54c08c8d94cf78/T05-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache --seed=0xd004b268 --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 10/11 tests passed (1 failed)
+test transitive failure
++- run test T05-test 10 pass, 1 fail (11 total)
+   +- compile test T05-test Debug native success 4s MaxRSS:259M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache/o/5141f98b72c01d7e7e7d84fd5e561ea8/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T05/tmp/mutants/m14-no-walk-cancel /Users/guribbong/code/ZCR-state/tasks/T05/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T05/zig-global-cache --seed 0xd004b268 -Zd14b0954e34feb37 test -Dtest-group=fs --summary all

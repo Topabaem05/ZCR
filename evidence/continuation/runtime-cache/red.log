@@ -1,0 +1,32 @@
+test
++- run test T08-test 0 pass, 2 fail (2 total)
+error: 't08_test.test.BR-001 runtime cache repeated real reads hit with one existing CPU credit' failed:
+       expected 1, found 0
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:118:17: 0x1276db9 in expectEqualInner__anon_45956 (std.zig)
+                       return error.TestExpectedEqual;
+                       ^
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:83:5: 0x13777d9 in expectEqual (t08_test.zig)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-runtime-cache/tests/t08_test.zig:697:5: 0x137785c in test.BR-001 runtime cache repeated real reads hit with one existing CPU credit (t08_test.zig)
+           try testing.expectEqual(@as(usize, 1), f.store.?.stats().entries);
+           ^
+error: 't08_test.test.BR-001 runtime cache four workspace queries share one allocation and drain pins' failed:
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:615:14: 0x1276a09 in expect (std.zig)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-runtime-cache/tests/t08_test.zig:714:5: 0x127718c in test.BR-001 runtime cache four workspace queries share one allocation and drain pins (t08_test.zig)
+           try testing.expect(charge > 0);
+           ^
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/runtime-cache/zig-local-cache && /workspace/scratch/3f4ab65dfb82/state/runtime-cache/zig-local-cache/o/264248858a4c180f222b9db2cea4c333/T08-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/runtime-cache/zig-local-cache --seed=0xda9861a0 --listen=-
+
+Build Summary: 3/5 steps succeeded (1 failed); 0/2 tests passed (2 failed)
+test transitive failure
++- install T08-test success
+|  +- compile test T08-test Debug native success 616ms MaxRSS:189M
+|     +- options cached
++- run test T08-test 0 pass, 2 fail (2 total)
+   +- compile test T08-test Debug native (+1 more reused dependencies)
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/runtime-cache/zig-local-cache/o/724ce5cfe56c603aee0d13d31a05c2c7/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-runtime-cache /workspace/scratch/3f4ab65dfb82/state/runtime-cache/zig-local-cache /workspace/scratch/3f4ab65dfb82/state/runtime-cache/zig-global-cache --seed 0xda9861a0 -Ze20297d9bbd63d85 test -Dtest-group=mcp -Dtest-id=runtime cache -Doptimize=Debug -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/runtime-cache/out-red --summary all

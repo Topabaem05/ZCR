@@ -1,0 +1,13 @@
+{
+  "schema_version": "zcr-evidence/1",
+  "task_id": "T02",
+  "label": "green-isolation-debug",
+  "command": "zig build test -Dtest-group=isolation -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-green-isolation-debug",
+  "exit_code": 0,
+  "source_commit": "103a49fc0a4f9f1d626be04e82f4f73712680a2c",
+  "source_tree": "b95ca4379ec658e9893e2db5bfdfca48dac431f2",
+  "worktree_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/task-t02",
+  "binary_path": "/Users/guribbong/code/ZCR-state/tasks/T02/out-green-isolation-debug/bin/T02-test",
+  "binary_sha256": "8e19b72d6f0c4b4b30c5c1122169898617de4f2f91d5c66b3f5d9d4d2e1f697e",
+  "recorded_at_unix_ms": 1789125884132
+}

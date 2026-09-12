@@ -1,0 +1,41 @@
+test
++- run test T04-test 7 pass, 3 fail (10 total)
+error: 't04_test.test.IO-001 two lines come back with exact byte offsets and no phantom EOF line' failed:
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m5-phantom-line/src/fs/read.zig:96:9: 0x102ea08a7 in readRange (T04-test)
+               return error.VersionConflict;
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m5-phantom-line/tests/t04_test.zig:106:23: 0x102e9ad1f in read (T04-test)
+               const owned = try h.reader.readRange(io, reserved.allocator(), capability, s, &reservation, h.cancel());
+                             ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m5-phantom-line/tests/t04_test.zig:183:16: 0x102ecdc7f in test.IO-001 two lines come back with exact byte offsets and no phantom EOF line (T04-test)
+           var more = try h.read(Harness.spec("a.txt", 1, 5));
+                      ^
+error: 't04_test.test.IO-002 empty files have no lines and an unterminated last line is one line' failed:
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m5-phantom-line/src/fs/read.zig:96:9: 0x102ea08a7 in readRange (T04-test)
+               return error.VersionConflict;
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m5-phantom-line/tests/t04_test.zig:106:23: 0x102e9ad1f in read (T04-test)
+               const owned = try h.reader.readRange(io, reserved.allocator(), capability, s, &reservation, h.cancel());
+                             ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m5-phantom-line/tests/t04_test.zig:197:17: 0x102ecbed3 in test.IO-002 empty files have no lines and an unterminated last line is one line (T04-test)
+           var empty = try h.read(Harness.spec("empty.txt", 1, 200));
+                       ^
+error: 't04_test.test.IO-005 a change after open is retried once and never mixes versions' failed:
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m5-phantom-line/src/fs/read.zig:96:9: 0x102ea08a7 in readRange (T04-test)
+               return error.VersionConflict;
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m5-phantom-line/tests/t04_test.zig:106:23: 0x102e9ad1f in read (T04-test)
+               const owned = try h.reader.readRange(io, reserved.allocator(), capability, s, &reservation, h.cancel());
+                             ^
+       /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m5-phantom-line/tests/t04_test.zig:362:19: 0x102ec648f in test.IO-005 a change after open is retried once and never mixes versions (T04-test)
+           var retried = try h.read(Harness.spec("c.txt", 1, 10));
+                         ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache/o/8ecf8304a6ad0324bfc1237222c8827a/T04-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache --seed=0x32d4a5ab --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 7/10 tests passed (3 failed)
+test transitive failure
++- run test T04-test 7 pass, 3 fail (10 total)
+   +- compile test T04-test Debug native success 7s MaxRSS:203M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache/o/12ecb60e287f5a624443e3faa2ba9fc4/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T04/tmp/mutants/m5-phantom-line /Users/guribbong/code/ZCR-state/tasks/T04/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T04/zig-global-cache --seed 0x32d4a5ab -Z051274d66469f3d9 test -Dtest-group=io --summary all

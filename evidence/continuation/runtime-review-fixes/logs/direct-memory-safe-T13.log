@@ -1,0 +1,16 @@
+1/15 t13_test.test.ME-004 four workspaces share one immutable allocation and pins prevent eviction...OK
+2/15 t13_test.test.IS-006 domain and current session authority are rechecked before cache existence or pins...OK
+3/15 t13_test.test.ME-004 second touch admits, bulk scan bypasses, sparse checkpoints preserve raw lines...OK
+4/15 t13_test.test.IS-006 same size changed bytes, missing path, and forged whole-file digest never hit...OK
+5/15 t13_test.test.ME-004 pin budgets, token ownership, and association saturation retain live data...OK
+6/15 t13_test.test.ME-004 control and verification allocation, FD and CPU credits are real shared reservations...OK
+7/15 t13_test.test.ME-004 cancellation during verification drains memory and preserves later successful lookup...OK
+8/15 t13_test.test.ME-004 failure at every allocation unwinds reservations and cache ownership...OK
+9/15 t13_test.test.IS-006 file binding never shares paths across workspace generation or security domains...OK
+10/15 t13_test.test.IS-006 cache reauthorization refuses symlinks and rooted final-open replacement...OK
+11/15 t13_test.test.ME-004 concurrent pins and unpins remain valid while eviction runs...OK
+12/15 t13_test.test.ME-004 sparse index matches linear oracle including empty and final-newline boundaries...OK
+13/15 t13_test.test.ME-004 probation metadata is bounded and pinned pressure cannot bypass the group cap...OK
+14/15 t13_test.test.IS-006 retired workspace rejects new pins while old pins drain...OK
+15/15 t13_test.test.ME-004 borrowed verification uses one live request credit and rejects mismatched or insufficient credit...OK
+All 15 tests passed.

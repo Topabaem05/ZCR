@@ -1,0 +1,177 @@
+{
+  "schema_version": "zcr-handoff/1",
+  "state": "completed",
+  "task_id": "T01",
+  "step": "S06",
+  "base_commit": "ede012a350023ece805b71a0417e9627dac21ca2",
+  "base_note": "task-t00 handoff head; T00 is not merged into main yet",
+  "head_commit": "a744a4e3e915ae89701aed3870078f325fbee53a",
+  "head_commit_note": "source commit of the GREEN evidence; evidence files are added in the following S06 commit",
+  "contract_digest": "8aa53314410fe471f0e070c522766684286f60e1ad4d9785c292bb709ea370a4",
+  "contract_digest_method": "git ls-files -z contracts | LC_ALL=C sort -z | xargs -0 shasum -a 256 | shasum -a 256 (also: zcr-dev-evidence contract-digest)",
+  "source_tree_digest": "142c5ad8534d0be5de4da2ce0fbdafec5b12378e",
+  "source_tree_digest_method": "git tree object id of head_commit",
+  "binary_sha256": "48c959b0aec582fef8dde4afbd781664c3fd881a310067dc79e989663cd06eae",
+  "binary_note": "T01-test Debug binary installed by -Dinstall-tests; rebuilds are not bit-reproducible (see T00 baseline), binaries retained under $STATE/out-*",
+  "toolchain": {
+    "zig_version": "0.16.0",
+    "zig_sha256": "e6cd688d25664983833aae272f501d4bceeae304875b8f1741209d15fd13a4ec"
+  },
+  "owned_paths": [
+    "build.zig",
+    "build.zig.zon",
+    "src/main.zig",
+    "src/core/types.zig",
+    "src/core/errors.zig",
+    "src/core/limits.zig",
+    "AGENTS.md",
+    "tools/dev/evidence.zig",
+    "tests/t01_test.zig",
+    "evidence/T01/"
+  ],
+  "changed_files": [
+    "AGENTS.md",
+    "build.zig",
+    "build.zig.zon",
+    "src/core/errors.zig",
+    "src/core/limits.zig",
+    "src/core/types.zig",
+    "src/main.zig",
+    "tests/t01_test.zig",
+    "tools/dev/evidence.zig",
+    "evidence/T01/*"
+  ],
+  "test_evidence": [
+    {
+      "id": "DV-001",
+      "status": "PASS",
+      "tests": 2
+    },
+    {
+      "id": "DV-004",
+      "status": "PASS",
+      "tests": 5
+    },
+    {
+      "id": "DV-005",
+      "status": "PASS",
+      "tests": 4
+    },
+    {
+      "id": "T01 core/contract",
+      "status": "PASS",
+      "tests": 7,
+      "note": "includes 128 verify-contracts checks"
+    },
+    {
+      "id": "PF-001 (T00, regression through new runner)",
+      "status": "PASS",
+      "tests": 11
+    },
+    {
+      "runs": [
+        {
+          "label": "red",
+          "optimize": "Debug",
+          "source_commit": "7d73cdbda087129807a1ca35944297190730397b",
+          "exit_code": 1,
+          "summary": "Build Summary: 4/8 steps succeeded (3 failed); 1/18 tests passed (17 failed)",
+          "installed_test_binaries_sha256": {
+            "T01-test": "b099a9a53ca4209a01f9193662786626ee9208f007279368d33e9d2592c1efc0"
+          }
+        },
+        {
+          "label": "green-dev-debug",
+          "optimize": "Debug",
+          "source_commit": "a744a4e3e915ae89701aed3870078f325fbee53a",
+          "exit_code": 0,
+          "summary": "Build Summary: 8/8 steps succeeded; 18/18 tests passed",
+          "installed_test_binaries_sha256": {
+            "T01-test": "48c959b0aec582fef8dde4afbd781664c3fd881a310067dc79e989663cd06eae"
+          }
+        },
+        {
+          "label": "green-dev-releasesafe",
+          "optimize": "ReleaseSafe",
+          "source_commit": "a744a4e3e915ae89701aed3870078f325fbee53a",
+          "exit_code": 0,
+          "summary": "Build Summary: 8/8 steps succeeded; 18/18 tests passed",
+          "installed_test_binaries_sha256": {
+            "T01-test": "2bacab710a1095963119d618c22deb08a5dbf93aa25b45198afb433e532ea188"
+          }
+        },
+        {
+          "label": "regression-perf-debug",
+          "optimize": "Debug",
+          "source_commit": "a744a4e3e915ae89701aed3870078f325fbee53a",
+          "exit_code": 0,
+          "summary": "Build Summary: 4/4 steps succeeded; 11/11 tests passed",
+          "installed_test_binaries_sha256": {
+            "T00-test": "e3db1aa81e3bc525f0e426ffdc706242c95d5b38d693a4e59ac0e940a9d53786"
+          }
+        },
+        {
+          "label": "fault-injection-dv004",
+          "optimize": "Debug",
+          "source_commit": "a744a4e3e915ae89701aed3870078f325fbee53a",
+          "exit_code": 0,
+          "summary": "Build Summary: 5/5 steps succeeded; 5/5 tests passed",
+          "installed_test_binaries_sha256": {
+            "T01-test": "32277daf9d9079df732bc204ebf56606a509a243096f6646ce7c57581d6bbba6"
+          }
+        },
+        {
+          "label": "verify-contracts",
+          "optimize": "Debug",
+          "source_commit": "a744a4e3e915ae89701aed3870078f325fbee53a",
+          "exit_code": 0,
+          "summary": "Build Summary: 3/3 steps succeeded",
+          "installed_test_binaries_sha256": {}
+        }
+      ]
+    }
+  ],
+  "exports": [
+    "build.zig: steps test, verify-contracts, bench(fails until T21), run; flags -Dtest-group -Dtest-id -Dfault-injection -Dinstall-tests; module zcr_core; build_options {version, zig_version, fault_injection, repo_root}",
+    "src/core/types.zig (module zcr_core): identifiers, shared enums, value types, request/result types, JournalStore, Owned(T), Sink(T), I01-I19 signature types (AuthorizeFn ... ServeFrameFn, JournalStore.VTable), interfaces table, conforms()",
+    "src/core/errors.zig: WireCode, error sets by category, Error, ErrorInfo, wireCode(), defaultRetryable()",
+    "src/core/limits.zig: Limits/values, memory_profiles, scheduler profiles/constants, hardwareCeiling()",
+    "zcr CLI: --version, help; mcp/broker exit 69",
+    "zcr-dev-evidence: preflight, record, verify, ledger-begin, ledger-step, resume, contract-digest, verify-contracts (schemas zcr-evidence/1, zcr-step-ledger/1)"
+  ],
+  "interface_change_proposals": [
+    {
+      "target": "contracts/response.schema.json + docs/06",
+      "issue": "docs/06 names E_MANIFEST_UNBOUND but the wire enum lacks it",
+      "current_decision": "errors.ManifestUnbound maps to E_SCOPE",
+      "needs": "integrator decision: add the code (contract digest change) or keep E_SCOPE and edit docs/06"
+    },
+    {
+      "target": "MANIFEST.sha256, verification/report.json",
+      "issue": "AGENTS.md (T01-owned) changed, so shasum -c reports AGENTS.md FAILED",
+      "needs": "integrator regenerates package manifest/report after merge"
+    },
+    {
+      "target": ".gitignore",
+      "issue": "no task owns it; zig build without ZIG_LOCAL_CACHE_DIR creates .zig-cache/ and zig-out/ in the worktree",
+      "needs": "integrator adds .zig-cache/ and zig-out/"
+    },
+    {
+      "target": "tasks/tasks.json",
+      "issue": "owns lists omit tests/tNN_test.zig and evidence/TNN/ that each task document requires (seen in T00 and T01)",
+      "needs": "integrator decision"
+    },
+    {
+      "target": "tests/catalog.json",
+      "issue": "execution_status for PF-001, DV-001, DV-004, DV-005 still not_run",
+      "needs": "integrator update after re-test on integration binary"
+    }
+  ],
+  "remaining_gates": [
+    "integrator re-test on an integration worktree after merging task-t00 and task-t01",
+    "runner and evidence tool not built or run on Linux/Intel Mac/Windows (NOT_RUN)",
+    "-Dfault-injection is plumbed to build_options only; no fault hooks exist yet (T03/T11/T12 consume it)",
+    "I01-I19 are declarations; conformance of implementations is checked per task with core.conforms",
+    "task ledger for T01 was reconstructed as zcr-step-ledger/1 after S03 (the tool did not exist at S01); S01/S02 recorded_at_unix_ms are 0"
+  ]
+}

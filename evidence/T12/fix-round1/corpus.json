@@ -1,0 +1,12 @@
+{
+  "size": 786432,
+  "old_sha256": "3de247db6ce12d4a573b50235782c49a488370e1bf124d4adc987421d94c54d5",
+  "new_sha256": "93dae659b18c33fafde5cb0ead7acc7576e54ec1aaf84b5a7375e5acfd270e3d",
+  "history_changed_sha256": "d4a27f6443dbc32938c39ec146bcfaabfaf93252d7405c7fa63ec6ee47a03319",
+  "sentinel_sha256": "64487c314c1045e1a21e213d1c87351c3fcbf3c2255ad2809295f5210ea79777",
+  "fixture_sha256": "3a710b37608f0cff0342ef229583ac3e64dd6e047893d1c9e219fa4b61fd6a62",
+  "test_sha256": "2c20a796d8716d7ded3a08ee13e678333a9442b92d3009be8e9a3b43548215e3",
+  "child_sha256": "6f1492cb6e069c407650f51741e63bb2b6f3575b1ed2043be18952934fdc43fe",
+  "platform": "Linux-6.18.35-x86_64-with-glibc2.39",
+  "configuration": "durable T11 patch/create; 768KiB O/N main matrix; F1 O-to-N-to-C, abort then C, and N-to-N identity replacement"
+}

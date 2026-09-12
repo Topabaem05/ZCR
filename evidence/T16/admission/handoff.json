@@ -1,0 +1,24 @@
+{
+  "schema": "zcr-t16-admission-handoff/1",
+  "source_commit": "8bad59b79bc8df00d25a8d0db60f94bd9c1f4c05",
+  "source_tree": "4fb9e150525f9001afd8c8f5eca7aa642945d77f",
+  "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+  "changed_source_paths": [
+    "src/cache/content.zig",
+    "src/scheduler/executor.zig",
+    "src/scheduler/queue.zig",
+    "tests/t09_test.zig",
+    "tests/t13_test.zig"
+  ],
+  "steps": {
+    "S01": "manifest/base/contract and required documents read; isolated worktree/cache/tmp/artifacts",
+    "S02": "functional RED committed and both expected behavioral failures executed",
+    "S03": "source freeze 8bad59b79bc8df00d25a8d0db60f94bd9c1f4c05",
+    "S04": "actual Debug and ReleaseSafe covering runs, focused failure/transition cases",
+    "S05": "108 passes; native Mac NOT_RUN; owned-source scope and digest verification",
+    "S06": "report/proof/log handoff packaged; independent review and integration remain open"
+  },
+  "native_gate": "NOT_RUN",
+  "governor_runtime_complete": false,
+  "proof_sha256": "3cffdeb71c974db6722f2debc392d15498dc9e640b2df39baafc445d468cb940"
+}

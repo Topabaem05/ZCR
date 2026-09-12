@@ -1,0 +1,42 @@
+test
++- run test T12-test w
+T12 C01 patch pid=294 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C02 patch pid=447 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C03 patch pid=613 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C04 patch pid=685 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=1
+T12 C05 patch pid=728 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C06 patch pid=771 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C07 patch pid=814 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C08 patch pid=857 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C09 patch pid=900 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C10 patch pid=943 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C01 create pid=986 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C02 create pid=1029 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C03 create pid=1072 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C04 create pid=1115 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=1
+T12 C05 create pid=1158 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C06 create pid=1201 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C07 create pid=1244 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C08 create pid=1287 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C09 create pid=1330 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C10 create pid=1373 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 recovery append SIGKILL verified
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/T12/final-debug/cache && /workspace/scratch/3f4ab65dfb82/state/T12/final-debug/cache/o/09dcb67cd468e5c9189f5c454440bfa9/T12-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/T12/final-debug/cache --seed=0xd6f27f5a --listen=-
+
+Build Summary: 11/11 steps succeeded; 62/62 tests passed
+test success
++- install T11-test success
+|  +- compile test T11-test Debug native success 3s MaxRSS:183M
++- run test T11-test 41 pass (41 total) 1s MaxRSS:16M
+|  +- compile test T11-test Debug native (reused)
++- install T12-child success
+|  +- compile test T12-child Debug native success 3s MaxRSS:280M
+|     +- options success
++- install T12-test success
+|  +- compile test T12-test Debug native success 695ms MaxRSS:190M
+|     +- options (reused)
+|     +- options success
+|        +- compile test T12-child Debug native (+1 more reused dependencies)
++- run test T12-test 21 pass (21 total) 11s MaxRSS:16M
+   +- compile test T12-test Debug native (+2 more reused dependencies)
+

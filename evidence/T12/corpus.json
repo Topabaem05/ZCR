@@ -1,0 +1,18 @@
+{
+  "size": 786432,
+  "old_byte": "O",
+  "new_byte": "N",
+  "old_sha256": "3de247db6ce12d4a573b50235782c49a488370e1bf124d4adc987421d94c54d5",
+  "new_sha256": "93dae659b18c33fafde5cb0ead7acc7576e54ec1aaf84b5a7375e5acfd270e3d",
+  "sentinel_sha256": "64487c314c1045e1a21e213d1c87351c3fcbf3c2255ad2809295f5210ea79777",
+  "configuration_source": "tests/t12_fixtures.zig",
+  "configuration_source_sha256": "1ef04f116709f8c5967efe5cf9df085c78f5c86aadb636c9f1f6412358ef2178",
+  "cap_entries": 10000,
+  "cap_storage_bytes": 134217728,
+  "cap_frame_bytes": 16384,
+  "max_frames_per_operation": 16,
+  "operation_credit_bytes": 524288,
+  "eviction": "none; all terminal receipts retained for store lifetime, refuse at caps",
+  "platform": "Linux-6.18.35-x86_64-with-glibc2.39",
+  "git_version": "git version 2.43.0"
+}

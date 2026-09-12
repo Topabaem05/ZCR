@@ -1,0 +1,97 @@
+test
++- fail failure
+error: registered test file tests/t15_test.zig is missing (T15 not delivered yet)
+
+test
++- fail failure
+error: registered test file tests/t11_test.zig is missing (T11 not delivered yet)
+
+test
++- run test T01-test 18 pass, 1 fail (19 total)
+error: 't01_test.test.T01 core: interface table declares I01 to I19 with receiver-generic signatures' failed:
+       expected 3, found 4
+failed command: cd /home/runner/work/_temp/zcr-native-34681109500-1-x86_64-linux/ReleaseSafe/local-cache && /home/runner/work/_temp/zcr-native-34681109500-1-x86_64-linux/ReleaseSafe/local-cache/o/ef76a4d83266c6003d6281421b6e2409/T01-test --cache-dir=/home/runner/work/_temp/zcr-native-34681109500-1-x86_64-linux/ReleaseSafe/local-cache --seed=0xa267b3c3 --listen=-
+
+test
++- fail failure
+error: registered test file tests/t14_test.zig is missing (T14 not delivered yet)
+
+test
++- run test T05-test w
+FS-004 corpus=small actual_files=1000 candidate_count=1000 tracked_live=3745880 tracked_peak=3745880 coverage_skipped=0 complete=true corpus_sha256=c51d1cae1ca2457bc0183a853f69ca5841ce7cc770badec767ff85cac9694d5c
+FS-004 corpus=large actual_files=200000 candidate_count=200000 tracked_live=3745880 tracked_peak=3745880 coverage_skipped=0 complete=true corpus_sha256=8516686afc53e0500c9119dc68e4d62c60ab6e601af8d43a7f282bb90db6d26b
+failed command: cd /home/runner/work/_temp/zcr-native-34681109500-1-x86_64-linux/ReleaseSafe/local-cache && /home/runner/work/_temp/zcr-native-34681109500-1-x86_64-linux/ReleaseSafe/local-cache/o/2201a87dd40f987b3f06363d9dc0be2f/T05-test --cache-dir=/home/runner/work/_temp/zcr-native-34681109500-1-x86_64-linux/ReleaseSafe/local-cache --seed=0xa267b3c3 --listen=-
+
+Build Summary: 45/50 steps succeeded (4 failed); 221/222 tests passed (1 failed)
+test transitive failure
++- install T00-test success
+|  +- compile test T00-test ReleaseSafe native success 14s MaxRSS:507M
++- run test T00-test 12 pass (12 total) 87ms MaxRSS:5M
+|  +- compile test T00-test ReleaseSafe native (reused)
++- install T01-test success
+|  +- compile test T01-test ReleaseSafe native success 15s MaxRSS:492M
+|     +- options cached
++- run test T01-test 18 pass, 1 fail (19 total)
+|  +- compile test T01-test ReleaseSafe native (+1 more reused dependencies)
++- install T02-test success
+|  +- compile test T02-test ReleaseSafe native success 13s MaxRSS:446M
+|     +- options (reused)
++- run test T02-test 15 pass (15 total) 276ms MaxRSS:5M
+|  +- compile test T02-test ReleaseSafe native (+1 more reused dependencies)
++- install T03-test success
+|  +- compile test T03-test ReleaseSafe native success 15s MaxRSS:420M
++- run test T03-test 14 pass (14 total) 193ms MaxRSS:7M
+|  +- compile test T03-test ReleaseSafe native (reused)
++- install T04-test success
+|  +- compile test T04-test ReleaseSafe native success 15s MaxRSS:422M
++- run test T04-test 13 pass (13 total) 240ms MaxRSS:24M
+|  +- compile test T04-test ReleaseSafe native (reused)
++- install T04-deadline-test success
+|  +- compile test T04-deadline-test ReleaseSafe native success 11s MaxRSS:386M
++- run test T04-deadline-test 2 pass (2 total) 3ms MaxRSS:5M
+|  +- compile test T04-deadline-test ReleaseSafe native (reused)
++- install T05-test success
+|  +- compile test T05-test ReleaseSafe native success 13s MaxRSS:452M
++- run test T05-test 15 pass (15 total) 4s MaxRSS:9M
+|  +- compile test T05-test ReleaseSafe native (reused)
++- install T06-test success
+|  +- compile test T06-test ReleaseSafe native success 12s MaxRSS:442M
++- run test T06-test 15 pass (15 total) 380ms MaxRSS:11M
+|  +- compile test T06-test ReleaseSafe native (reused)
++- install T07-test success
+|  +- compile test T07-test ReleaseSafe native success 15s MaxRSS:466M
++- run test T07-test 25 pass (25 total) 95ms MaxRSS:17M
+|  +- compile test T07-test ReleaseSafe native (reused)
++- install T08-test success
+|  +- compile test T08-test ReleaseSafe native success 16s MaxRSS:528M
+|     +- options (reused)
++- run test T08-test 17 pass (17 total) 246ms MaxRSS:33M
+|  +- compile test T08-test ReleaseSafe native (+1 more reused dependencies)
++- install T09-test success
+|  +- compile test T09-test ReleaseSafe native success 12s MaxRSS:422M
++- run test T09-test 15 pass (15 total) 27ms MaxRSS:8M
+|  +- compile test T09-test ReleaseSafe native (reused)
++- install T08-launch-test success
+|  +- compile test T08-launch-test ReleaseSafe native success 11s MaxRSS:395M
+|     +- options (reused)
++- run test T08-launch-test 2 pass (2 total) 2ms MaxRSS:6M
+|  +- compile test T08-launch-test ReleaseSafe native (+1 more reused dependencies)
++- install T10-test success
+|  +- compile test T10-test ReleaseSafe native success 14s MaxRSS:500M
++- run test T10-test 44 pass (44 total) 2s MaxRSS:8M
+|  +- compile test T10-test ReleaseSafe native (reused)
++- fail failure
++- install T13-test success
+|  +- compile test T13-test ReleaseSafe native success 14s MaxRSS:491M
++- run test T13-test 14 pass (14 total) 247ms MaxRSS:8M
+|  +- compile test T13-test ReleaseSafe native (reused)
++- fail failure
++- fail failure
++- run exe zcr success 886us
+|  +- compile exe zcr ReleaseSafe native cached 11ms MaxRSS:41M
+|     +- options (reused)
++- run exe zcr success 1ms
+   +- compile exe zcr ReleaseSafe native (+1 more reused dependencies)
+
+error: the following build command failed with exit code 1:
+/home/runner/work/_temp/zcr-native-34681109500-1-x86_64-linux/ReleaseSafe/local-cache/o/bc9c70cad8080a868c3f0f8d8b8bf7ac/build /home/runner/work/_temp/zcr-native-34681109500-1-x86_64-linux/toolchain/zig-x86_64-linux-0.16.0/zig /home/runner/work/_temp/zcr-native-34681109500-1-x86_64-linux/toolchain/zig-x86_64-linux-0.16.0/lib /home/runner/work/ZCR/ZCR/source /home/runner/work/_temp/zcr-native-34681109500-1-x86_64-linux/ReleaseSafe/local-cache /home/runner/work/_temp/zcr-native-34681109500-1-x86_64-linux/ReleaseSafe/global-cache --seed 0xa267b3c3 -Ze133c6838cfaac36 -j2 -Doptimize=ReleaseSafe --prefix /home/runner/work/_temp/zcr-native-34681109500-1-x86_64-linux/ReleaseSafe/out --summary all test -Dinstall-tests=true

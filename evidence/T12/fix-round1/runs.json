@@ -1,0 +1,432 @@
+[
+  {
+    "command": [
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "build",
+      "test",
+      "-Dtest-group=write",
+      "-Doptimize=Debug",
+      "-Dinstall-tests=true",
+      "--prefix",
+      "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/red-f1/out",
+      "--summary",
+      "all",
+      "-Dtest-id=F1"
+    ],
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T12",
+    "environment": {
+      "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/red-f1/global-cache",
+      "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/red-f1/cache",
+      "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/red-f1/tmp"
+    },
+    "source_commit": "e29ddc2c52b3d9bf32ea57e6a9edf252a7c82b30",
+    "source_tree": "1b5d86b32f2e10f76d1362738bac78db9da5c4a6",
+    "started": "2026-09-12T13:07:54.369440+00:00",
+    "toolchain": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+    "toolchain_version": "0.16.0",
+    "toolchain_sha256": "2317bbb91798556d9d0f38aabdac23db83f0979b25f767259ae474546724087c",
+    "exit_code": 1,
+    "elapsed_seconds": 8.947621576997335,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "d3f020dd541351d1b1fd53f43da6e410f80dfc2e8fe08bbf67233de10a87ddfb",
+    "binaries": {
+      "T12-test": {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/red-f1/out/bin/T12-test",
+        "sha256": "be25a620780d4273bd6cf300f885a4af5f6b706f3887c97c9c658857b062db8c",
+        "size": 25259192
+      },
+      "T12-child": {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/red-f1/out/bin/T12-child",
+        "sha256": "110b2c7788c55ee7f26d82a86f143e0df69fd08195d0b8845e957618329ab766",
+        "size": 21440354
+      }
+    },
+    "label": "red-f1",
+    "classification": "functional RED on regression commit",
+    "archived_stderr": "logs/red-f1.stderr.log"
+  },
+  {
+    "command": [
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "build",
+      "test",
+      "-Dtest-group=write",
+      "-Doptimize=Debug",
+      "-Dinstall-tests=true",
+      "--prefix",
+      "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/red-f2/out",
+      "--summary",
+      "all",
+      "-Dtest-id=F2"
+    ],
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T12",
+    "environment": {
+      "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/red-f2/global-cache",
+      "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/red-f2/cache",
+      "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/red-f2/tmp"
+    },
+    "source_commit": "e29ddc2c52b3d9bf32ea57e6a9edf252a7c82b30",
+    "source_tree": "1b5d86b32f2e10f76d1362738bac78db9da5c4a6",
+    "started": "2026-09-12T13:07:54.367198+00:00",
+    "toolchain": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+    "toolchain_version": "0.16.0",
+    "toolchain_sha256": "2317bbb91798556d9d0f38aabdac23db83f0979b25f767259ae474546724087c",
+    "exit_code": 1,
+    "elapsed_seconds": 8.902517971000634,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "b2fdd0c092651fc47cd3c3fa4cfda07455237db7b8fdaa60814145d7b49d80d6",
+    "binaries": {
+      "T12-test": {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/red-f2/out/bin/T12-test",
+        "sha256": "432ff495c0910c4d724ba96fd42b82a0141bc6ed5e4e4688225beafb332bd717",
+        "size": 25157389
+      },
+      "T12-child": {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/red-f2/out/bin/T12-child",
+        "sha256": "411619aca220b0b5fadbee1c53ed1cf20755c37ca3f7a10517c8929e6e309417",
+        "size": 21440354
+      }
+    },
+    "label": "red-f2",
+    "classification": "functional RED on regression commit",
+    "archived_stderr": "logs/red-f2.stderr.log"
+  },
+  {
+    "command": [
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "build",
+      "test",
+      "-Dtest-group=write",
+      "-Doptimize=Debug",
+      "-Dinstall-tests=true",
+      "--prefix",
+      "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/green-f1/out",
+      "--summary",
+      "all",
+      "-Dtest-id=F1"
+    ],
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T12",
+    "environment": {
+      "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/green-f1/global-cache",
+      "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/green-f1/cache",
+      "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/green-f1/tmp"
+    },
+    "source_commit": "c2c24c76d8289b8769fd4e1cb5c13a10ea197b25",
+    "source_tree": "1ce5e56672668abf05bacca2bedaa1ff5bdf4f91",
+    "started": "2026-09-12T13:09:46.784630+00:00",
+    "toolchain": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+    "toolchain_version": "0.16.0",
+    "toolchain_sha256": "2317bbb91798556d9d0f38aabdac23db83f0979b25f767259ae474546724087c",
+    "exit_code": 1,
+    "elapsed_seconds": 9.256160582997836,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "de041e91e80ce605221b4903730fbd85d2b73128600846d9b172dc00016791f5",
+    "binaries": {
+      "T12-test": {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/green-f1/out/bin/T12-test",
+        "sha256": "21f9da560d1476a6f11e8d27f1eb28ce144fe1e77cfd3dc03fa62f804a0f70a3",
+        "size": 25259192
+      },
+      "T12-child": {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/green-f1/out/bin/T12-child",
+        "sha256": "4ec9e37de2e08f09affa912ad27d4c318083d224685e660059583db928537c5d",
+        "size": 21503245
+      }
+    },
+    "label": "green-f1",
+    "classification": "superseded test-helper EOF failure",
+    "archived_stderr": "logs/green-f1.stderr.log"
+  },
+  {
+    "command": [
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "build",
+      "test",
+      "-Dtest-group=write",
+      "-Doptimize=Debug",
+      "-Dinstall-tests=true",
+      "--prefix",
+      "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/final-debug/out",
+      "--summary",
+      "all"
+    ],
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T12",
+    "environment": {
+      "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/final-debug/global-cache",
+      "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/final-debug/cache",
+      "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/final-debug/tmp"
+    },
+    "source_commit": "c2c24c76d8289b8769fd4e1cb5c13a10ea197b25",
+    "source_tree": "1ce5e56672668abf05bacca2bedaa1ff5bdf4f91",
+    "started": "2026-09-12T13:10:25.950468+00:00",
+    "toolchain": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+    "toolchain_version": "0.16.0",
+    "toolchain_sha256": "2317bbb91798556d9d0f38aabdac23db83f0979b25f767259ae474546724087c",
+    "exit_code": 1,
+    "elapsed_seconds": 21.434692290000385,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "0f4cfb076c2ffbc5cd73ad23b36415264f3d4bbc39544420308dcb8851047160",
+    "binaries": {
+      "T11-test": {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/final-debug/out/bin/T11-test",
+        "sha256": "af190555bb8b9328d41c0d3d8ceda12f53f6964c4ea9efac6f3da5ddddd9019a",
+        "size": 21077474
+      },
+      "T12-test": {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/final-debug/out/bin/T12-test",
+        "sha256": "52366142bed01af4f4f0928543a92bfc9d72f3675e0c9bcb22ab7db94247cd4f",
+        "size": 28174818
+      },
+      "T12-child": {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/final-debug/out/bin/T12-child",
+        "sha256": "a3d71e6cce8ca02a8e6c52c473568eeefbd8aa0e515e99bdcda86b2da4444aa4",
+        "size": 21503245
+      }
+    },
+    "label": "final-debug",
+    "classification": "superseded test-helper EOF failure",
+    "archived_stderr": "logs/final-debug.stderr.log"
+  },
+  {
+    "command": [
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "build",
+      "test",
+      "-Dtest-group=write",
+      "-Doptimize=ReleaseSafe",
+      "-Dinstall-tests=true",
+      "--prefix",
+      "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/final-releasesafe/out",
+      "--summary",
+      "all"
+    ],
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T12",
+    "environment": {
+      "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/final-releasesafe/global-cache",
+      "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/final-releasesafe/cache",
+      "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/final-releasesafe/tmp"
+    },
+    "source_commit": "c2c24c76d8289b8769fd4e1cb5c13a10ea197b25",
+    "source_tree": "1ce5e56672668abf05bacca2bedaa1ff5bdf4f91",
+    "started": "2026-09-12T13:09:46.783380+00:00",
+    "toolchain": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+    "toolchain_version": "0.16.0",
+    "toolchain_sha256": "2317bbb91798556d9d0f38aabdac23db83f0979b25f767259ae474546724087c",
+    "exit_code": 1,
+    "elapsed_seconds": 61.80847341200206,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "c812342e5ab743a1232cbb4ef90c37911b47eaf9a53a0b787ad0fcae5190a887",
+    "binaries": {
+      "T11-test": {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/final-releasesafe/out/bin/T11-test",
+        "sha256": "f6ad46e3b948f62eb51f85b9bf4717c26f6e1b9b1e3bdb74a9b081459de484b8",
+        "size": 4795048
+      },
+      "T12-test": {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/final-releasesafe/out/bin/T12-test",
+        "sha256": "295455bcc178cf0bea539adea4b4730e281e7bbc019c52bb64f71139631116be",
+        "size": 5808672
+      },
+      "T12-child": {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/final-releasesafe/out/bin/T12-child",
+        "sha256": "22b3569ed113a7f195e145b216898d5217b514c8b33434c5980ffc409ccc26b9",
+        "size": 5155904
+      }
+    },
+    "label": "final-releasesafe",
+    "classification": "superseded test-helper EOF failure",
+    "archived_stderr": "logs/final-releasesafe.stderr.log"
+  },
+  {
+    "command": [
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "build",
+      "test",
+      "-Dtest-group=write",
+      "-Doptimize=Debug",
+      "-Dinstall-tests=true",
+      "--prefix",
+      "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/covering-f1/out",
+      "--summary",
+      "all",
+      "-Dtest-id=F1"
+    ],
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T12",
+    "environment": {
+      "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/covering-f1/global-cache",
+      "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/covering-f1/cache",
+      "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/covering-f1/tmp"
+    },
+    "source_commit": "1f1255328038300114cd2f23b6e077416f30b2b7",
+    "source_tree": "d72a361a8f98b422f91bb56ac07256455b2fb0a4",
+    "started": "2026-09-12T13:11:09.126138+00:00",
+    "toolchain": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+    "toolchain_version": "0.16.0",
+    "toolchain_sha256": "2317bbb91798556d9d0f38aabdac23db83f0979b25f767259ae474546724087c",
+    "exit_code": 0,
+    "elapsed_seconds": 9.706284768999467,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "dc67a4c14346d8ea65d6f68be51ec5f2e8bbf2fbcff47ec04cb154e005e452c9",
+    "binaries": {
+      "T12-test": {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/covering-f1/out/bin/T12-test",
+        "sha256": "998f29dc040517dbc02c558506c4295e8085d27e1350abdebe440476a4155cb0",
+        "size": 25259192
+      },
+      "T12-child": {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/covering-f1/out/bin/T12-child",
+        "sha256": "1a2ef252fafd6ae39d3a47b0316532aed9c37211924f4dd6fce63a9235a02de5",
+        "size": 21499149
+      }
+    },
+    "label": "covering-f1",
+    "classification": "PASS on final source",
+    "archived_stderr": "logs/covering-f1.stderr.log"
+  },
+  {
+    "command": [
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "build",
+      "test",
+      "-Dtest-group=write",
+      "-Doptimize=Debug",
+      "-Dinstall-tests=true",
+      "--prefix",
+      "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/covering-f2/out",
+      "--summary",
+      "all",
+      "-Dtest-id=F2"
+    ],
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T12",
+    "environment": {
+      "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/covering-f2/global-cache",
+      "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/covering-f2/cache",
+      "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/covering-f2/tmp"
+    },
+    "source_commit": "1f1255328038300114cd2f23b6e077416f30b2b7",
+    "source_tree": "d72a361a8f98b422f91bb56ac07256455b2fb0a4",
+    "started": "2026-09-12T13:11:19.106302+00:00",
+    "toolchain": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+    "toolchain_version": "0.16.0",
+    "toolchain_sha256": "2317bbb91798556d9d0f38aabdac23db83f0979b25f767259ae474546724087c",
+    "exit_code": 0,
+    "elapsed_seconds": 10.151988887999323,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "4acecd339db62d0a7a95721f434f99f41133d4f9147ea411791bc42baf27cab7",
+    "binaries": {
+      "T12-test": {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/covering-f2/out/bin/T12-test",
+        "sha256": "f046c420eb905c697cc444994c925fbb4664525939ab6cb935e136b8cdd7964a",
+        "size": 21912226
+      },
+      "T12-child": {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/covering-f2/out/bin/T12-child",
+        "sha256": "c7dae055f7c8412de2465fe15ec84dbbb8f83d01ef9fd1f58cbcacd18b318a51",
+        "size": 21503245
+      }
+    },
+    "label": "covering-f2",
+    "classification": "PASS on final source",
+    "archived_stderr": "logs/covering-f2.stderr.log"
+  },
+  {
+    "command": [
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "build",
+      "test",
+      "-Dtest-group=write",
+      "-Doptimize=Debug",
+      "-Dinstall-tests=true",
+      "--prefix",
+      "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/verified-debug/out",
+      "--summary",
+      "all"
+    ],
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T12",
+    "environment": {
+      "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/verified-debug/global-cache",
+      "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/verified-debug/cache",
+      "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/verified-debug/tmp"
+    },
+    "source_commit": "1f1255328038300114cd2f23b6e077416f30b2b7",
+    "source_tree": "d72a361a8f98b422f91bb56ac07256455b2fb0a4",
+    "started": "2026-09-12T13:11:40.441654+00:00",
+    "toolchain": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+    "toolchain_version": "0.16.0",
+    "toolchain_sha256": "2317bbb91798556d9d0f38aabdac23db83f0979b25f767259ae474546724087c",
+    "exit_code": 0,
+    "elapsed_seconds": 22.287697396001022,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "c1db7dede74ca0a9bef8e98630f49a3372185e1eef64ba03d7de6f79e2a2e010",
+    "binaries": {
+      "T11-test": {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/verified-debug/out/bin/T11-test",
+        "sha256": "3374cb63bd4e2233ef49e3b22f87546f96138f47256f741a1b9f8d4f73f24d25",
+        "size": 21077474
+      },
+      "T12-test": {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/verified-debug/out/bin/T12-test",
+        "sha256": "e604ab3f89d4cfe36748ea0db63bd056ef02798e8db692ee0e617a96d1e109ef",
+        "size": 28174818
+      },
+      "T12-child": {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/verified-debug/out/bin/T12-child",
+        "sha256": "d88e71b8fc9fea59eafeea63a08db41badf04ddad0bb72ba4a3b8bf44b835e57",
+        "size": 21503245
+      }
+    },
+    "label": "verified-debug",
+    "classification": "PASS on final source",
+    "archived_stderr": "logs/verified-debug.stderr.log"
+  },
+  {
+    "command": [
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "build",
+      "test",
+      "-Dtest-group=write",
+      "-Doptimize=ReleaseSafe",
+      "-Dinstall-tests=true",
+      "--prefix",
+      "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/verified-releasesafe/out",
+      "--summary",
+      "all"
+    ],
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T12",
+    "environment": {
+      "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/verified-releasesafe/global-cache",
+      "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/verified-releasesafe/cache",
+      "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/verified-releasesafe/tmp"
+    },
+    "source_commit": "1f1255328038300114cd2f23b6e077416f30b2b7",
+    "source_tree": "d72a361a8f98b422f91bb56ac07256455b2fb0a4",
+    "started": "2026-09-12T13:11:09.125584+00:00",
+    "toolchain": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+    "toolchain_version": "0.16.0",
+    "toolchain_sha256": "2317bbb91798556d9d0f38aabdac23db83f0979b25f767259ae474546724087c",
+    "exit_code": 0,
+    "elapsed_seconds": 63.04938870700062,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "1c5d0581922debe35a90d80e69bd240c13f18516660ae981f62962e2cd813d07",
+    "binaries": {
+      "T11-test": {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/verified-releasesafe/out/bin/T11-test",
+        "sha256": "96807c49cca7eedf4702580174e3c8616e506cbb186538b987042fba4b455319",
+        "size": 4795056
+      },
+      "T12-test": {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/verified-releasesafe/out/bin/T12-test",
+        "sha256": "0e355ff56d0319c6a47d60e5df650d4c18ab24d97fb104399e0da7e5f2a34ff5",
+        "size": 5808696
+      },
+      "T12-child": {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/verified-releasesafe/out/bin/T12-child",
+        "sha256": "551e16b569e27ec130627f549451a693228022dbaa6e821b2f625b301ed88335",
+        "size": 5155912
+      }
+    },
+    "label": "verified-releasesafe",
+    "classification": "PASS on final source",
+    "archived_stderr": "logs/verified-releasesafe.stderr.log"
+  }
+]

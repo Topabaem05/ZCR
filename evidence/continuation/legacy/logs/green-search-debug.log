@@ -1,0 +1,7 @@
+Build Summary: 4/4 steps succeeded; 13/13 tests passed
+test success
++- install T06-test success
+|  +- compile test T06-test Debug native success 422ms MaxRSS:177M
++- run test T06-test 13 pass (13 total) 1s MaxRSS:11M
+   +- compile test T06-test Debug native (reused)
+

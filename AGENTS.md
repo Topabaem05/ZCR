@@ -1,6 +1,6 @@
 # ZCR 구현 에이전트 규칙
 
-이 파일은 향후 runtime repository의 최상위 작업 규칙이다. 현재 패키지는 설계 문서이며 runtime 구현 완료를 의미하지 않는다.
+이 파일은 runtime repository의 최상위 작업 규칙이다. 구현 및 실행 증거의 현재 상태는 `tasks/progress.json`과 `tasks/INDEX.md`를 따른다. 설계의 완료 조건과 실제 시험 결과를 구분하고, 이전 commit의 증거를 현재 바이너리의 PASS로 재사용하지 않는다.
 
 ## 필수 시작 문서
 
@@ -21,6 +21,36 @@ README → docs/01 → docs/02 → docs/06 → docs/13 → 현재 tasks/Txx.md �
 ## 증거
 
 PASS에는 command, exit code, source commit, binary digest, config/corpus digest, test output artifact가 필요하다. 다른 worktree의 binary를 사용한 결과는 무효다. 실제 실행 못 한 Mac/Windows/host integration은 NOT_RUN이다. cross-compile은 runtime proof가 아니다.
+
+## 명령 (T01 기준)
+
+Toolchain은 Zig 0.16.0이다. `build.zig`는 다른 버전에서 컴파일을 거부한다. 캐시와 임시 파일은 `STATE=<state root>/tasks/<TaskId>` 아래에 둔다. state root는 source tree 밖이다.
+
+```sh
+export ZIG_GLOBAL_CACHE_DIR=$STATE/zig-global-cache ZIG_LOCAL_CACHE_DIR=$STATE/zig-local-cache TMPDIR=$STATE/tmp
+zig build test -Dtest-group=<group> -Doptimize=Debug        # io fs search batch write mcp isolation broker watch observe ast scheduler memory perf dev security
+zig build test -Dtest-id=WR-005 -Dfault-injection=true      # 이름에 ID가 들어간 test만 실행
+zig build test -Dtest-group=dev -Dinstall-tests=true --prefix $STATE/out-<label>   # 증거용 test binary 설치
+zig build verify-contracts                                  # src/core 선언과 contracts/·config/ 대조
+```
+
+선택된 test가 없으면 build가 실패한다. 빈 선택은 PASS가 아니다. test 이름은 catalog ID(예: `"WR-005 ..."`)로 시작한다. 새 test 파일은 통합자가 `build.zig`의 `test_files`에 등록한다. `zig build bench`는 T21 전까지 실패한다.
+
+## 증거·ledger 도구
+
+`zig build`가 설치하는 `zcr-dev-evidence`는 Git을 `-C <worktree>`로만 호출하고 worktree를 변경하지 않는다.
+
+```sh
+zcr-dev-evidence preflight --worktree <task worktree>                  # dirty·진행 중 merge/rebase면 exit 1, 사용자 변경 보존
+zcr-dev-evidence ledger-begin --worktree <wt> --task TNN --ledger $STATE/task-step.json
+zcr-dev-evidence ledger-step --worktree <wt> --ledger $STATE/task-step.json --step S02 --result pass --evidence evidence/TNN/red.json
+zcr-dev-evidence resume --worktree <wt> --ledger $STATE/task-step.json  # 새 세션은 여기서 시작
+zcr-dev-evidence record --worktree <wt> --task TNN --label green-debug --command "<cmd>" --exit 0 --binary <test binary> --out <file>
+zcr-dev-evidence verify --worktree <wt> --evidence <file>
+zcr-dev-evidence contract-digest --worktree <wt>
+```
+
+ledger(`zcr-step-ledger/1`)는 worktree git-dir, base commit, contract digest, step별 head commit을 기록한다. `resume`과 `ledger-step`은 다른 worktree, dirty tree, base와 무관한 HEAD, 기록 이후 추가된 commit, 바뀐 contract digest, step 건너뛰기를 거부한다. evidence(`zcr-evidence/1`)는 worktree git-dir·commit·tree·binary SHA-256이 모두 같을 때만 `verify`를 통과한다. contract digest는 `git ls-files -z contracts | LC_ALL=C sort -z | xargs -0 shasum -a 256 | shasum -a 256`과 같은 값이다.
 
 ## Handoff
 

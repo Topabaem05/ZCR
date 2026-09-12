@@ -1,0 +1,154 @@
+{
+  "schema_version": "zcr-handoff/1",
+  "task_id": "T10",
+  "state": "implemented_native_linux_verified",
+  "step": "S06",
+  "base_commit": "9897f27a18c66c310ae6dda3ee854f7fdcdcfa3d",
+  "head_commit": "f8a3b24f44a02aa882ec72c170ad57296e02c815",
+  "head_commit_note": "Tested source commit; evidence-only commit follows.",
+  "source_tree_digest": "8a48002b003d041ae770e2b1cca6de71c61b85dd",
+  "contract_digest": "8aa53314410fe471f0e070c522766684286f60e1ad4d9785c292bb709ea370a4",
+  "owned_paths": [
+    "src/workspace/registry.zig",
+    "src/workspace/identity.zig",
+    "src/workspace/lease.zig",
+    "tests/t10_test.zig",
+    "evidence/T10/"
+  ],
+  "changed_files": [
+    "src/workspace/registry.zig",
+    "src/workspace/identity.zig",
+    "src/workspace/lease.zig",
+    "tests/t10_test.zig",
+    "evidence/T10/*"
+  ],
+  "exports": {
+    "module": "zcr_workspace",
+    "root": "src/workspace/registry.zig",
+    "imports": [
+      "zcr_core",
+      "zcr_policy"
+    ],
+    "frozen": [
+      "Registry.registerWorkspace(*Registry,Io,TrustedRoot,Policy) RegisterError!WorkspaceId",
+      "Registry.acquireWriter(*Registry,TaskContext,WorkspaceId) LeaseError!WriterLease"
+    ],
+    "supplemental": [
+      "Registry.init/deinit/bootNonce",
+      "Registry.snapshot/validateWorkspace/markChanged",
+      "Registry.bindSession/validateSession/unbindSession/setManagedWrite",
+      "Registry.renewWriter/revokeWriter/validateLease",
+      "Registry.beginCallback/validateCallback/endCallback",
+      "identity.discover; lease.State",
+      "Snapshot.head:[64]u8 and head_len:u8: compare approved launch manifest HEAD to exact retained discovery.",
+      "Registry.acquireCommit(CallbackTicket) LeaseError!CommitGuard",
+      "CommitGuard.next_generation:u64; markApplied() void; release() void"
+    ]
+  },
+  "test_evidence": [
+    {
+      "id": "IS-001",
+      "status": "PASS_NATIVE_LINUX",
+      "scenarios": "two real linked dirty worktrees share RepoId common-dir but have distinct per-worktree IDs, dirty bytes, stable repeated registration; generation changes on HEAD/markChanged; Snapshot HEAD copied and preserved across rediscovery"
+    },
+    {
+      "id": "IS-002",
+      "status": "PASS_NATIVE_LINUX",
+      "scenarios": "delete/recreate same path; moved root; edited linked Git marker; old-boot and old-incarnation rejection; FIFO substitution after stat before open, after-read timestamp/size/directory-entry replacement; guard blocks HEAD rediscovery generation and replacement/invalid-root retirement; waiting commit freshly rechecks root identity"
+    },
+    {
+      "id": "IS-005",
+      "status": "PASS_NATIVE_LINUX",
+      "scenarios": "eight concurrent threads admit exactly one writer; 30s TTL/10s renew; expired/cancelled callbacks reject commit;64 slots; double completion and counter overflow refusal; old incarnation drains before new writer; session expiry; OOM unwind; seven actual blocked-mutex expiry boundaries and two-task disconnect/expiry/stale-lease isolation; commit publication blocks revocation, disconnect, disable, all expiry paths and generation changes; abort/apply/stale guard/overflow/owner drain/waiter bound; other worktree progress and waiting binding relookup"
+    },
+    {
+      "id": "IS-008",
+      "status": "PASS_NATIVE_LINUX",
+      "scenarios": "shared editor no write; bound task/policy/boot/session/domain/fence/expiry checks; invalid/planned policies; immutable copied policy; bad root/discovery errors; bounded32 workspace and16 session state"
+    },
+    {
+      "id": "T02 isolation regression",
+      "status": "PASS_NATIVE_LINUX",
+      "tests_per_mode": 12
+    },
+    {
+      "id": "T10 registry tests",
+      "status": "PASS_NATIVE_LINUX",
+      "tests_per_mode": 42
+    },
+    {
+      "id": "T10 lease unit tests",
+      "status": "PASS_NATIVE_LINUX",
+      "tests_per_mode": 8
+    },
+    {
+      "id": "verify-contracts",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "id": "production test hooks absent",
+      "status": "PASS_COMPILE_ONLY",
+      "note": "Non-test object compilation asserts lock/marker test hooks have void type; not a platform runtime claim."
+    }
+  ],
+  "runs": "evidence/T10/runs.json",
+  "limitations": [
+    "Native macOS Apple Silicon/Intel, Windows, and real MCP/broker host integration NOT_RUN; Linux x86_64 alone is runtime-proven.",
+    "Caller must validateSession(session, current_boot) before using a static Authorizer; snapshot root/GitMetadata are borrowed until exclusive Registry.deinit.",
+    "Only trusted launcher may call registerWorkspace, bindSession, or setManagedWrite. The manifest external workspace label must be approved by launcher and mapped to the newly issued runtime WorkspaceId; I08/I09 signatures have no persisted manifest-label field.",
+    "I09 cannot receive SessionContext or OutOfScope in its frozen signature. It requires a prior exact trusted binding and maps scope mismatch to FenceMismatch; dispatcher must check its bound transport session first.",
+    "Retired registry entries retain handles and callback counters until exclusive teardown; capacity defaults/hard-caps at32 lifetime incarnations, 16 current sessions,2 concurrent discoveries,64 callbacks per workspace. After capacity exhaustion the host must drain and create a fresh registry.",
+    "Git discovery only accepts explicit Git workspace roots; non-Git directories, subdirectory roots, bare repositories, and path spellings containing newline/NUL are refused.",
+    "Generation advances on markChanged, changed discovered HEAD, and CommitGuard.markApplied. Watcher integration must call markChanged for dirty file changes; this module does not watch files.",
+    "Registry policy snapshots cannot be replaced in place: a different policy or same digest with different contents is rejected. Host rebind uses a fresh registry after drain.",
+    "Use acquireCommit(ticket), filesystem publication, markApplied(), release(), then endCallback(ticket). While a guard is held, invoke no ordinary same-workspace Registry methods (including snapshot/validateWorkspace); use the retained Snapshot and guard.next_generation. Owner endCallback returns Busy. Duplicate release is harmless. Guard and callbacks require a stable Registry address and live retained handles.",
+    "The publication latch orders participating host operations, not hostile same-UID external filesystem writers. Managed-write approval remains an operational host condition; the editor supplies filesystem CAS and recovery.",
+    "Publication waits are bounded to64 per workspace and release the global mutex. After guard acquisition, expiry or revocation waits for release; no old-fence commit may follow successful revocation. Abort does not publish the reserved generation; markApplied is idempotent."
+  ],
+  "remaining_gates": [
+    "Combined integrator binaries after cherry-picks",
+    "Native macOS/Windows and actual host integration NOT_RUN"
+  ],
+  "review_fixes": {
+    "review": "/workspace/scratch/3f4ab65dfb82/state/reviews/t10-review.md",
+    "reviewed_source": "a84ab2417b3754fb0bf8681fa7a07a7b8510bae7",
+    "red_commit": "876e568daccb25edd47b4cb75eea59f27721edcd",
+    "fix_commit": "c926ea9f9cf3378bc36553e4bce94f4c3a3f9362",
+    "changes": [
+      "Sample monotonic and wall clocks inside the final serialized authority check after acquiring the registry mutex in all seven affected operations.",
+      "Scope disconnect/expired-task revocation to the actual active lease task; keep workspace retirement and explicit revoke workspace-wide."
+    ],
+    "regressions": [
+      "Seven deterministic tests block the actual authority mutex, advance injected std.Io clocks across expiry, and verify acquire, renew, lease validation, callback start/commit, bind, and session validation reject.",
+      "Two tasks share one workspace: unrelated disconnect, expired acquire, and expired stale lease validate/renew/callback-start preserve the healthy writer; owner disconnect/expiry revoke and drain correctly."
+    ],
+    "red_summary": "5/14 pass,9/14 fail at876e568; all were intentional assertions, not compiler/toolchain errors.",
+    "test_instrumentation": "Optional lock barrier exists only when builtin.is_test; runtime Registry has no hook storage or call. Clock injection is via a test-only std.Io.VTable copy preserving all other IO behavior.",
+    "rereview": "APPROVE at c926ea9; historical evidence verified"
+  },
+  "marker_review_fixes": {
+    "red_commit": "9498ba01ed69494c5dc9bd9dc551785e2c9f881a",
+    "fix_commit": "98eaee492b32dd8854d882bc4c250997c1fd682d",
+    "changes": [
+      "Open linked .git markers with descriptor-relative RDONLY|NONBLOCK|NOFOLLOW|CLOEXEC before validating regular-file identity.",
+      "Require stable pre/post read inode/kind/size/ctime/mtime, bounded read length, and matching final directory-entry identity.",
+      "Copy Snapshot.head:[64]u8 and head_len:u8 under the registry mutex from the retained discovery; old returned snapshot remains immutable."
+    ],
+    "red": "evidence/T10/marker-red.json",
+    "red_summary": "Five expected assertions failed: FIFO hung until fallback writer; after-read timestamp/size/entry changes accepted; HEAD snapshot unavailable.",
+    "rereview": "APPROVE at98eaee4; historical source/binary/log hashes verified"
+  },
+  "commit_coordinator": {
+    "authorization": "Root-authorized T11 dependency follow-on; frozen I08/I09 unchanged",
+    "red_commit": "ab5df134d234792003a9a28aca70d26508b1cfc7",
+    "implementation_commit": "02a4ee4f169133022f842cb310b041969c237ba8",
+    "source_commit": "f8a3b24f44a02aa882ec72c170ad57296e02c815",
+    "red": "evidence/T10/commit-red.json",
+    "green": "evidence/T10/runs.json",
+    "red_summary": "38/51 isolation pass; thirteen assertion failures show twelve mutation/expiry/retirement operations complete while a commit guard is held and owner callback completion is not rejected. Guard reservation scaffold exists without lifecycle integration at this RED commit.",
+    "design": "Per-workspace publishing slot and bounded condition waiters release registry mutex during filesystem work; all revoking/expiring/retiring/generation mutation paths wait, then revalidate filesystem identity or relookup bindings as appropriate. Guard ID is monotonic and registry-wide; stored reservation defeats duplicate/stale releases or modified next_generation.",
+    "consumer_contract": "Retain snapshot before acquiring guard. acquireCommit(ticket); publish filesystem; markApplied(); release(); endCallback(ticket). Release without markApplied on abort. No ordinary same-workspace Registry calls while guarded. T11 confirms compliance.",
+    "review": "APPROVE at f8a3b24f44a02aa882ec72c170ad57296e02c815; /workspace/scratch/3f4ab65dfb82/state/reviews/commit-coordinator-review.md. Reviewer verified all four source hashes, ten final binary/log hashes, 13-failure RED hashes, all 32 historical archive member hashes and preserved prior marker runtime object. No additional tests requested."
+  }
+}

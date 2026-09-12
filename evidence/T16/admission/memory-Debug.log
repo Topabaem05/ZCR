@@ -1,0 +1,11 @@
+Build Summary: 7/7 steps succeeded; 34/34 tests passed
+test success
++- install T03-test success
+|  +- compile test T03-test Debug native success 542ms MaxRSS:175M
++- run test T03-test 16 pass (16 total) 292ms MaxRSS:7M
+|  +- compile test T03-test Debug native (reused)
++- install T13-test success
+|  +- compile test T13-test Debug native success 640ms MaxRSS:185M
++- run test T13-test 18 pass (18 total) 413ms MaxRSS:9M
+   +- compile test T13-test Debug native (reused)
+

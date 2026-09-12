@@ -1,0 +1,425 @@
+{
+  "schema_version": "zcr-progress/1",
+  "updated": "2026-09-13",
+  "source_baseline": "531cfc378950e6ef6ac6f49cb4e2de3de56312cc",
+  "release_status": "BLOCKED",
+  "notes": [
+    "Spec catalog is not runtime evidence.",
+    "Historical handoffs identify their own source/binary and do not prove this checkout.",
+    "Current mandatory external Mac/client/E2E gates remain required.",
+    "Native CI34681109500 executed all three targets at tree39978457; its overall FAIL is preserved with221/222 passing per mode plus three absent task files.",
+    "Native CI34692959158 ran published9d6d8e55/tree1c7fbe50: Linux285/285 per Debug/ReleaseSafe; both Macs232 passed/12 skipped with T11 compilation failure. Missing T12/T15 sources at that checkpoint keep the overall result FAIL.",
+    "T12 source1f12553/evidence4759605 passed scoped independent review and was integrated atad577ab. Worker Debug/ReleaseSafe65/65 each; actual integrated Debug65/65 with raw capture. Production supervisor, Mac/kernel-fault/power-loss gates remain open.",
+    "Runtime/cache/broker fix source95352af and evidenceec9e5ad passed independent review and were integrated throughdae7ddc. Source-specific prior executions remain pinned; live broker/bridge host wiring and native socket gates remain open.",
+    "Darwin T11 source d8e7ac5/evidenceef891f0 passed independent review and was integrated at53b4686/c80508b: Linux41/41 each mode; both Mac semantic targets compile only, actual native execution pending.",
+    "Clean integrated source108b906 ran Debug and ReleaseSafe:338/347 registered tests passed each mode, all9 failures in broker AF_UNIX tests under local socket policy. Both builds/contracts, codec10 and actual CLI19 passed each mode. Overall registered suite remains FAIL.",
+    "T16 admission source8bad59b/evidencef5de460 passed independent review and was integrated at7b915f8. Worker scheduler20PASS+1nativeSKIP and memory34PASS each mode; pure governor policy, signal collection and actual runtime wiring remain required.",
+    "Main integration audit: every original remote branch is an ancestor of a911bf8. PR #1 is retargeted to main by explicit user request; release_status remains BLOCKED. See docs/18-Merge-and-Remaining-Work.md.",
+    "CI bootstrap fixed at local169be18 / published88546e8, identical tree54dba2efb586303f5b60e80bf3834c28519a223e. Plain-Python import regression reproduced the source mutation before the fix; all5 CI-tooling tests pass after it. Runtime verification is recorded separately.",
+    "Source88546e8 native CI34705666351: Linux job SUCCESS. Apple Silicon Debug320PASS/12SKIP/24FAIL, ReleaseSafe321PASS/12SKIP/23FAIL. T12 Linux-only Store.init/metadata causes23 failures and Debug fixture cleanup leaks; Debug additionally fails MC-004 retiring tool id assertion. Intel Mac was still running at documentation checkpoint. Release remains BLOCKED. Local169be18 both modes346PASS/1SKIP/9AF_UNIX failures; builds/contracts, codec10, CLI19 pass."
+  ],
+  "tasks": [
+    {
+      "id": "T00",
+      "required": true,
+      "status": "IMPLEMENTED_WITH_OPEN_GATES",
+      "historical_evidence": "evidence/T00/handoff.json",
+      "current_evidence": [
+        "evidence/continuation/test-harness/provenance.json",
+        "evidence/continuation/native-ci-34681109500/README.md",
+        "evidence/continuation/native-ci-34692959158/README.md"
+      ],
+      "required_tests": [
+        "PF-001"
+      ]
+    },
+    {
+      "id": "T01",
+      "required": true,
+      "status": "IMPLEMENTED_WITH_OPEN_GATES",
+      "historical_evidence": "evidence/T01/handoff.json",
+      "current_evidence": [
+        "evidence/continuation/test-harness/provenance.json",
+        "evidence/continuation/native-ci-34681109500/README.md",
+        "evidence/continuation/native-ci-34692959158/README.md"
+      ],
+      "required_tests": [
+        "DV-001",
+        "DV-004",
+        "DV-005"
+      ]
+    },
+    {
+      "id": "T02",
+      "required": true,
+      "status": "IMPLEMENTED_WITH_OPEN_GATES",
+      "historical_evidence": "evidence/T02/handoff.json",
+      "current_evidence": [
+        "evidence/continuation/test-harness/provenance.json",
+        "evidence/continuation/native-ci-34681109500/README.md",
+        "evidence/continuation/native-ci-34692959158/README.md"
+      ],
+      "required_tests": [
+        "IS-003",
+        "IS-004",
+        "DV-002",
+        "DV-003"
+      ]
+    },
+    {
+      "id": "T03",
+      "required": true,
+      "status": "IMPLEMENTED_WITH_OPEN_GATES",
+      "historical_evidence": "evidence/T03/handoff.json",
+      "current_evidence": [
+        "evidence/continuation/test-harness/provenance.json",
+        "evidence/continuation/native-ci-34681109500/README.md",
+        "evidence/continuation/native-ci-34692959158/README.md"
+      ],
+      "required_tests": [
+        "ME-001",
+        "ME-002",
+        "ME-003",
+        "ME-007"
+      ]
+    },
+    {
+      "id": "T04",
+      "required": true,
+      "status": "IMPLEMENTED_WITH_OPEN_GATES",
+      "historical_evidence": "evidence/T04/handoff.json",
+      "current_evidence": [
+        "evidence/continuation/legacy/report.md",
+        "evidence/continuation/native-ci-34681109500/README.md",
+        "evidence/continuation/native-ci-34692959158/README.md"
+      ],
+      "required_tests": [
+        "IO-001",
+        "IO-002",
+        "IO-003",
+        "IO-004",
+        "IO-005",
+        "IO-006"
+      ]
+    },
+    {
+      "id": "T05",
+      "required": true,
+      "status": "IMPLEMENTED_WITH_OPEN_GATES",
+      "historical_evidence": "evidence/T05/handoff.json",
+      "current_evidence": [
+        "evidence/continuation/legacy/report.md",
+        "evidence/continuation/native-ci-34681109500/README.md",
+        "evidence/continuation/native-ci-34692959158/README.md"
+      ],
+      "required_tests": [
+        "FS-001",
+        "FS-002",
+        "FS-003",
+        "FS-004",
+        "FS-005",
+        "FS-006"
+      ]
+    },
+    {
+      "id": "T06",
+      "required": true,
+      "status": "IMPLEMENTED_WITH_OPEN_GATES",
+      "historical_evidence": "evidence/T06/handoff.json",
+      "current_evidence": [
+        "evidence/continuation/legacy/report.md",
+        "evidence/continuation/native-ci-34681109500/README.md",
+        "evidence/continuation/native-ci-34692959158/README.md"
+      ],
+      "required_tests": [
+        "SR-001",
+        "SR-002",
+        "SR-003",
+        "SR-004",
+        "SR-005",
+        "SR-006"
+      ]
+    },
+    {
+      "id": "T07",
+      "required": true,
+      "status": "IMPLEMENTED_WITH_OPEN_GATES",
+      "historical_evidence": "evidence/T07/handoff.json",
+      "current_evidence": [
+        "evidence/T07/handoff.json",
+        "evidence/continuation/native-ci-34681109500/README.md",
+        "evidence/continuation/native-ci-34692959158/README.md"
+      ],
+      "required_tests": [
+        "BA-001",
+        "BA-002",
+        "BA-003"
+      ]
+    },
+    {
+      "id": "T08",
+      "required": true,
+      "status": "IMPLEMENTED_WITH_OPEN_GATES",
+      "historical_evidence": null,
+      "current_evidence": [
+        "evidence/T08/handoff.json",
+        "evidence/continuation/native-ci-34681109500/README.md",
+        "evidence/continuation/native-ci-34692959158/README.md",
+        "evidence/continuation/integrated-108b906/README.md"
+      ],
+      "required_tests": [
+        "MC-001",
+        "MC-002",
+        "MC-003",
+        "MC-004"
+      ]
+    },
+    {
+      "id": "T09",
+      "required": true,
+      "status": "IMPLEMENTED_WITH_OPEN_GATES",
+      "historical_evidence": null,
+      "current_evidence": [
+        "evidence/T09/handoff.json",
+        "evidence/continuation/native-ci-34681109500/README.md",
+        "evidence/continuation/native-ci-34692959158/README.md"
+      ],
+      "required_tests": [
+        "SC-001",
+        "SC-002",
+        "SC-003",
+        "SC-004"
+      ]
+    },
+    {
+      "id": "T10",
+      "required": true,
+      "status": "IMPLEMENTED_WITH_OPEN_GATES",
+      "historical_evidence": null,
+      "current_evidence": [
+        "evidence/T10/handoff.json",
+        "evidence/continuation/native-ci-34681109500/README.md",
+        "evidence/continuation/native-ci-34692959158/README.md"
+      ],
+      "required_tests": [
+        "IS-001",
+        "IS-002",
+        "IS-005",
+        "IS-008"
+      ]
+    },
+    {
+      "id": "T11",
+      "required": true,
+      "status": "IMPLEMENTED_WITH_OPEN_GATES",
+      "historical_evidence": null,
+      "current_evidence": [
+        "evidence/T11/handoff.json",
+        "evidence/continuation/native-ci-34692959158/README.md",
+        "evidence/T11/darwin/README.md",
+        "evidence/continuation/review-checkpoints/Darwin-T11.md",
+        "evidence/continuation/integrated-108b906/README.md"
+      ],
+      "required_tests": [
+        "WR-001",
+        "WR-002",
+        "WR-003",
+        "WR-004",
+        "WR-007",
+        "WR-009",
+        "WR-010",
+        "IS-007"
+      ]
+    },
+    {
+      "id": "T12",
+      "required": true,
+      "status": "IMPLEMENTED_WITH_OPEN_GATES",
+      "historical_evidence": null,
+      "current_evidence": [
+        "evidence/T12/fix-round1/handoff.json",
+        "evidence/continuation/review-checkpoints/T12-fix1.md",
+        "evidence/continuation/integrated-T12-ad577ab/README.md",
+        "evidence/continuation/integrated-108b906/README.md"
+      ],
+      "required_tests": [
+        "WR-005",
+        "WR-006",
+        "WR-008"
+      ]
+    },
+    {
+      "id": "T13",
+      "required": true,
+      "status": "IMPLEMENTED_WITH_OPEN_GATES",
+      "historical_evidence": null,
+      "current_evidence": [
+        "evidence/T13/handoff.json",
+        "evidence/continuation/native-ci-34681109500/README.md",
+        "evidence/continuation/native-ci-34692959158/README.md",
+        "evidence/continuation/runtime-cache/provenance.json",
+        "evidence/continuation/runtime-review-fixes/r2/README.md",
+        "evidence/continuation/review-checkpoints/runtime-wave-final.md",
+        "evidence/continuation/integrated-108b906/README.md"
+      ],
+      "required_tests": [
+        "ME-004",
+        "IS-006"
+      ]
+    },
+    {
+      "id": "T14",
+      "required": true,
+      "status": "IMPLEMENTED_WITH_OPEN_GATES",
+      "historical_evidence": null,
+      "current_evidence": [
+        "evidence/T14/handoff.json",
+        "evidence/continuation/native-ci-34692959158/README.md"
+      ],
+      "required_tests": [
+        "WA-001",
+        "WA-002",
+        "WA-003",
+        "WA-004",
+        "WA-005",
+        "WA-006"
+      ]
+    },
+    {
+      "id": "T15",
+      "required": true,
+      "status": "IN_PROGRESS",
+      "historical_evidence": null,
+      "current_evidence": [
+        "evidence/continuation/runtime-review-fixes/r2/README.md",
+        "evidence/continuation/review-checkpoints/runtime-wave-final.md",
+        "evidence/continuation/integrated-108b906/README.md"
+      ],
+      "required_tests": [
+        "BR-001",
+        "BR-002",
+        "BR-003",
+        "BR-004",
+        "BR-005"
+      ]
+    },
+    {
+      "id": "T16",
+      "required": true,
+      "status": "IN_PROGRESS",
+      "historical_evidence": null,
+      "current_evidence": [
+        "evidence/T16/admission/handoff.json",
+        "evidence/continuation/review-checkpoints/T16-admission.md"
+      ],
+      "required_tests": [
+        "SC-005",
+        "SC-006",
+        "ME-005",
+        "ME-006"
+      ]
+    },
+    {
+      "id": "T17",
+      "required": true,
+      "status": "PENDING",
+      "historical_evidence": null,
+      "current_evidence": [],
+      "required_tests": [
+        "ME-008"
+      ]
+    },
+    {
+      "id": "T18",
+      "required": false,
+      "status": "NOT_SELECTED",
+      "historical_evidence": null,
+      "current_evidence": [],
+      "required_tests": [
+        "WIN-GATE"
+      ]
+    },
+    {
+      "id": "T19",
+      "required": true,
+      "status": "PENDING",
+      "historical_evidence": null,
+      "current_evidence": [],
+      "required_tests": [
+        "PF-005"
+      ]
+    },
+    {
+      "id": "T20",
+      "required": false,
+      "status": "NOT_SELECTED",
+      "historical_evidence": null,
+      "current_evidence": [],
+      "required_tests": [
+        "AS-001",
+        "AS-002",
+        "AS-003",
+        "AS-004"
+      ]
+    },
+    {
+      "id": "T21",
+      "required": true,
+      "status": "PENDING",
+      "historical_evidence": null,
+      "current_evidence": [],
+      "required_tests": [
+        "PF-002",
+        "PF-003",
+        "PF-004",
+        "PF-006",
+        "PF-007"
+      ]
+    },
+    {
+      "id": "T22",
+      "required": true,
+      "status": "PENDING",
+      "historical_evidence": null,
+      "current_evidence": [],
+      "required_tests": [
+        "OB-001",
+        "OB-002",
+        "OB-003",
+        "OB-004"
+      ]
+    },
+    {
+      "id": "T23",
+      "required": true,
+      "status": "PENDING",
+      "historical_evidence": null,
+      "current_evidence": [],
+      "required_tests": [
+        "MC-005",
+        "MC-006"
+      ]
+    },
+    {
+      "id": "T24",
+      "required": true,
+      "status": "PENDING",
+      "historical_evidence": null,
+      "current_evidence": [],
+      "required_tests": [
+        "PACKAGE-GATE"
+      ]
+    },
+    {
+      "id": "T25",
+      "required": true,
+      "status": "PENDING",
+      "historical_evidence": null,
+      "current_evidence": [],
+      "required_tests": [
+        "PF-008",
+        "DV-006"
+      ]
+    }
+  ]
+}

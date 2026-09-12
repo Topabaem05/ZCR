@@ -1,0 +1,17 @@
+{
+  "commit": "95352af44fd4c84574e3ae4e190f00654f8ec520",
+  "files": [
+    {
+      "git_blob": "14e2c09008bd715e6f600a52073347e750a20aa5",
+      "path": "src/broker/server.zig",
+      "sha256": "a5698562810b403cc45cc68ea56c886100b2d3ce221e69d8fd68ca08f92911ad"
+    },
+    {
+      "git_blob": "6797bc0ad2b72ca95fa228e2e12b70b3a59e3c6c",
+      "path": "tests/t15_test.zig",
+      "sha256": "78671b51b83e8eb41dfbc093ba04ccbe203c9b93dacbaebbd1057d8a70209cb1"
+    }
+  ],
+  "schema": "zcr-evidence-source-corpus/1",
+  "tree": "364ec8fcc24b9c35782d8f2ef9cd38d293f5dab7"
+}
