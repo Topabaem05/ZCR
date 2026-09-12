@@ -1,0 +1,25 @@
+{
+  "files": [
+    {
+      "path": "tests/t04_test.zig",
+      "sha256": "a593c0876ba6ed360f5d0428c9d653a1912ce23150ddd78f74a2597a8190b81a"
+    },
+    {
+      "path": "tests/t05_test.zig",
+      "sha256": "85ae09a13ba20facaf3d161ff7f2306d082bae46a3d232a1f197ed240f6d9217"
+    },
+    {
+      "path": "tests/t06_test.zig",
+      "sha256": "0133b65a290f8e7c3ac46dcdc24cfb5137c9a67e2084fd21418999aebcf17ba2"
+    },
+    {
+      "path": "tests/t07_test.zig",
+      "sha256": "faeddad4a63a5aa16d551fb4b597d55024f71b0071eddd6b544d428d6899ad5b"
+    },
+    {
+      "path": "tests/timing_test.zig",
+      "sha256": "98254b5f219d6b2d562619f5e331f9c0faf053f632b79459cc965781e99432c4"
+    }
+  ],
+  "method": "SHA256 of generator source files; fixtures are defined in these tests and generated afresh. This is a generator/corpus-definition digest, not a claim that random temporary path names are identical. FS004 additionally records an exact canonical on-disk name/content corpus hash."
+}

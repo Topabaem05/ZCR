@@ -1,0 +1,17 @@
+test
++- run test T08-test 0 pass, 1 fail (1 total)
+error: 't08_test.test.MC-004 stdout failure stops even when peer keeps stdin open' failed:
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:615:14: 0x1258cf9 in expect (std.zig)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T08/tests/t08_test.zig:432:5: 0x1259643 in test.MC-004 stdout failure stops even when peer keeps stdin open (t08_test.zig)
+           try testing.expect(stopped_before_eof);
+           ^
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/T08/zig-local-cache && /workspace/scratch/3f4ab65dfb82/state/T08/zig-local-cache/o/f89ba0ac69759c031dadace7ad2d9095/T08-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/T08/zig-local-cache --seed=0xedd1a58e --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 0/1 tests passed (1 failed)
+test transitive failure
++- run test T08-test 0 pass, 1 fail (1 total)
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/T08/zig-local-cache/o/32518fc5f4855d7ca20a29c737e84d77/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-T08 /workspace/scratch/3f4ab65dfb82/state/T08/zig-local-cache /workspace/scratch/3f4ab65dfb82/state/T08/zig-global-cache --seed 0xedd1a58e -Zf33b4461b0e6adb7 test -Dtest-group=mcp -Dtest-id=stdout failure stops -Doptimize=Debug

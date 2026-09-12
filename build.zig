@@ -21,7 +21,7 @@ comptime {
 
 pub const TestGroup = enum { io, fs, search, batch, write, mcp, isolation, broker, watch, observe, ast, scheduler, memory, perf, dev, security };
 
-const Import = enum { core, evidence, caps, build_options, policy, guard, memory, admission, fs_read, fs_traverse, search, batch, projection };
+const Import = enum { core, evidence, caps, build_options, policy, guard, memory, admission, fs_read, fs_traverse, search, batch, projection, mcp, executor, workspace, queue, darwin, launch, edit, cache, watch, broker };
 
 const TestFile = struct {
     task: []const u8,
@@ -37,9 +37,18 @@ const test_files = [_]TestFile{
     .{ .task = "T02", .path = "tests/t02_test.zig", .group = .isolation, .imports = &.{ .core, .policy, .guard, .evidence, .build_options } },
     .{ .task = "T03", .path = "tests/t03_test.zig", .group = .memory, .imports = &.{ .core, .memory, .admission } },
     .{ .task = "T04", .path = "tests/t04_test.zig", .group = .io, .imports = &.{ .core, .policy, .memory, .admission, .fs_read } },
+    .{ .task = "T04-deadline", .path = "tests/timing_test.zig", .group = .io, .imports = &.{.core} },
     .{ .task = "T05", .path = "tests/t05_test.zig", .group = .fs, .imports = &.{ .core, .policy, .memory, .fs_traverse, .evidence } },
     .{ .task = "T06", .path = "tests/t06_test.zig", .group = .search, .imports = &.{ .core, .policy, .memory, .fs_read, .fs_traverse, .search } },
     .{ .task = "T07", .path = "tests/t07_test.zig", .group = .batch, .imports = &.{ .core, .policy, .memory, .admission, .fs_read, .batch, .projection } },
+    .{ .task = "T08", .path = "tests/t08_test.zig", .group = .mcp, .imports = &.{ .core, .policy, .memory, .admission, .fs_read, .fs_traverse, .search, .batch, .projection, .mcp, .build_options } },
+    .{ .task = "T09", .path = "tests/t09_test.zig", .group = .scheduler, .imports = &.{ .core, .memory, .admission, .executor, .queue, .darwin } },
+    .{ .task = "T08-launch", .path = "tests/launch_test.zig", .group = .mcp, .imports = &.{.launch} },
+    .{ .task = "T10", .path = "tests/t10_test.zig", .group = .isolation, .imports = &.{ .core, .policy, .workspace } },
+    .{ .task = "T11", .path = "tests/t11_test.zig", .group = .write, .imports = &.{ .core, .policy, .memory, .fs_read, .workspace, .edit } },
+    .{ .task = "T13", .path = "tests/t13_test.zig", .group = .memory, .imports = &.{ .core, .policy, .memory, .workspace, .cache } },
+    .{ .task = "T14", .path = "tests/t14_test.zig", .group = .watch, .imports = &.{ .core, .policy, .memory, .workspace, .cache, .fs_traverse, .watch } },
+    .{ .task = "T15", .path = "tests/t15_test.zig", .group = .broker, .imports = &.{ .core, .policy, .memory, .workspace, .cache, .executor, .mcp, .broker, .build_options } },
 };
 
 /// Exit code for CLI roles that exist in the contract but are not built yet (EX_UNAVAILABLE).
@@ -60,6 +69,9 @@ pub fn build(b: *std.Build) void {
     options.addOption([]const u8, "version", manifest.version);
     options.addOption([]const u8, "zig_version", builtin.zig_version_string);
     options.addOption(bool, "fault_injection", fault_injection);
+    options.addOption([]const u8, "tools_json", @embedFile("contracts/tools.json"));
+    const contract_digest = contractDigest();
+    options.addOption([]const u8, "contract_digest", &contract_digest);
     options.addOption([]const u8, "repo_root", b.build_root.path orelse ".");
     const options_module = options.createModule();
 
@@ -185,6 +197,137 @@ pub fn build(b: *std.Build) void {
             .{ .name = "zcr_core", .module = core },
         },
     });
+    const mcp_module = b.createModule(.{
+        .root_source_file = b.path("src/protocol/mcp.zig"),
+        .target = target,
+        .optimize = optimize,
+        .link_libc = true,
+        .imports = &.{
+            .{ .name = "zcr_core", .module = core },
+            .{ .name = "zcr_policy", .module = policy_module },
+            .{ .name = "zcr_memory", .module = memory_module },
+            .{ .name = "zcr_admission", .module = admission_module },
+            .{ .name = "zcr_fs_read", .module = fs_read_module },
+            .{ .name = "zcr_fs_traverse", .module = fs_traverse_module },
+            .{ .name = "zcr_search", .module = search_module },
+            .{ .name = "zcr_batch_read", .module = batch_module },
+            .{ .name = "zcr_projection", .module = projection_module },
+        },
+    });
+    const queue_module = b.createModule(.{
+        .root_source_file = b.path("src/scheduler/queue.zig"),
+        .target = target,
+        .optimize = optimize,
+        .imports = &.{.{ .name = "zcr_core", .module = core }},
+    });
+    const darwin_module = b.createModule(.{
+        .root_source_file = b.path("src/platform/darwin.zig"),
+        .target = target,
+        .optimize = optimize,
+        .link_libc = true,
+        .imports = &.{.{ .name = "zcr_core", .module = core }},
+    });
+    const executor_module = b.createModule(.{
+        .root_source_file = b.path("src/scheduler/executor.zig"),
+        .target = target,
+        .optimize = optimize,
+        .link_libc = true,
+        .imports = &.{
+            .{ .name = "zcr_core", .module = core },
+            .{ .name = "zcr_memory", .module = memory_module },
+            .{ .name = "zcr_admission", .module = admission_module },
+            .{ .name = "zcr_queue", .module = queue_module },
+            .{ .name = "zcr_darwin", .module = darwin_module },
+        },
+    });
+    if (target.result.os.tag == .macos and sourceExists(b, "c/darwin_shim.c")) {
+        darwin_module.addCSourceFile(.{ .file = b.path("c/darwin_shim.c") });
+        darwin_module.addIncludePath(b.path("c"));
+    }
+    const workspace_module = b.createModule(.{
+        .root_source_file = b.path("src/workspace/registry.zig"),
+        .target = target,
+        .optimize = optimize,
+        .link_libc = true,
+        .imports = &.{
+            .{ .name = "zcr_core", .module = core },
+            .{ .name = "zcr_policy", .module = policy_module },
+        },
+    });
+    const edit_module = b.createModule(.{
+        .root_source_file = b.path("src/fs/edit.zig"),
+        .target = target,
+        .optimize = optimize,
+        .link_libc = true,
+        .imports = &.{
+            .{ .name = "zcr_core", .module = core },
+            .{ .name = "zcr_policy", .module = policy_module },
+            .{ .name = "zcr_memory", .module = memory_module },
+            .{ .name = "zcr_fs_read", .module = fs_read_module },
+            .{ .name = "zcr_workspace", .module = workspace_module },
+        },
+    });
+    const cache_module = b.createModule(.{
+        .root_source_file = b.path("src/cache/content.zig"),
+        .target = target,
+        .optimize = optimize,
+        .link_libc = true,
+        .imports = &.{
+            .{ .name = "zcr_core", .module = core },
+            .{ .name = "zcr_policy", .module = policy_module },
+            .{ .name = "zcr_memory", .module = memory_module },
+            .{ .name = "zcr_workspace", .module = workspace_module },
+        },
+    });
+    const watch_module = b.createModule(.{
+        .root_source_file = b.path("src/watch/core.zig"),
+        .target = target,
+        .optimize = optimize,
+        .link_libc = true,
+        .imports = &.{
+            .{ .name = "zcr_core", .module = core },
+            .{ .name = "zcr_policy", .module = policy_module },
+            .{ .name = "zcr_memory", .module = memory_module },
+            .{ .name = "zcr_workspace", .module = workspace_module },
+            .{ .name = "zcr_cache", .module = cache_module },
+            .{ .name = "zcr_fs_traverse", .module = fs_traverse_module },
+        },
+    });
+    if (target.result.os.tag == .macos) {
+        watch_module.linkFramework("CoreServices", .{});
+        watch_module.linkFramework("CoreFoundation", .{});
+    }
+    const broker_module = b.createModule(.{
+        .root_source_file = b.path("src/broker/server.zig"),
+        .target = target,
+        .optimize = optimize,
+        .link_libc = true,
+        .imports = &.{
+            .{ .name = "zcr_core", .module = core },
+            .{ .name = "zcr_policy", .module = policy_module },
+            .{ .name = "zcr_memory", .module = memory_module },
+            .{ .name = "zcr_workspace", .module = workspace_module },
+            .{ .name = "zcr_cache", .module = cache_module },
+            .{ .name = "zcr_executor", .module = executor_module },
+            .{ .name = "zcr_mcp", .module = mcp_module },
+        },
+    });
+    const launch_module = b.createModule(.{
+        .root_source_file = b.path("src/launch.zig"),
+        .target = target,
+        .optimize = optimize,
+        .link_libc = true,
+        .imports = &.{
+            .{ .name = "zcr_core", .module = core },
+            .{ .name = "zcr_policy", .module = policy_module },
+            .{ .name = "zcr_memory", .module = memory_module },
+            .{ .name = "zcr_workspace", .module = workspace_module },
+            .{ .name = "zcr_mcp", .module = mcp_module },
+            .{ .name = "zcr_fs_read", .module = fs_read_module },
+            .{ .name = "build_options", .module = options_module },
+        },
+    });
+    zcr.root_module.addImport("zcr_launch", launch_module);
     // A tool is installed once its owning task has delivered the source file.
     if (sourceExists(b, "tools/dev/guard.zig")) {
         b.installArtifact(b.addExecutable(.{ .name = "zcr-dev-guard", .root_module = guard_module }));
@@ -221,6 +364,8 @@ pub fn build(b: *std.Build) void {
             .root_source_file = b.path(file.path),
             .target = target,
             .optimize = optimize,
+            // POSIX fixtures call mkfifo/open/chmod on Linux as well as Darwin.
+            .link_libc = target.result.os.tag != .windows,
         });
         for (file.imports) |import| switch (import) {
             .core => module.addImport("zcr_core", core),
@@ -235,6 +380,16 @@ pub fn build(b: *std.Build) void {
             .search => module.addImport("zcr_search", search_module),
             .batch => module.addImport("zcr_batch", batch_module),
             .projection => module.addImport("zcr_projection", projection_module),
+            .mcp => module.addImport("zcr_mcp", mcp_module),
+            .executor => module.addImport("zcr_executor", executor_module),
+            .workspace => module.addImport("zcr_workspace", workspace_module),
+            .queue => module.addImport("zcr_queue", queue_module),
+            .darwin => module.addImport("zcr_darwin", darwin_module),
+            .launch => module.addImport("zcr_launch", launch_module),
+            .watch => module.addImport("zcr_watch", watch_module),
+            .broker => module.addImport("zcr_broker", broker_module),
+            .edit => module.addImport("zcr_fs_edit", edit_module),
+            .cache => module.addImport("zcr_cache", cache_module),
             .caps => module.addImport("caps", caps_module orelse blk: {
                 caps_module = capsModule(b, target, optimize);
                 break :blk caps_module.?;
@@ -264,8 +419,8 @@ pub fn build(b: *std.Build) void {
 
         const unavailable = b.addRunArtifact(zcr);
         unavailable.addArg("mcp");
-        unavailable.expectExitCode(exit_unavailable);
-        unavailable.expectStdErrEqual("zcr: 'mcp' is not implemented in this build (T08); no tools are served\n");
+        unavailable.expectExitCode(64);
+        unavailable.expectStdErrEqual("zcr: mcp requires --standalone --policy /absolute/approved-policy.json\n");
         unavailable.has_side_effects = true;
         test_step.dependOn(&unavailable.step);
         selected += 1;
@@ -314,4 +469,32 @@ fn capsModule(b: *std.Build, target: std.Build.ResolvedTarget, optimize: std.bui
         module.linkFramework("CoreFoundation", .{});
     }
     return module;
+}
+
+/// Same sorted sha256sum-of-sha256sum contract fingerprint used by zcr-dev-evidence.
+fn contractDigest() [64]u8 {
+    var total = std.crypto.hash.sha2.Sha256.init(.{});
+    inline for (.{
+        "contracts/README.md",
+        "contracts/data.schema.json",
+        "contracts/inputs/zcr_batch_read.schema.json",
+        "contracts/inputs/zcr_create.schema.json",
+        "contracts/inputs/zcr_files.schema.json",
+        "contracts/inputs/zcr_health.schema.json",
+        "contracts/inputs/zcr_patch.schema.json",
+        "contracts/inputs/zcr_read.schema.json",
+        "contracts/inputs/zcr_search.schema.json",
+        "contracts/inputs/zcr_status.schema.json",
+        "contracts/response.schema.json",
+        "contracts/task-manifest.schema.json",
+        "contracts/tools.json",
+    }) |path| {
+        var digest: [32]u8 = undefined;
+        std.crypto.hash.sha2.Sha256.hash(@embedFile(path), &digest, .{});
+        total.update(&std.fmt.bytesToHex(digest, .lower));
+        total.update("  ");
+        total.update(path);
+        total.update("\n");
+    }
+    return std.fmt.bytesToHex(total.finalResult(), .lower);
 }

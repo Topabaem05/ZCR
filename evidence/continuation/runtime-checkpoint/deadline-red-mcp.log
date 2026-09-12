@@ -1,0 +1,35 @@
+test
++- run test T08-test 0 pass, 1 fail (1 total)
+error: 't08_test.test.IO-004 native MCP preserves deadline-only failure in its envelope' failed:
+       ====== expected this output: =========
+       E_DEADLINE␃
+       
+       ======== instead found this: =========
+       E_CANCELLED␃
+       
+       ======================================
+       First difference occurs on line 1:
+       expected:
+       E_DEADLINE
+         ^ ('\x44')
+       found:
+       E_CANCELLED
+         ^ ('\x43')
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:682:9: 0x1273915 in expectEqualStrings (std.zig)
+               return error.TestExpectedEqual;
+               ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-work/tests/t08_test.zig:26:5: 0x127421f in test.IO-004 native MCP preserves deadline-only failure in its envelope (t08_test.zig)
+           try testing.expectEqualStrings("E_DEADLINE", body.object.get("error").?.object.get("code").?.string);
+           ^
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/integration/cache-mcp && /workspace/scratch/3f4ab65dfb82/state/integration/cache-mcp/o/6c2b313f854082e1be4eff8ca06600dd/T08-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/integration/cache-mcp --seed=0x7537d679 --listen=-
+
+Build Summary: 3/5 steps succeeded (1 failed); 0/1 tests passed (1 failed)
+test transitive failure
++- install T08-test success
+|  +- compile test T08-test Debug native success 621ms MaxRSS:188M
+|     +- options success
++- run test T08-test 0 pass, 1 fail (1 total)
+   +- compile test T08-test Debug native (+1 more reused dependencies)
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/integration/cache-mcp/o/fdca125f0b8dca6576be50b47965ed65/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-work /workspace/scratch/3f4ab65dfb82/state/integration/cache-mcp /workspace/scratch/3f4ab65dfb82/state/integration/global-cache --seed 0x7537d679 -Zcb4d0fc4b9a14390 test -Dtest-group=mcp -Dtest-id=IO-004 -Doptimize=Debug -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/integration/deadline-red-mcp --summary all

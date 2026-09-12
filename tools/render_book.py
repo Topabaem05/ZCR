@@ -11,7 +11,8 @@ def put(path,content):
     (ROOT/path).write_text(content.strip()+'\n',encoding='utf-8')
 # Single-file HTML design book, inline SVG, no external JS/fonts.
 main=sorted(ROOT.glob('docs/*.md'))
-ordered=[ROOT/'README.md']+main+[ROOT/'AGENTS.md',ROOT/'tasks/INDEX.md']+[ROOT/f'tasks/T{i:02}.md' for i in range(26)]+[ROOT/'contracts/README.md',ROOT/'references/SOURCES.md']
+plans=sorted(ROOT.glob('docs/superpowers/plans/*.md'))
+ordered=[ROOT/'README.md']+main+plans+[ROOT/'AGENTS.md',ROOT/'tasks/INDEX.md']+[ROOT/f'tasks/T{i:02}.md' for i in range(26)]+[ROOT/'contracts/README.md',ROOT/'references/SOURCES.md']
 ids={str(p.relative_to(ROOT)):'doc-'+re.sub(r'[^a-zA-Z0-9]+','-',str(p.relative_to(ROOT))) for p in ordered}
 md=MarkdownIt('commonmark',{'html':True}).enable('table')
 sections=[];nav=[]
@@ -45,7 +46,7 @@ for p in ordered:
             dest='#'+(anchor if anchor.startswith('R') else ids[key])
             return 'href="'+dest+'"'
         # source code assets live in ZIP; remove dependency in portable book, retaining plain label.
-        return 'data-package-file="'+html.escape(key)+'" title="편집 원본은 ZIP 패키지에 포함"'
+        return 'data-package-file="'+html.escape(key)+'" title="편집 원본은 저장소에 포함"'
     rendered=re.sub(r'href="([^"]+)"',relink,rendered)
     sections.append(f'<section id="{sid}" class="doc"><div class="docpath">{html.escape(rel)}</div>{rendered}</section>')
     nav.append(f'<a href="#{sid}" class="{"task" if rel.startswith("tasks/T") else "main"}">{html.escape(title)}</a>')
@@ -60,6 +61,6 @@ table{width:100%;border-collapse:collapse;margin:20px 0;font-size:12px;line-heig
 @media(max-width:1000px){nav{position:relative;width:auto;max-height:320px}main{margin:0;padding:28px 22px}.hero h1{font-size:32px}.diagram svg{min-width:520px}}
 @media print{nav{display:none}main{margin:0;padding:0;max-width:none}.hero h1{font-size:28px}.doc{break-before:page;padding-top:10px}h1,h2,h3{break-after:avoid}pre{white-space:pre-wrap;overflow-wrap:anywhere}table{display:table;font-size:9px}th,td{min-width:0;padding:5px}.diagram{break-inside:avoid;border:0}.diagram svg{min-width:0;max-height:820px}a{color:inherit;text-decoration:none}}
 '''
-page='''<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ZCR · Zig Code Runtime | C4 + SDD + Implementation Plans</title><style>'''+css+'''</style></head><body><nav><div class="brand">ZCR / DESIGN</div><div class="sub">Zig 0.16.0 · 2026-09-11<br>구현 전 설계 기준선 v1.0</div>'''+''.join(nav)+'''</nav><main><header class="hero"><div class="eyebrow">CODE AGENT RUNTIME · DESIGN BASELINE</div><h1>빠른 모델이<br>코드 도구를 기다리지 않도록.</h1><p>Apple Silicon을 우선하는 Zig native runtime의 C4·SDD, 메모리·워크트리 격리, 처리 파이프라인, x86 이식성, 구현 Task와 검증 계약.</p><div class="meta"><span><strong>26</strong> implementation tasks</span><span><strong>8</strong> core tools</span><span><strong>11</strong> architecture diagrams</span><span><strong>미실측</strong> 성능 목표</span></div></header>'''+''.join(sections)+'''<footer>이 통합 문서는 외부 JavaScript·폰트·이미지 요청 없이 열람할 수 있습니다. 편집 가능한 원본·계약·fixture·검증기는 ZIP에 포함되어 있습니다. 성능과 런타임 테스트는 실행하지 않았습니다.</footer></main></body></html>'''
+page='''<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ZCR · Zig Code Runtime | C4 + SDD + Implementation Plans</title><style>'''+css+'''</style></head><body><nav><div class="brand">ZCR / DESIGN</div><div class="sub">Zig 0.16.0 · 2026-09-12<br>설계 · 구현 · 검증 진행 중</div>'''+''.join(nav)+'''</nav><main><header class="hero"><div class="eyebrow">CODE AGENT RUNTIME · IMPLEMENTATION & EVIDENCE</div><h1>빠른 모델이<br>코드 도구를 기다리지 않도록.</h1><p>Apple Silicon을 우선하는 Zig native runtime의 C4·SDD, 메모리·워크트리 격리, 처리 파이프라인, x86 이식성, 구현 Task와 검증 계약.</p><div class="meta"><span><strong>26</strong> implementation tasks</span><span><strong>8</strong> core tools</span><span><strong>11</strong> architecture diagrams</span><span><strong>미실측</strong> 성능 목표</span></div></header>'''+''.join(sections)+'''<footer>이 통합 문서는 외부 JavaScript·폰트·이미지 요청 없이 열람할 수 있습니다. 편집 가능한 원본·계약·fixture·검증기는 저장소에 포함되어 있습니다. 실행 상태는 작업 상태표를, 실제 시험 결과는 source·binary·환경이 기록된 evidence를 따릅니다. 문서 검증은 런타임 시험을 대신하지 않습니다.</footer></main></body></html>'''
 put('DESIGNBOOK.html',page)
 print('Built',len(list((ROOT/'diagrams').glob('*.svg'))),'SVG diagrams and HTML',len(page.encode()),'bytes')

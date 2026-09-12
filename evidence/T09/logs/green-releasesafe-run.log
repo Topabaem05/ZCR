@@ -1,0 +1,15 @@
+1/14 t09_test.test.SC-001 foreground dependencies retain USER_INITIATED and pending work promotes...OK
+2/14 t09_test.test.SC-002 four foreground chunks then maintenance with workspace and task rotation...OK
+3/14 t09_test.test.SC-002 eight mixed tasks obey CPU IO and reserved foreground permits before dispatch...OK
+4/14 t09_test.test.SC-003 cancellation races callback teardown and drain keeps all owned jobs alive...OK
+5/14 t09_test.test.SC-004 nested submit uses the same bounded executor and drain detects self wait...OK
+6/14 t09_test.test.SC-002 queue saturation cancellation and invalid reservations preserve caller ownership...OK
+7/14 t09_test.test.SC-004 Darwin public callback QoS and teardown or explicit unsupported status...OK
+8/14 t09_test.test.SC-002 concurrent producers saturate bounded workers without losing jobs...OK
+9/14 t09_test.test.SC-002 executor full queue rejects without consuming its reservation...OK
+10/14 t09_test.test.SC-001 idle work waits behind blocked dependencies and impossible permits reject...OK
+11/14 t09_test.test.SC-004 partial worker creation failure joins started workers and permits retry...OK
+12/14 t09_test.test.SC-003 callback IO failure returns scratch and execution permits before idle barrier...OK
+13/14 t09_test.test.SC-002 R1 multi-permit waiter progresses under staggered foreground refill...OK
+14/14 t09_test.test.SC-001 R2 idle dispatch waits for active foreground callback completion...OK
+All 14 tests passed.

@@ -1,0 +1,43 @@
+1/42 t10_test.test.IS-001 real linked worktrees retain separate dirty bytes and common repo identity...OK
+2/42 t10_test.test.IS-002 root deletion recreation rejects old capability and old incarnation...OK
+3/42 t10_test.test.IS-005 callbacks drain before new writer and stale fence cannot commit...OK
+4/42 t10_test.test.IS-008 shared editor and invalid bound scopes cannot acquire writer...OK
+5/42 t10_test.test.IS-005 TTL renewal expiry and callback limits use monotonic time...OK
+6/42 t10_test.test.IS-005 concurrent acquisition admits exactly one writer and drains after retirement...OK
+7/42 t10_test.test.IS-002 moved root and rewritten linked Git marker revoke identity...OK
+8/42 t10_test.test.IS-008 bounded registry session release wrong roots and discovery failure...OK
+9/42 t10_test.test.IS-001 checkout changes workspace generation and restart rejects previous boot...OK
+10/42 t10_test.test.IS-005 session expiration revokes outstanding callbacks and allocation failure unwinds...OK
+11/42 t10_test.test.IS-005 blocked mutex acquisition samples task expiry at authority check...OK
+12/42 t10_test.test.IS-005 blocked mutex renewal cannot revive an expired writer...OK
+13/42 t10_test.test.IS-005 blocked mutex lease validation rejects expiry...OK
+14/42 t10_test.test.IS-005 blocked mutex callback start rejects expiry...OK
+15/42 t10_test.test.IS-005 blocked mutex callback commit check rejects expiry...OK
+16/42 t10_test.test.IS-005 blocked mutex session bind rejects expiry...OK
+17/42 t10_test.test.IS-005 blocked mutex session validation rejects expiry...OK
+18/42 t10_test.test.IS-005 disconnecting a different task preserves the active writer and callback...OK
+19/42 t10_test.test.IS-005 expired task and its stale lease cannot revoke a different writer...OK
+20/42 t10_test.test.IS-005 expiry revokes its own writer and waits for its callback to drain...OK
+21/42 t10_test.test.IS-002 Git marker FIFO replacement between stat and open cannot block...OK
+22/42 t10_test.test.IS-002 Git marker timestamp change after read invalidates discovery...OK
+23/42 t10_test.test.IS-002 Git marker size change after read invalidates discovery...OK
+24/42 t10_test.test.IS-002 Git marker directory entry replacement after read invalidates discovery...OK
+25/42 t10_test.test.IS-001 snapshot exposes HEAD copied from retained discovery...OK
+26/42 t10_test.test.IS-005 commit guard holds revocation until filesystem publication finishes...OK
+27/42 t10_test.test.IS-005 commit guard holds session unbind until publication finishes...OK
+28/42 t10_test.test.IS-005 commit guard serializes managed write disable...OK
+29/42 t10_test.test.IS-005 commit guard serializes dirty generation changes...OK
+30/42 t10_test.test.IS-005 commit guard serializes validation expiry...OK
+31/42 t10_test.test.IS-005 commit guard serializes renewal expiry...OK
+32/42 t10_test.test.IS-005 commit guard serializes callback admission expiry...OK
+33/42 t10_test.test.IS-005 commit guard serializes callback validation expiry...OK
+34/42 t10_test.test.IS-005 commit guard serializes writer acquisition expiry...OK
+35/42 t10_test.test.IS-002 commit guard serializes rediscovered HEAD generation...OK
+36/42 t10_test.test.IS-002 commit guard serializes replacement incarnation retirement...OK
+37/42 t10_test.test.IS-002 commit guard serializes invalid root retirement...OK
+38/42 t10_test.test.IS-005 commit generation reservation abort apply and stale guards are bounded...OK
+39/42 t10_test.test.IS-005 held commit guard permits independent worktree progress...OK
+40/42 t10_test.test.IS-002 waiting commit rechecks root identity after another publication releases...OK
+41/42 t10_test.test.IS-005 concurrent unbind waiters relookup session after guard release...OK
+42/42 t10_test.test.IS-005 publication waiter bound refuses pressure without changing current guard...OK
+All 42 tests passed.

@@ -77,9 +77,15 @@ pub fn success(buffer: []u8, envelope: Envelope, data: Data, status: core.Result
     const plan = try planData(data, output_bytes);
     const truncated = status.truncated or plan.omitted > 0;
     const complete = status.complete and !truncated;
+    var emitted_status = status;
+    if (data == .batch_read) {
+        // Existing item errors are already counted by the batcher. Only successful
+        // items replaced during projection introduce additional skipped items.
+        emitted_status.coverage.skipped = std.math.add(u64, status.coverage.skipped, plan.omitted) catch return error.InvalidArgument;
+    }
 
     var out: Out = .{ .buf = buffer };
-    writeSuccess(&out, envelope, data, status, plan, complete, truncated) catch |err| return switch (err) {
+    writeSuccess(&out, envelope, data, emitted_status, plan, complete, truncated) catch |err| return switch (err) {
         error.NoSpace => error.InvalidArgument,
         error.InvalidText => error.InvalidArgument,
     };

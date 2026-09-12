@@ -20,6 +20,18 @@ const Allocator = std.mem.Allocator;
 const KiB = core.limits.KiB;
 const MiB = core.limits.MiB;
 
+test "IO-004 native batch preserves a deadline-only token at admission" {
+    var arena = std.heap.ArenaAllocator.init(testing.allocator);
+    defer arena.deinit();
+    const h = try Harness.init(arena.allocator(), .{});
+    defer h.deinit();
+    try h.write("deadline.txt", "content\n");
+    h.batcher.cancel = h.batcher.cancel.withTimeout(io, 0);
+    const items = [_]core.BatchReadItem{.{ .item_id = "d", .spec = .{ .path = .{ .bytes = "deadline.txt" }, .lines = .{ .first = 1, .count = 1 } } }};
+    try h.expectBatchError(error.DeadlineExceeded, session(), &items, try batch.plannedCost(&items, 4096, 1));
+    try testing.expect(!h.cancel_flag.load(.acquire));
+}
+
 const workspace: core.WorkspaceId = .{ .registry_uuid = @splat(0x11), .incarnation = @splat(0x22) };
 const other_workspace: core.WorkspaceId = .{ .registry_uuid = @splat(0x11), .incarnation = @splat(0x99) };
 const task: core.TaskId = .{ .uuid = @splat(0x33) };
@@ -244,6 +256,102 @@ fn openFdCount() !usize {
 
 // ------------------------------------------------------------------ BA-001
 
+test "BA-001 plannedCost rejects zero line count without panicking" {
+    const items = [_]core.BatchReadItem{item("zero-count", "a.txt", 1, 0)};
+    try testing.expectError(error.InvalidArgument, batch.plannedCost(&items, 64 * KiB, 1));
+}
+
+test "BA-001 plannedCost rejects overflowing line range without panicking" {
+    const items = [_]core.BatchReadItem{item("overflow", "a.txt", std.math.maxInt(u32), 2)};
+    try testing.expectError(error.InvalidArgument, batch.plannedCost(&items, 64 * KiB, 1));
+}
+
+test "BA-001 plannedCost validates request constraints before computing a reservation" {
+    const ranges = [_]core.LineRange{
+        .{ .first = 0, .count = 1 },
+        .{ .first = 1, .count = core.limits.values.max_read_lines + 1 },
+    };
+    for (ranges) |range| {
+        const items = [_]core.BatchReadItem{item("invalid", "a.txt", range.first, range.count)};
+        try testing.expectError(error.InvalidArgument, batch.plannedCost(&items, 64 * KiB, 1));
+    }
+    var items = [_]core.BatchReadItem{item("valid", "a.txt", std.math.maxInt(u32), 1)};
+    _ = try batch.plannedCost(&items, 64 * KiB, 1);
+    for ([_]u64{ 0, core.limits.values.max_output_bytes + 1 }) |output| {
+        items[0].spec.output_bytes = output;
+        try testing.expectError(error.InvalidArgument, batch.plannedCost(&items, 64 * KiB, 1));
+    }
+}
+
+fn expectBatchMatchesStandalone(h: *Harness, items: []const core.BatchReadItem) !void {
+    for ([_]u32{ 1, 4 }) |concurrency| {
+        h.batcher.caps.max_concurrency = concurrency;
+        var result = try h.run(items, 64 * KiB, concurrency);
+        defer h.finish(&result) catch unreachable;
+        for (items, result.items()) |it, got| {
+            var oracle = try h.oracle(it);
+            defer h.releaseOracle(&oracle) catch unreachable;
+            try expectSameItem(oracle, got);
+        }
+    }
+}
+
+test "BA-001 adjacent invalid UTF-8 does not poison a valid later member" {
+    var arena_state = std.heap.ArenaAllocator.init(testing.allocator);
+    defer arena_state.deinit();
+    const h = try Harness.init(arena_state.allocator(), .{});
+    defer h.deinit();
+    try h.write("mixed.txt", "\xff\nvalid\n");
+    const items = [_]core.BatchReadItem{
+        item("bad", "mixed.txt", 1, 1),
+        item("good", "mixed.txt", 2, 1),
+    };
+    var good = try h.oracle(items[1]);
+    defer h.releaseOracle(&good) catch unreachable;
+    try testing.expectEqualStrings("valid\n", good.ok.owned.value.lines[0].text);
+    try expectBatchMatchesStandalone(h, &items);
+    const reversed = [_]core.BatchReadItem{ items[1], items[0] };
+    try expectBatchMatchesStandalone(h, &reversed);
+}
+
+test "BA-001 adjacent long line cannot exhaust a later members own output budget" {
+    var arena_state = std.heap.ArenaAllocator.init(testing.allocator);
+    defer arena_state.deinit();
+    const h = try Harness.init(arena_state.allocator(), .{});
+    defer h.deinit();
+    try h.write("long.txt", "x" ** 100 ++ "\nok\n");
+    var items = [_]core.BatchReadItem{
+        item("long", "long.txt", 1, 1),
+        item("short", "long.txt", 2, 1),
+    };
+    for (&items) |*it| it.spec.output_bytes = 8;
+    var short = try h.oracle(items[1]);
+    defer h.releaseOracle(&short) catch unreachable;
+    try testing.expectEqualStrings("ok\n", short.ok.owned.value.lines[0].text);
+    try expectBatchMatchesStandalone(h, &items);
+    const reversed = [_]core.BatchReadItem{ items[1], items[0] };
+    try expectBatchMatchesStandalone(h, &reversed);
+}
+
+test "BA-001 same range with different output limits keeps standalone UTF-8 results" {
+    var arena_state = std.heap.ArenaAllocator.init(testing.allocator);
+    defer arena_state.deinit();
+    const h = try Harness.init(arena_state.allocator(), .{});
+    defer h.deinit();
+    try h.write("limits.txt", "ok\n\xff\n");
+    var items = [_]core.BatchReadItem{
+        item("small", "limits.txt", 1, 2),
+        item("large", "limits.txt", 1, 2),
+    };
+    items[0].spec.output_bytes = 3;
+    items[1].spec.output_bytes = 16;
+    var small = try h.oracle(items[0]);
+    defer h.releaseOracle(&small) catch unreachable;
+    try testing.expectEqualStrings("ok\n", small.ok.owned.value.lines[0].text);
+    try testing.expect(small.ok.owned.value.status.truncated);
+    try expectBatchMatchesStandalone(h, &items);
+}
+
 /// 32 items: distinct ranges, an exact duplicate, overlapping ranges, missing
 /// files, a directory, write intent, EOF edges, CRLF, invalid UTF-8 and small
 /// per-item output caps.
@@ -308,10 +416,10 @@ test "BA-001 32 items keep input order, item ids and per-item errors, and match 
 
     try testing.expectEqual(@as(usize, 32), r.items().len);
     const expected_ids = [_][]const u8{
-        "item-0",  "item-1",  "item-2",  "item-3",  "item-4",  "item-5",     "item-6",    "item-7",
-        "item-8",  "item-9",  "item-10", "item-11", "item-12", "item-13",    "item-14",   "item-15",
-        "item-16", "item-17", "item-18", "item-19", "dup-3",   "overlap-3",  "missing",   "directory",
-        "hash-5",  "tail-19", "past-eof-7", "crlf", "invalid-utf8", "missing-again", "tiny-output", "truncated-1",
+        "item-0",  "item-1",  "item-2",     "item-3",  "item-4",       "item-5",        "item-6",      "item-7",
+        "item-8",  "item-9",  "item-10",    "item-11", "item-12",      "item-13",       "item-14",     "item-15",
+        "item-16", "item-17", "item-18",    "item-19", "dup-3",        "overlap-3",     "missing",     "directory",
+        "hash-5",  "tail-19", "past-eof-7", "crlf",    "invalid-utf8", "missing-again", "tiny-output", "truncated-1",
     };
     for (r.items(), expected_ids, oracles) |got, id, o| {
         try testing.expectEqualStrings(id, got.item_id);
@@ -338,8 +446,8 @@ test "BA-001 32 items keep input order, item ids and per-item errors, and match 
     const rep = h.batcher.report();
     try testing.expectEqual(@as(u32, 32), rep.items);
     try testing.expectEqual(@as(u32, 1), rep.deduplicated);
-    try testing.expectEqual(@as(u32, 3), rep.merged);
-    try testing.expectEqual(@as(u32, 25), rep.jobs);
+    try testing.expectEqual(@as(u32, 0), rep.merged);
+    try testing.expectEqual(@as(u32, 28), rep.jobs);
     try testing.expectEqual(@as(u32, 5), rep.item_errors);
     try testing.expect(rep.peak_running <= 4);
 
@@ -848,7 +956,7 @@ test "T07 projection keeps whole lines within output_bytes and says the result i
     try testing.expectEqual(@as(u64, 2), failed.returned_bytes);
 }
 
-test "T07 batch projection keeps every item id in order and marks items that do not fit" {
+test "BA-003 batch projection keeps every item id and counts budget replacements in coverage" {
     var arena_state = std.heap.ArenaAllocator.init(testing.allocator);
     defer arena_state.deinit();
     const arena = arena_state.allocator();
@@ -875,6 +983,11 @@ test "T07 batch projection keeps every item id in order and marks items that do 
     try testing.expectEqual(@as(u32, 2), response.omitted);
 
     const root = try parse(arena, response.bytes);
+    try testing.expectEqual(@as(i64, 3), root.object.get("coverage").?.object.get("skipped").?.integer);
+    try testing.expect(root.object.get("truncated").?.bool);
+    try testing.expect(!root.object.get("complete").?.bool);
+    const reasons = root.object.get("coverage").?.object.get("reasons").?.array.items;
+    try testing.expectEqualStrings(projection.reason_output_budget, reasons[reasons.len - 1].string);
     const got = root.object.get("data").?.object.get("items").?.array.items;
     try testing.expectEqual(@as(usize, 5), got.len);
     const ids = [_][]const u8{ "a", "b", "c", "d", "e" };
@@ -895,6 +1008,10 @@ test "T07 batch projection keeps every item id in order and marks items that do 
 
     // A budget too small for even the error forms of all items is refused.
     try testing.expectError(error.OutputBudgetExceeded, project(arena, envelope, .{ .batch_read = value }, value.status, 100));
+    const full = try project(arena, envelope, .{ .batch_read = value }, value.status, 16 * KiB);
+    const full_root = try parse(arena, full.bytes);
+    try testing.expectEqual(@as(u32, 0), full.omitted);
+    try testing.expectEqual(@as(i64, 1), full_root.object.get("coverage").?.object.get("skipped").?.integer);
 }
 
 test "T07 files and search projection keep whole entries within output_bytes" {

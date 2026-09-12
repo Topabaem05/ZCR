@@ -1,0 +1,26 @@
+{
+  "schema_version": "zcr-task-preflight/1",
+  "task_id": "T10",
+  "base_commit": "9897f27a18c66c310ae6dda3ee854f7fdcdcfa3d",
+  "source_commit": "a84ab2417b3754fb0bf8681fa7a07a7b8510bae7",
+  "worktree": "/workspace/scratch/3f4ab65dfb82/ZCR-T10",
+  "branch": "codex/t10-workspace",
+  "manifest_sha256": "e610abc003111c8ece17bf1f9704aeff65ab038de5164f166df8f288c5c0214a",
+  "manifest_workspace_id": "d912a36b-18c2-4552-95bf-c74a0ac72d70",
+  "contract_digest": "8aa53314410fe471f0e070c522766684286f60e1ad4d9785c292bb709ea370a4",
+  "dependency_hashes": {
+    "src/core/types.zig": "16347affe942c1393bdbe28c053a0e5813888b6f141b4a157b3c7068ae12500c",
+    "src/core/errors.zig": "4166c1278c889e703cebc67925acfa9e768f5a4119fe42bfb8e29084a4752f1c",
+    "src/policy/capability.zig": "11a77a83e45aab973e54e69e3d5f953d74efc1a1193fdf74006e4119772183c9",
+    "src/policy/paths.zig": "af8e8c6ec7af13f79c25ff4641d12ccaf0d6c3d60720fdd5416c9512a6edfb31",
+    "src/policy/scope.zig": "ff9b6246f4451a851d406cdcb82ad805f3668e40455ce0782d1f7d5ab641696c",
+    "build.zig": "f71a6e08f73ed3df32cebe0afc7f21e04f9952a0b56d526e763ecb04f418a2a1",
+    "tests/t02_test.zig": "7c68a2bd70a5e9f4e07c9d4ac9e39c4da49fdb9d1e6062aac280ada03347d6c0"
+  },
+  "toolchain_version": "0.16.0",
+  "toolchain_sha256": "2317bbb91798556d9d0f38aabdac23db83f0979b25f767259ae474546724087c",
+  "git_version": "git version 2.43.0",
+  "platform": "Linux-6.18.35-x86_64-with-glibc2.39",
+  "integrator_build_commit": "5264d13",
+  "integrator_build_note": "Authorized cherry-pick of root-owned build registration 9542cf7; exclude when integrating T10 owned commits."
+}

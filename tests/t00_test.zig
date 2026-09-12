@@ -220,11 +220,55 @@ test "G04 sysctl probe distinguishes present and absent keys" {
     }
 }
 
+// Fixture mutations use a system-owned executable and never inherit Git controls.
+fn trustedGit() ![]const u8 {
+    for ([_][]const u8{ "/usr/bin/git", "/bin/git" }) |candidate| {
+        const stat = std.Io.Dir.cwd().statFile(io, candidate, .{}) catch continue;
+        if (stat.kind == .file and stat.permissions.toMode() & 0o111 != 0) return candidate;
+    }
+    return error.TrustedFixtureGitUnavailable;
+}
+
+fn fixtureEnvironment(arena: std.mem.Allocator, inherited: *const std.process.Environ.Map, empty_template: []const u8) !std.process.Environ.Map {
+    var clean = std.process.Environ.Map.init(arena);
+    var entries = inherited.iterator();
+    while (entries.next()) |entry| {
+        if (std.ascii.startsWithIgnoreCase(entry.key_ptr.*, "GIT_")) continue;
+        try clean.put(entry.key_ptr.*, entry.value_ptr.*);
+    }
+    try clean.put("GIT_CONFIG_GLOBAL", "/dev/null");
+    try clean.put("GIT_CONFIG_NOSYSTEM", "1");
+    try clean.put("GIT_TERMINAL_PROMPT", "0");
+    try clean.put("GIT_AUTHOR_NAME", "t00");
+    try clean.put("GIT_AUTHOR_EMAIL", "t00@example.invalid");
+    try clean.put("GIT_COMMITTER_NAME", "t00");
+    try clean.put("GIT_COMMITTER_EMAIL", "t00@example.invalid");
+    const keys = [_][]const u8{ "core.hooksPath", "commit.gpgSign", "tag.gpgSign", "init.templateDir", "core.attributesFile", "core.excludesFile" };
+    const values = [_][]const u8{ "/dev/null", "false", "false", empty_template, "/dev/null", "/dev/null" };
+    try clean.put("GIT_CONFIG_COUNT", "6");
+    for (keys, values, 0..) |key, value, i| {
+        try clean.put(try std.fmt.allocPrint(arena, "GIT_CONFIG_KEY_{d}", .{i}), key);
+        try clean.put(try std.fmt.allocPrint(arena, "GIT_CONFIG_VALUE_{d}", .{i}), value);
+    }
+    return clean;
+}
+
 fn runOk(arena: std.mem.Allocator, cwd: []const u8, argv: []const []const u8) !void {
+    var inherited = try testing.environ.createMap(arena);
+    return runOkFromEnvironment(arena, cwd, argv, &inherited);
+}
+
+fn runOkFromEnvironment(arena: std.mem.Allocator, cwd: []const u8, argv: []const []const u8, inherited: *const std.process.Environ.Map) !void {
+    std.debug.assert(argv.len > 0 and std.mem.eql(u8, argv[0], "git"));
+    var empty_template = testing.tmpDir(.{});
+    defer empty_template.cleanup();
+    var env = try fixtureEnvironment(arena, inherited, try empty_template.dir.realPathFileAlloc(io, ".", arena));
+    const trusted_argv = try arena.dupe([]const u8, argv);
+    trusted_argv[0] = try trustedGit();
     const result = try std.process.run(arena, io, .{
-        .argv = argv,
+        .argv = trusted_argv,
         .cwd = .{ .path = cwd },
-        .expand_arg0 = .expand, // resolve "git" through PATH
+        .environ_map = &env,
     });
     switch (result.term) {
         .exited => |code| if (code != 0) {
@@ -254,7 +298,11 @@ test "G06 git probe identifies main and linked worktrees" {
     try runOk(arena, repo, &(git_id ++ [_][]const u8{ "commit", "-q", "-m", "fixture" }));
     try runOk(arena, repo, &.{ "git", "worktree", "add", "-q", "-b", "linked", linked });
 
-    var env = try testing.environ.createMap(arena);
+    var inherited = try testing.environ.createMap(arena);
+    try tmp.dir.createDirPath(io, "empty-template");
+    var env = try fixtureEnvironment(arena, &inherited, try std.fs.path.join(arena, &.{ base, "empty-template" }));
+    // probeGit intentionally exercises PATH discovery; restrict this fixture probe to trusted directories.
+    try env.put("PATH", "/usr/bin:/bin");
 
     const main_probe = try caps.probeGit(arena, io, &env, repo);
     try testing.expectEqual(caps.ProbeStatus.present, main_probe.status);
@@ -312,4 +360,63 @@ test "B0/B1 tool probe reports absent tools explicitly" {
     try testing.expectEqual(caps.ProbeStatus.present, git.status);
     try testing.expect(std.mem.startsWith(u8, git.version.?, "git version "));
     try testing.expectEqual(@as(usize, 64), git.sha256.?.len);
+}
+
+test "G06 fixture hostile Git environment cannot redirect mutations into a sentinel" {
+    var arena_state = std.heap.ArenaAllocator.init(testing.allocator);
+    defer arena_state.deinit();
+    const arena = arena_state.allocator();
+    var tmp = testing.tmpDir(.{});
+    defer tmp.cleanup();
+    const base = try tmp.dir.realPathFileAlloc(io, ".", arena);
+    const sentinel = try std.fs.path.join(arena, &.{ base, "sentinel" });
+    const target = try std.fs.path.join(arena, &.{ base, "target" });
+    try tmp.dir.createDirPath(io, "sentinel");
+    try tmp.dir.createDirPath(io, "target");
+    try tmp.dir.createDirPath(io, "hostile-empty-template");
+    try tmp.dir.writeFile(io, .{ .sub_path = "sentinel/tracked.txt", .data = "sentinel original\n" });
+    var clean = std.process.Environ.Map.init(arena);
+    try clean.put("PATH", "/usr/bin:/bin");
+    try clean.put("GIT_CONFIG_GLOBAL", "/dev/null");
+    try clean.put("GIT_CONFIG_NOSYSTEM", "1");
+    const identity = [_][]const u8{ "git", "-c", "user.name=t00", "-c", "user.email=t00@example.invalid", "-c", "commit.gpgSign=false" };
+    try runOkFromEnvironment(arena, sentinel, &.{ "git", "init", "-q", "-b", "sentinel" }, &clean);
+    try runOkFromEnvironment(arena, sentinel, &.{ "git", "add", "." }, &clean);
+    try runOkFromEnvironment(arena, sentinel, &(identity ++ [_][]const u8{ "commit", "-q", "-m", "sentinel base" }), &clean);
+    try tmp.dir.writeFile(io, .{ .sub_path = "sentinel/untracked.txt", .data = "remain untracked\n" });
+    const before = try caps.probeGit(arena, io, &clean, sentinel);
+    const before_index = try tmp.dir.readFileAlloc(io, "sentinel/.git/index", arena, .limited(1 << 20));
+    const before_config = try tmp.dir.readFileAlloc(io, "sentinel/.git/config", arena, .limited(1 << 20));
+
+    var hostile = try clean.clone(arena);
+    try hostile.put("GIT_DIR", try std.fs.path.join(arena, &.{ sentinel, ".git" }));
+    try hostile.put("GIT_WORK_TREE", sentinel);
+    try hostile.put("GIT_INDEX_FILE", try std.fs.path.join(arena, &.{ sentinel, ".git/index" }));
+    try hostile.put("GIT_CONFIG", try std.fs.path.join(arena, &.{ sentinel, ".git/config" }));
+    try hostile.put("GIT_CONFIG_COUNT", "1");
+    try hostile.put("GIT_CONFIG_KEY_0", "core.worktree");
+    try hostile.put("GIT_CONFIG_VALUE_0", sentinel);
+    try hostile.put("GIT_TEMPLATE_DIR", try std.fs.path.join(arena, &.{ base, "hostile-empty-template" }));
+    try hostile.put("GIT_FUTURE_UNRECOGNIZED_OVERRIDE", "must be removed too");
+    try hostile.put("PATH", try std.fs.path.join(arena, &.{ base, "untrusted-bin" }));
+    try hostile.put("ZCR_FIXTURE_HOST_VALUE", "preserved");
+    var sanitized = try fixtureEnvironment(arena, &hostile, try std.fs.path.join(arena, &.{ base, "hostile-empty-template" }));
+    try testing.expectEqualStrings("preserved", sanitized.get("ZCR_FIXTURE_HOST_VALUE").?);
+    try testing.expectEqualStrings(hostile.get("PATH").?, sanitized.get("PATH").?);
+    for ([_][]const u8{ "GIT_DIR", "GIT_WORK_TREE", "GIT_INDEX_FILE", "GIT_CONFIG", "GIT_FUTURE_UNRECOGNIZED_OVERRIDE" }) |key| try testing.expect(sanitized.get(key) == null);
+    try tmp.dir.writeFile(io, .{ .sub_path = "target/fixture-only.txt", .data = "target only\n" });
+    try runOkFromEnvironment(arena, target, &.{ "git", "init", "-q", "-b", "target" }, &hostile);
+    try runOkFromEnvironment(arena, target, &.{ "git", "config", "fixture.probe", "target-only" }, &hostile);
+    try runOkFromEnvironment(arena, target, &.{ "git", "add", "." }, &hostile);
+    try runOkFromEnvironment(arena, target, &(identity ++ [_][]const u8{ "commit", "-q", "-m", "target fixture mutation" }), &hostile);
+
+    const after = try caps.probeGit(arena, io, &clean, sentinel);
+    try testing.expectEqualStrings(before.head_commit.?, after.head_commit.?);
+    try testing.expectEqualSlices(u8, before_index, try tmp.dir.readFileAlloc(io, "sentinel/.git/index", arena, .limited(1 << 20)));
+    try testing.expectEqualSlices(u8, before_config, try tmp.dir.readFileAlloc(io, "sentinel/.git/config", arena, .limited(1 << 20)));
+    try testing.expectEqualStrings("remain untracked\n", try tmp.dir.readFileAlloc(io, "sentinel/untracked.txt", arena, .limited(1024)));
+    try testing.expectEqualStrings("sentinel original\n", try tmp.dir.readFileAlloc(io, "sentinel/tracked.txt", arena, .limited(1024)));
+    const target_probe = try caps.probeGit(arena, io, &clean, target);
+    try testing.expectEqual(caps.GitFileKind.directory, target_probe.dot_git_kind);
+    try testing.expect(!std.mem.eql(u8, before.absolute_git_dir.?, target_probe.absolute_git_dir.?));
 }

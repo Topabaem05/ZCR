@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "state": {
+    "toplevel": "/workspace/scratch/3f4ab65dfb82/ZCR-T09",
+    "absolute_git_dir": "/workspace/scratch/3f4ab65dfb82/ZCR/.git/worktrees/ZCR-T09",
+    "common_dir": "/workspace/scratch/3f4ab65dfb82/ZCR/.git",
+    "head_commit": "acc2741304887825080762166f09dfe0aeb5533c",
+    "head_tree": "b467e50360e331b500f1079aee12442494e8b778",
+    "branch": "codex/t09-scheduler",
+    "entries": []
+  },
+  "reasons": []
+}

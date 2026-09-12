@@ -1,6 +1,6 @@
 # 구현 Task 인덱스
 
-**26 Tasks · 각 Task S01–S06 · 모든 상태 PLANNED.** 독립 branch/worktree, owned files, dependencies, inputs/outputs, RED/GREEN test, provenance handoff를 기준으로 진행한다. 단순 순서가 아니라 아래 DAG를 따른다.
+**26 Tasks · 각 Task S01–S06.** 현재 상태는 [progress.json](progress.json), 실행 순서는 [후속 계획](../docs/superpowers/plans/2026-09-12-runtime-continuation.md)을 따른다. T00–T07에는 구현과 과거 증거가 있으며, 새 통합 소스의 재검증과 남은 플랫폼 게이트를 구분한다. 독립 branch/worktree, owned files, dependencies, inputs/outputs, RED/GREEN test, provenance handoff를 기준으로 진행한다. 단순 순서가 아니라 아래 DAG를 따른다.
 
 | Task | 목적 | 선행 Task | 구분 |
 |---|---|---|---|
@@ -33,4 +33,4 @@
 
 ![Task DAG](../diagrams/task-dag.svg)
 
-Task의 실제 코딩은 이 문서 패키지 밖 향후 프로젝트에서 수행한다. schema와 runner 변경은 단일 integration owner가 처리한다.
+구현은 이 저장소에서 Task별 독립 worktree로 진행한다. schema와 runner 변경은 단일 integration owner가 처리한다.

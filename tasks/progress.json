@@ -1,0 +1,363 @@
+{
+  "schema_version": "zcr-progress/1",
+  "updated": "2026-09-12",
+  "source_baseline": "531cfc378950e6ef6ac6f49cb4e2de3de56312cc",
+  "release_status": "BLOCKED",
+  "notes": [
+    "Spec catalog is not runtime evidence.",
+    "Historical handoffs identify their own source/binary and do not prove this checkout.",
+    "Current mandatory external Mac/client/E2E gates remain required."
+  ],
+  "tasks": [
+    {
+      "id": "T00",
+      "required": true,
+      "status": "IMPLEMENTED_WITH_OPEN_GATES",
+      "historical_evidence": "evidence/T00/handoff.json",
+      "current_evidence": [
+        "evidence/continuation/test-harness/provenance.json"
+      ],
+      "required_tests": [
+        "PF-001"
+      ]
+    },
+    {
+      "id": "T01",
+      "required": true,
+      "status": "IMPLEMENTED_WITH_OPEN_GATES",
+      "historical_evidence": "evidence/T01/handoff.json",
+      "current_evidence": [
+        "evidence/continuation/test-harness/provenance.json"
+      ],
+      "required_tests": [
+        "DV-001",
+        "DV-004",
+        "DV-005"
+      ]
+    },
+    {
+      "id": "T02",
+      "required": true,
+      "status": "IMPLEMENTED_WITH_OPEN_GATES",
+      "historical_evidence": "evidence/T02/handoff.json",
+      "current_evidence": [
+        "evidence/continuation/test-harness/provenance.json"
+      ],
+      "required_tests": [
+        "IS-003",
+        "IS-004",
+        "DV-002",
+        "DV-003"
+      ]
+    },
+    {
+      "id": "T03",
+      "required": true,
+      "status": "IMPLEMENTED_WITH_OPEN_GATES",
+      "historical_evidence": "evidence/T03/handoff.json",
+      "current_evidence": [
+        "evidence/continuation/test-harness/provenance.json"
+      ],
+      "required_tests": [
+        "ME-001",
+        "ME-002",
+        "ME-003",
+        "ME-007"
+      ]
+    },
+    {
+      "id": "T04",
+      "required": true,
+      "status": "IMPLEMENTED_WITH_OPEN_GATES",
+      "historical_evidence": "evidence/T04/handoff.json",
+      "current_evidence": [
+        "evidence/continuation/legacy/report.md"
+      ],
+      "required_tests": [
+        "IO-001",
+        "IO-002",
+        "IO-003",
+        "IO-004",
+        "IO-005",
+        "IO-006"
+      ]
+    },
+    {
+      "id": "T05",
+      "required": true,
+      "status": "IMPLEMENTED_WITH_OPEN_GATES",
+      "historical_evidence": "evidence/T05/handoff.json",
+      "current_evidence": [
+        "evidence/continuation/legacy/report.md"
+      ],
+      "required_tests": [
+        "FS-001",
+        "FS-002",
+        "FS-003",
+        "FS-004",
+        "FS-005",
+        "FS-006"
+      ]
+    },
+    {
+      "id": "T06",
+      "required": true,
+      "status": "IMPLEMENTED_WITH_OPEN_GATES",
+      "historical_evidence": "evidence/T06/handoff.json",
+      "current_evidence": [
+        "evidence/continuation/legacy/report.md"
+      ],
+      "required_tests": [
+        "SR-001",
+        "SR-002",
+        "SR-003",
+        "SR-004",
+        "SR-005",
+        "SR-006"
+      ]
+    },
+    {
+      "id": "T07",
+      "required": true,
+      "status": "IMPLEMENTED_WITH_OPEN_GATES",
+      "historical_evidence": "evidence/T07/handoff.json",
+      "current_evidence": [
+        "evidence/T07/handoff.json"
+      ],
+      "required_tests": [
+        "BA-001",
+        "BA-002",
+        "BA-003"
+      ]
+    },
+    {
+      "id": "T08",
+      "required": true,
+      "status": "IN_PROGRESS",
+      "historical_evidence": null,
+      "current_evidence": [
+        "evidence/T08/handoff.json"
+      ],
+      "required_tests": [
+        "MC-001",
+        "MC-002",
+        "MC-003",
+        "MC-004"
+      ]
+    },
+    {
+      "id": "T09",
+      "required": true,
+      "status": "IN_PROGRESS",
+      "historical_evidence": null,
+      "current_evidence": [
+        "evidence/T09/handoff.json"
+      ],
+      "required_tests": [
+        "SC-001",
+        "SC-002",
+        "SC-003",
+        "SC-004"
+      ]
+    },
+    {
+      "id": "T10",
+      "required": true,
+      "status": "IN_PROGRESS",
+      "historical_evidence": null,
+      "current_evidence": [
+        "evidence/T10/handoff.json"
+      ],
+      "required_tests": [
+        "IS-001",
+        "IS-002",
+        "IS-005",
+        "IS-008"
+      ]
+    },
+    {
+      "id": "T11",
+      "required": true,
+      "status": "IN_PROGRESS",
+      "historical_evidence": null,
+      "current_evidence": [],
+      "required_tests": [
+        "WR-001",
+        "WR-002",
+        "WR-003",
+        "WR-004",
+        "WR-007",
+        "WR-009",
+        "WR-010",
+        "IS-007"
+      ]
+    },
+    {
+      "id": "T12",
+      "required": true,
+      "status": "PENDING",
+      "historical_evidence": null,
+      "current_evidence": [],
+      "required_tests": [
+        "WR-005",
+        "WR-006",
+        "WR-008"
+      ]
+    },
+    {
+      "id": "T13",
+      "required": true,
+      "status": "IN_PROGRESS",
+      "historical_evidence": null,
+      "current_evidence": [],
+      "required_tests": [
+        "ME-004",
+        "IS-006"
+      ]
+    },
+    {
+      "id": "T14",
+      "required": true,
+      "status": "PENDING",
+      "historical_evidence": null,
+      "current_evidence": [],
+      "required_tests": [
+        "WA-001",
+        "WA-002",
+        "WA-003",
+        "WA-004",
+        "WA-005",
+        "WA-006"
+      ]
+    },
+    {
+      "id": "T15",
+      "required": true,
+      "status": "PENDING",
+      "historical_evidence": null,
+      "current_evidence": [],
+      "required_tests": [
+        "BR-001",
+        "BR-002",
+        "BR-003",
+        "BR-004",
+        "BR-005"
+      ]
+    },
+    {
+      "id": "T16",
+      "required": true,
+      "status": "PENDING",
+      "historical_evidence": null,
+      "current_evidence": [],
+      "required_tests": [
+        "SC-005",
+        "SC-006",
+        "ME-005",
+        "ME-006"
+      ]
+    },
+    {
+      "id": "T17",
+      "required": true,
+      "status": "PENDING",
+      "historical_evidence": null,
+      "current_evidence": [],
+      "required_tests": [
+        "ME-008"
+      ]
+    },
+    {
+      "id": "T18",
+      "required": false,
+      "status": "NOT_SELECTED",
+      "historical_evidence": null,
+      "current_evidence": [],
+      "required_tests": [
+        "WIN-GATE"
+      ]
+    },
+    {
+      "id": "T19",
+      "required": true,
+      "status": "PENDING",
+      "historical_evidence": null,
+      "current_evidence": [],
+      "required_tests": [
+        "PF-005"
+      ]
+    },
+    {
+      "id": "T20",
+      "required": false,
+      "status": "NOT_SELECTED",
+      "historical_evidence": null,
+      "current_evidence": [],
+      "required_tests": [
+        "AS-001",
+        "AS-002",
+        "AS-003",
+        "AS-004"
+      ]
+    },
+    {
+      "id": "T21",
+      "required": true,
+      "status": "PENDING",
+      "historical_evidence": null,
+      "current_evidence": [],
+      "required_tests": [
+        "PF-002",
+        "PF-003",
+        "PF-004",
+        "PF-006",
+        "PF-007"
+      ]
+    },
+    {
+      "id": "T22",
+      "required": true,
+      "status": "PENDING",
+      "historical_evidence": null,
+      "current_evidence": [],
+      "required_tests": [
+        "OB-001",
+        "OB-002",
+        "OB-003",
+        "OB-004"
+      ]
+    },
+    {
+      "id": "T23",
+      "required": true,
+      "status": "PENDING",
+      "historical_evidence": null,
+      "current_evidence": [],
+      "required_tests": [
+        "MC-005",
+        "MC-006"
+      ]
+    },
+    {
+      "id": "T24",
+      "required": true,
+      "status": "PENDING",
+      "historical_evidence": null,
+      "current_evidence": [],
+      "required_tests": [
+        "PACKAGE-GATE"
+      ]
+    },
+    {
+      "id": "T25",
+      "required": true,
+      "status": "PENDING",
+      "historical_evidence": null,
+      "current_evidence": [],
+      "required_tests": [
+        "PF-008",
+        "DV-006"
+      ]
+    }
+  ]
+}

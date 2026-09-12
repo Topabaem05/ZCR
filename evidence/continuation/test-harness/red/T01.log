@@ -1,0 +1,25 @@
+1/1 t01_test.test.DV-001 fixture hostile Git environment cannot redirect mutations into a sentinel...
+====== expected this output: =========
+eb48691ebd869c4b9271fc7c61529efd7c203948
+␃
+
+======== instead found this: =========
+b38d7d0d631b78abe2ecd35fb48304708be2398a
+␃
+
+======================================
+First difference occurs on line 1:
+expected:
+eb48691ebd869c4b9271fc7c61529efd7c203948
+^ ('\x65')
+found:
+b38d7d0d631b78abe2ecd35fb48304708be2398a
+^ ('\x62')
+FAIL (TestExpectedEqual)
+/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:682:9: 0x122ee35 in expectEqualStrings (std.zig)
+        return error.TestExpectedEqual;
+        ^
+/workspace/scratch/3f4ab65dfb82/ZCR-tests/tests/t01_test.zig:540:5: 0x1234d86 in test.DV-001 fixture hostile Git environment cannot redirect mutations into a sentinel (t01_test.zig)
+    try testing.expectEqualStrings(before_head, try sentinel.run("repo", &.{ "rev-parse", "HEAD" }));
+    ^
+0 passed; 0 skipped; 1 failed.

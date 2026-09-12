@@ -1,0 +1,13 @@
+test
++- run test T05-test w
+FS-004 corpus=small actual_files=1000 candidate_count=1000 tracked_live=3745880 tracked_peak=3745880 coverage_skipped=0 complete=true corpus_sha256=c51d1cae1ca2457bc0183a853f69ca5841ce7cc770badec767ff85cac9694d5c
+FS-004 corpus=large actual_files=200000 candidate_count=200000 tracked_live=3745880 tracked_peak=3745880 coverage_skipped=0 complete=true corpus_sha256=8516686afc53e0500c9119dc68e4d62c60ab6e601af8d43a7f282bb90db6d26b
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/legacy/zig-local-cache && /workspace/scratch/3f4ab65dfb82/state/legacy/zig-local-cache/o/f70a6f4c46c6559ead5bb5a5b900b47a/T05-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/legacy/zig-local-cache --seed=0x4ee06e --listen=-
+
+Build Summary: 4/4 steps succeeded; 15/15 tests passed
+test success
++- install T05-test success
+|  +- compile test T05-test ReleaseSafe native success 17s MaxRSS:493M
++- run test T05-test 15 pass (15 total) 21s MaxRSS:7M
+   +- compile test T05-test ReleaseSafe native (reused)
+

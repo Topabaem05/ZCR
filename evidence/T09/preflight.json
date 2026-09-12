@@ -1,0 +1,16 @@
+{
+  "step": "S01",
+  "status": "PASS",
+  "head": "9897f27a18c66c310ae6dda3ee854f7fdcdcfa3d",
+  "git_dir": "/workspace/scratch/3f4ab65dfb82/ZCR/.git/worktrees/ZCR-T09",
+  "status_porcelain": "",
+  "files": {
+    "AGENTS.md": "c973019466da797df132d0c3cf2d4380390762cf932263ffdcf813e14e8bdf3a",
+    "tasks/T09.md": "7be027fcdcac7484c5cb7df5c80400471b8cad1d202b14a40e73aa6941181d07",
+    "src/core/types.zig": "16347affe942c1393bdbe28c053a0e5813888b6f141b4a157b3c7068ae12500c",
+    "src/scheduler/admission.zig": "f43b872ca0648998a9b1f805ae080ad0fb2fe2181134b0018977f528281f9b6f",
+    "src/memory/budget.zig": "51394d108231fd049bfc88e3fa3468d75a33a9d5d9e9e3e2b2c0e60ce14aa4c0",
+    "evidence/T03/handoff.json": "90db884c098a6dce01aa334ea5785bc9f2715aa138474f9901f4eb4c303f6fd2",
+    "evidence/T00/handoff.json": "fca3a27393b9746030c6cc6dab10e455377833671dcb9c66ebf380a248c02096"
+  }
+}

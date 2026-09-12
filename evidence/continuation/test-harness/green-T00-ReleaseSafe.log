@@ -1,0 +1,13 @@
+1/12 t00_test.test.PF-001 baseline capture records compiler, OS, corpus, cache and power...OK
+2/12 t00_test.test.PF-001 corpus not provided is recorded explicitly...OK
+3/12 t00_test.test.PF-001 unavailable corpus path is an error, not an empty corpus...OK
+4/12 t00_test.test.PF-001 corpus limits are enforced...OK
+5/12 t00_test.test.PF-001 validate rejects cold-cache claims without control evidence...OK
+6/12 t00_test.test.PF-001 validate rejects a baseline without every T00 gate...OK
+7/12 t00_test.test.PF-001 validate rejects a wrong compiler version...OK
+8/12 t00_test.test.G04 sysctl probe distinguishes present and absent keys...OK
+9/12 t00_test.test.G06 git probe identifies main and linked worktrees...OK
+10/12 t00_test.test.G03 darwin probes report a known state or an explicit unknown...OK
+11/12 t00_test.test.B0/B1 tool probe reports absent tools explicitly...OK
+12/12 t00_test.test.G06 fixture hostile Git environment cannot redirect mutations into a sentinel...OK
+All 12 tests passed.

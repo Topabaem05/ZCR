@@ -8,10 +8,9 @@
 //!    session bound to another workspace, or a released reservation. Nothing is
 //!    read or allocated before these checks.
 //! 2. Each item is authorized on its own (I01); a refused path fails that item.
-//! 3. Items with the same path, write intent and consistency whose line ranges
-//!    overlap or touch share one read of the union range (at most 5,000 lines).
-//!    Each item then takes its own lines from the union and applies its own
-//!    `output_bytes`, so it gets what a single read would return.
+//! 3. Items share a read only when path, range, write intent, consistency, output
+//!    cap and deadline match. Other ranges are read independently: an invalid
+//!    byte or a line that exceeds one item's cap must not fail another item.
 //! 4. The result store is allocated once: item records, ids, paths, and room for
 //!    at most `reservation.output` text bytes and the matching line records. What
 //!    is left of the reservation is the memory pool for reads in progress.
@@ -64,11 +63,11 @@ pub const BatchFault = struct {
 
 pub const Report = struct {
     items: u32 = 0,
-    /// Reads after deduplication and merging.
+    /// Reads after deduplication.
     jobs: u32 = 0,
-    /// Items with the same path, range, write intent and consistency as an earlier item.
+    /// Items with the same read specification as an earlier item.
     deduplicated: u32 = 0,
-    /// Items whose range was merged into an earlier item's read.
+    /// Retained for report compatibility; unequal ranges are no longer merged.
     merged: u32 = 0,
     workers: u32 = 0,
     peak_running: u32 = 0,
@@ -130,7 +129,8 @@ fn storeBytes(items: []const core.BatchReadItem, output_bytes: u64) u64 {
 /// The output text lives in the result store, so `output_bytes` is part of the store
 /// charge and the total bytes are the store plus `concurrency` reads.
 pub fn plannedCost(items: []const core.BatchReadItem, output_bytes: u64, concurrency: u32) error{InvalidArgument}!core.ResourceCost {
-    if (items.len == 0 or items.len > max_items or concurrency == 0) return error.InvalidArgument;
+    try Batcher.checkRequest(items);
+    if (concurrency == 0) return error.InvalidArgument;
     if (output_bytes == 0 or output_bytes > max_output) return error.InvalidArgument;
     var groups: Groups = .{};
     for (items, 0..) |_, i| _ = groups.add(items, i);
@@ -188,7 +188,7 @@ const Job = struct {
     write_intent: bool,
     consistency: core.RequestConsistency,
     deadline_ms: u32,
-    /// Output this read asks for: the members' `output_bytes`, summed and capped.
+    /// Output cap shared by every member of this exact-specification group.
     want: u64,
 
     fn lineCount(job: Job) u32 {
@@ -196,8 +196,8 @@ const Job = struct {
     }
 };
 
-/// Items grouped into reads: same path, write intent and consistency, with line
-/// ranges that overlap or touch, and a union of at most `max_read_lines`.
+/// Exact read specifications share a read. A union of unequal ranges or output
+/// caps can fail on bytes that a standalone member would never return.
 const Groups = struct {
     jobs: [max_items]Job = undefined,
     count: u32 = 0,
@@ -212,8 +212,8 @@ const Groups = struct {
         const found: ?u32 = for (g.jobs[0..g.count], 0..) |job, j| {
             if (!std.mem.eql(u8, job.path.bytes, spec.path.bytes)) continue;
             if (job.write_intent != spec.write_intent or job.consistency != spec.consistency) continue;
-            if (spec.lines.first > job.last +| 1 or job.first > last +| 1) continue;
-            if (@as(u64, @max(job.last, last)) - @min(job.first, spec.lines.first) + 1 > core.limits.values.max_read_lines) continue;
+            if (spec.lines.first != job.first or last != job.last) continue;
+            if (itemOutput(spec) != job.want or spec.deadline_ms != job.deadline_ms) continue;
             break @intCast(j);
         } else null;
 
@@ -231,20 +231,7 @@ const Groups = struct {
             g.count += 1;
             return g.count - 1;
         };
-        const job = &g.jobs[j];
-        const duplicate = for (items[0..i], g.member_of[0..i]) |earlier, member| {
-            if (member == j and earlier.spec.lines.first == spec.lines.first and earlier.spec.lines.count == spec.lines.count) break true;
-        } else false;
-        if (duplicate) {
-            g.deduplicated += 1;
-            job.want = @max(job.want, itemOutput(spec));
-        } else {
-            g.merged += 1;
-            job.want = @min(max_output, job.want + itemOutput(spec));
-        }
-        job.first = @min(job.first, spec.lines.first);
-        job.last = @max(job.last, last);
-        job.deadline_ms = @max(job.deadline_ms, spec.deadline_ms);
+        g.deduplicated += 1;
         g.member_of[i] = j;
         return j;
     }
@@ -287,7 +274,7 @@ pub const Batcher = struct {
         try checkRequest(items);
         if (!context.bound_workspace.eql(self.reader.workspace_id)) return error.OutOfScope;
         if (reservation.released or reservation.fd == 0) return error.ResourceExhausted;
-        if (self.cancel.isRequested()) return error.Cancelled;
+        try self.cancel.check();
 
         var run: Run = .{
             .batcher = self,
@@ -328,6 +315,7 @@ pub const Batcher = struct {
         }
         self.last.peak_running = run.peak_running;
         self.last.output_used = run.output_used;
+        try self.cancel.check();
         if (run.cancelled) return error.Cancelled;
 
         var status: core.ResultStatus = .{
@@ -370,6 +358,7 @@ pub const Batcher = struct {
         status.coverage.reasons = kept;
 
         owned.value = .{ .items = records, .status = status };
+        try self.cancel.check();
         return owned;
     }
 

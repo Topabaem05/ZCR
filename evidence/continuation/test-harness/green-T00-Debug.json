@@ -1,0 +1,34 @@
+{
+  "argv": [
+    "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+    "test",
+    "--test-no-exec",
+    "-lc",
+    "-O",
+    "Debug",
+    "--dep",
+    "caps",
+    "-Mroot=tests/t00_test.zig",
+    "-Mcaps=bench/spikes/caps.zig",
+    "-femit-bin=/workspace/scratch/3f4ab65dfb82/state/test-harness/bin/green-T00-Debug"
+  ],
+  "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-tests",
+  "exit_code": 0,
+  "head": "16ad06115b3bd67fc00c192cbf54ef69429171a2",
+  "compile_exit": 0,
+  "run_argv": [
+    "/workspace/scratch/3f4ab65dfb82/state/test-harness/bin/green-T00-Debug"
+  ],
+  "run_cwd": "/workspace/scratch/3f4ab65dfb82/state/test-harness",
+  "log_sha256": "a3a3b66c1a95fbae91d83e0f8eafe78c0dcf37ddcd7e95043c2617bd82a28c00",
+  "binary_sha256": "a581598d644042adec90ac7083fb2ca355f32db0d4fb672c86b196747fcfb877",
+  "task": "T00",
+  "optimize": "Debug",
+  "passed": 12,
+  "failed": 0,
+  "skipped": 0,
+  "provenance": "provenance.json",
+  "source_manifest_sha256": "303436bb724f2084eb4e870f6b018c53bba347cb7f89a3e8133f411251b93be0",
+  "build_options_sha256": "b25fbf98533dd6a673c6bacfcea088edef0d0d2a3b98f5bcdf7822cf0b96a5c5",
+  "driver_sha256": "f3a8fc35dec1acbeea4f3f2e833cba42af2d958ae0f754f193f857faa2d7f5f3"
+}

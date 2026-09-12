@@ -1,0 +1,13 @@
+{
+  "schema_version": "zcr-evidence/1",
+  "task_id": "T09",
+  "label": "review-debug",
+  "command": "/workspace/scratch/3f4ab65dfb82/state/T09/out-review-debug/bin/T09-test",
+  "exit_code": 0,
+  "source_commit": "acc2741304887825080762166f09dfe0aeb5533c",
+  "source_tree": "b467e50360e331b500f1079aee12442494e8b778",
+  "worktree_git_dir": "/workspace/scratch/3f4ab65dfb82/ZCR/.git/worktrees/ZCR-T09",
+  "binary_path": "/workspace/scratch/3f4ab65dfb82/state/T09/out-review-debug/bin/T09-test",
+  "binary_sha256": "d17fb93d222032e56d87fc9d32076418bfb4dcd7a7af4a24837ff5f3b46f80ff",
+  "recorded_at_unix_ms": 1789195661630
+}

@@ -1,0 +1,36 @@
+test
++- run test T07-test 0 pass, 1 crash (1 total)
+error: 't07_test.test.BA-001 plannedCost rejects zero line count without panicking' terminated with signal ABRT with stderr:
+       thread 31 panic: integer overflow
+       /workspace/scratch/3f4ab65dfb82/ZCR-T07/src/batch/read.zig:211:59: 0x1231aae in add (read.zig)
+               const last = spec.lines.first + (spec.lines.count - 1);
+                                                                 ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T07/src/batch/read.zig:136:43: 0x122de10 in plannedCost (read.zig)
+           for (items, 0..) |_, i| _ = groups.add(items, i);
+                                                 ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T07/tests/t07_test.zig:249:69: 0x122cb31 in test.BA-001 plannedCost rejects zero line count without panicking (t07_test.zig)
+           try testing.expectError(error.InvalidArgument, batch.plannedCost(&items, 64 * KiB, 1));
+                                                                           ^
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/compiler/test_runner.zig:140:68: 0x11e60cc in mainServer (test_runner.zig)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/compiler/test_runner.zig:71:26: 0x11e6ebd in main (test_runner.zig)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/start.zig:699:88: 0x11e3c5e in callMain (std.zig)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x7f0ea49f31c9 in ??? (/lib/x86_64-linux-gnu/libc.so.6)
+       ???:?:?: 0x7f0ea49f328a in ??? (/lib/x86_64-linux-gnu/libc.so.6)
+       ???:?:?: 0x1232654 in ??? (???)
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/T07/zig-local-cache && /workspace/scratch/3f4ab65dfb82/state/T07/zig-local-cache/o/9445a1886923f0d7c8f8f36925dc1a7d/T07-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/T07/zig-local-cache --seed=0xf5809df5 --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 0/1 tests passed (1 crashed)
+test transitive failure
++- install T07-test success
+|  +- compile test T07-test Debug native success 3s MaxRSS:275M
++- run test T07-test 0 pass, 1 crash (1 total)
+   +- compile test T07-test Debug native (reused)
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/T07/zig-local-cache/o/f28d12be414d247ec5da67365b4abafb/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-T07 /workspace/scratch/3f4ab65dfb82/state/T07/zig-local-cache /workspace/scratch/3f4ab65dfb82/state/T07/zig-global-cache --seed 0xf5809df5 -Z74d7230abe6fdb1c test -Dtest-group=batch -Doptimize=Debug -Dtest-id=zero line count -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T07/out-red-zero --summary all

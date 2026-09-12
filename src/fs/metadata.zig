@@ -22,6 +22,12 @@ pub const OpenError = error{ InvalidArgument, NotFound, NotRegular, PathEscape, 
 
 pub const Opened = struct { file: Io.File, before: Snapshot };
 
+/// Deterministic test hook; regular production opens pass null.
+pub const OpenFault = struct {
+    before_open: *const fn (?*anyopaque) void,
+    context: ?*anyopaque = null,
+};
+
 pub fn snapshot(io: Io, file: Io.File) error{IoFailure}!Snapshot {
     const stat = file.stat(io) catch return error.IoFailure;
     const entry = policy.paths.statHandle(file.handle) catch return error.IoFailure;
@@ -46,17 +52,27 @@ pub fn fileVersion(workspace_id: core.WorkspaceId, generation: u64, s: Snapshot,
 }
 
 pub fn openRegular(io: Io, root: Io.Dir, path: []const u8) OpenError!Opened {
+    return openRegularWithFault(io, root, path, null);
+}
+
+pub fn openRegularWithFault(io: Io, root: Io.Dir, path: []const u8, fault: ?*const OpenFault) OpenError!Opened {
     const resolved = try resolveFinal(io, root, path);
     const entry = resolved orelse return error.NotFound;
     if (entry.kind != .regular) return error.NotRegular;
 
-    const file = root.openFile(io, path, .{ .mode = .read_only, .follow_symlinks = false, .allow_directory = false }) catch |err| return switch (err) {
+    if (fault) |f| f.before_open(f.context);
+    // O_NONBLOCK matters only when a special file replaced the regular path after
+    // resolution: it lets the post-open type check reject a FIFO without waiting.
+    const fd = std.posix.openat(root.handle, path, .{ .ACCMODE = .RDONLY, .NONBLOCK = true, .NOFOLLOW = true, .CLOEXEC = true }, 0) catch |err| return switch (err) {
         error.SymLinkLoop => error.PathEscape,
         error.FileNotFound, error.IsDir, error.NotDir => error.Changed,
         error.AccessDenied, error.PermissionDenied => error.OutOfScope,
         else => error.IoFailure,
     };
+    const file: Io.File = .{ .handle = fd, .flags = .{ .nonblocking = true } };
     errdefer file.close(io);
+    const actual = policy.paths.statHandle(file.handle) catch return error.IoFailure;
+    if (actual.kind != .regular) return error.NotRegular;
     const before = try snapshot(io, file);
     if (!before.identity.eql(entry.identity)) return error.Changed;
     return .{ .file = file, .before = before };

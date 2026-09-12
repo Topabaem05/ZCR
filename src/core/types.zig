@@ -225,12 +225,30 @@ pub const Reservation = struct {
     }
 };
 
-/// Cooperative cancellation. `requested` outlives every job that holds it.
+/// Cooperative cancellation and monotonic deadlines. `requested` and the Io
+/// backend outlive every job. A child operation can shorten, never extend, the
+/// inherited deadline. OS calls still obey their platform cancellation boundary.
 pub const Cancel = struct {
     requested: *const std.atomic.Value(bool),
+    deadline: ?struct { io: Io, at_ns: i96 } = null,
+
+    pub fn withTimeout(c: Cancel, io: Io, milliseconds: u32) Cancel {
+        const end = Io.Clock.awake.now(io).nanoseconds +| (@as(i96, milliseconds) * std.time.ns_per_ms);
+        if (c.deadline) |existing| if (existing.at_ns <= end) return c;
+        var child = c;
+        child.deadline = .{ .io = io, .at_ns = end };
+        return child;
+    }
+
+    /// Preserve the reason so native callers can return E_DEADLINE accurately.
+    pub fn check(c: Cancel) errors.InterruptError!void {
+        if (c.requested.load(.acquire)) return error.Cancelled;
+        if (c.deadline) |d| if (Io.Clock.awake.now(d.io).nanoseconds >= d.at_ns) return error.DeadlineExceeded;
+    }
 
     pub fn isRequested(c: Cancel) bool {
-        return c.requested.load(.acquire);
+        c.check() catch return true;
+        return false;
     }
 };
 
@@ -400,6 +418,20 @@ pub const JournalKey = struct {
     idempotency_key: []const u8,
 };
 
+/// Trusted live publication identities captured by the editor before PREPARED.
+/// Persistence copies temp_name; recovery must never treat it as an arbitrary path.
+pub const PublicationIdentity = struct {
+    workspace_id: WorkspaceId,
+    root_id: FileId,
+    parent_id: FileId,
+    temp_id: FileId,
+    temp_name: []const u8,
+    old_file_id: ?FileId,
+    fence: u64,
+    durability: Durability,
+    receipt_id: ReceiptId,
+};
+
 pub const PreparedRecord = struct {
     key: JournalKey,
     op_digest: Sha256,
@@ -407,7 +439,12 @@ pub const PreparedRecord = struct {
     old_hash: ?ContentHash,
     new_hash: ContentHash,
     generation: u64,
+    /// Required by persistent production stores. Null supports explicit fake
+    /// stores in tests written before the T12 persistence implementation.
+    publication: ?PublicationIdentity = null,
 };
+
+pub const JournalTransition = union(enum) { applied: Receipt, aborted: Receipt };
 
 pub const JournalResult = union(enum) {
     absent,
@@ -428,6 +465,9 @@ pub const JournalStore = struct {
         prepare: *const fn (context: *anyopaque, record: PreparedRecord) JournalError!JournalResult,
         record: *const fn (context: *anyopaque, receipt: Receipt) JournalError!JournalResult,
         lookup: *const fn (context: *anyopaque, key: JournalKey) JournalError!JournalResult,
+        /// Request-bound namespace, key/digest and receipt identity are checked
+        /// by the store. Production writes require this persistence channel.
+        transition: ?*const fn (context: *anyopaque, event: JournalTransition) JournalError!JournalResult = null,
     };
 
     pub fn prepare(store: JournalStore, record_: PreparedRecord) JournalError!JournalResult {
@@ -440,6 +480,11 @@ pub const JournalStore = struct {
 
     pub fn lookup(store: JournalStore, key: JournalKey) JournalError!JournalResult {
         return store.vtable.lookup(store.context, key);
+    }
+
+    pub fn transition(store: JournalStore, event: JournalTransition) JournalError!JournalResult {
+        const apply = store.vtable.transition orelse return error.Unsupported;
+        return apply(store.context, event);
     }
 };
 

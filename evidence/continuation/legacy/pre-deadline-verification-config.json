@@ -1,0 +1,14 @@
+{
+  "cache_root": "/workspace/scratch/3f4ab65dfb82/state/legacy",
+  "caps_status": [
+    "CapEff:\t0000000000000000",
+    "CapBnd:\t0000000000000000",
+    "NoNewPrivs:\t1"
+  ],
+  "kernel": "6.18.35",
+  "source_commit": "8050416117fde7c58b4077d9f25b2af0c31a5703",
+  "source_tree": "0a02a77e09cd87dfc8e5605a7766389ec80dad16",
+  "target": "native Linux x86_64",
+  "uid": 0,
+  "zig_sha256": "2317bbb91798556d9d0f38aabdac23db83f0979b25f767259ae474546724087c"
+}

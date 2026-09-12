@@ -1,0 +1,51 @@
+{
+  "source_commit": "8a4d74fe6f87a1f5427c6d0f94dd0b01fe082efd",
+  "checks": [
+    {
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/state/T13/zig-local-cache/o/549224efc715154f08bbe04bfc3bc80f/zcr-dev-evidence",
+        "verify",
+        "--worktree",
+        "/workspace/scratch/3f4ab65dfb82/ZCR-T13",
+        "--evidence",
+        "/workspace/scratch/3f4ab65dfb82/state/T13/green-debug-standard.json"
+      ],
+      "exit": 0,
+      "output": "verify: accepted\n"
+    },
+    {
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/state/T13/zig-local-cache/o/549224efc715154f08bbe04bfc3bc80f/zcr-dev-evidence",
+        "verify",
+        "--worktree",
+        "/workspace/scratch/3f4ab65dfb82/ZCR-T13",
+        "--evidence",
+        "/workspace/scratch/3f4ab65dfb82/state/T13/green-safe-standard.json"
+      ],
+      "exit": 0,
+      "output": "verify: accepted\n"
+    },
+    {
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/state/T13/zig-local-cache/o/549224efc715154f08bbe04bfc3bc80f/zcr-dev-evidence",
+        "verify",
+        "--worktree",
+        "/workspace/scratch/3f4ab65dfb82/ZCR-T13",
+        "--evidence",
+        "/workspace/scratch/3f4ab65dfb82/state/T13/fault-debug-standard.json"
+      ],
+      "exit": 0,
+      "output": "verify: accepted\n"
+    },
+    {
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/state/T13/zig-local-cache/o/549224efc715154f08bbe04bfc3bc80f/zcr-dev-evidence",
+        "preflight",
+        "--worktree",
+        "/workspace/scratch/3f4ab65dfb82/ZCR-T13"
+      ],
+      "exit": 0,
+      "output": "{\n  \"ok\": true,\n  \"state\": {\n    \"toplevel\": \"/workspace/scratch/3f4ab65dfb82/ZCR-T13\",\n    \"absolute_git_dir\": \"/workspace/scratch/3f4ab65dfb82/ZCR/.git/worktrees/ZCR-T13\",\n    \"common_dir\": \"/workspace/scratch/3f4ab65dfb82/ZCR/.git\",\n    \"head_commit\": \"8a4d74fe6f87a1f5427c6d0f94dd0b01fe082efd\",\n    \"head_tree\": \"f15cf82ea55a06341641ca3d6b13c3c9b27f2134\",\n    \"branch\": \"codex/t13-cache\",\n    \"entries\": []\n  },\n  \"reasons\": []\n}\n"
+    }
+  ]
+}

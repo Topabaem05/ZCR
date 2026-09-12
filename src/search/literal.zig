@@ -22,8 +22,8 @@
 //! has no output or deadline field (see handoff): the budget is `output_bytes` on
 //! the searcher and a deadline is expressed through `Cancel`.
 //!
-//! Candidates come from one traversal limited to `max_file_results` files; a larger
-//! tree is reported as truncated by the traversal.
+//! Candidates stream from a dedicated traversal. The files API's returned-path
+//! limit does not limit the internal candidate scan; match/output limits still do.
 
 const std = @import("std");
 const core = @import("zcr_core");
@@ -191,7 +191,7 @@ pub const Searcher = struct {
             .stop = false,
             .failure = null,
         };
-        if (cancel.isRequested()) return error.Cancelled;
+        try cancel.check();
 
         const file_spec: core.FileSpec = .{
             .glob = spec.glob,
@@ -200,11 +200,12 @@ pub const Searcher = struct {
             .order = spec.order,
         };
         const walk_sink: core.Sink(core.RelativePath) = .{ .context = self, .push_fn = onFile };
-        _ = self.traverser.enumerate(io, capability, file_spec, walk_sink, cancel) catch |err| {
+        _ = self.traverser.enumerateSearchCandidates(io, capability, file_spec, walk_sink, cancel) catch |err| {
             if (self.run.failure) |failure| return failure;
             if (!(err == error.Cancelled and self.run.stop)) return err;
         };
 
+        try cancel.check();
         const walk = self.traverser.report();
         self.last.traversal = walk;
         self.last.finished_ns = self.elapsed();
@@ -273,7 +274,7 @@ pub const Searcher = struct {
         var attempt: u32 = 0;
         while (attempt < 2) : (attempt += 1) {
             if (attempt == 1) self.last.retries += 1;
-            if (self.run.cancel.isRequested()) return error.Cancelled;
+            try self.run.cancel.check();
 
             const opened = metadata.openRegular(io, self.root.dir, path) catch |err| switch (err) {
                 error.IoFailure => return error.IoFailure,
@@ -303,8 +304,15 @@ pub const Searcher = struct {
                 },
                 .text => {},
             }
-            if (scan.matches == 0) return;
             if (self.fault) |f| if (f.after_scan) |hook| hook(f.context, path);
+            try self.run.cancel.check();
+            if (scan.matches == 0) {
+                const after_scan = metadata.snapshot(io, opened.file) catch return error.IoFailure;
+                if (!metadata.sameVersion(before, after_scan)) continue;
+                const current = metadata.pathIdentity(io, self.root.dir, path) catch continue;
+                if (current == null or !current.?.eql(before.identity)) continue;
+                return;
+            }
 
             const found = self.matches[0..scan.matches];
             const interval_count = context.buildIntervals(found, self.run.spec.context_lines, self.intervals);
@@ -327,6 +335,7 @@ pub const Searcher = struct {
             if (now == null or !now.?.eql(before.identity)) continue;
 
             if (projection.matches > 0) {
+                try self.run.cancel.check();
                 try self.run.sink.push(.{
                     .path = .{ .bytes = path },
                     .matches = self.results[0..projection.matches],
@@ -368,7 +377,7 @@ pub const Searcher = struct {
         var chunk: u32 = 0;
 
         while (true) {
-            if (self.run.cancel.isRequested()) return error.Cancelled;
+            try self.run.cancel.check();
             const n = try self.readAt(self.run.io, file, self.window[keep..][0..self.caps.chunk_bytes], window_start + keep);
             if (n == 0) break;
             const fresh = self.window[keep..][0..n];
@@ -413,8 +422,8 @@ pub const Searcher = struct {
         return .{ .outcome = .text, .matches = count, .limit_reached = limit_reached };
     }
 
-    pub fn readAt(self: *Searcher, io: Io, file: Io.File, buffer: []u8, offset: u64) error{IoFailure}!usize {
-        _ = self;
+    pub fn readAt(self: *Searcher, io: Io, file: Io.File, buffer: []u8, offset: u64) (error{IoFailure} || core.errors.InterruptError)!usize {
+        try self.run.cancel.check();
         return file.readPositional(io, &.{buffer}, offset) catch return error.IoFailure;
     }
 
@@ -424,6 +433,7 @@ pub const Searcher = struct {
             .{ .active = walk.unreadable_directories > 0, .text = "unreadable directories were not searched" },
             .{ .active = walk.unsupported_names > 0, .text = "names that are not valid ZCR paths were not searched" },
             .{ .active = walk.ignore_limits_exceeded > 0, .text = "ignore files over the size or rule limit: their directories were not searched" },
+            .{ .active = walk.unreadable_ignore_files > 0, .text = "ignore files unreadable, changed or non-regular: their directories were not searched" },
             .{ .active = walk.depth_limited > 0, .text = "directory depth limit reached" },
             .{ .active = walk.truncated, .text = "candidate file limit reached" },
             .{ .active = r.truncated, .text = "match limit or output budget reached" },

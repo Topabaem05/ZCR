@@ -9,3 +9,6 @@ schema는 bytespan overlap/order, UTF-8 byte length, root scope, capability, uni
 `immutable_snapshot` consistency는 내부 결과/후속 capability용으로 예약되며 v1 public input에는 노출하지 않는다. 이를 외부에서 요청하면 E_UNSUPPORTED다. managed_generation/bounded_stale도 해당 단계와 policy가 활성화됐을 때만 허용한다.
 
 planning manifest는 null identity를 허용하지만 ready/active는 실제 workspace/base/contract/fence/expiry가 필수다. 예시 planned manifest는 쓰기/실행 권한을 주지 않는다. 본 ZIP의 검증기용 Python/jsonschema는 **문서 제작·검증 도구**이며 Zig runtime의 배포 의존성이 아니다.
+# Native cancellation contract
+
+The native `Cancel` value carries a borrowed atomic flag and an optional monotonic deadline with its borrowed `std.Io` backend. `withTimeout(io, milliseconds)` may shorten an inherited deadline; `check()` distinguishes `Cancelled` from `DeadlineExceeded`. Both borrowed lifetimes extend through callback drain. This adds no wire field or permission. Native range reads intersect this deadline with `ReadSpec.deadline_ms`.

@@ -1,0 +1,9 @@
+1/8 lease.test.IS-005 writer lease has a thirty second TTL and excludes a second writer...OK
+2/8 lease.test.IS-005 renewal every ten seconds refreshes snapshots and keeps callback authority...OK
+3/8 lease.test.IS-005 cancellation invalidates callbacks and a new writer waits for every drain...OK
+4/8 lease.test.IS-005 exact TTL expiry revokes old fence and waits for callback drain...OK
+5/8 lease.test.IS-005 callback slots are bounded and duplicate or foreign completion cannot drain work...OK
+6/8 lease.test.IS-005 forged workspace task fence or expiry cannot acquire callback authority...OK
+7/8 lease.test.IS-005 fence and timestamp overflow fail closed without wrapping authority...OK
+8/8 lease.test.IS-005 callback id exhaustion preserves existing work and never reuses a ticket...OK
+All 8 tests passed.

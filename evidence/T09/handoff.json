@@ -1,0 +1,115 @@
+{
+  "schema_version": "zcr-handoff/1",
+  "task_id": "T09",
+  "state": "implemented_pending_platform_gate",
+  "step": "S06",
+  "base_commit": "9897f27a18c66c310ae6dda3ee854f7fdcdcfa3d",
+  "head_commit": "acc2741304887825080762166f09dfe0aeb5533c",
+  "head_commit_note": "This source commit produced installed test binaries; the evidence-only commit follows.",
+  "contract_digest": "8aa53314410fe471f0e070c522766684286f60e1ad4d9785c292bb709ea370a4",
+  "source_tree": "b467e50360e331b500f1079aee12442494e8b778",
+  "config_digest": "1099cffd15d9548e5b3e511613956a41200c411b029095695e1bfe8e9ab84090",
+  "workspace_id": "f11b4529-7945-40b7-be54-23b220e05d6e",
+  "source_commits": [
+    "a9f86a5",
+    "f5ecd5fa0fea0591b4b29b8f7920b634162e4908",
+    "eeae1bf3ea01fff07c40f23340b42d993a2ef71f",
+    "acc2741304887825080762166f09dfe0aeb5533c"
+  ],
+  "integrator_build_commits_already_owned_by_root": [
+    "9542cf7",
+    "9ab9f76",
+    "edc776b"
+  ],
+  "scoped_sources": [
+    "src/scheduler/queue.zig",
+    "src/scheduler/executor.zig",
+    "src/platform/darwin.zig",
+    "c/darwin_shim.h",
+    "c/darwin_shim.c",
+    "tests/t09_test.zig"
+  ],
+  "exports": {
+    "zcr_executor": "Executor.init(*Executor, Allocator, *memory.Budget, Options) !void; Executor.submit(*Executor, *core.JobEnvelope) core.SubmitError!core.JobHandle [comptime core.SubmitFn check]; promote; waitIdle; drain; deinit; snapshot",
+    "zcr_queue": "Queue.push(*Queue, *core.JobEnvelope, core.JobHandle) error{Busy}!void; Queue.pop(*Queue, Resources) ?Entry; Queue.promote; cpuCost; ioCost",
+    "zcr_darwin": "qosClass(core.QosIntent) core.limits.QosClass; Adapter.init/submit/deinit; currentQos() error{Unsupported}!u32"
+  },
+  "build_imports": {
+    "zcr_executor": [
+      "zcr_core",
+      "zcr_memory",
+      "zcr_queue",
+      "zcr_darwin"
+    ],
+    "zcr_queue": [
+      "zcr_core"
+    ],
+    "zcr_darwin": [
+      "zcr_core"
+    ],
+    "tests": [
+      "zcr_core",
+      "zcr_memory",
+      "zcr_executor",
+      "zcr_queue",
+      "zcr_darwin"
+    ]
+  },
+  "linkage": "POSIX libc; macOS additionally compiles c/darwin_shim.c with include path c and system libdispatch APIs. No private APIs, Blocks, additional std.Io pool, or core pinning.",
+  "lifetime": "All accepted heap jobs allocated by the supplied concurrent-free allocator transfer ownership. Callbacks run exactly once even after cancellation, must check job.cancel and release their own callback scratch allocations, and must neither free their envelope nor release its scratch_reservation. Executor destroys envelope then releases reservation after callback returns. Cancel tokens/userdata and parent arenas live through drain/waitIdle. Only owner deinit joins workers or barriers all GCD queues. Nested callback waits/new pool initialization are refused.",
+  "permit_model": "One executor is the process/broker global owner shared by all tasks/workspaces. Waiting queue is 64 global/16 session; execution CPU and conservative one-per-FD-bearing-job IO permits are independent. CPU reservation is max(1, scratch_reservation.cpu). Reserve up to 2 short-foreground CPU permits without preventing non-short progress at cap=1. Callbacks perform synchronous operations and enqueue future bounded chunks here. A blocked selected service turn protects its entire required CPU/non-short/I/O grant; smaller jobs may use only spare resources beyond that grant. Idle admission also requires zero active foreground callbacks.",
+  "test_evidence": "evidence/T09/test-runs.json",
+  "remaining_gates": [
+    "Actual Apple Silicon and Intel Mac SDK C build/link and GCD runtime matrix (NOT_RUN).",
+    "Actual Mac QoS/worker-count/stack-footprint and Instruments measurements (NOT_RUN).",
+    "Root review and integrated binary regression; no COMPLETE claim before mandatory Mac execution.",
+    "T16 adaptive policies/pressure updates and T15 process-level single-owner integration remain separate tasks."
+  ],
+  "scope_note": "Task-only scope guard checks changes after imported integrator build commit 4093309. Tests/evidence RED commit was separately within the manifest. Full manifest-base diff also contains the explicitly requested integrator-owned build cherry-picks. Review revision scope guard checks 08ab917..acc2741 plus pending evidence and finds no violations.",
+  "changed_files": [
+    "c/darwin_shim.c",
+    "c/darwin_shim.h",
+    "evidence/T09/digests.json",
+    "evidence/T09/evidence-green-debug.json",
+    "evidence/T09/evidence-green-releasesafe.json",
+    "evidence/T09/evidence-memory-regression.json",
+    "evidence/T09/handoff.json",
+    "evidence/T09/logs/final-preflight.log",
+    "evidence/T09/logs/green-debug-build.log",
+    "evidence/T09/logs/green-debug-run.log",
+    "evidence/T09/logs/green-releasesafe-build.log",
+    "evidence/T09/logs/green-releasesafe-run.log",
+    "evidence/T09/logs/macos-zig-typecheck.log",
+    "evidence/T09/logs/manifest-scope-audit.json",
+    "evidence/T09/logs/ownership-guard.json",
+    "evidence/T09/logs/red.log",
+    "evidence/T09/logs/regression-memory-build.log",
+    "evidence/T09/logs/regression-memory-releasesafe-run.log",
+    "evidence/T09/logs/regression-memory-run.log",
+    "evidence/T09/logs/review-red.log",
+    "evidence/T09/logs/scope-guard.json",
+    "evidence/T09/logs/verify-contracts-report.log",
+    "evidence/T09/manifest.snapshot.json",
+    "evidence/T09/preflight.json",
+    "evidence/T09/task-step.snapshot.json",
+    "evidence/T09/test-runs.json",
+    "src/platform/darwin.zig",
+    "src/scheduler/executor.zig",
+    "src/scheduler/queue.zig",
+    "tests/t09_test.zig"
+  ],
+  "review_revision": {
+    "reviewed_commit": "f5ecd5fa0fea0591b4b29b8f7920b634162e4908",
+    "review_report_sha256": "017b6cdefd83ced48461504459e0631878bea87fcf101714eed9f9a6fe88ee52",
+    "findings": [
+      "R1 multi-permit starvation",
+      "R2 idle dispatch alongside active foreground"
+    ],
+    "status": "root_rereview_findings_closed",
+    "red_commit": "eeae1bf3ea01fff07c40f23340b42d993a2ef71f",
+    "implementation_commit": "acc2741304887825080762166f09dfe0aeb5533c",
+    "behavior": "Fair turns are chosen before permit eligibility. A blocked turn protects its CPU/non-short/I/O grant until active chunks drain; only capacity beyond that grant may refill. Executor tracks active foreground callbacks and denies idle until they finish. Accepted multi-permit jobs remain supported.",
+    "validation": "14 scheduler tests each Debug/ReleaseSafe; 12 memory tests each Debug/ReleaseSafe; 128 contract checks; actual Darwin runtime remains NOT_RUN.",
+    "rereview": "Root independently reviewed the complete eeae1bf..acc2741 source/test delta against the original reviewer reproductions and reported both findings closed with no new blocking delta issue. Integrated-binary verification and actual Darwin platform gates remain separate."
+  }
+}

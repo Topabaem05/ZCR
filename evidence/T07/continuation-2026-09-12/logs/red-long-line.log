@@ -1,0 +1,24 @@
+test
++- run test T07-test 0 pass, 1 fail (1 total)
+error: 't07_test.test.BA-001 adjacent long line cannot exhaust a later members own output budget' failed:
+       item short: expected a result, got E_OUTPUT_BUDGET
+       /workspace/scratch/3f4ab65dfb82/ZCR-T07/tests/t07_test.zig:204:21: 0x123669f in expectSameItem (t07_test.zig)
+                           return error.TestExpectedEqual;
+                           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T07/tests/t07_test.zig:282:13: 0x1238734 in expectBatchMatchesStandalone (t07_test.zig)
+                   try expectSameItem(oracle, got);
+                   ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T07/tests/t07_test.zig:319:5: 0x12393bc in test.BA-001 adjacent long line cannot exhaust a later members own output budget (t07_test.zig)
+           try expectBatchMatchesStandalone(h, &items);
+           ^
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/T07/zig-local-cache && /workspace/scratch/3f4ab65dfb82/state/T07/zig-local-cache/o/0f9aeb307b3916ca898d61ca976ddf11/T07-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/T07/zig-local-cache --seed=0x8bc34f3 --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 0/1 tests passed (1 failed)
+test transitive failure
++- install T07-test success
+|  +- compile test T07-test Debug native success 481ms MaxRSS:178M
++- run test T07-test 0 pass, 1 fail (1 total)
+   +- compile test T07-test Debug native (reused)
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/T07/zig-local-cache/o/f28d12be414d247ec5da67365b4abafb/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-T07 /workspace/scratch/3f4ab65dfb82/state/T07/zig-local-cache /workspace/scratch/3f4ab65dfb82/state/T07/zig-global-cache --seed 0x8bc34f3 -Zf654ce62e1384d60 test -Dtest-group=batch -Doptimize=Debug -Dtest-id=adjacent long line -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T07/out-red-long-line --summary all

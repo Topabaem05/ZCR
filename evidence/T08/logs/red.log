@@ -1,0 +1,10 @@
+1/1 t08_test.test.MC-001 supported version negotiates and unsupported version refuses...FAIL (TestUnexpectedResult)
+/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:615:14: 0x12332b9 in expect (std.zig)
+    if (!ok) return error.TestUnexpectedResult;
+             ^
+/workspace/scratch/3f4ab65dfb82/ZCR-T08/tests/t08_test.zig:4:5: 0x1233342 in test.MC-001 supported version negotiates and unsupported version refuses (t08_test.zig)
+    try std.testing.expect(mcp.supportedVersion("2025-11-25"));
+    ^
+0 passed; 0 skipped; 1 failed.
+error: the following test command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/T08/out/red-test --seed=0xcf143c0e

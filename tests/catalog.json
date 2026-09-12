@@ -1,6 +1,6 @@
 {
   "schema_version": "zcr-test-catalog/1",
-  "status": "design_only",
+  "status": "specification_catalog",
   "tests": [
     {
       "id": "IO-001",
@@ -737,6 +737,23 @@
       "when": "finalaudit",
       "then": "미연결필수요구사항0",
       "execution_status": "not_run"
+    },
+    {
+      "id": "PACKAGE-GATE",
+      "owner_task": "T24",
+      "given": "actual target artifacts + SBOM",
+      "when": "support matrix audit",
+      "then": "실행 증거 없는 target은 supported=false",
+      "execution_status": "not_run"
+    },
+    {
+      "id": "WIN-GATE",
+      "owner_task": "T18",
+      "given": "Windows11 actual runner · reparse/pipe/rename fixtures",
+      "when": "backend suite",
+      "then": "잘못된 path/peer 거부, atomic semantics와 capability 일치",
+      "execution_status": "not_run"
     }
-  ]
+  ],
+  "execution_status_scope": "Initial scenario specification; current source/binary execution evidence is tracked separately in tasks/progress.json."
 }

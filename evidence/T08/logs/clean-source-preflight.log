@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "state": {
+    "toplevel": "/workspace/scratch/3f4ab65dfb82/ZCR-T08",
+    "absolute_git_dir": "/workspace/scratch/3f4ab65dfb82/ZCR/.git/worktrees/ZCR-T08",
+    "common_dir": "/workspace/scratch/3f4ab65dfb82/ZCR/.git",
+    "head_commit": "48d2e8b61a83af444f0914379f8bc75f169413f3",
+    "head_tree": "32e0f1c7db627bfcdf45a8acf475b41e8be718bb",
+    "branch": "codex/t08-mcp",
+    "entries": []
+  },
+  "reasons": []
+}

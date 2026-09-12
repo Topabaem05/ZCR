@@ -1,0 +1,937 @@
+{
+  "schema": "zcr-continuation-evidence/1",
+  "scope": "legacy filesystem and scalar search continuation; not a full product completion certificate",
+  "created_at": "2026-09-12T06:52:21.242183+00:00",
+  "worktree": "/workspace/scratch/3f4ab65dfb82/ZCR-legacy",
+  "git_dir": "/workspace/scratch/3f4ab65dfb82/ZCR/.git/worktrees/ZCR-legacy",
+  "branch": "codex/legacy-search-audit",
+  "base_commit": "9897f27a18c66c310ae6dda3ee854f7fdcdcfa3d",
+  "source_commit": "a5a24a3d7f0f9bc4a840cd0a6668e70ac3a6632f",
+  "source_tree": "7e757018542321e65cd11cd5b85d01e0a00538e8",
+  "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+  "changed_source_paths": [
+    "build.zig",
+    "contracts/README.md",
+    "docs/17-Data-Model-and-Interfaces.md",
+    "src/core/types.zig",
+    "src/fs/metadata.zig",
+    "src/fs/read.zig",
+    "src/fs/traverse.zig",
+    "src/search/context.zig",
+    "src/search/literal.zig",
+    "tests/t04_test.zig",
+    "tests/t05_test.zig",
+    "tests/t06_test.zig",
+    "tests/timing_test.zig"
+  ],
+  "integrator_authorized_cherry_picks": [
+    {
+      "original": "ab26dca",
+      "local": "95a7a11"
+    },
+    {
+      "original": "5025059",
+      "local": "51ff311"
+    }
+  ],
+  "read_inventory": [
+    {
+      "path": "src/fs/ignore.zig",
+      "full_read": true,
+      "source_commit": "a5a24a3d7f0f9bc4a840cd0a6668e70ac3a6632f",
+      "sha256": "4d398d96174d7a52d4a895494ba5c75a17205146518be3feef38d60f4c8379cd",
+      "git_blob": "d2f0f80d5b7507705b3d3e756164323da5a53f05",
+      "lines": 308
+    },
+    {
+      "path": "src/fs/metadata.zig",
+      "full_read": true,
+      "source_commit": "a5a24a3d7f0f9bc4a840cd0a6668e70ac3a6632f",
+      "sha256": "ecbe8d94bfed6bc6b032e811ec75941585963e4d61848cdb864004a0566fabca",
+      "git_blob": "0d3f34ae2ac6e02c1e3a455f5d1eddbadba9d9e3",
+      "lines": 96
+    },
+    {
+      "path": "src/fs/read.zig",
+      "full_read": true,
+      "source_commit": "a5a24a3d7f0f9bc4a840cd0a6668e70ac3a6632f",
+      "sha256": "27fa94f79465b97d027c455665621354b42d3e23436a0306783e2ed35ab64997",
+      "git_blob": "7d61ff5ffdbe7ed3547de88d117bea7aeb91f708",
+      "lines": 351
+    },
+    {
+      "path": "src/fs/traverse.zig",
+      "full_read": true,
+      "source_commit": "a5a24a3d7f0f9bc4a840cd0a6668e70ac3a6632f",
+      "sha256": "4e40d6b5ac76549174efde0c36ac5aab1bf14066fd2959e513d0eb1e6715e7a8",
+      "git_blob": "cbf389c95173497f8b1f2551623ab059c3d91145",
+      "lines": 564
+    },
+    {
+      "path": "src/search/context.zig",
+      "full_read": true,
+      "source_commit": "a5a24a3d7f0f9bc4a840cd0a6668e70ac3a6632f",
+      "sha256": "9be7eae7e6eac525f2486e8895cd8b96f648cbd10f2f5df4d6c60fcd3ac59ecd",
+      "git_blob": "27385608100c3dc4fc21a2a7198a70469024b993",
+      "lines": 172
+    },
+    {
+      "path": "src/search/literal.zig",
+      "full_read": true,
+      "source_commit": "a5a24a3d7f0f9bc4a840cd0a6668e70ac3a6632f",
+      "sha256": "00263a5337ad0097a83961620c853bd389653bcc8dd42fe9352938eb7ff47546",
+      "git_blob": "b67d106b7bf63e6acfbf38ddba70c94a7bc4b7f3",
+      "lines": 550
+    },
+    {
+      "path": "src/search/scalar.zig",
+      "full_read": true,
+      "source_commit": "a5a24a3d7f0f9bc4a840cd0a6668e70ac3a6632f",
+      "sha256": "aef984f53852ce28f41c7f5eca940db422511890941053e2e81bc362b746c3bd",
+      "git_blob": "51800ae63054cbf75387c0c3adfec3bc14c96f13",
+      "lines": 10
+    },
+    {
+      "path": "tests/t04_test.zig",
+      "full_read": true,
+      "source_commit": "a5a24a3d7f0f9bc4a840cd0a6668e70ac3a6632f",
+      "sha256": "a593c0876ba6ed360f5d0428c9d653a1912ce23150ddd78f74a2597a8190b81a",
+      "git_blob": "23b726f307188a6445a175ea6257994d70a1fe85",
+      "lines": 628
+    },
+    {
+      "path": "tests/t05_test.zig",
+      "full_read": true,
+      "source_commit": "a5a24a3d7f0f9bc4a840cd0a6668e70ac3a6632f",
+      "sha256": "85ae09a13ba20facaf3d161ff7f2306d082bae46a3d232a1f197ed240f6d9217",
+      "git_blob": "e42e379a99df2021ffee31ed66e9ba3f805b8ccd",
+      "lines": 760
+    },
+    {
+      "path": "tests/t06_test.zig",
+      "full_read": true,
+      "source_commit": "a5a24a3d7f0f9bc4a840cd0a6668e70ac3a6632f",
+      "sha256": "0133b65a290f8e7c3ac46dcdc24cfb5137c9a67e2084fd21418999aebcf17ba2",
+      "git_blob": "257409f616acfc6a11c249f15be800b5427ca2cc",
+      "lines": 629
+    }
+  ],
+  "config_inventory": [
+    {
+      "path": "config/limits.json",
+      "sha256": "d7b3db8b6956c0f8b1e6f399e6e432fb4eadb8aa033f39d303e31edbe539154c"
+    },
+    {
+      "path": "config/memory-profiles.json",
+      "sha256": "7f925fb57bc0453f2505b3c10856a4e74322bcb8cc3417070ec7693e847804b7"
+    },
+    {
+      "path": "config/scheduler-profiles.json",
+      "sha256": "3f3b7d88264c94ac84ea0969da47ff1aee46ad4ba51f4899742ee2c1603b57a8"
+    }
+  ],
+  "fixture_definitions_sha256": "d9e429b245f0751147bb1589b42b3c167e9955f113e3f82b1fe283eef43eec45",
+  "red": [
+    {
+      "label": "red-search",
+      "source_commit": "a33934444344a6fc01d4135ed94d7256653e28c5",
+      "source_tree": "1f62bce062d6aa6518d0cfbf7dd409c06a970aa8",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=search",
+        "-Dtest-id=streams beyond",
+        "-Dinstall-tests=true",
+        "-Doptimize=Debug",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/legacy/out/red-search"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-legacy",
+      "exit_code": 1,
+      "kind": "assertion",
+      "observed": "expected one hit beyond 10000 candidates; found zero",
+      "binary_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/red-search/bin/T06-test",
+      "binary_sha256": "e8c1157af26326af1f80ace2acd145ac72fc73968aa835eb53c5ff302ff1b6f7",
+      "output_sha256": "96df23982e8c163d18060dc77f1d1a08b83b9aff87080613f26809b3e5157173",
+      "output_artifact": "logs/red-search.log",
+      "config_digest_basis": "same pinned toolchain and native host; command options above; historical run did not capture an environment snapshot",
+      "fixture_source_sha256": "b7f6903cc466b1330fa759ad23f38989ffee6364ebb63a7ec4319afa8c588663",
+      "provenance_note": "T06 compiled at a339344. A later t05-only commit was made while the completed T06 binary ran; no T06/build/dependency source was changed during its compilation or execution."
+    },
+    {
+      "label": "red-ignore",
+      "source_commit": "03fca3e100be523349f3cdcdefd31e74f5bd72f9",
+      "source_tree": "39f25260122446a18c807ff7fe7b40d9e6455e66",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=fs",
+        "-Dtest-id=trusted Git",
+        "-Dinstall-tests=true",
+        "-Doptimize=Debug",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/legacy/out/red-ignore"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-legacy",
+      "exit_code": 1,
+      "kind": "missing_API",
+      "observed": "TrustedExcludes field was absent",
+      "binary_path": null,
+      "binary_sha256": null,
+      "output_sha256": "bc07eed56cca9447e31edb88418a26170bbe1ac02a284802ede294622aa172ca",
+      "output_artifact": "logs/red-ignore.log",
+      "config_digest_basis": "same pinned toolchain and native host; command options above; historical run did not capture an environment snapshot",
+      "fixture_source_sha256": "9c17b16e00ffc4057a75ff74da19ed2b998672ac8c697249215cfe98545b2e9f"
+    },
+    {
+      "label": "red-unreadable",
+      "source_commit": "03fca3e100be523349f3cdcdefd31e74f5bd72f9",
+      "source_tree": "39f25260122446a18c807ff7fe7b40d9e6455e66",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=fs",
+        "-Dtest-id=unreadable ignore",
+        "-Dinstall-tests=true",
+        "-Doptimize=Debug",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/legacy/out/red-unreadable"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-legacy",
+      "exit_code": 1,
+      "kind": "assertion",
+      "observed": "unreadable .gitignore exposed private files",
+      "binary_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/red-unreadable/bin/T05-test",
+      "binary_sha256": "528aac23dd6529069ca074041e4e7513a87364904dee638bdfd6043a7a09da0c",
+      "output_sha256": "d39f4607d1cf87745b332a897a893bd1735cc0b73319672a350062aaaea2970f",
+      "output_artifact": "logs/red-unreadable.log",
+      "config_digest_basis": "same pinned toolchain and native host; command options above; historical run did not capture an environment snapshot",
+      "fixture_source_sha256": "9c17b16e00ffc4057a75ff74da19ed2b998672ac8c697249215cfe98545b2e9f"
+    },
+    {
+      "label": "red-no-match",
+      "source_commit": "a5ea0faf042bb9b69462e4ea870de667ac05b2aa",
+      "source_tree": "0cb3a785e34f36e7766953fc2db766d484842c9e",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=search",
+        "-Dtest-id=no-match file",
+        "-Dinstall-tests=true",
+        "-Doptimize=Debug",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/legacy/out/red-no-match"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-legacy",
+      "exit_code": 1,
+      "kind": "assertion",
+      "observed": "changed no-match file was not retried; expected2matches found0",
+      "binary_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/red-no-match/bin/T06-test",
+      "binary_sha256": "52c398fff7c5d48983c3ffd228e7af04031d99c4cc2e5413a21a125b2759ea8e",
+      "output_sha256": "3bdf28556e47016491e2605d512b9f10efea2c4ddb160aa5e5e783f667238375",
+      "output_artifact": "logs/red-no-match.log",
+      "config_digest_basis": "same pinned toolchain and native host; command options above; historical run did not capture an environment snapshot",
+      "fixture_source_sha256": "98d6a5722ae4531950fd8dfde81a662c20a8351f20827059eba8357325124de0"
+    },
+    {
+      "label": "red-ignore-race",
+      "source_commit": "a04467909026a1000d7a2dc5d3f34907d335824e",
+      "source_tree": "2d46f11fd5006c4a72c07ff011582b0f40bd4dd0",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=fs",
+        "-Dtest-id=replacing an ignore",
+        "-Dinstall-tests=true",
+        "-Doptimize=Debug",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/legacy/out/red-ignore-race"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-legacy",
+      "exit_code": 1,
+      "kind": "missing_test_hook",
+      "observed": "IgnoreFault did not exist",
+      "binary_path": null,
+      "binary_sha256": null,
+      "output_sha256": "21dc3bd7826604848af57652839801d7d0802dce8ec023e782e9561a81590f65",
+      "output_artifact": "logs/red-ignore-race.log",
+      "config_digest_basis": "same pinned toolchain and native host; command options above; historical run did not capture an environment snapshot",
+      "fixture_source_sha256": "85ae09a13ba20facaf3d161ff7f2306d082bae46a3d232a1f197ed240f6d9217"
+    },
+    {
+      "label": "red-cancel",
+      "source_commit": "978c217d4339559225555c467737ff2ec6047ec8",
+      "source_tree": "8a58c4e03ae9306514eacdafd726b86967935b7d",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=search",
+        "-Dtest-id=cancellation after scan",
+        "-Dinstall-tests=true",
+        "-Doptimize=Debug",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/legacy/out/red-cancel"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-legacy",
+      "exit_code": 1,
+      "kind": "assertion",
+      "observed": "expected Cancelled after scan, got success",
+      "binary_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/red-cancel/bin/T06-test",
+      "binary_sha256": "60ac2125b365d8506c7bfd2bfe6409bbb7f5e80037431ca08392bf253c4eef36",
+      "output_sha256": "fe513a5a2e5709f7c28b67cd6f56a4ac02254fbbaa49dce8d99b7f301a4469ec",
+      "output_artifact": "logs/red-cancel.log",
+      "config_digest_basis": "same pinned toolchain and native host; command options above; historical run did not capture an environment snapshot",
+      "fixture_source_sha256": "e21e2e6f786f2f9d1273a2a32284522337162fd404cac67266d41ec5314ed8ff"
+    },
+    {
+      "label": "red-read-fifo",
+      "source_commit": "978c217d4339559225555c467737ff2ec6047ec8",
+      "source_tree": "8a58c4e03ae9306514eacdafd726b86967935b7d",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=io",
+        "-Dtest-id=FIFO replacement",
+        "-Doptimize=Debug"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-legacy",
+      "exit_code": 1,
+      "kind": "missing_test_hook",
+      "observed": "OpenFault did not exist",
+      "binary_path": null,
+      "binary_sha256": null,
+      "output_sha256": "a52e501b3cff96b1c48aff0649200a0740816ed1ddc79e864c490e85f666644e",
+      "output_artifact": "logs/red-read-fifo.log",
+      "config_digest_basis": "same pinned toolchain and native host; command options above; historical run did not capture an environment snapshot",
+      "fixture_source_sha256": "73fcb79cae13faa78dc1503607ba258b568e0c88e3f803f6d7819be949ccf896"
+    },
+    {
+      "label": "red-deadline-io",
+      "source_commit": "7388ea96ba44a707ce460c8a5b6a1dc5ad093c2c",
+      "source_tree": "42e592df9ca872023f4a2129c2ddd33de7b56696",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=io",
+        "-Dinstall-tests=true",
+        "-Doptimize=Debug",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/legacy/out/red-deadline-io",
+        "--summary",
+        "all"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-legacy",
+      "exit_code": 1,
+      "kind": "assertion",
+      "observed": "ignored native deadline and accepted out-of-range deadline",
+      "binary_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/red-deadline-io/bin/T04-test",
+      "binary_sha256": "b474335612c33401f9b4a33ec5e9afbe260fd6939ba283dfde04247c88fc69f8",
+      "output_sha256": "fb95ce8bf8fa6d8707f39658887264c9840581ba1663a3473b6f3ae28ae1fcbf",
+      "output_artifact": "logs/red-deadline-io.log",
+      "config_digest_basis": "same pinned toolchain and native host; command options above; historical run did not capture an environment snapshot",
+      "fixture_source_sha256": "a593c0876ba6ed360f5d0428c9d653a1912ce23150ddd78f74a2597a8190b81a"
+    },
+    {
+      "label": "red-deadline-search",
+      "source_commit": "7388ea96ba44a707ce460c8a5b6a1dc5ad093c2c",
+      "source_tree": "42e592df9ca872023f4a2129c2ddd33de7b56696",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=search",
+        "-Dinstall-tests=true",
+        "-Doptimize=Debug",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/legacy/out/red-deadline-search",
+        "--summary",
+        "all"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-legacy",
+      "exit_code": 1,
+      "kind": "assertion",
+      "observed": "expired deadline returned Cancelled instead of DeadlineExceeded",
+      "binary_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/red-deadline-search/bin/T06-test",
+      "binary_sha256": "52bdd5b80b864051458ef6f756b95d8d876e4ba6e9b4057ed0eb4f6dac0f083d",
+      "output_sha256": "93b9c98b64c3c3e0f1bb84c279e21a6e4d6ab2d1bb55b66427f5c71bcdafac09",
+      "output_artifact": "logs/red-deadline-search.log",
+      "config_digest_basis": "same pinned toolchain and native host; command options above; historical run did not capture an environment snapshot",
+      "fixture_source_sha256": "0133b65a290f8e7c3ac46dcdc24cfb5137c9a67e2084fd21418999aebcf17ba2"
+    }
+  ],
+  "green": [
+    {
+      "label": "deadline-final-io-debug",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=io",
+        "-Dinstall-tests=true",
+        "-Doptimize=Debug",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-io-debug",
+        "--summary",
+        "all"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-legacy",
+      "source_commit": "a5a24a3d7f0f9bc4a840cd0a6668e70ac3a6632f",
+      "source_tree": "7e757018542321e65cd11cd5b85d01e0a00538e8",
+      "config_sha256": "c05ddd9566d84ac5cf4e54786a7201f198db8285f4435dc0bb1e0bf10d437791",
+      "started_at": "2026-09-12T06:48:44.690943+00:00",
+      "elapsed_seconds": 2.8751799089995984,
+      "exit_code": 0,
+      "binary_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-io-debug/bin/T04-test",
+      "binary_sha256": "5c3aad62a48cd9f5e9d9ebf6cc0405f16f8eec5124aec2d636928e2ad82e4750",
+      "output_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/logs/deadline-final-io-debug.log",
+      "output_sha256": "c8f7a772420e15711ae7a7a28598ef7cd56ee750078b6e76504b39b63abcaafa",
+      "corpus_sha256": null,
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-io-debug/bin/T04-deadline-test",
+          "sha256": "624d1df90c3fa5c5f4b13b2893930893d7f30091879f00881d9502fd1be14dff"
+        },
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-io-debug/bin/T04-test",
+          "sha256": "5c3aad62a48cd9f5e9d9ebf6cc0405f16f8eec5124aec2d636928e2ad82e4750"
+        }
+      ],
+      "output_artifact": "logs/deadline-final-io-debug.log",
+      "fixture_definitions_sha256": "d9e429b245f0751147bb1589b42b3c167e9955f113e3f82b1fe283eef43eec45",
+      "passed_tests": 15,
+      "total_tests": 15
+    },
+    {
+      "label": "deadline-final-fs-debug",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=fs",
+        "-Dinstall-tests=true",
+        "-Doptimize=Debug",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-fs-debug",
+        "--summary",
+        "all"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-legacy",
+      "source_commit": "a5a24a3d7f0f9bc4a840cd0a6668e70ac3a6632f",
+      "source_tree": "7e757018542321e65cd11cd5b85d01e0a00538e8",
+      "config_sha256": "c05ddd9566d84ac5cf4e54786a7201f198db8285f4435dc0bb1e0bf10d437791",
+      "started_at": "2026-09-12T06:48:47.609009+00:00",
+      "elapsed_seconds": 21.228055286999734,
+      "exit_code": 0,
+      "binary_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-fs-debug/bin/T05-test",
+      "binary_sha256": "833715db118743c369ff207f65cf12b332e0f82f8340df738421f182ee8f7204",
+      "output_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/logs/deadline-final-fs-debug.log",
+      "output_sha256": "307420e1404ad1c36e86627a9d8efaf7d8c82f057214c0f1b66bd4d08d4fcafa",
+      "corpus_sha256": "8516686afc53e0500c9119dc68e4d62c60ab6e601af8d43a7f282bb90db6d26b",
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-fs-debug/bin/T05-test",
+          "sha256": "833715db118743c369ff207f65cf12b332e0f82f8340df738421f182ee8f7204"
+        }
+      ],
+      "output_artifact": "logs/deadline-final-fs-debug.log",
+      "fixture_definitions_sha256": "d9e429b245f0751147bb1589b42b3c167e9955f113e3f82b1fe283eef43eec45",
+      "passed_tests": 15,
+      "total_tests": 15
+    },
+    {
+      "label": "deadline-final-search-debug",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=search",
+        "-Dinstall-tests=true",
+        "-Doptimize=Debug",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-search-debug",
+        "--summary",
+        "all"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-legacy",
+      "source_commit": "a5a24a3d7f0f9bc4a840cd0a6668e70ac3a6632f",
+      "source_tree": "7e757018542321e65cd11cd5b85d01e0a00538e8",
+      "config_sha256": "c05ddd9566d84ac5cf4e54786a7201f198db8285f4435dc0bb1e0bf10d437791",
+      "started_at": "2026-09-12T06:49:08.883492+00:00",
+      "elapsed_seconds": 2.4392924269996,
+      "exit_code": 0,
+      "binary_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-search-debug/bin/T06-test",
+      "binary_sha256": "f08778781d34c716007bcd5667cdfa8a392f139e999c67912d8a618427e0bb59",
+      "output_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/logs/deadline-final-search-debug.log",
+      "output_sha256": "0f5e7c388c7c67947c8ff0e5663c9b8a276c644d8f6232ae97458c42c42b35a2",
+      "corpus_sha256": null,
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-search-debug/bin/T06-test",
+          "sha256": "f08778781d34c716007bcd5667cdfa8a392f139e999c67912d8a618427e0bb59"
+        }
+      ],
+      "output_artifact": "logs/deadline-final-search-debug.log",
+      "fixture_definitions_sha256": "d9e429b245f0751147bb1589b42b3c167e9955f113e3f82b1fe283eef43eec45",
+      "passed_tests": 15,
+      "total_tests": 15
+    },
+    {
+      "label": "deadline-final-batch-debug",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=batch",
+        "-Dinstall-tests=true",
+        "-Doptimize=Debug",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-batch-debug",
+        "--summary",
+        "all"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-legacy",
+      "source_commit": "a5a24a3d7f0f9bc4a840cd0a6668e70ac3a6632f",
+      "source_tree": "7e757018542321e65cd11cd5b85d01e0a00538e8",
+      "config_sha256": "c05ddd9566d84ac5cf4e54786a7201f198db8285f4435dc0bb1e0bf10d437791",
+      "started_at": "2026-09-12T06:49:11.350827+00:00",
+      "elapsed_seconds": 0.7162162419999731,
+      "exit_code": 0,
+      "binary_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-batch-debug/bin/T07-test",
+      "binary_sha256": "c9419667563ff2c8aa066cbbf6044253b6d7bd69c8f62b30b6c91657716a2282",
+      "output_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/logs/deadline-final-batch-debug.log",
+      "output_sha256": "b8c4a9cc5fb04a791e00737c7dbdeced38d251fcd03d98c4a4034666927a1e7c",
+      "corpus_sha256": null,
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-batch-debug/bin/T07-test",
+          "sha256": "c9419667563ff2c8aa066cbbf6044253b6d7bd69c8f62b30b6c91657716a2282"
+        }
+      ],
+      "output_artifact": "logs/deadline-final-batch-debug.log",
+      "fixture_definitions_sha256": "d9e429b245f0751147bb1589b42b3c167e9955f113e3f82b1fe283eef43eec45",
+      "passed_tests": 18,
+      "total_tests": 18
+    },
+    {
+      "label": "deadline-final-io-releasesafe",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=io",
+        "-Dinstall-tests=true",
+        "-Doptimize=ReleaseSafe",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-io-releasesafe",
+        "--summary",
+        "all"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-legacy",
+      "source_commit": "a5a24a3d7f0f9bc4a840cd0a6668e70ac3a6632f",
+      "source_tree": "7e757018542321e65cd11cd5b85d01e0a00538e8",
+      "config_sha256": "c05ddd9566d84ac5cf4e54786a7201f198db8285f4435dc0bb1e0bf10d437791",
+      "started_at": "2026-09-12T06:49:12.111184+00:00",
+      "elapsed_seconds": 16.401528078999945,
+      "exit_code": 0,
+      "binary_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-io-releasesafe/bin/T04-test",
+      "binary_sha256": "11aec3e7d4ba9e3b1afbfd9187e2b5a39611e68912f82c56652eaa39c8d5e5a9",
+      "output_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/logs/deadline-final-io-releasesafe.log",
+      "output_sha256": "8bcb839f30053758f76b55122dffa52e58d86c10d3f1222e0d739e098bb532af",
+      "corpus_sha256": null,
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-io-releasesafe/bin/T04-deadline-test",
+          "sha256": "39cc132fbdd024b4ac3de5178ccfb0467b383c88207baf67873b01a491c84812"
+        },
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-io-releasesafe/bin/T04-test",
+          "sha256": "11aec3e7d4ba9e3b1afbfd9187e2b5a39611e68912f82c56652eaa39c8d5e5a9"
+        }
+      ],
+      "output_artifact": "logs/deadline-final-io-releasesafe.log",
+      "fixture_definitions_sha256": "d9e429b245f0751147bb1589b42b3c167e9955f113e3f82b1fe283eef43eec45",
+      "passed_tests": 15,
+      "total_tests": 15
+    },
+    {
+      "label": "deadline-final-fs-releasesafe",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=fs",
+        "-Dinstall-tests=true",
+        "-Doptimize=ReleaseSafe",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-fs-releasesafe",
+        "--summary",
+        "all"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-legacy",
+      "source_commit": "a5a24a3d7f0f9bc4a840cd0a6668e70ac3a6632f",
+      "source_tree": "7e757018542321e65cd11cd5b85d01e0a00538e8",
+      "config_sha256": "c05ddd9566d84ac5cf4e54786a7201f198db8285f4435dc0bb1e0bf10d437791",
+      "started_at": "2026-09-12T06:49:28.548087+00:00",
+      "elapsed_seconds": 39.826542406000044,
+      "exit_code": 0,
+      "binary_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-fs-releasesafe/bin/T05-test",
+      "binary_sha256": "159a0ec642dd3137d922747586cd993e975b4b7fec23129c5afabdd69bb44277",
+      "output_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/logs/deadline-final-fs-releasesafe.log",
+      "output_sha256": "100613e73dd1d2397086ded25200b386524133bf2c32e1e1c8e5a12eb8e1cfba",
+      "corpus_sha256": "8516686afc53e0500c9119dc68e4d62c60ab6e601af8d43a7f282bb90db6d26b",
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-fs-releasesafe/bin/T05-test",
+          "sha256": "159a0ec642dd3137d922747586cd993e975b4b7fec23129c5afabdd69bb44277"
+        }
+      ],
+      "output_artifact": "logs/deadline-final-fs-releasesafe.log",
+      "fixture_definitions_sha256": "d9e429b245f0751147bb1589b42b3c167e9955f113e3f82b1fe283eef43eec45",
+      "passed_tests": 15,
+      "total_tests": 15
+    },
+    {
+      "label": "deadline-final-search-releasesafe",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=search",
+        "-Dinstall-tests=true",
+        "-Doptimize=ReleaseSafe",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-search-releasesafe",
+        "--summary",
+        "all"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-legacy",
+      "source_commit": "a5a24a3d7f0f9bc4a840cd0a6668e70ac3a6632f",
+      "source_tree": "7e757018542321e65cd11cd5b85d01e0a00538e8",
+      "config_sha256": "c05ddd9566d84ac5cf4e54786a7201f198db8285f4435dc0bb1e0bf10d437791",
+      "started_at": "2026-09-12T06:50:08.403133+00:00",
+      "elapsed_seconds": 22.115647348000493,
+      "exit_code": 0,
+      "binary_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-search-releasesafe/bin/T06-test",
+      "binary_sha256": "b2346ecf22328b305d3686494e4978a2367648fea0bc992d7acae658933a4a8c",
+      "output_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/logs/deadline-final-search-releasesafe.log",
+      "output_sha256": "475f9c81c520c8bbf7d8808f79b07d891beeb5f341e4d01501355d3d374d464d",
+      "corpus_sha256": null,
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-search-releasesafe/bin/T06-test",
+          "sha256": "b2346ecf22328b305d3686494e4978a2367648fea0bc992d7acae658933a4a8c"
+        }
+      ],
+      "output_artifact": "logs/deadline-final-search-releasesafe.log",
+      "fixture_definitions_sha256": "d9e429b245f0751147bb1589b42b3c167e9955f113e3f82b1fe283eef43eec45",
+      "passed_tests": 15,
+      "total_tests": 15
+    },
+    {
+      "label": "deadline-final-batch-releasesafe",
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=batch",
+        "-Dinstall-tests=true",
+        "-Doptimize=ReleaseSafe",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-batch-releasesafe",
+        "--summary",
+        "all"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-legacy",
+      "source_commit": "a5a24a3d7f0f9bc4a840cd0a6668e70ac3a6632f",
+      "source_tree": "7e757018542321e65cd11cd5b85d01e0a00538e8",
+      "config_sha256": "c05ddd9566d84ac5cf4e54786a7201f198db8285f4435dc0bb1e0bf10d437791",
+      "started_at": "2026-09-12T06:50:30.530638+00:00",
+      "elapsed_seconds": 39.15952262100018,
+      "exit_code": 0,
+      "binary_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-batch-releasesafe/bin/T07-test",
+      "binary_sha256": "ad0588804f0c61be5b1d5b2b68c8b0e82056dc4b5ca2e540f7bdfaeefcd76f03",
+      "output_path": "/workspace/scratch/3f4ab65dfb82/state/legacy/logs/deadline-final-batch-releasesafe.log",
+      "output_sha256": "1d3c5149ebc01f5a581156d2a1e2d22a35c857331ce4c2c50ab8b5b391a3831a",
+      "corpus_sha256": null,
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/legacy/out/deadline-final-batch-releasesafe/bin/T07-test",
+          "sha256": "ad0588804f0c61be5b1d5b2b68c8b0e82056dc4b5ca2e540f7bdfaeefcd76f03"
+        }
+      ],
+      "output_artifact": "logs/deadline-final-batch-releasesafe.log",
+      "fixture_definitions_sha256": "d9e429b245f0751147bb1589b42b3c167e9955f113e3f82b1fe283eef43eec45",
+      "passed_tests": 18,
+      "total_tests": 18
+    }
+  ],
+  "fs004": {
+    "status": "PASS_LINUX_NATIVE",
+    "real_file_counts": [
+      1000,
+      200000
+    ],
+    "candidate_counts": [
+      1000,
+      200000
+    ],
+    "live_bytes": [
+      3745880,
+      3745880
+    ],
+    "peak_live_bytes": [
+      3745880,
+      3745880
+    ],
+    "coverage_skipped": [
+      0,
+      0
+    ],
+    "complete": [
+      true,
+      true
+    ],
+    "corpus_sha256": [
+      "c51d1cae1ca2457bc0183a853f69ca5841ce7cc770badec767ff85cac9694d5c",
+      "8516686afc53e0500c9119dc68e4d62c60ab6e601af8d43a7f282bb90db6d26b"
+    ],
+    "corpus_digest_definition": "SHA256(sorted relative path + NUL + raw SHA256(empty-file))",
+    "oracle": "Validate every emitted path, reject duplicates in a test-only25000-byte bitmap, require exact expected candidate count. Three actual walks per corpus cover selective discovery, every search candidate, and sorted-cache fallback.",
+    "not_evidence_for": "T21 2GiB C-large performance, APFS/AppleSilicon runtime or host E2E"
+  },
+  "checks": [
+    {
+      "name": "verify-contracts",
+      "exit_code": 0,
+      "output_sha256": "6637f1142f5f8b9e63abf93378b0c5da16d7ddd659e828b9b0a8fcc06f9cdf56",
+      "output_artifact": "logs/verify-contracts.log"
+    },
+    {
+      "name": "zig fmt --check src/fs src/search tests/t04_test.zig tests/t05_test.zig tests/t06_test.zig",
+      "exit_code": 0,
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "output_artifact": "logs/fmt-check.log"
+    },
+    {
+      "name": "changed-source ownership",
+      "result": "PASS",
+      "authorized_integrator_paths": [
+        "build.zig",
+        "contracts/README.md",
+        "docs/17-Data-Model-and-Interfaces.md",
+        "src/core/types.zig",
+        "tests/timing_test.zig"
+      ]
+    }
+  ],
+  "remaining_gates": [
+    "Parent independent rereview and integration-binary verification",
+    "Production trusted exclude handle binding and lifecycle integration owned by root",
+    "Final macOS/AppleSilicon/APFS runtime NOT_RUN here",
+    "T21 performance corpora and host/client E2E NOT_RUN here"
+  ],
+  "commits": [
+    {
+      "commit": "a33934444344a6fc01d4135ed94d7256653e28c5",
+      "subject": "test(search): expose omitted candidates beyond files result limit"
+    },
+    {
+      "commit": "03fca3e100be523349f3cdcdefd31e74f5bd72f9",
+      "subject": "test(fs): specify trusted excludes and fail-closed ignore read errors"
+    },
+    {
+      "commit": "89eb368e594c6d93f5b13ec4d8bf2b7fb351660d",
+      "subject": "fix(fs): stream search candidates and bind trusted exclude handles"
+    },
+    {
+      "commit": "a5ea0faf042bb9b69462e4ea870de667ac05b2aa",
+      "subject": "test(search): require no-match version revalidation"
+    },
+    {
+      "commit": "3452614557f486141bc6f849a7854bad855969ed",
+      "subject": "fix(search): revalidate files with no matches before completion"
+    },
+    {
+      "commit": "a04467909026a1000d7a2dc5d3f34907d335824e",
+      "subject": "test(fs): inject ignore replacement and FIFO races"
+    },
+    {
+      "commit": "a6209a0c667b5a9b4c8fe89aea812be6b63e1946",
+      "subject": "fix(fs): reject ignore FIFO races and revalidate loaded paths"
+    },
+    {
+      "commit": "978c217d4339559225555c467737ff2ec6047ec8",
+      "subject": "test(io): specify FIFO races and post-scan cancellation"
+    },
+    {
+      "commit": "8050416117fde7c58b4077d9f25b2af0c31a5703",
+      "subject": "fix(io): refuse FIFO open races and drain cancelled context reads"
+    },
+    {
+      "commit": "95a7a11344bcbdc07971eae38d701b5e853508ab",
+      "subject": "test: specify native deadline inheritance and cancellation behavior"
+    },
+    {
+      "commit": "51ff311732ac199de5e7235d06439b54770fdb30",
+      "subject": "feat(core): propagate monotonic deadlines through native cancellation"
+    },
+    {
+      "commit": "7388ea96ba44a707ce460c8a5b6a1dc5ad093c2c",
+      "subject": "test(io): expose ignored read deadlines and lost search deadline reason"
+    },
+    {
+      "commit": "a5a24a3d7f0f9bc4a840cd0a6668e70ac3a6632f",
+      "subject": "fix(io): enforce native deadlines and retain interruption reasons"
+    }
+  ],
+  "catalog_coverage": {
+    "IO-001": {
+      "tests": [
+        "IO-001 two lines come back with exact byte offsets and no phantom EOF line"
+      ],
+      "status": "PASS native Linux Debug and ReleaseSafe"
+    },
+    "IO-002": {
+      "tests": [
+        "IO-002 empty files have no lines and an unterminated last line is one line"
+      ],
+      "status": "PASS native Linux Debug and ReleaseSafe"
+    },
+    "IO-003": {
+      "tests": [
+        "IO-003 BOM, CRLF, mixed newlines and Hangul keep raw bytes and the whole-file SHA-256"
+      ],
+      "status": "PASS native Linux Debug and ReleaseSafe"
+    },
+    "IO-004": {
+      "tests": [
+        "IO-004 5000 lines, a line longer than a chunk and small output budgets stay bounded",
+        "IO-004 native read deadline expires after open and scan without a cancellation producer",
+        "IO-004 native read rejects deadlines outside the frozen limits"
+      ],
+      "status": "PASS native Linux Debug and ReleaseSafe"
+    },
+    "IO-005": {
+      "tests": [
+        "IO-005 FIFO replacement after path resolution cannot block a regular-file open",
+        "IO-005 short reads and interrupted reads give the same result as a plain read",
+        "IO-005 a change after open is retried once and never mixes versions"
+      ],
+      "status": "PASS native Linux Debug and ReleaseSafe"
+    },
+    "IO-006": {
+      "tests": [
+        "IO-006 write intent hashes the whole 8 MiB file and every descriptor and byte is returned"
+      ],
+      "status": "PASS native Linux Debug and ReleaseSafe"
+    },
+    "FS-001": {
+      "tests": [
+        "FS-001 trusted Git info and global excludes follow Git precedence without reading repository config",
+        "FS-001 nested .gitignore files and negations give Git's file set",
+        "FS-001 single ignore patterns match git check-ignore"
+      ],
+      "status": "PASS native Linux Debug and ReleaseSafe"
+    },
+    "FS-002": {
+      "tests": [
+        "FS-002 a file under an excluded directory cannot be re-included, contents of a pattern-excluded directory can"
+      ],
+      "status": "PASS native Linux Debug and ReleaseSafe"
+    },
+    "FS-003": {
+      "tests": [
+        "FS-003 hidden files, .git and escaped, comment and trailing-space patterns follow the policy"
+      ],
+      "status": "PASS native Linux Debug and ReleaseSafe"
+    },
+    "FS-004": {
+      "tests": [
+        "FS-004 200000 actual files stream with fixed traversal memory and exact coverage"
+      ],
+      "status": "PASS native Linux Debug and ReleaseSafe"
+    },
+    "FS-005": {
+      "tests": [
+        "FS-005 replacing an ignore file with a FIFO between stat and open cannot block",
+        "FS-005 replacing an ignore path during its read cannot report stale rules complete",
+        "FS-005 an unreadable ignore file cannot silently expose its excluded subtree",
+        "FS-005 symlink loops are not followed and an unreadable directory makes the result incomplete"
+      ],
+      "status": "PASS native Linux Debug and ReleaseSafe"
+    },
+    "FS-006": {
+      "tests": [
+        "FS-006 Unicode names come back byte for byte and unsupported names are counted, not dropped silently"
+      ],
+      "status": "PASS native Linux Debug and ReleaseSafe"
+    },
+    "SR-001": {
+      "tests": [
+        "SR-001 a literal across the 256 KiB chunk boundary matches the scalar oracle exactly once",
+        "SR-001 tiny chunks over random files never duplicate or miss a match"
+      ],
+      "status": "PASS native Linux Debug and ReleaseSafe"
+    },
+    "SR-002": {
+      "tests": [
+        "SR-002 several matches on one line and overlapping context return each line once"
+      ],
+      "status": "PASS native Linux Debug and ReleaseSafe"
+    },
+    "SR-003": {
+      "tests": [
+        "SR-003 empty literals are refused and regex-looking literals match as plain bytes"
+      ],
+      "status": "PASS native Linux Debug and ReleaseSafe"
+    },
+    "SR-004": {
+      "tests": [
+        "SR-004 binary, invalid UTF-8 and oversized files are skipped with exact coverage"
+      ],
+      "status": "PASS native Linux Debug and ReleaseSafe"
+    },
+    "SR-005": {
+      "tests": [
+        "SR-005 match, output and deadline caps stop the search honestly without allocating",
+        "SR-005 internal first-match time and delivery time are recorded separately",
+        "SR-005 cancellation inside a large file is observed at the next chunk",
+        "SR-005 deadline after scan keeps its reason and publishes no context",
+        "SR-005 cancellation after scan stops context reads and result publication",
+        "SR-005 search streams beyond the files result cap without growing candidate storage"
+      ],
+      "status": "PASS native Linux Debug and ReleaseSafe"
+    },
+    "SR-006": {
+      "tests": [
+        "SR-006 same-size rewrites are caught by the version check or by the match bytes",
+        "SR-006 a no-match file changed after scan is revalidated before complete success",
+        "SR-006 a file that changes between scan and context read is retried once or skipped, never mixed"
+      ],
+      "status": "PASS native Linux Debug and ReleaseSafe"
+    }
+  },
+  "independent_review": {
+    "reviewer": "/root/requirements_audit/review_legacy",
+    "reviewed_through": "3452614",
+    "findings": [
+      "P1 FIFO replacement races in ignore and metadata opens",
+      "P2 local ignore after-read path identity and ctime checks",
+      "P2 context cancellation boundaries"
+    ],
+    "fix_commits": [
+      "a6209a0",
+      "8050416",
+      "a5a24a3"
+    ],
+    "rereview_status": "PENDING parent independent review; child thread limit prevented followup"
+  }
+}

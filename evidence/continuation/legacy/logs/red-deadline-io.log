@@ -1,0 +1,87 @@
+test
++- run test T04-test 11 pass, 2 fail (13 total)
+error: 't04_test.test.IO-004 native read deadline expires after open and scan without a cancellation producer' failed:
+       expected DeadlineExceeded, read succeeded
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/fs/metadata.zig:61:33: 0x125bf96 in openRegularWithFault (read.zig)
+           if (entry.kind != .regular) return error.NotRegular;
+                                       ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/fs/metadata.zig:55:5: 0x125bc3b in openRegular (read.zig)
+           return openRegularWithFault(io, root, path, null);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/fs/read.zig:130:24: 0x123aaca in readOnce (read.zig)
+               const opened = try metadata.openRegular(io, self.root.dir, spec.path.bytes);
+                              ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/fs/read.zig:92:29: 0x123a31f in readRange (read.zig)
+                       else => |e| return e,
+                                   ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/fs/metadata.zig:61:33: 0x125bf96 in openRegularWithFault (read.zig)
+           if (entry.kind != .regular) return error.NotRegular;
+                                       ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/fs/metadata.zig:55:5: 0x125bc3b in openRegular (read.zig)
+           return openRegularWithFault(io, root, path, null);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/fs/read.zig:130:24: 0x123aaca in readOnce (read.zig)
+               const opened = try metadata.openRegular(io, self.root.dir, spec.path.bytes);
+                              ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/fs/read.zig:92:29: 0x123a31f in readRange (read.zig)
+                       else => |e| return e,
+                                   ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/policy/paths.zig:112:37: 0x1250824 in resolve (capability.zig)
+               if (entry.kind == .symlink) return error.PathEscape;
+                                           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/fs/metadata.zig:88:71: 0x124f7a6 in resolveFinal (read.zig)
+           const resolved = policy.paths.resolve(io, root, path) catch |err| return switch (err) {
+                                                                             ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/fs/metadata.zig:59:22: 0x125be90 in openRegularWithFault (read.zig)
+           const resolved = try resolveFinal(io, root, path);
+                            ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/fs/metadata.zig:55:5: 0x125bc3b in openRegular (read.zig)
+           return openRegularWithFault(io, root, path, null);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/fs/read.zig:130:24: 0x123aaca in readOnce (read.zig)
+               const opened = try metadata.openRegular(io, self.root.dir, spec.path.bytes);
+                              ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/fs/read.zig:92:29: 0x123a31f in readRange (read.zig)
+                       else => |e| return e,
+                                   ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/fs/metadata.zig:60:35: 0x125bf0e in openRegularWithFault (read.zig)
+           const entry = resolved orelse return error.NotFound;
+                                         ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/fs/metadata.zig:55:5: 0x125bc3b in openRegular (read.zig)
+           return openRegularWithFault(io, root, path, null);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/fs/read.zig:130:24: 0x123aaca in readOnce (read.zig)
+               const opened = try metadata.openRegular(io, self.root.dir, spec.path.bytes);
+                              ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/src/fs/read.zig:92:29: 0x123a31f in readRange (read.zig)
+                       else => |e| return e,
+                                   ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/tests/t04_test.zig:157:13: 0x12300ba in expectReadError (t04_test.zig)
+                   return error.TestUnexpectedSuccess;
+                   ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/tests/t04_test.zig:536:9: 0x1273053 in test.IO-004 native read deadline expires after open and scan without a cancellation producer (t04_test.zig)
+               try h.expectReadError(error.DeadlineExceeded, spec);
+               ^
+error: 't04_test.test.IO-004 native read rejects deadlines outside the frozen limits' failed:
+       expected InvalidArgument, read succeeded
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/tests/t04_test.zig:157:13: 0x12300ba in expectReadError (t04_test.zig)
+                   return error.TestUnexpectedSuccess;
+                   ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-legacy/tests/t04_test.zig:554:9: 0x12728e2 in test.IO-004 native read rejects deadlines outside the frozen limits (t04_test.zig)
+               try h.expectReadError(error.InvalidArgument, spec);
+               ^
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/legacy/zig-local-cache && /workspace/scratch/3f4ab65dfb82/state/legacy/zig-local-cache/o/b6b590d88f8d9a3485db4e2546526786/T04-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/legacy/zig-local-cache --seed=0x5dc33daf --listen=-
+
+Build Summary: 5/7 steps succeeded (1 failed); 13/15 tests passed (2 failed)
+test transitive failure
++- install T04-test success
+|  +- compile test T04-test Debug native success 618ms MaxRSS:176M
++- run test T04-test 11 pass, 2 fail (13 total)
+|  +- compile test T04-test Debug native (reused)
++- install T04-deadline-test success
+|  +- compile test T04-deadline-test Debug native success 620ms MaxRSS:172M
++- run test T04-deadline-test 2 pass (2 total) 12ms MaxRSS:5M
+   +- compile test T04-deadline-test Debug native (reused)
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/legacy/zig-local-cache/o/c36c1675aeff3d0b5c45ee8a47d29ebc/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-legacy /workspace/scratch/3f4ab65dfb82/state/legacy/zig-local-cache /workspace/scratch/3f4ab65dfb82/state/legacy/zig-global-cache --seed 0x5dc33daf -Z06e9746fb6093273 test -Dtest-group=io -Dinstall-tests=true -Doptimize=Debug --prefix /workspace/scratch/3f4ab65dfb82/state/legacy/out/red-deadline-io --summary all

@@ -1,0 +1,25 @@
+1/24 t07_test.test.BA-001 plannedCost rejects zero line count without panicking...OK
+2/24 t07_test.test.BA-001 plannedCost rejects overflowing line range without panicking...OK
+3/24 t07_test.test.BA-001 plannedCost validates request constraints before computing a reservation...OK
+4/24 t07_test.test.BA-001 adjacent invalid UTF-8 does not poison a valid later member...OK
+5/24 t07_test.test.BA-001 adjacent long line cannot exhaust a later members own output budget...OK
+6/24 t07_test.test.BA-001 same range with different output limits keeps standalone UTF-8 results...OK
+7/24 t07_test.test.BA-001 32 items keep input order, item ids and per-item errors, and match single reads...OK
+8/24 t07_test.test.BA-001 results do not depend on how many items run at once...OK
+9/24 t07_test.test.BA-002 more than 32 items, bad item ids and another workspace are refused before any read...OK
+10/24 t07_test.test.BA-002 paths that leave the root fail only their own item...OK
+11/24 t07_test.test.BA-003 32 items asking for 8 MiB share a 2 MiB output cap under a small group budget...OK
+12/24 t07_test.test.BA-003 a reservation without room for the store or any item is refused honestly...OK
+13/24 t07_test.test.T07 cancellation during a batch returns Cancelled after every job has stopped...OK
+14/24 t07_test.test.T07 no read starts after cancellation is requested between reads...OK
+15/24 t07_test.test.T07 a file that keeps changing fails its item with a version conflict, others succeed...OK
+16/24 t07_test.test.T07 an allocation failure at any point fails an item or the batch and leaks nothing...OK
+17/24 t07_test.test.T07 batch contracts...OK
+18/24 t07_test.test.T07 projection writes compact read data with exact offsets and the zcr/1 envelope...OK
+19/24 t07_test.test.T07 projection escapes JSON text and keeps bytes, CR and non-ASCII exact...OK
+20/24 t07_test.test.T07 projection keeps whole lines within output_bytes and says the result is truncated...OK
+21/24 t07_test.test.BA-003 batch projection keeps every item id and counts budget replacements in coverage...OK
+22/24 t07_test.test.T07 files and search projection keep whole entries within output_bytes...OK
+23/24 t07_test.test.T07 projection refuses a bad envelope and a buffer that is too small...OK
+24/24 t07_test.test.T07 a real batch result projects within its output budget...OK
+All 24 tests passed.

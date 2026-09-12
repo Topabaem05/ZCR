@@ -6,9 +6,8 @@
 //! so memory does not depend on the number of files.
 //!
 //! The walk starts from a handle-relative, no-follow open of the capability path,
-//! applies .gitignore files from the root down (git ls-files --exclude-standard
-//! semantics for per-directory files; info/exclude and core.excludesFile are not
-//! read), never enters an ignored directory, and pushes matching regular files to
+//! applies trusted global and Git info excludes before .gitignore files from the
+//! root down, never enters an ignored directory, and pushes matching regular files to
 //! the sink as root-relative paths that are valid only during the push.
 //!
 //! Nothing is dropped silently. Unreadable directories, names that are not valid
@@ -73,6 +72,7 @@ pub const Report = struct {
     unreadable_directories: u64 = 0,
     unsupported_names: u64 = 0,
     ignore_limits_exceeded: u64 = 0,
+    unreadable_ignore_files: u64 = 0,
     depth_limited: u64 = 0,
     // Policy filters: reported, not incomplete.
     symlinks_not_followed: u64 = 0,
@@ -80,7 +80,7 @@ pub const Report = struct {
     vanished_entries: u64 = 0,
 
     pub fn skipped(r: Report) u64 {
-        return r.unreadable_directories + r.unsupported_names + r.ignore_limits_exceeded + r.depth_limited;
+        return r.unreadable_directories + r.unsupported_names + r.ignore_limits_exceeded + r.unreadable_ignore_files + r.depth_limited;
     }
 };
 
@@ -99,11 +99,30 @@ const Frame = struct {
     next: u32,
 };
 
+/// Trusted launch configuration only. Handles are already opened by the host's
+/// narrow Git/config helper, including a linked worktree's common-dir exclude.
+/// They are pinned file identities, owned by the caller through every walk; after
+/// atomic replacement the host must explicitly rebind a new handle. No request path, repository
+/// config, environment variable or ignore rule can open another file or widen scope.
+pub const TrustedExcludes = struct {
+    global_exclude: ?Io.File = null,
+    git_info_exclude: ?Io.File = null,
+};
+
+/// Deterministic test-only I/O race hooks. Production traversers leave this null.
+pub const IgnoreFault = struct {
+    before_open: ?*const fn (?*anyopaque) void = null,
+    after_read: ?*const fn (?*anyopaque) void = null,
+    context: ?*anyopaque = null,
+};
+
 pub const Traverser = struct {
     allocator: Allocator,
     root: core.TrustedRoot,
     workspace_id: core.WorkspaceId,
     caps: Caps,
+    trusted_excludes: TrustedExcludes = .{},
+    ignore_fault: ?*IgnoreFault = null,
     frames: []Frame,
     top: usize = 0,
     rules: ignore.RuleStack,
@@ -114,7 +133,7 @@ pub const Traverser = struct {
     cache_bytes_len: usize = 0,
     path_buf: [path_max]u8 = undefined,
     scope_buf: [path_max]u8 = undefined,
-    reasons_buf: [8][]const u8 = undefined,
+    reasons_buf: [9][]const u8 = undefined,
     last: Report = .{},
 
     pub fn init(allocator: Allocator, root: core.TrustedRoot, workspace_id: core.WorkspaceId, caps: Caps) Allocator.Error!Traverser {
@@ -161,9 +180,28 @@ pub const Traverser = struct {
         sink: core.Sink(core.RelativePath),
         cancel: core.Cancel,
     ) core.ReadError!core.Coverage {
+        return self.enumerateImpl(io, capability, spec, sink, cancel, false);
+    }
+
+    /// Internal search data flow: candidates are streamed directly to the scanner,
+    /// not retained or returned as a files API result. Only a search capability may
+    /// use this entry point; match/output/deadline limits remain the scanner's job.
+    pub fn enumerateSearchCandidates(
+        self: *Traverser,
+        io: Io,
+        capability: core.Capability,
+        spec: core.FileSpec,
+        sink: core.Sink(core.RelativePath),
+        cancel: core.Cancel,
+    ) core.ReadError!core.Coverage {
+        if (capability.operation != .search) return error.OutOfScope;
+        return self.enumerateImpl(io, capability, spec, sink, cancel, true);
+    }
+
+    fn enumerateImpl(self: *Traverser, io: Io, capability: core.Capability, spec: core.FileSpec, sink: core.Sink(core.RelativePath), cancel: core.Cancel, search_candidates: bool) core.ReadError!core.Coverage {
         try self.checkRequest(capability, spec);
         self.last = .{};
-        if (cancel.isRequested()) return error.Cancelled;
+        try cancel.check();
 
         const start = capability.path.bytes;
         const scope_len = @min(start.len, self.scope_buf.len);
@@ -173,10 +211,14 @@ pub const Traverser = struct {
         defer self.rules.restore(rules_start);
         defer self.closeFrames(io);
 
-        if (try self.openStart(io, start)) |opened| {
-            try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel);
+        const trusted_loaded = self.loadTrustedExcludes(io);
+        if (trusted_loaded) {
+            if (try self.openStart(io, start)) |opened| {
+                try self.walk(io, opened.dir, opened.path_len, spec, sink, cancel, search_candidates);
+            }
         }
 
+        try cancel.check();
         self.last.complete = self.last.skipped() == 0 and !self.last.truncated;
         return .{
             .scope = self.scope_buf[0..scope_len],
@@ -234,12 +276,12 @@ pub const Traverser = struct {
         return .{ .dir = dir, .path_len = path_len };
     }
 
-    fn walk(self: *Traverser, io: Io, start_dir: Io.Dir, start_len: usize, spec: core.FileSpec, sink: core.Sink(core.RelativePath), cancel: core.Cancel) core.ReadError!void {
+    fn walk(self: *Traverser, io: Io, start_dir: Io.Dir, start_len: usize, spec: core.FileSpec, sink: core.Sink(core.RelativePath), cancel: core.Cancel, search_candidates: bool) core.ReadError!void {
         try self.enterDir(io, start_dir, start_len, spec);
 
         while (self.top > 0) {
             self.last.entries_seen += 1;
-            if (self.last.entries_seen % cancel_check_interval == 0 and cancel.isRequested()) return error.Cancelled;
+            if (self.last.entries_seen % cancel_check_interval == 0) try cancel.check();
 
             const frame = &self.frames[self.top - 1];
             const entry = self.nextEntry(io, frame) catch {
@@ -285,10 +327,11 @@ pub const Traverser = struct {
                     self.last.files_seen += 1;
                     if (self.rules.isIgnored(rel, false)) continue;
                     if (!ignore.wildmatch(spec.glob, rel)) continue;
-                    if (self.last.emitted == spec.limit) {
+                    if (!search_candidates and self.last.emitted == spec.limit) {
                         self.last.truncated = true;
                         return;
                     }
+                    try cancel.check();
                     try sink.push(.{ .bytes = rel });
                     self.last.emitted += 1;
                 },
@@ -398,19 +441,77 @@ pub const Traverser = struct {
     /// Loads `dir/.gitignore` onto the rule stack. False when it is over a limit, in
     /// which case the directory must not be listed.
     fn loadIgnore(self: *Traverser, io: Io, dir: Io.Dir, path_len: usize) bool {
-        const file = dir.openFile(io, ".gitignore", .{ .follow_symlinks = false, .allow_directory = false }) catch return true;
+        // Inspect first so a named pipe cannot block the walk while opening it.
+        const entry = policy.paths.statAt(dir.handle, ".gitignore") catch {
+            self.last.unreadable_ignore_files += 1;
+            return false;
+        } orelse return true;
+        if (entry.kind != .regular) {
+            self.last.unreadable_ignore_files += 1;
+            return false;
+        }
+        if (self.ignore_fault) |fault| if (fault.before_open) |hook| hook(fault.context);
+        // A FIFO swapped after the stat must not block before fstat can reject it.
+        const fd = std.posix.openat(dir.handle, ".gitignore", .{ .ACCMODE = .RDONLY, .NONBLOCK = true, .NOFOLLOW = true, .CLOEXEC = true }, 0) catch {
+            self.last.unreadable_ignore_files += 1;
+            return false;
+        };
+        const file: Io.File = .{ .handle = fd, .flags = .{ .nonblocking = true } };
         defer file.close(io);
-        const stat = file.stat(io) catch return true;
-        if (stat.kind != .file) return true;
+        const opened = policy.paths.statHandle(file.handle) catch {
+            self.last.unreadable_ignore_files += 1;
+            return false;
+        };
+        if (opened.kind != .regular or !opened.identity.eql(entry.identity)) {
+            self.last.unreadable_ignore_files += 1;
+            return false;
+        }
+        if (!self.loadIgnoreHandle(io, file, self.path_buf[0..path_len])) return false;
+        const current = policy.paths.statAt(dir.handle, ".gitignore") catch {
+            self.last.unreadable_ignore_files += 1;
+            return false;
+        };
+        if (current == null or current.?.kind != .regular or !current.?.identity.eql(opened.identity)) {
+            self.last.unreadable_ignore_files += 1;
+            return false;
+        }
+        return true;
+    }
+
+    fn loadTrustedExcludes(self: *Traverser, io: Io) bool {
+        // Git precedence, lowest first. Per-directory .gitignore rules follow.
+        if (self.trusted_excludes.global_exclude) |file| if (!self.loadIgnoreHandle(io, file, "")) return false;
+        if (self.trusted_excludes.git_info_exclude) |file| if (!self.loadIgnoreHandle(io, file, "")) return false;
+        return true;
+    }
+
+    fn loadIgnoreHandle(self: *Traverser, io: Io, file: Io.File, base: []const u8) bool {
+        const stat = file.stat(io) catch {
+            self.last.unreadable_ignore_files += 1;
+            return false;
+        };
+        if (stat.kind != .file) {
+            self.last.unreadable_ignore_files += 1;
+            return false;
+        }
         if (stat.size > self.caps.max_ignore_file_bytes) {
             self.last.ignore_limits_exceeded += 1;
             return false;
         }
         const n = file.readPositionalAll(io, self.ignore_buf[0..@intCast(stat.size)], 0) catch {
-            self.last.ignore_limits_exceeded += 1;
+            self.last.unreadable_ignore_files += 1;
             return false;
         };
-        self.rules.pushFile(self.path_buf[0..path_len], self.ignore_buf[0..n]) catch {
+        if (self.ignore_fault) |fault| if (fault.after_read) |hook| hook(fault.context);
+        const after = file.stat(io) catch {
+            self.last.unreadable_ignore_files += 1;
+            return false;
+        };
+        if (n != stat.size or after.size != stat.size or after.mtime.nanoseconds != stat.mtime.nanoseconds or after.ctime.nanoseconds != stat.ctime.nanoseconds) {
+            self.last.unreadable_ignore_files += 1;
+            return false;
+        }
+        self.rules.pushFile(base, self.ignore_buf[0..n]) catch {
             self.last.ignore_limits_exceeded += 1;
             return false;
         };
@@ -447,6 +548,7 @@ pub const Traverser = struct {
             .{ .active = r.unreadable_directories > 0, .text = "unreadable directories were not listed" },
             .{ .active = r.unsupported_names > 0, .text = "names that are not valid ZCR paths were not listed" },
             .{ .active = r.ignore_limits_exceeded > 0, .text = "ignore files over the size or rule limit: their directories were not listed" },
+            .{ .active = r.unreadable_ignore_files > 0, .text = "ignore files unreadable, changed or non-regular: their directories were not listed" },
             .{ .active = r.depth_limited > 0, .text = "directory depth limit reached" },
             .{ .active = r.truncated, .text = "result limit reached" },
             .{ .active = r.order_fallback, .text = "path cache full: some directories are in discovery order" },

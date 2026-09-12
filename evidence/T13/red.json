@@ -1,0 +1,55 @@
+{
+  "source_commit": "29c732a4ccab3971ad371f87a0e7da0f0dbfd17f",
+  "base_commit": "98c722ebc906321b94bc3e9c8b60522f3305faa7",
+  "native_behavioral_failures": [
+    {
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=memory",
+        "-Dtest-id=ME-004",
+        "-Dinstall-tests=true",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/T13/out-red",
+        "--summary",
+        "all"
+      ],
+      "exit": 1,
+      "log_sha256": "4c34b0303d8d3e88811570652f52ed8c4ab6255908a2702d6aba188f683d4ad5",
+      "label": "red",
+      "source_commit": "29c732a4ccab3971ad371f87a0e7da0f0dbfd17f",
+      "evidence_log": "evidence/T13/red.log",
+      "binary": "/workspace/scratch/3f4ab65dfb82/state/T13/out-red/bin/T13-test",
+      "binary_sha256": "d14115fc73d7f18576349c3ba2182638ac76a86dbfa080087b9682764229955e",
+      "result": "EXPECTED_ASSERTION_RED",
+      "failed": 2,
+      "passed": 0
+    },
+    {
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=memory",
+        "-Dtest-id=IS-006",
+        "-Dinstall-tests=true",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/T13/out-red-isolation",
+        "--summary",
+        "all"
+      ],
+      "exit": 1,
+      "log_sha256": "fdefa81cbd15060de11172ebab0d5f3d89fa617132ae1190cbdabf7a92623b2c",
+      "label": "red-isolation",
+      "source_commit": "29c732a4ccab3971ad371f87a0e7da0f0dbfd17f",
+      "evidence_log": "evidence/T13/red-isolation.log",
+      "binary": "/workspace/scratch/3f4ab65dfb82/state/T13/out-red-isolation/bin/T13-test",
+      "binary_sha256": "a2dd64d4145f6e0fba105c717a443401dd4fbdbf0c941369ac977811cf7c31f7",
+      "result": "EXPECTED_ASSERTION_RED",
+      "failed": 2,
+      "passed": 0
+    }
+  ],
+  "interpretation": "Four intended native assertions fail because initial cache observation returns bypassed instead of required probation. No compiler/toolchain failure is claimed as behavioral RED. Later source adds the full 14-test suite."
+}

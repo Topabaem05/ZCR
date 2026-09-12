@@ -1,0 +1,218 @@
+{
+  "schema_version": "zcr-task-runs/1",
+  "environment": {
+    "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T10/zig-global-cache",
+    "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T10/zig-local-cache",
+    "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T10/tmp"
+  },
+  "config_digest": "c20cd22b7fd46d362af1ec3ab2df3943d5680868df4b380092ceb1de5ef3fe8a",
+  "review_red": "evidence/T10/review-red.json",
+  "marker_red": "evidence/T10/marker-red.json",
+  "runtime_compile_source_sha256": "376fcb8c2507315db67e59f8e937491499d87229fc47b296586d57ec9344d1f0",
+  "runtime_compile_source": "evidence/T10/runtime-hooks-absent.zig",
+  "source_hashes": {
+    "src/workspace/registry.zig": "a597e8c64822f5bcb6e5e5010efc79aad8d64f08db287ac6db02323ed7ec27b1",
+    "src/workspace/identity.zig": "ea493786a52c7fb0460efb1e911293fd4ab69aac273e47bfa8d15c129ebe5c3d",
+    "src/workspace/lease.zig": "b7b19b516e2dfe25f8e38df3962659cab90600e469cc1c0623050b2016d52e60",
+    "tests/t10_test.zig": "1a512f0772e8190cdbc1803a1cbb051f51ea0402e7fb1c783b4516495789e9e6"
+  },
+  "corpus_digest": "1a512f0772e8190cdbc1803a1cbb051f51ea0402e7fb1c783b4516495789e9e6",
+  "runs": [
+    {
+      "label": "isolation-debug",
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=isolation",
+        "-Doptimize=Debug",
+        "-Dinstall-tests=true",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/T10/out/commit-debug",
+        "--summary",
+        "all"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T10",
+      "exit_code": 0,
+      "source_commit": "f8a3b24f44a02aa882ec72c170ad57296e02c815",
+      "log": "/workspace/scratch/3f4ab65dfb82/state/T10/logs/commit-isolation-debug.log",
+      "log_sha256": "e0d16220ff65d8e49db7d0f622541894d55fbd60af01ab1c35ab45b08d96e29e",
+      "binary": "/workspace/scratch/3f4ab65dfb82/state/T10/out/commit-debug/bin/T10-test",
+      "binary_sha256": "b4651875af9349235255c09fde447f8d5d724d907947ae2a348a86ec76890bb6",
+      "evidence_log": "evidence/T10/commit-isolation-debug.log"
+    },
+    {
+      "label": "t10-debug",
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/state/T10/out/commit-debug/bin/T10-test"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/state/T10/tmp",
+      "exit_code": 0,
+      "source_commit": "f8a3b24f44a02aa882ec72c170ad57296e02c815",
+      "log": "/workspace/scratch/3f4ab65dfb82/state/T10/logs/commit-t10-debug.log",
+      "log_sha256": "fb765b7dd6e2c0d2785b2a2891c9c159464881697fa082f959b98d9fa6cb5e67",
+      "binary": "/workspace/scratch/3f4ab65dfb82/state/T10/out/commit-debug/bin/T10-test",
+      "binary_sha256": "b4651875af9349235255c09fde447f8d5d724d907947ae2a348a86ec76890bb6",
+      "evidence_log": "evidence/T10/commit-t10-debug.log"
+    },
+    {
+      "label": "t02-debug",
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/state/T10/out/commit-debug/bin/T02-test"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/state/T10/tmp",
+      "exit_code": 0,
+      "source_commit": "f8a3b24f44a02aa882ec72c170ad57296e02c815",
+      "log": "/workspace/scratch/3f4ab65dfb82/state/T10/logs/commit-t02-debug.log",
+      "log_sha256": "2e875a47bad5aef7ded54821407f442889260e8b52bcca9e232312189836d7a7",
+      "binary": "/workspace/scratch/3f4ab65dfb82/state/T10/out/commit-debug/bin/T02-test",
+      "binary_sha256": "68bdcc23dd4e58dc5e4a6cf3cf51191808ee4b3447251f931388112be369fd04",
+      "evidence_log": "evidence/T10/commit-t02-debug.log"
+    },
+    {
+      "label": "lease-debug",
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "test",
+        "-ODebug",
+        "--dep",
+        "zcr_core",
+        "-Mroot=src/workspace/lease.zig",
+        "-Mzcr_core=src/core/types.zig",
+        "-femit-bin=/workspace/scratch/3f4ab65dfb82/state/T10/out/commit-lease-debug"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T10",
+      "exit_code": 0,
+      "source_commit": "f8a3b24f44a02aa882ec72c170ad57296e02c815",
+      "log": "/workspace/scratch/3f4ab65dfb82/state/T10/logs/commit-lease-debug.log",
+      "log_sha256": "dc9462effb42db1089153a897bcc54d7f6cbf777b00b9ff41e73ed138da532ed",
+      "binary": "/workspace/scratch/3f4ab65dfb82/state/T10/out/commit-lease-debug",
+      "binary_sha256": "ff95c8a57bf135816abc0ce0f7bfa6fe06e0866ca2f3ff38f612bfa203241e5a",
+      "evidence_log": "evidence/T10/commit-lease-debug.log"
+    },
+    {
+      "label": "isolation-release-safe",
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=isolation",
+        "-Doptimize=ReleaseSafe",
+        "-Dinstall-tests=true",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/T10/out/commit-release-safe",
+        "--summary",
+        "all"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T10",
+      "exit_code": 0,
+      "source_commit": "f8a3b24f44a02aa882ec72c170ad57296e02c815",
+      "log": "/workspace/scratch/3f4ab65dfb82/state/T10/logs/commit-isolation-release-safe.log",
+      "log_sha256": "9dafe484ef83baa2f9f0b3552540e2ec147a18119aacafe63060aa8fb256cc7b",
+      "binary": "/workspace/scratch/3f4ab65dfb82/state/T10/out/commit-release-safe/bin/T10-test",
+      "binary_sha256": "e4bcf0d73d1c842278ad78504eb2bb2982c87e57a91762f96d781d70307080eb",
+      "evidence_log": "evidence/T10/commit-isolation-release-safe.log"
+    },
+    {
+      "label": "t10-release-safe",
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/state/T10/out/commit-release-safe/bin/T10-test"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/state/T10/tmp",
+      "exit_code": 0,
+      "source_commit": "f8a3b24f44a02aa882ec72c170ad57296e02c815",
+      "log": "/workspace/scratch/3f4ab65dfb82/state/T10/logs/commit-t10-release-safe.log",
+      "log_sha256": "fb765b7dd6e2c0d2785b2a2891c9c159464881697fa082f959b98d9fa6cb5e67",
+      "binary": "/workspace/scratch/3f4ab65dfb82/state/T10/out/commit-release-safe/bin/T10-test",
+      "binary_sha256": "e4bcf0d73d1c842278ad78504eb2bb2982c87e57a91762f96d781d70307080eb",
+      "evidence_log": "evidence/T10/commit-t10-release-safe.log"
+    },
+    {
+      "label": "t02-release-safe",
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/state/T10/out/commit-release-safe/bin/T02-test"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/state/T10/tmp",
+      "exit_code": 0,
+      "source_commit": "f8a3b24f44a02aa882ec72c170ad57296e02c815",
+      "log": "/workspace/scratch/3f4ab65dfb82/state/T10/logs/commit-t02-release-safe.log",
+      "log_sha256": "2e875a47bad5aef7ded54821407f442889260e8b52bcca9e232312189836d7a7",
+      "binary": "/workspace/scratch/3f4ab65dfb82/state/T10/out/commit-release-safe/bin/T02-test",
+      "binary_sha256": "eedb3cf62fe163fb7518187f20a32d93888fec6ede24dded8f78842dc4f443a9",
+      "evidence_log": "evidence/T10/commit-t02-release-safe.log"
+    },
+    {
+      "label": "lease-release-safe",
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "test",
+        "-OReleaseSafe",
+        "--dep",
+        "zcr_core",
+        "-Mroot=src/workspace/lease.zig",
+        "-Mzcr_core=src/core/types.zig",
+        "-femit-bin=/workspace/scratch/3f4ab65dfb82/state/T10/out/commit-lease-release-safe"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T10",
+      "exit_code": 0,
+      "source_commit": "f8a3b24f44a02aa882ec72c170ad57296e02c815",
+      "log": "/workspace/scratch/3f4ab65dfb82/state/T10/logs/commit-lease-release-safe.log",
+      "log_sha256": "dc9462effb42db1089153a897bcc54d7f6cbf777b00b9ff41e73ed138da532ed",
+      "binary": "/workspace/scratch/3f4ab65dfb82/state/T10/out/commit-lease-release-safe",
+      "binary_sha256": "b961966d730da123ee801b6d8c7a60d15a0b49d38c475b0603324fe934ae5958",
+      "evidence_log": "evidence/T10/commit-lease-release-safe.log"
+    },
+    {
+      "label": "verify-contracts",
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "verify-contracts",
+        "--summary",
+        "all"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T10",
+      "exit_code": 0,
+      "source_commit": "f8a3b24f44a02aa882ec72c170ad57296e02c815",
+      "log": "/workspace/scratch/3f4ab65dfb82/state/T10/logs/commit-verify-contracts.log",
+      "log_sha256": "2a6757495e9aee65179c7fbbd0a84334de346a5e316dc1f3de06cd4532583eb4",
+      "evidence_log": "evidence/T10/commit-verify-contracts.log"
+    },
+    {
+      "label": "runtime-hooks-absent",
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build-obj",
+        "-OReleaseSafe",
+        "-lc",
+        "--dep",
+        "zcr_workspace",
+        "-Mroot=/workspace/scratch/3f4ab65dfb82/state/T10/runtime_compile.zig",
+        "--dep",
+        "zcr_core",
+        "--dep",
+        "zcr_policy",
+        "-Mzcr_workspace=src/workspace/registry.zig",
+        "-Mzcr_core=src/core/types.zig",
+        "--dep",
+        "zcr_core",
+        "-Mzcr_policy=src/policy/capability.zig",
+        "-femit-bin=/workspace/scratch/3f4ab65dfb82/state/T10/out/runtime-hooks-absent.o"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T10",
+      "exit_code": 0,
+      "source_commit": "f8a3b24f44a02aa882ec72c170ad57296e02c815",
+      "log": "/workspace/scratch/3f4ab65dfb82/state/T10/logs/commit-runtime-hooks-absent.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binary": "/workspace/scratch/3f4ab65dfb82/state/T10/out/runtime-hooks-absent.o",
+      "binary_sha256": "7d9fd8cc092781cc323b86e6cd855ca06e99b6ec810201040c3e218206aa4641",
+      "evidence_log": "evidence/T10/commit-runtime-hooks-absent.log"
+    }
+  ],
+  "previous_runs": [
+    "evidence/T10/initial-runs.json",
+    "evidence/T10/review-runs.json",
+    "evidence/T10/marker-runs.json"
+  ],
+  "commit_red": "evidence/T10/commit-red.json"
+}

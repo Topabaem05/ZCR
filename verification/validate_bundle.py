@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate this design bundle, not the unimplemented Zig runtime.
+"""Validate repository documentation, schemas and fixtures, not runtime behavior.
 
 Usage: python verification/validate_bundle.py [--report /path/to/report.json]
 Requires Python 3.10+ and jsonschema. Does not use the network or mutate sources.
@@ -82,7 +82,13 @@ def main():
     ts=load('tasks/tasks.json')['tasks'];taskmap={t['id']:t for t in ts};testcases=load('tests/catalog.json')['tests'];testmap={t['id']:t for t in testcases}
     check('26_unique_tasks',len(taskmap)==len(ts)==26)
     check('unique_test_ids',len(testmap)==len(testcases))
-    check('all_runtime_tests_not_run',all(t['execution_status']=='not_run' for t in testcases))
+    catalog=load('tests/catalog.json')
+    check('catalog_preserves_initial_test_specifications',catalog.get('status')=='specification_catalog' and all(t['execution_status']=='not_run' for t in testcases))
+    progress=load('tasks/progress.json')
+    progressmap={t['id']:t for t in progress['tasks']}
+    check('progress_covers_all_tasks',set(progressmap)==set(taskmap) and len(progress['tasks'])==len(taskmap))
+    check('progress_test_mapping',all(set(t['required_tests'])==set(taskmap[tid]['tests']) for tid,t in progressmap.items()))
+    check('complete_tasks_have_current_evidence',all(t['status']!='COMPLETE' or t['current_evidence'] for t in progress['tasks']))
     assigned=set()
     colors={}
     def visit(tid):
@@ -140,7 +146,8 @@ def main():
     check('html_unique_ids',len(ha.ids)==len(set(ha.ids)))
     check('html_fragment_links',all(h in set(ha.ids) for h in ha.fragments),str([h for h in ha.fragments if h not in set(ha.ids)]))
     check('html_no_external_assets',not ha.assets,str(ha.assets))
-    check('html_all_main_and_task_docs',ha.sections==49,str(ha.sections))
+    expected_sections=5+len(list((ROOT/'docs').glob('*.md')))+len(list((ROOT/'docs/superpowers/plans').glob('*.md')))+len(ts)
+    check('html_all_main_and_task_docs',ha.sections==expected_sections,str(ha.sections))
     result=load('bench/results-template.json')
     check('benchmark_not_fabricated',result['status']=='not_run' and all(v is None for v in result['metrics'].values()))
     failed=[c for c in checks if c['status']=='fail']

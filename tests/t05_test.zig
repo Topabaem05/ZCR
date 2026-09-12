@@ -182,6 +182,125 @@ fn contains(list: []const []const u8, item: []const u8) bool {
 
 const all_hidden: core.FileSpec = .{ .include_hidden = true, .limit = 10_000 };
 
+extern "c" fn mkfifo(path: [*:0]const u8, mode: std.c.mode_t) c_int;
+
+const IgnoreSwap = struct {
+    h: *Harness,
+    fifo: bool,
+    done: bool = false,
+
+    fn swap(ctx: ?*anyopaque) void {
+        const self: *IgnoreSwap = @ptrCast(@alignCast(ctx.?));
+        if (self.done) return;
+        self.done = true;
+        if (self.fifo) {
+            self.h.tmp.dir.deleteFile(io, ".gitignore") catch unreachable;
+            const path = std.fmt.allocPrintSentinel(self.h.arena, "{s}/.gitignore", .{self.h.root_path}, 0) catch unreachable;
+            std.debug.assert(mkfifo(path.ptr, 0o600) == 0);
+        } else {
+            self.h.write("replacement", "secret.txt\n") catch unreachable;
+            self.h.tmp.dir.rename("replacement", self.h.tmp.dir, ".gitignore", io) catch unreachable;
+        }
+    }
+};
+
+test "FS-005 replacing an ignore file with a FIFO between stat and open cannot block" {
+    var arena_state = std.heap.ArenaAllocator.init(testing.allocator);
+    defer arena_state.deinit();
+    const h = try Harness.init(arena_state.allocator(), .{});
+    defer h.deinit();
+    try h.write(".gitignore", "secret.txt\n");
+    try h.write("secret.txt", "x\n");
+    var swap: IgnoreSwap = .{ .h = h, .fifo = true };
+    var fault: traverse.IgnoreFault = .{ .before_open = IgnoreSwap.swap, .context = &swap };
+    h.traverser.ignore_fault = &fault;
+    var collector: Collector = .{ .arena = h.arena };
+    const coverage = try h.enumerate(all_hidden, &collector);
+    try testing.expect(swap.done);
+    try testing.expectEqual(@as(usize, 0), collector.paths.items.len);
+    try testing.expect(coverage.skipped > 0);
+    try testing.expect(!h.traverser.report().complete);
+}
+
+test "FS-005 replacing an ignore path during its read cannot report stale rules complete" {
+    var arena_state = std.heap.ArenaAllocator.init(testing.allocator);
+    defer arena_state.deinit();
+    const h = try Harness.init(arena_state.allocator(), .{});
+    defer h.deinit();
+    try h.write(".gitignore", "# initial\n");
+    try h.write("secret.txt", "x\n");
+    var swap: IgnoreSwap = .{ .h = h, .fifo = false };
+    var fault: traverse.IgnoreFault = .{ .after_read = IgnoreSwap.swap, .context = &swap };
+    h.traverser.ignore_fault = &fault;
+    var collector: Collector = .{ .arena = h.arena };
+    const coverage = try h.enumerate(all_hidden, &collector);
+    try testing.expect(swap.done);
+    try testing.expectEqual(@as(usize, 0), collector.paths.items.len);
+    try testing.expect(coverage.skipped > 0);
+    try testing.expect(!h.traverser.report().complete);
+}
+
+test "FS-001 trusted Git info and global excludes follow Git precedence without reading repository config" {
+    var arena_state = std.heap.ArenaAllocator.init(testing.allocator);
+    defer arena_state.deinit();
+    const h = try Harness.init(arena_state.allocator(), .{});
+    defer h.deinit();
+    try h.gitInit();
+    try h.write(".git/info/exclude", "info.txt\n!from-global.txt\nshared.txt\n");
+    try h.write(".gitignore", "!shared.txt\n");
+    try h.write("sub/.gitignore", "!global.txt\n");
+    for ([_][]const u8{ "info.txt", "global.txt", "from-global.txt", "shared.txt", "sub/global.txt", "visible.txt" }) |p| try h.write(p, "x\n");
+    var external = testing.tmpDir(.{});
+    defer external.cleanup();
+    try external.dir.writeFile(io, .{ .sub_path = "global", .data = "global.txt\nfrom-global.txt\n" });
+    const global_path = try external.dir.realPathFileAlloc(io, "global", h.arena);
+    const config_arg = try std.fmt.allocPrint(h.arena, "core.excludesFile={s}", .{global_path});
+    const oracle_bytes = try h.runGit(&.{ "-c", config_arg, "ls-files", "--others", "--exclude-standard", "-z" }, true);
+    var expected: std.ArrayList([]const u8) = .empty;
+    var paths = std.mem.tokenizeScalar(u8, oracle_bytes, 0);
+    while (paths.next()) |p| try expected.append(h.arena, p);
+    std.mem.sort([]const u8, expected.items, {}, lessThan);
+
+    const info = try h.tmp.dir.openFile(io, ".git/info/exclude", .{});
+    defer info.close(io);
+    const global = try external.dir.openFile(io, "global", .{});
+    defer global.close(io);
+    h.traverser.trusted_excludes = .{ .git_info_exclude = info, .global_exclude = global };
+    var collector: Collector = .{ .arena = h.arena };
+    const coverage = try h.enumerate(all_hidden, &collector);
+    try expectSameSet(expected.items, collector.sorted());
+    try testing.expectEqual(@as(u64, 0), coverage.skipped);
+    try testing.expect(h.traverser.report().complete);
+
+    // A repository setting is data, and cannot make ZCR open an external file.
+    _ = try h.runGit(&.{ "config", "core.excludesFile", global_path }, true);
+    h.traverser.trusted_excludes = .{};
+    var unbound: Collector = .{ .arena = h.arena };
+    _ = try h.enumerate(all_hidden, &unbound);
+    try testing.expect(contains(unbound.paths.items, "global.txt"));
+    // Exclude handles are borrowed; traversal neither closes nor returns their contents.
+    try testing.expect((try info.stat(io)).kind == .file);
+    try testing.expect((try global.stat(io)).kind == .file);
+}
+
+test "FS-005 an unreadable ignore file cannot silently expose its excluded subtree" {
+    var arena_state = std.heap.ArenaAllocator.init(testing.allocator);
+    defer arena_state.deinit();
+    const h = try Harness.init(arena_state.allocator(), .{});
+    defer h.deinit();
+    try h.write("private/.gitignore", "secret.txt\n");
+    try h.write("private/secret.txt", "x\n");
+    try h.write("visible.txt", "x\n");
+    const locked = try std.fmt.allocPrintSentinel(h.arena, "{s}/private/.gitignore", .{h.root_path}, 0);
+    try testing.expectEqual(@as(c_int, 0), std.c.chmod(locked.ptr, 0));
+    defer _ = std.c.chmod(locked.ptr, 0o600);
+    var collector: Collector = .{ .arena = h.arena };
+    const coverage = try h.enumerate(all_hidden, &collector);
+    try expectSameSet(&.{"visible.txt"}, collector.sorted());
+    try testing.expect(!h.traverser.report().complete);
+    try testing.expect(coverage.skipped > 0);
+}
+
 // ------------------------------------------------------------------ FS-001 .. FS-003
 
 test "FS-001 nested .gitignore files and negations give Git's file set" {
@@ -194,10 +313,10 @@ test "FS-001 nested .gitignore files and negations give Git's file set" {
     try h.write("src/.gitignore", "!debug.log\n*.tmp\n/local.txt\n");
     try h.write("deep/nested/.gitignore", "!*.log\n");
     for ([_][]const u8{
-        "a.log",          "important.log",       "top-only.txt",     "src/top-only.txt", "src/debug.log",
-        "src/x.log",      "src/y.tmp",           "src/z.zig",        "src/local.txt",    "src/sub/local.txt",
-        "build/out.bin",  "src/build/out.bin",   "docs/a/b/draft.md", "docs/draft.md",   "docs/keep.md",
-        "deep/nested/c.log", "deep/other.log",   "obj/main.o",       "keep.txt",
+        "a.log",             "important.log",     "top-only.txt",      "src/top-only.txt", "src/debug.log",
+        "src/x.log",         "src/y.tmp",         "src/z.zig",         "src/local.txt",    "src/sub/local.txt",
+        "build/out.bin",     "src/build/out.bin", "docs/a/b/draft.md", "docs/draft.md",    "docs/keep.md",
+        "deep/nested/c.log", "deep/other.log",    "obj/main.o",        "keep.txt",
     }) |path| try h.write(path, "x\n");
 
     try h.gitInit();
@@ -276,14 +395,14 @@ test "FS-001 single ignore patterns match git check-ignore" {
     try h.gitInit();
 
     const patterns = [_][]const u8{
-        "*.zig",   "/root.txt",  "a/*.txt", "**/gen/*.c", "lib/**",   "a/**/z", "?.md",   "[a-c]x.txt",
-        "[!a]y.txt", "[[:digit:]]*.log", "*.[ch]", "doc/**/*.pdf", "x\\*y", "foo**bar", "**/deep",
+        "*.zig",     "/root.txt",        "a/*.txt", "**/gen/*.c",   "lib/**", "a/**/z",   "?.md",    "[a-c]x.txt",
+        "[!a]y.txt", "[[:digit:]]*.log", "*.[ch]",  "doc/**/*.pdf", "x\\*y",  "foo**bar", "**/deep",
     };
     const candidates = [_][]const u8{
-        "main.zig",   "src/main.zig", "root.txt", "sub/root.txt", "a/b.txt",    "a/b/c.txt", "x/gen/m.c", "gen/m.c",
-        "lib/a/b",    "lib",          "a/z",      "a/b/c/z",      "q.md",       "qq.md",     "bx.txt",    "dx.txt",
-        "ay.txt",     "by.txt",       "1a.log",   "a1.log",       "file.h",     "file.hh",   "doc/x.pdf", "doc/a/b/x.pdf",
-        "x*y",        "xzy",          "fooXbar",  "foo/bar",      "p/q/deep",   "deep",
+        "main.zig", "src/main.zig", "root.txt", "sub/root.txt", "a/b.txt",  "a/b/c.txt", "x/gen/m.c", "gen/m.c",
+        "lib/a/b",  "lib",          "a/z",      "a/b/c/z",      "q.md",     "qq.md",     "bx.txt",    "dx.txt",
+        "ay.txt",   "by.txt",       "1a.log",   "a1.log",       "file.h",   "file.hh",   "doc/x.pdf", "doc/a/b/x.pdf",
+        "x*y",      "xzy",          "fooXbar",  "foo/bar",      "p/q/deep", "deep",
     };
 
     for (patterns) |pattern| {
@@ -338,18 +457,16 @@ fn buildCorpus(parent: Io.Dir, name: []const u8, dirs: usize, files_per_dir: usi
 
 const capability_all: core.Capability = .{ .handle = @enumFromInt(1), .operation = .enumerate, .workspace_id = workspace, .task_id = task, .policy_digest = digest, .path = .{ .bytes = "." } };
 
-// docs/12 C-large is 200,000 files. On the reference Mac that corpus took about two minutes
-// to create and more than 1 GiB of free space, so this test checks the property that makes
-// size irrelevant: traversal memory is fixed at init and does not change between 1,000 and
-// 10,000 files. A full 200k run belongs to the T21 benchmark corpus.
-test "FS-004 streaming traversal memory is fixed at init and does not grow with file count" {
+// The complete catalog fixture is created on disk; the separate T21 C-large
+// performance corpus additionally requires 2 GiB of contents.
+test "FS-004 200000 actual files stream with fixed traversal memory and exact coverage" {
     var arena_state = std.heap.ArenaAllocator.init(testing.allocator);
     defer arena_state.deinit();
     const arena = arena_state.allocator();
     var tmp = testing.tmpDir(.{});
     defer tmp.cleanup();
     try buildCorpus(tmp.dir, "small", 20, 50);
-    try buildCorpus(tmp.dir, "large", 40, 250);
+    try buildCorpus(tmp.dir, "large", 400, 500);
 
     var counters: memory.accounting.Counters = .{};
     var budget = memory.Budget.init(1, .{ .bytes = 64 * MiB, .fds = 64, .cpu = 4, .output_bytes = 16 * MiB }, &counters);
@@ -359,7 +476,7 @@ test "FS-004 streaming traversal memory is fixed at init and does not grow with 
     var live_per_size: [2]u64 = undefined;
     for ([_]struct { name: []const u8, dirs: u64, files: u64, needle: []const u8 }{
         .{ .name = "small", .dirs = 20, .files = 1_000, .needle = "d0019/f0049.txt" },
-        .{ .name = "large", .dirs = 40, .files = 10_000, .needle = "d0039/f0249.txt" },
+        .{ .name = "large", .dirs = 400, .files = 200_000, .needle = "d0399/f0499.txt" },
     }, 0..) |corpus, i| {
         var reservation = try budget.reserve(session(), .{ .scratch_bytes = traverse.Caps.defaultBytes(caps) + 256 * KiB, .fds = 32 });
         defer budget.release(&reservation) catch unreachable;
@@ -382,6 +499,20 @@ test "FS-004 streaming traversal memory is fixed at init and does not grow with 
         try testing.expectEqual(@as(u64, 0), coverage.skipped);
         try testing.expectEqual(after_init, reserved.liveBytes());
 
+        // Search's internal traversal must visit every candidate without using
+        // the files response limit. The bitmap is a test oracle, not runtime memory.
+        var all: ExactCorpusSink = .{ .files_per_dir = @intCast(corpus.files / corpus.dirs), .dirs = @intCast(corpus.dirs) };
+        var search_cap = capability_all;
+        search_cap.operation = .search;
+        const full = try traverser.enumerateSearchCandidates(io, search_cap, .{}, all.sink(), .{ .requested = &flag });
+        try testing.expectEqual(corpus.files, all.count);
+        try testing.expectEqual(corpus.files, traverser.report().emitted);
+        try testing.expect(traverser.report().complete);
+        try testing.expectEqual(@as(u64, 0), full.skipped);
+        try testing.expectEqual(after_init, reserved.liveBytes());
+        const manifest_hash = corpusDigest(@intCast(corpus.dirs), @intCast(corpus.files / corpus.dirs));
+        std.debug.print("FS-004 corpus={s} actual_files={d} candidate_count={d} tracked_live={d} tracked_peak={d} coverage_skipped={d} complete={} corpus_sha256={s}\n", .{ corpus.name, corpus.files, all.count, reserved.liveBytes(), counters.snapshot().peak_live_bytes, full.skipped, traverser.report().complete, std.fmt.bytesToHex(manifest_hash, .lower) });
+
         // Sorted order with a 64-entry path cache falls back to discovery order and says so.
         var sorted: Collector = .{ .arena = arena };
         const fallback = try traverser.enumerate(io, capability_all, .{ .glob = "d000[0-1]/f000*.txt", .order = .path_then_offset }, sorted.sink(), .{ .requested = &flag });
@@ -391,8 +522,49 @@ test "FS-004 streaming traversal memory is fixed at init and does not grow with 
         try testing.expectEqual(corpus.files, traverser.report().files_seen);
         try testing.expectEqual(after_init, reserved.liveBytes());
     }
-    // Ten times the files, the same traversal memory.
+    // Two hundred times the files, the same traversal memory.
     try testing.expectEqual(live_per_size[0], live_per_size[1]);
+}
+
+const ExactCorpusSink = struct {
+    seen: [25_000]u8 = @splat(0),
+    files_per_dir: u32,
+    dirs: u32,
+    count: u64 = 0,
+
+    fn push(ctx: *anyopaque, item: core.RelativePath) core.SinkError!void {
+        const self: *ExactCorpusSink = @ptrCast(@alignCast(ctx));
+        const p = item.bytes;
+        if (p.len != 15 or p[0] != 'd' or !std.mem.eql(u8, p[5..7], "/f") or !std.mem.eql(u8, p[11..], ".txt")) return error.OutputBudgetExceeded;
+        const d = std.fmt.parseInt(u32, p[1..5], 10) catch return error.OutputBudgetExceeded;
+        const f = std.fmt.parseInt(u32, p[7..11], 10) catch return error.OutputBudgetExceeded;
+        if (d >= self.dirs or f >= self.files_per_dir) return error.OutputBudgetExceeded;
+        const index = d * self.files_per_dir + f;
+        const bit: u8 = @as(u8, 1) << @as(u3, @intCast(index % 8));
+        if (self.seen[index / 8] & bit != 0) return error.OutputBudgetExceeded;
+        self.seen[index / 8] |= bit;
+        self.count += 1;
+    }
+
+    fn sink(self: *ExactCorpusSink) core.Sink(core.RelativePath) {
+        return .{ .context = self, .push_fn = push };
+    }
+};
+
+// SHA-256 of lexicographically sorted relative path + NUL + SHA256(empty file).
+fn corpusDigest(dirs: u32, files_per_dir: u32) [32]u8 {
+    const Sha256 = std.crypto.hash.sha2.Sha256;
+    var empty_hash: [32]u8 = undefined;
+    Sha256.hash("", &empty_hash, .{});
+    var hash = Sha256.init(.{});
+    var buf: [32]u8 = undefined;
+    for (0..dirs) |d| for (0..files_per_dir) |f| {
+        const path = std.fmt.bufPrint(&buf, "d{d:0>4}/f{d:0>4}.txt", .{ d, f }) catch unreachable;
+        hash.update(path);
+        hash.update("\x00");
+        hash.update(&empty_hash);
+    };
+    return hash.finalResult();
 }
 
 // ------------------------------------------------------------------ FS-005, FS-006

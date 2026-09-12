@@ -1,0 +1,74 @@
+{
+  "schema_version": "zcr-task-handoff/1",
+  "task": "T08",
+  "status": "IMPLEMENTED_VERIFIED_NATIVE_INTEGRATION_PENDING",
+  "base_commit": "9897f27a18c66c310ae6dda3ee854f7fdcdcfa3d",
+  "source_head": "48d2e8b61a83af444f0914379f8bc75f169413f3",
+  "source_tree": "32e0f1c7db627bfcdf45a8acf475b41e8be718bb",
+  "source_commits": [
+    "e742d64fbd40bda605e932a5b4b300a986eea600",
+    "5482a7022fd20ce4b284b17ac48e7c93bfe33280",
+    "48d2e8b61a83af444f0914379f8bc75f169413f3"
+  ],
+  "contract_digest": "8aa53314410fe471f0e070c522766684286f60e1ad4d9785c292bb709ea370a4",
+  "workspace_incarnation": "4d6ae4ae-f3aa-4b20-b1c8-061147f3dfd2",
+  "source_owned_files": [
+    "src/protocol/mcp.zig",
+    "src/protocol/framing.zig",
+    "src/protocol/codec.zig",
+    "tests/t08_test.zig"
+  ],
+  "exports": [
+    "Config{allocator,io,authorizer,session,generation,budget,tools_json,version,output_bytes,max_search_file_bytes,authority_context,validate_authority,retirement_context,before_tool_release}",
+    "Server.init(Config)!Server",
+    "Server.respond(Allocator,[]const u8,core.Cancel)!?[]const u8",
+    "Server.serve(std.Io.File,std.Io.File)!void",
+    "Server.FrameContext{allocator,cancel}",
+    "Server.serveFrame(std.Io,*core.Connection,core.BoundedBytes) core.ServeError!core.EncodedToolResult",
+    "codec.preflight/parse/preflightToolArguments/rawRequestId/toolName",
+    "framing.Decoder.init/push/finish; framing.RecordWriter.write"
+  ],
+  "tests": {
+    "mcp_debug": 15,
+    "mcp_release_safe": 15,
+    "codec_debug": 10,
+    "codec_release_safe": 10,
+    "batch_regression_debug": 24,
+    "batch_regression_release_safe": 24,
+    "record_verify": 6,
+    "contract_verification": "PASS",
+    "actual_host_integration": "NOT_RUN",
+    "macOS_runtime": "NOT_RUN",
+    "Windows_runtime": "NOT_RUN"
+  },
+  "config_corpus_sha256": "24f7299c4d85acec602a617d3a2c096f97f9a116e9ab3a6acf7fd8c0bfc03fd2",
+  "limitations": [
+    "zcr_files/zcr_search currently require policy authority for the traversal root \".\"; narrower policies fail E_SCOPE rather than broadening authority.",
+    "A single engine worker processes a bounded queue; batch reads may use up to two bounded internal workers.",
+    "Parser resource limits additionally cap 4096 total object keys and 65536 JSON values.",
+    "Actual CLI/host integration, macOS runtime and Windows runtime were not executed in this task.",
+    "The launcher must provide validate_authority for registry/session expiry and root-identity validation; Config defaults support independently bound test fixtures.",
+    "Trusted global/info excludes and the integrator core.Cancel deadline extension are pending root integration; T08 uses an independent per-request monotonic watcher and flags.",
+    "Direct stdio currently requires public POSIX poll/libc; Windows serve reports Unsupported until its platform gate."
+  ],
+  "steps": {
+    "S01": "manifest/docs/base/scope read; later clean-source preflight recorded",
+    "S02": "intended supported-version RED captured before implementation",
+    "S03": "owned modules implemented against real engines",
+    "S04": "native Debug/ReleaseSafe and injected failure paths pass",
+    "S05": "T07 fixed dependency regressions and contract/scope checks pass",
+    "S06": "source commits and scoped evidence prepared; root integration gates remain"
+  },
+  "integration_dependencies": [
+    "build imports zcr_core,zcr_policy,zcr_memory,zcr_fs_read,zcr_fs_traverse,zcr_search,zcr_batch_read,zcr_projection",
+    "tools_json supplied from trusted build_options or Config bytes",
+    "root callback validates registry/session on each tool",
+    "T07 approved fixes 4ff1101 fa80da7 65f747e applied in task worktree",
+    "integrator build commits9542cf7 and9ab9f76 applied in task worktree"
+  ],
+  "review_fixes": {
+    "R1": "retiring state detaches reader-visible arena slices under lock before cleanup; deterministic gated same-string-ID reuse test",
+    "R2": "exclusive stdin uses20ms public POSIX poll to observe stdout failure without requiring input EOF; intended RED and GREEN captured",
+    "R3": "control backing and output credit reserved at startup; health works while ordinary global Budget is fully admitted elsewhere"
+  }
+}

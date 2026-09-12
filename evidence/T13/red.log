@@ -1,0 +1,38 @@
+test
++- run test T13-test 0 pass, 2 fail (2 total)
+error: 't13_test.test.ME-004 four workspaces share one immutable allocation and pins prevent eviction' failed:
+       expected .probation, found .bypassed
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:118:17: 0x1232774 in expectEqualInner__anon_44397 (std.zig)
+                       return error.TestExpectedEqual;
+                       ^
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:83:5: 0x12727da in expectEqual (t13_test.zig)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T13/tests/t13_test.zig:66:9: 0x1272833 in admit (t13_test.zig)
+               try t.expectEqual(cache.AdmissionResult.probation, try c.session.observe(c.cap, text_, v, .interactive));
+               ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T13/tests/t13_test.zig:77:5: 0x1272fc8 in test.ME-004 four workspaces share one immutable allocation and pins prevent eviction (t13_test.zig)
+           try f.admit(&clients[0], text_);
+           ^
+error: 't13_test.test.ME-004 second touch admits, bulk scan bypasses, sparse checkpoints preserve raw lines' failed:
+       expected .probation, found .bypassed
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:118:17: 0x1232774 in expectEqualInner__anon_44397 (std.zig)
+                       return error.TestExpectedEqual;
+                       ^
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:83:5: 0x12336b1 in expectEqual (t13_test.zig)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T13/tests/t13_test.zig:118:5: 0x1233778 in test.ME-004 second touch admits, bulk scan bypasses, sparse checkpoints preserve raw lines (t13_test.zig)
+           try t.expectEqual(cache.AdmissionResult.probation, try c.session.observe(c.cap, data.items, v, .interactive));
+           ^
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/T13/zig-local-cache && /workspace/scratch/3f4ab65dfb82/state/T13/zig-local-cache/o/82ad24fc5b3da30a398984d98915eaa0/T13-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/T13/zig-local-cache --seed=0x6e01f5b2 --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 0/2 tests passed (2 failed)
+test transitive failure
++- install T13-test success
+|  +- compile test T13-test Debug native success 430ms MaxRSS:175M
++- run test T13-test 0 pass, 2 fail (2 total)
+   +- compile test T13-test Debug native (reused)
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/T13/zig-local-cache/o/81f38b490921d3ae2c610102b61a3558/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-T13 /workspace/scratch/3f4ab65dfb82/state/T13/zig-local-cache /workspace/scratch/3f4ab65dfb82/state/T13/zig-global-cache --seed 0x6e01f5b2 -Zf5521f7f5207e1dc test -Dtest-group=memory -Dtest-id=ME-004 -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T13/out-red --summary all

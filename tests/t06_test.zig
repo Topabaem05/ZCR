@@ -414,6 +414,56 @@ test "SR-005 cancellation inside a large file is observed at the next chunk" {
     h.cancel_flag.store(false, .release);
 }
 
+const CancelAfterScan = struct {
+    fn cancel(ctx: ?*anyopaque, _: []const u8) void {
+        const flag: *std.atomic.Value(bool) = @ptrCast(@alignCast(ctx.?));
+        flag.store(true, .release);
+    }
+};
+
+const ExpireAfterScan = struct {
+    called: bool = false,
+
+    fn delay(context: ?*anyopaque, path: []const u8) void {
+        _ = path;
+        const self: *ExpireAfterScan = @ptrCast(@alignCast(context.?));
+        self.called = true;
+        Io.sleep(io, .fromMilliseconds(40), .awake) catch unreachable;
+    }
+};
+
+test "SR-005 deadline after scan keeps its reason and publishes no context" {
+    var arena = std.heap.ArenaAllocator.init(testing.allocator);
+    defer arena.deinit();
+    const h = try Harness.init(arena.allocator(), .{});
+    defer h.deinit();
+    try h.write("deadline.txt", "key\n");
+    var delayed: ExpireAfterScan = .{};
+    var fault: search.SearchFault = .{ .after_scan = ExpireAfterScan.delay, .context = &delayed };
+    h.searcher.fault = &fault;
+    var collector: Collector = .{ .arena = arena.allocator() };
+    const capability = try h.authorizer.authorize(io, session(), .search, .{ .bytes = "." });
+    try testing.expectError(error.DeadlineExceeded, h.searcher.search(io, capability, .{ .literal = "key" }, collector.sink(), h.cancel().withTimeout(io, 20)));
+    try testing.expect(delayed.called);
+    try testing.expectEqual(@as(usize, 0), collector.files.items.len);
+    try testing.expect(!h.cancel_flag.load(.acquire));
+}
+
+test "SR-005 cancellation after scan stops context reads and result publication" {
+    var arena_state = std.heap.ArenaAllocator.init(testing.allocator);
+    defer arena_state.deinit();
+    const h = try Harness.init(arena_state.allocator(), .{});
+    defer h.deinit();
+    try h.write("a.txt", "needle\n");
+    var fault: search.SearchFault = .{ .after_scan = CancelAfterScan.cancel, .context = &h.cancel_flag };
+    h.searcher.fault = &fault;
+    var collector: Collector = .{ .arena = h.arena };
+    try testing.expectError(error.Cancelled, h.run(.{ .literal = "needle" }, &collector));
+    try testing.expectEqual(@as(usize, 0), collector.files.items.len);
+    h.searcher.fault = null;
+    h.cancel_flag.store(false, .release);
+}
+
 // ------------------------------------------------------------------ SR-006
 
 const Rewrite = struct {
@@ -478,6 +528,24 @@ test "SR-006 same-size rewrites are caught by the version check or by the match 
     h.searcher.fault = null;
 }
 
+test "SR-006 a no-match file changed after scan is revalidated before complete success" {
+    var arena_state = std.heap.ArenaAllocator.init(testing.allocator);
+    defer arena_state.deinit();
+    const h = try Harness.init(arena_state.allocator(), .{});
+    defer h.deinit();
+    try h.write("a.txt", "plain\n");
+    var once: Rewrite = .{ .h = h, .remaining = 1 };
+    var fault: search.SearchFault = .{ .after_scan = Rewrite.afterScan, .context = &once };
+    h.searcher.fault = &fault;
+    var collector: Collector = .{ .arena = h.arena };
+    const coverage = try h.run(.{ .literal = "key", .context_lines = 0 }, &collector);
+    try testing.expectEqual(@as(usize, 2), collector.totalMatches());
+    try testing.expectEqual(@as(u64, 1), h.searcher.report().retries);
+    try testing.expectEqual(@as(u64, 0), coverage.skipped);
+    try testing.expect(h.searcher.report().complete);
+    h.searcher.fault = null;
+}
+
 test "SR-006 a file that changes between scan and context read is retried once or skipped, never mixed" {
     var arena_state = std.heap.ArenaAllocator.init(testing.allocator);
     defer arena_state.deinit();
@@ -533,4 +601,29 @@ test "T06 capability and search spec are validated" {
     // The scalar kernel is the oracle T19 SIMD kernels must match.
     try testing.expectEqual(@as(?usize, 3), search.scalar.find("abcabc", "abc", 1));
     try testing.expectEqual(@as(?usize, null), search.scalar.find("abcabc", "abd", 0));
+}
+
+test "SR-005 search streams beyond the files result cap without growing candidate storage" {
+    var arena_state = std.heap.ArenaAllocator.init(testing.allocator);
+    defer arena_state.deinit();
+    const h = try Harness.init(arena_state.allocator(), .{ .traverse = .{ .path_cache_entries = 256, .path_cache_bytes = 8 * KiB } });
+    defer h.deinit();
+    var path_buf: [64]u8 = undefined;
+    for (0..100) |d| {
+        for (0..100) |f| {
+            const path = try std.fmt.bufPrint(&path_buf, "d{d:0>3}/f{d:0>3}.txt", .{ d, f });
+            try h.write(path, "");
+        }
+    }
+    try h.write("zz-final.txt", "needle\n");
+    const live = h.reserved.liveBytes();
+    var collector: Collector = .{ .arena = h.arena };
+    const coverage = try h.run(.{ .literal = "needle", .context_lines = 0, .order = .path_then_offset }, &collector);
+    try testing.expectEqual(@as(usize, 1), collector.files.items.len);
+    try testing.expectEqualStrings("zz-final.txt", collector.files.items[0].path);
+    try testing.expectEqual(@as(u64, 10_001), h.searcher.report().files_considered);
+    try testing.expect(h.searcher.report().complete);
+    try testing.expect(!h.searcher.report().traversal.truncated);
+    try testing.expectEqual(@as(u64, 0), coverage.skipped);
+    try testing.expectEqual(live, h.reserved.liveBytes());
 }

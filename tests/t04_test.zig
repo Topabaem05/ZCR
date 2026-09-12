@@ -35,6 +35,32 @@ fn session() core.SessionContext {
 
 extern "c" fn mkfifo(path: [*:0]const u8, mode: std.c.mode_t) c_int;
 
+const ReplaceWithFifo = struct {
+    root: Io.Dir,
+    path: [:0]const u8,
+    done: bool = false,
+
+    fn replace(ctx: ?*anyopaque) void {
+        const self: *ReplaceWithFifo = @ptrCast(@alignCast(ctx.?));
+        self.root.deleteFile(io, "race.txt") catch unreachable;
+        std.debug.assert(mkfifo(self.path.ptr, 0o600) == 0);
+        self.done = true;
+    }
+};
+
+test "IO-005 FIFO replacement after path resolution cannot block a regular-file open" {
+    var arena = std.heap.ArenaAllocator.init(testing.allocator);
+    defer arena.deinit();
+    var tmp = testing.tmpDir(.{});
+    defer tmp.cleanup();
+    try tmp.dir.writeFile(io, .{ .sub_path = "race.txt", .data = "old\n" });
+    const path = try tmp.dir.realPathFileAlloc(io, "race.txt", arena.allocator());
+    var swap: ReplaceWithFifo = .{ .root = tmp.dir, .path = try arena.allocator().dupeZ(u8, path) };
+    const fault: fs_read.metadata.OpenFault = .{ .before_open = ReplaceWithFifo.replace, .context = &swap };
+    try testing.expectError(error.NotRegular, fs_read.metadata.openRegularWithFault(io, tmp.dir, "race.txt", &fault));
+    try testing.expect(swap.done);
+}
+
 const Harness = struct {
     arena: std.mem.Allocator,
     tmp: testing.TmpDir,
@@ -144,8 +170,12 @@ fn sha256Hex(bytes: []const u8) [64]u8 {
 }
 
 fn openFdCount() !usize {
-    if (builtin.os.tag != .macos) return 0;
-    var dir = try Io.Dir.openDirAbsolute(io, "/dev/fd", .{ .iterate = true });
+    const fd_directory = switch (builtin.os.tag) {
+        .macos => "/dev/fd",
+        .linux => "/proc/self/fd",
+        else => return error.UnsupportedPlatform,
+    };
+    var dir = try Io.Dir.openDirAbsolute(io, fd_directory, .{ .iterate = true });
     defer dir.close(io);
     var count: usize = 0;
     var it = dir.iterate();
@@ -474,6 +504,56 @@ const CancelAfterChunk = struct {
         if (chunk == 1) self.flag.store(true, .release);
     }
 };
+
+const ExpireReadDeadline = struct {
+    calls: u32 = 0,
+
+    fn delay(context: ?*anyopaque, boundary: u32) void {
+        _ = boundary;
+        const self: *ExpireReadDeadline = @ptrCast(@alignCast(context.?));
+        self.calls += 1;
+        Io.sleep(io, .fromMilliseconds(40), .awake) catch unreachable;
+    }
+};
+
+test "IO-004 native read deadline expires after open and scan without a cancellation producer" {
+    var arena = std.heap.ArenaAllocator.init(testing.allocator);
+    defer arena.deinit();
+    const h = try Harness.init(arena.allocator());
+    defer h.deinit();
+    try h.write("deadline.txt", "hello\n");
+    const fds_before = try openFdCount();
+    var spec = Harness.spec("deadline.txt", 1, 1);
+    spec.deadline_ms = 20;
+    for ([_]bool{ false, true }) |after_scan| {
+        var delayed: ExpireReadDeadline = .{};
+        var fault: fs_read.ReadFault = .{
+            .after_open = if (after_scan) null else ExpireReadDeadline.delay,
+            .after_chunk = if (after_scan) ExpireReadDeadline.delay else null,
+            .context = &delayed,
+        };
+        h.reader.fault = &fault;
+        try h.expectReadError(error.DeadlineExceeded, spec);
+        try testing.expectEqual(@as(u32, 1), delayed.calls);
+        try testing.expect(!h.cancel_flag.load(.acquire));
+        try testing.expectEqual(fds_before, try openFdCount());
+        try testing.expectEqual(@as(u64, 0), h.counters.snapshot().live_bytes);
+    }
+    h.reader.fault = null;
+}
+
+test "IO-004 native read rejects deadlines outside the frozen limits" {
+    var arena = std.heap.ArenaAllocator.init(testing.allocator);
+    defer arena.deinit();
+    const h = try Harness.init(arena.allocator());
+    defer h.deinit();
+    try h.write("deadline.txt", "hello\n");
+    var spec = Harness.spec("deadline.txt", 1, 1);
+    for ([_]u32{ 0, core.limits.values.max_deadline_ms + 1 }) |deadline| {
+        spec.deadline_ms = deadline;
+        try h.expectReadError(error.InvalidArgument, spec);
+    }
+}
 
 test "T04 cancellation before open and between chunks closes the file and frees scratch" {
     var arena_state = std.heap.ArenaAllocator.init(testing.allocator);

@@ -1,0 +1,23 @@
+1/1 t00_test.test.G06 fixture hostile Git environment cannot redirect mutations into a sentinel...
+====== expected this output: =========
+d3a1835258b62a6f868769cb224ad569994f4eb2␃
+
+======== instead found this: =========
+919cbf7b6b492c4f2aa7a98d4c576c4ed228c064␃
+
+======================================
+First difference occurs on line 1:
+expected:
+d3a1835258b62a6f868769cb224ad569994f4eb2
+^ ('\x64')
+found:
+919cbf7b6b492c4f2aa7a98d4c576c4ed228c064
+^ ('\x39')
+FAIL (TestExpectedEqual)
+/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:682:9: 0x122fe75 in expectEqualStrings (std.zig)
+        return error.TestExpectedEqual;
+        ^
+/workspace/scratch/3f4ab65dfb82/ZCR-tests/tests/t00_test.zig:366:5: 0x1235f73 in test.G06 fixture hostile Git environment cannot redirect mutations into a sentinel (t00_test.zig)
+    try testing.expectEqualStrings(before.head_commit.?, after.head_commit.?);
+    ^
+0 passed; 0 skipped; 1 failed.

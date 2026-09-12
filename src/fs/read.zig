@@ -75,15 +75,17 @@ pub const Reader = struct {
         cancel: core.Cancel,
     ) core.ReadError!core.Owned(core.ReadResult) {
         try self.checkRequest(capability, spec, reservation);
-        if (cancel.isRequested()) return error.Cancelled;
+        const effective_cancel = cancel.withTimeout(io, spec.deadline_ms);
+        try effective_cancel.check();
 
         var owned: core.Owned(core.ReadResult) = .{ .value = undefined, .arena = .init(allocator) };
         errdefer owned.arena.deinit();
 
         var attempt: u32 = 0;
         while (attempt < max_attempts) : (attempt += 1) {
+            try effective_cancel.check();
             if (self.fault) |f| f.attempts += 1;
-            self.readOnce(io, allocator, &owned, spec, reservation, cancel, attempt) catch |err| switch (err) {
+            self.readOnce(io, allocator, &owned, spec, reservation, effective_cancel, attempt) catch |err| switch (err) {
                 error.Changed => {
                     owned.arena.deinit();
                     owned.arena = .init(allocator);
@@ -109,6 +111,7 @@ pub const Reader = struct {
         policy.paths.validate(spec.path.bytes) catch |err| return err;
         _ = core.LineRange.init(spec.lines.first, spec.lines.count) catch return error.InvalidArgument;
         if (spec.output_bytes == 0 or spec.output_bytes > v.max_output_bytes) return error.InvalidArgument;
+        if (spec.deadline_ms == 0 or spec.deadline_ms > v.max_deadline_ms) return error.InvalidArgument;
 
         if (reservation.released) return error.ResourceExhausted;
         if (spec.output_bytes > reservation.output) return error.OutputBudgetExceeded;
@@ -134,7 +137,7 @@ pub const Reader = struct {
 
         const hash_whole = spec.write_intent and before.size <= core.limits.values.max_write_file_bytes;
         const plan = try self.scan(io, allocator, opened.file, before.size, spec, reservation, cancel, hash_whole);
-        if (cancel.isRequested()) return error.Cancelled;
+        try cancel.check();
 
         // Result block: [lines][reasons][path][text], one arena allocation.
         var reasons_buf: [2][]const u8 = undefined;
@@ -163,7 +166,7 @@ pub const Reader = struct {
         @memcpy(path, spec.path.bytes);
         const text = block[total - text_len ..];
 
-        try self.readExact(io, opened.file, text, plan.start);
+        try self.readExact(io, opened.file, text, plan.start, cancel);
         try splitLines(lines, text, plan.start, spec.lines.first);
         if (!validText(text)) return error.Unsupported;
 
@@ -175,6 +178,7 @@ pub const Reader = struct {
             else => |e| return e,
         };
         if (now == null or !now.?.eql(before.identity)) return error.Changed;
+        try cancel.check();
 
         owned.value = .{
             .path = .{ .bytes = path },
@@ -232,8 +236,8 @@ pub const Reader = struct {
         var chunk: u32 = 0;
 
         while (true) {
-            if (cancel.isRequested()) return error.Cancelled;
-            const n = try self.readAt(io, file, scratch, offset);
+            try cancel.check();
+            const n = try self.readAt(io, file, scratch, offset, cancel);
             if (n == 0) break;
             const data = scratch[0..n];
             if (hash_whole) hasher.update(data);
@@ -296,8 +300,9 @@ pub const Reader = struct {
         }
     };
 
-    fn readAt(self: *Reader, io: Io, file: Io.File, buffer: []u8, offset: u64) error{IoFailure}!usize {
+    fn readAt(self: *Reader, io: Io, file: Io.File, buffer: []u8, offset: u64, cancel: core.Cancel) (error{IoFailure} || core.errors.InterruptError)!usize {
         while (true) {
+            try cancel.check();
             var want = buffer.len;
             if (self.fault) |f| {
                 f.reads += 1;
@@ -311,10 +316,12 @@ pub const Reader = struct {
         }
     }
 
-    fn readExact(self: *Reader, io: Io, file: Io.File, buffer: []u8, offset: u64) AttemptError!void {
+    fn readExact(self: *Reader, io: Io, file: Io.File, buffer: []u8, offset: u64, cancel: core.Cancel) AttemptError!void {
         var filled: usize = 0;
         while (filled < buffer.len) {
-            const n = try self.readAt(io, file, buffer[filled..], offset + filled);
+            try cancel.check();
+            const end = filled + @min(buffer.len - filled, core.limits.values.chunk_bytes);
+            const n = try self.readAt(io, file, buffer[filled..end], offset + filled, cancel);
             if (n == 0) return error.Changed; // the file got shorter since the scan
             filled += n;
         }

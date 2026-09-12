@@ -12,6 +12,39 @@ const testing = std.testing;
 const io = testing.io;
 const Allocator = std.mem.Allocator;
 
+// Fixture mutations use a system-owned executable and never inherit Git controls.
+fn trustedGit() ![]const u8 {
+    for ([_][]const u8{ "/usr/bin/git", "/bin/git" }) |candidate| {
+        const stat = std.Io.Dir.cwd().statFile(io, candidate, .{}) catch continue;
+        if (stat.kind == .file and stat.permissions.toMode() & 0o111 != 0) return candidate;
+    }
+    return error.TrustedFixtureGitUnavailable;
+}
+
+fn fixtureEnvironment(arena: std.mem.Allocator, inherited: *const std.process.Environ.Map, empty_template: []const u8) !std.process.Environ.Map {
+    var clean = std.process.Environ.Map.init(arena);
+    var entries = inherited.iterator();
+    while (entries.next()) |entry| {
+        if (std.ascii.startsWithIgnoreCase(entry.key_ptr.*, "GIT_")) continue;
+        try clean.put(entry.key_ptr.*, entry.value_ptr.*);
+    }
+    try clean.put("GIT_CONFIG_GLOBAL", "/dev/null");
+    try clean.put("GIT_CONFIG_NOSYSTEM", "1");
+    try clean.put("GIT_TERMINAL_PROMPT", "0");
+    try clean.put("GIT_AUTHOR_NAME", "t01");
+    try clean.put("GIT_AUTHOR_EMAIL", "t01@example.invalid");
+    try clean.put("GIT_COMMITTER_NAME", "t01");
+    try clean.put("GIT_COMMITTER_EMAIL", "t01@example.invalid");
+    const keys = [_][]const u8{ "core.hooksPath", "commit.gpgSign", "tag.gpgSign", "init.templateDir", "core.attributesFile", "core.excludesFile" };
+    const values = [_][]const u8{ "/dev/null", "false", "false", empty_template, "/dev/null", "/dev/null" };
+    try clean.put("GIT_CONFIG_COUNT", "6");
+    for (keys, values, 0..) |key, value, i| {
+        try clean.put(try std.fmt.allocPrint(arena, "GIT_CONFIG_KEY_{d}", .{i}), key);
+        try clean.put(try std.fmt.allocPrint(arena, "GIT_CONFIG_VALUE_{d}", .{i}), value);
+    }
+    return clean;
+}
+
 /// A throwaway Git repository with Git configuration isolated from the user's.
 const Fixture = struct {
     arena: Allocator,
@@ -21,18 +54,19 @@ const Fixture = struct {
     git: evidence.Git,
 
     fn init(arena: Allocator) !*Fixture {
+        var inherited = try testing.environ.createMap(arena);
+        return initFromEnvironment(arena, &inherited);
+    }
+
+    fn initFromEnvironment(arena: Allocator, inherited: *const std.process.Environ.Map) !*Fixture {
         const f = try arena.create(Fixture);
         f.arena = arena;
         f.tmp = testing.tmpDir(.{});
+        errdefer f.tmp.cleanup();
         f.root = try f.tmp.dir.realPathFileAlloc(io, ".", arena);
-        f.env = try testing.environ.createMap(arena);
-        try f.env.put("GIT_CONFIG_GLOBAL", "/dev/null");
-        try f.env.put("GIT_CONFIG_NOSYSTEM", "1");
-        try f.env.put("GIT_AUTHOR_NAME", "t01");
-        try f.env.put("GIT_AUTHOR_EMAIL", "t01@example.invalid");
-        try f.env.put("GIT_COMMITTER_NAME", "t01");
-        try f.env.put("GIT_COMMITTER_EMAIL", "t01@example.invalid");
-        f.git = try evidence.findGit(arena, io, &f.env);
+        try f.tmp.dir.createDirPath(io, "empty-template");
+        f.env = try fixtureEnvironment(arena, inherited, try f.path("empty-template"));
+        f.git = .{ .exe = try trustedGit(), .environ = &f.env };
         return f;
     }
 
@@ -399,17 +433,37 @@ test "T01 contract: contract digest matches the recorded T00 method" {
     defer f.deinit();
     try f.initRepo();
 
-    // Oracle: sha256 of `shasum -a 256` lines for tracked contract files in byte order.
-    const Sha256 = std.crypto.hash.sha2.Sha256;
-    var file_digest: [32]u8 = undefined;
-    Sha256.hash("{\"v\":1}\n", &file_digest, .{});
-    var outer = Sha256.init(.{});
-    outer.update(&std.fmt.bytesToHex(file_digest, .lower));
-    outer.update("  contracts/api.json\n");
-    const expected = std.fmt.bytesToHex(outer.finalResult(), .lower);
+    // Coverage-only: creation/staging order differs from the independently specified byte order.
+    try f.write("repo/contracts/z-last.json", "last\n");
+    try f.write("repo/contracts/nested/mid name.json", "middle with space\n");
+    try f.write("repo/contracts/a-first.json", "first\n");
+    _ = try f.run("repo", &.{ "add", "contracts/z-last.json", "contracts/nested/mid name.json", "contracts/a-first.json" });
+    _ = try f.run("repo", &.{ "commit", "-q", "-m", "multi-file contracts" });
+    try f.write("repo/contracts/0-untracked.json", "excluded from digest\n");
 
+    // Independent oracle: literal sorted tracked paths and literal expected contents.
+    // Do not reuse the implementation's Git listing, sorting or framing helpers.
+    const tracked = [_]struct { path: []const u8, bytes: []const u8 }{
+        .{ .path = "contracts/a-first.json", .bytes = "first\n" },
+        .{ .path = "contracts/api.json", .bytes = "{\"v\":1}\n" },
+        .{ .path = "contracts/nested/mid name.json", .bytes = "middle with space\n" },
+        .{ .path = "contracts/z-last.json", .bytes = "last\n" },
+    };
+    const Sha256 = std.crypto.hash.sha2.Sha256;
+    var outer = Sha256.init(.{});
+    for (tracked) |file| {
+        var file_digest: [32]u8 = undefined;
+        Sha256.hash(file.bytes, &file_digest, .{});
+        outer.update(&std.fmt.bytesToHex(file_digest, .lower));
+        outer.update("  ");
+        outer.update(file.path);
+        outer.update("\n");
+    }
+    const expected = std.fmt.bytesToHex(outer.finalResult(), .lower);
     const digest = try evidence.contractDigest(f.arena, io, f.git, try f.path("repo"), &.{"contracts"});
     try testing.expectEqualStrings(&expected, digest);
+    try f.write("repo/contracts/0-untracked.json", "changed untracked bytes still excluded\n");
+    try testing.expectEqualStrings(&expected, try evidence.contractDigest(f.arena, io, f.git, try f.path("repo"), &.{"contracts"}));
 }
 
 test "T01 core: ByteSpan, LineRange and RelativePath reject invalid input" {
@@ -487,4 +541,64 @@ test "T01 limits: scheduler hardware ceiling follows the recorded formula" {
     try testing.expectEqual(@as(u32, 6), core.limits.hardwareCeiling(7));
     try testing.expectEqual(@as(u32, 6), core.limits.hardwareCeiling(8));
     try testing.expectEqual(@as(u32, 14), core.limits.hardwareCeiling(16));
+}
+
+test "DV-001 fixture hostile Git environment cannot redirect mutations into a sentinel" {
+    var arena_state = std.heap.ArenaAllocator.init(testing.allocator);
+    defer arena_state.deinit();
+    const arena = arena_state.allocator();
+    // No hostile value ever points outside repositories owned by this test.
+    // Bootstrap the sentinel with a minimal explicit system-Git environment.
+    var clean = std.process.Environ.Map.init(arena);
+    try clean.put("PATH", "/usr/bin:/bin");
+    try clean.put("ZCR_FIXTURE_HOST_VALUE", "preserved");
+    const sentinel = try Fixture.initFromEnvironment(arena, &clean);
+    defer sentinel.deinit();
+    try sentinel.initRepo();
+    try sentinel.write("repo/sentinel-untracked.txt", "sentinel stays untracked\n");
+    const sentinel_repo = try sentinel.path("repo");
+    const before_head = try sentinel.run("repo", &.{ "rev-parse", "HEAD" });
+    const before_index = try sentinel.tmp.dir.readFileAlloc(io, "repo/.git/index", arena, .limited(1 << 20));
+    const before_config = try sentinel.tmp.dir.readFileAlloc(io, "repo/.git/config", arena, .limited(1 << 20));
+    const before_status = try sentinel.run("repo", &.{ "status", "--porcelain=v2", "-z" });
+    try sentinel.tmp.dir.createDirPath(io, "empty-hostile-template");
+
+    var hostile = try clean.clone(arena);
+    // An unusable inherited PATH must be preserved without selecting the fixture executable.
+    try hostile.put("PATH", try sentinel.path("untrusted-bin"));
+    try hostile.put("GIT_DIR", try sentinel.path("repo/.git"));
+    try hostile.put("GIT_WORK_TREE", sentinel_repo);
+    try hostile.put("GIT_INDEX_FILE", try sentinel.path("repo/.git/index"));
+    try hostile.put("GIT_CONFIG", try sentinel.path("repo/.git/config"));
+    try hostile.put("GIT_CONFIG_GLOBAL", try sentinel.path("repo/.git/config"));
+    try hostile.put("GIT_CONFIG_SYSTEM", try sentinel.path("repo/.git/config"));
+    try hostile.put("GIT_CONFIG_COUNT", "2");
+    try hostile.put("GIT_CONFIG_KEY_0", "core.worktree");
+    try hostile.put("GIT_CONFIG_VALUE_0", sentinel_repo);
+    try hostile.put("GIT_CONFIG_KEY_1", "user.name");
+    try hostile.put("GIT_CONFIG_VALUE_1", "hostile environment identity");
+    try hostile.put("GIT_CONFIG_KEY_99", "unused.stale.key");
+    try hostile.put("GIT_TEMPLATE_DIR", try sentinel.path("empty-hostile-template"));
+    try hostile.put("GIT_FUTURE_UNRECOGNIZED_OVERRIDE", "must be removed too");
+    const target = try Fixture.initFromEnvironment(arena, &hostile);
+    defer target.deinit();
+    try target.write("repo/fixture-only.txt", "belongs only to target\n");
+    _ = try target.run("repo", &.{ "init", "-q", "-b", "fixture-target" });
+    _ = try target.run("repo", &.{ "config", "fixture.probe", "target-only" });
+    _ = try target.run("repo", &.{ "add", "." });
+    _ = try target.run("repo", &.{ "commit", "-q", "-m", "target fixture mutation" });
+
+    try testing.expectEqualStrings(before_head, try sentinel.run("repo", &.{ "rev-parse", "HEAD" }));
+    try testing.expectEqualSlices(u8, before_index, try sentinel.tmp.dir.readFileAlloc(io, "repo/.git/index", arena, .limited(1 << 20)));
+    try testing.expectEqualSlices(u8, before_config, try sentinel.tmp.dir.readFileAlloc(io, "repo/.git/config", arena, .limited(1 << 20)));
+    try testing.expectEqualStrings(before_status, try sentinel.run("repo", &.{ "status", "--porcelain=v2", "-z" }));
+    try testing.expectEqualStrings("sentinel stays untracked\n", try sentinel.tmp.dir.readFileAlloc(io, "repo/sentinel-untracked.txt", arena, .limited(1024)));
+    try testing.expectEqualStrings("target-only\n", try target.run("repo", &.{ "config", "--get", "fixture.probe" }));
+    try testing.expectEqualStrings("preserved", target.env.get("ZCR_FIXTURE_HOST_VALUE").?);
+    for ([_][]const u8{ "GIT_DIR", "GIT_WORK_TREE", "GIT_INDEX_FILE", "GIT_CONFIG", "GIT_CONFIG_KEY_99", "GIT_FUTURE_UNRECOGNIZED_OVERRIDE" }) |key| try testing.expect(target.env.get(key) == null);
+    try testing.expectEqualStrings(try trustedGit(), target.git.exe);
+    try testing.expectEqualStrings(hostile.get("PATH").?, target.env.get("PATH").?);
+    try testing.expectEqualStrings("/dev/null\n", try target.run("repo", &.{ "config", "--get", "core.hooksPath" }));
+    try testing.expectEqualStrings("false\n", try target.run("repo", &.{ "config", "--get", "commit.gpgSign" }));
+    try testing.expectEqualStrings("0", target.env.get("GIT_TERMINAL_PROMPT").?);
 }

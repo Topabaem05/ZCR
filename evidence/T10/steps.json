@@ -1,0 +1,64 @@
+{
+  "schema_version": "zcr-task-progress/1",
+  "task_id": "T10",
+  "source_commit": "f8a3b24f44a02aa882ec72c170ad57296e02c815",
+  "steps": [
+    {
+      "id": "S01",
+      "result": "PASS",
+      "evidence": "evidence/T10/preflight.json"
+    },
+    {
+      "id": "S02",
+      "result": "RED_EXPECTED",
+      "evidence": "evidence/T10/red.json"
+    },
+    {
+      "id": "S03",
+      "result": "IMPLEMENTED",
+      "source_commit": "a84ab2417b3754fb0bf8681fa7a07a7b8510bae7"
+    },
+    {
+      "id": "S04",
+      "result": "PASS_NATIVE_LINUX",
+      "evidence": "evidence/T10/runs.json"
+    },
+    {
+      "id": "S05",
+      "result": "PASS_ISOLATION_DEBUG_RELEASESAFE_CONTRACTS",
+      "scope": "Owned code/tests/evidence; root-authorized build registration cherry-pick"
+    },
+    {
+      "id": "S06",
+      "result": "APPROVED_READY_FOR_INTEGRATION",
+      "evidence": "evidence/T10/handoff.json"
+    }
+  ],
+  "review_followup": {
+    "red_commit": "876e568daccb25edd47b4cb75eea59f27721edcd",
+    "fix_commit": "c926ea9f9cf3378bc36553e4bce94f4c3a3f9362",
+    "red": "evidence/T10/review-red.json",
+    "green": "evidence/T10/review-runs.json",
+    "scope": "Only registry.zig/tests and T10 evidence changed; no build/core/contracts edits",
+    "rereview": "APPROVE"
+  },
+  "marker_followup": {
+    "red_commit": "9498ba01ed69494c5dc9bd9dc551785e2c9f881a",
+    "fix_commit": "98eaee492b32dd8854d882bc4c250997c1fd682d",
+    "red": "evidence/T10/marker-red.json",
+    "green": "evidence/T10/marker-runs.json",
+    "scope": "Only identity.zig/registry.zig/tests and T10 evidence; no build/core/contracts changes"
+  },
+  "commit_followup": {
+    "authorization": "Root-authorized T11 dependency follow-on; frozen I08/I09 unchanged",
+    "red_commit": "ab5df134d234792003a9a28aca70d26508b1cfc7",
+    "implementation_commit": "02a4ee4f169133022f842cb310b041969c237ba8",
+    "source_commit": "f8a3b24f44a02aa882ec72c170ad57296e02c815",
+    "red": "evidence/T10/commit-red.json",
+    "green": "evidence/T10/runs.json",
+    "red_summary": "38/51 isolation pass; thirteen assertion failures show twelve mutation/expiry/retirement operations complete while a commit guard is held and owner callback completion is not rejected. Guard reservation scaffold exists without lifecycle integration at this RED commit.",
+    "design": "Per-workspace publishing slot and bounded condition waiters release registry mutex during filesystem work; all revoking/expiring/retiring/generation mutation paths wait, then revalidate filesystem identity or relookup bindings as appropriate. Guard ID is monotonic and registry-wide; stored reservation defeats duplicate/stale releases or modified next_generation.",
+    "consumer_contract": "Retain snapshot before acquiring guard. acquireCommit(ticket); publish filesystem; markApplied(); release(); endCallback(ticket). Release without markApplied on abort. No ordinary same-workspace Registry calls while guarded. T11 confirms compliance.",
+    "review": "APPROVE at f8a3b24f44a02aa882ec72c170ad57296e02c815; /workspace/scratch/3f4ab65dfb82/state/reviews/commit-coordinator-review.md. Reviewer verified all four source hashes, ten final binary/log hashes, 13-failure RED hashes, all 32 historical archive member hashes and preserved prior marker runtime object. No additional tests requested."
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "source_commit": "9498ba01ed69494c5dc9bd9dc551785e2c9f881a",
+  "command": "zig build test -Dtest-group=isolation -Doptimize=Debug -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T10/out/marker-red --summary all",
+  "exit_code": 1,
+  "binary": "/workspace/scratch/3f4ab65dfb82/state/T10/out/marker-red/bin/T10-test",
+  "binary_sha256": "c0646d82b6bde6ad7ad82806e68c4cf5f7f58b7f2b76c169592ad5cac0be52a9",
+  "log": "/workspace/scratch/3f4ab65dfb82/state/T10/logs/marker-red.log",
+  "log_sha256": "05937238fdc518aefb4b0e50ef7e970541b9c0463fc14c9c05d5e77a0461176c",
+  "summary": "32/37 isolation tests pass; five expected assertion failures: FIFO replacement blocks until fallback writer, after-read timestamp/size/entry mutation accepted, missing retained HEAD snapshot.",
+  "evidence_log_archive": {
+    "path": "evidence/T10/historical-logs.zip",
+    "member": "marker-red.log"
+  }
+}

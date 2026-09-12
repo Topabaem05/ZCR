@@ -1,0 +1,1 @@
+The three isolated sentinel regression tests each ran and failed before fixture sanitization. All injected Git paths point at disposable repositories owned by the corresponding test. The recorded base plus source digests identifies this test-only RED state. T03 gate and CPU/FD additions are coverage corrections, with no claimed runtime RED.

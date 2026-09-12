@@ -1,0 +1,43 @@
+{
+  "argv": [
+    "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+    "test",
+    "--test-no-exec",
+    "-lc",
+    "-O",
+    "Debug",
+    "--dep",
+    "zcr_core",
+    "--dep",
+    "evidence",
+    "--dep",
+    "build_options",
+    "-Mroot=tests/t01_test.zig",
+    "-Mzcr_core=src/core/types.zig",
+    "--dep",
+    "zcr_core",
+    "-Mevidence=tools/dev/evidence.zig",
+    "-Mbuild_options=/workspace/scratch/3f4ab65dfb82/state/test-harness/build_options.zig",
+    "-femit-bin=/workspace/scratch/3f4ab65dfb82/state/test-harness/bin/red-T01",
+    "--test-filter",
+    "fixture hostile"
+  ],
+  "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-tests",
+  "exit_code": 1,
+  "head": "98c722ebc906321b94bc3e9c8b60522f3305faa7",
+  "compile_exit": 0,
+  "run_argv": [
+    "/workspace/scratch/3f4ab65dfb82/state/test-harness/bin/red-T01"
+  ],
+  "run_cwd": "/workspace/scratch/3f4ab65dfb82/state/test-harness",
+  "log_sha256": "66d252874d020f102448fcff354b99b5fab0185a8d4a1181e70a0595ab26b999",
+  "binary_sha256": "521cd4d61a7fc5f4bfa9b01cbaa7b03adbc95be6804028539774324630435ee8",
+  "source_state": "Uncommitted test-only regression at recorded base; exact tested sources below.",
+  "source_sha256": {
+    "tests/t01_test.zig": "9f6819ca2d90c719904b6285e84a9a6b96ec9e89e49079a58019636937c2b486",
+    "tools/dev/evidence.zig": "eb649db10c199fc42666590e6f02460e12c9be3a270e5d24d0386d745ecfcb97",
+    "src/core/types.zig": "339def811cdbf97f47184ce86d5577342ab13cba1ba65b68702ab16b736b2ddf"
+  },
+  "config_sha256": "b25fbf98533dd6a673c6bacfcea088edef0d0d2a3b98f5bcdf7822cf0b96a5c5",
+  "expected_failure": "Sentinel HEAD changed through inherited Git environment; compile succeeded, selected test ran and failed."
+}

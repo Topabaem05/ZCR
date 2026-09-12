@@ -1,6 +1,6 @@
 # ZCR 구현 에이전트 규칙
 
-이 파일은 runtime repository의 최상위 작업 규칙이다. T01부터 build runner와 core 계약이 있으나 runtime 기능(read/search/patch/MCP 등)은 아직 구현되지 않았다.
+이 파일은 runtime repository의 최상위 작업 규칙이다. 구현 및 실행 증거의 현재 상태는 `tasks/progress.json`과 `tasks/INDEX.md`를 따른다. 설계의 완료 조건과 실제 시험 결과를 구분하고, 이전 commit의 증거를 현재 바이너리의 PASS로 재사용하지 않는다.
 
 ## 필수 시작 문서
 

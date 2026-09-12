@@ -1,0 +1,145 @@
+test
++- run test T10-test 26 pass, 13 fail (39 total)
+error: 't10_test.test.IS-005 commit guard holds revocation until filesystem publication finishes' failed:
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:615:14: 0x1255019 in expect (std.zig)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T10/tests/t10_test.zig:849:5: 0x12f0704 in commitMutationWaits (t10_test.zig)
+           try t.expect(blocked);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T10/tests/t10_test.zig:874:5: 0x12fa789 in test.IS-005 commit guard holds revocation until filesystem publication finishes (t10_test.zig)
+           try commitMutationWaits(.revoke);
+           ^
+error: 't10_test.test.IS-005 commit guard holds session unbind until publication finishes' failed:
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:615:14: 0x1255019 in expect (std.zig)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T10/tests/t10_test.zig:849:5: 0x12f0704 in commitMutationWaits (t10_test.zig)
+           try t.expect(blocked);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T10/tests/t10_test.zig:877:5: 0x12fa709 in test.IS-005 commit guard holds session unbind until publication finishes (t10_test.zig)
+           try commitMutationWaits(.unbind);
+           ^
+error: 't10_test.test.IS-005 commit guard serializes managed write disable' failed:
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:615:14: 0x1255019 in expect (std.zig)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T10/tests/t10_test.zig:849:5: 0x12f0704 in commitMutationWaits (t10_test.zig)
+           try t.expect(blocked);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T10/tests/t10_test.zig:880:5: 0x12fa689 in test.IS-005 commit guard serializes managed write disable (t10_test.zig)
+           try commitMutationWaits(.disable);
+           ^
+error: 't10_test.test.IS-005 commit guard serializes dirty generation changes' failed:
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:615:14: 0x1255019 in expect (std.zig)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T10/tests/t10_test.zig:849:5: 0x12f0704 in commitMutationWaits (t10_test.zig)
+           try t.expect(blocked);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T10/tests/t10_test.zig:883:5: 0x12fa609 in test.IS-005 commit guard serializes dirty generation changes (t10_test.zig)
+           try commitMutationWaits(.mark_changed);
+           ^
+error: 't10_test.test.IS-005 commit guard serializes validation expiry' failed:
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:615:14: 0x1255019 in expect (std.zig)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T10/tests/t10_test.zig:849:5: 0x12f0704 in commitMutationWaits (t10_test.zig)
+           try t.expect(blocked);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T10/tests/t10_test.zig:886:5: 0x12fa589 in test.IS-005 commit guard serializes validation expiry (t10_test.zig)
+           try commitMutationWaits(.validate_lease);
+           ^
+error: 't10_test.test.IS-005 commit guard serializes renewal expiry' failed:
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:615:14: 0x1255019 in expect (std.zig)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T10/tests/t10_test.zig:849:5: 0x12f0704 in commitMutationWaits (t10_test.zig)
+           try t.expect(blocked);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T10/tests/t10_test.zig:889:5: 0x12fa509 in test.IS-005 commit guard serializes renewal expiry (t10_test.zig)
+           try commitMutationWaits(.renew);
+           ^
+error: 't10_test.test.IS-005 commit guard serializes callback admission expiry' failed:
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:615:14: 0x1255019 in expect (std.zig)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T10/tests/t10_test.zig:849:5: 0x12f0704 in commitMutationWaits (t10_test.zig)
+           try t.expect(blocked);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T10/tests/t10_test.zig:892:5: 0x12fa489 in test.IS-005 commit guard serializes callback admission expiry (t10_test.zig)
+           try commitMutationWaits(.begin_callback);
+           ^
+error: 't10_test.test.IS-005 commit guard serializes callback validation expiry' failed:
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:615:14: 0x1255019 in expect (std.zig)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T10/tests/t10_test.zig:849:5: 0x12f0704 in commitMutationWaits (t10_test.zig)
+           try t.expect(blocked);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T10/tests/t10_test.zig:895:5: 0x12fa409 in test.IS-005 commit guard serializes callback validation expiry (t10_test.zig)
+           try commitMutationWaits(.validate_callback);
+           ^
+error: 't10_test.test.IS-005 commit guard serializes writer acquisition expiry' failed:
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:615:14: 0x1255019 in expect (std.zig)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T10/tests/t10_test.zig:849:5: 0x12f0704 in commitMutationWaits (t10_test.zig)
+           try t.expect(blocked);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T10/tests/t10_test.zig:898:5: 0x12fa389 in test.IS-005 commit guard serializes writer acquisition expiry (t10_test.zig)
+           try commitMutationWaits(.acquire_writer);
+           ^
+error: 't10_test.test.IS-002 commit guard serializes rediscovered HEAD generation' failed:
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:615:14: 0x1255019 in expect (std.zig)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T10/tests/t10_test.zig:849:5: 0x12f0704 in commitMutationWaits (t10_test.zig)
+           try t.expect(blocked);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T10/tests/t10_test.zig:901:5: 0x12fa309 in test.IS-002 commit guard serializes rediscovered HEAD generation (t10_test.zig)
+           try commitMutationWaits(.register_same);
+           ^
+error: 't10_test.test.IS-002 commit guard serializes replacement incarnation retirement' failed:
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:615:14: 0x1255019 in expect (std.zig)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T10/tests/t10_test.zig:849:5: 0x12f0704 in commitMutationWaits (t10_test.zig)
+           try t.expect(blocked);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T10/tests/t10_test.zig:904:5: 0x12fa289 in test.IS-002 commit guard serializes replacement incarnation retirement (t10_test.zig)
+           try commitMutationWaits(.register_replacement);
+           ^
+error: 't10_test.test.IS-002 commit guard serializes invalid root retirement' failed:
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:615:14: 0x1255019 in expect (std.zig)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T10/tests/t10_test.zig:849:5: 0x12f0704 in commitMutationWaits (t10_test.zig)
+           try t.expect(blocked);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T10/tests/t10_test.zig:907:5: 0x12f48c9 in test.IS-002 commit guard serializes invalid root retirement (t10_test.zig)
+           try commitMutationWaits(.invalid_root);
+           ^
+error: 't10_test.test.IS-005 commit generation reservation abort apply and stale guards are bounded' failed:
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:615:14: 0x1255019 in expect (std.zig)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T10/tests/t10_test.zig:949:5: 0x128fd00 in test.IS-005 commit generation reservation abort apply and stale guards are bounded (t10_test.zig)
+           try t.expect(!ended);
+           ^
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/T10/zig-local-cache && /workspace/scratch/3f4ab65dfb82/state/T10/zig-local-cache/o/c71383fa341143c5a3ec37c1692dfd39/T10-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/T10/zig-local-cache --seed=0x39f7e583 --listen=-
+
+Build Summary: 6/8 steps succeeded (1 failed); 38/51 tests passed (13 failed)
+test transitive failure
++- install T02-test success
+|  +- compile test T02-test Debug native cached 12ms MaxRSS:71M
+|     +- options cached
++- run test T02-test 12 pass (12 total) 359ms MaxRSS:6M
+|  +- compile test T02-test Debug native (+1 more reused dependencies)
++- install T10-test success
+|  +- compile test T10-test Debug native success 555ms MaxRSS:183M
++- run test T10-test 26 pass, 13 fail (39 total)
+   +- compile test T10-test Debug native (reused)
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/T10/zig-local-cache/o/82f6eec072af4c43c775ed9b5580df37/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-T10 /workspace/scratch/3f4ab65dfb82/state/T10/zig-local-cache /workspace/scratch/3f4ab65dfb82/state/T10/zig-global-cache --seed 0x39f7e583 -Zf2f7093b43a1833a test -Dtest-group=isolation -Doptimize=Debug -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T10/out/commit-red --summary all

@@ -84,6 +84,73 @@ test "ME-003 output beyond the budget's output share is refused" {
     try testing.expectEqual(@as(u64, 0), budget.usage().bytes);
 }
 
+// Coverage-only boundaries: the byte-cap hammer cannot independently exhaust these resources.
+fn expectIsolatedReservationCap(comptime dimension: enum { fds, cpu }) !void {
+    const is_fd = dimension == .fds;
+    var counters: memory.accounting.Counters = .{};
+    var budget = memory.Budget.init(8, .{
+        .bytes = 64 * MiB,
+        .fds = if (is_fd) 3 else 32,
+        .cpu = if (is_fd) 32 else 3,
+        .output_bytes = 32 * MiB,
+    }, &counters);
+    const empty: memory.Caps = .{ .bytes = 0, .fds = 0, .cpu = 0, .output_bytes = 0 };
+    const one: core.ResourceCost = .{ .input_bytes = 1 * KiB, .output_bytes = 1 * KiB, .fds = 1, .cpu_permits = 1 };
+    var two = one;
+    var oversized = one;
+    if (is_fd) {
+        two.fds = 2;
+        oversized.fds = 4;
+    } else {
+        two.cpu_permits = 2;
+        oversized.cpu_permits = 4;
+    }
+
+    try testing.expectError(error.ResourceExhausted, budget.reserve(session(1), oversized));
+    try testing.expectEqualDeep(empty, budget.usage());
+    try testing.expectEqual(@as(u64, 0), counters.snapshot().active_reservations);
+
+    var first = try budget.reserve(session(1), two);
+    defer if (!first.released) budget.release(&first) catch @panic("first reservation cleanup failed");
+    var second = try budget.reserve(session(2), one);
+    defer if (!second.released) budget.release(&second) catch @panic("second reservation cleanup failed");
+    const at_limit: memory.Caps = .{
+        .bytes = 4 * KiB,
+        .fds = if (is_fd) 3 else 2,
+        .cpu = if (is_fd) 2 else 3,
+        .output_bytes = 2 * KiB,
+    };
+    try testing.expectEqualDeep(at_limit, budget.usage());
+    try testing.expectEqual(@as(u64, 2), counters.snapshot().active_reservations);
+
+    // This otherwise-affordable request exceeds only the selected cumulative cap.
+    const counters_at_limit = counters.snapshot();
+    try testing.expectError(error.ResourceExhausted, budget.reserve(session(3), one));
+    try testing.expectEqualDeep(at_limit, budget.usage());
+    try testing.expectEqualDeep(counters_at_limit, counters.snapshot());
+
+    try budget.release(&first);
+    try testing.expectEqualDeep(memory.Caps{ .bytes = 2 * KiB, .fds = 1, .cpu = 1, .output_bytes = 1 * KiB }, budget.usage());
+    try testing.expectEqual(@as(u64, 1), counters.snapshot().active_reservations);
+    var replacement = try budget.reserve(session(3), two);
+    defer if (!replacement.released) budget.release(&replacement) catch @panic("replacement reservation cleanup failed");
+    try testing.expectEqualDeep(at_limit, budget.usage());
+
+    try budget.release(&second);
+    try budget.release(&replacement);
+    try testing.expectEqualDeep(empty, budget.usage());
+    try testing.expectEqual(@as(u64, 0), counters.snapshot().active_reservations);
+    try testing.expectEqual(@as(u64, 0), counters.snapshot().double_releases);
+}
+
+test "ME-003 FD reservations grant the exact cap, reject exhaustion and restore capacity" {
+    try expectIsolatedReservationCap(.fds);
+}
+
+test "ME-003 CPU reservations grant the exact cap, reject exhaustion and restore capacity" {
+    try expectIsolatedReservationCap(.cpu);
+}
+
 const HammerContext = struct {
     budget: *memory.Budget,
     cost: core.ResourceCost,
@@ -339,10 +406,14 @@ const ChildThread = struct {
     token: memory.ChildToken,
     buffer: []u8,
     go: std.atomic.Value(bool) = .init(false),
+    // Published by go: setup/assertion failure can join without using a possibly released buffer.
+    write_buffer: bool = false,
 
     fn run(ctx: *ChildThread) void {
         while (!ctx.go.load(.acquire)) std.Thread.yield() catch {};
-        for (0..64) |round| @memset(ctx.buffer, @intCast(round));
+        if (ctx.write_buffer) for (0..64) |round| {
+            @memset(ctx.buffer, @intCast(round));
+        };
         ctx.request.endChild(ctx.token);
     }
 };
@@ -353,28 +424,46 @@ test "ME-002 release waits for a child on another thread to drain" {
     var reservation = try budget.reserve(session(1), .{ .scratch_bytes = 1 * MiB });
     var request: memory.RequestArena = undefined;
     request.init(testing.allocator, &reservation, &counters, null);
+    defer if (!reservation.released) {
+        _ = request.release(&budget, &reservation) catch @panic("request cleanup failed");
+    };
 
-    var ctx: ChildThread = .{ .request = &request, .token = try request.beginChild(), .buffer = try request.allocator().alloc(u8, 64 * KiB) };
+    const buffer = try request.allocator().alloc(u8, 64 * KiB);
+    const token = try request.beginChild();
+    var child_owned_by_test = true;
+    defer if (child_owned_by_test) request.endChild(token);
+    var ctx: ChildThread = .{ .request = &request, .token = token, .buffer = buffer };
     const thread = try std.Thread.spawn(.{}, ChildThread.run, .{&ctx});
+    child_owned_by_test = false;
+    defer {
+        ctx.go.store(true, .release);
+        thread.join();
+    }
     request.requestCancel();
 
-    var refused: u64 = 0;
+    // The child cannot drain before this refusal, regardless of thread scheduling.
+    try testing.expectError(error.ChildrenPending, request.release(&budget, &reservation));
+    try testing.expectEqual(@as(u32, 1), request.pendingChildren());
+    try testing.expect(!reservation.released);
+    try testing.expect(budget.usage().bytes > 0);
+    try testing.expect(counters.snapshot().live_bytes > 0);
+
+    ctx.write_buffer = true;
     ctx.go.store(true, .release);
-    while (true) {
+    for (0..2000) |_| {
         _ = request.release(&budget, &reservation) catch |err| switch (err) {
             error.ChildrenPending => {
-                refused += 1;
-                std.Thread.yield() catch {};
+                try std.Io.sleep(io, .fromMilliseconds(1), .awake);
                 continue;
             },
             else => return err,
         };
         break;
-    }
-    thread.join();
-    try testing.expect(refused >= 1);
+    } else return error.TestExpectedChildDrain;
     try testing.expectEqual(@as(u32, 0), request.pendingChildren());
     try testing.expectEqual(@as(u64, 0), budget.usage().bytes);
+    try testing.expectEqual(@as(u64, 0), counters.snapshot().active_reservations);
+    try testing.expectEqual(@as(u64, 0), counters.snapshot().live_bytes);
 }
 
 // ------------------------------------------------------------------ ME-007

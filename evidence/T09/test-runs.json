@@ -1,0 +1,167 @@
+{
+  "task_id": "T09",
+  "source_commit": "acc2741304887825080762166f09dfe0aeb5533c",
+  "runs": [
+    {
+      "label": "red",
+      "status": "EXPECTED_FAIL",
+      "source_commit": "a9f86a598344ff42a3b215b091f9466532479e20",
+      "command": "zig test -lc -O Debug --dep zcr_core --dep zcr_memory --dep zcr_executor --dep zcr_queue --dep zcr_darwin -Mroot=tests/t09_test.zig -Mzcr_core=src/core/types.zig --dep zcr_core -Mzcr_memory=src/memory/budget.zig --dep zcr_core --dep zcr_memory --dep zcr_queue --dep zcr_darwin -Mzcr_executor=src/scheduler/executor.zig --dep zcr_core -Mzcr_queue=src/scheduler/queue.zig --dep zcr_core -Mzcr_darwin=src/platform/darwin.zig -femit-bin=/workspace/scratch/3f4ab65dfb82/state/T09/bin/scheduler-Debug",
+      "exit_code": 1,
+      "binary_sha256": null,
+      "output": "evidence/T09/logs/red.log",
+      "output_sha256": "7273e658ea0360a69feb214643e35b83d0870dc1a03c1ff30d3afdd657651d64",
+      "cause": "The owned zcr_executor, zcr_queue and zcr_darwin modules did not exist when the SC-001\u2013004 behavioral tests were first run. This is feature-absence RED, not an assertion-run binary."
+    },
+    {
+      "label": "review-red",
+      "status": "EXPECTED_FAIL",
+      "source_commit": "eeae1bf3ea01fff07c40f23340b42d993a2ef71f",
+      "binary": "/workspace/scratch/3f4ab65dfb82/state/T09/bin/review-red-debug",
+      "binary_sha256": "66c83bac8a6ddf3909b096a9b9251461f8711bc83239e3188a029769cb09a9e2",
+      "config_digest": "1099cffd15d9548e5b3e511613956a41200c411b029095695e1bfe8e9ab84090",
+      "corpus_digest": "db989a73adc9e2b92dc85c368e98c8403256b510ac077f0c02a32c6f0ae9662d",
+      "command": "zig test -lc -O Debug --dep zcr_core --dep zcr_memory --dep zcr_executor --dep zcr_queue --dep zcr_darwin -Mroot=tests/t09_test.zig -Mzcr_core=src/core/types.zig --dep zcr_core -Mzcr_memory=src/memory/budget.zig --dep zcr_core --dep zcr_memory --dep zcr_queue --dep zcr_darwin -Mzcr_executor=src/scheduler/executor.zig --dep zcr_core -Mzcr_queue=src/scheduler/queue.zig --dep zcr_core -Mzcr_darwin=src/platform/darwin.zig -femit-bin=/workspace/scratch/3f4ab65dfb82/state/T09/bin/scheduler-Debug",
+      "exit_code": 1,
+      "tests_passed": 12,
+      "tests_failed": 2,
+      "skipped": 0,
+      "output": "evidence/T09/logs/review-red.log",
+      "output_sha256": "b5916c8205c0d2faaa021a83685c1b71593aba1646676d0e3b83b22b15b3cfd1",
+      "cause": "R1 valid two-permit waiter did not enter after six staggered foreground completions; R2 idle had already left its queue while foreground remained gated."
+    },
+    {
+      "label": "review-green-debug",
+      "status": "PASS",
+      "ids": [
+        "SC-001",
+        "SC-002",
+        "SC-003",
+        "SC-004"
+      ],
+      "platform": "x86_64-linux-gnu",
+      "source_commit": "acc2741304887825080762166f09dfe0aeb5533c",
+      "binary": "/workspace/scratch/3f4ab65dfb82/state/T09/out-review-debug/bin/T09-test",
+      "binary_sha256": "d17fb93d222032e56d87fc9d32076418bfb4dcd7a7af4a24837ff5f3b46f80ff",
+      "config_digest": "1099cffd15d9548e5b3e511613956a41200c411b029095695e1bfe8e9ab84090",
+      "corpus_digest": "9a8bf40ea2a7cc5ea273957242034a8db472c29016298002e0e557c93bb9f8a6",
+      "build_command": "zig build test -Dtest-group=scheduler -Doptimize=Debug -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T09/out-review-debug",
+      "build_exit": 0,
+      "run_command": "/workspace/scratch/3f4ab65dfb82/state/T09/out-review-debug/bin/T09-test",
+      "run_exit": 0,
+      "output": "evidence/T09/logs/green-debug-run.log",
+      "output_sha256": "b2ea83b21c2ad0890b7580259bd52aeb1e8130c94ba3d78c9091987fac1330f8",
+      "test_count": 14,
+      "skipped": 0
+    },
+    {
+      "label": "review-green-releasesafe",
+      "status": "PASS",
+      "ids": [
+        "SC-001",
+        "SC-002",
+        "SC-003",
+        "SC-004"
+      ],
+      "platform": "x86_64-linux-gnu",
+      "source_commit": "acc2741304887825080762166f09dfe0aeb5533c",
+      "binary": "/workspace/scratch/3f4ab65dfb82/state/T09/out-review-releasesafe/bin/T09-test",
+      "binary_sha256": "2f31f34011ec358049c21c328d62b99bf66dc6545093aee6c1be2f4acc5013ce",
+      "config_digest": "1099cffd15d9548e5b3e511613956a41200c411b029095695e1bfe8e9ab84090",
+      "corpus_digest": "9a8bf40ea2a7cc5ea273957242034a8db472c29016298002e0e557c93bb9f8a6",
+      "build_command": "zig build test -Dtest-group=scheduler -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T09/out-review-releasesafe",
+      "build_exit": 0,
+      "run_command": "/workspace/scratch/3f4ab65dfb82/state/T09/out-review-releasesafe/bin/T09-test",
+      "run_exit": 0,
+      "output": "evidence/T09/logs/green-releasesafe-run.log",
+      "output_sha256": "b2ea83b21c2ad0890b7580259bd52aeb1e8130c94ba3d78c9091987fac1330f8",
+      "test_count": 14,
+      "skipped": 0
+    },
+    {
+      "label": "review-green-memory-debug",
+      "status": "PASS",
+      "ids": [
+        "T03 regression"
+      ],
+      "platform": "x86_64-linux-gnu",
+      "source_commit": "acc2741304887825080762166f09dfe0aeb5533c",
+      "binary": "/workspace/scratch/3f4ab65dfb82/state/T09/out-review-memory-debug/bin/T03-test",
+      "binary_sha256": "cb0a8825661d48dcde1c663d7f3262aba84ae9ba1f14ded87d648b545f2190e7",
+      "config_digest": "1099cffd15d9548e5b3e511613956a41200c411b029095695e1bfe8e9ab84090",
+      "corpus_digest": "fbeb29d611edc6325f8eae5bfb12fffae45959e84d3252d1d9d04435f8d72d26",
+      "build_command": "zig build test -Dtest-group=memory -Doptimize=Debug -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T09/out-review-memory-debug",
+      "build_exit": 0,
+      "run_command": "/workspace/scratch/3f4ab65dfb82/state/T09/out-review-memory-debug/bin/T03-test",
+      "run_exit": 0,
+      "output": "evidence/T09/logs/regression-memory-run.log",
+      "output_sha256": "134770aa1950b2f9c0c1fc77c5def9181498a01a536c8938846ac7d0ac182129",
+      "test_count": 12,
+      "skipped": 0
+    },
+    {
+      "label": "review-green-memory-releasesafe",
+      "status": "PASS",
+      "ids": [
+        "T03 regression"
+      ],
+      "platform": "x86_64-linux-gnu",
+      "source_commit": "acc2741304887825080762166f09dfe0aeb5533c",
+      "binary": "/workspace/scratch/3f4ab65dfb82/state/T09/out-review-memory-releasesafe/bin/T03-test",
+      "binary_sha256": "6a9b3ad1dbf407c8c956efddd377be01c7a336ed37c529b42d46f11337314e7a",
+      "config_digest": "1099cffd15d9548e5b3e511613956a41200c411b029095695e1bfe8e9ab84090",
+      "corpus_digest": "fbeb29d611edc6325f8eae5bfb12fffae45959e84d3252d1d9d04435f8d72d26",
+      "build_command": "zig build test -Dtest-group=memory -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T09/out-review-memory-releasesafe",
+      "build_exit": 0,
+      "run_command": "/workspace/scratch/3f4ab65dfb82/state/T09/out-review-memory-releasesafe/bin/T03-test",
+      "run_exit": 0,
+      "output": "evidence/T09/logs/regression-memory-releasesafe-run.log",
+      "output_sha256": "134770aa1950b2f9c0c1fc77c5def9181498a01a536c8938846ac7d0ac182129",
+      "test_count": 12,
+      "skipped": 0
+    },
+    {
+      "label": "contracts",
+      "status": "PASS",
+      "command": "/workspace/scratch/3f4ab65dfb82/state/T09/tools/bin/zcr-dev-evidence verify-contracts --root /workspace/scratch/3f4ab65dfb82/ZCR-T09",
+      "exit_code": 0,
+      "checks": 128,
+      "failed": 0,
+      "source_commit": "acc2741304887825080762166f09dfe0aeb5533c",
+      "validator_binary_sha256": "11b2050ad63abf41f7d75bb2404b5121669e133527756b6a16228928cf5789f9",
+      "config_digest": "1099cffd15d9548e5b3e511613956a41200c411b029095695e1bfe8e9ab84090",
+      "output": "evidence/T09/logs/verify-contracts-report.log",
+      "output_sha256": "1855f8d2e1057d26e9ccae45a29f4e553b41ba7df3110408dab7fcd95bc9915c"
+    },
+    {
+      "label": "macos-zig-typecheck",
+      "status": "COMPILE_ONLY",
+      "target": "aarch64-macos",
+      "command": "zig test -lc -target aarch64-macos -O Debug --test-no-exec -fno-emit-bin --dep zcr_core --dep zcr_memory --dep zcr_executor --dep zcr_queue --dep zcr_darwin -Mroot=tests/t09_test.zig -Mzcr_core=src/core/types.zig --dep zcr_core -Mzcr_memory=src/memory/budget.zig --dep zcr_core --dep zcr_memory --dep zcr_queue --dep zcr_darwin -Mzcr_executor=src/scheduler/executor.zig --dep zcr_core -Mzcr_queue=src/scheduler/queue.zig --dep zcr_core -Mzcr_darwin=src/platform/darwin.zig",
+      "exit_code": 0,
+      "binary_sha256": null,
+      "source_commit": "acc2741304887825080762166f09dfe0aeb5533c",
+      "config_digest": "1099cffd15d9548e5b3e511613956a41200c411b029095695e1bfe8e9ab84090",
+      "note": "Only Zig semantic/type checks. No SDK C compilation, link, executable, or Mac runtime result."
+    },
+    {
+      "label": "darwin-runtime",
+      "status": "NOT_RUN",
+      "ids": [
+        "SC-001",
+        "SC-002",
+        "SC-003",
+        "SC-004"
+      ],
+      "reason": "Host is x86_64 Linux; no actual Mac runtime or macOS SDK is available. Mac test branches select both executors and observe public QoS, but were not executed here."
+    }
+  ],
+  "run_context": {
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T09",
+    "zig_binary": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+    "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T09/zig-global-cache",
+    "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T09/zig-local-cache",
+    "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T09/tmp"
+  },
+  "prior_evidence_commit": "08ab917b376e0d9f80dea35a10469452476ec735"
+}

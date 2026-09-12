@@ -57,7 +57,7 @@ pub const Projection = struct {
 
 const read_step = 64 * 1024;
 
-/// `reader` provides `fn readAt(reader, io, file, buffer, offset) error{IoFailure}!usize`.
+/// `reader.readAt` checks cancellation at each bounded context read.
 pub fn project(
     io: Io,
     file: Io.File,
@@ -69,7 +69,7 @@ pub fn project(
     lines_out: []core.Line,
     text_out: []u8,
     results_out: []core.SearchMatch,
-) error{IoFailure}!Projection {
+) (error{IoFailure} || core.errors.InterruptError)!Projection {
     var p: Projection = .{};
     const text_cap: usize = @intCast(@min(budget, text_out.len));
 

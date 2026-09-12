@@ -8,5 +8,7 @@
   "broker_allowed": false,
   "additional_roots": [],
   "network_allowed": false,
-  "arbitrary_exec_allowed": false
+  "arbitrary_exec_allowed": false,
+  "git_executable": "/usr/bin/git",
+  "global_exclude": null
 }

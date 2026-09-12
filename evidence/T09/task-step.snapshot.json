@@ -1,0 +1,56 @@
+{
+  "schema_version": "zcr-task-step-snapshot/1",
+  "task_id": "T09",
+  "base_commit": "9897f27a18c66c310ae6dda3ee854f7fdcdcfa3d",
+  "contract_digest": "8aa53314410fe471f0e070c522766684286f60e1ad4d9785c292bb709ea370a4",
+  "worktree": "/workspace/scratch/3f4ab65dfb82/ZCR-T09",
+  "steps": [
+    {
+      "step": "S01",
+      "status": "PASS",
+      "head": "9897f27a18c66c310ae6dda3ee854f7fdcdcfa3d",
+      "evidence": "evidence/T09/preflight.json"
+    },
+    {
+      "step": "S02",
+      "status": "EXPECTED_FAIL",
+      "head": "a9f86a5",
+      "evidence": "evidence/T09/logs/red.log"
+    },
+    {
+      "step": "S03",
+      "status": "IMPLEMENTED",
+      "head": "f5ecd5fa0fea0591b4b29b8f7920b634162e4908"
+    },
+    {
+      "step": "S04",
+      "status": "PASS_LINUX_NOT_RUN_MAC",
+      "head": "f5ecd5fa0fea0591b4b29b8f7920b634162e4908",
+      "evidence": "evidence/T09/test-runs.json"
+    },
+    {
+      "step": "S05",
+      "status": "PASS",
+      "head": "f5ecd5fa0fea0591b4b29b8f7920b634162e4908",
+      "evidence": [
+        "evidence/T09/logs/scope-guard.json",
+        "evidence/T09/logs/ownership-guard.json",
+        "evidence/T09/logs/verify-contracts-report.log"
+      ]
+    },
+    {
+      "step": "S06",
+      "status": "HANDOFF_PENDING_REVIEW_AND_MAC",
+      "head": "f5ecd5fa0fea0591b4b29b8f7920b634162e4908"
+    }
+  ],
+  "note": "Reconstructed trace from retained step artifacts and scoped commits; not a claim that the strict dev-tool step ledger was advanced contemporaneously.",
+  "review_revision": {
+    "base_commit": "08ab917b376e0d9f80dea35a10469452476ec735",
+    "red_commit": "eeae1bf3ea01fff07c40f23340b42d993a2ef71f",
+    "implementation_commit": "acc2741304887825080762166f09dfe0aeb5533c",
+    "red_status": "12 PASS / 2 expected behavioral failures",
+    "green_status": "14 scheduler and 12 memory PASS in both Debug/ReleaseSafe",
+    "review_status": "Root independent rereview: original findings closed; no new blocking delta issue"
+  }
+}

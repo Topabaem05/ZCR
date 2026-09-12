@@ -1,0 +1,13 @@
+1/12 t02_test.test.IS-003 traversal, absolute, UNC, drive-letter and backslash paths are refused...OK
+2/12 t02_test.test.IS-003 symlinks are refused as final or intermediate components, even when they point inside the root...OK
+3/12 t02_test.test.IS-003 model arguments cannot switch workspace, task, policy or operation...OK
+4/12 t02_test.test.IS-003 allowed operations inside scope yield distinct immutable capabilities...OK
+5/12 t02_test.test.IS-004 the linked worktree .git file is neither writable nor readable...OK
+6/12 t02_test.test.IS-004 the main .git directory is refused by name and a common git dir under the root by identity...OK
+7/12 t02_test.test.IS-004 immutable paths are compared by filesystem identity, not spelling...OK
+8/12 t02_test.test.DV-002 out-of-scope new, renamed, deleted, staged and committed files are all rejected...OK
+9/12 t02_test.test.DV-002 changes inside owned paths pass and ownership matches whole path components...OK
+10/12 t02_test.test.DV-003 two tasks editing the same shared contract are rejected unless the integrator makes the change...OK
+11/12 t02_test.test.DV-003 overlapping task ownership is detected...OK
+12/12 t02_test.test.DV-003 the repository task table assigns every path to one owner...OK
+All 12 tests passed.
