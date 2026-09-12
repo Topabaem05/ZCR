@@ -1,0 +1,2 @@
+SOURCE         FSTYPE OPTIONS
+/dev/nvme0n1p1 ext4   rw,relatime,discard,errors=remount-ro,commit=30

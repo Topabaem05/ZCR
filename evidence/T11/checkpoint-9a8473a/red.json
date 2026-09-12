@@ -1,0 +1,25 @@
+{
+  "source_commit": "48648ae31459b3c4f367d22517341753a59bac0e",
+  "source_file_hashes": {
+    "src/fs/edit.zig": "72112c21f07c423dd243f5e5fc09b4b20970cea0ad2f00216ae45be09058d40b",
+    "tests/t11_test.zig": "3372eff1f37b31e739dd9ce9925bdea42e6494d5b3c501025a95ede2b9b8c9e1",
+    "build.zig": "0b4e1febe65415a70621dbbf5c373a099255bd0af14e913dfb111657dbd8c55f",
+    "build.zig.zon": "2ad2381bdb29d5669c6d2ac4807c124c2afe6d007daf7ea2b507fdc64bf44e52",
+    "src/core/types.zig": "339def811cdbf97f47184ce86d5577342ab13cba1ba65b68702ab16b736b2ddf",
+    "src/workspace/registry.zig": "5fea4891bfcf2d07e14e33202643fcb3088013f63421b6ebb8048905f2a916d9"
+  },
+  "command": "zig build test -Dtest-group=write -Doptimize=Debug -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T11/out-red --summary all",
+  "toolchain": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+  "environment": {
+    "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-global-cache",
+    "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache",
+    "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T11/tmp"
+  },
+  "exit_code": 1,
+  "summary": "0/11 passed, 11 actual Unsupported/assertion behavior failures against API stub",
+  "binary": "/workspace/scratch/3f4ab65dfb82/state/T11/out-red/bin/T11-test",
+  "binary_sha256": "9b71c93ea08235ddda154ea0c7620c26d98e5a1ee4f394012a4e698f952c4cf6",
+  "log": "red.log in logs.tar.gz",
+  "log_sha256": "be67827aa9cb583250c3d3ed4480849fcb052bf8ca22cf20e88f1aa9b3625cea",
+  "initial_compiler_errors": "red-initial.log is retained as setup failure and is not the behavioral RED"
+}

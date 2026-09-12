@@ -1,0 +1,3 @@
+1/2 darwin.test.WA-002 Darwin callback copies coalesced relative paths and rejects sibling prefixes...OK
+2/2 darwin.test.WA-005 Darwin oversized callback collapses without reading skipped event arrays...OK
+All 2 tests passed.

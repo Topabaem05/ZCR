@@ -1,0 +1,21 @@
+test
++- run test T03-test
+   +- compile test T03-test Debug native 1 errors
+tests/t03_test.zig:41:15: error: no field or member function named 'setAdmissionCaps' in 'budget.Budget'
+    try budget.setAdmissionCaps(.{ .bytes = 32, .fds = 2, .cpu = 1, .output_bytes = 16 });
+        ~~~~~~^~~~~~~~~~~~~~~~~
+src/memory/budget.zig:98:20: note: struct declared here
+pub const Budget = struct {
+                   ^~~~~~
+error: 1 compilation errors
+failed command: /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig test -ODebug --dep zcr_core --dep zcr_memory --dep zcr_admission -Mroot=/workspace/scratch/3f4ab65dfb82/ZCR-work/tests/t03_test.zig -ODebug -Mzcr_core=/workspace/scratch/3f4ab65dfb82/ZCR-work/src/core/types.zig -ODebug --dep zcr_core -Mzcr_memory=/workspace/scratch/3f4ab65dfb82/ZCR-work/src/memory/budget.zig -ODebug --dep zcr_core --dep zcr_memory -Mzcr_admission=/workspace/scratch/3f4ab65dfb82/ZCR-work/src/scheduler/admission.zig -lc --cache-dir /workspace/scratch/3f4ab65dfb82/state/integration/pressure/cache --global-cache-dir /workspace/scratch/3f4ab65dfb82/state/integration/global-cache --name T03-test --zig-lib-dir /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/ --listen=-
+
+Build Summary: 2/5 steps succeeded (1 failed); 14/14 tests passed
+test transitive failure
++- run test T03-test transitive failure
+|  +- compile test T03-test Debug native 1 errors
++- run test T13-test 14 pass (14 total) 311ms MaxRSS:9M
+   +- compile test T13-test Debug native success 577ms MaxRSS:184M
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/integration/pressure/cache/o/4019de6d424aa27c240d75ad7c7c7bc2/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-work /workspace/scratch/3f4ab65dfb82/state/integration/pressure/cache /workspace/scratch/3f4ab65dfb82/state/integration/global-cache --seed 0x7411a64b -Z3d51d4d7d8111dc3 test -Dtest-group=memory -Doptimize=Debug --prefix /workspace/scratch/3f4ab65dfb82/state/integration/pressure/out --summary all

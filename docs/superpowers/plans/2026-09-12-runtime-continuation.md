@@ -432,3 +432,13 @@ zig build verify-contracts
 - [ ] Final source has independent whole-branch review and fixed material findings.
 - [ ] A feature branch and reviewable draft PR contain the plan, code, evidence and exact outstanding external gates.
 - [ ] T25 release gate is COMPLETE only if all mandatory evidence exists, otherwise explicitly BLOCKED with reproducible next commands.
+
+
+## 2026-09-12 구현 체크포인트
+
+- 전체10개 원본 브랜치·고유 소스·설계 및 작업 문서 감사를 완료했다. 원본 main/integration은 변경하지 않았다.
+- T11source09422d4는 독립 승인 후 통합했다. 작업 소스의 Debug/ReleaseSafe 각각41write tests, 통합7bd5be8 Debug41tests가 통과했다. 생산 쓰기는 T12 및 플랫폼 복구 게이트 전까지 비활성이다.
+- T14source2ca8e31은 독립 승인 후 통합했다. 각Debug/ReleaseSafe/fault19tests, 통합988dde8 Debug19tests가 통과했다. Darwin 실제FSEvents 수명·이벤트 전달은 미검증으로 유지한다.
+- [실제3플랫폼CI](../../../evidence/continuation/native-ci-34681109500/README.md)는 이전tree39978457에서 각모드221/222tests가 통과했고 T01계약시험 및 당시 미통합T11/T14/T15로 전체FAIL이다. T01은 승인된 nativeI19 네번째필드를 검사하도록7115d63에서 수정, 로컬Debug19/19가 통과했다. 이후소스의PASS로 이 증거를 재사용하지 않는다.
+- T12영속저널·실제SIGKILL/새복구프로세스40사례를 구현 중이다. 실제MCP캐시 경로b5fe273과 broker98c63f8은 검토에서 캐시압력 후admission 및 대기요청취소응답 결함이 확인되어 수정 전까지 승인하지 않는다.
+- T16은 공유Budget의 동적admission 한도 선행API를 작업 중이며 governor 구현·연결은 남아 있다. T17/T19/T21–T25와 실제클라이언트·모델·최소OS 게이트도 남아 있다.

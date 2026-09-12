@@ -34,6 +34,34 @@ fn inflightBudget(counters: *memory.accounting.Counters) memory.Budget {
 
 // ------------------------------------------------------------------ ME-003
 
+test "ME-005 pressure lowers new admission without revoking live reservations" {
+    var counters: memory.accounting.Counters = .{};
+    var budget = memory.Budget.init(42, .{ .bytes = 128, .fds = 8, .cpu = 4, .output_bytes = 32 }, &counters);
+    var held = try budget.reserve(session(1), .{ .scratch_bytes = 80, .fds = 3, .cpu_permits = 2 });
+    try budget.setAdmissionCaps(.{ .bytes = 32, .fds = 2, .cpu = 1, .output_bytes = 16 });
+    try testing.expectEqual(@as(u64, 80), budget.usage().bytes);
+    try testing.expect(!held.released);
+    try testing.expectError(error.ResourceExhausted, budget.reserve(session(2), .{ .scratch_bytes = 1 }));
+    try budget.release(&held);
+    var smaller = try budget.reserve(session(2), .{ .scratch_bytes = 32, .fds = 2, .cpu_permits = 1 });
+    try testing.expectError(error.ResourceExhausted, budget.reserve(session(3), .{ .cpu_permits = 1 }));
+    try budget.release(&smaller);
+    try testing.expectError(error.InvalidArgument, budget.setAdmissionCaps(.{ .bytes = 129, .fds = 2, .cpu = 1, .output_bytes = 16 }));
+    try testing.expectEqual(@as(u64, 32), budget.admissionCaps().bytes);
+    try budget.setAdmissionCaps(budget.caps);
+    var recovered = try budget.reserve(session(1), .{ .scratch_bytes = 80, .fds = 3, .cpu_permits = 2 });
+    try budget.release(&recovered);
+    try testing.expectEqual(@as(u64, 0), budget.usage().bytes);
+}
+
+test "ME-003 aggregate byte admission never overflows at the integer ceiling" {
+    var counters: memory.accounting.Counters = .{};
+    var budget = memory.Budget.init(43, .{ .bytes = std.math.maxInt(u64), .fds = 0, .cpu = 0, .output_bytes = 0 }, &counters);
+    var held = try budget.reserve(session(1), .{ .scratch_bytes = std.math.maxInt(u64) - 1 });
+    defer budget.release(&held) catch unreachable;
+    try testing.expectError(error.ResourceExhausted, budget.reserve(session(2), .{ .scratch_bytes = 2 }));
+}
+
 test "ME-003 oversized requests are refused at admission and the tracked cap stays untouched" {
     var counters: memory.accounting.Counters = .{};
     var budget = inflightBudget(&counters);

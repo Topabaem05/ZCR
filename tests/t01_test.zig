@@ -513,8 +513,9 @@ test "T01 core: interface table declares I01 to I19 with receiver-generic signat
         try testing.expectEqualStrings(id, entry.id);
         const Signature = entry.Signature(Receiver);
         if (n == 19) {
-            // I19 is the JournalStore vtable: prepare, record, lookup.
-            try testing.expectEqual(@as(usize, 3), @typeInfo(Signature).@"struct".fields.len);
+            // Native I19 adds the approved optional publication transition hook.
+            try testing.expectEqual(@as(usize, 4), @typeInfo(Signature).@"struct".fields.len);
+            try testing.expect(@typeInfo(@FieldType(Signature, "transition")) == .optional);
         } else {
             const info = @typeInfo(Signature).@"fn";
             try testing.expect(info.params[0].type.? == *Receiver);

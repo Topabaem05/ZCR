@@ -15,6 +15,27 @@ const session: core.SessionContext = .{ .session_id = .{ .uuid = @splat(4) }, .s
 const initialize = "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2025-11-25\",\"capabilities\":{},\"clientInfo\":{\"name\":\"fixture\",\"version\":\"1\"}}}";
 const initialized = "{\"jsonrpc\":\"2.0\",\"method\":\"notifications/initialized\"}";
 
+test "BR-001 host batch ceiling uses one funded worker and reports broker backend" {
+    const h = try Harness.init();
+    defer h.deinit();
+    try h.start();
+    var held = try h.budget.reserve(session, .{ .cpu_permits = 3 });
+    defer h.budget.release(&held) catch unreachable;
+    const request = "{\"items\":[{\"item_id\":\"a\",\"path\":\"hello.txt\"},{\"item_id\":\"b\",\"path\":\"hello.txt\"}]}";
+    try expectToolError(h, "zcr_batch_read", request, "E_RESOURCE");
+    h.server.config.max_batch_concurrency = 1;
+    h.server.config.backend = .broker;
+    const batch_body = try logical(h, try h.tool("zcr_batch_read", request));
+    try testing.expect(batch_body.object.get("ok").?.bool);
+    const health = try logical(h, try h.tool("zcr_health", "{}"));
+    try testing.expectEqualStrings("broker", health.object.get("data").?.object.get("backend").?.string);
+    var invalid = h.server.config;
+    invalid.max_batch_concurrency = 0;
+    try testing.expectError(error.InvalidArgument, mcp.Server.init(invalid));
+    invalid.max_batch_concurrency = 3;
+    try testing.expectError(error.InvalidArgument, mcp.Server.init(invalid));
+}
+
 test "IO-004 native MCP preserves deadline-only failure in its envelope" {
     const h = try Harness.init();
     defer h.deinit();

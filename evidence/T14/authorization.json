@@ -1,0 +1,13 @@
+{
+  "authorizer": "root integrator",
+  "authority": "user goal implementation continuation",
+  "task_id": "T14",
+  "manifest": "/workspace/scratch/3f4ab65dfb82/state/T14/manifest.json",
+  "base": "d83a8993640dfd90e1b478bab2ac378b947af378",
+  "write_scope": [
+    "src/watch",
+    "tests/t14_test.zig",
+    "evidence/T14"
+  ],
+  "isolated_state": "/workspace/scratch/3f4ab65dfb82/state/T14"
+}

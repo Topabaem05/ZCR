@@ -1,0 +1,71 @@
+[
+  {
+    "binary": "/workspace/scratch/3f4ab65dfb82/state/T11/out-red-duplicate/bin/T11-test",
+    "binary_sha256": "184b659af155341d9c0e3dc6595ba08e607ef24001ee9574963c5729b6c389cc",
+    "exit_code": 1,
+    "label": "red-duplicate",
+    "log": "/workspace/scratch/3f4ab65dfb82/state/T11/logs/red-duplicate.log",
+    "log_sha256": "dfb6b6f26826386a1a94430bdb68f2dce54a909e95a90d6298e96de77643aebd",
+    "source_commit": "a9d7091d352338abef349734b5a1d90fba66c92c",
+    "source_files": {
+      "src/fs/edit.zig": "5032814e8571a15406e380f7817ffd1d75c84f39560af0480fcc40c2bad9be7d",
+      "src/fs/publish.zig": "eaa549d1273925edfa53e11bc616f0996f6261432fe82dd8134f2d44315d6d91",
+      "tests/t11_test.zig": "9d2c8043d3e50f741694148c06b19edccc6f6f8bd9e8e2b48303d34e4e90365b"
+    },
+    "summary": "0/1; forbidden same-position insertions returned applied receipt"
+  },
+  {
+    "binary": "/workspace/scratch/3f4ab65dfb82/state/T11/out-red-cleanup/bin/T11-test",
+    "binary_sha256": "719fb495224d6bbc1cfe9a548a7c54c2e8f5f58989a189d52a69063f6d95ad3e",
+    "exit_code": 1,
+    "label": "red-cleanup",
+    "log": "/workspace/scratch/3f4ab65dfb82/state/T11/logs/red-cleanup.log",
+    "log_sha256": "ba9b303743b5cfe4ce80528137142ab977916806c4d5f62339acae34401125c2",
+    "source_commit": "5f02a30ceda951652e90b2a9a43c0b36f58d915b",
+    "source_files": {
+      "src/fs/edit.zig": "f7d7dff5e6b1694bfee35fb2fc749c8c70ea95da7a641137760b2ad9a9282086",
+      "src/fs/publish.zig": "eaa549d1273925edfa53e11bc616f0996f6261432fe82dd8134f2d44315d6d91",
+      "tests/t11_test.zig": "483f01686fafb78c16f59c2b7ca17ee78eb3ef5651597175d64cf0c8adfe4aed"
+    },
+    "summary": "0/1; replaced temp returned RecoveryRequired but workspace remained enabled"
+  },
+  {
+    "binary": "/workspace/scratch/3f4ab65dfb82/state/T11/out-red-final-version/bin/T11-test",
+    "binary_sha256": "2a2665f6acf5c0d567d79f04e0075efccb7dae4494614dcdd295b1ea0bf70285",
+    "exit_code": 1,
+    "label": "red-final-version",
+    "log": "/workspace/scratch/3f4ab65dfb82/state/T11/logs/red-final-version.log",
+    "log_sha256": "fecd431b901ecef53e52ebd1d38e2f9109e544151c4a24b6729c1d191f40198b",
+    "source_commit": "ae47c664cd5717fb495a15978939d44346fc055c",
+    "source_files": {
+      "src/fs/edit.zig": "ed8027103035e37188a76116bfb7b1802923d197c1911e1856ea5ee734279b2c",
+      "src/fs/publish.zig": "1c831a65b6d4da77b5d9bf1da25381ad0d00760347747c5354fd642c2d657bbb",
+      "tests/t11_test.zig": "a171b1b448ecbbae520d4d4d95495b4978e659e16c6a8002f803a2aea0914094"
+    },
+    "summary": "0/1; mediated replacement after read returned Unsupported instead of VersionConflict"
+  },
+  {
+    "binary": "/workspace/scratch/3f4ab65dfb82/state/T11/out-red-journal-uncertainty/bin/T11-test",
+    "binary_sha256": "4542350ef235c316d470d17398bdfad22b24cf6b6f25f7d02f77d3d71d608752",
+    "exit_code": 1,
+    "label": "red-journal-uncertainty",
+    "log": "/workspace/scratch/3f4ab65dfb82/state/T11/logs/red-journal-uncertainty.log",
+    "log_sha256": "d30a23fd4b40758b6dd10a99cc0d8aac4e193e67ba317c154252e16089208b74",
+    "source_commit": "414b52ef995b1aa1e0520a155361d9b9c6e2cf55",
+    "source_files": {
+      "src/fs/edit.zig": "bee7230772a53fce29240b98131b8d13529ce2dba5682065814cd1130b5ca4b1",
+      "src/fs/publish.zig": "f45814cce6f6a29e2411907230f30fd22fdaa976139c8830874d766028cbe63c",
+      "tests/t11_test.zig": "c9659c41da6f6fca33d1dc6975808d1d3dd7e7e6f429e3de6ded137e9a3036c4"
+    },
+    "summary": "12/16; four new failures including actual queued filesystem publication after unresolved durability"
+  },
+  {
+    "binary": "/workspace/scratch/3f4ab65dfb82/state/T11/out-red-transitions/bin/T11-test",
+    "binary_sha256": "38c70f0c7f707051425f1117110dd3dca9ec559fe451ad50efac67d9234b4f0c",
+    "exit_code": 1,
+    "label": "red-transitions-assertions",
+    "log_sha256": "7dd95ce6e960154b591c1b88606e42ac491ae9d32811df29cd2400c210361938",
+    "source_binding": "Working test edits based on c4be790, selected regression bodies subsequently committed as 5f02a30 with an additional cleanup regression. Not a clean-source binary attestation.",
+    "summary": "0/3 actual missing publication/APPLIED/ABORTED assertion failures before implementation. Prior red-transitions.log also retains a null-option test assertion crash, not counted as the clean assertion run."
+  }
+]

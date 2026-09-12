@@ -83,6 +83,8 @@ I19의 native persistence 보완은 기존 세 signature를 유지한다. `Prepa
 
 구체 struct 필드 추가/오류 union 변경은 contract digest 변경이다. task는 동일 개념에 새로운 로컬 public type을 발명하지 않는다. private implementation struct는 모듈 안에서 자유롭게 바꿀 수 있다.
 
+영속 store의 `lookup`/`prepare`가 반환하는 Busy·resource·contract admission 오류는 저장 상태를 바꾸지 않은 확정 거부여야 한다. 저장 여부가 불확실하거나 파일·무결성 오류이면 editor는 workspace를 격리하고 정확한 임시 파일·저널 증거를 복구 시점까지 보존한다. 공개 후 parent sync가 실패한 경우 최종 기록에 성공해도 적용 사실과 `E_DURABILITY`를 유지하며, commit guard를 놓기 전에 추가 쓰기를 격리한다.
+
 ## 4. Lock과 소유 순서
 
 control-plane actor는 global budget reservation을 얻고 workspace 작업을 제출한 뒤 lock을 놓는다. cache shard lock은 lookup/pin count 수정만 수행하고 file read/parse/output 동안 유지하지 않는다. edit는 workspace writer lease와 path-specific coordinator만 사용한다.

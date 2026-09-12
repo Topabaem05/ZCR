@@ -6,7 +6,11 @@
   "notes": [
     "Spec catalog is not runtime evidence.",
     "Historical handoffs identify their own source/binary and do not prove this checkout.",
-    "Current mandatory external Mac/client/E2E gates remain required."
+    "Current mandatory external Mac/client/E2E gates remain required.",
+    "Native CI34681109500 executed all three targets at tree39978457; its overall FAIL is preserved with221/222 passing per mode plus three absent task files.",
+    "T12 and T15 remain in implementation/review; T13 real-query cache integration has an open pressure-admission finding.",
+    "T16 has a tested shared-budget admission prerequisite only; governor module and runtime wiring are still pending.",
+    "T16 admission prerequisite30/30Debug/Safe is reviewed with an open temporary-output error-classification correction."
   ],
   "tasks": [
     {
@@ -15,7 +19,8 @@
       "status": "IMPLEMENTED_WITH_OPEN_GATES",
       "historical_evidence": "evidence/T00/handoff.json",
       "current_evidence": [
-        "evidence/continuation/test-harness/provenance.json"
+        "evidence/continuation/test-harness/provenance.json",
+        "evidence/continuation/native-ci-34681109500/README.md"
       ],
       "required_tests": [
         "PF-001"
@@ -27,7 +32,8 @@
       "status": "IMPLEMENTED_WITH_OPEN_GATES",
       "historical_evidence": "evidence/T01/handoff.json",
       "current_evidence": [
-        "evidence/continuation/test-harness/provenance.json"
+        "evidence/continuation/test-harness/provenance.json",
+        "evidence/continuation/native-ci-34681109500/README.md"
       ],
       "required_tests": [
         "DV-001",
@@ -41,7 +47,8 @@
       "status": "IMPLEMENTED_WITH_OPEN_GATES",
       "historical_evidence": "evidence/T02/handoff.json",
       "current_evidence": [
-        "evidence/continuation/test-harness/provenance.json"
+        "evidence/continuation/test-harness/provenance.json",
+        "evidence/continuation/native-ci-34681109500/README.md"
       ],
       "required_tests": [
         "IS-003",
@@ -56,7 +63,8 @@
       "status": "IMPLEMENTED_WITH_OPEN_GATES",
       "historical_evidence": "evidence/T03/handoff.json",
       "current_evidence": [
-        "evidence/continuation/test-harness/provenance.json"
+        "evidence/continuation/test-harness/provenance.json",
+        "evidence/continuation/native-ci-34681109500/README.md"
       ],
       "required_tests": [
         "ME-001",
@@ -71,7 +79,8 @@
       "status": "IMPLEMENTED_WITH_OPEN_GATES",
       "historical_evidence": "evidence/T04/handoff.json",
       "current_evidence": [
-        "evidence/continuation/legacy/report.md"
+        "evidence/continuation/legacy/report.md",
+        "evidence/continuation/native-ci-34681109500/README.md"
       ],
       "required_tests": [
         "IO-001",
@@ -88,7 +97,8 @@
       "status": "IMPLEMENTED_WITH_OPEN_GATES",
       "historical_evidence": "evidence/T05/handoff.json",
       "current_evidence": [
-        "evidence/continuation/legacy/report.md"
+        "evidence/continuation/legacy/report.md",
+        "evidence/continuation/native-ci-34681109500/README.md"
       ],
       "required_tests": [
         "FS-001",
@@ -105,7 +115,8 @@
       "status": "IMPLEMENTED_WITH_OPEN_GATES",
       "historical_evidence": "evidence/T06/handoff.json",
       "current_evidence": [
-        "evidence/continuation/legacy/report.md"
+        "evidence/continuation/legacy/report.md",
+        "evidence/continuation/native-ci-34681109500/README.md"
       ],
       "required_tests": [
         "SR-001",
@@ -122,7 +133,8 @@
       "status": "IMPLEMENTED_WITH_OPEN_GATES",
       "historical_evidence": "evidence/T07/handoff.json",
       "current_evidence": [
-        "evidence/T07/handoff.json"
+        "evidence/T07/handoff.json",
+        "evidence/continuation/native-ci-34681109500/README.md"
       ],
       "required_tests": [
         "BA-001",
@@ -133,10 +145,11 @@
     {
       "id": "T08",
       "required": true,
-      "status": "IN_PROGRESS",
+      "status": "IMPLEMENTED_WITH_OPEN_GATES",
       "historical_evidence": null,
       "current_evidence": [
-        "evidence/T08/handoff.json"
+        "evidence/T08/handoff.json",
+        "evidence/continuation/native-ci-34681109500/README.md"
       ],
       "required_tests": [
         "MC-001",
@@ -148,10 +161,11 @@
     {
       "id": "T09",
       "required": true,
-      "status": "IN_PROGRESS",
+      "status": "IMPLEMENTED_WITH_OPEN_GATES",
       "historical_evidence": null,
       "current_evidence": [
-        "evidence/T09/handoff.json"
+        "evidence/T09/handoff.json",
+        "evidence/continuation/native-ci-34681109500/README.md"
       ],
       "required_tests": [
         "SC-001",
@@ -163,10 +177,11 @@
     {
       "id": "T10",
       "required": true,
-      "status": "IN_PROGRESS",
+      "status": "IMPLEMENTED_WITH_OPEN_GATES",
       "historical_evidence": null,
       "current_evidence": [
-        "evidence/T10/handoff.json"
+        "evidence/T10/handoff.json",
+        "evidence/continuation/native-ci-34681109500/README.md"
       ],
       "required_tests": [
         "IS-001",
@@ -178,9 +193,11 @@
     {
       "id": "T11",
       "required": true,
-      "status": "IN_PROGRESS",
+      "status": "IMPLEMENTED_WITH_OPEN_GATES",
       "historical_evidence": null,
-      "current_evidence": [],
+      "current_evidence": [
+        "evidence/T11/handoff.json"
+      ],
       "required_tests": [
         "WR-001",
         "WR-002",
@@ -195,7 +212,7 @@
     {
       "id": "T12",
       "required": true,
-      "status": "PENDING",
+      "status": "IN_PROGRESS",
       "historical_evidence": null,
       "current_evidence": [],
       "required_tests": [
@@ -209,7 +226,10 @@
       "required": true,
       "status": "IN_PROGRESS",
       "historical_evidence": null,
-      "current_evidence": [],
+      "current_evidence": [
+        "evidence/T13/handoff.json",
+        "evidence/continuation/native-ci-34681109500/README.md"
+      ],
       "required_tests": [
         "ME-004",
         "IS-006"
@@ -218,9 +238,11 @@
     {
       "id": "T14",
       "required": true,
-      "status": "PENDING",
+      "status": "IMPLEMENTED_WITH_OPEN_GATES",
       "historical_evidence": null,
-      "current_evidence": [],
+      "current_evidence": [
+        "evidence/T14/handoff.json"
+      ],
       "required_tests": [
         "WA-001",
         "WA-002",
@@ -233,7 +255,7 @@
     {
       "id": "T15",
       "required": true,
-      "status": "PENDING",
+      "status": "IN_PROGRESS",
       "historical_evidence": null,
       "current_evidence": [],
       "required_tests": [
@@ -247,7 +269,7 @@
     {
       "id": "T16",
       "required": true,
-      "status": "PENDING",
+      "status": "IN_PROGRESS",
       "historical_evidence": null,
       "current_evidence": [],
       "required_tests": [

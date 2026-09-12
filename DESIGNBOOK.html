@@ -3657,8 +3657,11 @@ Receipt = { id, op_digest, applied:bool, durable:bool,
 </tr>
 </tbody>
 </table>
+<p>I19의 native persistence 보완은 기존 세 signature를 유지한다. <code>PreparedRecord.publication</code>은 실제 workspace/root/parent/temp/old-file 정체성, temp basename, fence, durability, 미리 할당한 receipt ID를 담는다. 영속 store는 이를 필수로 검증하고 복사한다. 선택적 <code>transition(APPLIED receipt | ABORTED receipt)</code> vtable은 PREPARED 뒤의 상태를 영속화하며, 없는 구현은 <code>Unsupported</code>를 반환한다. 이전 fake-store 단위 시험만 필드를 생략할 수 있고 production write는 이 채널과 T12 crash/restart 증거를 모두 요구한다. <code>record(Receipt)</code>는 최종 결과를 기록하되 durability 실패나 복구 필요 상태를 성공으로 승격하지 않는다. 재시작의 새 registry incarnation은 신뢰된 호스트의 명시적 연속성 검증 없이 이전 journal namespace를 재사용하지 않는다.</p>
 <pre><code>
 구체 struct 필드 추가/오류 union 변경은 contract digest 변경이다. task는 동일 개념에 새로운 로컬 public type을 발명하지 않는다. private implementation struct는 모듈 안에서 자유롭게 바꿀 수 있다.
+
+영속 store의 `lookup`/`prepare`가 반환하는 Busy·resource·contract admission 오류는 저장 상태를 바꾸지 않은 확정 거부여야 한다. 저장 여부가 불확실하거나 파일·무결성 오류이면 editor는 workspace를 격리하고 정확한 임시 파일·저널 증거를 복구 시점까지 보존한다. 공개 후 parent sync가 실패한 경우 최종 기록에 성공해도 적용 사실과 `E_DURABILITY`를 유지하며, commit guard를 놓기 전에 추가 쓰기를 격리한다.
 
 ## 4. Lock과 소유 순서
 
@@ -4096,6 +4099,15 @@ zig build verify-contracts
 <li>[ ] Final source has independent whole-branch review and fixed material findings.</li>
 <li>[ ] A feature branch and reviewable draft PR contain the plan, code, evidence and exact outstanding external gates.</li>
 <li>[ ] T25 release gate is COMPLETE only if all mandatory evidence exists, otherwise explicitly BLOCKED with reproducible next commands.</li>
+</ul>
+<h2>2026-09-12 구현 체크포인트</h2>
+<ul>
+<li>전체10개 원본 브랜치·고유 소스·설계 및 작업 문서 감사를 완료했다. 원본 main/integration은 변경하지 않았다.</li>
+<li>T11source09422d4는 독립 승인 후 통합했다. 작업 소스의 Debug/ReleaseSafe 각각41write tests, 통합7bd5be8 Debug41tests가 통과했다. 생산 쓰기는 T12 및 플랫폼 복구 게이트 전까지 비활성이다.</li>
+<li>T14source2ca8e31은 독립 승인 후 통합했다. 각Debug/ReleaseSafe/fault19tests, 통합988dde8 Debug19tests가 통과했다. Darwin 실제FSEvents 수명·이벤트 전달은 미검증으로 유지한다.</li>
+<li><a data-package-file="evidence/continuation/native-ci-34681109500/README.md" title="편집 원본은 저장소에 포함">실제3플랫폼CI</a>는 이전tree39978457에서 각모드221/222tests가 통과했고 T01계약시험 및 당시 미통합T11/T14/T15로 전체FAIL이다. T01은 승인된 nativeI19 네번째필드를 검사하도록7115d63에서 수정, 로컬Debug19/19가 통과했다. 이후소스의PASS로 이 증거를 재사용하지 않는다.</li>
+<li>T12영속저널·실제SIGKILL/새복구프로세스40사례를 구현 중이다. 실제MCP캐시 경로b5fe273과 broker98c63f8은 검토에서 캐시압력 후admission 및 대기요청취소응답 결함이 확인되어 수정 전까지 승인하지 않는다.</li>
+<li>T16은 공유Budget의 동적admission 한도 선행API를 작업 중이며 governor 구현·연결은 남아 있다. T17/T19/T21–T25와 실제클라이언트·모델·최소OS 게이트도 남아 있다.</li>
 </ul>
 </section><section id="doc-AGENTS-md" class="doc"><div class="docpath">AGENTS.md</div><h1>ZCR 구현 에이전트 규칙</h1>
 <p>이 파일은 runtime repository의 최상위 작업 규칙이다. 구현 및 실행 증거의 현재 상태는 <code>tasks/progress.json</code>과 <code>tasks/INDEX.md</code>를 따른다. 설계의 완료 조건과 실제 시험 결과를 구분하고, 이전 commit의 증거를 현재 바이너리의 PASS로 재사용하지 않는다.</p>
@@ -5568,7 +5580,7 @@ zcr-dev-evidence contract-digest --worktree &lt;wt&gt;
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T02, T07<br />
-<strong>Status:</strong> IN_PROGRESS — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
+<strong>Status:</strong> IMPLEMENTED_WITH_OPEN_GATES — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -5651,7 +5663,7 @@ zcr-dev-evidence contract-digest --worktree &lt;wt&gt;
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T03, T01<br />
-<strong>Status:</strong> IN_PROGRESS — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
+<strong>Status:</strong> IMPLEMENTED_WITH_OPEN_GATES — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -5736,7 +5748,7 @@ zcr-dev-evidence contract-digest --worktree &lt;wt&gt;
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T02, T01<br />
-<strong>Status:</strong> IN_PROGRESS — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
+<strong>Status:</strong> IMPLEMENTED_WITH_OPEN_GATES — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -5819,7 +5831,7 @@ zcr-dev-evidence contract-digest --worktree &lt;wt&gt;
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T04, T10<br />
-<strong>Status:</strong> PENDING — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
+<strong>Status:</strong> IMPLEMENTED_WITH_OPEN_GATES — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -5925,7 +5937,7 @@ zcr-dev-evidence contract-digest --worktree &lt;wt&gt;
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T11<br />
-<strong>Status:</strong> PENDING — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
+<strong>Status:</strong> IN_PROGRESS — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -6002,7 +6014,7 @@ zcr-dev-evidence contract-digest --worktree &lt;wt&gt;
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T04, T10, T03<br />
-<strong>Status:</strong> PENDING — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
+<strong>Status:</strong> IN_PROGRESS — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -6073,7 +6085,7 @@ zcr-dev-evidence contract-digest --worktree &lt;wt&gt;
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T05, T10, T13<br />
-<strong>Status:</strong> PENDING — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
+<strong>Status:</strong> IMPLEMENTED_WITH_OPEN_GATES — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -6168,7 +6180,7 @@ zcr-dev-evidence contract-digest --worktree &lt;wt&gt;
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T08, T09, T10, T13<br />
-<strong>Status:</strong> PENDING — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
+<strong>Status:</strong> IN_PROGRESS — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -6257,7 +6269,7 @@ zcr-dev-evidence contract-digest --worktree &lt;wt&gt;
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T09, T13, T15<br />
-<strong>Status:</strong> PENDING — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
+<strong>Status:</strong> IN_PROGRESS — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>

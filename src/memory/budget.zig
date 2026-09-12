@@ -98,6 +98,9 @@ pub const SpinLock = struct {
 pub const Budget = struct {
     id: u32,
     caps: Caps,
+    /// Host pressure policy narrows future admission under lock. Hard caps stay
+    /// immutable during runtime, and existing reservations retain their credit.
+    admission_caps: ?Caps = null,
     counters: *accounting.Counters,
     lock: SpinLock = .{},
     used: Caps = .{ .bytes = 0, .fds = 0, .cpu = 0, .output_bytes = 0 },
@@ -105,6 +108,20 @@ pub const Budget = struct {
 
     pub fn init(id: u32, caps: Caps, counters: *accounting.Counters) Budget {
         return .{ .id = id, .caps = caps, .counters = counters };
+    }
+
+    pub fn setAdmissionCaps(self: *Budget, caps: Caps) error{InvalidArgument}!void {
+        if (caps.bytes > self.caps.bytes or caps.fds > self.caps.fds or
+            caps.cpu > self.caps.cpu or caps.output_bytes > self.caps.output_bytes) return error.InvalidArgument;
+        self.lock.lock();
+        defer self.lock.unlock();
+        self.admission_caps = caps;
+    }
+
+    pub fn admissionCaps(self: *Budget) Caps {
+        self.lock.lock();
+        defer self.lock.unlock();
+        return self.admission_caps orelse self.caps;
     }
 
     /// Reserves the whole cost or nothing. A cost that can never fit and a cost
@@ -118,10 +135,12 @@ pub const Budget = struct {
 
         self.lock.lock();
         defer self.lock.unlock();
-        if (self.used.bytes + bytes > self.caps.bytes or
-            @as(u32, self.used.fds) + cost.fds > self.caps.fds or
-            @as(u16, self.used.cpu) + cost.cpu_permits > self.caps.cpu or
-            self.used.output_bytes + cost.output_bytes > self.caps.output_bytes) return error.ResourceExhausted;
+        const cap = self.admission_caps orelse self.caps;
+        if (cost.output_bytes > cap.output_bytes) return error.OutputBudgetExceeded;
+        if (bytes > cap.bytes -| self.used.bytes or
+            cost.fds > cap.fds -| self.used.fds or
+            cost.cpu_permits > cap.cpu -| self.used.cpu or
+            cost.output_bytes > cap.output_bytes -| self.used.output_bytes) return error.ResourceExhausted;
 
         self.used.bytes += bytes;
         self.used.fds += cost.fds;

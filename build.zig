@@ -21,7 +21,7 @@ comptime {
 
 pub const TestGroup = enum { io, fs, search, batch, write, mcp, isolation, broker, watch, observe, ast, scheduler, memory, perf, dev, security };
 
-const Import = enum { core, evidence, caps, build_options, policy, guard, memory, admission, fs_read, fs_traverse, search, batch, projection, mcp, executor, workspace, queue, darwin, launch, edit, cache, watch, broker };
+const Import = enum { core, evidence, caps, build_options, policy, guard, memory, admission, fs_read, fs_traverse, search, batch, projection, mcp, executor, workspace, queue, darwin, launch, edit, cache, watch, broker, storage };
 
 const TestFile = struct {
     task: []const u8,
@@ -41,11 +41,12 @@ const test_files = [_]TestFile{
     .{ .task = "T05", .path = "tests/t05_test.zig", .group = .fs, .imports = &.{ .core, .policy, .memory, .fs_traverse, .evidence } },
     .{ .task = "T06", .path = "tests/t06_test.zig", .group = .search, .imports = &.{ .core, .policy, .memory, .fs_read, .fs_traverse, .search } },
     .{ .task = "T07", .path = "tests/t07_test.zig", .group = .batch, .imports = &.{ .core, .policy, .memory, .admission, .fs_read, .batch, .projection } },
-    .{ .task = "T08", .path = "tests/t08_test.zig", .group = .mcp, .imports = &.{ .core, .policy, .memory, .admission, .fs_read, .fs_traverse, .search, .batch, .projection, .mcp, .build_options } },
+    .{ .task = "T08", .path = "tests/t08_test.zig", .group = .mcp, .imports = &.{ .core, .policy, .memory, .admission, .fs_read, .fs_traverse, .search, .batch, .projection, .mcp, .workspace, .cache, .build_options } },
     .{ .task = "T09", .path = "tests/t09_test.zig", .group = .scheduler, .imports = &.{ .core, .memory, .admission, .executor, .queue, .darwin } },
     .{ .task = "T08-launch", .path = "tests/launch_test.zig", .group = .mcp, .imports = &.{.launch} },
     .{ .task = "T10", .path = "tests/t10_test.zig", .group = .isolation, .imports = &.{ .core, .policy, .workspace } },
     .{ .task = "T11", .path = "tests/t11_test.zig", .group = .write, .imports = &.{ .core, .policy, .memory, .fs_read, .workspace, .edit } },
+    .{ .task = "T12", .path = "tests/t12_test.zig", .group = .write, .imports = &.{ .core, .policy, .memory, .fs_read, .workspace, .edit, .storage, .build_options } },
     .{ .task = "T13", .path = "tests/t13_test.zig", .group = .memory, .imports = &.{ .core, .policy, .memory, .workspace, .cache } },
     .{ .task = "T14", .path = "tests/t14_test.zig", .group = .watch, .imports = &.{ .core, .policy, .memory, .workspace, .cache, .fs_traverse, .watch } },
     .{ .task = "T15", .path = "tests/t15_test.zig", .group = .broker, .imports = &.{ .core, .policy, .memory, .workspace, .cache, .executor, .mcp, .broker, .build_options } },
@@ -267,6 +268,19 @@ pub fn build(b: *std.Build) void {
             .{ .name = "zcr_workspace", .module = workspace_module },
         },
     });
+    const storage_module = b.createModule(.{
+        .root_source_file = b.path("src/storage/journal.zig"),
+        .target = target,
+        .optimize = optimize,
+        .link_libc = true,
+        .imports = &.{
+            .{ .name = "zcr_core", .module = core },
+            .{ .name = "zcr_policy", .module = policy_module },
+            .{ .name = "zcr_memory", .module = memory_module },
+            .{ .name = "zcr_workspace", .module = workspace_module },
+            .{ .name = "zcr_fs_read", .module = fs_read_module },
+        },
+    });
     const cache_module = b.createModule(.{
         .root_source_file = b.path("src/cache/content.zig"),
         .target = target,
@@ -279,6 +293,8 @@ pub fn build(b: *std.Build) void {
             .{ .name = "zcr_workspace", .module = workspace_module },
         },
     });
+    mcp_module.addImport("zcr_cache", cache_module);
+    fs_read_module.addImport("zcr_cache", cache_module);
     const watch_module = b.createModule(.{
         .root_source_file = b.path("src/watch/core.zig"),
         .target = target,
@@ -327,6 +343,7 @@ pub fn build(b: *std.Build) void {
             .{ .name = "build_options", .module = options_module },
         },
     });
+    launch_module.addImport("zcr_cache", cache_module);
     zcr.root_module.addImport("zcr_launch", launch_module);
     // A tool is installed once its owning task has delivered the source file.
     if (sourceExists(b, "tools/dev/guard.zig")) {
@@ -390,11 +407,38 @@ pub fn build(b: *std.Build) void {
             .broker => module.addImport("zcr_broker", broker_module),
             .edit => module.addImport("zcr_fs_edit", edit_module),
             .cache => module.addImport("zcr_cache", cache_module),
+            .storage => module.addImport("zcr_storage", storage_module),
             .caps => module.addImport("caps", caps_module orelse blk: {
                 caps_module = capsModule(b, target, optimize);
                 break :blk caps_module.?;
             }),
         };
+
+        if (std.mem.eql(u8, file.task, "T12")) {
+            // Separate real exec image: builtin.is_test preserves the production
+            // write gate, and child declarations never run in the parent suite.
+            const child_module = b.createModule(.{
+                .root_source_file = b.path("tests/t12_child.zig"),
+                .target = target,
+                .optimize = optimize,
+                .link_libc = true,
+                .imports = &.{
+                    .{ .name = "zcr_core", .module = core },
+                    .{ .name = "zcr_policy", .module = policy_module },
+                    .{ .name = "zcr_memory", .module = memory_module },
+                    .{ .name = "zcr_workspace", .module = workspace_module },
+                    .{ .name = "zcr_fs_read", .module = fs_read_module },
+                    .{ .name = "zcr_fs_edit", .module = edit_module },
+                    .{ .name = "zcr_storage", .module = storage_module },
+                    .{ .name = "build_options", .module = options_module },
+                },
+            });
+            const child = b.addTest(.{ .name = "T12-child", .root_module = child_module });
+            const child_options = b.addOptions();
+            child_options.addOptionPath("child_exe", child.getEmittedBin());
+            module.addOptions("t12_options", child_options);
+            if (install_tests) test_step.dependOn(&b.addInstallArtifact(child, .{}).step);
+        }
 
         const test_artifact = b.addTest(.{
             .name = b.fmt("{s}-test", .{file.task}),

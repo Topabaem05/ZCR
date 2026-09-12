@@ -1,0 +1,32 @@
+{
+  "chunk_bytes": 262144,
+  "description": "Deterministic byte fixtures, ACL layout, fault points, concurrency barriers and original spans are embedded in the compiled test source; temporary Git repositories generated independently each run. Git commit timestamps are not a semantic oracle.",
+  "max_file_bytes": 8388608,
+  "native_acl_probe": {
+    "fixture_bytes": "0200000001000600ffffffff020004000000000004000400ffffffff10000400ffffffff20000000ffffffff",
+    "fixture_path": "/workspace/scratch/3f4ab65dfb82/state/T11/tmp/acl-current-probe",
+    "historical_failed_probe": "acl-probe.json used unmapped UID12345; that EINVAL was a fixture setup failure, not lack of ACL support",
+    "mapped_uid": 0,
+    "native_acl_fixture": "PASS",
+    "operations": [
+      "setxattr system.posix_acl_access",
+      "getxattr identical bytes",
+      "listxattr includes system.posix_acl_access",
+      "remove fixture"
+    ],
+    "readback_sha256": "0dfca80514cad0726d587b2e8dd71f4de94d4922eb7dd55d05dd3472b4dd69e0"
+  },
+  "supplemental_fixtures": [
+    "real target replacement by nested mediated write",
+    "real temp-name replacement before/after commit admission",
+    "real bounded O_EXCL collisions with deterministic entropy",
+    "queued publisher blocked by failedreceipt quarantine",
+    "errno injected after actual successful replacement and no-replace rename",
+    "abortable thread launch barrier",
+    "actual durable create chunk/metadata/sync/receipt stage trace",
+    "real queued publisher refused after successful record of E_DURABILITY",
+    "lookup and post-observable-prepare filesystem/integrity vtable errors",
+    "impossible journal tags preserve uncertainty and pending temp"
+  ],
+  "tests/t11_test.zig": "c9659c41da6f6fca33d1dc6975808d1d3dd7e7e6f429e3de6ded137e9a3036c4"
+}

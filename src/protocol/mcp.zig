@@ -36,6 +36,9 @@ pub const Config = struct {
     /// Lowering these limits grants no new authority.
     output_bytes: u64 = core.limits.values.max_output_bytes,
     max_search_file_bytes: u64 = core.limits.values.default_search_file_bytes,
+    /// Host execution policy; may only narrow the direct adapter's two workers.
+    max_batch_concurrency: u32 = 2,
+    backend: enum { direct_stdio, broker } = .direct_stdio,
     /// Caller-owned trusted handles, retained until every request has drained.
     trusted_excludes: traverse.TrustedExcludes = .{},
     authority_context: ?*anyopaque = null,
@@ -51,7 +54,8 @@ pub const Server = struct {
     sequence: std.atomic.Value(u64) = .init(1),
     pub fn init(config: Config) !Server {
         if (config.budget.caps.cpu == 0 or config.output_bytes < 1024 or config.output_bytes > core.limits.values.max_output_bytes or
-            config.max_search_file_bytes == 0 or config.max_search_file_bytes > core.limits.values.max_search_file_bytes) return error.InvalidArgument;
+            config.max_search_file_bytes == 0 or config.max_search_file_bytes > core.limits.values.max_search_file_bytes or
+            config.max_batch_concurrency == 0 or config.max_batch_concurrency > 2) return error.InvalidArgument;
         if (!config.session.bound_workspace.eql(config.authorizer.workspace_id) or
             !std.mem.eql(u8, &config.session.bound_task.uuid, &config.authorizer.task_id.uuid) or
             !std.mem.eql(u8, &config.session.policy_digest, &config.authorizer.policy.digest)) return error.OutOfScope;
@@ -180,7 +184,7 @@ pub const Server = struct {
                 return try diagnostic(output_allocator, envelope, try json(control, .{ .task_id = std.fmt.bytesToHex(self.config.session.bound_task.uuid, .lower), .index_state = "live", .write_mode = "read_only", .receipt = @as(?u8, null) }));
             }
             const usage = self.config.budget.usage();
-            return try diagnostic(output_allocator, envelope, try json(control, .{ .build_version = self.config.version, .backend = "direct_stdio", .capabilities = .{
+            return try diagnostic(output_allocator, envelope, try json(control, .{ .build_version = self.config.version, .backend = @tagName(self.config.backend), .capabilities = .{
                 .read = self.enabled(.zcr_read),
                 .enumerate = self.enabled(.zcr_files),
                 .search = self.enabled(.zcr_search),
@@ -202,7 +206,7 @@ pub const Server = struct {
         // Resource profiles may lower traversal depth; engines report that limit.
         const traversal_caps: traverse.Caps = .{ .max_depth = @min(core.limits.values.directory_max_depth, self.config.budget.caps.fds -| 6) };
         const traversal_fds: u16 = @intCast(traversal_caps.max_depth + 4);
-        const batch_workers: u32 = @min(@as(u32, 2), self.config.budget.caps.cpu);
+        const batch_workers: u32 = @min(self.config.max_batch_concurrency, self.config.budget.caps.cpu);
         var cost: core.ResourceCost = switch (tool) {
             .zcr_read => blk: {
                 const spec = try readSpec(args, output_bytes, deadline_ms);

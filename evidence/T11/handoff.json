@@ -1,0 +1,72 @@
+{
+  "schema_version": "zcr-task-handoff/1",
+  "task_id": "T11",
+  "state": "implemented_and_reviewed_linux_test_only",
+  "authorization_base": "98c722ebc906321b94bc3e9c8b60522f3305faa7",
+  "source_commit": "09422d47fcf98d95f05a36d00c304846d3e1e6f8",
+  "source_tree": "a7a2b494150fa319477360d1bfe18ba21268df72",
+  "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+  "manifest_sha256": "319228b85d1e22c83b4158a213522990097d98bbb2b70431eefbe168072247d1",
+  "source_config_sha256": "069182e236c65672bd209972a12355fe13e30dff65845a0f3bec8bc9a81832e9",
+  "corpus_sha256": "544c99d33436889c0806b431fdd405fe4e2966df8f86dfc5a4fe26713c3ebb6f",
+  "owned_source": [
+    "src/fs/edit.zig",
+    "src/fs/publish.zig",
+    "tests/t11_test.zig"
+  ],
+  "exports": {
+    "I10": "fn (*Editor, Io, Capability, *const WriterLease, PatchSpec) WriteError!Receipt",
+    "I11": "fn (*Editor, Io, Capability, *const WriterLease, CreateSpec) WriteError!Receipt",
+    "init": "Editor.init(Options)",
+    "Stage": [
+      "after_read",
+      "after_temp_chunk",
+      "before_metadata",
+      "after_temp",
+      "after_prepare",
+      "before_commit",
+      "guarded",
+      "after_commit",
+      "before_sync",
+      "after_sync",
+      "before_record",
+      "after_record"
+    ],
+    "required_fds": 8,
+    "production_writes_enabled": false
+  },
+  "steps": {
+    "S01": "authorized isolated worktree, original manifest/base and root dependency commits recorded",
+    "S02": "initial and review-discovered behavioral RED preserved with no implementation substitution",
+    "S03": "Linux mechanics, I19 lifecycle and no-fail recovery quarantine implemented",
+    "S04": "41/41 write tests in Debug and ReleaseSafe with fault injection",
+    "S05": "56 isolation,11 fs,12 io,12 direct memory per mode; contracts and non-test gate PASS; ownership verified",
+    "S06": "Source and final evidence APPROVE; integration-binary verification delegated to root"
+  },
+  "source_review": "APPROVE source09422d4 and final evidence; state/reviews/t11-review.md",
+  "run_records": "final/runs.json",
+  "test_counts_per_mode": {
+    "write": 41,
+    "isolation": 56,
+    "fs": 11,
+    "io": 12,
+    "memory_direct": 12
+  },
+  "remaining_gates": [
+    "T12 real persistent JournalStore, crash/restart matrix and trusted continuity",
+    "Production capability remains disabled until T12 and integration gates pass",
+    "Darwin and Windows publication backend/native execution not delivered; no platform support claims",
+    "Actual power loss, physically exhausted filesystem, read-only mount NOT_RUN",
+    "Integration-binary verification by root"
+  ],
+  "journal_consumer_contract": {
+    "binding": "full security domain/workspace incarnation/task/key; receipt ID+canonical digest verified against PREPARED",
+    "prepare": "copy publication metadata; filesystem/integrity uncertainty preserves pending/temp and quarantines",
+    "ordinary_errors": "contract/resource admission refusals must be definitely side-effect-free",
+    "transition": "required for persistent stores; missing hook allowed only test fake compatibility",
+    "durability_failure": "applied E_DURABILITY remains recovery-aware and quarantines even after record succeeds",
+    "reenable": "trusted exclusive startup/recovery only after all quarantine activity drains"
+  },
+  "history": "checkpoint-9a8473a and final historical archives retained; checkpoint IO prose corrected to12/12",
+  "packaging_note": "Following evidence-only commit packages attestations made at clean source09422d4; it does not change compiled source."
+}

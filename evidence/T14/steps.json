@@ -1,0 +1,66 @@
+{
+  "schema_version": "zcr-t14-step-state/1",
+  "note": "Retained artifact-backed state snapshot, not a retroactively created strict ledger transition log.",
+  "task_id": "T14",
+  "base_commit": "d83a8993640dfd90e1b478bab2ac378b947af378",
+  "source_commit": "2ca8e314a7c06c611a2e7e315470dd21737ce0a0",
+  "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+  "steps": [
+    {
+      "step": "S01",
+      "status": "PASS",
+      "evidence": [
+        "manifest.json",
+        "authorization.json",
+        "preflight.json"
+      ]
+    },
+    {
+      "step": "S02",
+      "status": "PASS",
+      "source_commit": "e1e20ab9c06c67a9a41ae3da845570f9df9b6b69",
+      "evidence": [
+        "red.json",
+        "behavioral-red.log"
+      ]
+    },
+    {
+      "step": "S03",
+      "status": "PASS",
+      "source_commit": "2ca8e314a7c06c611a2e7e315470dd21737ce0a0",
+      "evidence": [
+        "handoff.json"
+      ]
+    },
+    {
+      "step": "S04",
+      "status": "PASS",
+      "evidence": [
+        "runs.json",
+        "green-debug.log",
+        "fault-debug.log"
+      ]
+    },
+    {
+      "step": "S05",
+      "status": "PASS",
+      "evidence": [
+        "green-safe.log",
+        "regression-fs.log",
+        "regression-memory.log",
+        "regression-isolation.log",
+        "contracts.log",
+        "standard-verification.json"
+      ]
+    },
+    {
+      "step": "S06",
+      "status": "READY_FOR_INTEGRATION",
+      "evidence": [
+        "handoff.json",
+        "review.md",
+        "review-evidence-check.json"
+      ]
+    }
+  ]
+}

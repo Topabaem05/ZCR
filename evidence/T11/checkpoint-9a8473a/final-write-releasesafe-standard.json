@@ -1,0 +1,13 @@
+{
+  "schema_version": "zcr-evidence/1",
+  "task_id": "T11",
+  "label": "final-write-releasesafe",
+  "command": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig build test -Dtest-group=write -Doptimize=ReleaseSafe -Dfault-injection=true -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T11/out-final-write-releasesafe --summary all",
+  "exit_code": 0,
+  "source_commit": "9a8473ae0eed17b0d80dc5b5044ff7990ce43e72",
+  "source_tree": "42f75b51008599c851e5589825209c3a2cddaf4d",
+  "worktree_git_dir": "/workspace/scratch/3f4ab65dfb82/ZCR/.git/worktrees/ZCR-T11",
+  "binary_path": "/workspace/scratch/3f4ab65dfb82/state/T11/out-final-write-releasesafe/bin/T11-test",
+  "binary_sha256": "4e840b8d100cedc14a414d32fcba5f14bebb7d2dc76ca39bb30b80f5ed363721",
+  "recorded_at_unix_ms": 1789197845218
+}

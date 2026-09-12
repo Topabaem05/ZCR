@@ -1,0 +1,201 @@
+{
+  "reviewed_source": "2ca8e314a7c06c611a2e7e315470dd21737ce0a0",
+  "source_tree": "17d5f6fd328c6282081fb4cbfe0afebfd983becb",
+  "recorded_hashes_verified": 542,
+  "runs": [
+    {
+      "label": "green-debug",
+      "source_commit": "2ca8e314a7c06c611a2e7e315470dd21737ce0a0",
+      "exit": 0,
+      "source_files_verified": 73,
+      "log_sha256": "767cb14ab69bd0028fedf6b78ea32dc8af0e8ae054b0f24ddc55e89bb39c8cf5",
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T14/out-green-debug/bin/T14-test",
+          "sha256": "c444e9833d240788cec39c2f9ae7c38e1eb8629e5477273802786d15b4c9aa33"
+        }
+      ],
+      "observed_summary": "Build Summary: 4/4 steps succeeded; 19/19 tests passed",
+      "status": "VERIFIED"
+    },
+    {
+      "label": "green-safe",
+      "source_commit": "2ca8e314a7c06c611a2e7e315470dd21737ce0a0",
+      "exit": 0,
+      "source_files_verified": 73,
+      "log_sha256": "c03f4b5b8e0157be66fc811bfd23dcf3af96c4c7500d6d010eaf27a1a601b55f",
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T14/out-green-safe/bin/T14-test",
+          "sha256": "10ed1027c60f6fbab630f49313361b23caa064d082031ec9785d9fe3bb2fd9b1"
+        }
+      ],
+      "observed_summary": "Build Summary: 4/4 steps succeeded; 19/19 tests passed",
+      "status": "VERIFIED"
+    },
+    {
+      "label": "fault-debug",
+      "source_commit": "2ca8e314a7c06c611a2e7e315470dd21737ce0a0",
+      "exit": 0,
+      "source_files_verified": 73,
+      "log_sha256": "3dff44f88eef482069afad234b74a645f1ea7c9ff31a4f038d7250e1f9120ec1",
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T14/out-fault-debug/bin/T14-test",
+          "sha256": "c444e9833d240788cec39c2f9ae7c38e1eb8629e5477273802786d15b4c9aa33"
+        }
+      ],
+      "observed_summary": "Build Summary: 4/4 steps succeeded; 19/19 tests passed",
+      "status": "VERIFIED"
+    },
+    {
+      "label": "regression-fs",
+      "source_commit": "2ca8e314a7c06c611a2e7e315470dd21737ce0a0",
+      "exit": 0,
+      "source_files_verified": 73,
+      "log_sha256": "29d154a4ff72cd3582c83a025da3652dd909c6821abcc382c71fe544719348e6",
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T14/out-regression-fs/bin/T05-test",
+          "sha256": "1209acff997e7f6504a7676767e07ecd408e29ba6a7d458d9e34bc9a8783e0c1"
+        }
+      ],
+      "observed_summary": "Build Summary: 4/4 steps succeeded; 15/15 tests passed",
+      "status": "VERIFIED"
+    },
+    {
+      "label": "regression-memory",
+      "source_commit": "2ca8e314a7c06c611a2e7e315470dd21737ce0a0",
+      "exit": 0,
+      "source_files_verified": 73,
+      "log_sha256": "c6266392a81207ffaa6881a2ce60032c38add5db6efc582c281fd105147950e0",
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T14/out-regression-memory/bin/T13-test",
+          "sha256": "a972c43946eaef53621039cabd52287ba7fc417b86fe9b8dabe7a123cccf07ec"
+        },
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T14/out-regression-memory/bin/T03-test",
+          "sha256": "b41dd66e175d2c51982f8406208a964649091247d2c87961cc2abbe2a1c08691"
+        }
+      ],
+      "observed_summary": "Build Summary: 7/7 steps succeeded; 28/28 tests passed",
+      "status": "VERIFIED"
+    },
+    {
+      "label": "regression-isolation",
+      "source_commit": "2ca8e314a7c06c611a2e7e315470dd21737ce0a0",
+      "exit": 0,
+      "source_files_verified": 73,
+      "log_sha256": "e63422743e5b942241d4517b35a2a4752af395b6a6202a32f62dbc1419404c0c",
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T14/out-regression-isolation/bin/T02-test",
+          "sha256": "9d655253b17181f8face9475d8440ecda84b2ae002664e191fddc154a4967f44"
+        },
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T14/out-regression-isolation/bin/T10-test",
+          "sha256": "7fbbe34d8cc31b5a00ad45edb580abd273d5439109af708b2e0cfd59da1cf785"
+        }
+      ],
+      "observed_summary": "Build Summary: 8/8 steps succeeded; 57/57 tests passed",
+      "status": "VERIFIED"
+    },
+    {
+      "label": "contracts",
+      "source_commit": "2ca8e314a7c06c611a2e7e315470dd21737ce0a0",
+      "exit": 0,
+      "source_files_verified": 73,
+      "log_sha256": "23ed07b444f355d46c89a9d7b7415d86bcca7af7a06ee6d733c4acf8fa57e6d4",
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T14/zig-local-cache/o/549224efc715154f08bbe04bfc3bc80f/zcr-dev-evidence",
+          "sha256": "13c4547ae6e309702b4b905b7e9d6a7b41f6e4ea4c949a501036c6afde1cd778"
+        }
+      ],
+      "observed_summary": "Build Summary: 3/3 steps succeeded",
+      "status": "VERIFIED"
+    },
+    {
+      "label": "darwin-callback-debug",
+      "source_commit": "2ca8e314a7c06c611a2e7e315470dd21737ce0a0",
+      "exit": 0,
+      "source_files_verified": 0,
+      "log_sha256": "f467619a18882edd2cd9a741139c800813f7333f4d242485703bd25bcaf7fbea",
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T14/adapter-out/darwin-callback-debug",
+          "sha256": "25fea3d424ecb63a0acea21d6364f0abcb7fa73cdafaa0fe5e520b5b88e1a38c"
+        }
+      ],
+      "observed_summary": "All 2 tests passed.",
+      "status": "VERIFIED"
+    },
+    {
+      "label": "darwin-callback-releasesafe",
+      "source_commit": "2ca8e314a7c06c611a2e7e315470dd21737ce0a0",
+      "exit": 0,
+      "source_files_verified": 0,
+      "log_sha256": "f467619a18882edd2cd9a741139c800813f7333f4d242485703bd25bcaf7fbea",
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T14/adapter-out/darwin-callback-releasesafe",
+          "sha256": "d40bf8568c611856d34e0637deb6db101c175fdf3d30225cdb15579c1f86e5f4"
+        }
+      ],
+      "observed_summary": "All 2 tests passed.",
+      "status": "VERIFIED"
+    },
+    {
+      "label": "darwin-abi-aarch64",
+      "source_commit": "2ca8e314a7c06c611a2e7e315470dd21737ce0a0",
+      "exit": 0,
+      "source_files_verified": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T14/adapter-out/darwin-abi-aarch64.o",
+          "sha256": "9573d97a1f8b7ef686c40599a5da93d7e78be102e1b5277b561edcdbe340853c"
+        }
+      ],
+      "observed_summary": null,
+      "status": "VERIFIED"
+    },
+    {
+      "label": "darwin-abi-x86_64",
+      "source_commit": "2ca8e314a7c06c611a2e7e315470dd21737ce0a0",
+      "exit": 0,
+      "source_files_verified": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T14/adapter-out/darwin-abi-x86_64.o",
+          "sha256": "540b6da31f710871397c9a18570f67e5500140a760e9cd0cca909d0a5c540a5f"
+        }
+      ],
+      "observed_summary": null,
+      "status": "VERIFIED"
+    },
+    {
+      "label": "runtime-hooks-absent",
+      "source_commit": "2ca8e314a7c06c611a2e7e315470dd21737ce0a0",
+      "exit": 0,
+      "source_files_verified": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T14/adapter-out/runtime-hooks-absent.o",
+          "sha256": "d2c9cf4339dff25f3c44fdf07c1bde2fd78bf5d817886694ee9ccb01e7370e35"
+        }
+      ],
+      "observed_summary": null,
+      "status": "VERIFIED"
+    }
+  ],
+  "red": {
+    "source_commit": "e1e20ab9c06c67a9a41ae3da845570f9df9b6b69",
+    "exit": 1,
+    "log_sha256": "5f03a5d8f8f5aff7ad66e509ae6319304f6f3b155816f22db07aff2dc835a331"
+  },
+  "repo_tests_rerun": false
+}

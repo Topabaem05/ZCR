@@ -1,0 +1,335 @@
+{
+  "source_commit": "40dd152685bbb3bc74a78776fb801c0f3037e44a",
+  "source_tree": "3db55d5c12ce1e1efb3e2836bf844b0d4081ded9",
+  "source_files": [
+    {
+      "path": "build.zig",
+      "sha256": "51bbc47cd1aafc90fc865b20cc15d863b0ec19109b6d01f5ac4bf3ae75d04d64"
+    },
+    {
+      "path": "build.zig.zon",
+      "sha256": "2ad2381bdb29d5669c6d2ac4807c124c2afe6d007daf7ea2b507fdc64bf44e52"
+    },
+    {
+      "path": "config/limits.json",
+      "sha256": "d7b3db8b6956c0f8b1e6f399e6e432fb4eadb8aa033f39d303e31edbe539154c"
+    },
+    {
+      "path": "config/memory-profiles.json",
+      "sha256": "7f925fb57bc0453f2505b3c10856a4e74322bcb8cc3417070ec7693e847804b7"
+    },
+    {
+      "path": "config/scheduler-profiles.json",
+      "sha256": "3f3b7d88264c94ac84ea0969da47ff1aee46ad4ba51f4899742ee2c1603b57a8"
+    },
+    {
+      "path": "contracts/README.md",
+      "sha256": "e3fb52440e84c7a9abe3f855f1423eee91222c546243b2435988c64cb325a05b"
+    },
+    {
+      "path": "contracts/data.schema.json",
+      "sha256": "5c3932867cf4e16729cd6b959c16b9a143308aa5396f79a7f0e56f6563d314f5"
+    },
+    {
+      "path": "contracts/inputs/zcr_batch_read.schema.json",
+      "sha256": "50c4b12c0575660e6d030acabd8a3fb60ec9e3b4a620426cea79133ec011f15d"
+    },
+    {
+      "path": "contracts/inputs/zcr_create.schema.json",
+      "sha256": "821b9bdb7e74db3c5456e06ee6ceb0cf5105fa13ab39786ef0f4fd024b1812ca"
+    },
+    {
+      "path": "contracts/inputs/zcr_files.schema.json",
+      "sha256": "8f7680bc92ad4ef9a1a34e7a9756cbca4f286452387a246de33cb13073890eb4"
+    },
+    {
+      "path": "contracts/inputs/zcr_health.schema.json",
+      "sha256": "9e78382dc9325d9dafba3edbadf843f670505c5e19d8a2ee0a168147862d9538"
+    },
+    {
+      "path": "contracts/inputs/zcr_patch.schema.json",
+      "sha256": "77d27a7cb46a2d7765f245f85f2e47560df5ea82e406e049e1e387d38f543f99"
+    },
+    {
+      "path": "contracts/inputs/zcr_read.schema.json",
+      "sha256": "fdd23867b862977d19bf3b3d45183ead856d58ec4742d41ec3e970751e524bdc"
+    },
+    {
+      "path": "contracts/inputs/zcr_search.schema.json",
+      "sha256": "ed9109d79358aa095c54fe6c70260be99f4ba9c68aef4d4539319562f8567211"
+    },
+    {
+      "path": "contracts/inputs/zcr_status.schema.json",
+      "sha256": "a46793fa818ba7ce90931a0dece57235aaa5aebbd010bbc3606fb3a8cb0cc5b1"
+    },
+    {
+      "path": "contracts/response.schema.json",
+      "sha256": "587ba596c5ca9a3c30d820905aaf4d91b388325ededddbd468534c9119f91060"
+    },
+    {
+      "path": "contracts/task-manifest.schema.json",
+      "sha256": "d65a9082b5b4896e6e1017d4bfa6a37dc12efe88b362ed809491a5f3b2c965cc"
+    },
+    {
+      "path": "contracts/tools.json",
+      "sha256": "6537c0961f85dd623cf76c195dab534f583052c31eff2eda54727e97083a0b4b"
+    },
+    {
+      "path": "src/batch/read.zig",
+      "sha256": "a0627a93212db8d864deb37037a9b4c27e5bee4948f4602ed4c9da2c7339e6e6"
+    },
+    {
+      "path": "src/cache/association.zig",
+      "sha256": "69cb402708d851060c5bc5fda6a6b77e6ef47fefced33b6556bfe646d0d358f4"
+    },
+    {
+      "path": "src/cache/content.zig",
+      "sha256": "a3ceaa5c9e67c2a26528e260815010e1e0799b9b800cf9c5411d65c409993de3"
+    },
+    {
+      "path": "src/cache/lines.zig",
+      "sha256": "6e17fa2885df645fb8dce77941d7e459b7cacb8177b3552d34c974e691f2c73e"
+    },
+    {
+      "path": "src/core/errors.zig",
+      "sha256": "4166c1278c889e703cebc67925acfa9e768f5a4119fe42bfb8e29084a4752f1c"
+    },
+    {
+      "path": "src/core/limits.zig",
+      "sha256": "41771a1b441e7710a5c27ac6d5cc92170f023764b74ace4e5519e28161a65137"
+    },
+    {
+      "path": "src/core/types.zig",
+      "sha256": "f6b28697e3e27ed401cd165320dbb9a5816a3020e135bec4d633736ce48ef453"
+    },
+    {
+      "path": "src/fs/edit.zig",
+      "sha256": "0c7cd32028ef7920ad973a3226198916dfece42acb408692f82602b384f3fea2"
+    },
+    {
+      "path": "src/fs/ignore.zig",
+      "sha256": "4d398d96174d7a52d4a895494ba5c75a17205146518be3feef38d60f4c8379cd"
+    },
+    {
+      "path": "src/fs/metadata.zig",
+      "sha256": "ecbe8d94bfed6bc6b032e811ec75941585963e4d61848cdb864004a0566fabca"
+    },
+    {
+      "path": "src/fs/publish.zig",
+      "sha256": "f45814cce6f6a29e2411907230f30fd22fdaa976139c8830874d766028cbe63c"
+    },
+    {
+      "path": "src/fs/read.zig",
+      "sha256": "27fa94f79465b97d027c455665621354b42d3e23436a0306783e2ed35ab64997"
+    },
+    {
+      "path": "src/fs/traverse.zig",
+      "sha256": "4e40d6b5ac76549174efde0c36ac5aab1bf14066fd2959e513d0eb1e6715e7a8"
+    },
+    {
+      "path": "src/launch.zig",
+      "sha256": "62d4aa64ffbe3d7aac328d32e871fa8b83ff488b4ecf87ba178e046191586672"
+    },
+    {
+      "path": "src/launch_ignore.zig",
+      "sha256": "58eff3d9eca3c2fe4b8a4192c1c66596333b14f6e5a2a879ab201bc55d59b127"
+    },
+    {
+      "path": "src/main.zig",
+      "sha256": "32b77292ca22a0f4e068caf4809f63c941f311f1ffb2610f8de84a9716502b41"
+    },
+    {
+      "path": "src/memory/accounting.zig",
+      "sha256": "c71ff2d39979bd03b3dd73d93285ba9dbc97d41fe2437e3fbc156c5a9e0fd654"
+    },
+    {
+      "path": "src/memory/arena.zig",
+      "sha256": "6c2b911849041d5935f434a110b858ad590331e82653eca9a9502b2c308b00fc"
+    },
+    {
+      "path": "src/memory/budget.zig",
+      "sha256": "fe09416c0bb65da356d1d002f6906a12633e6b3e629474b459a9a1a2a3e0fa5c"
+    },
+    {
+      "path": "src/platform/darwin.zig",
+      "sha256": "9f2c8be090cee2a9fcdb9c48937e25e0b64e22430c21d611feb7fb0088321cd7"
+    },
+    {
+      "path": "src/policy/capability.zig",
+      "sha256": "11a77a83e45aab973e54e69e3d5f953d74efc1a1193fdf74006e4119772183c9"
+    },
+    {
+      "path": "src/policy/paths.zig",
+      "sha256": "af8e8c6ec7af13f79c25ff4641d12ccaf0d6c3d60720fdd5416c9512a6edfb31"
+    },
+    {
+      "path": "src/policy/scope.zig",
+      "sha256": "ff9b6246f4451a851d406cdcb82ad805f3668e40455ce0782d1f7d5ab641696c"
+    },
+    {
+      "path": "src/protocol/codec.zig",
+      "sha256": "f3af32c8682d0afa0b39bcbc39edeb7bd92beef8946fc0c335671c90444188c0"
+    },
+    {
+      "path": "src/protocol/framing.zig",
+      "sha256": "893d41b3fbed837ec856596bbe9ba04ec5d22d8a122b00fb39f1231197e20aeb"
+    },
+    {
+      "path": "src/protocol/mcp.zig",
+      "sha256": "a4fd09b569dc6eb1914697d24257935f9f2b007fa673039c7689d4950d1c2e1e"
+    },
+    {
+      "path": "src/protocol/projection.zig",
+      "sha256": "f197f4c136a0b16f393760aca1b15e057191103e03504dbce8b7babe8e8a4bcf"
+    },
+    {
+      "path": "src/scheduler/admission.zig",
+      "sha256": "f43b872ca0648998a9b1f805ae080ad0fb2fe2181134b0018977f528281f9b6f"
+    },
+    {
+      "path": "src/scheduler/executor.zig",
+      "sha256": "755e95087f966237fa255a392876f39638be80ac9fa42cbeacf55ac38e8d7aae"
+    },
+    {
+      "path": "src/scheduler/queue.zig",
+      "sha256": "a28d5c3adc4de2e160a094470ad14ca7cb530c147e8b0a4b4ffa2301b30617c7"
+    },
+    {
+      "path": "src/search/context.zig",
+      "sha256": "9be7eae7e6eac525f2486e8895cd8b96f648cbd10f2f5df4d6c60fcd3ac59ecd"
+    },
+    {
+      "path": "src/search/literal.zig",
+      "sha256": "00263a5337ad0097a83961620c853bd389653bcc8dd42fe9352938eb7ff47546"
+    },
+    {
+      "path": "src/search/scalar.zig",
+      "sha256": "aef984f53852ce28f41c7f5eca940db422511890941053e2e81bc362b746c3bd"
+    },
+    {
+      "path": "src/watch/core.zig",
+      "sha256": "106b77d82f1b963416638b740b217bd321c6c877d2728c63dbe1e94263dc8080"
+    },
+    {
+      "path": "src/watch/darwin.zig",
+      "sha256": "135c405a6743213052194962284044c0f5ec62704d7380c6c94b509a393d5a62"
+    },
+    {
+      "path": "src/watch/linux.zig",
+      "sha256": "6081678633239f54bb425896fa71f91015a6e0bd4ea17e06e6b1245671a1efa0"
+    },
+    {
+      "path": "src/workspace/identity.zig",
+      "sha256": "ea493786a52c7fb0460efb1e911293fd4ab69aac273e47bfa8d15c129ebe5c3d"
+    },
+    {
+      "path": "src/workspace/lease.zig",
+      "sha256": "b7b19b516e2dfe25f8e38df3962659cab90600e469cc1c0623050b2016d52e60"
+    },
+    {
+      "path": "src/workspace/registry.zig",
+      "sha256": "322e0147763b238f32a46d5a4b6921b46f2524e6d0134411b424960329ba68bf"
+    },
+    {
+      "path": "tests/t03_test.zig",
+      "sha256": "b98cd161a280f8bed95b5b22b4346e0cf3b70bc5772a1ab0d64a27f6d57c003d"
+    },
+    {
+      "path": "tests/t13_test.zig",
+      "sha256": "d78f7c4ec7c3c647d82ada2acd6158642a1f1871bfc151ac3a5c42a7a8507e85"
+    }
+  ],
+  "note": "Documentation/evidence-only changes occurred during Safe run; all listed compiled source/build/config bytes match tested source40dd152. No current native-platform/governor runtime claim.",
+  "red": {
+    "source_commit": "c62c416558cf5121866f2cde013b62cceaaaa45a",
+    "exit_code": 1,
+    "reason": "required Budget.setAdmissionCaps API missing",
+    "log": "pressure-admission-red.log",
+    "sha256": "b78ebfecfae7ed3adb335b12d8582b1824218eeac889bd3f1f89284f4e8fa507"
+  },
+  "runs": [
+    {
+      "mode": "Debug",
+      "exit_code": 0,
+      "status": "PASS",
+      "tests": {
+        "T03": 16,
+        "T13": 14
+      },
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=memory",
+        "-Doptimize=Debug",
+        "-Dinstall-tests=true",
+        "--cache-dir",
+        "/workspace/scratch/3f4ab65dfb82/state/integration/pressure/cache",
+        "--global-cache-dir",
+        "/workspace/scratch/3f4ab65dfb82/state/integration/global-cache",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/integration/pressure/out",
+        "--summary",
+        "all"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-work",
+      "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/integration/broker-mcp/tmp",
+      "combined_log": {
+        "path": "pressure-admission-debug.log",
+        "sha256": "2b25b3c7f4ac3a38db2c277d4c6dee85f27cfb8c4b40eb325191211a9532c22b"
+      },
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/integration/pressure/out/bin/T03-test",
+          "sha256": "8ce2ee9512395573de42cd1c640d13ac2d6ce06fc1876dd1837716253257c0c6"
+        },
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/integration/pressure/out/bin/T13-test",
+          "sha256": "f39632536dedb0430d6762842a122eb44279a92770008fcab444e18808065e18"
+        }
+      ]
+    },
+    {
+      "mode": "ReleaseSafe",
+      "exit_code": 0,
+      "status": "PASS",
+      "tests": {
+        "T03": 16,
+        "T13": 14
+      },
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=memory",
+        "-Doptimize=ReleaseSafe",
+        "-Dinstall-tests=true",
+        "--cache-dir",
+        "/workspace/scratch/3f4ab65dfb82/state/integration/pressure-safe/cache",
+        "--global-cache-dir",
+        "/workspace/scratch/3f4ab65dfb82/state/integration/global-cache",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/integration/pressure-safe/out",
+        "--summary",
+        "all"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-work",
+      "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/integration/broker-mcp/tmp",
+      "combined_log": {
+        "path": "pressure-admission-safe.log",
+        "sha256": "6e73f631d9f231b2cbca920069d823f522599ca14cc6c58a8a6090a58261d2ca"
+      },
+      "binaries": [
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/integration/pressure-safe/out/bin/T03-test",
+          "sha256": "9a2d0fa5c35c6a63f7b144c458767f4af45ae64806c1a06a0e638aea5e780704"
+        },
+        {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/integration/pressure-safe/out/bin/T13-test",
+          "sha256": "bda4ecfc6dc616cdcc844a260ac43310dcfd8bea5e229069a02fa8e24f45de61"
+        }
+      ]
+    }
+  ],
+  "toolchain_sha256": "2317bbb91798556d9d0f38aabdac23db83f0979b25f767259ae474546724087c"
+}

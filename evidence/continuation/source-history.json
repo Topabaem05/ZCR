@@ -1,16 +1,20 @@
 {
   "format": "git-bundle",
-  "sha256": "1b725aaea071b1ce6dba522f6f3fa4bfc01679f42fbe08ad9c0ebc8c4ce8086b",
-  "bytes": 1105510,
-  "checkpoint_source": "5187b627314ddc56ae9a908abb6cc3b6dee5d82a",
+  "sha256": "8c243adc3048265a6bf2754f44095088853b859eb780733ef8a5214d9d3f7ffe",
+  "bytes": 2453258,
+  "checkpoint_source": "9172c80036e9a99f4f4eb1894d913304a8376d17",
   "refs": [
     {
-      "sha": "5187b627314ddc56ae9a908abb6cc3b6dee5d82a",
+      "sha": "9172c80036e9a99f4f4eb1894d913304a8376d17",
       "ref": "refs/heads/codex/continue-runtime-20260912"
     },
     {
       "sha": "11f82d80184a7fe88361d5527a51a11602e4ba87",
       "ref": "refs/heads/codex/legacy-search-audit"
+    },
+    {
+      "sha": "b5fe273bb58bd9518bf7711446f164ef5e4bbd62",
+      "ref": "refs/heads/codex/runtime-cache-20260912"
     },
     {
       "sha": "65f747e0e06442a65a7679f2cfbf64dd7a3fc7dd",
@@ -29,19 +33,23 @@
       "ref": "refs/heads/codex/t10-workspace"
     },
     {
-      "sha": "5f02a30ceda951652e90b2a9a43c0b36f58d915b",
+      "sha": "169ea241addcc7bf7644670818745f439a6624dd",
       "ref": "refs/heads/codex/t11-atomic-write"
+    },
+    {
+      "sha": "f75b69b73019c271a4e25aec9d7485cfc0398d8f",
+      "ref": "refs/heads/codex/t12-journal"
     },
     {
       "sha": "efc7fa89960c752b73f3ca13a04d134efcdc8617",
       "ref": "refs/heads/codex/t13-cache"
     },
     {
-      "sha": "e1e20ab9c06c67a9a41ae3da845570f9df9b6b69",
+      "sha": "ecec8964f66ea4329d00dd9e071051754fb722ff",
       "ref": "refs/heads/codex/t14-watch"
     },
     {
-      "sha": "96fcdfb3eedfa28682997dd786cdbff664d6e165",
+      "sha": "98c63f8c9676032331e41ed2dea72f001526e346",
       "ref": "refs/heads/codex/t15-broker"
     },
     {
@@ -97,7 +105,7 @@
       "ref": "refs/remotes/origin/task-t07"
     },
     {
-      "sha": "5187b627314ddc56ae9a908abb6cc3b6dee5d82a",
+      "sha": "9172c80036e9a99f4f4eb1894d913304a8376d17",
       "ref": "HEAD"
     },
     {
@@ -105,15 +113,19 @@
       "ref": "main-worktree/HEAD"
     },
     {
-      "sha": "e1e20ab9c06c67a9a41ae3da845570f9df9b6b69",
+      "sha": "ecec8964f66ea4329d00dd9e071051754fb722ff",
       "ref": "worktrees/ZCR-T14/HEAD"
     },
     {
-      "sha": "5f02a30ceda951652e90b2a9a43c0b36f58d915b",
+      "sha": "169ea241addcc7bf7644670818745f439a6624dd",
       "ref": "worktrees/ZCR-T11/HEAD"
     },
     {
-      "sha": "96fcdfb3eedfa28682997dd786cdbff664d6e165",
+      "sha": "b5fe273bb58bd9518bf7711446f164ef5e4bbd62",
+      "ref": "worktrees/ZCR-runtime-cache/HEAD"
+    },
+    {
+      "sha": "98c63f8c9676032331e41ed2dea72f001526e346",
       "ref": "worktrees/ZCR-T15/HEAD"
     },
     {
@@ -131,6 +143,10 @@
     {
       "sha": "86ed075a1bf3693142c4f581d83d6bfae84e4bc3",
       "ref": "worktrees/ZCR-T10/HEAD"
+    },
+    {
+      "sha": "f75b69b73019c271a4e25aec9d7485cfc0398d8f",
+      "ref": "worktrees/ZCR-T12/HEAD"
     },
     {
       "sha": "11f82d80184a7fe88361d5527a51a11602e4ba87",

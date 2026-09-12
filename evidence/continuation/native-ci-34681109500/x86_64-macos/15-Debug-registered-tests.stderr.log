@@ -1,0 +1,106 @@
+test
++- fail failure
+error: registered test file tests/t15_test.zig is missing (T15 not delivered yet)
+
+test
++- fail failure
+error: registered test file tests/t14_test.zig is missing (T14 not delivered yet)
+
+test
++- fail failure
+error: registered test file tests/t11_test.zig is missing (T11 not delivered yet)
+
+test
++- run test T01-test 18 pass, 1 fail (19 total)
+error: 't01_test.test.T01 core: interface table declares I01 to I19 with receiver-generic signatures' failed:
+       expected 3, found 4
+       /Users/runner/work/_temp/zcr-native-34681109500-1-x86_64-macos/toolchain/zig-x86_64-macos-0.16.0/lib/std/testing.zig:118:17: 0x109e99659 in expectEqualInner__anon_40948 (T01-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/runner/work/_temp/zcr-native-34681109500-1-x86_64-macos/toolchain/zig-x86_64-macos-0.16.0/lib/std/testing.zig:83:5: 0x109e9b75e in expectEqual (T01-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/runner/work/ZCR/ZCR/source/tests/t01_test.zig:517:13: 0x109e9b7a5 in test.T01 core: interface table declares I01 to I19 with receiver-generic signatures (T01-test)
+                   try testing.expectEqual(@as(usize, 3), @typeInfo(Signature).@"struct".fields.len);
+                   ^
+failed command: cd /Users/runner/work/_temp/zcr-native-34681109500-1-x86_64-macos/Debug/local-cache && /Users/runner/work/_temp/zcr-native-34681109500-1-x86_64-macos/Debug/out/bin/T01-test --cache-dir=/Users/runner/work/_temp/zcr-native-34681109500-1-x86_64-macos/Debug/local-cache --seed=0x3398e11b --listen=-
+
+test
++- run test T05-test w
+FS-004 corpus=small actual_files=1000 candidate_count=1000 tracked_live=3745880 tracked_peak=3745880 coverage_skipped=0 complete=true corpus_sha256=c51d1cae1ca2457bc0183a853f69ca5841ce7cc770badec767ff85cac9694d5c
+FS-004 corpus=large actual_files=200000 candidate_count=200000 tracked_live=3745880 tracked_peak=3745880 coverage_skipped=0 complete=true corpus_sha256=8516686afc53e0500c9119dc68e4d62c60ab6e601af8d43a7f282bb90db6d26b
+failed command: cd /Users/runner/work/_temp/zcr-native-34681109500-1-x86_64-macos/Debug/local-cache && /Users/runner/work/_temp/zcr-native-34681109500-1-x86_64-macos/Debug/local-cache/o/646b544108483811e0614016eb881a33/T05-test --cache-dir=/Users/runner/work/_temp/zcr-native-34681109500-1-x86_64-macos/Debug/local-cache --seed=0x3398e11b --listen=-
+
+Build Summary: 45/50 steps succeeded (4 failed); 221/222 tests passed (1 failed)
+test transitive failure
++- install T00-test success
+|  +- compile test T00-test Debug native success 15s MaxRSS:301M
++- run test T00-test 12 pass (12 total) 5s MaxRSS:4M
+|  +- compile test T00-test Debug native (reused)
++- install T01-test success
+|  +- compile test T01-test Debug native success 10s MaxRSS:296M
+|     +- options cached
++- run test T01-test 18 pass, 1 fail (19 total)
+|  +- compile test T01-test Debug native (+1 more reused dependencies)
++- install T02-test success
+|  +- compile test T02-test Debug native success 11s MaxRSS:269M
+|     +- options (reused)
++- run test T02-test 15 pass (15 total) 7s MaxRSS:3M
+|  +- compile test T02-test Debug native (+1 more reused dependencies)
++- install T03-test success
+|  +- compile test T03-test Debug native success 8s MaxRSS:252M
++- run test T03-test 14 pass (14 total) 1s MaxRSS:2M
+|  +- compile test T03-test Debug native (reused)
++- install T04-test success
+|  +- compile test T04-test Debug native success 10s MaxRSS:254M
++- run test T04-test 13 pass (13 total) 22s MaxRSS:18M
+|  +- compile test T04-test Debug native (reused)
++- install T04-deadline-test success
+|  +- compile test T04-deadline-test Debug native success 6s MaxRSS:220M
++- run test T04-deadline-test 2 pass (2 total) 10ms MaxRSS:1M
+|  +- compile test T04-deadline-test Debug native (reused)
++- install T05-test success
+|  +- compile test T05-test Debug native success 7s MaxRSS:263M
++- run test T05-test 15 pass (15 total) 48s MaxRSS:6M
+|  +- compile test T05-test Debug native (reused)
++- install T06-test success
+|  +- compile test T06-test Debug native success 5s MaxRSS:259M
++- run test T06-test 15 pass (15 total) 4s MaxRSS:7M
+|  +- compile test T06-test Debug native (reused)
++- install T07-test success
+|  +- compile test T07-test Debug native success 13s MaxRSS:288M
++- run test T07-test 25 pass (25 total) 456ms MaxRSS:7M
+|  +- compile test T07-test Debug native (reused)
++- install T08-test success
+|  +- compile test T08-test Debug native success 9s MaxRSS:308M
+|     +- options (reused)
++- run test T08-test 17 pass (17 total) 922ms MaxRSS:30M
+|  +- compile test T08-test Debug native (+1 more reused dependencies)
++- install T09-test success
+|  +- compile test T09-test Debug native success 7s MaxRSS:260M
++- run test T09-test 15 pass (15 total) 280ms MaxRSS:5M
+|  +- compile test T09-test Debug native (reused)
++- install T08-launch-test success
+|  +- compile test T08-launch-test Debug native success 8s MaxRSS:228M
+|     +- options (reused)
++- run test T08-launch-test 2 pass (2 total) 12ms MaxRSS:1M
+|  +- compile test T08-launch-test Debug native (+1 more reused dependencies)
++- install T10-test success
+|  +- compile test T10-test Debug native success 10s MaxRSS:288M
++- run test T10-test 44 pass (44 total) 22s MaxRSS:3M
+|  +- compile test T10-test Debug native (reused)
++- fail failure
++- install T13-test success
+|  +- compile test T13-test Debug native success 8s MaxRSS:286M
++- run test T13-test 14 pass (14 total) 5s MaxRSS:3M
+|  +- compile test T13-test Debug native (reused)
++- fail failure
++- fail failure
++- run exe zcr success 16ms
+|  +- compile exe zcr Debug native cached 182ms MaxRSS:21M
+|     +- options (reused)
++- run exe zcr success 13ms
+   +- compile exe zcr Debug native (+1 more reused dependencies)
+
+error: the following build command failed with exit code 1:
+/Users/runner/work/_temp/zcr-native-34681109500-1-x86_64-macos/Debug/local-cache/o/71d341526d6172349f48ed71885828b4/build /Users/runner/work/_temp/zcr-native-34681109500-1-x86_64-macos/toolchain/zig-x86_64-macos-0.16.0/zig /Users/runner/work/_temp/zcr-native-34681109500-1-x86_64-macos/toolchain/zig-x86_64-macos-0.16.0/lib /Users/runner/work/ZCR/ZCR/source /Users/runner/work/_temp/zcr-native-34681109500-1-x86_64-macos/Debug/local-cache /Users/runner/work/_temp/zcr-native-34681109500-1-x86_64-macos/Debug/global-cache --seed 0x3398e11b -Z083a766e29516519 -j2 -Doptimize=Debug --prefix /Users/runner/work/_temp/zcr-native-34681109500-1-x86_64-macos/Debug/out --summary all test -Dinstall-tests=true

@@ -1,0 +1,7 @@
+Build Summary: 4/4 steps succeeded; 19/19 tests passed
+test success
++- install T14-test success
+|  +- compile test T14-test Debug native success 653ms MaxRSS:187M
++- run test T14-test 19 pass (19 total) 434ms MaxRSS:16M
+   +- compile test T14-test Debug native (reused)
+

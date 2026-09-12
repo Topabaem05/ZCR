@@ -1,0 +1,11 @@
+1/10 codec.test.MC-003 codec preflight rejects decoded duplicate keys...OK
+2/10 codec.test.MC-003 codec validates JSON strings numbers UTF-8 and complete document...OK
+3/10 codec.test.MC-003 codec enforces exact depth and frame limits before allocation...OK
+4/10 codec.test.MC-003 codec resource limits bound object tables and flat arrays...OK
+5/10 codec.test.MC-001 codec RPC envelope keeps id types and strict integer ranges...OK
+6/10 codec.test.MC-003 codec frees all DOM allocations on allocation failure...OK
+7/10 codec.test.MC-003 tool schema validation precedes decoded string allocation...OK
+8/10 codec.test.MC-003 raw tool schema checks all supported tools and nested batch fields...OK
+9/10 codec.test.MC-003 raw tool strings count decoded UTF-8 bytes and batch count is exact...OK
+10/10 codec.test.MC-001 raw argument preflight retains malformed envelope classification...OK
+All 10 tests passed.

@@ -1,0 +1,157 @@
+{
+  "schema_version": "zcr-handoff/1",
+  "task_id": "T14",
+  "state": "implemented_native_linux_verified_review_approved",
+  "step": "S06",
+  "base_commit": "d83a8993640dfd90e1b478bab2ac378b947af378",
+  "head_commit": "2ca8e314a7c06c611a2e7e315470dd21737ce0a0",
+  "head_commit_note": "Tested source commit; evidence-only commits follow. Integrator must test its actual combined source.",
+  "red_commit": "e1e20ab9c06c67a9a41ae3da845570f9df9b6b69",
+  "branch": "codex/t14-watch",
+  "workspace_id": "fs:28:1056907:28:1056905:28:393230",
+  "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+  "changed_files": [
+    "src/watch/core.zig",
+    "src/watch/linux.zig",
+    "src/watch/darwin.zig",
+    "tests/t14_test.zig",
+    "evidence/T14/*"
+  ],
+  "source_manifest_sha256": "20d070e7992e54dfe532d14f0f78a34f97088fc1df598b5ba98a6a36678f5bd9",
+  "config_manifest_sha256": "be3712e09c20f7a25b56a437ec2f0f25b6eeda5fac6007723ef6be9753b2ed5b",
+  "corpus_sha256": "770621191a98e7d7a5ae2e955b88e8fad0c1bdf9dcdfa4b9574d16aa11479ce3",
+  "exports": {
+    "module": "zcr_watch",
+    "imports": [
+      "zcr_core",
+      "zcr_policy",
+      "zcr_memory",
+      "zcr_workspace",
+      "zcr_cache",
+      "zcr_fs_traverse"
+    ],
+    "frozen": [
+      "Runtime.invalidate(*Runtime,WorkspaceId,WatchEvent) InvalidateError!IndexState",
+      "Index.invalidate(*Index,WorkspaceId,WatchEvent) InvalidateError!IndexState"
+    ],
+    "supplemental": [
+      "Runtime.create(Allocator,Io,*Budget,*Registry,*Authorizer,SessionContext,Options) ReadError!*Runtime",
+      "Runtime.start(*Runtime,Cancel) ReadError!void",
+      "Runtime.poll(*Runtime,Cancel) ReadError!Snapshot",
+      "Runtime.reconcile(*Runtime,Cancel) ReadError!ReconcileResult",
+      "Runtime.enumerateLive/searchCandidatesLive(*Runtime,Capability,FileSpec,Sink(RelativePath),Cancel) ReadError!LiveResult",
+      "Runtime.deinit(*Runtime) CacheError!void",
+      "Index.init/snapshot/copyDirty",
+      "Native Backend.start/refresh/poll/stop/watchedCount/synchronized; EventSink; supported"
+    ]
+  },
+  "test_evidence": [
+    {
+      "label": "green-debug",
+      "tests": 19,
+      "status": "PASS_NATIVE_LINUX"
+    },
+    {
+      "label": "green-safe",
+      "tests": 19,
+      "status": "PASS_NATIVE_LINUX"
+    },
+    {
+      "label": "fault-debug",
+      "tests": 19,
+      "status": "PASS_NATIVE_LINUX",
+      "note": "Deterministic fault cases also run without the flag."
+    },
+    {
+      "label": "regression-fs",
+      "tests": 15,
+      "status": "PASS_NATIVE_LINUX",
+      "note": "Actual 200,000-file T05 corpus passed; this is traversal regression, not a T14 watcher capacity claim."
+    },
+    {
+      "label": "regression-memory",
+      "tests": 28,
+      "status": "PASS_NATIVE_LINUX"
+    },
+    {
+      "label": "regression-isolation",
+      "tests": 57,
+      "status": "PASS_NATIVE_LINUX"
+    },
+    {
+      "label": "darwin-callback-debug/release-safe",
+      "tests_per_mode": 2,
+      "status": "PASS_NATIVE_LINUX_LOGIC_ONLY"
+    },
+    {
+      "label": "darwin-abi-aarch64/x86_64",
+      "status": "PASS_CROSS_COMPILE_ONLY"
+    },
+    {
+      "label": "runtime-hooks-absent",
+      "status": "PASS_COMPILE_ONLY"
+    },
+    {
+      "label": "contracts and three standard evidence verifies",
+      "status": "PASS"
+    }
+  ],
+  "state_byte_counts": {
+    "native_x86_64_production_Runtime_bytes": 812128,
+    "native_x86_64_production_Index_bytes": 262752,
+    "native_x86_64_production_Linux_Backend_bytes": 544824,
+    "proof": "runtime-hooks-absent.o exports constant sizeof values; native resource tests assert actual test-build sizeof(Runtime) is reserved",
+    "dirty_path_capacity": 64,
+    "dirty_path_bytes_each": 4096,
+    "default_dirty_limit": 32,
+    "maximum_native_watch_registrations": 128,
+    "inotify_fd_count": 1,
+    "inotify_read_buffer_bytes": 16384,
+    "maximum_bytes_read_per_poll": 1048576,
+    "maximum_decoded_records_per_read": 512,
+    "Darwin_maximum_callback_events_per_poll": 512,
+    "temporary_refresh_fd_allowance": 3,
+    "maintenance_cpu_permits": 1,
+    "all_fixture_final_budget_usage_and_tracked_live_bytes": 0
+  },
+  "integration_preconditions": [
+    "Trusted launcher creates Runtime from the existing exact Registry session, matching Authorizer and boot nonce. Runtime requires authorized root enumeration and validates workspace/root/task/policy before and after live work. I14 is trusted event ingress only and cannot grant read/write authority.",
+    "Use caller-supplied shared budgets: control Budget reserves sizeof(Runtime) and one Linux watcher FD; Options.work_budget reserves actual traversal allocation bounds plus depth+4 FDs and one CPU permit, or three temporary FDs and one CPU permit for recursive watch refresh. Do not construct independent per-request budget caps.",
+    "Call start before the initial reconcile. Call poll/reconcile from the workspace actor; the operation gate returns Busy for overlapping/reentrant work. Native callbacks only call invalidate and copy bounded paths. Index invalidation and snapshots support concurrent callbacks; source I/O and cache/registry calls stay outside its mutex.",
+    "Stop new calls and join every Runtime and Index/callback borrower before exclusive Runtime.deinit. Busy is not a concurrent destruction barrier. Registry, Authorizer, budgets, trusted-exclude handles and cache outlive their uses. Native macOS start/poll/refresh/stop must stay on the same native thread with stable Runtime address.",
+    "LiveResult.coverage.scope and reasons borrow Runtime-owned storage until its next live walk/reconcile or deinit. Copy before admitting another operation. Traversal sink paths are borrowed only during push. Caller sink/request storage outlives synchronous traversal.",
+    "checked_live files and search use enumerateLive/searchCandidatesLive (or the existing authoritative T05 traversal) even when index state is live. Never use watcher state as an atomic snapshot, content hash, immutable cache authorization, or complete candidate oracle.",
+    "Options.content_cache optionally connects T13: actor-side invalidation detaches mutable workspace associations while live pins retain immutable storage. Do not evict pinned content in an event callback.",
+    "Trusted exclude handles follow the existing T05 host binding contract: replacement requires host revalidation/rebinding. Watch streams do not turn old external exclude handles into current policy.",
+    "Linux needs public inotify and procfs /proc/self/fd to bind each watch to a verified no-follow directory handle. Backend failure, unavailable support, incomplete coverage, cancellation or dropped events preserves uncertain/live fallback; safe read/search remains usable."
+  ],
+  "limitations": [
+    "Native macOS SDK linking, stream delivery/teardown, resource measurement and Windows runtime are NOT_RUN. Native Linux x86_64 only is runtime-proven.",
+    "Darwin public FSEvents adapter uses a private same-thread CFRunLoop mode. Scheduling API is deprecated but public. Without a native-proven delivery barrier synchronized stays false, so Darwin never falsely publishes a clean index.",
+    "Linux native registration is bounded at128 active slots. Incomplete registration, unusual filesystem behavior, dropped events and churn recovery keep uncertainty explicit; retired slots are reused conservatively.",
+    "Reconciliation performs a full-root covering rescan for all coalesced paths, uses the current T05 10,000-result cap and default max_depth32, and has at most3 passes (hard8). Truncation, coverage skips or ongoing events leave uncertain state with unchanged published index generation.",
+    "Only checked_live candidate traversal is implemented; bounded_stale/managed-generation cached candidate paths are not provided. No performance threshold or atomic snapshot is claimed.",
+    "Linux kernel watch memory and Darwin framework-internal allocations are not represented as Zig heap measurements. Explicit Zig control allocations, CPU/FD reservations and registration/batch counts are bounded; actual macOS resource accounting remains a release gate."
+  ],
+  "review": {
+    "spec_verdict": "APPROVED",
+    "quality_verdict": "APPROVED",
+    "source_commit": "2ca8e314a7c06c611a2e7e315470dd21737ce0a0",
+    "reviewer": "independent review_t09 agent",
+    "report": "evidence/T14/review.md",
+    "evidence_check": "evidence/T14/review-evidence-check.json",
+    "verified_comparisons": 542,
+    "requested_source_changes": []
+  },
+  "remaining_gates": [
+    "Root integration wiring and actual combined binary tests",
+    "Native macOS/Windows and actual host runtime gates NOT_RUN"
+  ],
+  "evidence": [
+    "evidence/T14/runs.json",
+    "evidence/T14/red.json",
+    "evidence/T14/standard-verification.json",
+    "evidence/T14/review.md",
+    "evidence/T14/review-evidence-check.json"
+  ]
+}

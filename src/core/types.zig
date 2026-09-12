@@ -458,6 +458,10 @@ pub const JournalError = errors.ContractError || errors.FileError || errors.Inte
 
 /// I19. Versioned, checksummed persistence behind a vtable so T11 can test with a fake store.
 pub const JournalStore = struct {
+    /// Busy, resource, and contract admission errors from lookup/prepare must be
+    /// side-effect-free. Any uncertain persistence, malformed state, or I/O
+    /// outcome returns a filesystem/integrity error; the editor quarantines the
+    /// workspace and preserves evidence until exclusive recovery succeeds.
     context: *anyopaque,
     vtable: *const VTable,
 
@@ -652,7 +656,7 @@ pub fn HealthFn(comptime Self: type) type {
 pub fn ServeFrameFn(comptime Self: type) type {
     return fn (*Self, Io, *Connection, BoundedBytes) ServeError!EncodedToolResult;
 }
-/// I19 is a vtable (prepare/record/lookup); the receiver is `JournalStore.context`.
+/// I19 is a vtable (prepare/record/lookup plus native transition); the receiver is `JournalStore.context`.
 pub fn JournalStoreVTable(comptime Self: type) type {
     _ = Self;
     return JournalStore.VTable;

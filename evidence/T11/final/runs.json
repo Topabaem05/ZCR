@@ -1,0 +1,629 @@
+[
+  {
+    "argv": [
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "test",
+      "-ODebug",
+      "-lc",
+      "--test-no-exec",
+      "--dep",
+      "zcr_core",
+      "--dep",
+      "zcr_memory",
+      "--dep",
+      "zcr_admission",
+      "-Mroot=tests/t03_test.zig",
+      "-Mzcr_core=src/core/types.zig",
+      "--dep",
+      "zcr_core",
+      "-Mzcr_memory=src/memory/budget.zig",
+      "--dep",
+      "zcr_core",
+      "--dep",
+      "zcr_memory",
+      "-Mzcr_admission=src/scheduler/admission.zig",
+      "-femit-bin=/workspace/scratch/3f4ab65dfb82/state/T11/current/T03-Debug"
+    ],
+    "binaries": [
+      {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T11/current/T03-Debug",
+        "sha256": "7fdc610a6b929abec2bd86a2ce3d790d976b65e0a13485558be99e1ef56d5b36"
+      }
+    ],
+    "command": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig test -ODebug -lc --test-no-exec --dep zcr_core --dep zcr_memory --dep zcr_admission -Mroot=tests/t03_test.zig -Mzcr_core=src/core/types.zig --dep zcr_core -Mzcr_memory=src/memory/budget.zig --dep zcr_core --dep zcr_memory -Mzcr_admission=src/scheduler/admission.zig -femit-bin=/workspace/scratch/3f4ab65dfb82/state/T11/current/T03-Debug",
+    "corpus_sha256": "544c99d33436889c0806b431fdd405fe4e2966df8f86dfc5a4fe26713c3ebb6f",
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T11",
+    "elapsed_seconds": 0.486,
+    "environment": {
+      "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T11/tmp",
+      "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-global-cache",
+      "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache"
+    },
+    "exit_code": 0,
+    "label": "dependency-t03-direct-debug-compile",
+    "log": "/workspace/scratch/3f4ab65dfb82/state/T11/current/logs/dependency-t03-direct-debug-compile.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "source_commit": "09422d47fcf98d95f05a36d00c304846d3e1e6f8",
+    "source_config_sha256": "069182e236c65672bd209972a12355fe13e30dff65845a0f3bec8bc9a81832e9",
+    "summary": null
+  },
+  {
+    "argv": [
+      "/workspace/scratch/3f4ab65dfb82/state/T11/current/T03-Debug"
+    ],
+    "binaries": [
+      {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T11/current/T03-Debug",
+        "sha256": "7fdc610a6b929abec2bd86a2ce3d790d976b65e0a13485558be99e1ef56d5b36"
+      }
+    ],
+    "command": "/workspace/scratch/3f4ab65dfb82/state/T11/current/T03-Debug",
+    "corpus_sha256": "544c99d33436889c0806b431fdd405fe4e2966df8f86dfc5a4fe26713c3ebb6f",
+    "cwd": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache",
+    "elapsed_seconds": 0.309,
+    "environment": {
+      "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T11/tmp",
+      "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-global-cache",
+      "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache"
+    },
+    "exit_code": 0,
+    "label": "dependency-t03-direct-debug-run",
+    "log": "/workspace/scratch/3f4ab65dfb82/state/T11/current/logs/dependency-t03-direct-debug-run.log",
+    "log_sha256": "134770aa1950b2f9c0c1fc77c5def9181498a01a536c8938846ac7d0ac182129",
+    "source_commit": "09422d47fcf98d95f05a36d00c304846d3e1e6f8",
+    "source_config_sha256": "069182e236c65672bd209972a12355fe13e30dff65845a0f3bec8bc9a81832e9",
+    "summary": "All 12 tests passed."
+  },
+  {
+    "argv": [
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "test",
+      "-OReleaseSafe",
+      "-lc",
+      "--test-no-exec",
+      "--dep",
+      "zcr_core",
+      "--dep",
+      "zcr_memory",
+      "--dep",
+      "zcr_admission",
+      "-Mroot=tests/t03_test.zig",
+      "-Mzcr_core=src/core/types.zig",
+      "--dep",
+      "zcr_core",
+      "-Mzcr_memory=src/memory/budget.zig",
+      "--dep",
+      "zcr_core",
+      "--dep",
+      "zcr_memory",
+      "-Mzcr_admission=src/scheduler/admission.zig",
+      "-femit-bin=/workspace/scratch/3f4ab65dfb82/state/T11/current/T03-ReleaseSafe"
+    ],
+    "binaries": [
+      {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T11/current/T03-ReleaseSafe",
+        "sha256": "9a6d1d2a21e1df7e7e87c5511282db6822be92cb8a0598784bc16f562eaec207"
+      }
+    ],
+    "command": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig test -OReleaseSafe -lc --test-no-exec --dep zcr_core --dep zcr_memory --dep zcr_admission -Mroot=tests/t03_test.zig -Mzcr_core=src/core/types.zig --dep zcr_core -Mzcr_memory=src/memory/budget.zig --dep zcr_core --dep zcr_memory -Mzcr_admission=src/scheduler/admission.zig -femit-bin=/workspace/scratch/3f4ab65dfb82/state/T11/current/T03-ReleaseSafe",
+    "corpus_sha256": "544c99d33436889c0806b431fdd405fe4e2966df8f86dfc5a4fe26713c3ebb6f",
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T11",
+    "elapsed_seconds": 15.698,
+    "environment": {
+      "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T11/tmp",
+      "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-global-cache",
+      "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache"
+    },
+    "exit_code": 0,
+    "label": "dependency-t03-direct-releasesafe-compile",
+    "log": "/workspace/scratch/3f4ab65dfb82/state/T11/current/logs/dependency-t03-direct-releasesafe-compile.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "source_commit": "09422d47fcf98d95f05a36d00c304846d3e1e6f8",
+    "source_config_sha256": "069182e236c65672bd209972a12355fe13e30dff65845a0f3bec8bc9a81832e9",
+    "summary": null
+  },
+  {
+    "argv": [
+      "/workspace/scratch/3f4ab65dfb82/state/T11/current/T03-ReleaseSafe"
+    ],
+    "binaries": [
+      {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T11/current/T03-ReleaseSafe",
+        "sha256": "9a6d1d2a21e1df7e7e87c5511282db6822be92cb8a0598784bc16f562eaec207"
+      }
+    ],
+    "command": "/workspace/scratch/3f4ab65dfb82/state/T11/current/T03-ReleaseSafe",
+    "corpus_sha256": "544c99d33436889c0806b431fdd405fe4e2966df8f86dfc5a4fe26713c3ebb6f",
+    "cwd": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache",
+    "elapsed_seconds": 0.144,
+    "environment": {
+      "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T11/tmp",
+      "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-global-cache",
+      "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache"
+    },
+    "exit_code": 0,
+    "label": "dependency-t03-direct-releasesafe-run",
+    "log": "/workspace/scratch/3f4ab65dfb82/state/T11/current/logs/dependency-t03-direct-releasesafe-run.log",
+    "log_sha256": "134770aa1950b2f9c0c1fc77c5def9181498a01a536c8938846ac7d0ac182129",
+    "source_commit": "09422d47fcf98d95f05a36d00c304846d3e1e6f8",
+    "source_config_sha256": "069182e236c65672bd209972a12355fe13e30dff65845a0f3bec8bc9a81832e9",
+    "summary": "All 12 tests passed."
+  },
+  {
+    "argv": [
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "build-exe",
+      "-OReleaseSafe",
+      "-lc",
+      "--dep",
+      "zcr_core",
+      "-Mroot=tools/dev/evidence.zig",
+      "-Mzcr_core=src/core/types.zig",
+      "-femit-bin=/workspace/scratch/3f4ab65dfb82/state/T11/current/zcr-dev-evidence"
+    ],
+    "binaries": [
+      {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T11/current/zcr-dev-evidence",
+        "sha256": "8acc985babc2f05ce4654a09acd822e352507c1cc6d916c9971ec85967a4eb88"
+      }
+    ],
+    "command": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig build-exe -OReleaseSafe -lc --dep zcr_core -Mroot=tools/dev/evidence.zig -Mzcr_core=src/core/types.zig -femit-bin=/workspace/scratch/3f4ab65dfb82/state/T11/current/zcr-dev-evidence",
+    "corpus_sha256": "544c99d33436889c0806b431fdd405fe4e2966df8f86dfc5a4fe26713c3ebb6f",
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T11",
+    "elapsed_seconds": 18.415,
+    "environment": {
+      "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T11/tmp",
+      "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-global-cache",
+      "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache"
+    },
+    "exit_code": 0,
+    "label": "evidence-tool-compile",
+    "log": "/workspace/scratch/3f4ab65dfb82/state/T11/current/logs/evidence-tool-compile.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "source_commit": "09422d47fcf98d95f05a36d00c304846d3e1e6f8",
+    "source_config_sha256": "069182e236c65672bd209972a12355fe13e30dff65845a0f3bec8bc9a81832e9",
+    "summary": null
+  },
+  {
+    "argv": [
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "build",
+      "test",
+      "-Dtest-group=fs",
+      "-Doptimize=Debug",
+      "-Dfault-injection=true",
+      "-Dinstall-tests=true",
+      "--prefix",
+      "/workspace/scratch/3f4ab65dfb82/state/T11/current/out-final-fs-debug",
+      "--summary",
+      "all"
+    ],
+    "binaries": [
+      {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T11/current/out-final-fs-debug/bin/T05-test",
+        "sha256": "fbc33ba76745a15693f1ab5717a7829a5c2ef4ff5cce043d47f60fa9724f6d08"
+      }
+    ],
+    "command": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig build test -Dtest-group=fs -Doptimize=Debug -Dfault-injection=true -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T11/current/out-final-fs-debug --summary all",
+    "corpus_sha256": "544c99d33436889c0806b431fdd405fe4e2966df8f86dfc5a4fe26713c3ebb6f",
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T11",
+    "elapsed_seconds": 1.919,
+    "environment": {
+      "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T11/tmp",
+      "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-global-cache",
+      "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache"
+    },
+    "exit_code": 0,
+    "label": "final-fs-debug",
+    "log": "/workspace/scratch/3f4ab65dfb82/state/T11/current/logs/final-fs-debug.log",
+    "log_sha256": "e01c1ce863c047bac00b41dd99e81f16e71958ae674661494e3d9c0883505baa",
+    "source_commit": "09422d47fcf98d95f05a36d00c304846d3e1e6f8",
+    "source_config_sha256": "069182e236c65672bd209972a12355fe13e30dff65845a0f3bec8bc9a81832e9",
+    "summary": "Build Summary: 4/4 steps succeeded; 11/11 tests passed"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "build",
+      "test",
+      "-Dtest-group=fs",
+      "-Doptimize=ReleaseSafe",
+      "-Dfault-injection=true",
+      "-Dinstall-tests=true",
+      "--prefix",
+      "/workspace/scratch/3f4ab65dfb82/state/T11/current/out-final-fs-releasesafe",
+      "--summary",
+      "all"
+    ],
+    "binaries": [
+      {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T11/current/out-final-fs-releasesafe/bin/T05-test",
+        "sha256": "76c4a3a3892b720ac19415acb9962f93348f6fe2dde815f822afb49d19991245"
+      }
+    ],
+    "command": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig build test -Dtest-group=fs -Doptimize=ReleaseSafe -Dfault-injection=true -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T11/current/out-final-fs-releasesafe --summary all",
+    "corpus_sha256": "544c99d33436889c0806b431fdd405fe4e2966df8f86dfc5a4fe26713c3ebb6f",
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T11",
+    "elapsed_seconds": 1.979,
+    "environment": {
+      "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T11/tmp",
+      "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-global-cache",
+      "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache"
+    },
+    "exit_code": 0,
+    "label": "final-fs-releasesafe",
+    "log": "/workspace/scratch/3f4ab65dfb82/state/T11/current/logs/final-fs-releasesafe.log",
+    "log_sha256": "d55f3d1d3908cbf8085bfdb616ceb3bf57ad77f4652a9fb8e83064d586e7a2d5",
+    "source_commit": "09422d47fcf98d95f05a36d00c304846d3e1e6f8",
+    "source_config_sha256": "069182e236c65672bd209972a12355fe13e30dff65845a0f3bec8bc9a81832e9",
+    "summary": "Build Summary: 4/4 steps succeeded; 11/11 tests passed"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "build",
+      "test",
+      "-Dtest-group=io",
+      "-Doptimize=Debug",
+      "-Dfault-injection=true",
+      "-Dinstall-tests=true",
+      "--prefix",
+      "/workspace/scratch/3f4ab65dfb82/state/T11/current/out-final-io-debug",
+      "--summary",
+      "all"
+    ],
+    "binaries": [
+      {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T11/current/out-final-io-debug/bin/T04-deadline-test",
+        "sha256": "80c5c8487f584eb0e7d9ce795b48417e19c05140bf38de94f9aaa32bab2c47a5"
+      },
+      {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T11/current/out-final-io-debug/bin/T04-test",
+        "sha256": "748b473e2b7648c29707e0a4373bba5b372de9eed495ca7201108ee543920c0e"
+      }
+    ],
+    "command": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig build test -Dtest-group=io -Doptimize=Debug -Dfault-injection=true -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T11/current/out-final-io-debug --summary all",
+    "corpus_sha256": "544c99d33436889c0806b431fdd405fe4e2966df8f86dfc5a4fe26713c3ebb6f",
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T11",
+    "elapsed_seconds": 2.303,
+    "environment": {
+      "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T11/tmp",
+      "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-global-cache",
+      "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache"
+    },
+    "exit_code": 0,
+    "label": "final-io-debug",
+    "log": "/workspace/scratch/3f4ab65dfb82/state/T11/current/logs/final-io-debug.log",
+    "log_sha256": "fc649364ee5a47f06e3e38dc2e586b03ece85e67ca2c29d7ddc23560ea4b3606",
+    "source_commit": "09422d47fcf98d95f05a36d00c304846d3e1e6f8",
+    "source_config_sha256": "069182e236c65672bd209972a12355fe13e30dff65845a0f3bec8bc9a81832e9",
+    "summary": "Build Summary: 7/7 steps succeeded; 12/12 tests passed"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "build",
+      "test",
+      "-Dtest-group=io",
+      "-Doptimize=ReleaseSafe",
+      "-Dfault-injection=true",
+      "-Dinstall-tests=true",
+      "--prefix",
+      "/workspace/scratch/3f4ab65dfb82/state/T11/current/out-final-io-releasesafe",
+      "--summary",
+      "all"
+    ],
+    "binaries": [
+      {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T11/current/out-final-io-releasesafe/bin/T04-deadline-test",
+        "sha256": "532f6903c0b5603278d04051f9bf6bf0d1011828540c71cd1f387eeb6acfaba1"
+      },
+      {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T11/current/out-final-io-releasesafe/bin/T04-test",
+        "sha256": "a010bfff411cf911a7b20fc268c0c6e294c19c4b1c602186c3232b59d81a520f"
+      }
+    ],
+    "command": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig build test -Dtest-group=io -Doptimize=ReleaseSafe -Dfault-injection=true -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T11/current/out-final-io-releasesafe --summary all",
+    "corpus_sha256": "544c99d33436889c0806b431fdd405fe4e2966df8f86dfc5a4fe26713c3ebb6f",
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T11",
+    "elapsed_seconds": 0.255,
+    "environment": {
+      "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T11/tmp",
+      "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-global-cache",
+      "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache"
+    },
+    "exit_code": 0,
+    "label": "final-io-releasesafe",
+    "log": "/workspace/scratch/3f4ab65dfb82/state/T11/current/logs/final-io-releasesafe.log",
+    "log_sha256": "fdb31f10a00176cd77db9c465a2c24602efa0612c8a79419bb0de6423caa1efd",
+    "source_commit": "09422d47fcf98d95f05a36d00c304846d3e1e6f8",
+    "source_config_sha256": "069182e236c65672bd209972a12355fe13e30dff65845a0f3bec8bc9a81832e9",
+    "summary": "Build Summary: 7/7 steps succeeded; 12/12 tests passed"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "build",
+      "test",
+      "-Dtest-group=isolation",
+      "-Doptimize=Debug",
+      "-Dfault-injection=true",
+      "-Dinstall-tests=true",
+      "--prefix",
+      "/workspace/scratch/3f4ab65dfb82/state/T11/current/out-final-isolation-debug",
+      "--summary",
+      "all"
+    ],
+    "binaries": [
+      {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T11/current/out-final-isolation-debug/bin/T02-test",
+        "sha256": "29bba6f027e63d44ef0c865d6bc3e5dd453871fb19ead6f9f85b76bd33f27036"
+      },
+      {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T11/current/out-final-isolation-debug/bin/T10-test",
+        "sha256": "cd8397353a5425eb6ac7ec8c6bb02c1b88a5f1e4daf841fe62a572f5a45ac310"
+      }
+    ],
+    "command": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig build test -Dtest-group=isolation -Doptimize=Debug -Dfault-injection=true -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T11/current/out-final-isolation-debug --summary all",
+    "corpus_sha256": "544c99d33436889c0806b431fdd405fe4e2966df8f86dfc5a4fe26713c3ebb6f",
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T11",
+    "elapsed_seconds": 1.172,
+    "environment": {
+      "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T11/tmp",
+      "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-global-cache",
+      "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache"
+    },
+    "exit_code": 0,
+    "label": "final-isolation-debug",
+    "log": "/workspace/scratch/3f4ab65dfb82/state/T11/current/logs/final-isolation-debug.log",
+    "log_sha256": "b300dd968667fde43736022c9f51035d3066a3e0b01f36a3787fe851557d5f92",
+    "source_commit": "09422d47fcf98d95f05a36d00c304846d3e1e6f8",
+    "source_config_sha256": "069182e236c65672bd209972a12355fe13e30dff65845a0f3bec8bc9a81832e9",
+    "summary": "Build Summary: 8/8 steps succeeded; 56/56 tests passed"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "build",
+      "test",
+      "-Dtest-group=isolation",
+      "-Doptimize=ReleaseSafe",
+      "-Dfault-injection=true",
+      "-Dinstall-tests=true",
+      "--prefix",
+      "/workspace/scratch/3f4ab65dfb82/state/T11/current/out-final-isolation-releasesafe",
+      "--summary",
+      "all"
+    ],
+    "binaries": [
+      {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T11/current/out-final-isolation-releasesafe/bin/T02-test",
+        "sha256": "4e0e4889fd846a49590ad346fbcac0adb4a8f694fc8849da321f95bc00021e42"
+      },
+      {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T11/current/out-final-isolation-releasesafe/bin/T10-test",
+        "sha256": "11c8068347b2ff6f3f1dbc1ac905e1bdf9da0ca1a3546a290a96027e17bdee37"
+      }
+    ],
+    "command": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig build test -Dtest-group=isolation -Doptimize=ReleaseSafe -Dfault-injection=true -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T11/current/out-final-isolation-releasesafe --summary all",
+    "corpus_sha256": "544c99d33436889c0806b431fdd405fe4e2966df8f86dfc5a4fe26713c3ebb6f",
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T11",
+    "elapsed_seconds": 1.555,
+    "environment": {
+      "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T11/tmp",
+      "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-global-cache",
+      "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache"
+    },
+    "exit_code": 0,
+    "label": "final-isolation-releasesafe",
+    "log": "/workspace/scratch/3f4ab65dfb82/state/T11/current/logs/final-isolation-releasesafe.log",
+    "log_sha256": "fba13befdef79c63c47aca8c16f063011ec006fbd34fea240c92fe99377bb090",
+    "source_commit": "09422d47fcf98d95f05a36d00c304846d3e1e6f8",
+    "source_config_sha256": "069182e236c65672bd209972a12355fe13e30dff65845a0f3bec8bc9a81832e9",
+    "summary": "Build Summary: 8/8 steps succeeded; 56/56 tests passed"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "build",
+      "test",
+      "-Dtest-group=write",
+      "-Doptimize=Debug",
+      "-Dfault-injection=true",
+      "-Dinstall-tests=true",
+      "--prefix",
+      "/workspace/scratch/3f4ab65dfb82/state/T11/current/out-final-write-debug",
+      "--summary",
+      "all"
+    ],
+    "binaries": [
+      {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T11/current/out-final-write-debug/bin/T11-test",
+        "sha256": "e3e0ddae305a1ad89a880750285b545ff4f31bdc8c3dd333320e72780937d8ae"
+      }
+    ],
+    "command": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig build test -Dtest-group=write -Doptimize=Debug -Dfault-injection=true -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T11/current/out-final-write-debug --summary all",
+    "corpus_sha256": "544c99d33436889c0806b431fdd405fe4e2966df8f86dfc5a4fe26713c3ebb6f",
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T11",
+    "elapsed_seconds": 1.208,
+    "environment": {
+      "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T11/tmp",
+      "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-global-cache",
+      "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache"
+    },
+    "exit_code": 0,
+    "label": "final-write-debug",
+    "log": "/workspace/scratch/3f4ab65dfb82/state/T11/current/logs/final-write-debug.log",
+    "log_sha256": "e22a2e7c10523329c0cc9680d171893dd1c1769f3737a54e364a62be574fdd27",
+    "source_commit": "09422d47fcf98d95f05a36d00c304846d3e1e6f8",
+    "source_config_sha256": "069182e236c65672bd209972a12355fe13e30dff65845a0f3bec8bc9a81832e9",
+    "summary": "Build Summary: 4/4 steps succeeded; 41/41 tests passed"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "build",
+      "test",
+      "-Dtest-group=write",
+      "-Doptimize=ReleaseSafe",
+      "-Dfault-injection=true",
+      "-Dinstall-tests=true",
+      "--prefix",
+      "/workspace/scratch/3f4ab65dfb82/state/T11/current/out-final-write-releasesafe",
+      "--summary",
+      "all"
+    ],
+    "binaries": [
+      {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T11/current/out-final-write-releasesafe/bin/T11-test",
+        "sha256": "7dcd3726c4ed7dc58adee4add738108c26887af11a38a55d044e5973758331f5"
+      }
+    ],
+    "command": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig build test -Dtest-group=write -Doptimize=ReleaseSafe -Dfault-injection=true -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T11/current/out-final-write-releasesafe --summary all",
+    "corpus_sha256": "544c99d33436889c0806b431fdd405fe4e2966df8f86dfc5a4fe26713c3ebb6f",
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T11",
+    "elapsed_seconds": 19.299,
+    "environment": {
+      "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T11/tmp",
+      "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-global-cache",
+      "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache"
+    },
+    "exit_code": 0,
+    "label": "final-write-releasesafe",
+    "log": "/workspace/scratch/3f4ab65dfb82/state/T11/current/logs/final-write-releasesafe.log",
+    "log_sha256": "02e65d24bfdb6bd8e72e0e48947356c505b14b317399f883585c13802234409c",
+    "source_commit": "09422d47fcf98d95f05a36d00c304846d3e1e6f8",
+    "source_config_sha256": "069182e236c65672bd209972a12355fe13e30dff65845a0f3bec8bc9a81832e9",
+    "summary": "Build Summary: 4/4 steps succeeded; 41/41 tests passed"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "build-exe",
+      "-OReleaseSafe",
+      "-lc",
+      "--dep",
+      "zcr_fs_edit",
+      "--dep",
+      "zcr_core",
+      "-Mroot=/workspace/scratch/3f4ab65dfb82/state/T11/current/runtime-gate.zig",
+      "--dep",
+      "zcr_core",
+      "--dep",
+      "zcr_policy",
+      "--dep",
+      "zcr_workspace",
+      "-Mzcr_fs_edit=src/fs/edit.zig",
+      "-Mzcr_core=src/core/types.zig",
+      "--dep",
+      "zcr_core",
+      "-Mzcr_policy=src/policy/capability.zig",
+      "--dep",
+      "zcr_core",
+      "--dep",
+      "zcr_policy",
+      "-Mzcr_workspace=src/workspace/registry.zig",
+      "-femit-bin=/workspace/scratch/3f4ab65dfb82/state/T11/current/runtime-gate"
+    ],
+    "binaries": [
+      {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T11/current/runtime-gate",
+        "sha256": "c6abd87a2afcc915c20500ab6c187609a9528e6a2b5969a880ce9cd9bffa7491"
+      }
+    ],
+    "command": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig build-exe -OReleaseSafe -lc --dep zcr_fs_edit --dep zcr_core -Mroot=/workspace/scratch/3f4ab65dfb82/state/T11/current/runtime-gate.zig --dep zcr_core --dep zcr_policy --dep zcr_workspace -Mzcr_fs_edit=src/fs/edit.zig -Mzcr_core=src/core/types.zig --dep zcr_core -Mzcr_policy=src/policy/capability.zig --dep zcr_core --dep zcr_policy -Mzcr_workspace=src/workspace/registry.zig -femit-bin=/workspace/scratch/3f4ab65dfb82/state/T11/current/runtime-gate",
+    "corpus_sha256": "544c99d33436889c0806b431fdd405fe4e2966df8f86dfc5a4fe26713c3ebb6f",
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T11",
+    "elapsed_seconds": 14.396,
+    "environment": {
+      "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T11/tmp",
+      "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-global-cache",
+      "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache"
+    },
+    "exit_code": 0,
+    "label": "runtime-gate-compile",
+    "log": "/workspace/scratch/3f4ab65dfb82/state/T11/current/logs/runtime-gate-compile.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "source_commit": "09422d47fcf98d95f05a36d00c304846d3e1e6f8",
+    "source_config_sha256": "069182e236c65672bd209972a12355fe13e30dff65845a0f3bec8bc9a81832e9",
+    "summary": null
+  },
+  {
+    "argv": [
+      "/workspace/scratch/3f4ab65dfb82/state/T11/current/runtime-gate"
+    ],
+    "binaries": [
+      {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T11/current/runtime-gate",
+        "sha256": "c6abd87a2afcc915c20500ab6c187609a9528e6a2b5969a880ce9cd9bffa7491"
+      }
+    ],
+    "command": "/workspace/scratch/3f4ab65dfb82/state/T11/current/runtime-gate",
+    "corpus_sha256": "544c99d33436889c0806b431fdd405fe4e2966df8f86dfc5a4fe26713c3ebb6f",
+    "cwd": "/workspace/scratch/3f4ab65dfb82/state/T11/tmp",
+    "elapsed_seconds": 0.002,
+    "environment": {
+      "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T11/tmp",
+      "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-global-cache",
+      "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache"
+    },
+    "exit_code": 0,
+    "label": "runtime-gate-run",
+    "log": "/workspace/scratch/3f4ab65dfb82/state/T11/current/logs/runtime-gate-run.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "source_commit": "09422d47fcf98d95f05a36d00c304846d3e1e6f8",
+    "source_config_sha256": "069182e236c65672bd209972a12355fe13e30dff65845a0f3bec8bc9a81832e9",
+    "summary": null
+  },
+  {
+    "argv": [
+      "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "build",
+      "verify-contracts",
+      "--summary",
+      "all"
+    ],
+    "binaries": [],
+    "command": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig build verify-contracts --summary all",
+    "corpus_sha256": "544c99d33436889c0806b431fdd405fe4e2966df8f86dfc5a4fe26713c3ebb6f",
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T11",
+    "elapsed_seconds": 0.056,
+    "environment": {
+      "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T11/tmp",
+      "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-global-cache",
+      "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T11/zig-local-cache"
+    },
+    "exit_code": 0,
+    "label": "verify-contracts",
+    "log": "/workspace/scratch/3f4ab65dfb82/state/T11/current/logs/verify-contracts.log",
+    "log_sha256": "ff2cea39810d853729e68054809771338761400e12811fa4263c83030e399fba",
+    "source_commit": "09422d47fcf98d95f05a36d00c304846d3e1e6f8",
+    "source_config_sha256": "069182e236c65672bd209972a12355fe13e30dff65845a0f3bec8bc9a81832e9",
+    "summary": "Build Summary: 3/3 steps succeeded"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/3f4ab65dfb82/state/T11/current/zcr-dev-evidence",
+      "verify-contracts",
+      "--root",
+      "/workspace/scratch/3f4ab65dfb82/ZCR-T11"
+    ],
+    "binaries": [
+      {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/T11/current/zcr-dev-evidence",
+        "sha256": "8acc985babc2f05ce4654a09acd822e352507c1cc6d916c9971ec85967a4eb88"
+      }
+    ],
+    "command": "/workspace/scratch/3f4ab65dfb82/state/T11/current/zcr-dev-evidence verify-contracts --root /workspace/scratch/3f4ab65dfb82/ZCR-T11",
+    "corpus_sha256": "544c99d33436889c0806b431fdd405fe4e2966df8f86dfc5a4fe26713c3ebb6f",
+    "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T11",
+    "elapsed_seconds": 0.003,
+    "exit_code": 0,
+    "label": "verify-contracts-direct",
+    "log": "/workspace/scratch/3f4ab65dfb82/state/T11/current/logs/verify-contracts-direct.log",
+    "log_sha256": "1855f8d2e1057d26e9ccae45a29f4e553b41ba7df3110408dab7fcd95bc9915c",
+    "source_commit": "09422d47fcf98d95f05a36d00c304846d3e1e6f8",
+    "source_config_sha256": "069182e236c65672bd209972a12355fe13e30dff65845a0f3bec8bc9a81832e9",
+    "source_note": "Tool compiled from clean09422d4 before evidence packaging; direct contract invocation executed while only owned evidence artifacts were uncommitted."
+  }
+]
