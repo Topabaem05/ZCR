@@ -1,0 +1,17 @@
+test
++- run test T15-test 0 pass, 1 fail (1 total)
+error: 't15_test.test.BR-004 unit pre-submit cancellation preserves request ID and skips filesystem dispatch' failed:
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:615:14: 0x1259849 in expect (std.zig)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/tests/t15_test.zig:655:5: 0x1277b28 in test.BR-004 unit pre-submit cancellation preserves request ID and skips filesystem dispatch (t15_test.zig)
+           try t.expect(std.mem.indexOf(u8, response, "\"id\":2") != null);
+           ^
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/broker-red2-local && /workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/broker-red2-local/o/3813a748f12b3027e3526bca9771b7c1/T15-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/broker-red2-local --seed=0x75de3807 --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 0/1 tests passed (1 failed)
+test transitive failure
++- run test T15-test 0 pass, 1 fail (1 total)
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/broker-red2-local/o/de94d8b23d3f88fd829df252bfc22c95/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes /workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/broker-red2-local /workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/broker-red2-global --seed 0x75de3807 -Zb83167ddaf21d18b test -Dtest-group=broker -Dtest-id=pre-submit cancellation preserves -Doptimize=Debug

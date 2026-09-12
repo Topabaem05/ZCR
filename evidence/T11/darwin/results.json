@@ -1,0 +1,906 @@
+{
+  "schema": "zcr-darwin-publication-evidence/1",
+  "base": "11b2fdc4953e3a27089c4c4b51cda1b0433b14a8",
+  "source_commit": "d8e7ac519f3eca4b282840c8bc4c072a0d591739",
+  "source_tree": "a047bd09308d1fb46764a09970bc0fad7ec06d0c",
+  "source_paths": {
+    "sha256": "ae42f7b963de8f54cc7b9b079d2b8b579037c67569cbc263be33e3525072735c",
+    "algorithm": "sha256(sorted sha256 + two spaces + relative path + newline)",
+    "files": [
+      {
+        "path": "src/fs/publish.zig",
+        "sha256": "7f0d3f1541be08e9d511b906753c1817cf891d1022884434a2c0e5dee5a72936"
+      },
+      {
+        "path": "tests/t11_test.zig",
+        "sha256": "c98aa21fe40145b12abc6aaf202e3e7df120d50f67cc4096679b0b19ed7514c0"
+      }
+    ]
+  },
+  "config": {
+    "sha256": "d1ec42953d3539408653ebb4ce5aa291205785f7cabd6f2a16bd5568c7455594",
+    "algorithm": "sha256(sorted sha256 + two spaces + relative path + newline)",
+    "files": [
+      {
+        "path": "build.zig",
+        "sha256": "51bbc47cd1aafc90fc865b20cc15d863b0ec19109b6d01f5ac4bf3ae75d04d64"
+      },
+      {
+        "path": "build.zig.zon",
+        "sha256": "2ad2381bdb29d5669c6d2ac4807c124c2afe6d007daf7ea2b507fdc64bf44e52"
+      },
+      {
+        "path": "config/limits.json",
+        "sha256": "d7b3db8b6956c0f8b1e6f399e6e432fb4eadb8aa033f39d303e31edbe539154c"
+      },
+      {
+        "path": "config/memory-profiles.json",
+        "sha256": "7f925fb57bc0453f2505b3c10856a4e74322bcb8cc3417070ec7693e847804b7"
+      },
+      {
+        "path": "config/scheduler-profiles.json",
+        "sha256": "3f3b7d88264c94ac84ea0969da47ff1aee46ad4ba51f4899742ee2c1603b57a8"
+      }
+    ]
+  },
+  "corpus": {
+    "sha256": "c80d7e39d32a04f573b44c8fda9eff119bd10e072ab659929c63b3cfcd5baca2",
+    "algorithm": "sha256(sorted sha256 + two spaces + relative path + newline)",
+    "files": [
+      {
+        "path": "tests/t11_test.zig",
+        "sha256": "c98aa21fe40145b12abc6aaf202e3e7df120d50f67cc4096679b0b19ed7514c0"
+      }
+    ]
+  },
+  "contract": {
+    "sha256": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+    "algorithm": "sha256(sorted sha256 + two spaces + relative path + newline)",
+    "files": [
+      {
+        "path": "contracts/README.md",
+        "sha256": "e3fb52440e84c7a9abe3f855f1423eee91222c546243b2435988c64cb325a05b"
+      },
+      {
+        "path": "contracts/data.schema.json",
+        "sha256": "5c3932867cf4e16729cd6b959c16b9a143308aa5396f79a7f0e56f6563d314f5"
+      },
+      {
+        "path": "contracts/inputs/zcr_batch_read.schema.json",
+        "sha256": "50c4b12c0575660e6d030acabd8a3fb60ec9e3b4a620426cea79133ec011f15d"
+      },
+      {
+        "path": "contracts/inputs/zcr_create.schema.json",
+        "sha256": "821b9bdb7e74db3c5456e06ee6ceb0cf5105fa13ab39786ef0f4fd024b1812ca"
+      },
+      {
+        "path": "contracts/inputs/zcr_files.schema.json",
+        "sha256": "8f7680bc92ad4ef9a1a34e7a9756cbca4f286452387a246de33cb13073890eb4"
+      },
+      {
+        "path": "contracts/inputs/zcr_health.schema.json",
+        "sha256": "9e78382dc9325d9dafba3edbadf843f670505c5e19d8a2ee0a168147862d9538"
+      },
+      {
+        "path": "contracts/inputs/zcr_patch.schema.json",
+        "sha256": "77d27a7cb46a2d7765f245f85f2e47560df5ea82e406e049e1e387d38f543f99"
+      },
+      {
+        "path": "contracts/inputs/zcr_read.schema.json",
+        "sha256": "fdd23867b862977d19bf3b3d45183ead856d58ec4742d41ec3e970751e524bdc"
+      },
+      {
+        "path": "contracts/inputs/zcr_search.schema.json",
+        "sha256": "ed9109d79358aa095c54fe6c70260be99f4ba9c68aef4d4539319562f8567211"
+      },
+      {
+        "path": "contracts/inputs/zcr_status.schema.json",
+        "sha256": "a46793fa818ba7ce90931a0dece57235aaa5aebbd010bbc3606fb3a8cb0cc5b1"
+      },
+      {
+        "path": "contracts/response.schema.json",
+        "sha256": "587ba596c5ca9a3c30d820905aaf4d91b388325ededddbd468534c9119f91060"
+      },
+      {
+        "path": "contracts/task-manifest.schema.json",
+        "sha256": "d65a9082b5b4896e6e1017d4bfa6a37dc12efe88b362ed809491a5f3b2c965cc"
+      },
+      {
+        "path": "contracts/tools.json",
+        "sha256": "6537c0961f85dd623cf76c195dab534f583052c31eff2eda54727e97083a0b4b"
+      }
+    ]
+  },
+  "manifest": {
+    "path": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/manifest.json",
+    "sha256": "7a2f728827208cf7498f74e2621f7a97d04974dfe5bc349046839ea00211b2b2"
+  },
+  "host": {
+    "system": "Linux",
+    "node": "localhost",
+    "release": "6.18.35",
+    "version": "#1 SMP Mon Aug 31 18:10:37 UTC 2026",
+    "machine": "x86_64",
+    "processor": "x86_64"
+  },
+  "toolchain": {
+    "path": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+    "version": "0.16.0",
+    "sha256": "2317bbb91798556d9d0f38aabdac23db83f0979b25f767259ae474546724087c"
+  },
+  "verification": [
+    {
+      "label": "native-Debug",
+      "kind": "native_linux_execution",
+      "tests": 41,
+      "skips": 0,
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+            "test",
+            "-lc",
+            "--name",
+            "T11-test",
+            "--test-no-exec",
+            "-femit-bin=/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/native-Debug-test",
+            "-ODebug",
+            "--dep",
+            "zcr_core",
+            "--dep",
+            "zcr_policy",
+            "--dep",
+            "zcr_memory",
+            "--dep",
+            "zcr_fs_read",
+            "--dep",
+            "zcr_workspace",
+            "--dep",
+            "zcr_fs_edit",
+            "-Mroot=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/tests/t11_test.zig",
+            "-ODebug",
+            "-Mzcr_core=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/core/types.zig",
+            "-ODebug",
+            "--dep",
+            "zcr_core",
+            "-Mzcr_policy=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/policy/capability.zig",
+            "-ODebug",
+            "--dep",
+            "zcr_core",
+            "-Mzcr_memory=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/memory/budget.zig",
+            "-ODebug",
+            "--dep",
+            "zcr_core",
+            "--dep",
+            "zcr_policy",
+            "--dep",
+            "zcr_memory",
+            "--dep",
+            "zcr_cache",
+            "-Mzcr_fs_read=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/fs/read.zig",
+            "-ODebug",
+            "--dep",
+            "zcr_core",
+            "--dep",
+            "zcr_policy",
+            "-Mzcr_workspace=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/workspace/registry.zig",
+            "-ODebug",
+            "--dep",
+            "zcr_core",
+            "--dep",
+            "zcr_policy",
+            "--dep",
+            "zcr_memory",
+            "--dep",
+            "zcr_fs_read",
+            "--dep",
+            "zcr_workspace",
+            "-Mzcr_fs_edit=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/fs/edit.zig",
+            "-ODebug",
+            "--dep",
+            "zcr_core",
+            "--dep",
+            "zcr_policy",
+            "--dep",
+            "zcr_memory",
+            "--dep",
+            "zcr_workspace",
+            "-Mzcr_cache=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/cache/content.zig"
+          ],
+          "cwd": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/tmp",
+          "exit": 0,
+          "environment": {
+            "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/global-cache",
+            "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/cache",
+            "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/tmp"
+          }
+        },
+        {
+          "stage": "run",
+          "argv": [
+            "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/native-Debug-test"
+          ],
+          "cwd": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/tmp",
+          "exit": 0,
+          "environment": {
+            "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/global-cache",
+            "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/cache",
+            "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/tmp"
+          }
+        }
+      ],
+      "binary": {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/native-Debug-test",
+        "sha256": "3ab73e40b85ae6c5f78cf4392440d0c96add47ce02de75a65ea821dc2ecd0006"
+      }
+    },
+    {
+      "label": "native-ReleaseSafe",
+      "kind": "native_linux_execution",
+      "tests": 41,
+      "skips": 0,
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+            "test",
+            "-lc",
+            "--name",
+            "T11-test",
+            "--test-no-exec",
+            "-femit-bin=/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/native-ReleaseSafe-test",
+            "-OReleaseSafe",
+            "--dep",
+            "zcr_core",
+            "--dep",
+            "zcr_policy",
+            "--dep",
+            "zcr_memory",
+            "--dep",
+            "zcr_fs_read",
+            "--dep",
+            "zcr_workspace",
+            "--dep",
+            "zcr_fs_edit",
+            "-Mroot=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/tests/t11_test.zig",
+            "-OReleaseSafe",
+            "-Mzcr_core=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/core/types.zig",
+            "-OReleaseSafe",
+            "--dep",
+            "zcr_core",
+            "-Mzcr_policy=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/policy/capability.zig",
+            "-OReleaseSafe",
+            "--dep",
+            "zcr_core",
+            "-Mzcr_memory=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/memory/budget.zig",
+            "-OReleaseSafe",
+            "--dep",
+            "zcr_core",
+            "--dep",
+            "zcr_policy",
+            "--dep",
+            "zcr_memory",
+            "--dep",
+            "zcr_cache",
+            "-Mzcr_fs_read=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/fs/read.zig",
+            "-OReleaseSafe",
+            "--dep",
+            "zcr_core",
+            "--dep",
+            "zcr_policy",
+            "-Mzcr_workspace=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/workspace/registry.zig",
+            "-OReleaseSafe",
+            "--dep",
+            "zcr_core",
+            "--dep",
+            "zcr_policy",
+            "--dep",
+            "zcr_memory",
+            "--dep",
+            "zcr_fs_read",
+            "--dep",
+            "zcr_workspace",
+            "-Mzcr_fs_edit=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/fs/edit.zig",
+            "-OReleaseSafe",
+            "--dep",
+            "zcr_core",
+            "--dep",
+            "zcr_policy",
+            "--dep",
+            "zcr_memory",
+            "--dep",
+            "zcr_workspace",
+            "-Mzcr_cache=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/cache/content.zig"
+          ],
+          "cwd": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/tmp",
+          "exit": 0,
+          "environment": {
+            "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/global-cache",
+            "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/cache",
+            "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/tmp"
+          }
+        },
+        {
+          "stage": "run",
+          "argv": [
+            "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/native-ReleaseSafe-test"
+          ],
+          "cwd": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/tmp",
+          "exit": 0,
+          "environment": {
+            "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/global-cache",
+            "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/cache",
+            "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/tmp"
+          }
+        }
+      ],
+      "binary": {
+        "path": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/native-ReleaseSafe-test",
+        "sha256": "16ee5265dd442d55e0d066c1617ed699f99c7a1f3fe74767efab2b6249a92bb9"
+      }
+    },
+    {
+      "label": "aarch64-macos.11.0-Debug",
+      "kind": "semantic_cross_compile_only_no_binary",
+      "tests": null,
+      "skips": null,
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+            "test",
+            "-lc",
+            "--name",
+            "T11-test",
+            "-fno-emit-bin",
+            "-ODebug",
+            "-target",
+            "aarch64-macos.11.0",
+            "--dep",
+            "zcr_core",
+            "--dep",
+            "zcr_policy",
+            "--dep",
+            "zcr_memory",
+            "--dep",
+            "zcr_fs_read",
+            "--dep",
+            "zcr_workspace",
+            "--dep",
+            "zcr_fs_edit",
+            "-Mroot=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/tests/t11_test.zig",
+            "-ODebug",
+            "-target",
+            "aarch64-macos.11.0",
+            "-Mzcr_core=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/core/types.zig",
+            "-ODebug",
+            "-target",
+            "aarch64-macos.11.0",
+            "--dep",
+            "zcr_core",
+            "-Mzcr_policy=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/policy/capability.zig",
+            "-ODebug",
+            "-target",
+            "aarch64-macos.11.0",
+            "--dep",
+            "zcr_core",
+            "-Mzcr_memory=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/memory/budget.zig",
+            "-ODebug",
+            "-target",
+            "aarch64-macos.11.0",
+            "--dep",
+            "zcr_core",
+            "--dep",
+            "zcr_policy",
+            "--dep",
+            "zcr_memory",
+            "--dep",
+            "zcr_cache",
+            "-Mzcr_fs_read=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/fs/read.zig",
+            "-ODebug",
+            "-target",
+            "aarch64-macos.11.0",
+            "--dep",
+            "zcr_core",
+            "--dep",
+            "zcr_policy",
+            "-Mzcr_workspace=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/workspace/registry.zig",
+            "-ODebug",
+            "-target",
+            "aarch64-macos.11.0",
+            "--dep",
+            "zcr_core",
+            "--dep",
+            "zcr_policy",
+            "--dep",
+            "zcr_memory",
+            "--dep",
+            "zcr_fs_read",
+            "--dep",
+            "zcr_workspace",
+            "-Mzcr_fs_edit=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/fs/edit.zig",
+            "-ODebug",
+            "-target",
+            "aarch64-macos.11.0",
+            "--dep",
+            "zcr_core",
+            "--dep",
+            "zcr_policy",
+            "--dep",
+            "zcr_memory",
+            "--dep",
+            "zcr_workspace",
+            "-Mzcr_cache=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/cache/content.zig"
+          ],
+          "cwd": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/tmp",
+          "exit": 0,
+          "environment": {
+            "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/global-cache",
+            "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/cache",
+            "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/tmp"
+          }
+        }
+      ],
+      "binary": null
+    },
+    {
+      "label": "aarch64-macos.11.0-ReleaseSafe",
+      "kind": "semantic_cross_compile_only_no_binary",
+      "tests": null,
+      "skips": null,
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+            "test",
+            "-lc",
+            "--name",
+            "T11-test",
+            "-fno-emit-bin",
+            "-OReleaseSafe",
+            "-target",
+            "aarch64-macos.11.0",
+            "--dep",
+            "zcr_core",
+            "--dep",
+            "zcr_policy",
+            "--dep",
+            "zcr_memory",
+            "--dep",
+            "zcr_fs_read",
+            "--dep",
+            "zcr_workspace",
+            "--dep",
+            "zcr_fs_edit",
+            "-Mroot=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/tests/t11_test.zig",
+            "-OReleaseSafe",
+            "-target",
+            "aarch64-macos.11.0",
+            "-Mzcr_core=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/core/types.zig",
+            "-OReleaseSafe",
+            "-target",
+            "aarch64-macos.11.0",
+            "--dep",
+            "zcr_core",
+            "-Mzcr_policy=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/policy/capability.zig",
+            "-OReleaseSafe",
+            "-target",
+            "aarch64-macos.11.0",
+            "--dep",
+            "zcr_core",
+            "-Mzcr_memory=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/memory/budget.zig",
+            "-OReleaseSafe",
+            "-target",
+            "aarch64-macos.11.0",
+            "--dep",
+            "zcr_core",
+            "--dep",
+            "zcr_policy",
+            "--dep",
+            "zcr_memory",
+            "--dep",
+            "zcr_cache",
+            "-Mzcr_fs_read=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/fs/read.zig",
+            "-OReleaseSafe",
+            "-target",
+            "aarch64-macos.11.0",
+            "--dep",
+            "zcr_core",
+            "--dep",
+            "zcr_policy",
+            "-Mzcr_workspace=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/workspace/registry.zig",
+            "-OReleaseSafe",
+            "-target",
+            "aarch64-macos.11.0",
+            "--dep",
+            "zcr_core",
+            "--dep",
+            "zcr_policy",
+            "--dep",
+            "zcr_memory",
+            "--dep",
+            "zcr_fs_read",
+            "--dep",
+            "zcr_workspace",
+            "-Mzcr_fs_edit=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/fs/edit.zig",
+            "-OReleaseSafe",
+            "-target",
+            "aarch64-macos.11.0",
+            "--dep",
+            "zcr_core",
+            "--dep",
+            "zcr_policy",
+            "--dep",
+            "zcr_memory",
+            "--dep",
+            "zcr_workspace",
+            "-Mzcr_cache=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/cache/content.zig"
+          ],
+          "cwd": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/tmp",
+          "exit": 0,
+          "environment": {
+            "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/global-cache",
+            "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/cache",
+            "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/tmp"
+          }
+        }
+      ],
+      "binary": null
+    },
+    {
+      "label": "x86_64-macos.11.0-Debug",
+      "kind": "semantic_cross_compile_only_no_binary",
+      "tests": null,
+      "skips": null,
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+            "test",
+            "-lc",
+            "--name",
+            "T11-test",
+            "-fno-emit-bin",
+            "-ODebug",
+            "-target",
+            "x86_64-macos.11.0",
+            "--dep",
+            "zcr_core",
+            "--dep",
+            "zcr_policy",
+            "--dep",
+            "zcr_memory",
+            "--dep",
+            "zcr_fs_read",
+            "--dep",
+            "zcr_workspace",
+            "--dep",
+            "zcr_fs_edit",
+            "-Mroot=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/tests/t11_test.zig",
+            "-ODebug",
+            "-target",
+            "x86_64-macos.11.0",
+            "-Mzcr_core=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/core/types.zig",
+            "-ODebug",
+            "-target",
+            "x86_64-macos.11.0",
+            "--dep",
+            "zcr_core",
+            "-Mzcr_policy=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/policy/capability.zig",
+            "-ODebug",
+            "-target",
+            "x86_64-macos.11.0",
+            "--dep",
+            "zcr_core",
+            "-Mzcr_memory=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/memory/budget.zig",
+            "-ODebug",
+            "-target",
+            "x86_64-macos.11.0",
+            "--dep",
+            "zcr_core",
+            "--dep",
+            "zcr_policy",
+            "--dep",
+            "zcr_memory",
+            "--dep",
+            "zcr_cache",
+            "-Mzcr_fs_read=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/fs/read.zig",
+            "-ODebug",
+            "-target",
+            "x86_64-macos.11.0",
+            "--dep",
+            "zcr_core",
+            "--dep",
+            "zcr_policy",
+            "-Mzcr_workspace=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/workspace/registry.zig",
+            "-ODebug",
+            "-target",
+            "x86_64-macos.11.0",
+            "--dep",
+            "zcr_core",
+            "--dep",
+            "zcr_policy",
+            "--dep",
+            "zcr_memory",
+            "--dep",
+            "zcr_fs_read",
+            "--dep",
+            "zcr_workspace",
+            "-Mzcr_fs_edit=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/fs/edit.zig",
+            "-ODebug",
+            "-target",
+            "x86_64-macos.11.0",
+            "--dep",
+            "zcr_core",
+            "--dep",
+            "zcr_policy",
+            "--dep",
+            "zcr_memory",
+            "--dep",
+            "zcr_workspace",
+            "-Mzcr_cache=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/cache/content.zig"
+          ],
+          "cwd": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/tmp",
+          "exit": 0,
+          "environment": {
+            "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/global-cache",
+            "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/cache",
+            "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/tmp"
+          }
+        }
+      ],
+      "binary": null
+    },
+    {
+      "label": "x86_64-macos.11.0-ReleaseSafe",
+      "kind": "semantic_cross_compile_only_no_binary",
+      "tests": null,
+      "skips": null,
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+            "test",
+            "-lc",
+            "--name",
+            "T11-test",
+            "-fno-emit-bin",
+            "-OReleaseSafe",
+            "-target",
+            "x86_64-macos.11.0",
+            "--dep",
+            "zcr_core",
+            "--dep",
+            "zcr_policy",
+            "--dep",
+            "zcr_memory",
+            "--dep",
+            "zcr_fs_read",
+            "--dep",
+            "zcr_workspace",
+            "--dep",
+            "zcr_fs_edit",
+            "-Mroot=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/tests/t11_test.zig",
+            "-OReleaseSafe",
+            "-target",
+            "x86_64-macos.11.0",
+            "-Mzcr_core=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/core/types.zig",
+            "-OReleaseSafe",
+            "-target",
+            "x86_64-macos.11.0",
+            "--dep",
+            "zcr_core",
+            "-Mzcr_policy=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/policy/capability.zig",
+            "-OReleaseSafe",
+            "-target",
+            "x86_64-macos.11.0",
+            "--dep",
+            "zcr_core",
+            "-Mzcr_memory=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/memory/budget.zig",
+            "-OReleaseSafe",
+            "-target",
+            "x86_64-macos.11.0",
+            "--dep",
+            "zcr_core",
+            "--dep",
+            "zcr_policy",
+            "--dep",
+            "zcr_memory",
+            "--dep",
+            "zcr_cache",
+            "-Mzcr_fs_read=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/fs/read.zig",
+            "-OReleaseSafe",
+            "-target",
+            "x86_64-macos.11.0",
+            "--dep",
+            "zcr_core",
+            "--dep",
+            "zcr_policy",
+            "-Mzcr_workspace=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/workspace/registry.zig",
+            "-OReleaseSafe",
+            "-target",
+            "x86_64-macos.11.0",
+            "--dep",
+            "zcr_core",
+            "--dep",
+            "zcr_policy",
+            "--dep",
+            "zcr_memory",
+            "--dep",
+            "zcr_fs_read",
+            "--dep",
+            "zcr_workspace",
+            "-Mzcr_fs_edit=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/fs/edit.zig",
+            "-OReleaseSafe",
+            "-target",
+            "x86_64-macos.11.0",
+            "--dep",
+            "zcr_core",
+            "--dep",
+            "zcr_policy",
+            "--dep",
+            "zcr_memory",
+            "--dep",
+            "zcr_workspace",
+            "-Mzcr_cache=/workspace/scratch/3f4ab65dfb82/ZCR-Darwin-publication/src/cache/content.zig"
+          ],
+          "cwd": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/tmp",
+          "exit": 0,
+          "environment": {
+            "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/global-cache",
+            "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/cache",
+            "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/tmp"
+          }
+        }
+      ],
+      "binary": null
+    }
+  ],
+  "artifact_digests": [
+    {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/aarch64-macos.11.0-Debug-commands.json",
+      "sha256": "24ca839991ad24c21218769f9903319a83e4d54e2febbedcbd41053ccac9db33"
+    },
+    {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/aarch64-macos.11.0-Debug-compile.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/aarch64-macos.11.0-Debug-compile.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/aarch64-macos.11.0-ReleaseSafe-commands.json",
+      "sha256": "08611f1bcc7614dab89197ac69310ff069be82bf67d89b90750ec198c991004d"
+    },
+    {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/aarch64-macos.11.0-ReleaseSafe-compile.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/aarch64-macos.11.0-ReleaseSafe-compile.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/native-Debug-commands.json",
+      "sha256": "e82b561a90485a14416adabfe0354b3813b06f4bafbff966452248ba70e69e04"
+    },
+    {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/native-Debug-compile.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/native-Debug-compile.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/native-Debug-run.stderr.log",
+      "sha256": "58c63313f6b21ec5ac9001badb80460a77f55b74deaedd21f578407e81176281"
+    },
+    {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/native-Debug-run.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/native-Debug-test",
+      "sha256": "3ab73e40b85ae6c5f78cf4392440d0c96add47ce02de75a65ea821dc2ecd0006"
+    },
+    {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/native-ReleaseSafe-commands.json",
+      "sha256": "45660cc1b3468a93fd706abf12bb890bc38c6f9f44bddc0cbc88a882aa34cd59"
+    },
+    {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/native-ReleaseSafe-compile.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/native-ReleaseSafe-compile.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/native-ReleaseSafe-run.stderr.log",
+      "sha256": "58c63313f6b21ec5ac9001badb80460a77f55b74deaedd21f578407e81176281"
+    },
+    {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/native-ReleaseSafe-run.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/native-ReleaseSafe-test",
+      "sha256": "16ee5265dd442d55e0d066c1617ed699f99c7a1f3fe74767efab2b6249a92bb9"
+    },
+    {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/red-cross-command.json",
+      "sha256": "34f7bcdada425b0fa0a259952aec3e7de69b6f0ee820519b183f7d4dd45a7eee"
+    },
+    {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/red-cross.stderr.log",
+      "sha256": "ef969dda00d55656eec8c125996e0e380333e574bbfc79733d2ba044cc5e1d2a"
+    },
+    {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/red-cross.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/x86_64-macos.11.0-Debug-commands.json",
+      "sha256": "24c09137c0731af9869377f76060c489c0f63be870d1f1f095e02caab5352e8b"
+    },
+    {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/x86_64-macos.11.0-Debug-compile.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/x86_64-macos.11.0-Debug-compile.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/x86_64-macos.11.0-ReleaseSafe-commands.json",
+      "sha256": "0937b2550b08c92e0fa25fd8d0e56bbb7df88d5949871afc7b0070876897e036"
+    },
+    {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/x86_64-macos.11.0-ReleaseSafe-compile.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/darwin-publication/artifacts/x86_64-macos.11.0-ReleaseSafe-compile.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "historical_native_red": {
+    "run": 34692959158,
+    "job": 103551374482,
+    "artifact": 10297447481,
+    "archive_sha256": "b8990f3ed500ec69f93e3313f3442fb5d1d5f3c9b8991e62e1e4da86d6267300",
+    "source": {
+      "commit": "b6475a041b9cbee8263eb2d91138f544d3c04862",
+      "config_sha256": "8688c74cc98a91c5437596b0ffc42989451bf4a491f301e97c3478671e1fb323",
+      "contract_config_sha256": "7753ce3bc905ebcc2c67d224321c804ac0d742b7d7f2e37d54921f9dc84dce51",
+      "contract_sha256": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+      "git_status": "",
+      "test_inputs_sha256": "074ce7c7fed000b5c011e7db95cb36436aeaf7277d74ab85503f561fcea25d39",
+      "tracked_files_sha256": "0d29ced0cbaa20cec26b2694090d906527878c8d0764482ecdaa816c6a375095",
+      "tree": "1c7fbe5048241cc82d0bc8b1170f7f8ab20d48bd"
+    },
+    "report_sha256": "f4542ed8d1743d7bbcaf65233065ca4fe76d77a9a5d9ec01a761e0d04652ca76",
+    "verification_sha256": "bbeda19db39a58eaa4e514b3bcb714c6c6b38fa022e960d159d8a639e96b5b82",
+    "failure": "T11 compile failure: fchmod expected u16, received u32; no T11 tests executed",
+    "scope": "Original archive and extraction retained unchanged; brief checkpoint9d6d8e55 is distinct from native report source commit."
+  },
+  "native_current_source": "NOT_RUN",
+  "remaining": [
+    "real aarch64 macOS and Intel macOS Debug/ReleaseSafe T11 41-test execution with zero skips",
+    "native ACL and xattr fixtures, plain and durable create/replace, owner/group/mode retention, no-replace race, uncertain receipt replay",
+    "native filesystem refusing no-replace/directory fsync: retain original target and refuse precommit",
+    "actual macOS 11 execution",
+    "APFS power-loss validation and F_FULLFSYNC strongest_available",
+    "T12 persistent-journal Darwin recovery and production write activation (outside scope)"
+  ],
+  "exports": "Existing public interfaces unchanged; no build/core/edit/journal changes",
+  "source_frozen": true
+}

@@ -1,0 +1,37 @@
+{
+  "workflow_run": 34692959158,
+  "url": "https://github.com/Topabaem05/ZCR/actions/runs/34692959158",
+  "remote_head": "9d6d8e5521ebe923a625e883aa5b80776da4c841",
+  "local_checkpoint": "d0f35ef0bc03f527aef0f6e8d5c4989fd4320d66",
+  "overall_status": "FAIL",
+  "artifacts": [
+    {
+      "artifact_id": 10298326693,
+      "target": "x86_64-linux",
+      "zip_sha256": "0ad8f56d43bacb87c659e87a35271fc9a84873ba358e1eb6d6dcfe9e4ba1841d",
+      "verified_checks": 1380,
+      "native_status": "FAIL",
+      "native_commit": "b6475a041b9cbee8263eb2d91138f544d3c04862",
+      "tree": "1c7fbe5048241cc82d0bc8b1170f7f8ab20d48bd"
+    },
+    {
+      "artifact_id": 10297447481,
+      "target": "aarch64-macos",
+      "zip_sha256": "b8990f3ed500ec69f93e3313f3442fb5d1d5f3c9b8991e62e1e4da86d6267300",
+      "verified_checks": 1392,
+      "native_status": "FAIL",
+      "native_commit": "b6475a041b9cbee8263eb2d91138f544d3c04862",
+      "tree": "1c7fbe5048241cc82d0bc8b1170f7f8ab20d48bd"
+    },
+    {
+      "artifact_id": 10298222343,
+      "target": "x86_64-macos",
+      "zip_sha256": "90e689ffc2f7ba7dd26a3ea1e238071955dc28bc3a92035cf1fb76f91e8441eb",
+      "verified_checks": 1392,
+      "native_status": "FAIL",
+      "native_commit": "b6475a041b9cbee8263eb2d91138f544d3c04862",
+      "tree": "1c7fbe5048241cc82d0bc8b1170f7f8ab20d48bd"
+    }
+  ],
+  "scope": "Actual native command results at exactly this checkpoint; later changes require new proof."
+}

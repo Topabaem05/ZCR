@@ -1,0 +1,143 @@
+{
+  "binaries": [
+    {
+      "bytes": 15280821,
+      "label": "memory-debug-T03",
+      "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/memory-debug/bin/T03-test",
+      "sha256": "0e9962c4671c350be778ee9859c5f8e5d239ab9cea090ba2a8770682c38746a4"
+    },
+    {
+      "bytes": 25456930,
+      "label": "memory-debug-T13",
+      "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/memory-debug/bin/T13-test",
+      "sha256": "a1d1d4abe39f930cea35f8e1dde9c91d8f9b2aff457b195073099dd9de1047d1"
+    },
+    {
+      "bytes": 4143232,
+      "label": "memory-safe-T03",
+      "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/memory-safe/bin/T03-test",
+      "sha256": "fd7e8e606648b399be92b970e991b1a53040ff472a719e6131e8281b22546baf"
+    },
+    {
+      "bytes": 4898640,
+      "label": "memory-safe-T13",
+      "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/memory-safe/bin/T13-test",
+      "sha256": "cf86484751d221f3156fdbd1cef6a0a9b50c8cd799c4feec85d853cc726c7abf"
+    },
+    {
+      "bytes": 28827085,
+      "label": "mcp-debug-T08",
+      "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/mcp-debug/bin/T08-test",
+      "sha256": "75766d9ba3762953e23c592b6b404d1cc9e8153fd24d5bce987f9c29f1ef383e"
+    },
+    {
+      "bytes": 13052813,
+      "label": "mcp-debug-launch",
+      "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/mcp-debug/bin/T08-launch-test",
+      "sha256": "793036bec881dc03e5728b16a08bea1f2d770e6cd405ea38948f2934a1751898"
+    },
+    {
+      "bytes": 6330056,
+      "label": "mcp-safe-T08",
+      "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/mcp-safe/bin/T08-test",
+      "sha256": "515785eb417dba4e8186c11c147aa43e680199472299f32c9bf831ec46c12940"
+    },
+    {
+      "bytes": 3796456,
+      "label": "mcp-safe-launch",
+      "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/mcp-safe/bin/T08-launch-test",
+      "sha256": "59d80f40beae58fff386e8aba9c01a2beb916aec22741767ef3c534aaa6181b1"
+    },
+    {
+      "bytes": 26723192,
+      "label": "broker-filtered-debug",
+      "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/broker-debug/bin/T15-test",
+      "sha256": "5d8f0d5b4baa5b570cad01b2623b6570608d4226ddda78743e68efc2944597ad"
+    },
+    {
+      "bytes": 5778848,
+      "label": "broker-filtered-safe",
+      "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/broker-safe/bin/T15-test",
+      "sha256": "100cb85dd5b83017060ae5184bb7ef2cbe43da595e3e6b520b564954cc7144aa"
+    },
+    {
+      "bytes": 27394914,
+      "label": "broker-full-debug",
+      "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/broker-full-debug/bin/T15-test",
+      "sha256": "580a89391615391fac08c550f2e803c3f5aa12c2c135c92e7d2231cf8e174416"
+    },
+    {
+      "bytes": 6096408,
+      "label": "broker-full-safe",
+      "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/broker-full-safe/bin/T15-test",
+      "sha256": "5f0970a63c28972aa6d3e9472782ce6e4157f35deff8dba728e42f1b20a5e727"
+    },
+    {
+      "bytes": 21414029,
+      "label": "cli-debug",
+      "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/cli-debug/bin/zcr",
+      "sha256": "b3225a35e2be2161faa8c1607cd8c4d31d001b30b9e27dcd754157bcacf620b1"
+    },
+    {
+      "bytes": 5928696,
+      "label": "cli-safe",
+      "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/cli-safe/bin/zcr",
+      "sha256": "53ca2f895da0b990ec1fd28c3457519f35026118de1c06a9fb24fb508ca5c88f"
+    },
+    {
+      "bytes": 18006968,
+      "label": "evidence-cli-debug",
+      "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/out/cli-debug/bin/zcr-dev-evidence",
+      "sha256": "1b903764e58145414d9c31df3c7acf3ae3ef0ad6921587c013959c5c642445b6"
+    },
+    {
+      "bytes": 13017912,
+      "label": "budget-focused-debug",
+      "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/final-debug-local/o/b4f1a403e67f47a8e4da236ac621f427/T03-test",
+      "sha256": "0fd58dd62223a58eaae287dce63ff140a5ff79d6a521f5be39dac5ffba610d29"
+    },
+    {
+      "bytes": 3856696,
+      "label": "budget-focused-safe",
+      "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/final-safe-local/o/c76d7af856ee349356d0def8184a564b/T03-test",
+      "sha256": "3d82e395c7f86eb170799a7f952c7b8db449239b7428b4524d6ea664765a9bed"
+    },
+    {
+      "bytes": 13013432,
+      "label": "budget-red-debug",
+      "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/zig-local-cache/o/c343c2441e8e6de98a1253bd818e113e/T03-test",
+      "sha256": "76884ce3f2fbe2e35a17d6158f719b7057cdd41e16fd0f3e0b37986f69b25097"
+    },
+    {
+      "bytes": 27727672,
+      "label": "cache-red-debug",
+      "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/cache-red5-local/o/fa0812cbf1f042bab5a732d866d290dc/T08-test",
+      "sha256": "22dc65cfafe47238c86ebb8e7f2dca72969445fe1a626b133e96a45e1ec75d0c"
+    },
+    {
+      "bytes": 28074210,
+      "label": "broker-red-debug",
+      "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/broker-red2-local/o/3813a748f12b3027e3526bca9771b7c1/T15-test",
+      "sha256": "a5e872a20d7491a3fae146ec48e9efdd4713335457b16605a500d10d8470e228"
+    },
+    {
+      "bytes": 26108216,
+      "label": "r1-red-debug",
+      "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/r1-red-c/o/76ad3472d74cc3b0df57576380a7c7f1/T15-test",
+      "sha256": "b9f982d271198bc61493d4c5101746e473e73f7b73ed7681f06c87144e037dc3"
+    },
+    {
+      "bytes": 26120930,
+      "label": "r1-green-debug",
+      "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/r1-green-debug-c/o/6525b8cff0bc1f9caf63196c4df922cc/T15-test",
+      "sha256": "adddedd24d6b8fdaa6c324f09ec0efe9002076ed74721896954f7a034886c99e"
+    },
+    {
+      "bytes": 5586456,
+      "label": "r1-green-safe",
+      "path": "/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/r1-green-safe-c/o/d2f7b7a66f99df2a21a26d6c3e94f44b/T15-test",
+      "sha256": "7f6a8965cf8ecb6c085577608ae9fc21177650a2de831096677f85e7aa23e9b2"
+    }
+  ],
+  "schema": "zcr-binary-identities/1"
+}

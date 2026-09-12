@@ -1,0 +1,122 @@
+{
+  "files": [
+    {
+      "bytes": 5,
+      "path": "cli/fixture/tiny.txt",
+      "sha256": "36d25d3d80f8431614deece844a6def69fb24b92310156ce7847ba1d9595db57"
+    },
+    {
+      "bytes": 199992,
+      "path": "cli/fixture/warm0.txt",
+      "sha256": "ed7a18bc421c35bc463aeca3a1b72cec642f5a8d7317b9cb7ccbacbc199dad68"
+    },
+    {
+      "bytes": 199992,
+      "path": "cli/fixture/warm1.txt",
+      "sha256": "90d027a853868ebb1bd3baf7cf7d4e411278eb6752ad79708e6a50f9a7cf0062"
+    },
+    {
+      "bytes": 199993,
+      "path": "cli/fixture/warm10.txt",
+      "sha256": "c2bdf72b74be322f5854cfa3376d1476a5348bcd9569d85c0b6bf49ff8beab24"
+    },
+    {
+      "bytes": 199993,
+      "path": "cli/fixture/warm11.txt",
+      "sha256": "99586c16455c0886891c2d0f080424a1f25b443c4c52c4a0d532143c3b7b42f3"
+    },
+    {
+      "bytes": 199993,
+      "path": "cli/fixture/warm12.txt",
+      "sha256": "b6e3aa7fb05b29c6d1df5affd8360c11ee6a7960afc28af75aa7e712a061fede"
+    },
+    {
+      "bytes": 199993,
+      "path": "cli/fixture/warm13.txt",
+      "sha256": "9913f5879a995dbe078930970e0da7edc47b51daa90d89ed106b533153e36bc2"
+    },
+    {
+      "bytes": 199993,
+      "path": "cli/fixture/warm14.txt",
+      "sha256": "a7339368edd500decf1853a5f6e754f193c8934f7e13afe9bfb8c4c7160f3446"
+    },
+    {
+      "bytes": 199993,
+      "path": "cli/fixture/warm15.txt",
+      "sha256": "c604e9eb15e5c81f4a16207da068ef1b92f3c8d8683e4a5513a913880a8f4aaf"
+    },
+    {
+      "bytes": 199992,
+      "path": "cli/fixture/warm2.txt",
+      "sha256": "2e7910f48c4752d905b5670d5c155fc26291c09c6f43df235e4c978174b3dce3"
+    },
+    {
+      "bytes": 199992,
+      "path": "cli/fixture/warm3.txt",
+      "sha256": "7c950d885e8b5c88545b29c7326797a9e3c0614755c2ac236eb37c3277d11731"
+    },
+    {
+      "bytes": 199992,
+      "path": "cli/fixture/warm4.txt",
+      "sha256": "05bb99cb73661a06f37d245482af8350b9ad6cd0b512d4eab42f349a0b0c018d"
+    },
+    {
+      "bytes": 199992,
+      "path": "cli/fixture/warm5.txt",
+      "sha256": "c7976f7a91dab14013d1339cc57d06c144e4a8051aa8694306a0afabd72cb4fd"
+    },
+    {
+      "bytes": 199992,
+      "path": "cli/fixture/warm6.txt",
+      "sha256": "6cf3e223f8909678b4e5f1c9d26460f0f675b440ba53d99dfc21284dad6dcfde"
+    },
+    {
+      "bytes": 199992,
+      "path": "cli/fixture/warm7.txt",
+      "sha256": "0349991bd4a23edff8a2a140241cfa67fafac1bdf7be1442d7c12fd893a99560"
+    },
+    {
+      "bytes": 199992,
+      "path": "cli/fixture/warm8.txt",
+      "sha256": "8371eac59c9b3a2e88d2a7e4aedec334cc468b549477b4881bac913d95e0a203"
+    },
+    {
+      "bytes": 199992,
+      "path": "cli/fixture/warm9.txt",
+      "sha256": "e014f87098a4e4da4e991efaeef89b19b5203712f17bb26e54b1fbe02b6bd520"
+    },
+    {
+      "bytes": 416,
+      "path": "cli/manifest.json",
+      "sha256": "9b74a27a72d64611091a152cc011bd941ea81b51e66dcbce20d62c1cb4504e33"
+    },
+    {
+      "bytes": 212,
+      "path": "cli/policy.json",
+      "sha256": "0c6108109c027a9f315e1ea8825aee023b878845aaa2f07225c0de26250e401a"
+    },
+    {
+      "bytes": 5445,
+      "path": "cli/proof-debug.json",
+      "sha256": "fb794ef690d859a7ff671308f82b67ab90a69389c79bb2928f76fadacdb4d65f"
+    },
+    {
+      "bytes": 5444,
+      "path": "cli/proof-safe.json",
+      "sha256": "322778f467c0de6c919d5f6c84dd721d69d8744800739b16c35c0fb84b54c14a"
+    },
+    {
+      "bytes": 2063,
+      "path": "cli/run_pressure.py",
+      "sha256": "b397a0ce501984fbc68853944b0d5ec49b8df89c74a2b9861b9bb28a95673874"
+    },
+    {
+      "bytes": 197,
+      "path": "cli/workspace.json",
+      "sha256": "e86c17efe7e1472f9abe024df24c1116a134680562974bfc54d378fbb78c906c"
+    }
+  ],
+  "fixture_git_head": "45ce20868507bf48fd63b869262f79fd79bfc554",
+  "schema": "zcr-cli-corpus/1",
+  "workspace_id": "fs:28:1179835:28:1179838:28:1179838"
+}

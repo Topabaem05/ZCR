@@ -6,6 +6,7 @@ const core = @import("zcr_core");
 const policy = @import("zcr_policy");
 const workspace = @import("zcr_workspace");
 const memory = @import("zcr_memory");
+const cache = @import("zcr_cache");
 const mcp = @import("zcr_mcp");
 const options = @import("build_options");
 const ignores = @import("launch_ignore.zig");
@@ -194,7 +195,12 @@ pub fn serve(a: A, io: Io, policy_path: []const u8) !void {
     var launch_caps = memory.capsFor(&core.limits.memory_profiles[0], .inflight);
     launch_caps.cpu = 1;
     var budget = memory.Budget.init(1, launch_caps, &counters);
+    const cache_store = try cache.Store.create(a, io, &budget, session, .{ .verification_budget = &budget });
+    // server.serve joins request/control workers before returning, including errors.
+    defer cache_store.deinit() catch @panic("cache teardown before request drain");
+    var cache_cancel = std.atomic.Value(bool).init(false);
+    var cache_session = try cache.Session.init(cache_store, &registry, &authorizer, session, .{ .requested = &cache_cancel });
     var authority: Authority = .{ .registry = &registry, .session = session, .boot = registry.bootNonce(), .io = io, .info_exclude = &info_exclude, .global_exclude = if (global_exclude) |*global| global else null };
-    var server = try mcp.Server.init(.{ .allocator = a, .io = io, .authorizer = &authorizer, .session = session, .generation = snapshot.generation, .budget = &budget, .tools_json = options.tools_json, .version = options.version, .authority_context = &authority, .validate_authority = Authority.validate, .trusted_excludes = .{ .git_info_exclude = info_exclude.file, .global_exclude = if (global_exclude) |global| global.binding.file else null } });
+    var server = try mcp.Server.init(.{ .allocator = a, .io = io, .authorizer = &authorizer, .session = session, .generation = snapshot.generation, .budget = &budget, .cache_session = &cache_session, .tools_json = options.tools_json, .version = options.version, .authority_context = &authority, .validate_authority = Authority.validate, .trusted_excludes = .{ .git_info_exclude = info_exclude.file, .global_exclude = if (global_exclude) |global| global.binding.file else null } });
     try server.serve(Io.File.stdin(), Io.File.stdout());
 }

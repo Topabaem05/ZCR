@@ -1,0 +1,7 @@
+tests/t15_test.zig: OK
+tests/t13_test.zig: OK
+tests/t03_test.zig: OK
+src/protocol/mcp.zig: OK
+tests/t08_test.zig: OK
+src/memory/budget.zig: OK
+src/broker/server.zig: OK

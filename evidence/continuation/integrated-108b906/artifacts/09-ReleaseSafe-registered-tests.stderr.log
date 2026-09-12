@@ -1,0 +1,137 @@
+test
++- run test T15-test 19 pass, 9 fail (28 total)
+error: 't15_test.test.BR-001 four real UDS clients query using one executor and 128MiB group' failed without output
+error: 't15_test.test.BR-002 seventeenth UDS connection refuses while sixteen clients retain progress' failed without output
+error: 't15_test.test.BR-003 slow UDS client holds output while fast client keeps making progress' failed without output
+error: 't15_test.test.BR-004 real UDS token and domain refusal cannot disconnect a valid grant' failed without output
+error: 't15_test.test.BR-002 idle unauthenticated UDS peer expires and releases its connection credit' failed without output
+error: 't15_test.test.BR-003 finite bridge stdin drains complete requests and all broker responses before EOF' failed without output
+error: 't15_test.test.BR-004 active UDS request cancellation remains scoped across client sessions' failed without output
+error: 't15_test.test.BR-003 real broker health stays available when ordinary group bytes are exhausted' failed without output
+error: 't15_test.test.BR-004 coalesced UDS request and cancellation cancel the preceding idle request' failed without output
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/i1/S/c && /workspace/scratch/3f4ab65dfb82/state/i1/S/o/bin/T15-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/i1/S/c --seed=0x8391a6ed --listen=-
+
+test
++- run test T12-test w
+T12 C01 patch pid=8496 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C02 patch pid=8539 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C03 patch pid=8582 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C04 patch pid=8625 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=1
+T12 C05 patch pid=8668 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C06 patch pid=8711 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C07 patch pid=8754 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C08 patch pid=8797 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C09 patch pid=8840 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C10 patch pid=8883 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C01 create pid=8926 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C02 create pid=8969 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C03 create pid=9012 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C04 create pid=9055 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=1
+T12 C05 create pid=9098 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C06 create pid=9141 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C07 create pid=9184 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C08 create pid=9227 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C09 create pid=9270 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C10 create pid=9313 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 recovery append SIGKILL verified
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/i1/S/c && /workspace/scratch/3f4ab65dfb82/state/i1/S/c/o/9d4b03fdd035f7329ea6ec41dd3d0b00/T12-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/i1/S/c --seed=0x8391a6ed --listen=-
+
+test
++- run test T05-test w
+FS-004 corpus=small actual_files=1000 candidate_count=1000 tracked_live=3745880 tracked_peak=3745880 coverage_skipped=0 complete=true corpus_sha256=c51d1cae1ca2457bc0183a853f69ca5841ce7cc770badec767ff85cac9694d5c
+FS-004 corpus=large actual_files=200000 candidate_count=200000 tracked_live=3745880 tracked_peak=3745880 coverage_skipped=0 complete=true corpus_sha256=8516686afc53e0500c9119dc68e4d62c60ab6e601af8d43a7f282bb90db6d26b
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/i1/S/c && /workspace/scratch/3f4ab65dfb82/state/i1/S/c/o/36f5c8538ada5e1cbbe1069a9acd7daa/T05-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/i1/S/c --seed=0x8391a6ed --listen=-
+
+Build Summary: 60/62 steps succeeded (1 failed); 338/347 tests passed (9 failed)
+test transitive failure
++- install T00-test success
+|  +- compile test T00-test ReleaseSafe native success 21s MaxRSS:539M
++- run test T00-test 12 pass (12 total) 263ms MaxRSS:7M
+|  +- compile test T00-test ReleaseSafe native (reused)
++- install T01-test success
+|  +- compile test T01-test ReleaseSafe native success 21s MaxRSS:538M
+|     +- options cached
++- run test T01-test 19 pass (19 total) 890ms MaxRSS:5M
+|  +- compile test T01-test ReleaseSafe native (+1 more reused dependencies)
++- install T02-test success
+|  +- compile test T02-test ReleaseSafe native success 21s MaxRSS:527M
+|     +- options (reused)
++- run test T02-test 15 pass (15 total) 375ms MaxRSS:5M
+|  +- compile test T02-test ReleaseSafe native (+1 more reused dependencies)
++- install T03-test success
+|  +- compile test T03-test ReleaseSafe native success 17s MaxRSS:479M
++- run test T03-test 16 pass (16 total) 148ms MaxRSS:5M
+|  +- compile test T03-test ReleaseSafe native (reused)
++- install T04-test success
+|  +- compile test T04-test ReleaseSafe native success 19s MaxRSS:496M
++- run test T04-test 13 pass (13 total) 283ms MaxRSS:20M
+|  +- compile test T04-test ReleaseSafe native (reused)
++- install T04-deadline-test success
+|  +- compile test T04-deadline-test ReleaseSafe native success 17s MaxRSS:439M
++- run test T04-deadline-test 2 pass (2 total) 7ms MaxRSS:6M
+|  +- compile test T04-deadline-test ReleaseSafe native (reused)
++- install T05-test success
+|  +- compile test T05-test ReleaseSafe native success 18s MaxRSS:520M
++- run test T05-test 15 pass (15 total) 23s MaxRSS:7M
+|  +- compile test T05-test ReleaseSafe native (reused)
++- install T06-test success
+|  +- compile test T06-test ReleaseSafe native success 18s MaxRSS:486M
++- run test T06-test 15 pass (15 total) 1s MaxRSS:9M
+|  +- compile test T06-test ReleaseSafe native (reused)
++- install T07-test success
+|  +- compile test T07-test ReleaseSafe native success 21s MaxRSS:556M
++- run test T07-test 25 pass (25 total) 102ms MaxRSS:15M
+|  +- compile test T07-test ReleaseSafe native (reused)
++- install T08-test success
+|  +- compile test T08-test ReleaseSafe native success 28s MaxRSS:640M
+|     +- options (reused)
++- run test T08-test 27 pass (27 total) 753ms MaxRSS:52M
+|  +- compile test T08-test ReleaseSafe native (+1 more reused dependencies)
++- install T09-test success
+|  +- compile test T09-test ReleaseSafe native success 16s MaxRSS:480M
++- run test T09-test 15 pass (15 total) 35ms MaxRSS:6M
+|  +- compile test T09-test ReleaseSafe native (reused)
++- install T08-launch-test success
+|  +- compile test T08-launch-test ReleaseSafe native success 17s MaxRSS:453M
+|     +- options (reused)
++- run test T08-launch-test 2 pass (2 total) 3ms MaxRSS:6M
+|  +- compile test T08-launch-test ReleaseSafe native (+1 more reused dependencies)
++- install T10-test success
+|  +- compile test T10-test ReleaseSafe native success 20s MaxRSS:554M
++- run test T10-test 44 pass (44 total) 1s MaxRSS:6M
+|  +- compile test T10-test ReleaseSafe native (reused)
++- install T11-test success
+|  +- compile test T11-test ReleaseSafe native success 21s MaxRSS:521M
++- run test T11-test 41 pass (41 total) 995ms MaxRSS:12M
+|  +- compile test T11-test ReleaseSafe native (reused)
++- install T12-child success
+|  +- compile test T12-child ReleaseSafe native success 23s MaxRSS:555M
+|     +- options (reused)
++- install T12-test success
+|  +- compile test T12-test ReleaseSafe native success 25s MaxRSS:592M
+|     +- options (reused)
+|     +- options success
+|        +- compile test T12-child ReleaseSafe native (+1 more reused dependencies)
++- run test T12-test 24 pass (24 total) 5s MaxRSS:12M
+|  +- compile test T12-test ReleaseSafe native (+2 more reused dependencies)
++- install T13-test success
+|  +- compile test T13-test ReleaseSafe native success 20s MaxRSS:559M
++- run test T13-test 15 pass (15 total) 582ms MaxRSS:6M
+|  +- compile test T13-test ReleaseSafe native (reused)
++- install T14-test success
+|  +- compile test T14-test ReleaseSafe native success 22s MaxRSS:606M
++- run test T14-test 19 pass (19 total) 623ms MaxRSS:11M
+|  +- compile test T14-test ReleaseSafe native (reused)
++- install T15-test success
+|  +- compile test T15-test ReleaseSafe native success 27s MaxRSS:621M
+|     +- options (reused)
++- run test T15-test 19 pass, 9 fail (28 total)
+|  +- compile test T15-test ReleaseSafe native (+1 more reused dependencies)
++- run exe zcr success 1ms
+|  +- compile exe zcr ReleaseSafe native cached 16ms MaxRSS:71M
+|     +- options (reused)
++- run exe zcr success 988us
+   +- compile exe zcr ReleaseSafe native (+1 more reused dependencies)
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/i1/S/c/o/4019de6d424aa27c240d75ad7c7c7bc2/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-work /workspace/scratch/3f4ab65dfb82/state/i1/S/c /workspace/scratch/3f4ab65dfb82/state/i1/S/g --seed 0x8391a6ed -Z9485b2834d362a7c -j2 -Doptimize=ReleaseSafe --prefix /workspace/scratch/3f4ab65dfb82/state/i1/S/o --summary all test -Dinstall-tests=true

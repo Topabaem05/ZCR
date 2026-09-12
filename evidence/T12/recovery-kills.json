@@ -1,0 +1,20 @@
+[
+  {
+    "mode": "Debug",
+    "fixture_directory": "7FiNRIQ0tUbzobTi",
+    "ack_point": 11,
+    "writer_point": 7,
+    "source_commit": "8d241f687effb78c3416c3d733d18283a5956ffb",
+    "terminal_append_kill_asserted_by": "tests/t12_test.zig killed recovery terminal append test; child.wait signal KILL",
+    "fresh_successful_recoveries_after_kill": 2
+  },
+  {
+    "mode": "ReleaseSafe",
+    "fixture_directory": "hSyaUa-xtbrQxLJ6",
+    "ack_point": 11,
+    "writer_point": 7,
+    "source_commit": "8d241f687effb78c3416c3d733d18283a5956ffb",
+    "terminal_append_kill_asserted_by": "tests/t12_test.zig killed recovery terminal append test; child.wait signal KILL",
+    "fresh_successful_recoveries_after_kill": 2
+  }
+]

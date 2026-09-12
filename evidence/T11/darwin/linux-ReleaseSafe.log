@@ -1,0 +1,42 @@
+1/41 t11_test.test.WR-001 exact digest and original nonoverlap spans preserve unchanged bytes...OK
+2/41 t11_test.test.WR-001 journal receives exact live publication identities and applied transition...OK
+3/41 t11_test.test.WR-004 journal records established precommit abort with truthful cancellation...OK
+4/41 t11_test.test.WR-007 applied journal transition failure returns applied recovery receipt and quarantine...OK
+5/41 t11_test.test.WR-009 create existing path preserves original...OK
+6/41 t11_test.test.WR-010 new create publishes only complete bytes...OK
+7/41 t11_test.test.WR-002 stale expected digest leaves mediated writers bytes unchanged...OK
+8/41 t11_test.test.WR-003 overlap overflow order and UTF-8 split fail before mutation...OK
+9/41 t11_test.test.WR-003 duplicate insertion positions are refused before prepare or mutation...OK
+10/41 t11_test.test.WR-002 mediated change after original read is a final version conflict...OK
+11/41 t11_test.test.WR-007 ambiguous temp cleanup quarantines before and after guard admission...OK
+12/41 t11_test.test.WR-004 precommit cancellation preserves original and drains callback...OK
+13/41 t11_test.test.WR-004 postcommit cancellation returns applied receipt with observation...OK
+14/41 t11_test.test.WR-007 injected ENOSPC read-only metadata and prepare failures preserve original...OK
+15/41 t11_test.test.WR-007 postcommit sync failure is applied with durability error...OK
+16/41 t11_test.test.WR-004 revoked callback cannot pass final publication fence...OK
+17/41 t11_test.test.IS-007 moved parent is refused after temp preparation...OK
+18/41 t11_test.test.WR-001 primitive preserves ordinary mode and exact source identity...OK
+19/41 t11_test.test.IS-007 primitive rejects hardlink and special file without blocking...OK
+20/41 t11_test.test.WR-007 primitive refuses xattr and ACL metadata it cannot preserve...OK
+21/41 t11_test.test.WR-010 primitive simultaneous no-replace publish admits exactly one complete file...OK
+22/41 t11_test.test.WR-001 idempotency reuses receipt and rejects altered canonical payload...OK
+23/41 t11_test.test.WR-003 full 8 MiB boundary and decoded output growth stay bounded...OK
+24/41 t11_test.test.WR-003 invalid keys binary text and unsupported durability are refused...OK
+25/41 t11_test.test.WR-004 precommit deadline and missing reservation leave original unchanged...OK
+26/41 t11_test.test.WR-007 allocation faults free all buffers and never publish partial text...OK
+27/41 t11_test.test.WR-007 receipt failure preserves applied outcome and disables further writes...OK
+28/41 t11_test.test.WR-010 concurrent callbacks racing one create yield one truthful applied receipt...OK
+29/41 t11_test.test.WR-010 distinct bound sessions cannot bypass the exclusive task writer lease...OK
+30/41 t11_test.test.WR-007 primitive real Io write boundary propagates ENOSPC and temp cleanup...OK
+31/41 t11_test.test.WR-004 actual publication linearizes before concurrent lease revocation returns...OK
+32/41 t11_test.test.WR-007 syscall error after successful rename reconciles to applied receipt...OK
+33/41 t11_test.test.WR-007 primitive exclusive temp collision exhausts bounded retries without overwrite...OK
+34/41 t11_test.test.WR-010 abandoned second launch aborts and drains the first publisher...OK
+35/41 t11_test.test.WR-007 failed receipt atomically blocks an already queued filesystem publisher...OK
+36/41 t11_test.test.WR-007 unresolved durability blocks an already queued filesystem publisher...OK
+37/41 t11_test.test.WR-007 ambiguous lookup errors quarantine instead of accepting new mutation...OK
+38/41 t11_test.test.WR-007 ambiguous prepare errors preserve exact pending temp and quarantine...OK
+39/41 t11_test.test.WR-007 impossible journal result shapes preserve uncertainty and quarantine...OK
+40/41 t11_test.test.WR-007 failed abort persistence keeps pending state and quarantines...OK
+41/41 t11_test.test.WR-001 durable create exposes actual chunk metadata sync and receipt crash boundaries...OK
+All 41 tests passed.

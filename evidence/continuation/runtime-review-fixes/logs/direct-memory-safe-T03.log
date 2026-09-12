@@ -1,0 +1,17 @@
+1/16 t03_test.test.ME-005 pressure lowers new admission without revoking live reservations...OK
+2/16 t03_test.test.ME-003 aggregate byte admission never overflows at the integer ceiling...OK
+3/16 t03_test.test.ME-003 oversized requests are refused at admission and the tracked cap stays untouched...OK
+4/16 t03_test.test.ME-003 output beyond the budget's output share is refused...OK
+5/16 t03_test.test.ME-003 FD reservations grant the exact cap, reject exhaustion and restore capacity...OK
+6/16 t03_test.test.ME-003 CPU reservations grant the exact cap, reject exhaustion and restore capacity...OK
+7/16 t03_test.test.ME-003 concurrent reservations never exceed the hard tracked cap...OK
+8/16 t03_test.test.ME-003 reservation-bound allocation never falls back to an untracked allocator...OK
+9/16 t03_test.test.ME-003 admission evicts once and then reports exhaustion...OK
+10/16 t03_test.test.ME-003 admission bounds in-flight requests per session and globally...OK
+11/16 t03_test.test.ME-001 an Nth allocation failure in any phase leaves the original and returns every reservation...OK
+12/16 t03_test.test.ME-002 a request arena is not freed while a child is pending, even after cancellation...OK
+13/16 t03_test.test.ME-002 release waits for a child on another thread to drain...OK
+14/16 t03_test.test.ME-007 10k read and cancel cycles return to idle without leak growth...OK
+15/16 t03_test.test.T03 profiles map RAM to caps and budgets release exactly once...OK
+16/16 t03_test.test.T03 accounting reports live allocation, retained capacity and process footprint separately...OK
+All 16 tests passed.

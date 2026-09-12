@@ -24,6 +24,8 @@
 
 이 저장소는 API 계약, Zig 구현, 테스트, 실행 증거와 남은 작업 계획을 함께 관리한다. [브랜치 조사와 후속 계획](docs/superpowers/plans/2026-09-12-runtime-continuation.md), [작업 상태](tasks/INDEX.md), [상태 데이터](tasks/progress.json)를 기준으로 이어간다. 각 증거는 해당 source commit·binary·실행 환경에만 적용된다. 과거 Mac probe나 현재 Linux 시험으로 최종 Mac 런타임, 실제 클라이언트 연동, 종단 성능 검증을 대신하지 않는다.
 
+기본 `main`은 문서 기준선이며, 이어가는 Zig 코드는 [작업 브랜치의 src](https://github.com/Topabaem05/ZCR/tree/codex/continue-runtime-20260912/src)와 [Draft PR #1](https://github.com/Topabaem05/ZCR/pull/1)에서 확인한다.
+
 설정·메모리·지연 수치는 **초기 설계값 또는 합격 목표**이지 실측 성능이 아니다. 계약 파일 검증 결과와 런타임 테스트 결과를 혼동하지 않는다.
 
 ### 현재 직접 stdio 실행

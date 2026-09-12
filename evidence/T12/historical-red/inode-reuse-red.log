@@ -1,0 +1,59 @@
+test
++- run test T12-test 10 pass, 2 fail (12 total)
+error: 't12_test.test.WR-008 cold start and wrong grants fail closed without source mutation' failed:
+       T12 C01 patch pid=268 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+       T12 C02 patch pid=354 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+       T12 C03 patch pid=513 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+       T12 C04 patch pid=659 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=1
+       T12 C05 patch pid=702 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+       T12 C06 patch pid=745 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+       T12 C07 patch pid=788 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+       T12 C08 patch pid=831 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+       T12 C09 patch pid=874 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+       T12 C10 patch pid=917 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+       T12 C01 create pid=960 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+       T12 C02 create pid=1003 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+       T12 C03 create pid=1046 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+       T12 C04 create pid=1089 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=1
+       T12 C05 create pid=1132 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+       T12 C06 create pid=1175 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+       T12 C07 create pid=1218 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+       T12 C08 create pid=1261 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+       T12 C09 create pid=1304 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+       T12 C10 create pid=1347 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+       expected error.LeaseExpired, found error.FenceMismatch
+       /workspace/scratch/3f4ab65dfb82/ZCR-T12/src/workspace/registry.zig:269:13: 0x12adc0a in validateWorkspace (registry.zig)
+                   return error.FenceMismatch;
+                   ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T12/src/workspace/registry.zig:170:13: 0x12865d6 in lockForMutation (registry.zig)
+                   try self.validateWorkspace(id);
+                   ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T12/src/workspace/registry.zig:427:19: 0x1360b7f in validateLease (registry.zig)
+               const e = try self.lockForMutation(l.workspace_id, null);
+                         ^
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:72:13: 0x13d91a9 in expectError__anon_62959 (std.zig)
+                   return error.TestUnexpectedError;
+                   ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T12/tests/t12_test.zig:227:9: 0x13d9d31 in test.WR-008 cold start and wrong grants fail closed without source mutation (t12_test.zig)
+               try t.expectError(error.LeaseExpired, fresh.registry.validateLease(stale_lease));
+               ^
+error: 't12_test.test.WR-008 temp FIFO hardlink replacement and unrecorded decoys remain untouched' failed:
+       T12 recovery append SIGKILL verified
+       expected 1, found 0
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:118:17: 0x125e1f3 in expectEqualInner__anon_44929 (std.zig)
+                       return error.TestExpectedEqual;
+                       ^
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:83:5: 0x132cfff in expectEqual (t12_test.zig)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T12/tests/t12_test.zig:446:9: 0x132d0bc in test.WR-008 temp FIFO hardlink replacement and unrecorded decoys remain untouched (t12_test.zig)
+               try t.expectEqual(@as(u64, 1), report.value.uncertain);
+               ^
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/T12/cache && /workspace/scratch/3f4ab65dfb82/state/T12/cache/o/1575200bbda660dad37943969afffc0b/T12-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/T12/cache --seed=0x3069b596 --listen=-
+
+Build Summary: 6/8 steps succeeded (1 failed); 51/53 tests passed (2 failed)
+test transitive failure
++- run test T12-test 10 pass, 2 fail (12 total)
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/T12/cache/o/de94d8b23d3f88fd829df252bfc22c95/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-T12 /workspace/scratch/3f4ab65dfb82/state/T12/cache /workspace/scratch/3f4ab65dfb82/state/T12/global-cache --seed 0x3069b596 -Z48cd5a78b98eb629 test -Dtest-group=write -Doptimize=Debug

@@ -628,3 +628,229 @@ test "SC-001 R2 idle dispatch waits for active foreground callback completion" {
         }
     }
 }
+
+fn admission(cpu: u32, io_permits: u32, bulk: bool, speculative: bool) core.AdmissionLimits {
+    return .{ .cpu_permits = cpu, .io_permits = io_permits, .tracked_limit_bytes = 0, .cache_target_bytes = 0, .bulk_admission = bulk, .speculative_work = speculative };
+}
+test "SC-005 prospective admission refuses fresh bulk with caller ownership" {
+    var counters: memory.accounting.Counters = .{};
+    var budget = budgetFor(&counters);
+    var executor: scheduling.Executor = undefined;
+    try executor.init(t.allocator, &budget, .{ .cpu_permits = 2, .io_permits = 2, .usable_physical_cpus = 4 });
+    defer executor.deinit();
+    var probe: Probe = .{};
+    defer probe.deinit();
+    var flag: std.atomic.Value(bool) = .init(false);
+    try executor.setAdmissionLimits(admission(1, 1, false, false));
+    const job = try makeJob(&budget, &flag, &probe, 1, .fg_bulk, false);
+    const result = executor.submit(job);
+    if (result) |_| {
+        try executor.waitIdle();
+        return error.ExpectedProspectiveRefusal;
+    } else |err| {
+        defer rejectCleanup(&budget, job);
+        try t.expectEqual(error.Busy, err);
+        try t.expect(!job.scratch_reservation.released);
+        try t.expectEqual(@as(u32, 0), probe.calls.load(.acquire));
+    }
+}
+
+test "SC-005 CPU3 active and queued grants drain exclusively across tighten restore and promotion" {
+    for (backends) |backend| {
+        var counters: memory.accounting.Counters = .{};
+        var budget = budgetFor(&counters);
+        var executor: scheduling.Executor = undefined;
+        try executor.init(t.allocator, &budget, .{ .backend = backend, .cpu_permits = 6, .io_permits = 2, .usable_physical_cpus = 8 });
+        defer executor.deinit();
+        var flag: std.atomic.Value(bool) = .init(false);
+        var first_gate: Gate = .{};
+        defer first_gate.deinit();
+        var old_gate: Gate = .{};
+        defer old_gate.deinit();
+        var first: Probe = .{ .gate = &first_gate };
+        defer first.deinit();
+        var old: Probe = .{ .gate = &old_gate };
+        defer old.deinit();
+        var fresh: Probe = .{};
+        defer fresh.deinit();
+        defer {
+            first_gate.release();
+            old_gate.release();
+            executor.waitIdle() catch unreachable;
+        }
+        const active = try makeWeightedJob(&budget, &flag, &first, 1, .maintenance, true, 3);
+        const active_grant = active.scratch_reservation;
+        _ = try executor.submit(active);
+        first.entered.wait();
+        const queued = try makeWeightedJob(&budget, &flag, &old, 2, .maintenance, true, 3);
+        const original = queued.scratch_reservation;
+        const handle = try executor.submit(queued);
+        try executor.setAdmissionLimits(admission(1, 1, false, false));
+        var snap = executor.admissionSnapshot();
+        try t.expectEqual(@as(usize, 2), snap.outstanding_over_target);
+        try t.expect(!snap.target_effective);
+        try t.expectEqualDeep(active_grant, active.scratch_reservation);
+        try t.expectEqualDeep(original, queued.scratch_reservation);
+        try executor.setAdmissionLimits(admission(6, 2, true, true));
+        try t.expectEqual(@as(usize, 0), executor.admissionSnapshot().outstanding_legacy);
+        try executor.setAdmissionLimits(admission(1, 1, false, false));
+        try t.expect(executor.promote(handle));
+        const reject = try makeWeightedJob(&budget, &flag, &fresh, 3, .fg_short, false, 3);
+        try t.expectError(error.ResourceExhausted, executor.submit(reject));
+        rejectCleanup(&budget, reject);
+        _ = try executor.submit(try makeJob(&budget, &flag, &fresh, 4, .fg_short, false));
+        try t.expect(!fresh.entered.isOpen());
+        first_gate.release();
+        old.entered.wait();
+        snap = executor.admissionSnapshot();
+        try t.expectEqual(@as(u32, 3), snap.cpu_in_use);
+        try t.expectEqual(@as(u32, 1), snap.io_in_use);
+        try t.expectEqual(@as(usize, 1), snap.outstanding_over_target);
+        try t.expectEqualDeep(original, queued.scratch_reservation);
+        try t.expect(!snap.target_effective);
+        try t.expect(!fresh.entered.isOpen());
+        // Restoring CPU4 still leaves CPU3 above the non-short target of two;
+        // the one spare short permit must not break exclusive drain.
+        try executor.setAdmissionLimits(admission(4, 2, true, true));
+        try t.expect(!fresh.entered.isOpen());
+        try executor.setAdmissionLimits(admission(1, 1, false, false));
+        old_gate.release();
+        try executor.waitIdle();
+        try t.expectEqual(@as(u32, 1), first.calls.load(.acquire));
+        try t.expectEqual(@as(u32, 1), old.calls.load(.acquire));
+        try t.expectEqual(@as(u32, 1), fresh.calls.load(.acquire));
+        try t.expect(executor.admissionSnapshot().target_effective);
+        _ = try executor.submit(try makeJob(&budget, &flag, &fresh, 5, .fg_short, true));
+        try executor.waitIdle();
+        try t.expectEqual(@as(u32, 2), fresh.calls.load(.acquire));
+        try t.expectEqual(@as(u64, 0), counters.snapshot().active_reservations);
+        try t.expectEqual(@as(u32, 6), executor.options.cpu_permits);
+    }
+}
+
+test "SC-005 accepted bulk and idle drain while new classes refuse and invalid limits preserve state" {
+    for (backends) |backend| {
+        var counters: memory.accounting.Counters = .{};
+        var budget = budgetFor(&counters);
+        var executor: scheduling.Executor = undefined;
+        try executor.init(t.allocator, &budget, .{ .backend = backend, .cpu_permits = 1, .io_permits = 2, .usable_physical_cpus = 4 });
+        defer executor.deinit();
+        var gate: Gate = .{};
+        defer gate.deinit();
+        var probe: Probe = .{ .gate = &gate };
+        defer probe.deinit();
+        var flag: std.atomic.Value(bool) = .init(false);
+        defer {
+            gate.release();
+            executor.waitIdle() catch unreachable;
+        }
+        _ = try executor.submit(try makeJob(&budget, &flag, &probe, 1, .fg_short, false));
+        probe.entered.wait();
+        for ([_]core.QosIntent{ .fg_bulk, .maintenance, .idle }) |qos| _ = try executor.submit(try makeJob(&budget, &flag, &probe, 2, qos, false));
+        try executor.setAdmissionLimits(admission(1, 1, false, true));
+        const before = executor.admissionSnapshot();
+        try t.expectEqual(@as(usize, 3), before.outstanding_legacy);
+        for ([_]core.AdmissionLimits{ admission(0, 1, true, true), admission(2, 1, true, true), admission(1, 0, true, true), admission(1, 3, true, true) }) |invalid| {
+            try t.expectError(error.InvalidArgument, executor.setAdmissionLimits(invalid));
+            try t.expectEqualDeep(before, executor.admissionSnapshot());
+        }
+        for ([_]core.QosIntent{ .fg_bulk, .maintenance, .idle }) |qos| {
+            const job = try makeJob(&budget, &flag, &probe, 3, qos, false);
+            defer rejectCleanup(&budget, job);
+            try t.expectError(error.Busy, executor.submit(job));
+            try t.expect(!job.scratch_reservation.released);
+        }
+        gate.release();
+        try executor.drain();
+        try t.expectEqual(@as(u32, 4), probe.calls.load(.acquire));
+        try t.expect(executor.admissionSnapshot().target_effective);
+        try t.expectEqual(@as(u64, 0), counters.snapshot().active_reservations);
+    }
+}
+
+test "SC-005 protected oversized service turn retains fairness under fitting short refills" {
+    var flag: std.atomic.Value(bool) = .init(false);
+    var queue: queues.Queue = .{};
+    var large = envelope(1, session(1, 1, 1), &flag, .maintenance);
+    large.scratch_reservation.cpu = 3;
+    try queue.push(&large, .{ .id = 1 });
+    try t.expect(queue.pop(.{ .cpu = 1, .non_short_cpu = 1, .io = 1 }) == null);
+    var shorts: [8]core.JobEnvelope = undefined;
+    for (&shorts, 0..) |*short, i| {
+        short.* = envelope(i + 2, session(2, 2, 2), &flag, .fg_short);
+        try queue.push(short, .{ .id = i + 2 });
+        try t.expect(queue.pop(.{ .cpu = 1, .non_short_cpu = 1, .io = 1 }) == null);
+    }
+    try t.expectEqual(@as(u64, 1), queue.pop(.{ .cpu = 1, .non_short_cpu = 1, .io = 1, .exclusive_cpu = 6, .exclusive_non_short_cpu = 4, .exclusive_io = 2 }).?.handle.id);
+    try t.expectEqual(@as(u32, 3), large.scratch_reservation.cpu);
+    for (0..8) |i| try t.expectEqual(@as(u64, i + 2), queue.pop(available).?.handle.id);
+}
+
+test "SC-005 submit setter linearization follows publication despite older caller credit" {
+    var counters: memory.accounting.Counters = .{};
+    var budget = budgetFor(&counters);
+    var executor: scheduling.Executor = undefined;
+    try executor.init(t.allocator, &budget, .{ .cpu_permits = 1, .io_permits = 1, .usable_physical_cpus = 2 });
+    defer executor.deinit();
+    var flag: std.atomic.Value(bool) = .init(false);
+    var probe: Probe = .{};
+    defer probe.deinit();
+    const Submitter = struct {
+        executor: *scheduling.Executor,
+        job: *core.JobEnvelope,
+        ready: Gate = .{},
+        go: Gate = .{},
+        done: Gate = .{},
+        result: ?core.SubmitError = null,
+        fn run(w: *@This()) void {
+            w.ready.release();
+            w.go.wait();
+            _ = w.executor.submit(w.job) catch |err| {
+                w.result = err;
+                w.done.release();
+                return;
+            };
+            w.done.release();
+        }
+    };
+    for ([_]bool{ true, false }) |submit_first| {
+        try executor.setAdmissionLimits(admission(1, 1, true, true));
+        var w: Submitter = .{ .executor = &executor, .job = try makeJob(&budget, &flag, &probe, 1, .fg_bulk, false) };
+        defer w.ready.deinit();
+        defer w.go.deinit();
+        defer w.done.deinit();
+        const thread = try std.Thread.spawn(.{}, Submitter.run, .{&w});
+        w.ready.wait();
+        if (submit_first) {
+            w.go.release();
+            w.done.wait();
+        }
+        try executor.setAdmissionLimits(admission(1, 1, false, false));
+        if (!submit_first) w.go.release();
+        thread.join();
+        if (submit_first) try t.expect(w.result == null) else {
+            defer rejectCleanup(&budget, w.job);
+            try t.expectEqual(error.Busy, w.result.?);
+            try t.expect(!w.job.scratch_reservation.released);
+        }
+        try executor.waitIdle();
+    }
+    try t.expectEqual(@as(u32, 1), probe.calls.load(.acquire));
+    try t.expectEqual(@as(u64, 0), counters.snapshot().active_reservations);
+}
+
+test "SC-005 native Darwin GCD admission execution gate" {
+    if (builtin.os.tag != .macos) return error.SkipZigTest;
+    var counters: memory.accounting.Counters = .{};
+    var budget = budgetFor(&counters);
+    var executor: scheduling.Executor = undefined;
+    try executor.init(t.allocator, &budget, .{ .backend = .darwin_gcd, .cpu_permits = 2, .io_permits = 2, .usable_physical_cpus = 4 });
+    defer executor.deinit();
+    try executor.setAdmissionLimits(admission(1, 1, false, false));
+    var flag: std.atomic.Value(bool) = .init(false);
+    var probe: Probe = .{};
+    defer probe.deinit();
+    _ = try executor.submit(try makeJob(&budget, &flag, &probe, 1, .fg_short, true));
+    try executor.waitIdle();
+    try t.expectEqual(@as(u32, 1), probe.calls.load(.acquire));
+}

@@ -1,0 +1,238 @@
+{
+  "schema_version": "zcr-baseline/1",
+  "captured_at_unix_ms": 1789215868976,
+  "source": {
+    "repo_path": "/Users/runner/work/ZCR/ZCR/source",
+    "head_commit": "b6475a041b9cbee8263eb2d91138f544d3c04862",
+    "dirty": false
+  },
+  "compiler": {
+    "zig_version": "0.16.0",
+    "target": "x86_64-macos-none",
+    "optimize": "ReleaseSafe",
+    "zig_exe": "/Users/runner/work/_temp/zcr-native-34692959158-1-x86_64-macos/toolchain/zig-x86_64-macos-0.16.0/zig",
+    "zig_exe_sha256": "5597fba0eb9d8f1f5331e3e5822e7e96e4a12eeb6f4939781bd8e2c13b15e8b5"
+  },
+  "os": {
+    "tag": "macos",
+    "kernel_release": "24.6.0",
+    "product_version": "15.7.9",
+    "build": "24G830",
+    "model": "Macmini6,2"
+  },
+  "cpu": {
+    "arch": "x86_64",
+    "brand": "Intel(R) Core(TM) i7-8700B CPU @ 3.20GHz",
+    "ncpu": 4,
+    "physicalcpu": 4,
+    "logicalcpu": 4,
+    "nperflevels": 1,
+    "perflevels": [
+      {
+        "index": 0,
+        "name": "Standard",
+        "physicalcpu": 4,
+        "logicalcpu": 4
+      }
+    ]
+  },
+  "memory": {
+    "total_bytes": 15032385536,
+    "page_size": 4096,
+    "vm_pressure_level": 1,
+    "dispatch_pressure_source": "present"
+  },
+  "power": {
+    "source": "ac",
+    "low_power_mode": "disabled",
+    "thermal_state": "nominal"
+  },
+  "gcd": {
+    "status": "present",
+    "callback_ran": true,
+    "timed_out": false,
+    "requested_qos": "user_initiated",
+    "observed_qos": "user_initiated"
+  },
+  "cache": {
+    "page_cache_state": "unknown",
+    "control_evidence": null,
+    "zig_global_cache_dir": "/Users/runner/work/_temp/zcr-native-34692959158-1-x86_64-macos/ReleaseSafe/global-cache",
+    "zig_local_cache_dir": "/Users/runner/work/_temp/zcr-native-34692959158-1-x86_64-macos/ReleaseSafe/local-cache",
+    "tmpdir": "/Users/runner/work/_temp/zcr-native-34692959158-1-x86_64-macos/ReleaseSafe/tmp"
+  },
+  "corpus": {
+    "status": "measured",
+    "id": "checked-out-contracts",
+    "path": "/Users/runner/work/ZCR/ZCR/source/contracts",
+    "file_count": 13,
+    "total_bytes": 52893,
+    "skipped_non_regular": 0,
+    "sha256": "add4312b2c5f5d2d90ed2b56c2d0c44b120b4198a9979e4b04762a1d17603030",
+    "digest_method": "sha256 over sorted lines '<sha256hex>  <relative/path>\\n' of regular files",
+    "excluded_names": [
+      ".git",
+      ".zig-cache",
+      "zig-out"
+    ]
+  },
+  "sdk": {
+    "macos_min_required": 150709,
+    "macos_max_allowed": 150500,
+    "foundation_version": 3603.1
+  },
+  "tools": [
+    {
+      "name": "git",
+      "status": "present",
+      "path": "/usr/local/bin/git",
+      "version": "git version 2.55.0",
+      "sha256": "8a96263130d389f336c402eda9c06357e2f1b829187c730d1b247bfd53874116"
+    },
+    {
+      "name": "rg",
+      "status": "absent",
+      "path": null,
+      "version": null,
+      "sha256": null
+    },
+    {
+      "name": "fd",
+      "status": "absent",
+      "path": null,
+      "version": null,
+      "sha256": null
+    }
+  ],
+  "git": {
+    "status": "present",
+    "repo_path": "/Users/runner/work/ZCR/ZCR/source",
+    "toplevel": "/Users/runner/work/ZCR/ZCR/source",
+    "absolute_git_dir": "/Users/runner/work/ZCR/ZCR/source/.git",
+    "common_dir": "/Users/runner/work/ZCR/ZCR/source/.git",
+    "head_commit": "b6475a041b9cbee8263eb2d91138f544d3c04862",
+    "is_linked_worktree": false,
+    "dot_git_kind": "directory",
+    "worktree_count": 1,
+    "dirty": false,
+    "commands": [
+      {
+        "argv": "git -C <repo> rev-parse --show-toplevel",
+        "exit_code": 0,
+        "stdout_sha256": "14a8424d9eb3922b524f25e38913eb5f776106fab2150c2aa7df4c1e84a9692f"
+      },
+      {
+        "argv": "git -C <repo> rev-parse --absolute-git-dir",
+        "exit_code": 0,
+        "stdout_sha256": "cf34ab836d61d0d3356e388a465f89c8c399be6f917f194b0cb89c5bcf8b7dfd"
+      },
+      {
+        "argv": "git -C <repo> rev-parse --path-format=absolute --git-common-dir",
+        "exit_code": 0,
+        "stdout_sha256": "cf34ab836d61d0d3356e388a465f89c8c399be6f917f194b0cb89c5bcf8b7dfd"
+      },
+      {
+        "argv": "git -C <repo> rev-parse HEAD",
+        "exit_code": 0,
+        "stdout_sha256": "017d86b9070c49c753b84b7bfa09e202c034c51382d6e929441ea508e9d326cb"
+      },
+      {
+        "argv": "git -C <repo> worktree list --porcelain -z",
+        "exit_code": 0,
+        "stdout_sha256": "cd5cc7910b9c416145335c123e110321d5a78f62e9dae592e9bc14b8a863ee75"
+      },
+      {
+        "argv": "git -C <repo> status --porcelain=v2 -z --untracked-files=all",
+        "exit_code": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  },
+  "sysctl_keys": [
+    {
+      "key": "kern.osproductversion",
+      "status": "present"
+    },
+    {
+      "key": "kern.osversion",
+      "status": "present"
+    },
+    {
+      "key": "hw.model",
+      "status": "present"
+    },
+    {
+      "key": "machdep.cpu.brand_string",
+      "status": "present"
+    },
+    {
+      "key": "hw.ncpu",
+      "status": "present"
+    },
+    {
+      "key": "hw.physicalcpu",
+      "status": "present"
+    },
+    {
+      "key": "hw.logicalcpu",
+      "status": "present"
+    },
+    {
+      "key": "hw.nperflevels",
+      "status": "present"
+    },
+    {
+      "key": "hw.perflevel0.name",
+      "status": "present"
+    },
+    {
+      "key": "hw.perflevel0.physicalcpu",
+      "status": "present"
+    },
+    {
+      "key": "hw.perflevel0.logicalcpu",
+      "status": "present"
+    },
+    {
+      "key": "hw.memsize",
+      "status": "present"
+    },
+    {
+      "key": "hw.pagesize",
+      "status": "present"
+    },
+    {
+      "key": "kern.memorystatus_vm_pressure_level",
+      "status": "present"
+    }
+  ],
+  "gates": [
+    {
+      "id": "G01",
+      "status": "pass",
+      "detail": "zig=0.16.0 target=x86_64-macos-none optimize=ReleaseSafe macos_min_required=150709 macos_max_allowed=150500 foundation_version=3603.1 gcd_callback_ran=true"
+    },
+    {
+      "id": "G03",
+      "status": "pass",
+      "detail": "dispatch_memorypressure_source=present vm_pressure_level=1 thermal_state=nominal low_power_mode=disabled power_source=ac"
+    },
+    {
+      "id": "G04",
+      "status": "pass",
+      "detail": "nperflevels=1 physicalcpu=4 logicalcpu=4 perflevel0=Standard:4/4"
+    },
+    {
+      "id": "G06",
+      "status": "pass",
+      "detail": "git version 2.55.0; probe=present linked_worktree=false dot_git=directory worktrees=1 dirty=false"
+    }
+  ],
+  "not_run": [
+    "B0 host built-in tool latency trace (Codex/Claude Read/Grep/Glob) is not captured; --host-tools records host versions only",
+    "page cache state is not controlled on macOS and is recorded as unknown",
+    "physical energy measurement",
+    "Intel Mac, x86-64 Linux and Windows runtime probes",
+    "G11 macOS 11 legacy compatibility"
+  ]
+}

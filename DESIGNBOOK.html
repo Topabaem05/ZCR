@@ -58,6 +58,7 @@ table{width:100%;border-collapse:collapse;margin:20px 0;font-size:12px;line-heig
 <p><strong>전체 열람:</strong> <code>DESIGNBOOK.html</code>은 외부 스크립트·폰트·네트워크가 필요 없는 통합 열람본이다. Markdown이 수정 가능한 원본이며, <code>diagrams/</code>의 Mermaid와 DOT는 도식 원본이다.</p>
 <h3>패키지의 사용 경계</h3>
 <p>이 저장소는 API 계약, Zig 구현, 테스트, 실행 증거와 남은 작업 계획을 함께 관리한다. <a href="#doc-docs-superpowers-plans-2026-09-12-runtime-continuation-md">브랜치 조사와 후속 계획</a>, <a href="#doc-tasks-INDEX-md">작업 상태</a>, <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">상태 데이터</a>를 기준으로 이어간다. 각 증거는 해당 source commit·binary·실행 환경에만 적용된다. 과거 Mac probe나 현재 Linux 시험으로 최종 Mac 런타임, 실제 클라이언트 연동, 종단 성능 검증을 대신하지 않는다.</p>
+<p>기본 <code>main</code>은 문서 기준선이며, 이어가는 Zig 코드는 <a href="https://github.com/Topabaem05/ZCR/tree/codex/continue-runtime-20260912/src">작업 브랜치의 src</a>와 <a href="https://github.com/Topabaem05/ZCR/pull/1">Draft PR #1</a>에서 확인한다.</p>
 <p>설정·메모리·지연 수치는 <strong>초기 설계값 또는 합격 목표</strong>이지 실측 성능이 아니다. 계약 파일 검증 결과와 런타임 테스트 결과를 혼동하지 않는다.</p>
 <h3>현재 직접 stdio 실행</h3>
 <p>신뢰된 호스트는 <code>zcr workspace-id --root /absolute/dedicated-worktree</code>로 실제 파일시스템 정체성, HEAD, 계약 digest를 조회한다. 출력의 <code>workspace_id</code>, <code>base_commit</code>, <code>contract_digest</code>를 승인한 task manifest에 바인딩하고, <code>state: active</code>, 양수 <code>fence</code>, 미래 UTC <code>expires_at</code>과 필요한 읽기 범위를 지정한다. launch policy는 <code>status: approved</code>, 절대 <code>root</code>, 절대 <code>task_manifest</code> 경로를 사용한다. <code>examples/</code>의 planned 파일은 실행 권한을 부여하지 않는 작성 예시다.</p>
@@ -3767,12 +3768,12 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <ul>
 <li>[x] Record clean branch inventory, source baseline and pinned compiler installation.</li>
 <li>[x] Run inherited Debug suite: Linux reveals missing explicit libc linkage in POSIX T04/T05 fixtures; T07 runs 18 passing tests but reviewed edge cases are uncovered.</li>
-<li>[ ] Link POSIX test roots with libc and rerun all existing tests; retain baseline failure log.</li>
-<li>[ ] Add BA-001 regression: line range count=0 / u32 overflow returns InvalidArgument from plannedCost, never panics.</li>
-<li>[ ] Add BA-001 regression: invalid UTF-8 or over-budget earlier line does not turn a valid later batch member into an error; compare each member against a standalone read.</li>
-<li>[ ] Add BA-003 regression: projection output-budget errors update emitted coverage/status consistently.</li>
-<li>[ ] Implement validated planning and safe merge/fallback behavior; run batch and full Debug/ReleaseSafe tests.</li>
-<li>[ ] Review, commit and record remaining inherited gaps (including deadline plumbing) for their owning implementation task.</li>
+<li>[x] Link POSIX test roots with libc and rerun all existing tests; retain baseline failure log.</li>
+<li>[x] Add BA-001 regression: line range count=0 / u32 overflow returns InvalidArgument from plannedCost, never panics.</li>
+<li>[x] Add BA-001 regression: invalid UTF-8 or over-budget earlier line does not turn a valid later batch member into an error; compare each member against a standalone read.</li>
+<li>[x] Add BA-003 regression: projection output-budget errors update emitted coverage/status consistently.</li>
+<li>[x] Implement validated planning and safe merge/fallback behavior; run batch and full Debug/ReleaseSafe tests.</li>
+<li>[x] Review, commit and record remaining inherited gaps (including deadline plumbing) for their owning implementation task.</li>
 </ul>
 <pre><code class="language-sh">zig build test -Dtest-group=batch -Doptimize=Debug -Dinstall-tests=true --prefix &quot;$ZCR_STATE/out-debug&quot;
 zig build test -Doptimize=Debug --summary all
@@ -3860,6 +3861,7 @@ zig build verify-contracts
 </code></pre>
 <h2>Task 5: T12 — Journal·crash recovery·idempotency</h2>
 <p><strong>Spec:</strong> <code>tasks/T12.md</code> (all task-specific instructions and test assertions apply).
+<strong>Approved continuation design:</strong> <a data-package-file="docs/superpowers/designs/2026-09-12-supervised-recovery.md" title="편집 원본은 저장소에 포함">Supervised recovery and historical receipts</a>; production supervisor, native platform and kernel-fault gates remain open.
 <strong>Files:</strong> <code>src/storage/journal.zig</code>, <code>src/storage/recovery.zig</code>, <code>src/storage/receipts.zig</code>, <code>tests/t12_test.zig</code>, <code>evidence/T12/</code>.
 <strong>Dependencies:</strong> T11.
 <strong>Interfaces — consumes:</strong> I19 journal interface; I10/I11 commit point.
@@ -4102,12 +4104,36 @@ zig build verify-contracts
 </ul>
 <h2>2026-09-12 구현 체크포인트</h2>
 <ul>
-<li>전체10개 원본 브랜치·고유 소스·설계 및 작업 문서 감사를 완료했다. 원본 main/integration은 변경하지 않았다.</li>
-<li>T11source09422d4는 독립 승인 후 통합했다. 작업 소스의 Debug/ReleaseSafe 각각41write tests, 통합7bd5be8 Debug41tests가 통과했다. 생산 쓰기는 T12 및 플랫폼 복구 게이트 전까지 비활성이다.</li>
-<li>T14source2ca8e31은 독립 승인 후 통합했다. 각Debug/ReleaseSafe/fault19tests, 통합988dde8 Debug19tests가 통과했다. Darwin 실제FSEvents 수명·이벤트 전달은 미검증으로 유지한다.</li>
-<li><a data-package-file="evidence/continuation/native-ci-34681109500/README.md" title="편집 원본은 저장소에 포함">실제3플랫폼CI</a>는 이전tree39978457에서 각모드221/222tests가 통과했고 T01계약시험 및 당시 미통합T11/T14/T15로 전체FAIL이다. T01은 승인된 nativeI19 네번째필드를 검사하도록7115d63에서 수정, 로컬Debug19/19가 통과했다. 이후소스의PASS로 이 증거를 재사용하지 않는다.</li>
-<li>T12영속저널·실제SIGKILL/새복구프로세스40사례를 구현 중이다. 실제MCP캐시 경로b5fe273과 broker98c63f8은 검토에서 캐시압력 후admission 및 대기요청취소응답 결함이 확인되어 수정 전까지 승인하지 않는다.</li>
-<li>T16은 공유Budget의 동적admission 한도 선행API를 작업 중이며 governor 구현·연결은 남아 있다. T17/T19/T21–T25와 실제클라이언트·모델·최소OS 게이트도 남아 있다.</li>
+<li>
+<p>전체10개 원본 브랜치·고유 소스·설계 및 작업 문서 감사를 완료했다. 원본 main/integration은 변경하지 않았다.</p>
+</li>
+<li>
+<p>T11source09422d4는 독립 승인 후 통합했다. 작업 소스의 Debug/ReleaseSafe 각각41write tests, 통합7bd5be8 Debug41tests가 통과했다. 생산 쓰기는 T12 및 플랫폼 복구 게이트 전까지 비활성이다.</p>
+</li>
+<li>
+<p>T14source2ca8e31은 독립 승인 후 통합했다. 각Debug/ReleaseSafe/fault19tests, 통합988dde8 Debug19tests가 통과했다. Darwin 실제FSEvents 수명·이벤트 전달은 미검증으로 유지한다.</p>
+</li>
+<li>
+<p><a data-package-file="evidence/continuation/native-ci-34681109500/README.md" title="편집 원본은 저장소에 포함">실제3플랫폼CI</a>는 이전tree39978457에서 각모드221/222tests가 통과했고 T01계약시험 및 당시 미통합T11/T14/T15로 전체FAIL이다. T01은 승인된 nativeI19 네번째필드를 검사하도록7115d63에서 수정, 로컬Debug19/19가 통과했다. 이후소스의PASS로 이 증거를 재사용하지 않는다.</p>
+</li>
+<li>
+<p>T12 초기 검토의 두 결함을 수정한 source1f12553/evidence4759605가 독립 승인됐다. Debug/ReleaseSafe 각각65/65와40 writer SIGKILL 사례를 보존했고, ad577ab에 통합한 실제 소스에서도 Debug65/65가 통과했다. 생산 supervisor, Mac, 실제 kernel fault 및 power-loss 게이트는 남아 있다.</p>
+</li>
+<li>
+<p>캐시·브로커·임시 출력 예산 지적과 후속 실제 취소 경로를 source95352af/evidenceec9e5ad에서 수정하고 독립 승인 후 dae7ddc까지 통합했다. 실제 CLI 압력 검사와 원본 요청 ID 취소 응답의 실행 증거를 보존했다.</p>
+</li>
+<li>
+<p><a data-package-file="evidence/continuation/native-ci-34692959158/README.md" title="편집 원본은 저장소에 포함">후속 실제3플랫폼 CI</a>는 공개9d6d8e55/tree1c7fbe50에서 Linux 각모드285/285, 두Mac 각모드232통과/12건너뜀을 기록했다. Mac T11컴파일 오류와 당시T12/T15미통합으로 전체FAIL이다. 총4164개 archive/source/binary 검증을 기록했다.</p>
+</li>
+<li>
+<p>T16 스케줄러·캐시 선행API source8bad59b/evidencef5de460은 독립 승인 후7b915f8에 통합했다. 작업 소스의 각모드 scheduler20통과/1플랫폼건너뜀, memory34통과를 확인했다. Governor 정책·신호·실행 경로 연결, T17/T19/T21–T25와 실제클라이언트·모델·최소OS 게이트가 남아 있다.</p>
+</li>
+<li>
+<p>Darwin T11은 독립 승인 후53b4686/c80508b에 통합했다. Linux41/41 각모드와 두Mac 대상 semantic compile을 기록했으며 실제Mac 실행은 후속 CI 대상이다. T12 Darwin 포트를 별도 작업 트리에서 진행한다.</p>
+</li>
+<li>
+<p><a data-package-file="evidence/continuation/integrated-108b906/README.md" title="편집 원본은 저장소에 포함">통합108b906 실행</a>: 각Debug/ReleaseSafe338통과/9실패, 실패는 제한된 로컬 환경의 broker AF_UNIX 사례다. 각모드 build/contracts/codec10/실제CLI19는 통과했다. 전체 등록 시험은 FAIL로 보존하며 hosted CI에서 소켓·Mac 경로를 검증한다.</p>
+</li>
 </ul>
 </section><section id="doc-AGENTS-md" class="doc"><div class="docpath">AGENTS.md</div><h1>ZCR 구현 에이전트 규칙</h1>
 <p>이 파일은 runtime repository의 최상위 작업 규칙이다. 구현 및 실행 증거의 현재 상태는 <code>tasks/progress.json</code>과 <code>tasks/INDEX.md</code>를 따른다. 설계의 완료 조건과 실제 시험 결과를 구분하고, 이전 commit의 증거를 현재 바이너리의 PASS로 재사용하지 않는다.</p>
@@ -5937,7 +5963,7 @@ zcr-dev-evidence contract-digest --worktree &lt;wt&gt;
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T11<br />
-<strong>Status:</strong> IN_PROGRESS — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
+<strong>Status:</strong> IMPLEMENTED_WITH_OPEN_GATES — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>
@@ -6014,7 +6040,7 @@ zcr-dev-evidence contract-digest --worktree &lt;wt&gt;
 <strong>Tech Stack:</strong> Zig 0.16.0, 승인된 public OS API.<br />
 <strong>Spec:</strong> <a href="#doc-docs-13-Implementation-Roadmap-md">구현 로드맵</a>, <a href="#doc-docs-12-Performance-and-Test-Plan-md">테스트 계획</a>.<br />
 <strong>Dependencies:</strong> T04, T10, T03<br />
-<strong>Status:</strong> IN_PROGRESS — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
+<strong>Status:</strong> IMPLEMENTED_WITH_OPEN_GATES — 현재 실행 증거와 미완료 게이트는 <a href="#doc-tasks-INDEX-md">상태표</a> 및 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>을 따른다.</p>
 <h2>파일 소유권</h2>
 <p>아래는 향후 runtime repository에서 생성·수정할 경로다. ZIP에 구현됐다는 뜻이 아니다.</p>
 <ul>

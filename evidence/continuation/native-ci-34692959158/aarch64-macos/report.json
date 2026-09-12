@@ -1,0 +1,1115 @@
+{
+  "binaries": [
+    {
+      "bytes": 2732376,
+      "mode": "Debug",
+      "path": "codec/codec-test",
+      "sha256": "06c884d4adfa7c9e373cf03824d51f460ff4a94ac9b5dec97196827569d0d2c8"
+    },
+    {
+      "bytes": 3061016,
+      "mode": "Debug",
+      "path": "out/bin/T00-test",
+      "sha256": "dfa38efd29ed83824a93629466870b1f7dff218118412da3fd38277a94fbebaf"
+    },
+    {
+      "bytes": 3136872,
+      "mode": "Debug",
+      "path": "out/bin/T01-test",
+      "sha256": "72fd0c976c0a938930c73b558a6a79f5081fbdccd2a07e7a8b8585dc4e350cd2"
+    },
+    {
+      "bytes": 2768088,
+      "mode": "Debug",
+      "path": "out/bin/T02-test",
+      "sha256": "ba33f76d8affe264136182043abf2b9e9855625072d3b5d9ed51b8bade7f9c06"
+    },
+    {
+      "bytes": 2439448,
+      "mode": "Debug",
+      "path": "out/bin/T03-test",
+      "sha256": "6b6e06bc759e309bd696f059d61bb90d0cdab442ccd40246c1404b4737b3a825"
+    },
+    {
+      "bytes": 2125952,
+      "mode": "Debug",
+      "path": "out/bin/T04-deadline-test",
+      "sha256": "768f3dd23e08c4c5d404fc2c7a83ce9e1e19e9cc431d5dbfa865616e1e3c8ee3"
+    },
+    {
+      "bytes": 2472776,
+      "mode": "Debug",
+      "path": "out/bin/T04-test",
+      "sha256": "1f9417c599fc1bb7fdea0b15c712651d84648660e98b2776a20558d5a6e4cfb8"
+    },
+    {
+      "bytes": 2625224,
+      "mode": "Debug",
+      "path": "out/bin/T05-test",
+      "sha256": "9c57c8ab0e43e26bc57e5867ed9ca49369ec8eb70037ddb76df7fe9d71854033"
+    },
+    {
+      "bytes": 2531976,
+      "mode": "Debug",
+      "path": "out/bin/T06-test",
+      "sha256": "702ba748ad20cc5f0bee4bd65cc2945b7175b060a0edc424c38868e54d837289"
+    },
+    {
+      "bytes": 3001336,
+      "mode": "Debug",
+      "path": "out/bin/T07-test",
+      "sha256": "17b2ed8b07a75f4db2c81cf0ea52dce97bd1a6abf218a75de91e781417195ce1"
+    },
+    {
+      "bytes": 2168448,
+      "mode": "Debug",
+      "path": "out/bin/T08-launch-test",
+      "sha256": "961baa857b3e9f7441e87917417127be624746dc090108967b13f9ce413f98e6"
+    },
+    {
+      "bytes": 3888584,
+      "mode": "Debug",
+      "path": "out/bin/T08-test",
+      "sha256": "61abb80b4410ed35cabc882da73073172b17c092c36ed32154fd6b65c43ef9ec"
+    },
+    {
+      "bytes": 2529608,
+      "mode": "Debug",
+      "path": "out/bin/T09-test",
+      "sha256": "ded39d1b39738cb3ec4b15db152bed22c41584e88460d340b7a840a30f6178f9"
+    },
+    {
+      "bytes": 3172728,
+      "mode": "Debug",
+      "path": "out/bin/T10-test",
+      "sha256": "c4b78fb7d06f72ac28a35f6f46857e1726f3508e85038433f1249fec6e9e5369"
+    },
+    {
+      "bytes": 3417016,
+      "mode": "Debug",
+      "path": "out/bin/T13-test",
+      "sha256": "831d79a170aea988301614940d31bb905f42d957bcb5a2d30c02aa8fa4fa8be3"
+    },
+    {
+      "bytes": 4898584,
+      "mode": "Debug",
+      "path": "out/bin/T14-test",
+      "sha256": "0397ac180ac957efb607e51fba5eaddd223e3348d7c002ef337c0d36b3902582"
+    },
+    {
+      "bytes": 3890848,
+      "mode": "Debug",
+      "path": "out/bin/zcr",
+      "sha256": "23e8ebb96bf0b67a5ab609a3837ef8295a12d468c327fccacb88e5af5572f347"
+    },
+    {
+      "bytes": 2779216,
+      "mode": "Debug",
+      "path": "out/bin/zcr-dev-evidence",
+      "sha256": "d362eaa407dc25c197957091bfa47d00d19eccf3c8bdc392b5d5857f59f7c411"
+    },
+    {
+      "bytes": 2431072,
+      "mode": "Debug",
+      "path": "out/bin/zcr-dev-guard",
+      "sha256": "8c2f2f87966093bc31b47f412fbd5ad284139b336dd605657de91ea59c83cd3c"
+    },
+    {
+      "bytes": 2457608,
+      "mode": "Debug",
+      "path": "probe/caps",
+      "sha256": "74ff226c9f390bf06161040e7f74c7b75880eb0769d8b2a627ac37d4918251f1"
+    },
+    {
+      "bytes": 666264,
+      "mode": "ReleaseSafe",
+      "path": "codec/codec-test",
+      "sha256": "6cb474116d4ff5ab2364bfdb98d5348b0591da929c2e9ec5c1f82dc513400a70"
+    },
+    {
+      "bytes": 816808,
+      "mode": "ReleaseSafe",
+      "path": "out/bin/T00-test",
+      "sha256": "9cb7586d8054ea14c70e8051f60cbabf7b61e942ba1346bf281011c8f643a7af"
+    },
+    {
+      "bytes": 853272,
+      "mode": "ReleaseSafe",
+      "path": "out/bin/T01-test",
+      "sha256": "30cf4a9313c2360ebc214093c53ec04b6d21f77c68e4bc7fbd39ab38034a3f7f"
+    },
+    {
+      "bytes": 743592,
+      "mode": "ReleaseSafe",
+      "path": "out/bin/T02-test",
+      "sha256": "4a9f5004e38dd88552b5c2f432beb44d0afb82e61f93b85f59cef7ab6b65b923"
+    },
+    {
+      "bytes": 601656,
+      "mode": "ReleaseSafe",
+      "path": "out/bin/T03-test",
+      "sha256": "bd16d930621eb342ed00a34803bb6e5dfa5ca3db3333ddc421caeeb9d1b829dc"
+    },
+    {
+      "bytes": 519168,
+      "mode": "ReleaseSafe",
+      "path": "out/bin/T04-deadline-test",
+      "sha256": "768841a0c7eee62ad5539176e682923599cdde9bd4789820d9e04752900332c6"
+    },
+    {
+      "bytes": 617240,
+      "mode": "ReleaseSafe",
+      "path": "out/bin/T04-test",
+      "sha256": "75e232a9f76768e6a15410e67a096de90ced3df3c9fc297fb72f0e74420293db"
+    },
+    {
+      "bytes": 699016,
+      "mode": "ReleaseSafe",
+      "path": "out/bin/T05-test",
+      "sha256": "64889afb3152ad547cb904f15556ee875c451e5b8341dc50281ccc6a7032ee34"
+    },
+    {
+      "bytes": 671576,
+      "mode": "ReleaseSafe",
+      "path": "out/bin/T06-test",
+      "sha256": "3c0e1c423c2618cce0971be1b5fc48eeb0dce84aed1776079fd28555fff6ef1b"
+    },
+    {
+      "bytes": 814888,
+      "mode": "ReleaseSafe",
+      "path": "out/bin/T07-test",
+      "sha256": "6eb65c2ccb576321000b2f967a6a7eebe2026c602b7715ab4cb1ba98728aacff"
+    },
+    {
+      "bytes": 521360,
+      "mode": "ReleaseSafe",
+      "path": "out/bin/T08-launch-test",
+      "sha256": "df7d81f2bb39a723a4ecadf6da374993497f24ac3ad74c864da8718fbf4d969b"
+    },
+    {
+      "bytes": 1141160,
+      "mode": "ReleaseSafe",
+      "path": "out/bin/T08-test",
+      "sha256": "f77d77c64de13706fc9d4a63bc44fca3a1a40c0c3d6a42e78b59e5f4c68f0f26"
+    },
+    {
+      "bytes": 598904,
+      "mode": "ReleaseSafe",
+      "path": "out/bin/T09-test",
+      "sha256": "52c18fadb0a757b358c1fc610a00f8784f90b59c881a8dc8f12a040b2c80d7b7"
+    },
+    {
+      "bytes": 942936,
+      "mode": "ReleaseSafe",
+      "path": "out/bin/T10-test",
+      "sha256": "0083b086ae0fb5e71429baf70a21ba9542bb030cd48a8283fe5ec343f9ef554a"
+    },
+    {
+      "bytes": 773800,
+      "mode": "ReleaseSafe",
+      "path": "out/bin/T13-test",
+      "sha256": "a22ffc7bbc3a2e5e5ece5efa363e70fa3c1b93b0805319bbd8f12162e845f45d"
+    },
+    {
+      "bytes": 797096,
+      "mode": "ReleaseSafe",
+      "path": "out/bin/T14-test",
+      "sha256": "275ba212f39930763d8f1027ff04da16e11ab88276881c25238c638df65ebdd7"
+    },
+    {
+      "bytes": 1280080,
+      "mode": "ReleaseSafe",
+      "path": "out/bin/zcr",
+      "sha256": "367502e822ad58321bc0a14e4f1154f4cce18258583394b9b309b80d3eada2e0"
+    },
+    {
+      "bytes": 723904,
+      "mode": "ReleaseSafe",
+      "path": "out/bin/zcr-dev-evidence",
+      "sha256": "566e492c169456c5ab89a905a014c28de81a2f79672d3760c13870c37e0659b4"
+    },
+    {
+      "bytes": 577856,
+      "mode": "ReleaseSafe",
+      "path": "out/bin/zcr-dev-guard",
+      "sha256": "4f3e994bb7dae2278bbf79de236ac5bc4ef9396e565ce4142f1ab9d2fc0259d3"
+    },
+    {
+      "bytes": 595592,
+      "mode": "ReleaseSafe",
+      "path": "probe/caps",
+      "sha256": "1af107f1c2308fa03a0a23647cbf96c5e55aff15e5be57525f364b0c3cdaa96c"
+    }
+  ],
+  "checks": [
+    {
+      "detail": {
+        "actual": "aarch64-macos",
+        "expected": "aarch64-macos"
+      },
+      "name": "native-target",
+      "status": "PASS"
+    },
+    {
+      "detail": "3.12.10 (v3.12.10:0cc81280367, Apr  8 2025, 08:46:59) [Clang 13.0.0 (clang-1300.0.29.30)]",
+      "name": "python-3.12",
+      "status": "PASS"
+    },
+    {
+      "detail": "clean tracked and untracked files",
+      "name": "source-before-clean",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "bytes": 52238004,
+        "sha256": "b23d70deaa879b5c2d486ed3316f7eaa53e84acf6fc9cc747de152450d401489",
+        "url": "https://ziglang.org/download/0.16.0/zig-aarch64-macos-0.16.0.tar.xz"
+      },
+      "name": "zig-archive-pin",
+      "status": "PASS"
+    },
+    {
+      "detail": "0.16.0\n",
+      "name": "zig-version-pin",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "G01": "pass",
+        "G03": "pass",
+        "G04": "pass",
+        "G06": "pass"
+      },
+      "name": "Debug-caps-gates",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "G01": "pass",
+        "G03": "pass",
+        "G04": "pass",
+        "G06": "pass"
+      },
+      "name": "ReleaseSafe-caps-gates",
+      "status": "PASS"
+    },
+    {
+      "detail": "clean tracked and untracked files",
+      "name": "source-after-clean",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "after": {
+          "commit": "b6475a041b9cbee8263eb2d91138f544d3c04862",
+          "config_sha256": "8688c74cc98a91c5437596b0ffc42989451bf4a491f301e97c3478671e1fb323",
+          "contract_config_sha256": "7753ce3bc905ebcc2c67d224321c804ac0d742b7d7f2e37d54921f9dc84dce51",
+          "contract_sha256": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+          "git_status": "",
+          "test_inputs_sha256": "074ce7c7fed000b5c011e7db95cb36436aeaf7277d74ab85503f561fcea25d39",
+          "tracked_files_sha256": "0d29ced0cbaa20cec26b2694090d906527878c8d0764482ecdaa816c6a375095",
+          "tree": "1c7fbe5048241cc82d0bc8b1170f7f8ab20d48bd"
+        },
+        "before": {
+          "commit": "b6475a041b9cbee8263eb2d91138f544d3c04862",
+          "config_sha256": "8688c74cc98a91c5437596b0ffc42989451bf4a491f301e97c3478671e1fb323",
+          "contract_config_sha256": "7753ce3bc905ebcc2c67d224321c804ac0d742b7d7f2e37d54921f9dc84dce51",
+          "contract_sha256": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+          "git_status": "",
+          "test_inputs_sha256": "074ce7c7fed000b5c011e7db95cb36436aeaf7277d74ab85503f561fcea25d39",
+          "tracked_files_sha256": "0d29ced0cbaa20cec26b2694090d906527878c8d0764482ecdaa816c6a375095",
+          "tree": "1c7fbe5048241cc82d0bc8b1170f7f8ab20d48bd"
+        }
+      },
+      "name": "source-unchanged",
+      "status": "PASS"
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "--version"
+      ],
+      "cwd": "/Users/runner/work/ZCR/ZCR/source",
+      "duration_seconds": 0.013028860092163086,
+      "exit_code": 0,
+      "label": "git-version",
+      "required": true,
+      "started_unix": 1789215051.352171,
+      "status": "PASS",
+      "stderr": {
+        "path": "01-git-version.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "01-git-version.stdout.log",
+        "sha256": "e928567de6f903039a669b7647bf037309d50e4f7916bb5c06f7b05d3bf966fe"
+      }
+    },
+    {
+      "argv": [
+        "df",
+        "-h",
+        "/Users/runner/work/ZCR/ZCR/source",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos"
+      ],
+      "cwd": "/Users/runner/work/ZCR/ZCR/source",
+      "duration_seconds": 0.013247966766357422,
+      "exit_code": 0,
+      "label": "filesystem",
+      "required": true,
+      "started_unix": 1789215051.365812,
+      "status": "PASS",
+      "stderr": {
+        "path": "02-filesystem.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "02-filesystem.stdout.log",
+        "sha256": "54f0aae917ddcec6774b2fd40866cf024e8d5c957912795f062f1739dc0e68a0"
+      }
+    },
+    {
+      "argv": [
+        "sw_vers"
+      ],
+      "cwd": "/Users/runner/work/ZCR/ZCR/source",
+      "duration_seconds": 0.01123499870300293,
+      "exit_code": 0,
+      "label": "os-version",
+      "required": true,
+      "started_unix": 1789215051.379594,
+      "status": "PASS",
+      "stderr": {
+        "path": "03-os-version.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "03-os-version.stdout.log",
+        "sha256": "31fd674ddb951680692d7b68cafdeab5baa6b3e82aae843269dad73b53f25fc5"
+      }
+    },
+    {
+      "argv": [
+        "xcrun",
+        "--sdk",
+        "macosx",
+        "--show-sdk-version"
+      ],
+      "cwd": "/Users/runner/work/ZCR/ZCR/source",
+      "duration_seconds": 1.829035997390747,
+      "exit_code": 0,
+      "label": "sdk-version",
+      "required": true,
+      "started_unix": 1789215051.391402,
+      "status": "PASS",
+      "stderr": {
+        "path": "04-sdk-version.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "04-sdk-version.stdout.log",
+        "sha256": "521fbd942d19d4f08ee3ac22fe5e1fee54d05fb48db0d8d179461b8195d210eb"
+      }
+    },
+    {
+      "argv": [
+        "xcrun",
+        "--sdk",
+        "macosx",
+        "--show-sdk-path"
+      ],
+      "cwd": "/Users/runner/work/ZCR/ZCR/source",
+      "duration_seconds": 0.03024005889892578,
+      "exit_code": 0,
+      "label": "sdk-path",
+      "required": true,
+      "started_unix": 1789215053.221248,
+      "status": "PASS",
+      "stderr": {
+        "path": "05-sdk-path.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "05-sdk-path.stdout.log",
+        "sha256": "b965d7d8db9e3bfddbe97a5d44090aab2003ae49d0abf441beee55cca9162e2f"
+      }
+    },
+    {
+      "argv": [
+        "df",
+        "-P",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos"
+      ],
+      "cwd": "/Users/runner/work/ZCR/ZCR/source",
+      "duration_seconds": 0.0067272186279296875,
+      "exit_code": 0,
+      "label": "filesystem-device",
+      "required": true,
+      "started_unix": 1789215053.252136,
+      "status": "PASS",
+      "stderr": {
+        "path": "06-filesystem-device.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "06-filesystem-device.stdout.log",
+        "sha256": "4b86301ac465c33b5faeb3343ec01b9f74dfcff1a418795ff2e92d20bff87012"
+      }
+    },
+    {
+      "argv": [
+        "diskutil",
+        "info",
+        "/dev/disk2s5"
+      ],
+      "cwd": "/Users/runner/work/ZCR/ZCR/source",
+      "duration_seconds": 0.08982610702514648,
+      "exit_code": 0,
+      "label": "filesystem-detail",
+      "required": true,
+      "started_unix": 1789215053.25949,
+      "status": "PASS",
+      "stderr": {
+        "path": "07-filesystem-detail.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "07-filesystem-detail.stdout.log",
+        "sha256": "e0f0b325217be1df69eaa16376955226b6769ea347f04ae7148c2db1c34537d9"
+      }
+    },
+    {
+      "argv": [
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/toolchain/zig-aarch64-macos-0.16.0/zig",
+        "version"
+      ],
+      "cwd": "/Users/runner/work/ZCR/ZCR/source",
+      "duration_seconds": 0.24706673622131348,
+      "exit_code": 0,
+      "label": "zig-version",
+      "required": true,
+      "started_unix": 1789215067.5771961,
+      "status": "PASS",
+      "stderr": {
+        "path": "08-zig-version.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "08-zig-version.stdout.log",
+        "sha256": "aa037454b5e8320521a32b278a3f4aff05fc79009ab5503f5d4a1b9a33b38c47"
+      }
+    },
+    {
+      "argv": [
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/toolchain/zig-aarch64-macos-0.16.0/zig",
+        "env"
+      ],
+      "cwd": "/Users/runner/work/ZCR/ZCR/source",
+      "duration_seconds": 0.06742620468139648,
+      "exit_code": 0,
+      "label": "zig-env",
+      "required": true,
+      "started_unix": 1789215067.8253598,
+      "status": "PASS",
+      "stderr": {
+        "path": "09-zig-env.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "09-zig-env.stdout.log",
+        "sha256": "21e3f074119787985aeaf5e72003b8cc0e1d395acdb18434d20516cfd5ff38e7"
+      }
+    },
+    {
+      "argv": [
+        "/Library/Frameworks/Python.framework/Versions/3.12/bin/python",
+        "-m",
+        "venv",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/venv"
+      ],
+      "cwd": "/Users/runner/work/ZCR/ZCR/source",
+      "duration_seconds": 2.1046481132507324,
+      "exit_code": 0,
+      "label": "python-venv",
+      "required": true,
+      "started_unix": 1789215067.993691,
+      "status": "PASS",
+      "stderr": {
+        "path": "10-python-venv.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "10-python-venv.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "argv": [
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/venv/bin/python",
+        "-m",
+        "pip",
+        "--isolated",
+        "install",
+        "--disable-pip-version-check",
+        "--no-input",
+        "--no-cache-dir",
+        "--require-hashes",
+        "--only-binary=:all:",
+        "--index-url",
+        "https://pypi.org/simple",
+        "--report",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/artifacts/pip-install.json",
+        "-r",
+        "/Users/runner/work/ZCR/ZCR/source/tools/ci/requirements.txt"
+      ],
+      "cwd": "/Users/runner/work/ZCR/ZCR/source",
+      "duration_seconds": 0.7153160572052002,
+      "exit_code": 0,
+      "label": "schema-dependencies",
+      "required": true,
+      "started_unix": 1789215070.099094,
+      "status": "PASS",
+      "stderr": {
+        "path": "11-schema-dependencies.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "11-schema-dependencies.stdout.log",
+        "sha256": "8d1f603a4be3d397186b5ea6c9836e1af4ac0d185b9d514af9a532571e76acc5"
+      }
+    },
+    {
+      "argv": [
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/venv/bin/python",
+        "-m",
+        "pip",
+        "freeze",
+        "--all"
+      ],
+      "cwd": "/Users/runner/work/ZCR/ZCR/source",
+      "duration_seconds": 0.2800567150115967,
+      "exit_code": 0,
+      "label": "python-dependencies",
+      "required": true,
+      "started_unix": 1789215070.8152032,
+      "status": "PASS",
+      "stderr": {
+        "path": "12-python-dependencies.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "12-python-dependencies.stdout.log",
+        "sha256": "953400a3253557b93e060e61a60fa81f6cb59f89d12dce0ab65bc43dd6a9da0b"
+      }
+    },
+    {
+      "argv": [
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/toolchain/zig-aarch64-macos-0.16.0/zig",
+        "build",
+        "-j2",
+        "-Doptimize=Debug",
+        "--prefix",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/Debug/out",
+        "--summary",
+        "all",
+        "--cache-dir",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/Debug/local-cache",
+        "--global-cache-dir",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/Debug/global-cache"
+      ],
+      "cwd": "/Users/runner/work/ZCR/ZCR/source",
+      "duration_seconds": 10.507964134216309,
+      "exit_code": 0,
+      "label": "Debug-build",
+      "required": true,
+      "started_unix": 1789215071.096691,
+      "status": "PASS",
+      "stderr": {
+        "path": "13-Debug-build.stderr.log",
+        "sha256": "5b61932b6ddc9fa87dbb6ac0c636939b5cd247a7ecbf1e3c9c14181cec83eacd"
+      },
+      "stdout": {
+        "path": "13-Debug-build.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "argv": [
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/toolchain/zig-aarch64-macos-0.16.0/zig",
+        "build",
+        "-j2",
+        "-Doptimize=Debug",
+        "--prefix",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/Debug/out",
+        "--summary",
+        "all",
+        "--cache-dir",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/Debug/local-cache",
+        "--global-cache-dir",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/Debug/global-cache",
+        "verify-contracts"
+      ],
+      "cwd": "/Users/runner/work/ZCR/ZCR/source",
+      "duration_seconds": 0.25382494926452637,
+      "exit_code": 0,
+      "label": "Debug-contracts",
+      "required": true,
+      "started_unix": 1789215081.606022,
+      "status": "PASS",
+      "stderr": {
+        "path": "14-Debug-contracts.stderr.log",
+        "sha256": "9a6c8bf94b3e5f8665cc3a74930a5b18937e62ecd482f70370bbd5310ecc437d"
+      },
+      "stdout": {
+        "path": "14-Debug-contracts.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "argv": [
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/toolchain/zig-aarch64-macos-0.16.0/zig",
+        "build",
+        "-j2",
+        "-Doptimize=Debug",
+        "--prefix",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/Debug/out",
+        "--summary",
+        "all",
+        "--cache-dir",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/Debug/local-cache",
+        "--global-cache-dir",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/Debug/global-cache",
+        "test",
+        "-Dinstall-tests=true"
+      ],
+      "cwd": "/Users/runner/work/ZCR/ZCR/source",
+      "duration_seconds": 44.02355408668518,
+      "exit_code": 1,
+      "label": "Debug-registered-tests",
+      "required": true,
+      "started_unix": 1789215081.860663,
+      "status": "FAIL",
+      "stderr": {
+        "path": "15-Debug-registered-tests.stderr.log",
+        "sha256": "952e375227b334de45847975ba5902769e1df177b8194507f047017b59be3f39"
+      },
+      "stdout": {
+        "path": "15-Debug-registered-tests.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "argv": [
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/toolchain/zig-aarch64-macos-0.16.0/zig",
+        "test",
+        "/Users/runner/work/ZCR/ZCR/source/src/protocol/codec.zig",
+        "-ODebug",
+        "-femit-bin=/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/Debug/codec/codec-test",
+        "--cache-dir",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/Debug/local-cache",
+        "--global-cache-dir",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/Debug/global-cache"
+      ],
+      "cwd": "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/Debug/tmp",
+      "duration_seconds": 2.407405138015747,
+      "exit_code": 0,
+      "label": "Debug-codec-tests",
+      "required": true,
+      "started_unix": 1789215125.885633,
+      "status": "PASS",
+      "stderr": {
+        "path": "16-Debug-codec-tests.stderr.log",
+        "sha256": "1ef7ad3a35356665642743bd1e4ce916599b49366ba2b232a0ceb002b329cbd2"
+      },
+      "stdout": {
+        "path": "16-Debug-codec-tests.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "argv": [
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/venv/bin/python",
+        "/Users/runner/work/ZCR/ZCR/source/tests/cli_smoke.py",
+        "--binary",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/Debug/out/bin/zcr",
+        "--state",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/artifacts/Debug/cli"
+      ],
+      "cwd": "/Users/runner/work/ZCR/ZCR/source",
+      "duration_seconds": 3.8014020919799805,
+      "exit_code": 0,
+      "label": "Debug-cli-subprocess",
+      "required": true,
+      "started_unix": 1789215128.293982,
+      "status": "PASS",
+      "stderr": {
+        "path": "17-Debug-cli-subprocess.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "17-Debug-cli-subprocess.stdout.log",
+        "sha256": "121de1ecc64e1d2467611ad6b48d656651660c3f02596a970a035c22bb0b7938"
+      }
+    },
+    {
+      "argv": [
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/toolchain/zig-aarch64-macos-0.16.0/zig",
+        "build-exe",
+        "-ODebug",
+        "-femit-bin=/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/Debug/probe/caps",
+        "-lc",
+        "--cache-dir",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/Debug/local-cache",
+        "--global-cache-dir",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/Debug/global-cache",
+        "-framework",
+        "Foundation",
+        "-framework",
+        "IOKit",
+        "-framework",
+        "CoreFoundation",
+        "/Users/runner/work/ZCR/ZCR/source/bench/spikes/darwin_abi.c",
+        "/Users/runner/work/ZCR/ZCR/source/bench/spikes/caps.zig"
+      ],
+      "cwd": "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/Debug/tmp",
+      "duration_seconds": 2.221116065979004,
+      "exit_code": 0,
+      "label": "Debug-caps-build",
+      "required": true,
+      "started_unix": 1789215132.096391,
+      "status": "PASS",
+      "stderr": {
+        "path": "18-Debug-caps-build.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "18-Debug-caps-build.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "argv": [
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/Debug/probe/caps",
+        "--repo",
+        "/Users/runner/work/ZCR/ZCR/source",
+        "--corpus",
+        "/Users/runner/work/ZCR/ZCR/source/contracts",
+        "--corpus-id",
+        "checked-out-contracts",
+        "--zig",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/toolchain/zig-aarch64-macos-0.16.0/zig",
+        "--out",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/artifacts/Debug/baseline.json"
+      ],
+      "cwd": "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/Debug/tmp",
+      "duration_seconds": 0.9017579555511475,
+      "exit_code": 0,
+      "label": "Debug-caps-runtime",
+      "required": true,
+      "started_unix": 1789215134.318563,
+      "status": "PASS",
+      "stderr": {
+        "path": "19-Debug-caps-runtime.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "19-Debug-caps-runtime.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "argv": [
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/toolchain/zig-aarch64-macos-0.16.0/zig",
+        "build",
+        "-j2",
+        "-Doptimize=ReleaseSafe",
+        "--prefix",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/ReleaseSafe/out",
+        "--summary",
+        "all",
+        "--cache-dir",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/ReleaseSafe/local-cache",
+        "--global-cache-dir",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/ReleaseSafe/global-cache"
+      ],
+      "cwd": "/Users/runner/work/ZCR/ZCR/source",
+      "duration_seconds": 21.90242886543274,
+      "exit_code": 0,
+      "label": "ReleaseSafe-build",
+      "required": true,
+      "started_unix": 1789215140.683556,
+      "status": "PASS",
+      "stderr": {
+        "path": "20-ReleaseSafe-build.stderr.log",
+        "sha256": "62c6d03af3b2f3cdfb35914c8e0046b1568470d6349e12a91f213386bc024e86"
+      },
+      "stdout": {
+        "path": "20-ReleaseSafe-build.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "argv": [
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/toolchain/zig-aarch64-macos-0.16.0/zig",
+        "build",
+        "-j2",
+        "-Doptimize=ReleaseSafe",
+        "--prefix",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/ReleaseSafe/out",
+        "--summary",
+        "all",
+        "--cache-dir",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/ReleaseSafe/local-cache",
+        "--global-cache-dir",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/ReleaseSafe/global-cache",
+        "verify-contracts"
+      ],
+      "cwd": "/Users/runner/work/ZCR/ZCR/source",
+      "duration_seconds": 0.17902898788452148,
+      "exit_code": 0,
+      "label": "ReleaseSafe-contracts",
+      "required": true,
+      "started_unix": 1789215162.5873961,
+      "status": "PASS",
+      "stderr": {
+        "path": "21-ReleaseSafe-contracts.stderr.log",
+        "sha256": "71da054ab27b94aed18213925d90e00363fc8eb2c74b12b443f3e1d84efc1034"
+      },
+      "stdout": {
+        "path": "21-ReleaseSafe-contracts.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "argv": [
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/toolchain/zig-aarch64-macos-0.16.0/zig",
+        "build",
+        "-j2",
+        "-Doptimize=ReleaseSafe",
+        "--prefix",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/ReleaseSafe/out",
+        "--summary",
+        "all",
+        "--cache-dir",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/ReleaseSafe/local-cache",
+        "--global-cache-dir",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/ReleaseSafe/global-cache",
+        "test",
+        "-Dinstall-tests=true"
+      ],
+      "cwd": "/Users/runner/work/ZCR/ZCR/source",
+      "duration_seconds": 85.72246026992798,
+      "exit_code": 1,
+      "label": "ReleaseSafe-registered-tests",
+      "required": true,
+      "started_unix": 1789215162.7675688,
+      "status": "FAIL",
+      "stderr": {
+        "path": "22-ReleaseSafe-registered-tests.stderr.log",
+        "sha256": "01fc8214e9ba85e488eb8de15558a14c55958f2da65f86cc15408f7bb1e786e8"
+      },
+      "stdout": {
+        "path": "22-ReleaseSafe-registered-tests.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "argv": [
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/toolchain/zig-aarch64-macos-0.16.0/zig",
+        "test",
+        "/Users/runner/work/ZCR/ZCR/source/src/protocol/codec.zig",
+        "-OReleaseSafe",
+        "-femit-bin=/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/ReleaseSafe/codec/codec-test",
+        "--cache-dir",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/ReleaseSafe/local-cache",
+        "--global-cache-dir",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/ReleaseSafe/global-cache"
+      ],
+      "cwd": "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/ReleaseSafe/tmp",
+      "duration_seconds": 7.813277959823608,
+      "exit_code": 0,
+      "label": "ReleaseSafe-codec-tests",
+      "required": true,
+      "started_unix": 1789215248.492223,
+      "status": "PASS",
+      "stderr": {
+        "path": "23-ReleaseSafe-codec-tests.stderr.log",
+        "sha256": "1ef7ad3a35356665642743bd1e4ce916599b49366ba2b232a0ceb002b329cbd2"
+      },
+      "stdout": {
+        "path": "23-ReleaseSafe-codec-tests.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "argv": [
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/venv/bin/python",
+        "/Users/runner/work/ZCR/ZCR/source/tests/cli_smoke.py",
+        "--binary",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/ReleaseSafe/out/bin/zcr",
+        "--state",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/artifacts/ReleaseSafe/cli"
+      ],
+      "cwd": "/Users/runner/work/ZCR/ZCR/source",
+      "duration_seconds": 3.923880100250244,
+      "exit_code": 0,
+      "label": "ReleaseSafe-cli-subprocess",
+      "required": true,
+      "started_unix": 1789215256.306696,
+      "status": "PASS",
+      "stderr": {
+        "path": "24-ReleaseSafe-cli-subprocess.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "24-ReleaseSafe-cli-subprocess.stdout.log",
+        "sha256": "121de1ecc64e1d2467611ad6b48d656651660c3f02596a970a035c22bb0b7938"
+      }
+    },
+    {
+      "argv": [
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/toolchain/zig-aarch64-macos-0.16.0/zig",
+        "build-exe",
+        "-OReleaseSafe",
+        "-femit-bin=/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/ReleaseSafe/probe/caps",
+        "-lc",
+        "--cache-dir",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/ReleaseSafe/local-cache",
+        "--global-cache-dir",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/ReleaseSafe/global-cache",
+        "-framework",
+        "Foundation",
+        "-framework",
+        "IOKit",
+        "-framework",
+        "CoreFoundation",
+        "/Users/runner/work/ZCR/ZCR/source/bench/spikes/darwin_abi.c",
+        "/Users/runner/work/ZCR/ZCR/source/bench/spikes/caps.zig"
+      ],
+      "cwd": "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/ReleaseSafe/tmp",
+      "duration_seconds": 8.49052906036377,
+      "exit_code": 0,
+      "label": "ReleaseSafe-caps-build",
+      "required": true,
+      "started_unix": 1789215260.233313,
+      "status": "PASS",
+      "stderr": {
+        "path": "25-ReleaseSafe-caps-build.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "25-ReleaseSafe-caps-build.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "argv": [
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/ReleaseSafe/probe/caps",
+        "--repo",
+        "/Users/runner/work/ZCR/ZCR/source",
+        "--corpus",
+        "/Users/runner/work/ZCR/ZCR/source/contracts",
+        "--corpus-id",
+        "checked-out-contracts",
+        "--zig",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/toolchain/zig-aarch64-macos-0.16.0/zig",
+        "--out",
+        "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/artifacts/ReleaseSafe/baseline.json"
+      ],
+      "cwd": "/Users/runner/work/_temp/zcr-native-34692959158-1-aarch64-macos/ReleaseSafe/tmp",
+      "duration_seconds": 0.24898004531860352,
+      "exit_code": 0,
+      "label": "ReleaseSafe-caps-runtime",
+      "required": true,
+      "started_unix": 1789215268.731349,
+      "status": "PASS",
+      "stderr": {
+        "path": "26-ReleaseSafe-caps-runtime.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "26-ReleaseSafe-caps-runtime.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "external_gates": [
+    {
+      "gate": "G07/G08/G13 actual host client and sandbox integration",
+      "reason": "No actual Codex/Claude client or host sandbox in this job.",
+      "status": "NOT_RUN"
+    },
+    {
+      "gate": "G12 paired model coexistence and end-to-end performance",
+      "reason": "No actual model/client benchmark harness in this job.",
+      "status": "NOT_RUN"
+    },
+    {
+      "gate": "G11 macOS 11 Intel runtime",
+      "reason": "The matrix runs macOS 15, not an actual macOS 11 machine.",
+      "status": "NOT_RUN"
+    },
+    {
+      "gate": "G05 complete APFS ACL/xattr/crash-durability qualification",
+      "reason": "Unit tests do not constitute the full destructive APFS qualification harness.",
+      "status": "NOT_RUN"
+    }
+  ],
+  "finished_unix": 1789215270.35701,
+  "host": {
+    "image_os": "macos15",
+    "image_version": "20260907.0337.1",
+    "machine": "arm64",
+    "platform": "macOS-15.7.9-arm64-arm-64bit",
+    "python": "3.12.10 (v3.12.10:0cc81280367, Apr  8 2025, 08:46:59) [Clang 13.0.0 (clang-1300.0.29.30)]",
+    "python_executable_sha256": "d4f152f2a753c94e0e7935c8ebbe6b2609979e1df7898422b577d0076383d08b",
+    "runner_arch": "ARM64"
+  },
+  "performance_claims": false,
+  "runner": "macos-15",
+  "schema": "zcr-native-ci/1",
+  "scope": "required native contract, registered test, codec, and CLI subprocess commands",
+  "source": {
+    "after": {
+      "commit": "b6475a041b9cbee8263eb2d91138f544d3c04862",
+      "config_sha256": "8688c74cc98a91c5437596b0ffc42989451bf4a491f301e97c3478671e1fb323",
+      "contract_config_sha256": "7753ce3bc905ebcc2c67d224321c804ac0d742b7d7f2e37d54921f9dc84dce51",
+      "contract_sha256": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+      "git_status": "",
+      "test_inputs_sha256": "074ce7c7fed000b5c011e7db95cb36436aeaf7277d74ab85503f561fcea25d39",
+      "tracked_files_sha256": "0d29ced0cbaa20cec26b2694090d906527878c8d0764482ecdaa816c6a375095",
+      "tree": "1c7fbe5048241cc82d0bc8b1170f7f8ab20d48bd"
+    },
+    "before": {
+      "commit": "b6475a041b9cbee8263eb2d91138f544d3c04862",
+      "config_sha256": "8688c74cc98a91c5437596b0ffc42989451bf4a491f301e97c3478671e1fb323",
+      "contract_config_sha256": "7753ce3bc905ebcc2c67d224321c804ac0d742b7d7f2e37d54921f9dc84dce51",
+      "contract_sha256": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+      "git_status": "",
+      "test_inputs_sha256": "074ce7c7fed000b5c011e7db95cb36436aeaf7277d74ab85503f561fcea25d39",
+      "tracked_files_sha256": "0d29ced0cbaa20cec26b2694090d906527878c8d0764482ecdaa816c6a375095",
+      "tree": "1c7fbe5048241cc82d0bc8b1170f7f8ab20d48bd"
+    }
+  },
+  "status": "FAIL",
+  "target": "aarch64-macos",
+  "toolchain": {
+    "archive_sha256": "b23d70deaa879b5c2d486ed3316f7eaa53e84acf6fc9cc747de152450d401489",
+    "executable_sha256": "e6cd688d25664983833aae272f501d4bceeae304875b8f1741209d15fd13a4ec",
+    "lock_sha256": "24f9fa3b58915a2dd0aff7f43cb358841c78c36a57d1b21cb2e83544efdf461f",
+    "url": "https://ziglang.org/download/0.16.0/zig-aarch64-macos-0.16.0.tar.xz",
+    "version": "0.16.0"
+  },
+  "workflow": {
+    "GITHUB_EVENT_NAME": "pull_request",
+    "GITHUB_REF": "refs/pull/1/merge",
+    "GITHUB_REPOSITORY": "Topabaem05/ZCR",
+    "GITHUB_RUN_ATTEMPT": "1",
+    "GITHUB_RUN_ID": "34692959158",
+    "GITHUB_SHA": "b6475a041b9cbee8263eb2d91138f544d3c04862",
+    "GITHUB_WORKFLOW_SHA": "b6475a041b9cbee8263eb2d91138f544d3c04862"
+  }
+}

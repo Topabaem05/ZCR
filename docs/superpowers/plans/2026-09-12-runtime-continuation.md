@@ -43,12 +43,12 @@
 
 - [x] Record clean branch inventory, source baseline and pinned compiler installation.
 - [x] Run inherited Debug suite: Linux reveals missing explicit libc linkage in POSIX T04/T05 fixtures; T07 runs 18 passing tests but reviewed edge cases are uncovered.
-- [ ] Link POSIX test roots with libc and rerun all existing tests; retain baseline failure log.
-- [ ] Add BA-001 regression: line range count=0 / u32 overflow returns InvalidArgument from plannedCost, never panics.
-- [ ] Add BA-001 regression: invalid UTF-8 or over-budget earlier line does not turn a valid later batch member into an error; compare each member against a standalone read.
-- [ ] Add BA-003 regression: projection output-budget errors update emitted coverage/status consistently.
-- [ ] Implement validated planning and safe merge/fallback behavior; run batch and full Debug/ReleaseSafe tests.
-- [ ] Review, commit and record remaining inherited gaps (including deadline plumbing) for their owning implementation task.
+- [x] Link POSIX test roots with libc and rerun all existing tests; retain baseline failure log.
+- [x] Add BA-001 regression: line range count=0 / u32 overflow returns InvalidArgument from plannedCost, never panics.
+- [x] Add BA-001 regression: invalid UTF-8 or over-budget earlier line does not turn a valid later batch member into an error; compare each member against a standalone read.
+- [x] Add BA-003 regression: projection output-budget errors update emitted coverage/status consistently.
+- [x] Implement validated planning and safe merge/fallback behavior; run batch and full Debug/ReleaseSafe tests.
+- [x] Review, commit and record remaining inherited gaps (including deadline plumbing) for their owning implementation task.
 
 ```sh
 zig build test -Dtest-group=batch -Doptimize=Debug -Dinstall-tests=true --prefix "$ZCR_STATE/out-debug"
@@ -154,6 +154,7 @@ zig build verify-contracts
 ## Task 5: T12 — Journal·crash recovery·idempotency
 
 **Spec:** `tasks/T12.md` (all task-specific instructions and test assertions apply).
+**Approved continuation design:** [Supervised recovery and historical receipts](../designs/2026-09-12-supervised-recovery.md); production supervisor, native platform and kernel-fault gates remain open.
 **Files:** `src/storage/journal.zig`, `src/storage/recovery.zig`, `src/storage/receipts.zig`, `tests/t12_test.zig`, `evidence/T12/`.
 **Dependencies:** T11.
 **Interfaces — consumes:** I19 journal interface; I10/I11 commit point.
@@ -440,5 +441,10 @@ zig build verify-contracts
 - T11source09422d4는 독립 승인 후 통합했다. 작업 소스의 Debug/ReleaseSafe 각각41write tests, 통합7bd5be8 Debug41tests가 통과했다. 생산 쓰기는 T12 및 플랫폼 복구 게이트 전까지 비활성이다.
 - T14source2ca8e31은 독립 승인 후 통합했다. 각Debug/ReleaseSafe/fault19tests, 통합988dde8 Debug19tests가 통과했다. Darwin 실제FSEvents 수명·이벤트 전달은 미검증으로 유지한다.
 - [실제3플랫폼CI](../../../evidence/continuation/native-ci-34681109500/README.md)는 이전tree39978457에서 각모드221/222tests가 통과했고 T01계약시험 및 당시 미통합T11/T14/T15로 전체FAIL이다. T01은 승인된 nativeI19 네번째필드를 검사하도록7115d63에서 수정, 로컬Debug19/19가 통과했다. 이후소스의PASS로 이 증거를 재사용하지 않는다.
-- T12영속저널·실제SIGKILL/새복구프로세스40사례를 구현 중이다. 실제MCP캐시 경로b5fe273과 broker98c63f8은 검토에서 캐시압력 후admission 및 대기요청취소응답 결함이 확인되어 수정 전까지 승인하지 않는다.
-- T16은 공유Budget의 동적admission 한도 선행API를 작업 중이며 governor 구현·연결은 남아 있다. T17/T19/T21–T25와 실제클라이언트·모델·최소OS 게이트도 남아 있다.
+- T12 초기 검토의 두 결함을 수정한 source1f12553/evidence4759605가 독립 승인됐다. Debug/ReleaseSafe 각각65/65와40 writer SIGKILL 사례를 보존했고, ad577ab에 통합한 실제 소스에서도 Debug65/65가 통과했다. 생산 supervisor, Mac, 실제 kernel fault 및 power-loss 게이트는 남아 있다.
+- 캐시·브로커·임시 출력 예산 지적과 후속 실제 취소 경로를 source95352af/evidenceec9e5ad에서 수정하고 독립 승인 후 dae7ddc까지 통합했다. 실제 CLI 압력 검사와 원본 요청 ID 취소 응답의 실행 증거를 보존했다.
+- [후속 실제3플랫폼 CI](../../../evidence/continuation/native-ci-34692959158/README.md)는 공개9d6d8e55/tree1c7fbe50에서 Linux 각모드285/285, 두Mac 각모드232통과/12건너뜀을 기록했다. Mac T11컴파일 오류와 당시T12/T15미통합으로 전체FAIL이다. 총4164개 archive/source/binary 검증을 기록했다.
+- T16 스케줄러·캐시 선행API source8bad59b/evidencef5de460은 독립 승인 후7b915f8에 통합했다. 작업 소스의 각모드 scheduler20통과/1플랫폼건너뜀, memory34통과를 확인했다. Governor 정책·신호·실행 경로 연결, T17/T19/T21–T25와 실제클라이언트·모델·최소OS 게이트가 남아 있다.
+
+- Darwin T11은 독립 승인 후53b4686/c80508b에 통합했다. Linux41/41 각모드와 두Mac 대상 semantic compile을 기록했으며 실제Mac 실행은 후속 CI 대상이다. T12 Darwin 포트를 별도 작업 트리에서 진행한다.
+- [통합108b906 실행](../../../evidence/continuation/integrated-108b906/README.md): 각Debug/ReleaseSafe338통과/9실패, 실패는 제한된 로컬 환경의 broker AF_UNIX 사례다. 각모드 build/contracts/codec10/실제CLI19는 통과했다. 전체 등록 시험은 FAIL로 보존하며 hosted CI에서 소켓·Mac 경로를 검증한다.

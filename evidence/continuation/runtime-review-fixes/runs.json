@@ -1,0 +1,23 @@
+{
+  "schema_version": "zcr-runtime-review-fixes/1",
+  "source_commit": "5ad79b17c54e0ee28288f67344b208d04154f6a0",
+  "source_tree": "889597e35b5d3210b350fbe8f8493185d071cdbc",
+  "toolchain": {"version": "0.16.0", "sha256": "2317bbb91798556d9d0f38aabdac23db83f0979b25f767259ae474546724087c"},
+  "runs": [
+    {"label":"budget-red-debug","command":"zig build test -Dtest-id=ME-005 -Doptimize=Debug","exit":1,"result":"functional RED: expected ResourceExhausted, found OutputBudgetExceeded; registry also reported missing root-owned tests/t12_test.zig"},
+    {"label":"cache-red-debug","command":"zig build test -Dtest-group=mcp -Dtest-id='runtime cache pressure preserves' -Doptimize=Debug","exit":1,"result":"0/1 passed; warmed real MCP read returned !ok"},
+    {"label":"broker-red-debug","command":"zig build test -Dtest-group=broker -Dtest-id='pre-submit cancellation preserves' -Doptimize=Debug","exit":1,"result":"0/1 passed; response omitted original id 2"},
+    {"label":"budget-focused-debug","command":"zig build test -Dtest-group=memory -Dtest-id=ME-005 -Doptimize=Debug","exit":0,"passed":1,"failed":0},
+    {"label":"budget-focused-safe","command":"zig build test -Dtest-group=memory -Dtest-id=ME-005 -Doptimize=ReleaseSafe","exit":0,"passed":1,"failed":0},
+    {"label":"memory-debug","command":"installed T03-test and T13-test direct","exit":0,"passed":31,"failed":0},
+    {"label":"memory-safe","command":"installed T03-test and T13-test direct","exit":0,"passed":31,"failed":0},
+    {"label":"mcp-debug","command":"installed T08-test and T08-launch-test direct","exit":0,"passed":29,"failed":0},
+    {"label":"mcp-safe","command":"installed T08-test and T08-launch-test direct","exit":0,"passed":29,"failed":0},
+    {"label":"broker-unit-debug","command":"installed filtered T15-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/c","exit":0,"passed":19,"failed":0},
+    {"label":"broker-unit-safe","command":"installed filtered T15-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/c2","exit":0,"passed":19,"failed":0},
+    {"label":"broker-full-debug","command":"installed full T15-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/c3","exit":1,"passed":19,"failed":9,"blocked":"native AF_UNIX socket() returns EPERM/IoFailure"},
+    {"label":"broker-full-safe","command":"installed full T15-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/c4","exit":1,"passed":19,"failed":9,"blocked":"native AF_UNIX socket() returns EPERM/IoFailure"},
+    {"label":"cli-pressure-debug","command":"python3 run_pressure.py out/cli-debug/bin/zcr proof-debug.json","exit":0,"checks":35},
+    {"label":"cli-pressure-safe","command":"python3 run_pressure.py out/cli-safe/bin/zcr proof-safe.json","exit":0,"checks":35}
+  ]
+}

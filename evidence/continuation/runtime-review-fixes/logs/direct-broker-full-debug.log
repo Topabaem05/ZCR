@@ -1,0 +1,107 @@
+1/28 t15_test.test.BR-004 unit broker rejects wrong token instead of treating same uid as authority...OK
+2/28 t15_test.test.BR-004 unit broker rejects another user and another sandbox domain...OK
+3/28 t15_test.test.BR-001 four real UDS clients query using one executor and 128MiB group...FAIL (IoFailure)
+/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/src/broker/server.zig:109:21: 0x1262a7f in create (server.zig)
+        if (fd < 0) return error.IoFailure;
+                    ^
+/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/tests/t15_test.zig:113:20: 0x1265196 in start (t15_test.zig)
+        f.server = try broker.Server.create(f.config());
+                   ^
+/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/tests/t15_test.zig:146:5: 0x13ecfb0 in test.BR-001 four real UDS clients query using one executor and 128MiB group (t15_test.zig)
+    try f.start();
+    ^
+4/28 t15_test.test.BR-002 seventeenth UDS connection refuses while sixteen clients retain progress...FAIL (IoFailure)
+/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/src/broker/server.zig:109:21: 0x1262a7f in create (server.zig)
+        if (fd < 0) return error.IoFailure;
+                    ^
+/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/tests/t15_test.zig:113:20: 0x1265196 in start (t15_test.zig)
+        f.server = try broker.Server.create(f.config());
+                   ^
+/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/tests/t15_test.zig:194:5: 0x13eb69b in test.BR-002 seventeenth UDS connection refuses while sixteen clients retain progress (t15_test.zig)
+    try f.start();
+    ^
+5/28 t15_test.test.BR-004 unit policy intersection refuses broader scope operations and missing denies...OK
+6/28 t15_test.test.BR-001 unit four compatible cache facades share content and hold charged pins...OK
+7/28 t15_test.test.BR-001 unit broker refuses independent budgets inflated CPU and mismatched cache binding...OK
+8/28 t15_test.test.BR-003 unit bridge and output credit share global group refusal and release...OK
+9/28 t15_test.test.BR-005 unit reconnect never resends uncertain write and queries receipt only...OK
+10/28 t15_test.test.BR-004 unit token randomness and private parent check preserve host files...OK
+11/28 t15_test.test.BR-003 slow UDS client holds output while fast client keeps making progress...FAIL (IoFailure)
+/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/src/broker/server.zig:109:21: 0x1262a7f in create (server.zig)
+        if (fd < 0) return error.IoFailure;
+                    ^
+/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/tests/t15_test.zig:113:20: 0x1265196 in start (t15_test.zig)
+        f.server = try broker.Server.create(f.config());
+                   ^
+/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/tests/t15_test.zig:343:5: 0x13dbf5d in test.BR-003 slow UDS client holds output while fast client keeps making progress (t15_test.zig)
+    try f.start();
+    ^
+12/28 t15_test.test.BR-004 real UDS token and domain refusal cannot disconnect a valid grant...FAIL (IoFailure)
+/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/src/broker/server.zig:109:21: 0x1262a7f in create (server.zig)
+        if (fd < 0) return error.IoFailure;
+                    ^
+/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/tests/t15_test.zig:113:20: 0x1265196 in start (t15_test.zig)
+        f.server = try broker.Server.create(f.config());
+                   ^
+/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/tests/t15_test.zig:377:5: 0x13dab7d in test.BR-004 real UDS token and domain refusal cannot disconnect a valid grant (t15_test.zig)
+    try f.start();
+    ^
+13/28 t15_test.test.BR-002 idle unauthenticated UDS peer expires and releases its connection credit...FAIL (IoFailure)
+/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/src/broker/server.zig:109:21: 0x1262a7f in create (server.zig)
+        if (fd < 0) return error.IoFailure;
+                    ^
+/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/tests/t15_test.zig:396:16: 0x13d8c1a in test.BR-002 idle unauthenticated UDS peer expires and releases its connection credit (t15_test.zig)
+    f.server = try broker.Server.create(cfg);
+               ^
+14/28 t15_test.test.BR-005 unit bridge cancellation cannot open a socket or replay a request...OK
+15/28 t15_test.test.BR-001 unit constructor allocation refusal leaves group reservations and handles intact...OK
+16/28 t15_test.test.BR-005 unit reconnect mismatched receipt stays uncertain without new write...OK
+17/28 t15_test.test.BR-003 unit review EOF preserves final readable stdin frame...OK
+18/28 t15_test.test.BR-004 unit review active ID cancellation is scoped and recognizes escaped string IDs...OK
+19/28 t15_test.test.BR-003 unit review health uses retained control credit under global saturation...OK
+20/28 t15_test.test.BR-001 unit review executor frame claims an IO permit...OK
+21/28 t15_test.test.BR-004 unit review grant authorizer root must match registered root without cache facade...OK
+22/28 t15_test.test.BR-003 finite bridge stdin drains complete requests and all broker responses before EOF...FAIL (IoFailure)
+/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/src/broker/server.zig:109:21: 0x1262a7f in create (server.zig)
+        if (fd < 0) return error.IoFailure;
+                    ^
+/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/tests/t15_test.zig:113:20: 0x1265196 in start (t15_test.zig)
+        f.server = try broker.Server.create(f.config());
+                   ^
+/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/tests/t15_test.zig:498:5: 0x13c7b46 in test.BR-003 finite bridge stdin drains complete requests and all broker responses before EOF (t15_test.zig)
+    try f.start();
+    ^
+23/28 t15_test.test.BR-004 active UDS request cancellation remains scoped across client sessions...FAIL (IoFailure)
+/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/src/broker/server.zig:109:21: 0x1262a7f in create (server.zig)
+        if (fd < 0) return error.IoFailure;
+                    ^
+/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/tests/t15_test.zig:113:20: 0x1265196 in start (t15_test.zig)
+        f.server = try broker.Server.create(f.config());
+                   ^
+/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/tests/t15_test.zig:562:5: 0x13c5b25 in test.BR-004 active UDS request cancellation remains scoped across client sessions (t15_test.zig)
+    try f.start();
+    ^
+24/28 t15_test.test.BR-003 real broker health stays available when ordinary group bytes are exhausted...FAIL (IoFailure)
+/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/src/broker/server.zig:109:21: 0x1262a7f in create (server.zig)
+        if (fd < 0) return error.IoFailure;
+                    ^
+/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/tests/t15_test.zig:113:20: 0x1265196 in start (t15_test.zig)
+        f.server = try broker.Server.create(f.config());
+                   ^
+/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/tests/t15_test.zig:592:5: 0x13c4ce0 in test.BR-003 real broker health stays available when ordinary group bytes are exhausted (t15_test.zig)
+    try f.start();
+    ^
+25/28 t15_test.test.BR-004 unit wave2 cancellation binds preceding buffered IDs and survives compaction...OK
+26/28 t15_test.test.BR-004 unit pre-submit cancellation preserves request ID and skips filesystem dispatch...OK
+27/28 t15_test.test.BR-003 unit wave2 failed outbound send drains retained inbound before disconnect...OK
+28/28 t15_test.test.BR-004 coalesced UDS request and cancellation cancel the preceding idle request...FAIL (IoFailure)
+/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/src/broker/server.zig:109:21: 0x1262a7f in create (server.zig)
+        if (fd < 0) return error.IoFailure;
+                    ^
+/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/tests/t15_test.zig:113:20: 0x1265196 in start (t15_test.zig)
+        f.server = try broker.Server.create(f.config());
+                   ^
+/workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/tests/t15_test.zig:731:5: 0x1267346 in test.BR-004 coalesced UDS request and cancellation cancel the preceding idle request (t15_test.zig)
+    try f.start();
+    ^
+19 passed; 0 skipped; 9 failed.

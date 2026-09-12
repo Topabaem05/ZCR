@@ -1,0 +1,17 @@
+test
++- run test T08-test 0 pass, 1 fail (1 total)
+error: 't08_test.test.BR-001 runtime cache pressure preserves a previously admissible real MCP read' failed:
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:615:14: 0x12785d9 in expect (std.zig)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/tests/t08_test.zig:720:5: 0x1279f9f in test.BR-001 runtime cache pressure preserves a previously admissible real MCP read (t08_test.zig)
+           try testing.expect(recovered.object.get("ok").?.bool);
+           ^
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/cache-red5-local && /workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/cache-red5-local/o/fa0812cbf1f042bab5a732d866d290dc/T08-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/cache-red5-local --seed=0xc1a88140 --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 0/1 tests passed (1 failed)
+test transitive failure
++- run test T08-test 0 pass, 1 fail (1 total)
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/cache-red5-local/o/de94d8b23d3f88fd829df252bfc22c95/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes /workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/cache-red5-local /workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/cache-red5-global --seed 0xc1a88140 -Ze88e37aed1113e23 test -Dtest-group=mcp -Dtest-id=runtime cache pressure preserves -Doptimize=Debug

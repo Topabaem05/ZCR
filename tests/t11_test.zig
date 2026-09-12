@@ -1,4 +1,5 @@
 const std = @import("std");
+const builtin = @import("builtin");
 const core = @import("zcr_core");
 const policy = @import("zcr_policy");
 const memory = @import("zcr_memory");
@@ -465,7 +466,60 @@ test "IS-007 moved parent is refused after temp preparation" {
 }
 
 extern "c" fn mkfifoat(fd: c_int, path: [*:0]const u8, mode: std.c.mode_t) c_int;
-extern "c" fn fsetxattr(fd: c_int, name: [*:0]const u8, value: [*]const u8, size: usize, flags: c_int) c_int;
+const LinuxMetadata = struct {
+    extern "c" fn fsetxattr(fd: c_int, name: [*:0]const u8, value: [*]const u8, size: usize, flags: c_int) c_int;
+};
+const DarwinMetadata = struct {
+    extern "c" fn fsetxattr(fd: c_int, name: [*:0]const u8, value: [*]const u8, size: usize, position: u32, options: c_int) c_int;
+    extern "c" fn acl_init(count: c_int) ?*anyopaque;
+    extern "c" fn acl_free(acl: *anyopaque) c_int;
+    extern "c" fn acl_create_entry(acl: *?*anyopaque, entry: *?*anyopaque) c_int;
+    extern "c" fn acl_set_tag_type(entry: *anyopaque, tag: c_int) c_int;
+    extern "c" fn acl_set_qualifier(entry: *anyopaque, qualifier: *const anyopaque) c_int;
+    extern "c" fn acl_get_permset(entry: *anyopaque, perms: *?*anyopaque) c_int;
+    extern "c" fn acl_add_perm(perms: *anyopaque, perm: c_int) c_int;
+    extern "c" fn acl_set_fd_np(fd: c_int, acl: *anyopaque, kind: c_int) c_int;
+};
+
+fn setTestAttribute(fd: c_int) !void {
+    const rc = switch (builtin.os.tag) {
+        .linux => LinuxMetadata.fsetxattr(fd, "user.zcr-test", "value", 5, 0),
+        .macos => DarwinMetadata.fsetxattr(fd, "user.zcr-test", "value", 5, 0, 0),
+        else => return error.Unsupported,
+    };
+    try t.expectEqual(@as(c_int, 0), rc);
+}
+
+fn setTestAcl(fd: c_int) !void {
+    if (builtin.os.tag == .macos) {
+        // Native extended ACL, independent of xattr enumeration. A synthetic
+        // principal keeps the fixture independent of account lookup services.
+        var acl: ?*anyopaque = DarwinMetadata.acl_init(1) orelse return error.AclFixtureFailed;
+        defer t.expectEqual(@as(c_int, 0), DarwinMetadata.acl_free(acl.?)) catch unreachable;
+        var entry: ?*anyopaque = null;
+        try t.expectEqual(@as(c_int, 0), DarwinMetadata.acl_create_entry(&acl, &entry));
+        try t.expectEqual(@as(c_int, 0), DarwinMetadata.acl_set_tag_type(entry.?, 1)); // ACL_EXTENDED_ALLOW
+        const principal: [16]u8 = .{ 0x98, 0x21, 0x34, 0x56, 0x78, 0x9a, 0x4b, 0xcd, 0x8e, 0xf0, 0x12, 0x34, 0x56, 0x78, 0x9a, 0xbc };
+        try t.expectEqual(@as(c_int, 0), DarwinMetadata.acl_set_qualifier(entry.?, &principal));
+        var perms: ?*anyopaque = null;
+        try t.expectEqual(@as(c_int, 0), DarwinMetadata.acl_get_permset(entry.?, &perms));
+        try t.expectEqual(@as(c_int, 0), DarwinMetadata.acl_add_perm(perms.?, 1 << 1)); // ACL_READ_DATA
+        try t.expectEqual(@as(c_int, 0), DarwinMetadata.acl_set_fd_np(fd, acl.?, 0x100));
+    } else if (builtin.os.tag == .linux) {
+        // Linux POSIX ACL xattr version 2, with one named user and a mask.
+        var acl: [44]u8 = undefined;
+        std.mem.writeInt(u32, acl[0..4], 2, .little);
+        const tags = [_]u16{ 1, 2, 4, 16, 32 };
+        const permissions = [_]u16{ 6, 4, 4, 4, 0 };
+        for (tags, permissions, 0..) |tag, perm, i| {
+            const offset = 4 + i * 8;
+            std.mem.writeInt(u16, acl[offset..][0..2], tag, .little);
+            std.mem.writeInt(u16, acl[offset + 2 ..][0..2], perm, .little);
+            std.mem.writeInt(u32, acl[offset + 4 ..][0..4], if (tag == 2) (try edit.publish.Metadata.read(fd)).uid else std.math.maxInt(u32), .little);
+        }
+        try t.expectEqual(@as(c_int, 0), LinuxMetadata.fsetxattr(fd, "system.posix_acl_access", &acl, acl.len, 0));
+    } else return error.Unsupported;
+}
 
 fn expectNoTemps(f: *Fixture, path: []const u8) !void {
     var dir = try f.root.dir.openDir(io, path, .{ .iterate = true });
@@ -492,6 +546,12 @@ test "WR-001 primitive preserves ordinary mode and exact source identity" {
     try t.expectEqual(@as(u32, 0o640), (try edit.publish.Metadata.read(temp.file.handle)).mode);
     try parent.revalidate(io);
     try parent.publishReplace(&temp);
+    const published = try parent.openOriginal(io);
+    defer published.file.close(io);
+    try t.expect(published.metadata.identity.eql(temp.identity));
+    try t.expectEqual(original.metadata.mode, published.metadata.mode);
+    try t.expectEqual(original.metadata.uid, published.metadata.uid);
+    try t.expectEqual(original.metadata.gid, published.metadata.gid);
     try f.expectBytes("file.txt", "complete\n");
     try expectNoTemps(f, ".");
 }
@@ -515,28 +575,23 @@ test "WR-007 primitive refuses xattr and ACL metadata it cannot preserve" {
     defer f.deinit();
     const handle = try f.root.dir.openFile(io, "file.txt", .{ .mode = .read_write });
     defer handle.close(io);
-    try t.expectEqual(@as(c_int, 0), fsetxattr(handle.handle, "user.zcr-test", "value", 5, 0));
+    try setTestAttribute(handle.handle);
     var parent = try edit.publish.Parent.open(io, f.root.dir, "file.txt");
     defer parent.close(io);
     try t.expectError(error.Unsupported, parent.openOriginal(io));
+    try t.expectError(error.Unsupported, f.patch(simplePatch("base\n", "xattr-refusal")));
     try f.root.dir.writeFile(io, .{ .sub_path = "acl.txt", .data = "acl\n" });
     const acl_file = try f.root.dir.openFile(io, "acl.txt", .{ .mode = .read_write });
     defer acl_file.close(io);
-    // Linux POSIX ACL xattr version 2, with one named user and a mask.
-    var acl: [44]u8 = undefined;
-    std.mem.writeInt(u32, acl[0..4], 2, .little);
-    const tags = [_]u16{ 1, 2, 4, 16, 32 };
-    const permissions = [_]u16{ 6, 4, 4, 4, 0 };
-    for (tags, permissions, 0..) |tag, perm, i| {
-        const offset = 4 + i * 8;
-        std.mem.writeInt(u16, acl[offset..][0..2], tag, .little);
-        std.mem.writeInt(u16, acl[offset + 2 ..][0..2], perm, .little);
-        std.mem.writeInt(u32, acl[offset + 4 ..][0..4], if (tag == 2) (try edit.publish.Metadata.read(acl_file.handle)).uid else std.math.maxInt(u32), .little);
-    }
-    try t.expectEqual(@as(c_int, 0), fsetxattr(acl_file.handle, "system.posix_acl_access", &acl, acl.len, 0));
+    try setTestAcl(acl_file.handle);
     var acl_parent = try edit.publish.Parent.open(io, f.root.dir, "acl.txt");
     defer acl_parent.close(io);
     try t.expectError(error.Unsupported, acl_parent.openOriginal(io));
+    var acl_patch = simplePatch("acl\n", "acl-refusal");
+    acl_patch.path.bytes = "acl.txt";
+    try t.expectError(error.Unsupported, f.patch(acl_patch));
+    try t.expectEqual(@as(usize, 0), f.journal.prepares);
+    try expectNoTemps(f, ".");
     try f.expectBytes("file.txt", "base\n");
     try f.expectBytes("acl.txt", "acl\n");
 }
@@ -852,6 +907,11 @@ test "WR-007 syscall error after successful rename reconciles to applied receipt
         try t.expectEqual(@as(usize, 1), f.journal.applied_transitions);
         try t.expectEqual(@as(usize, 1), f.journal.records);
         try f.expectBytes(if (create) "new.txt" else "file.txt", if (create) "complete\n" else "Xase\n");
+        const retried = if (create) try f.create("new.txt", "complete\n", "uncertain-syscall") else try f.patch(simplePatch("base\n", "uncertain-syscall"));
+        try t.expectEqual(receipt.id, retried.id);
+        try t.expectEqual(receipt.generation, retried.generation);
+        try t.expect(retried.applied);
+        try t.expectEqual(@as(usize, 1), f.journal.records);
         try expectNoTemps(f, ".");
     }
 }

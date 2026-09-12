@@ -1,0 +1,47 @@
+{
+  "command": [
+    "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+    "build",
+    "test",
+    "-Dtest-group=write",
+    "-Doptimize=ReleaseSafe",
+    "-Dinstall-tests=true",
+    "--prefix",
+    "/workspace/scratch/3f4ab65dfb82/state/T12/final-releasesafe/out",
+    "--summary",
+    "all"
+  ],
+  "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T12",
+  "environment": {
+    "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T12/final-releasesafe/global-cache",
+    "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T12/final-releasesafe/cache",
+    "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T12/final-releasesafe/tmp"
+  },
+  "source_commit": "8d241f687effb78c3416c3d733d18283a5956ffb",
+  "source_tree": "3f9c9b52c0ae250b276d49a2fd703527502c9d1f",
+  "started": "2026-09-12T12:32:22.247269+00:00",
+  "toolchain": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+  "toolchain_version": "0.16.0",
+  "toolchain_sha256": "2317bbb91798556d9d0f38aabdac23db83f0979b25f767259ae474546724087c",
+  "exit_code": 0,
+  "elapsed_seconds": 62.14266699000291,
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "35faf2501bb863e7e88ba553a0346fcfa7cd7a34c2d8c59d6466c32d30cf41f1",
+  "binaries": {
+    "T11-test": {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/T12/final-releasesafe/out/bin/T11-test",
+      "sha256": "df2381e2314341cfb535a96fad1e9d148b570852b3456926876368383bb6c476",
+      "size": 4795032
+    },
+    "T12-test": {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/T12/final-releasesafe/out/bin/T12-test",
+      "sha256": "819d0232850487efb7161480c8bba8a55a754411f110ef99cca1e3bbb3ba38d9",
+      "size": 5692856
+    },
+    "T12-child": {
+      "path": "/workspace/scratch/3f4ab65dfb82/state/T12/final-releasesafe/out/bin/T12-child",
+      "sha256": "3f537021029c5abdf031570642e4b7e3d096673c955f6506591714ba7c068f32",
+      "size": 5126152
+    }
+  }
+}

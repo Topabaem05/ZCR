@@ -124,6 +124,20 @@ pub const Budget = struct {
         return self.admission_caps orelse self.caps;
     }
 
+    /// True only when reclaiming tracked bytes can make this exact cost fit.
+    /// Cache eviction cannot restore FD, CPU, or output credit, and must not run
+    /// for costs larger than the current admission cap itself.
+    pub fn reclaimableMemoryPressure(self: *Budget, cost: core.ResourceCost) bool {
+        const bytes = cost.totalBytes() catch return false;
+        self.lock.lock();
+        defer self.lock.unlock();
+        const cap = self.admission_caps orelse self.caps;
+        return bytes <= cap.bytes and bytes > cap.bytes -| self.used.bytes and
+            cost.fds <= cap.fds -| self.used.fds and
+            cost.cpu_permits <= cap.cpu -| self.used.cpu and
+            cost.output_bytes <= cap.output_bytes -| self.used.output_bytes;
+    }
+
     /// Reserves the whole cost or nothing. A cost that can never fit and a cost
     /// that does not fit right now are both `ResourceExhausted`; output larger
     /// than the whole output share is `OutputBudgetExceeded`.
@@ -136,7 +150,6 @@ pub const Budget = struct {
         self.lock.lock();
         defer self.lock.unlock();
         const cap = self.admission_caps orelse self.caps;
-        if (cost.output_bytes > cap.output_bytes) return error.OutputBudgetExceeded;
         if (bytes > cap.bytes -| self.used.bytes or
             cost.fds > cap.fds -| self.used.fds or
             cost.cpu_permits > cap.cpu -| self.used.cpu or

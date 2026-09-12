@@ -43,12 +43,18 @@ test "ME-005 pressure lowers new admission without revoking live reservations" {
     try testing.expect(!held.released);
     try testing.expectError(error.ResourceExhausted, budget.reserve(session(2), .{ .scratch_bytes = 1 }));
     try budget.release(&held);
+    // Output that fits the immutable share but not the temporary admission cap
+    // is retryable pressure, and the identical request succeeds after recovery.
+    try testing.expectError(error.ResourceExhausted, budget.reserve(session(2), .{ .output_bytes = 17 }));
     var smaller = try budget.reserve(session(2), .{ .scratch_bytes = 32, .fds = 2, .cpu_permits = 1 });
     try testing.expectError(error.ResourceExhausted, budget.reserve(session(3), .{ .cpu_permits = 1 }));
     try budget.release(&smaller);
     try testing.expectError(error.InvalidArgument, budget.setAdmissionCaps(.{ .bytes = 129, .fds = 2, .cpu = 1, .output_bytes = 16 }));
     try testing.expectEqual(@as(u64, 32), budget.admissionCaps().bytes);
     try budget.setAdmissionCaps(budget.caps);
+    var output_recovered = try budget.reserve(session(2), .{ .output_bytes = 17 });
+    try budget.release(&output_recovered);
+    try testing.expectError(error.OutputBudgetExceeded, budget.reserve(session(2), .{ .output_bytes = 33 }));
     var recovered = try budget.reserve(session(1), .{ .scratch_bytes = 80, .fds = 3, .cpu_permits = 2 });
     try budget.release(&recovered);
     try testing.expectEqual(@as(u64, 0), budget.usage().bytes);

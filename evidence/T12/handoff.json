@@ -1,0 +1,228 @@
+{
+  "schema_version": "zcr-t12-handoff/1",
+  "task": "T12",
+  "status": "IMPLEMENTED_AWAITING_REVIEW_AND_EXTERNAL_GATES",
+  "base_commit": "988dde8ed35141a8fff2b813f0988a9f346582e2",
+  "source_commit": "8d241f687effb78c3416c3d733d18283a5956ffb",
+  "source_tree": "3f9c9b52c0ae250b276d49a2fd703527502c9d1f",
+  "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+  "worktree": "/workspace/scratch/3f4ab65dfb82/ZCR-T12",
+  "source_snapshot_clean_before_evidence_creation": true,
+  "owned_source_files": {
+    "src/storage/journal.zig": "c68eee402039461617bc7268915dd178f166d4c691b149ff3c1ea75eb1a033a1",
+    "src/storage/receipts.zig": "57095c1d1e5356be2ff78798bf13e6e61b068419faf3154f2938d89f66765332",
+    "src/storage/recovery.zig": "3f0ae625e08ec1b42788a5c76f0abda63d6db84fe8b442920e137fd028595b56",
+    "tests/t12_child.zig": "4f7ea0ba5f4e76248d584ce7b5f6d68f657082c20c2ba0ab4609365553080ac7",
+    "tests/t12_fixtures.zig": "1ef04f116709f8c5967efe5cf9df085c78f5c86aadb636c9f1f6412358ef2178",
+    "tests/t12_test.zig": "223fd26da57e58927599d929de635f6ddc3dc3865327f0b7fc39aab350887971"
+  },
+  "build_sha256": "51bbc47cd1aafc90fc865b20cc15d863b0ec19109b6d01f5ac4bf3ae75d04d64",
+  "core_types_sha256": "f6b28697e3e27ed401cd165320dbb9a5816a3020e135bec4d633736ce48ef453",
+  "exports": {
+    "src/storage/journal.zig": [
+      "Namespace.fromIdentity",
+      "Store.init/deinit/find/append/preserveTail",
+      "Adapter.init/interface (I19 prepare/transition/record/lookup)",
+      "Caps",
+      "metadata/sync/readAt"
+    ],
+    "src/storage/recovery.zig": [
+      "GrantData",
+      "ContinuityGrant.validate + validate_publication",
+      "Recoverer.init/recover (I12)",
+      "budgetCost",
+      "identityMatches",
+      "publicationDigest"
+    ],
+    "src/storage/receipts.zig": [
+      "Frame",
+      "Origin",
+      "encode/decode/length",
+      "keyName/sameKey/validKey/validTemp"
+    ]
+  },
+  "runs": [
+    {
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=write",
+        "-Doptimize=Debug",
+        "-Dinstall-tests=true",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/T12/final-debug/out",
+        "--summary",
+        "all"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T12",
+      "environment": {
+        "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T12/final-debug/global-cache",
+        "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T12/final-debug/cache",
+        "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T12/final-debug/tmp"
+      },
+      "source_commit": "8d241f687effb78c3416c3d733d18283a5956ffb",
+      "source_tree": "3f9c9b52c0ae250b276d49a2fd703527502c9d1f",
+      "started": "2026-09-12T12:32:22.243683+00:00",
+      "toolchain": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "toolchain_version": "0.16.0",
+      "toolchain_sha256": "2317bbb91798556d9d0f38aabdac23db83f0979b25f767259ae474546724087c",
+      "exit_code": 0,
+      "elapsed_seconds": 19.88076398600242,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "7efb02be60373226dd40eb2dc3ebc40c5856d92e6e85610ca36705d8438b9418",
+      "binaries": {
+        "T11-test": {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T12/final-debug/out/bin/T11-test",
+          "sha256": "dd19ace05e96373478b02da8cc68963d6c6f53a5c1a6245df4e8fee8ff7e2cbb",
+          "size": 21077474
+        },
+        "T12-test": {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T12/final-debug/out/bin/T12-test",
+          "sha256": "9d0bf7b1936547abd99e3ac60ced9b8b2aeb2a82156f874e4cc6a48f4ea927e0",
+          "size": 27434189
+        },
+        "T12-child": {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T12/final-debug/out/bin/T12-child",
+          "sha256": "4364498a33072799535f1913df0d80cccdb82730b30f3b17c6ed55cb31aa2399",
+          "size": 21409784
+        }
+      },
+      "test_counts": {
+        "T11": 41,
+        "T12": 21,
+        "total": 62
+      }
+    },
+    {
+      "command": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-Dtest-group=write",
+        "-Doptimize=ReleaseSafe",
+        "-Dinstall-tests=true",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/T12/final-releasesafe/out",
+        "--summary",
+        "all"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-T12",
+      "environment": {
+        "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T12/final-releasesafe/global-cache",
+        "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/T12/final-releasesafe/cache",
+        "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/T12/final-releasesafe/tmp"
+      },
+      "source_commit": "8d241f687effb78c3416c3d733d18283a5956ffb",
+      "source_tree": "3f9c9b52c0ae250b276d49a2fd703527502c9d1f",
+      "started": "2026-09-12T12:32:22.247269+00:00",
+      "toolchain": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+      "toolchain_version": "0.16.0",
+      "toolchain_sha256": "2317bbb91798556d9d0f38aabdac23db83f0979b25f767259ae474546724087c",
+      "exit_code": 0,
+      "elapsed_seconds": 62.14266699000291,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "35faf2501bb863e7e88ba553a0346fcfa7cd7a34c2d8c59d6466c32d30cf41f1",
+      "binaries": {
+        "T11-test": {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T12/final-releasesafe/out/bin/T11-test",
+          "sha256": "df2381e2314341cfb535a96fad1e9d148b570852b3456926876368383bb6c476",
+          "size": 4795032
+        },
+        "T12-test": {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T12/final-releasesafe/out/bin/T12-test",
+          "sha256": "819d0232850487efb7161480c8bba8a55a754411f110ef99cca1e3bbb3ba38d9",
+          "size": 5692856
+        },
+        "T12-child": {
+          "path": "/workspace/scratch/3f4ab65dfb82/state/T12/final-releasesafe/out/bin/T12-child",
+          "sha256": "3f537021029c5abdf031570642e4b7e3d096673c955f6506591714ba7c068f32",
+          "size": 5126152
+        }
+      },
+      "test_counts": {
+        "T11": 41,
+        "T12": 21,
+        "total": 62
+      }
+    }
+  ],
+  "corpus_sha256": "31a8bb955b9b4c5669aa2c3e590330fcf584e923b2a586618c69676b63ac6546",
+  "matrix_cases": 40,
+  "additional_killed_writer_cases": 2,
+  "killed_recovery_cases": 2,
+  "raw_archive_sha256": "72c67287d754cbf309222ffba19ca3951b023cb8005952107e1dfcb7286b2822",
+  "raw_file_count": 590,
+  "tests": [
+    "WR-005 ten real SIGKILL writer points each patch create and fresh recovery twice",
+    "WR-005 authenticated persistent frame survives serialization and corrupt checksum refuses",
+    "WR-006 persistent binding receipt lifetime Busy cap refusal and transition validation",
+    "WR-008 cold start and wrong grants fail closed without source mutation",
+    "WR-008 target mismatch temp replacement noop identity and generation reconciliation",
+    "WR-007 actual T11 persistent append failures preserve applied and quarantine",
+    "WR-008 malformed complete journals never decode as absent or success",
+    "WR-008 malicious paths and private state modes are side effect free refusals",
+    "WR-005 killed recovery terminal append resumes in another fresh process",
+    "WR-007 durable success short writes and parent sync failure retain truth",
+    "WR-008 temp FIFO hardlink replacement and unrecorded decoys remain untouched",
+    "WR-008 changed Git marker and missing parent witness reject reconciliation",
+    "WR-007 real persistent failures atomically block queued filesystem publication",
+    "WR-008 moved and recreated roots cannot use retained namespace continuity",
+    "WR-008 complete checksummed receipt chains reject generation and durability drift",
+    "WR-007 actual kernel EACCES before PREPARED after publish and before receipt",
+    "WR-006 concurrent same key admission persists once and bounds storage without eviction",
+    "WR-008 retained publication parent move and missing publication attestation quarantine",
+    "WR-008 copied private journal directory cannot replace retained store witness",
+    "WR-006 ancient and future receipt clocks retain borrowed output under cap pressure",
+    "WR-005 successive torn recovery sequences preserve each forensic suffix"
+  ],
+  "functional_reds": [
+    {
+      "artifact": "historical-red/red.log",
+      "sha256": "03ea28b5541f6ea6b624972b08645aa7e60a6d0c07b3b6dc4ab365a839fbc886",
+      "source_commit": "f75b69b",
+      "provenance": "initial committed functional RED",
+      "binary_hashes_when_preserved": {
+        "/workspace/scratch/3f4ab65dfb82/state/T12/cache/o/7c6400dc45904fed9254005aba1e4844/T12-test": "b8ee94b45063d79f5718271e0ecb55c2e15042b279be5e8b3a3434e7898ec0cb"
+      }
+    },
+    {
+      "artifact": "historical-red/inode-reuse-red.log",
+      "sha256": "ce2582a8f85fcae39abb621caf9bfbf2d4ea3c7d9453dda417d1869ecb555db0",
+      "source_commit": null,
+      "provenance": "preserved functional RED; uncommitted source snapshot unavailable",
+      "binary_hashes_when_preserved": {
+        "/workspace/scratch/3f4ab65dfb82/state/T12/cache/o/1575200bbda660dad37943969afffc0b/T12-test": "8d46219424f315da862e5abdc6b75931b1f8dc783de2178ebafc952fdfd7ab48"
+      }
+    },
+    {
+      "artifact": "historical-red/chain-drift-red.log",
+      "sha256": "dc0e61e46146ede1e1b639f965798d1db03386edaea95f3cafecb9903c6c1712",
+      "source_commit": null,
+      "provenance": "preserved functional RED; uncommitted source snapshot unavailable",
+      "binary_hashes_when_preserved": {
+        "/workspace/scratch/3f4ab65dfb82/state/T12/cache/o/2325ce3ad7eeb1a2189557a95b4131aa/T12-test": "e8fce41129b8957f949b9bac5fe5dd0ab75d0c6ce46b1e25439ff10e72898215"
+      }
+    },
+    {
+      "artifact": "historical-red/successive-tail-red.log",
+      "sha256": "9428ddff9dfb63cb54992d1d6210cd4949fa0a38d2a9c22d32304e7557356c47",
+      "source_commit": null,
+      "provenance": "preserved functional RED; uncommitted source snapshot unavailable",
+      "binary_hashes_when_preserved": {
+        "/workspace/scratch/3f4ab65dfb82/state/T12/cache/o/d164ca3ad061556ca658c52b12d9805d/T12-test": "c25aed3736d1c07741563e520275355e92fe667ed68b3dc842b33c55210fd3d6"
+      }
+    }
+  ],
+  "remaining_gates": [
+    "Independent T12 source/evidence review and combined startup/write integration on integrator commit.",
+    "Trusted actual host launch wiring retaining root/Git/common/state and per-publication parent/temp/original handles with protected one-use grant; cold start stays quarantined.",
+    "Genuine kernel ENOSPC before and after publication: NOT_RUN; no shared-disk filling attempted.",
+    "Genuine kernel short-count return and fsync failure: NOT_RUN; deterministic seven-byte write chunks and injected write/fsync errors passed, not OS fault proof.",
+    "macOS Apple Silicon and Intel / Windows runtime: NOT_RUN; this store rejects non-Linux.",
+    "Power-loss durability and filesystem/platform support qualification: NOT_RUN; SIGKILL establishes process crash handling only.",
+    "Production capabilities/writes remain hard false; no test or recovery enables production."
+  ],
+  "scope_note": "Only six owned source/tests changed from base; evidence added under evidence/T12. No push or merge. Precommit logs are supplemental and not final committed proof.",
+  "retention_note": "No eviction; borrowed receipts remain valid until Store.deinit. Clock rollback cannot evict entries. Full worst-case journal+tail credit makes default storage cap refuse after at most 255 operations, before 10000 entry ceiling. No actual 10000-entry population test is claimed."
+}

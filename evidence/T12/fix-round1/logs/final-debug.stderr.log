@@ -1,0 +1,60 @@
+test
++- run test T12-test 23 pass, 1 fail (24 total)
+error: 't12_test.test.WR-006 F1 terminal history survives actual commit commit and abort commit fresh restart' failed:
+       T12 C01 patch pid=294 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+       T12 C02 patch pid=438 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+       T12 C03 patch pid=601 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+       T12 C04 patch pid=685 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=1
+       T12 C05 patch pid=728 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+       T12 C06 patch pid=771 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+       T12 C07 patch pid=814 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+       T12 C08 patch pid=857 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+       T12 C09 patch pid=900 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+       T12 C10 patch pid=943 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+       T12 C01 create pid=986 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+       T12 C02 create pid=1029 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+       T12 C03 create pid=1072 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+       T12 C04 create pid=1115 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=1
+       T12 C05 create pid=1158 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+       T12 C06 create pid=1201 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+       T12 C07 create pid=1244 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+       T12 C08 create pid=1287 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+       T12 C09 create pid=1330 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+       T12 C10 create pid=1373 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+       T12 recovery append SIGKILL verified
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/Io/Reader.zig:386:5: 0x12afb12 in appendRemainingAligned__anon_49663 (std.zig)
+           return error.StreamTooLong;
+           ^
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/Io/Reader.zig:308:5: 0x12ad89e in allocRemainingAlignedSentinel__anon_49648 (std.zig)
+           try appendRemainingAligned(r, gpa, alignment, &buffer, limit);
+           ^
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/Io/Dir.zig:1369:55: 0x12ad38a in readFileAllocOptions__anon_49635 (std.zig)
+               error.OutOfMemory, error.StreamTooLong => |e| return e,
+                                                             ^
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/Io/Dir.zig:1338:5: 0x12ac6ef in readFileAlloc (std.zig)
+           return readFileAllocOptions(dir, io, sub_path, gpa, limit, .of(u8), null);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T12/tests/t12_test.zig:980:50: 0x1383a60 in test.WR-006 F1 terminal history survives actual commit commit and abort commit fresh restart (t12_test.zig)
+               try t.expectEqualSlices(u8, fixture.new, try repo.root.dir.readFileAlloc(f.io, "file.txt", repo.arena.allocator(), .limited(f.size)));
+                                                        ^
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/final-debug/cache && /workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/final-debug/cache/o/9283028c3d0e48e979d1a18548f4e888/T12-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/final-debug/cache --seed=0x1f5da07f --listen=-
+
+Build Summary: 9/11 steps succeeded (1 failed); 64/65 tests passed (1 failed)
+test transitive failure
++- install T11-test success
+|  +- compile test T11-test Debug native success 3s MaxRSS:275M
++- run test T11-test 41 pass (41 total) 1s MaxRSS:16M
+|  +- compile test T11-test Debug native (reused)
++- install T12-child success
+|  +- compile test T12-child Debug native success 3s MaxRSS:186M
+|     +- options success
++- install T12-test success
+|  +- compile test T12-test Debug native success 712ms MaxRSS:193M
+|     +- options (reused)
+|     +- options success
+|        +- compile test T12-child Debug native (+1 more reused dependencies)
++- run test T12-test 23 pass, 1 fail (24 total)
+   +- compile test T12-test Debug native (+2 more reused dependencies)
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/final-debug/cache/o/de94d8b23d3f88fd829df252bfc22c95/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-T12 /workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/final-debug/cache /workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/final-debug/global-cache --seed 0x1f5da07f -Z118cece4582e1081 test -Dtest-group=write -Doptimize=Debug -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/final-debug/out --summary all

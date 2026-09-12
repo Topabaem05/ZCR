@@ -21,6 +21,8 @@ import time
 import traceback
 import urllib.request
 
+from storage_capture import capture as capture_storage
+
 
 def digest(path):
     with Path(path).open('rb') as stream:
@@ -198,6 +200,19 @@ class Run:
         built, _ = self.command(mode + '-build', build, env=env)
         self.command(mode + '-contracts', build + ['verify-contracts'], env=env)
         self.command(mode + '-registered-tests', build + ['test', '-Dinstall-tests=true'], env=env)
+        if (self.source / 'tests/t12_test.zig').exists():
+            # T12 intentionally retains journals and fresh-child pipe transcripts
+            # under the test cwd. Preserve them before the runner is discarded.
+            try:
+                captured = capture_storage(state / 'local-cache/.zig-cache/tmp', mode_artifacts / 'storage')
+                self.report.setdefault('storage_evidence', []).append({
+                    'mode': mode, 'source': self.report['source']['before'],
+                    'path': mode + '/storage/capture.json', **captured})
+                self.check(mode + '-storage-evidence-captured', captured['fixture_count'] > 0,
+                           {'status': captured['status'], 'fixtures': captured['fixture_count'],
+                            'note': 'Capture only; test outcomes and matrix verification remain separate.'})
+            except Exception as failure:
+                self.check(mode + '-storage-evidence-captured', False, str(failure))
         # codec.zig has its own allocation-failure/preflight tests outside build.zig's registry.
         self.command(mode + '-codec-tests', [zig, 'test', self.source / 'src/protocol/codec.zig',
                      f'-O{mode}', f'-femit-bin={state / "codec" / "codec-test"}', *cache_flags],

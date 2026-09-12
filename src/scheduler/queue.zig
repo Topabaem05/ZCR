@@ -11,6 +11,11 @@ pub const Resources = struct {
     io: u32,
     /// The executor also excludes idle while foreground is executing.
     idle_allowed: bool = true,
+    /// Original hard ceilings, supplied only with zero active CPU. Accepted
+    /// grants needing these allowances must execute alone and stay unchanged.
+    exclusive_cpu: u32 = 0,
+    exclusive_non_short_cpu: u32 = 0,
+    exclusive_io: u32 = 0,
 };
 pub const Entry = struct {
     job: *core.JobEnvelope,
@@ -78,8 +83,10 @@ pub const Queue = struct {
     }
 
     fn eligible(job: *const core.JobEnvelope, resources: Resources) bool {
-        return cpuCost(job) <= resources.cpu and ioCost(job) <= resources.io and
-            (job.qos_intent == .fg_short or cpuCost(job) <= resources.non_short_cpu);
+        return (cpuCost(job) <= resources.cpu and ioCost(job) <= resources.io and
+            (job.qos_intent == .fg_short or cpuCost(job) <= resources.non_short_cpu)) or
+            (cpuCost(job) <= resources.exclusive_cpu and ioCost(job) <= resources.exclusive_io and
+                (job.qos_intent == .fg_short or cpuCost(job) <= resources.exclusive_non_short_cpu));
     }
     fn choose(self: *const Queue, wanted: @TypeOf(lane(undefined)), resources: ?Resources) ?usize {
         var chosen: ?usize = null;
@@ -124,6 +131,9 @@ pub const Queue = struct {
             if (lane(candidate.job) == .idle) return null;
             self.protected_handle = candidate.handle;
             var spare = resources;
+            spare.exclusive_cpu = 0;
+            spare.exclusive_non_short_cpu = 0;
+            spare.exclusive_io = 0;
             spare.cpu -|= cpuCost(candidate.job);
             if (candidate.job.qos_intent != .fg_short) spare.non_short_cpu -|= cpuCost(candidate.job);
             spare.io -|= ioCost(candidate.job);

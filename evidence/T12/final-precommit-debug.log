@@ -1,0 +1,36 @@
+test
++- run test T12-test w
+T12 C01 patch pid=537 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C02 patch pid=580 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C03 patch pid=623 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C04 patch pid=666 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=1
+T12 C05 patch pid=709 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C06 patch pid=752 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C07 patch pid=795 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C08 patch pid=838 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C09 patch pid=881 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C10 patch pid=924 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C01 create pid=967 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C02 create pid=1010 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C03 create pid=1053 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C04 create pid=1096 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=1
+T12 C05 create pid=1139 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C06 create pid=1182 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C07 create pid=1225 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C08 create pid=1268 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C09 create pid=1311 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C10 create pid=1354 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 recovery append SIGKILL verified
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/T12/cache && /workspace/scratch/3f4ab65dfb82/state/T12/cache/o/9be7a80598da31cf527b7f63a4c76142/T12-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/T12/cache --seed=0x5cf59d9e --listen=-
+
+Build Summary: 8/8 steps succeeded; 62/62 tests passed
+test success
++- run test T11-test 41 pass (41 total) 1s MaxRSS:16M
+|  +- compile test T11-test Debug native cached 15ms MaxRSS:71M
++- run test T12-test 21 pass (21 total) 10s MaxRSS:16M
+   +- compile test T12-test Debug native success 649ms MaxRSS:193M
+      +- options cached
+      +- options success
+         +- compile test T12-child Debug native success 591ms MaxRSS:186M
+            +- options (reused)
+

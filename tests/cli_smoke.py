@@ -158,6 +158,16 @@ def main():
             if tool == "health":
                 assert envelope["data"]["usable_cpu_permits"] == 1, envelope
             checks.append("stdio/schema/byte-count " + tool)
+        repeated = []
+        for identifier in (30, 31, 32):
+            reply = client.request(identifier, "tools/call", {"name": "zcr_read", "arguments": {"path": "a.txt"}})["result"]
+            value = json.loads(reply["content"][0]["text"])
+            Draft202012Validator(envelope_schema).validate(value)
+            assert value["ok"] is True, value
+            repeated.append(value)
+        assert repeated[-1]["meta"]["cache"] == "hit", repeated
+        assert all(value["data"] == repeated[0]["data"] for value in repeated), repeated
+        checks.append("standalone repeated reads use the shared cache with one CPU permit")
         for i, arguments in enumerate(({"path": "../outside"}, {"path": "a.txt", "root": "/"}), 20):
             refused = client.request(i, "tools/call", {"name": "zcr_read", "arguments": arguments})
             assert "error" in refused or refused.get("result", {}).get("isError") is True, refused

@@ -1,5 +1,5 @@
-//! Descriptor-relative Linux publication primitives for T11. Other platforms
-//! fail closed until their metadata/no-replace/durability gates are executed.
+//! Descriptor-relative Linux and macOS publication primitives for T11.
+//! Native platform execution and durability gates are tracked separately.
 //! These checks assume the host-approved managed writer environment; they do
 //! not promise compare-and-swap against a hostile same-UID external writer.
 const std = @import("std");
@@ -9,7 +9,16 @@ const paths = @import("zcr_policy").paths;
 const Io = std.Io;
 const Error = core.WriteError;
 const linux = std.os.linux;
-extern "c" fn flistxattr(fd: c_int, list: ?[*]u8, size: usize) isize;
+const LinuxMetadata = struct {
+    extern "c" fn flistxattr(fd: c_int, list: ?[*]u8, size: usize) isize;
+};
+const Darwin = struct {
+    // Public Darwin APIs: xnu bsd/sys/{xattr,stdio}.h and Libc sys/acl.h.
+    extern "c" fn flistxattr(fd: c_int, list: ?[*]u8, size: usize, options: c_int) isize;
+    extern "c" fn acl_get_fd_np(fd: c_int, kind: c_int) ?*anyopaque;
+    extern "c" fn acl_free(acl: *anyopaque) c_int;
+    extern "c" fn renameatx_np(from_fd: c_int, from: [*:0]const u8, to_fd: c_int, to: [*:0]const u8, flags: c_uint) c_int;
+};
 pub const TempStage = enum { after_write_chunk, before_metadata };
 pub const TempProbe = struct { context: *anyopaque, call: *const fn (*anyopaque, TempStage) void };
 
@@ -24,6 +33,24 @@ pub const Metadata = struct {
     ctime_ns: i128,
 
     pub fn read(fd: std.posix.fd_t) Error!Metadata {
+        if (builtin.os.tag == .macos) {
+            // std.c selects fstat$INODE64 on Intel Darwin.
+            var stat: std.c.Stat = undefined;
+            if (std.c.fstat(fd, &stat) != 0) return error.IoFailure;
+            if ((stat.mode & 0o170000) != 0o100000) return error.NotRegular;
+            if (stat.nlink != 1 or (stat.mode & 0o7000) != 0 or stat.size < 0 or stat.flags != 0) return error.Unsupported;
+            const UnsignedDev = std.meta.Int(.unsigned, @bitSizeOf(@TypeOf(stat.dev)));
+            return .{
+                .identity = .{ .device = @as(UnsignedDev, @bitCast(stat.dev)), .inode = @intCast(stat.ino) },
+                .size = @intCast(stat.size),
+                .mode = stat.mode & 0o777,
+                .uid = stat.uid,
+                .gid = stat.gid,
+                .nlink = stat.nlink,
+                .mtime_ns = @as(i128, stat.mtimespec.sec) * std.time.ns_per_s + stat.mtimespec.nsec,
+                .ctime_ns = @as(i128, stat.ctimespec.sec) * std.time.ns_per_s + stat.ctimespec.nsec,
+            };
+        }
         if (builtin.os.tag != .linux) return error.Unsupported;
         var stat: linux.Statx = undefined;
         const result = linux.statx(fd, "", linux.AT.EMPTY_PATH, linux.STATX.BASIC_STATS, &stat);
@@ -40,11 +67,24 @@ pub const Metadata = struct {
 };
 
 fn noAttributes(fd: std.posix.fd_t) Error!void {
-    if (builtin.os.tag != .linux) return error.Unsupported;
     // POSIX ACLs and security labels are xattrs on Linux. Refuse any attribute
     // rather than silently dropping metadata this baseline cannot preserve.
-    const count = flistxattr(fd, null, 0);
+    const count = switch (builtin.os.tag) {
+        .linux => LinuxMetadata.flistxattr(fd, null, 0),
+        .macos => Darwin.flistxattr(fd, null, 0, 0x0020), // XATTR_SHOWCOMPRESSION
+        else => return error.Unsupported,
+    };
     if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+    if (builtin.os.tag == .macos) {
+        // Darwin ACLs are separate metadata. Even an explicit empty ACL is
+        // refused; acl_get_entry has different end semantics than Linux.
+        if (Darwin.acl_get_fd_np(fd, 0x100)) |acl| { // ACL_TYPE_EXTENDED
+            if (Darwin.acl_free(acl) != 0) return error.IoFailure;
+            return error.Unsupported;
+        }
+        // Libc filesec_get_property(FILESEC_ACL) reports no ACL as ENOENT.
+        if (std.c.errno(@as(c_int, -1)) != .NOENT) return error.IoFailure;
+    }
 }
 
 pub const Parent = struct {
@@ -61,7 +101,7 @@ pub const Parent = struct {
         return self.leaf[0..self.leaf_len :0];
     }
     pub fn open(io: Io, root: Io.Dir, path: []const u8) Error!Parent {
-        if (builtin.os.tag != .linux) return error.Unsupported;
+        if (builtin.os.tag != .linux and builtin.os.tag != .macos) return error.Unsupported;
         try paths.validate(path);
         if (std.mem.eql(u8, path, ".")) return error.InvalidArgument;
         const parent_path = std.fs.path.dirname(path) orelse ".";
@@ -151,10 +191,13 @@ pub const Parent = struct {
         temp.published = true;
     }
     pub fn publishCreate(self: *Parent, temp: *Temp) Error!void {
-        if (builtin.os.tag != .linux) return error.Unsupported;
+        if (builtin.os.tag != .linux and builtin.os.tag != .macos) return error.Unsupported;
         try temp.checkIdentity(self);
-        const rc = linux.renameat2(self.dir.handle, &temp.name, self.dir.handle, self.name(), .{ .NOREPLACE = true });
-        const errno = linux.errno(rc);
+        const errno = if (builtin.os.tag == .macos) blk: {
+            // RENAME_EXCL: same-directory atomic publication without overwrite.
+            const rc = Darwin.renameatx_np(self.dir.handle, &temp.name, self.dir.handle, self.name(), 0x00000004);
+            break :blk std.c.errno(rc);
+        } else linux.errno(linux.renameat2(self.dir.handle, &temp.name, self.dir.handle, self.name(), .{ .NOREPLACE = true }));
         if (errno != .SUCCESS) return self.failedPublish(temp, errno);
         if (builtin.is_test) if (self.after_publish_error) return self.failedPublish(temp, .IO);
         temp.published = true;
@@ -260,7 +303,7 @@ pub const Temp = struct {
         }
         try noAttributes(self.file.handle);
         self.observe(.before_metadata);
-        if (std.c.fchmod(self.file.handle, mode) != 0) return error.IoFailure;
+        if (std.c.fchmod(self.file.handle, @intCast(mode)) != 0) return error.IoFailure;
     }
     pub fn sync(self: *Temp, io: Io) Error!void {
         self.file.sync(io) catch return error.DurabilityFailed;

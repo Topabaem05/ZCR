@@ -21,6 +21,7 @@
 const std = @import("std");
 const core = @import("zcr_core");
 const policy = @import("zcr_policy");
+const cache = @import("zcr_cache");
 const Io = std.Io;
 const Allocator = std.mem.Allocator;
 const Sha256 = std.crypto.hash.sha2.Sha256;
@@ -58,6 +59,9 @@ pub const Reader = struct {
     /// Workspace generation from the registry (T10); reported, not interpreted.
     generation: u64,
     fault: ?*ReadFault = null,
+    /// Optional request-local facade. Batch/bulk readers leave this null.
+    cache_session: ?*cache.Session = null,
+    cache_result: core.CacheResult = .not_applicable,
 
     pub fn init(root: core.TrustedRoot, workspace_id: core.WorkspaceId, generation: u64) Reader {
         return .{ .root = root, .workspace_id = workspace_id, .generation = generation };
@@ -81,6 +85,18 @@ pub const Reader = struct {
         var owned: core.Owned(core.ReadResult) = .{ .value = undefined, .arena = .init(allocator) };
         errdefer owned.arena.deinit();
 
+        var cache_copy: ?cache.Session = if (self.cache_session) |source| source.* else null;
+        if (cache_copy) |*bound| {
+            bound.cancel = effective_cancel;
+            if (!bound.context.bound_workspace.eql(self.workspace_id)) return error.OutOfScope;
+            const reader_root = try policy.paths.statHandle(self.root.dir.handle);
+            const cache_root = try policy.paths.statHandle(bound.authorizer.root.dir.handle);
+            if (!reader_root.identity.eql(cache_root.identity)) return error.OutOfScope;
+            self.generation = try bound.currentGeneration();
+            self.cache_result = .miss;
+            if (try self.readCached(&owned, capability, spec, reservation, bound, effective_cancel)) return owned;
+        }
+
         var attempt: u32 = 0;
         while (attempt < max_attempts) : (attempt += 1) {
             try effective_cancel.check();
@@ -93,6 +109,10 @@ pub const Reader = struct {
                 },
                 else => |e| return e,
             };
+            if (cache_copy) |*bound| {
+                if (try bound.currentGeneration() != self.generation) return error.VersionConflict;
+                try observeComplete(bound, capability, spec, &owned.value, effective_cancel);
+            }
             return owned;
         }
         return error.VersionConflict;
@@ -116,6 +136,84 @@ pub const Reader = struct {
         if (reservation.released) return error.ResourceExhausted;
         if (spec.output_bytes > reservation.output) return error.OutputBudgetExceeded;
         if (reservation.fd < 1 or reservation.bytes < v.chunk_bytes) return error.ResourceExhausted;
+    }
+
+    fn cacheFailure(err: core.ReadError, cancel: core.Cancel) core.ReadError!void {
+        try cancel.check();
+        // A failed optimization never supplies bytes. Authority and cancellation
+        // failures stay errors; the filesystem reader owns other fallback behavior.
+        switch (err) {
+            error.OutOfScope, error.PathEscape, error.Cancelled, error.DeadlineExceeded, error.ManifestUnbound => return err,
+            else => {},
+        }
+    }
+    fn observeComplete(bound: *cache.Session, capability: core.Capability, spec: core.ReadSpec, result: *const core.ReadResult, cancel: core.Cancel) core.ReadError!void {
+        if (!result.status.complete or result.status.truncated or spec.lines.first != 1 or result.version.size > bound.store.options.max_file_bytes) return;
+        const raw: []const u8 = if (result.lines.len == 0) blk: {
+            if (result.version.size != 0) return;
+            break :blk "";
+        } else blk: {
+            const first = result.lines[0];
+            const last = result.lines[result.lines.len - 1];
+            if (first.span.start != 0 or last.span.end != result.version.size) return;
+            break :blk first.text.ptr[0..@intCast(result.version.size)];
+        };
+        var version = result.version;
+        var digest: core.ContentHash = undefined;
+        var hasher = Sha256.init(.{});
+        var offset: usize = 0;
+        while (offset < raw.len) {
+            try cancel.check();
+            const end = @min(raw.len, offset + cache.verification_scratch_bytes);
+            hasher.update(raw[offset..end]);
+            offset = end;
+        }
+        digest = hasher.finalResult();
+        version.sha256 = digest;
+        _ = bound.observe(capability, raw, version, .interactive) catch |err| {
+            try cacheFailure(err, cancel);
+            return;
+        };
+    }
+    fn readCached(self: *Reader, owned: *core.Owned(core.ReadResult), capability: core.Capability, spec: core.ReadSpec, reservation: *const core.Reservation, bound: *cache.Session, cancel: core.Cancel) core.ReadError!bool {
+        const current = bound.cacheGetCurrent(capability, .{ .max_pinned_bytes = bound.store.budget.caps.bytes }) catch |err| {
+            try cacheFailure(err, cancel);
+            return false;
+        };
+        self.generation = current.version.generation;
+        const pin = current.pin orelse return false;
+        defer bound.unpin(pin) catch unreachable;
+        const selected = try cache.lines.select(pin.bytes, try bound.lineIndex(pin), spec.lines);
+        const budget: Budget = .{ .output_bytes = spec.output_bytes, .payload_bytes = ((reservation.bytes -| node_slack_bytes) * 2) / 3, .fixed_bytes = spec.path.bytes.len + 2 * @sizeOf([]const u8) };
+        var plan: Plan = .{ .digest = if (spec.write_intent) current.version.sha256 else null };
+        var cursor: usize = @intCast(selected.span.start);
+        while (cursor < selected.span.end) {
+            try cancel.check();
+            const end = if (std.mem.indexOfScalarPos(u8, pin.bytes, cursor, '\n')) |newline| newline + 1 else pin.bytes.len;
+            if (try budget.add(&plan, cursor, end)) break;
+            cursor = end;
+        }
+        const reason_count: usize = @intFromBool(plan.stop != null);
+        const text_len: usize = @intCast(plan.end - plan.start);
+        const lines_bytes = plan.lines * @sizeOf(core.Line);
+        const reasons_bytes = reason_count * @sizeOf([]const u8);
+        const total = lines_bytes + reasons_bytes + spec.path.bytes.len + text_len;
+        const block = try owned.arena.allocator().alignedAlloc(u8, .of(core.Line), total);
+        const result_lines = @as([*]core.Line, @ptrCast(@alignCast(block.ptr)))[0..plan.lines];
+        const reasons = @as([*][]const u8, @ptrCast(@alignCast(block[lines_bytes..].ptr)))[0..reason_count];
+        if (plan.stop) |stop| reasons[0] = if (stop == .output_budget) reason_output_budget else reason_reservation;
+        const path = block[lines_bytes + reasons_bytes ..][0..spec.path.bytes.len];
+        @memcpy(path, spec.path.bytes);
+        const text = block[total - text_len ..];
+        @memcpy(text, pin.bytes[@intCast(plan.start)..@intCast(plan.end)]);
+        splitLines(result_lines, text, plan.start, spec.lines.first) catch return error.VersionConflict;
+        try cancel.check();
+        if (try bound.currentGeneration() != current.version.generation) return error.VersionConflict;
+        var version = current.version;
+        version.sha256 = plan.digest; // Preserve the public write-intent digest contract.
+        owned.value = .{ .path = .{ .bytes = path }, .lines = result_lines, .version = version, .status = .{ .complete = plan.stop == null, .truncated = plan.stop != null, .consistency = .checked_live, .coverage = .{ .scope = path, .skipped = 0, .index_state = .live, .reasons = reasons } } };
+        self.cache_result = .hit;
+        return true;
     }
 
     const AttemptError = core.ReadError || error{Changed};

@@ -1,0 +1,28 @@
+test
++- run test T12-test 0 pass, 1 fail (1 total)
+error: 't12_test.test.WR-005 successive torn recovery sequences preserve each forensic suffix' failed:
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/posix.zig:489:23: 0x126dc1e in openatZ (std.zig)
+                   .EXIST => return error.PathAlreadyExists,
+                             ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T12/src/storage/journal.zig:181:192: 0x126ce4f in createFile (journal.zig)
+               const fd = std.posix.openatZ(self.options.root.dir.handle, name, .{ .ACCMODE = .RDWR, .CREAT = true, .EXCL = true, .NOFOLLOW = true, .NONBLOCK = true, .CLOEXEC = true }, 0o600) catch return error.IoFailure;
+                                                                                                                                                                                                      ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T12/src/storage/journal.zig:350:69: 0x126ae1f in preserveTail (journal.zig)
+                   if ((try metadata(existing.handle, false)).size != len) return error.RecoveryRequired;
+                                                                           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T12/tests/t12_test.zig:909:5: 0x125f3f1 in test.WR-005 successive torn recovery sequences preserve each forensic suffix (t12_test.zig)
+           try third.store.preserveTail(third.store.head.?);
+           ^
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/T12/cache && /workspace/scratch/3f4ab65dfb82/state/T12/cache/o/d164ca3ad061556ca658c52b12d9805d/T12-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/T12/cache --seed=0x5d0ecd69 --listen=-
+
+Build Summary: 4/6 steps succeeded (1 failed); 0/1 tests passed (1 failed)
+test transitive failure
++- run test T12-test 0 pass, 1 fail (1 total)
+   +- compile test T12-test Debug native success 508ms MaxRSS:184M
+      +- options cached
+      +- options cached
+         +- compile test T12-child Debug native cached 13ms MaxRSS:71M
+            +- options (reused)
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/T12/cache/o/de94d8b23d3f88fd829df252bfc22c95/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-T12 /workspace/scratch/3f4ab65dfb82/state/T12/cache /workspace/scratch/3f4ab65dfb82/state/T12/global-cache --seed 0x5d0ecd69 -Z64af90fbbf82df3c test -Dtest-group=write -Dtest-id=successive torn -Doptimize=Debug --summary all

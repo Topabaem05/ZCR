@@ -24,9 +24,11 @@ pub const Options = struct {
     max_associations: usize = 32,
     max_pins: usize = 64,
     max_probation: usize = 32,
+    /// Immutable optional content ceiling; excludes the fixed Store charge.
+    max_content_bytes: ?u64 = null,
     max_file_bytes: u64 = 8 * core.limits.MiB,
 };
-pub const Stats = struct { content_bytes: u64 = 0, control_bytes: u64 = 0, entries: usize = 0, associations: usize = 0, pins: usize = 0, probation: usize = 0, active_calls: usize = 0 };
+pub const Stats = struct { target_bytes: u64 = 0, loading_bytes: u64 = 0, unreclaimable_excess: u64 = 0, content_bytes: u64 = 0, control_bytes: u64 = 0, entries: usize = 0, associations: usize = 0, pins: usize = 0, probation: usize = 0, active_calls: usize = 0 };
 const ContentKey = struct { domain: core.SecurityDomain, hash: core.ContentHash };
 const Content = struct {
     state: enum { empty, loading, ready } = .empty,
@@ -56,6 +58,9 @@ pub const Store = struct {
     next_pin: u64 = 1,
     clock: u64 = 0,
     content_bytes: u64 = 0,
+    loading_bytes: u64 = 0,
+    target_bytes: u64 = std.math.maxInt(u64),
+    original_content_limit: u64 = std.math.maxInt(u64),
     active_calls: usize = 0,
 
     /// All fixed table capacity, paths, token slots and Store itself are reserved
@@ -70,7 +75,7 @@ pub const Store = struct {
         errdefer budget.release(&control) catch unreachable;
         const s = try a.create(Store);
         budget.counters.recordAlloc(@sizeOf(Store));
-        s.* = .{ .allocator = a, .io = io, .budget = budget, .funding = funding, .options = options, .control = control, .next_pin = (std.mem.readInt(u64, &nonce, .little) >> 1) + 1 };
+        s.* = .{ .allocator = a, .io = io, .budget = budget, .funding = funding, .options = options, .control = control, .target_bytes = options.max_content_bytes orelse std.math.maxInt(u64), .original_content_limit = options.max_content_bytes orelse std.math.maxInt(u64), .next_pin = (std.mem.readInt(u64, &nonce, .little) >> 1) + 1 };
         return s;
     }
     fn lock(s: *Store) void {
@@ -117,10 +122,13 @@ pub const Store = struct {
     pub fn stats(s: *Store) Stats {
         s.lock();
         defer s.unlock();
-        var result: Stats = .{ .content_bytes = s.content_bytes, .control_bytes = s.control.bytes, .active_calls = s.active_calls };
+        var result: Stats = .{ .target_bytes = s.target_bytes, .loading_bytes = s.loading_bytes, .content_bytes = s.content_bytes, .control_bytes = s.control.bytes, .active_calls = s.active_calls };
+        var unreclaimable = s.loading_bytes;
         for (s.contents[0..s.options.max_entries]) |e| if (e.state == .ready) {
             result.entries += 1;
+            if (e.pins != 0) unreclaimable += e.reservation.bytes;
         };
+        result.unreclaimable_excess = unreclaimable -| s.target_bytes;
         for (s.associations[0..s.options.max_associations]) |e| if (e.occupied) {
             result.associations += 1;
         };
@@ -140,13 +148,32 @@ pub const Store = struct {
         for (s.contents[0..s.options.max_entries], 0..) |e, i| if (e.state == .empty) return i;
         return null;
     }
+    /// Persistent content target. Existing pins/loading grants stay owned.
+    /// The host must call this outside any global policy lock: reclamation
+    /// frees memory and releases existing Budget reservations after unlocking.
+    pub fn setTarget(s: *Store, target_bytes: u64) error{InvalidArgument}!void {
+        if (target_bytes > s.original_content_limit) return error.InvalidArgument;
+        s.lock();
+        s.target_bytes = target_bytes;
+        s.unlock();
+        s.converge();
+    }
+    fn converge(s: *Store) void {
+        _ = s.reclaim(null);
+    }
     /// Release only unpinned ready entries. Loading entries and pinned pointers
     /// survive pressure. Returns bytes actually freed, including checkpoints.
     pub fn evict(s: *Store, target_bytes: u64) u64 {
+        return s.reclaim(target_bytes);
+    }
+    fn reclaim(s: *Store, one_shot_target: ?u64) u64 {
         var freed: u64 = 0;
         while (true) {
             s.lock();
-            if (s.content_bytes <= target_bytes) {
+            // Reload persistent policy on each locked selection, including
+            // concurrent target updates and outstanding loading claims.
+            const target = @min(one_shot_target orelse s.target_bytes, s.target_bytes);
+            if (s.content_bytes <= target -| s.loading_bytes) {
                 s.unlock();
                 return freed;
             }
@@ -218,6 +245,22 @@ pub const Store = struct {
     }
 };
 
+// Borrow only the exact live request objects supplied by the trusted dispatcher.
+// No copied reservation, standalone cap or second allocator credit is created.
+const RequestCredit = struct {
+    budget: *memory.Budget,
+    reservation: *const core.Reservation,
+    allocation: *memory.ReservedAllocator,
+    fn validate(c: RequestCredit, expected: *memory.Budget) core.ReadError!void {
+        if (c.reservation.released) return error.ResourceExhausted;
+        if (c.budget != expected or c.reservation.budget_id != expected.id or c.allocation.counters != expected.counters or
+            c.allocation.limit != c.reservation.bytes) return error.OutOfScope;
+        if (c.reservation.bytes < verification_scratch_bytes or c.reservation.fd < 3 or c.reservation.cpu < 1 or
+            c.allocation.limit -| c.allocation.liveBytes() < verification_scratch_bytes) return error.ResourceExhausted;
+    }
+};
+pub const Current = struct { version: core.FileVersion, pin: ?core.PinnedEntry };
+
 pub const Session = struct {
     store: *Store,
     registry: *workspace.Registry,
@@ -225,6 +268,7 @@ pub const Session = struct {
     context: core.SessionContext,
     boot: core.Uuid,
     cancel: core.Cancel,
+    request_credit: ?RequestCredit = null,
 
     /// Trusted launcher constructs this facade from an existing registry binding.
     /// Registry, Authorizer, cancellation storage and Store outlive all calls.
@@ -232,6 +276,19 @@ pub const Session = struct {
         var result: Session = .{ .store = s, .registry = r, .authorizer = a, .context = c, .boot = r.bootNonce(), .cancel = cancel };
         _ = try result.authority(null);
         return result;
+    }
+    /// Request-local facade. All three credit objects and cancellation storage
+    /// outlive the returned facade. Its allocator is the existing bounded one.
+    pub fn forRequest(self: *const Session, budget: *memory.Budget, reservation: *const core.Reservation, allocation: *memory.ReservedAllocator, cancel: core.Cancel) core.ReadError!Session {
+        var copy = self.*;
+        copy.cancel = cancel;
+        copy.request_credit = .{ .budget = budget, .reservation = reservation, .allocation = allocation };
+        try copy.request_credit.?.validate(copy.store.options.verification_budget);
+        _ = try copy.authority(null);
+        return copy;
+    }
+    pub fn currentGeneration(self: *Session) core.ReadError!u64 {
+        return (try self.authority(null)).generation;
     }
     fn authority(self: *Session, cap: ?core.Capability) core.ReadError!workspace.Snapshot {
         try self.cancel.check();
@@ -253,13 +310,20 @@ pub const Session = struct {
     fn verify(self: *Session, cap: core.Capability) core.ReadError!Verified {
         const s = self.store;
         const snap = try self.authority(cap);
-        var reservation = try s.options.verification_budget.reserve(self.context, .{ .scratch_bytes = verification_scratch_bytes, .fds = 3, .cpu_permits = 1 });
-        defer s.options.verification_budget.release(&reservation) catch unreachable;
-        const scratch = try s.allocator.alloc(u8, verification_scratch_bytes);
-        s.options.verification_budget.counters.recordAlloc(scratch.len);
+        var owned_credit: ?core.Reservation = null;
+        const allocator = if (self.request_credit) |credit| blk: {
+            try credit.validate(s.options.verification_budget);
+            break :blk credit.allocation.allocator();
+        } else blk: {
+            owned_credit = try s.options.verification_budget.reserve(self.context, .{ .scratch_bytes = verification_scratch_bytes, .fds = 3, .cpu_permits = 1 });
+            break :blk s.allocator;
+        };
+        defer if (owned_credit) |*reservation| s.options.verification_budget.release(reservation) catch unreachable;
+        const scratch = try allocator.alloc(u8, verification_scratch_bytes);
+        if (owned_credit != null) s.options.verification_budget.counters.recordAlloc(scratch.len);
         defer {
-            s.allocator.free(scratch);
-            s.options.verification_budget.counters.recordFree(verification_scratch_bytes);
+            allocator.free(scratch);
+            if (owned_credit != null) s.options.verification_budget.counters.recordFree(verification_scratch_bytes);
         }
         const file = try association.verify(s.io, snap.root.dir, cap.path.bytes, s.options.max_file_bytes, scratch, self.cancel);
         const after = try self.authority(cap);
@@ -328,17 +392,24 @@ pub const Session = struct {
             s.unlock();
             return error.ResourceExhausted;
         };
+        const n = lines.count(bytes);
+        const text_start = n * @sizeOf(lines.Checkpoint);
+        const charge = @max(1, text_start + bytes.len);
+        if (charge > s.target_bytes -| s.content_bytes -| s.loading_bytes) {
+            s.unlock();
+            return .bypassed;
+        }
+        s.loading_bytes += charge;
         s.contents[index] = .{ .state = .loading, .key = key };
         s.unlock();
         var published = false;
         defer if (!published) {
             s.lock();
             s.contents[index] = .{};
+            s.loading_bytes -= charge;
             s.unlock();
+            s.converge();
         };
-        const n = lines.count(bytes);
-        const text_start = n * @sizeOf(lines.Checkpoint);
-        const charge = @max(1, text_start + bytes.len);
         var reservation = s.budget.reserve(s.funding, .{ .scratch_bytes = charge }) catch |err| blk: {
             if (err != error.ResourceExhausted) return err;
             _ = s.evict(0);
@@ -359,11 +430,16 @@ pub const Session = struct {
         const final_authority = try self.authority(cap);
         if (final_authority.generation != verified.key.generation) return error.VersionConflict;
         s.lock();
-        defer s.unlock();
-        _ = try s.associate(verified.key, cap.path.bytes);
+        _ = s.associate(verified.key, cap.path.bytes) catch |err| {
+            s.unlock();
+            return err;
+        };
         s.contents[index] = .{ .state = .ready, .key = key, .block = block, .bytes = copied, .checkpoints = checkpoints, .reservation = reservation, .touched = s.tick() };
         s.content_bytes += charge;
+        s.loading_bytes -= charge;
         published = true;
+        s.unlock();
+        s.converge();
         return .admitted;
     }
     /// I13 cannot represent cancellation, file or version errors. Its optimization
@@ -381,6 +457,19 @@ pub const Session = struct {
         defer s.end();
         const verified = try self.verify(cap);
         if (!std.mem.eql(u8, &verified.file.hash, &hash)) return null;
+        return self.pinVerified(verified, cap.path.bytes, pin_budget);
+    }
+    /// Verify the current rooted whole file before consulting shared content.
+    /// Even a miss supplies the current version for an authoritative fallback.
+    pub fn cacheGetCurrent(self: *Session, cap: core.Capability, pin_budget: core.PinBudget) core.ReadError!Current {
+        try self.store.begin();
+        defer self.store.end();
+        const verified = try self.verify(cap);
+        return .{ .version = .{ .workspace_id = verified.key.workspace, .file_id = verified.file.file_id, .generation = verified.key.generation, .size = verified.file.size, .mtime_ns = verified.file.mtime_ns, .sha256 = verified.file.hash }, .pin = try self.pinVerified(verified, cap.path.bytes, pin_budget) };
+    }
+    fn pinVerified(self: *Session, verified: Verified, path: []const u8, pin_budget: core.PinBudget) core.CacheError!?core.PinnedEntry {
+        const s = self.store;
+        const hash = verified.file.hash;
         s.lock();
         defer s.unlock();
         const i = s.find(.{ .domain = self.context.security_domain, .hash = hash }) orelse return null;
@@ -398,7 +487,7 @@ pub const Session = struct {
         if (entry.reservation.bytes > pin_budget.max_pinned_bytes -| pinned) return error.ResourceExhausted;
         const pin_slot = free orelse return error.ResourceExhausted;
         if (s.next_pin == std.math.maxInt(u64)) return error.ResourceExhausted;
-        const assoc = try s.associate(verified.key, cap.path.bytes);
+        const assoc = try s.associate(verified.key, path);
         const id = s.next_pin;
         s.next_pin += 1;
         s.pins[pin_slot] = .{ .id = id, .owner = self.context, .entry = i, .association_slot = assoc };
@@ -420,6 +509,7 @@ pub const Session = struct {
     /// existing lifetimes; it never grants a new pointer or authority.
     pub fn unpin(self: *Session, pin: core.PinnedEntry) core.CacheError!void {
         const s = self.store;
+        defer s.converge();
         s.lock();
         defer s.unlock();
         const i = try self.pinSlot(pin);

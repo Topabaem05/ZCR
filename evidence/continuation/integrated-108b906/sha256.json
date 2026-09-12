@@ -1,0 +1,172 @@
+[
+  {
+    "path": "README.md",
+    "sha256": "210d8329ba8f7dd5496138dbbc6521ab49e432ca6af689daa62835c7cbadbb8e",
+    "bytes": 1239
+  },
+  {
+    "path": "artifacts/01-zig-version.stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "artifacts/01-zig-version.stdout.log",
+    "sha256": "aa037454b5e8320521a32b278a3f4aff05fc79009ab5503f5d4a1b9a33b38c47",
+    "bytes": 7
+  },
+  {
+    "path": "artifacts/02-Debug-build.stderr.log",
+    "sha256": "06a51692744a85eae1c0fa042ef00b19058c245a5e08327eee5cc386bf29096e",
+    "bytes": 372
+  },
+  {
+    "path": "artifacts/02-Debug-build.stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "artifacts/03-Debug-contracts.stderr.log",
+    "sha256": "05892d0800bdef981f243bc38935b3ed884d43c16113abded0b82ea5ad48297b",
+    "bytes": 172
+  },
+  {
+    "path": "artifacts/03-Debug-contracts.stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "artifacts/04-Debug-registered-tests.stderr.log",
+    "sha256": "6487829a7652d717c9aec7bd12880af03c56a6710881fc9e3c5c2414dec0322d",
+    "bytes": 14279
+  },
+  {
+    "path": "artifacts/04-Debug-registered-tests.stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "artifacts/05-Debug-codec.stderr.log",
+    "sha256": "1ef7ad3a35356665642743bd1e4ce916599b49366ba2b232a0ceb002b329cbd2",
+    "bytes": 906
+  },
+  {
+    "path": "artifacts/05-Debug-codec.stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "artifacts/06-Debug-cli.stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "artifacts/06-Debug-cli.stdout.log",
+    "sha256": "f049e9b1381e33ea0a1f6d116359d78a416a7126c47492d59f23bfb749c1b4fc",
+    "bytes": 101
+  },
+  {
+    "path": "artifacts/07-ReleaseSafe-build.stderr.log",
+    "sha256": "b40a61385f7172ec67fef699cf3eae455a98202ba18fb953710800db6ed351fd",
+    "bytes": 387
+  },
+  {
+    "path": "artifacts/07-ReleaseSafe-build.stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "artifacts/08-ReleaseSafe-contracts.stderr.log",
+    "sha256": "58f8a906c628917338b504510603d22712e7c90b90434691edc5af9c522bc84c",
+    "bytes": 177
+  },
+  {
+    "path": "artifacts/08-ReleaseSafe-contracts.stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "artifacts/09-ReleaseSafe-registered-tests.stderr.log",
+    "sha256": "58788dfbb89e1e11d3e469f16ed2ed26b6d4c7fc671312a25b3c77d0994e1f1a",
+    "bytes": 9298
+  },
+  {
+    "path": "artifacts/09-ReleaseSafe-registered-tests.stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "artifacts/10-ReleaseSafe-codec.stderr.log",
+    "sha256": "1ef7ad3a35356665642743bd1e4ce916599b49366ba2b232a0ceb002b329cbd2",
+    "bytes": 906
+  },
+  {
+    "path": "artifacts/10-ReleaseSafe-codec.stdout.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "artifacts/11-ReleaseSafe-cli.stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "artifacts/11-ReleaseSafe-cli.stdout.log",
+    "sha256": "f049e9b1381e33ea0a1f6d116359d78a416a7126c47492d59f23bfb749c1b4fc",
+    "bytes": 101
+  },
+  {
+    "path": "artifacts/D/storage/capture.json",
+    "sha256": "813235d686e3dd198a6f2d1f6be02828a3b71a66f254b36cdaa7286194d83c15",
+    "bytes": 48140
+  },
+  {
+    "path": "artifacts/D/storage/raw-fixtures.tar.gz",
+    "sha256": "0ab1e84672e735bfad623e95a6876cd4f8d5645ec91042db21a498d952bddeea",
+    "bytes": 51054
+  },
+  {
+    "path": "artifacts/S/storage/capture.json",
+    "sha256": "786d398cb0d922f319672f491b860031424bf833595795c0460d171d80a0af1d",
+    "bytes": 48140
+  },
+  {
+    "path": "artifacts/S/storage/raw-fixtures.tar.gz",
+    "sha256": "cd8d0cd792209be91a28982322f648ed7a6b6bdb18bc443c3881f4db742b5d3f",
+    "bytes": 52867
+  },
+  {
+    "path": "artifacts/artifact-sha256.json",
+    "sha256": "90f58519c3517f49c84fdb0f49a471aac17ab620a1e6977d7b91d129987f530a",
+    "bytes": 4405
+  },
+  {
+    "path": "artifacts/report.json",
+    "sha256": "4e4770662e6566531dadc99bd7d6e195aa3c2198b4aee23a7f21081385df7aa9",
+    "bytes": 135164
+  },
+  {
+    "path": "artifacts/source-after.json",
+    "sha256": "c37c18e57c32571fdb42ec58e2bca580e8fcaa9343b0e8b5f4f7c8ebbcb1b0ae",
+    "bytes": 227018
+  },
+  {
+    "path": "artifacts/source-before.json",
+    "sha256": "c37c18e57c32571fdb42ec58e2bca580e8fcaa9343b0e8b5f4f7c8ebbcb1b0ae",
+    "bytes": 227018
+  },
+  {
+    "path": "cli-D.tar.gz",
+    "sha256": "9a3977d21bf69da982c84aa12e581066f9424ab6102d4b38fe6d851b53846b87",
+    "bytes": 6427
+  },
+  {
+    "path": "cli-S.tar.gz",
+    "sha256": "e7cfe95d18c919c8714553df303ff2418477861f474cc156d743d8d7c17394ee",
+    "bytes": 6398
+  },
+  {
+    "path": "run_combined.py",
+    "sha256": "9ea18412f8a6baeaf3a58ac8672845ba1f2f53ee28132c5ea965db737ec8531d",
+    "bytes": 2538
+  }
+]

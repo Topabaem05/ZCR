@@ -5,6 +5,7 @@ const builtin = @import("builtin");
 const core = @import("zcr_core");
 const policy = @import("zcr_policy");
 const memory = @import("zcr_memory");
+const cache = @import("zcr_cache");
 const fs_read = @import("zcr_fs_read");
 const traverse = @import("zcr_fs_traverse");
 const search = @import("zcr_search");
@@ -30,6 +31,8 @@ pub const Config = struct {
     session: core.SessionContext,
     generation: u64 = 0,
     budget: *memory.Budget,
+    /// Host-owned facade; copied for each request and retained until all requests drain.
+    cache_session: ?*cache.Session = null,
     /// Trusted contracts/tools.json; lifetime includes Server's lifetime.
     tools_json: []const u8,
     version: []const u8 = "0.1.0",
@@ -59,6 +62,11 @@ pub const Server = struct {
         if (!config.session.bound_workspace.eql(config.authorizer.workspace_id) or
             !std.mem.eql(u8, &config.session.bound_task.uuid, &config.authorizer.task_id.uuid) or
             !std.mem.eql(u8, &config.session.policy_digest, &config.authorizer.policy.digest)) return error.OutOfScope;
+        if (config.cache_session) |bound| {
+            if (!std.meta.eql(bound.context, config.session) or bound.authorizer != config.authorizer or
+                bound.store.budget != config.budget or bound.store.options.verification_budget != config.budget) return error.OutOfScope;
+            _ = try bound.currentGeneration();
+        }
         return .{ .config = config };
     }
 
@@ -67,6 +75,17 @@ pub const Server = struct {
         if (self.config.authorizer.policy.state != .active) return false;
         for (self.config.authorizer.policy.operations) |op| if (op == name.operation()) return true;
         return false;
+    }
+
+    /// Shared cache bytes are reclaimable request capacity. Retry the identical
+    /// whole reservation once after evicting only eligible unpinned entries.
+    fn reserveRequest(self: *Server, cost: core.ResourceCost) core.ReserveError!core.Reservation {
+        return self.config.budget.reserve(self.config.session, cost) catch |err| {
+            if (err != error.ResourceExhausted or !self.config.budget.reclaimableMemoryPressure(cost)) return err;
+            const bound = self.config.cache_session orelse return err;
+            _ = bound.store.evict(0);
+            return self.config.budget.reserve(self.config.session, cost);
+        };
     }
 
     /// Synchronous bounded-frame adapter. `allocator` must have a reservation
@@ -219,7 +238,7 @@ pub const Server = struct {
         };
         cost.cpu_permits = @intCast(if (tool == .zcr_batch_read) batch_workers else 1);
         if (tool == .zcr_batch_read) cost.fds += 4;
-        var reservation = try self.config.budget.reserve(self.config.session, cost);
+        var reservation = try self.reserveRequest(cost);
         defer self.config.budget.release(&reservation) catch unreachable;
         var reserved = memory.ReservedAllocator.init(self.config.allocator, &reservation, self.config.budget.counters, null);
         var arena = std.heap.ArenaAllocator.init(reserved.allocator());
@@ -232,9 +251,14 @@ pub const Server = struct {
             .zcr_read => {
                 const spec = try readSpec(args, output_bytes, deadline_ms);
                 const capability = try self.config.authorizer.authorize(self.config.io, self.config.session, .read, spec.path);
+                var request_cache: ?cache.Session = if (self.config.cache_session) |bound| try bound.forRequest(self.config.budget, &reservation, &reserved, cancel.withTimeout(self.config.io, deadline_ms)) else null;
+                if (request_cache) |*bound| reader.cache_session = bound;
                 var result = try reader.readRange(self.config.io, reserved.allocator(), capability, spec, &reservation, cancel);
                 defer result.deinit();
-                return try projection.success(output, envelope, .{ .read = result.value }, result.value.status, output_bytes);
+                var actual_envelope = envelope;
+                actual_envelope.generation = result.value.version.generation;
+                actual_envelope.cache = if (request_cache != null) reader.cache_result else null;
+                return try projection.success(output, actual_envelope, .{ .read = result.value }, result.value.status, output_bytes);
             },
             .zcr_batch_read => {
                 var batcher = batch.Batcher.init(self.config.authorizer, &reader, .{ .max_concurrency = batch_workers }, cancel);
@@ -725,7 +749,7 @@ const Transport = struct {
             slot.control_allocator = std.heap.FixedBufferAllocator.init(slot.control_backing);
             slot.arena = std.heap.ArenaAllocator.init(slot.control_allocator.allocator());
         } else {
-            slot.reservation = try t.server.config.budget.reserve(t.server.config.session, .{ .input_bytes = raw_len, .parser_bytes = 65536 + raw_len * 6, .scratch_bytes = 4 * MiB });
+            slot.reservation = try t.server.reserveRequest(.{ .input_bytes = raw_len, .parser_bytes = 65536 + raw_len * 6, .scratch_bytes = 4 * MiB });
             slot.reserved = memory.ReservedAllocator.init(t.server.config.allocator, &slot.reservation, t.server.config.budget.counters, null);
             slot.arena = std.heap.ArenaAllocator.init(slot.reserved.allocator());
         }

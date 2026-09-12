@@ -428,3 +428,217 @@ test "IS-006 retired workspace rejects new pins while old pins drain" {
     try t.expectEqualStrings("retire\n", pin.bytes);
     try c.session.unpin(pin);
 }
+
+test "ME-004 borrowed verification uses one live request credit and rejects mismatched or insufficient credit" {
+    const f = try Fixture.init();
+    defer f.deinit();
+    var c = try f.client(1, 1, "borrowed\n");
+    defer f.store.deinit() catch unreachable;
+    f.verify_budget.caps.cpu = 1;
+    try f.admit(&c, "borrowed\n");
+    var credit = try f.verify_budget.reserve(c.session.context, .{ .scratch_bytes = 32 * 1024, .fds = 3, .cpu_permits = 1 });
+    defer if (!credit.released) f.verify_budget.release(&credit) catch unreachable;
+    var allocation = memory.ReservedAllocator.init(A, &credit, &f.verify_counters, null);
+    // The ordinary cache facade correctly cannot take a second CPU permit.
+    try t.expectError(error.ResourceExhausted, c.session.cacheGetChecked(hash("borrowed\n"), c.cap, .{ .max_pinned_bytes = MiB }));
+    const held = f.verify_budget.usage();
+    var request = try c.session.forRequest(&f.verify_budget, &credit, &allocation, c.session.cancel);
+    const result = try request.cacheGetCurrent(c.cap, .{ .max_pinned_bytes = MiB });
+    const pin = result.pin.?;
+    try t.expectEqualStrings("borrowed\n", pin.bytes);
+    try t.expectEqualDeep(held, f.verify_budget.usage());
+    try t.expectEqual(@as(u64, 0), allocation.liveBytes());
+    try request.unpin(pin);
+    try t.expect(c.session.request_credit == null);
+
+    var other = memory.Budget.init(f.verify_budget.id, f.verify_budget.caps, &f.verify_counters);
+    try t.expectError(error.OutOfScope, c.session.forRequest(&other, &credit, &allocation, c.session.cancel));
+    var wrong_allocation = memory.ReservedAllocator.init(A, &credit, &f.content_counters, null);
+    try t.expectError(error.OutOfScope, c.session.forRequest(&f.verify_budget, &credit, &wrong_allocation, c.session.cancel));
+    wrong_allocation = allocation;
+    wrong_allocation.limit += 1;
+    try t.expectError(error.OutOfScope, c.session.forRequest(&f.verify_budget, &credit, &wrong_allocation, c.session.cancel));
+    const occupied = try allocation.allocator().alloc(u8, 20 * 1024);
+    try t.expectError(error.ResourceExhausted, c.session.forRequest(&f.verify_budget, &credit, &allocation, c.session.cancel));
+    allocation.allocator().free(occupied);
+    try f.verify_budget.release(&credit);
+    try t.expectError(error.ResourceExhausted, request.cacheGetCurrent(c.cap, .{ .max_pinned_bytes = MiB }));
+    for ([_]core.ResourceCost{
+        .{ .scratch_bytes = 16 * 1024 - 1, .fds = 3, .cpu_permits = 1 },
+        .{ .scratch_bytes = 16 * 1024, .fds = 2, .cpu_permits = 1 },
+        .{ .scratch_bytes = 16 * 1024, .fds = 3, .cpu_permits = 0 },
+    }) |cost| {
+        var small = try f.verify_budget.reserve(c.session.context, cost);
+        defer f.verify_budget.release(&small) catch unreachable;
+        var bounded = memory.ReservedAllocator.init(A, &small, &f.verify_counters, null);
+        try t.expectError(error.ResourceExhausted, c.session.forRequest(&f.verify_budget, &small, &bounded, c.session.cancel));
+    }
+    try t.expectEqual(@as(u64, 0), f.verify_budget.usage().bytes);
+}
+
+test "ME-005 persistent target prevents refill after eviction" {
+    const f = try Fixture.init();
+    defer f.deinit();
+    var c = try f.client(1, 1, "target\n");
+    defer f.store.deinit() catch unreachable;
+    try f.admit(&c, "target\n");
+    try f.store.setTarget(0);
+    const v = try f.version(&c, "target\n");
+    for (0..4) |_| _ = try c.session.observe(c.cap, "target\n", v, .interactive);
+    try t.expectEqual(@as(u64, 0), f.store.stats().content_bytes);
+    try t.expectEqual(f.store.stats().control_bytes, f.content_budget.usage().bytes);
+}
+
+const TargetGate = struct {
+    mutex: std.c.pthread_mutex_t = .{},
+    cond: std.c.pthread_cond_t = .{},
+    open: bool = false,
+    fn check(e: std.c.E) void {
+        if (e != .SUCCESS) @panic("cache latch invariant");
+    }
+    fn wait(g: *TargetGate) void {
+        check(std.c.pthread_mutex_lock(&g.mutex));
+        while (!g.open) check(std.c.pthread_cond_wait(&g.cond, &g.mutex));
+        check(std.c.pthread_mutex_unlock(&g.mutex));
+    }
+    fn release(g: *TargetGate) void {
+        check(std.c.pthread_mutex_lock(&g.mutex));
+        g.open = true;
+        check(std.c.pthread_cond_broadcast(&g.cond));
+        check(std.c.pthread_mutex_unlock(&g.mutex));
+    }
+    fn deinit(g: *TargetGate) void {
+        check(std.c.pthread_cond_destroy(&g.cond));
+        check(std.c.pthread_mutex_destroy(&g.mutex));
+    }
+};
+const HeldContentAllocator = struct {
+    hold: bool = false,
+    entered: TargetGate = .{},
+    released: TargetGate = .{},
+    fn allocator(h: *@This()) std.mem.Allocator {
+        return .{ .ptr = h, .vtable = &.{ .alloc = alloc, .resize = std.mem.Allocator.noResize, .remap = std.mem.Allocator.noRemap, .free = free } };
+    }
+    fn alloc(p: *anyopaque, len: usize, alignment: std.mem.Alignment, ra: usize) ?[*]u8 {
+        const h: *@This() = @ptrCast(@alignCast(p));
+        if (h.hold and len != cache.verification_scratch_bytes) {
+            h.entered.release();
+            h.released.wait();
+        }
+        return A.rawAlloc(len, alignment, ra);
+    }
+    fn free(_: *anyopaque, bytes: []u8, alignment: std.mem.Alignment, ra: usize) void {
+        A.rawFree(bytes, alignment, ra);
+    }
+    fn deinit(h: *@This()) void {
+        h.entered.deinit();
+        h.released.deinit();
+    }
+};
+
+test "ME-005 held loading claim survives tightening then publish and unpin converge on the same Budget" {
+    const f = try Fixture.init();
+    defer f.deinit();
+    var allocator: HeldContentAllocator = .{};
+    defer allocator.deinit();
+    var c = try f.client(1, 1, "pinned\n");
+    try f.store.deinit();
+    f.store = try cache.Store.create(allocator.allocator(), io, &f.content_budget, c.session.context, .{ .verification_budget = &f.verify_budget, .max_content_bytes = 1024 });
+    c.session.store = f.store;
+    defer f.store.deinit() catch unreachable;
+    try f.admit(&c, "pinned\n");
+    const pin = (try c.session.cacheGet(hash("pinned\n"), c.cap, .{ .max_pinned_bytes = MiB })).?;
+    var pinned = true;
+    defer if (pinned) c.session.unpin(pin) catch unreachable;
+    const ready = f.store.stats().content_bytes;
+    var loading = try f.client(2, 1, "loading\n");
+    var fresh = try f.client(3, 1, "fresh\n");
+    const loading_version = try f.version(&loading, "loading\n");
+    _ = try loading.session.observe(loading.cap, "loading\n", loading_version, .interactive);
+    const Loader = struct {
+        client: *Fixture.Client,
+        version: core.FileVersion,
+        result: core.ReadError!cache.AdmissionResult = error.IoFailure,
+        fn run(w: *@This()) void {
+            w.result = w.client.session.observe(w.client.cap, "loading\n", w.version, .interactive);
+        }
+    };
+    var worker: Loader = .{ .client = &loading, .version = loading_version };
+    allocator.hold = true;
+    const thread = try std.Thread.spawn(.{}, Loader.run, .{&worker});
+    var joined = false;
+    defer if (!joined) {
+        allocator.released.release();
+        thread.join();
+    };
+    allocator.entered.wait();
+    const before = f.store.stats();
+    const claim = "loading\n".len + @sizeOf(cache.lines.Checkpoint);
+    try t.expectEqual(@as(u64, claim), before.loading_bytes);
+    const granted_usage = f.content_budget.usage();
+    try t.expectEqual(before.control_bytes + ready + claim, granted_usage.bytes);
+    try t.expectEqual(@as(u64, 0), f.verify_budget.usage().bytes);
+    try f.store.setTarget(0);
+    try t.expectEqualDeep(granted_usage, f.content_budget.usage());
+    const lowered = f.store.stats();
+    try t.expectEqual(@as(u64, 0), lowered.target_bytes);
+    try t.expectEqual(ready + claim, lowered.unreclaimable_excess);
+    try t.expectEqualStrings("pinned\n", pin.bytes);
+    try t.expect(f.store.options.verification_budget == &f.verify_budget);
+    try t.expectError(error.InvalidArgument, f.store.setTarget(1025));
+    try t.expectEqualDeep(lowered, f.store.stats());
+    const fresh_version = try f.version(&fresh, "fresh\n");
+    for (0..4) |_| _ = try fresh.session.observe(fresh.cap, "fresh\n", fresh_version, .interactive);
+    try t.expectEqualDeep(granted_usage, f.content_budget.usage());
+    allocator.released.release();
+    thread.join();
+    joined = true;
+    allocator.hold = false;
+    try t.expectEqual(cache.AdmissionResult.admitted, try worker.result);
+    const after = f.store.stats();
+    try t.expectEqual(@as(u64, 0), after.loading_bytes);
+    try t.expectEqual(ready, after.content_bytes);
+    try t.expectEqual(ready, after.unreclaimable_excess);
+    try t.expectEqual(after.control_bytes + ready, f.content_budget.usage().bytes);
+    for (0..4) |_| _ = try fresh.session.observe(fresh.cap, "fresh\n", fresh_version, .interactive);
+    try t.expectEqual(ready, f.store.stats().content_bytes);
+    try t.expectEqualStrings("pinned\n", pin.bytes);
+    try c.session.unpin(pin);
+    pinned = false;
+    try t.expectEqual(@as(u64, 0), f.store.stats().content_bytes);
+    try t.expectEqual(@as(u64, 0), f.store.stats().unreclaimable_excess);
+    const control_only = f.content_budget.usage();
+    try t.expectEqual(after.control_bytes, control_only.bytes);
+    try f.store.setTarget(1024);
+    try t.expectEqualDeep(control_only, f.content_budget.usage());
+    try t.expectEqual(@as(?core.PinnedEntry, null), try loading.session.cacheGet(hash("loading\n"), loading.cap, .{ .max_pinned_bytes = MiB }));
+    try f.admit(&fresh, "fresh\n");
+    try t.expect(f.store.stats().content_bytes > 0);
+}
+
+test "ME-005 failed allocation relinquishes target claim and exact reservations for later refill" {
+    const f = try Fixture.init();
+    defer f.deinit();
+    var c = try f.client(1, 1, "alloc\n");
+    defer f.store.deinit() catch unreachable;
+    var fail = t.FailingAllocator.init(A, .{ .fail_index = 3 });
+    const charge = "alloc\n".len + @sizeOf(cache.lines.Checkpoint);
+    const s = try cache.Store.create(fail.allocator(), io, &f.content_budget, c.session.context, .{ .verification_budget = &f.verify_budget, .max_content_bytes = charge });
+    defer s.deinit() catch unreachable;
+    var local = try cache.Session.init(s, &f.registry, c.session.authorizer, c.session.context, c.session.cancel);
+    const baseline = f.content_budget.usage();
+    const v = try f.version(&c, "alloc\n");
+    _ = try local.observe(c.cap, "alloc\n", v, .interactive);
+    try t.expectError(error.OutOfMemory, local.observe(c.cap, "alloc\n", v, .interactive));
+    try t.expectEqual(@as(u64, 0), s.stats().loading_bytes);
+    try t.expectEqual(@as(u64, 0), s.stats().content_bytes);
+    try t.expectEqualDeep(baseline, f.content_budget.usage());
+    fail.fail_index = std.math.maxInt(usize);
+    _ = try local.observe(c.cap, "alloc\n", v, .interactive);
+    try t.expectEqual(cache.AdmissionResult.admitted, try local.observe(c.cap, "alloc\n", v, .interactive));
+    try t.expectEqual(@as(u64, charge), s.stats().content_bytes);
+    try t.expectEqual(baseline.bytes + charge, f.content_budget.usage().bytes);
+    try s.setTarget(0);
+    try t.expectEqualDeep(baseline, f.content_budget.usage());
+    try t.expectEqual(@as(u64, 0), f.verify_budget.usage().bytes);
+}

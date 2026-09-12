@@ -1,0 +1,10 @@
+Build Summary: 8/8 steps succeeded
+install success
++- install zcr success
+|  +- compile exe zcr ReleaseSafe native success 14s MaxRSS:532M
+|     +- options success
++- install zcr-dev-evidence success
+|  +- compile exe zcr-dev-evidence ReleaseSafe native success 11s MaxRSS:424M
++- install zcr-dev-guard success
+   +- compile exe zcr-dev-guard ReleaseSafe native success 9s MaxRSS:371M
+

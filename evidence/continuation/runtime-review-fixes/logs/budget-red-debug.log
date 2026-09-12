@@ -1,0 +1,26 @@
+test
++- fail failure
+error: registered test file tests/t12_test.zig is missing (T12 not delivered yet)
+
+test
++- run test T03-test 0 pass, 1 fail (1 total)
+error: 't03_test.test.ME-005 pressure lowers new admission without revoking live reservations' failed:
+       expected error.ResourceExhausted, found error.OutputBudgetExceeded
+       /workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/src/memory/budget.zig:139:51: 0x1234230 in reserve (budget.zig)
+               if (cost.output_bytes > cap.output_bytes) return error.OutputBudgetExceeded;
+                                                         ^
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/testing.zig:72:13: 0x122d9ba in expectError__anon_43138 (std.zig)
+                   return error.TestUnexpectedError;
+                   ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes/tests/t03_test.zig:48:5: 0x122e209 in test.ME-005 pressure lowers new admission without revoking live reservations (t03_test.zig)
+           try testing.expectError(error.ResourceExhausted, budget.reserve(session(2), .{ .output_bytes = 17 }));
+           ^
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/zig-local-cache && /workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/zig-local-cache/o/c343c2441e8e6de98a1253bd818e113e/T03-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/zig-local-cache --seed=0x924a9a91 --listen=-
+
+Build Summary: 1/4 steps succeeded (2 failed); 0/1 tests passed (1 failed)
+test transitive failure
++- run test T03-test 0 pass, 1 fail (1 total)
++- fail failure
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/zig-local-cache/o/de94d8b23d3f88fd829df252bfc22c95/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-runtime-fixes /workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/zig-local-cache /workspace/scratch/3f4ab65dfb82/state/runtime-review-fixes/zig-global-cache --seed 0x924a9a91 -Z2b2354a43b96271d test -Dtest-id=ME-005 -Doptimize=Debug

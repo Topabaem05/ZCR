@@ -1,0 +1,44 @@
+{
+  "source_commit": "5781b6cd6d015f791ff3fbfb287c5402567e9d23",
+  "scope": "CI capture validation, not new runtime execution",
+  "files": {
+    "tools/ci/native.py": "87d8522dfa3da521aa93c1427a9f507f875d47c2c9de3d6eefa5b675cfcbfe57",
+    "tools/ci/storage_capture.py": "b3b25a93185affb9af6648adc0f4db95474445f34598e415f0638131bff54b05",
+    "tools/ci/test_storage_capture.py": "7234cdd14562d95189cf7c6fae0fe9983fe69e276020fa58530132b2019d4500"
+  },
+  "commands": [
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "tools/ci/test_storage_capture.py"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-work",
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e73c3805f810fdcf3d0167ced7085c48306c9482a952ffb710551d230cdb3e51"
+    }
+  ],
+  "debug": {
+    "status": "CAPTURED",
+    "fixtures": 21,
+    "files": 187,
+    "bytes": 417856,
+    "archive_sha256": "ac9a48779cdc04dbd32e5466cd71bdf1df12930f006ca7975911ef79859560b9",
+    "historical_runtime_source": "8d241f687effb78c3416c3d733d18283a5956ffb",
+    "runtime_rerun": false
+  },
+  "releasesafe": {
+    "status": "CAPTURED",
+    "fixtures": 21,
+    "files": 187,
+    "bytes": 420116,
+    "archive_sha256": "f82af1f7ceb7f5aef21b7e1caab4b56d00aae5514eff194aa0f1aa2123258063",
+    "historical_runtime_source": "8d241f687effb78c3416c3d733d18283a5956ffb",
+    "runtime_rerun": false
+  },
+  "python": {
+    "executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "version": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "sha256": "fa67443527ed9647f760d807e2a38f26340757123e643c4639cf273ed15d5ea7"
+  }
+}

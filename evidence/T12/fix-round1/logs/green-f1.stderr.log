@@ -1,0 +1,35 @@
+test
++- run test T12-test 0 pass, 1 fail (1 total)
+error: 't12_test.test.WR-006 F1 terminal history survives actual commit commit and abort commit fresh restart' failed:
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/Io/Reader.zig:386:5: 0x1280312 in appendRemainingAligned__anon_47088 (std.zig)
+           return error.StreamTooLong;
+           ^
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/Io/Reader.zig:308:5: 0x127f15e in allocRemainingAlignedSentinel__anon_47073 (std.zig)
+           try appendRemainingAligned(r, gpa, alignment, &buffer, limit);
+           ^
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/Io/Dir.zig:1369:55: 0x127ed6a in readFileAllocOptions__anon_47061 (std.zig)
+               error.OutOfMemory, error.StreamTooLong => |e| return e,
+                                                             ^
+       /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib/std/Io/Dir.zig:1338:5: 0x127e98f in readFileAlloc (std.zig)
+           return readFileAllocOptions(dir, io, sub_path, gpa, limit, .of(u8), null);
+           ^
+       /workspace/scratch/3f4ab65dfb82/ZCR-T12/tests/t12_test.zig:980:50: 0x126a240 in test.WR-006 F1 terminal history survives actual commit commit and abort commit fresh restart (t12_test.zig)
+               try t.expectEqualSlices(u8, fixture.new, try repo.root.dir.readFileAlloc(f.io, "file.txt", repo.arena.allocator(), .limited(f.size)));
+                                                        ^
+failed command: cd /workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/green-f1/cache && /workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/green-f1/cache/o/05648c6c42fb8f4295da66b87adae36e/T12-test --cache-dir=/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/green-f1/cache --seed=0x6c6057a1 --listen=-
+
+Build Summary: 6/8 steps succeeded (1 failed); 0/1 tests passed (1 failed)
+test transitive failure
++- install T12-child success
+|  +- compile test T12-child Debug native success 3s MaxRSS:278M
+|     +- options success
++- install T12-test success
+|  +- compile test T12-test Debug native success 605ms MaxRSS:188M
+|     +- options (reused)
+|     +- options success
+|        +- compile test T12-child Debug native (+1 more reused dependencies)
++- run test T12-test 0 pass, 1 fail (1 total)
+   +- compile test T12-test Debug native (+2 more reused dependencies)
+
+error: the following build command failed with exit code 1:
+/workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/green-f1/cache/o/de94d8b23d3f88fd829df252bfc22c95/build /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig /workspace/scratch/3f4ab65dfb82/toolchain/ziglang/lib /workspace/scratch/3f4ab65dfb82/ZCR-T12 /workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/green-f1/cache /workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/green-f1/global-cache --seed 0x6c6057a1 -Z0d438d08a8e36850 test -Dtest-group=write -Doptimize=Debug -Dinstall-tests=true --prefix /workspace/scratch/3f4ab65dfb82/state/T12/fix-round1/green-f1/out --summary all -Dtest-id=F1

@@ -2,7 +2,10 @@ const std = @import("std");
 const core = @import("zcr_core");
 const policy = @import("zcr_policy");
 const memory = @import("zcr_memory");
+const cache = @import("zcr_cache");
+const workspace_mod = @import("zcr_workspace");
 const mcp = @import("zcr_mcp");
+const fs_read = @import("zcr_fs_read");
 const options = @import("build_options");
 const testing = std.testing;
 const io = testing.io;
@@ -614,4 +617,314 @@ test "MC-004 pre-reserved health control credit survives ordinary budget exhaust
     try testing.expect(health_ok);
     try testing.expectEqual(@as(i64, @intCast(h.budget.caps.bytes)), live);
     try testing.expect(!runner.failed.load(.acquire));
+}
+
+// Real MCP calls share the same cache and CPU-one request budget; no test inserts content manually.
+const CacheHarness = struct {
+    arena: std.heap.ArenaAllocator,
+    tmp: testing.TmpDir,
+    registry: workspace_mod.Registry,
+    counters: memory.accounting.Counters = .{},
+    budget: memory.Budget = undefined,
+    store: ?*cache.Store = null,
+    const Client = struct {
+        root: core.TrustedRoot,
+        auth: policy.Authorizer,
+        facade: cache.Session,
+        server: mcp.Server,
+        flag: std.atomic.Value(bool) = .init(false),
+    };
+    fn init() !*CacheHarness {
+        const f = try testing.allocator.create(CacheHarness);
+        f.* = .{ .arena = .init(testing.allocator), .tmp = testing.tmpDir(.{}), .registry = try workspace_mod.Registry.init(testing.allocator, io, .{ .git_executable = "/usr/bin/git" }) };
+        f.budget = memory.Budget.init(88, .{ .bytes = 32 * 1024 * 1024, .fds = 64, .cpu = 1, .output_bytes = 4 * 1024 * 1024 }, &f.counters);
+        return f;
+    }
+    fn deinit(f: *CacheHarness) void {
+        if (f.store) |store| store.deinit() catch unreachable;
+        testing.expectEqual(@as(u64, 0), f.budget.usage().bytes) catch unreachable;
+        testing.expectEqual(@as(u64, 0), f.counters.live_bytes.load(.monotonic)) catch unreachable;
+        f.registry.deinit() catch unreachable;
+        f.tmp.cleanup();
+        f.arena.deinit();
+        testing.allocator.destroy(f);
+    }
+    fn client(f: *CacheHarness, n: u8, domain: u64, bytes: []const u8) !*Client {
+        const a = f.arena.allocator();
+        const name = try std.fmt.allocPrint(a, "repo-{d}", .{n});
+        try f.tmp.dir.createDir(io, name, .default_dir);
+        const path = try f.tmp.dir.realPathFileAlloc(io, name, a);
+        var env: std.process.Environ.Map = .init(a);
+        try env.put("GIT_CONFIG_GLOBAL", "/dev/null");
+        try env.put("GIT_CONFIG_NOSYSTEM", "1");
+        const init_git = try std.process.run(a, io, .{ .argv = &.{ "/usr/bin/git", "-c", "core.hooksPath=/dev/null", "-c", "init.templateDir=", "-C", path, "init", "-q", "-b", "main" }, .environ_map = &env });
+        if (init_git.term != .exited or init_git.term.exited != 0) return error.FixtureGit;
+        const c = try a.create(Client);
+        const root: core.TrustedRoot = .{ .dir = try f.tmp.dir.openDir(io, name, .{}), .canonical_path = path };
+        defer root.dir.close(io);
+        try root.dir.writeFile(io, .{ .sub_path = "file.txt", .data = bytes });
+        const commit = try std.process.run(a, io, .{ .argv = &.{ "/usr/bin/git", "-c", "core.hooksPath=/dev/null", "-c", "commit.gpgSign=false", "-c", "user.name=cache-test", "-c", "user.email=cache@example.invalid", "-C", path, "commit", "--allow-empty", "-q", "-m", "fixture" }, .environ_map = &env });
+        if (commit.term != .exited or commit.term.exited != 0) return error.FixtureGit;
+        const pol: core.Policy = .{ .digest = @splat(19), .state = .active, .read_paths = &.{.{ .bytes = "." }}, .write_paths = &.{}, .immutable_paths = &.{}, .operations = &.{ .read, .batch_read, .search, .health }, .max_changed_files = 0 };
+        const id = try f.registry.registerWorkspace(io, root, pol);
+        const snap = try f.registry.snapshot(id);
+        const context: core.SessionContext = .{ .session_id = .{ .uuid = @splat(n) }, .security_domain = .{ .id = domain }, .policy_digest = pol.digest, .bound_workspace = id, .bound_task = .{ .uuid = @splat(n + 32) }, .capability_handle = @enumFromInt(@as(u64, n) + 1) };
+        try f.registry.bindSession(context, .{ .task_id = context.bound_task, .base_commit = snap.head[0..snap.head_len], .scope_digest = pol.digest, .fence = 1, .expires_at_unix_ms = std.math.maxInt(i64) }, f.registry.bootNonce());
+        c.* = .{ .root = snap.root, .auth = try policy.Authorizer.init(a, io, snap.root, id, context.bound_task, pol, snap.git), .facade = undefined, .server = undefined };
+        if (f.store == null) f.store = try cache.Store.create(testing.allocator, io, &f.budget, context, .{ .verification_budget = &f.budget });
+        c.facade = try cache.Session.init(f.store.?, &f.registry, &c.auth, context, .{ .requested = &c.flag });
+        c.server = try mcp.Server.init(.{ .allocator = testing.allocator, .io = io, .authorizer = &c.auth, .session = context, .generation = snap.generation, .budget = &f.budget, .cache_session = &c.facade, .tools_json = options.tools_json });
+        _ = try c.server.respond(a, initialize, .{ .requested = &c.flag });
+        _ = try c.server.respond(a, initialized, .{ .requested = &c.flag });
+        return c;
+    }
+    fn read(f: *CacheHarness, c: *Client, args: []const u8) !std.json.Value {
+        return f.readWithCancel(c, args, .{ .requested = &c.flag });
+    }
+    fn readWithCancel(f: *CacheHarness, c: *Client, args: []const u8, cancel: core.Cancel) !std.json.Value {
+        const a = f.arena.allocator();
+        const raw = try std.fmt.allocPrint(a, "{{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{{\"name\":\"zcr_read\",\"arguments\":{s}}}}}", .{args});
+        const response = (try c.server.respond(a, raw, cancel)).?;
+        const rpc = (try std.json.parseFromSlice(std.json.Value, a, response, .{})).value;
+        return (try std.json.parseFromSlice(std.json.Value, a, rpc.object.get("result").?.object.get("content").?.array.items[0].object.get("text").?.string, .{})).value;
+    }
+};
+
+test "BR-001 runtime cache pressure preserves a previously admissible real MCP read" {
+    const f = try CacheHarness.init();
+    defer f.deinit();
+    const c = try f.client(1, 7, "tiny\n");
+    const cold = try f.read(c, "{\"path\":\"file.txt\",\"output_bytes\":2097152}");
+    try testing.expect(cold.object.get("ok").?.bool);
+    // Mirror the long-lived stdio transport credit while real tool calls run.
+    var transport_credit = try f.budget.reserve(c.facade.context, .{ .scratch_bytes = 22 * 1024 * 1024 });
+    defer f.budget.release(&transport_credit) catch unreachable;
+
+    const bytes = try f.arena.allocator().alloc(u8, 200_000);
+    @memset(bytes, 'x');
+    bytes[bytes.len - 1] = '\n';
+    for (0..16) |i| {
+        const name = try std.fmt.allocPrint(f.arena.allocator(), "warm-{d}.txt", .{i});
+        bytes[0] = @intCast('A' + i);
+        try c.root.dir.writeFile(io, .{ .sub_path = name, .data = bytes });
+        const args = try std.fmt.allocPrint(f.arena.allocator(), "{{\"path\":\"{s}\"}}", .{name});
+        for (0..2) |_| {
+            const warmed = try f.read(c, args);
+            try testing.expect(warmed.object.get("ok").?.bool);
+        }
+    }
+    try testing.expect(f.store.?.stats().content_bytes >= 16 * 200_000);
+    var slot_credit = try f.budget.reserve(c.facade.context, .{ .scratch_bytes = 4 * 1024 * 1024 });
+    defer f.budget.release(&slot_credit) catch unreachable;
+    const recovered = try f.read(c, "{\"path\":\"file.txt\",\"output_bytes\":2097152}");
+    try testing.expect(recovered.object.get("ok").?.bool);
+}
+
+test "BR-001 runtime cache pressure never evicts pinned entries or for CPU-only refusal" {
+    const f = try CacheHarness.init();
+    defer f.deinit();
+    const c = try f.client(1, 7, "pinned\n");
+    for (0..2) |_| _ = try f.read(c, "{\"path\":\"file.txt\"}");
+    try testing.expectEqual(@as(usize, 1), f.store.?.stats().entries);
+
+    var cpu = try f.budget.reserve(c.facade.context, .{ .cpu_permits = 1 });
+    const cpu_refused = try f.read(c, "{\"path\":\"file.txt\"}");
+    try testing.expectEqualStrings("E_RESOURCE", cpu_refused.object.get("error").?.object.get("code").?.string);
+    try testing.expectEqual(@as(usize, 1), f.store.?.stats().entries);
+    try f.budget.release(&cpu);
+
+    const capability = try c.auth.authorize(io, c.facade.context, .read, .{ .bytes = "file.txt" });
+    const pin = (try c.facade.cacheGetCurrent(capability, .{ .max_pinned_bytes = 1024 })).pin.?;
+    try testing.expectEqual(@as(usize, 1), f.store.?.stats().pins);
+    const available = f.budget.caps.bytes - f.budget.usage().bytes;
+    var pressure = try f.budget.reserve(c.facade.context, .{ .scratch_bytes = available - 1024 });
+    const pinned_refusal = try f.read(c, "{\"path\":\"file.txt\",\"output_bytes\":2097152}");
+    try testing.expectEqualStrings("E_RESOURCE", pinned_refusal.object.get("error").?.object.get("code").?.string);
+    try testing.expectEqual(@as(usize, 1), f.store.?.stats().entries);
+    try testing.expectEqual(@as(usize, 1), f.store.?.stats().pins);
+    try f.budget.release(&pressure);
+    try c.facade.unpin(pin);
+}
+
+test "BR-001 runtime cache repeated real reads hit with one existing CPU credit" {
+    const f = try CacheHarness.init();
+    defer f.deinit();
+    const c = try f.client(1, 7, "alpha\r\nbeta\n");
+    const first = try f.read(c, "{\"path\":\"file.txt\"}");
+    try testing.expect(first.object.get("ok").?.bool);
+    const second = try f.read(c, "{\"path\":\"file.txt\"}");
+    try testing.expect(second.object.get("ok").?.bool);
+    try testing.expectEqual(@as(usize, 1), f.store.?.stats().entries);
+    const third = try f.read(c, "{\"path\":\"file.txt\"}");
+    try testing.expect(third.object.get("ok").?.bool);
+    try testing.expectEqualStrings("hit", third.object.get("meta").?.object.get("cache").?.string);
+    try testing.expectEqualStrings(try std.json.Stringify.valueAlloc(f.arena.allocator(), first.object.get("data").?, .{}), try std.json.Stringify.valueAlloc(f.arena.allocator(), third.object.get("data").?, .{}));
+    try testing.expectEqual(@as(usize, 0), f.store.?.stats().pins);
+    try testing.expectEqual(@as(u8, 0), f.budget.usage().cpu);
+    try testing.expectEqual(@as(u16, 0), f.budget.usage().fds);
+}
+
+test "BR-001 runtime cache four workspace queries share one allocation and drain pins" {
+    const f = try CacheHarness.init();
+    defer f.deinit();
+    const first = try f.client(1, 7, "shared\n");
+    _ = try f.read(first, "{\"path\":\"file.txt\"}");
+    _ = try f.read(first, "{\"path\":\"file.txt\"}");
+    const charge = f.store.?.stats().content_bytes;
+    try testing.expect(charge > 0);
+    for (2..5) |n| {
+        const c = try f.client(@intCast(n), 7, "shared\n");
+        const result = try f.read(c, "{\"path\":\"file.txt\"}");
+        try testing.expect(result.object.get("ok").?.bool);
+        try testing.expectEqualStrings("hit", result.object.get("meta").?.object.get("cache").?.string);
+        try testing.expectEqual(charge, f.store.?.stats().content_bytes);
+    }
+    try testing.expectEqual(@as(usize, 1), f.store.?.stats().entries);
+    try testing.expectEqual(@as(usize, 4), f.store.?.stats().associations);
+    try testing.expectEqual(@as(usize, 0), f.store.?.stats().pins);
+}
+
+test "BR-001 runtime cache hit preserves read version line output and truncation semantics" {
+    const f = try CacheHarness.init();
+    defer f.deinit();
+    const bytes = "\xef\xbb\xbfalpha\r\n" ++ "line with enough text to exercise output limits\r\n" ** 70 ++ "last without terminator";
+    const c = try f.client(1, 1, bytes);
+    for (0..2) |_| _ = try f.read(c, "{\"path\":\"file.txt\"}");
+    for ([_][]const u8{
+        "{\"path\":\"file.txt\"}",
+        "{\"path\":\"file.txt\",\"start_line\":2,\"line_count\":3}",
+        "{\"path\":\"file.txt\",\"start_line\":72,\"line_count\":2,\"write_intent\":true}",
+        "{\"path\":\"file.txt\",\"start_line\":4000,\"line_count\":1}",
+        "{\"path\":\"file.txt\",\"output_bytes\":1024}",
+    }) |args| {
+        c.server.config.cache_session = null;
+        const baseline = try f.read(c, args);
+        c.server.config.cache_session = &c.facade;
+        const cached = try f.read(c, args);
+        for ([_][]const u8{ "ok", "data", "complete", "truncated", "consistency", "coverage" }) |key| {
+            try testing.expectEqualStrings(try std.json.Stringify.valueAlloc(f.arena.allocator(), baseline.object.get(key).?, .{}), try std.json.Stringify.valueAlloc(f.arena.allocator(), cached.object.get(key).?, .{}));
+        }
+        if (cached.object.get("ok").?.bool) try testing.expectEqualStrings("hit", cached.object.get("meta").?.object.get("cache").?.string);
+        try testing.expectEqual(@as(usize, 0), f.store.?.stats().pins);
+    }
+    // Zero bytes and final-newline boundaries pass through the same real query path.
+    for ([_][]const u8{ "", "\n", "one\n" }, 2..) |text_, n| {
+        const other = try f.client(@intCast(n), 1, text_);
+        const first = try f.read(other, "{\"path\":\"file.txt\",\"write_intent\":true}");
+        _ = try f.read(other, "{\"path\":\"file.txt\",\"write_intent\":true}");
+        const hit = try f.read(other, "{\"path\":\"file.txt\",\"write_intent\":true}");
+        try testing.expectEqualStrings("hit", hit.object.get("meta").?.object.get("cache").?.string);
+        try testing.expectEqualStrings(try std.json.Stringify.valueAlloc(f.arena.allocator(), first.object.get("data").?, .{}), try std.json.Stringify.valueAlloc(f.arena.allocator(), hit.object.get("data").?, .{}));
+    }
+}
+
+test "IS-006 runtime cache respects domains revocation generation and same-metadata changes" {
+    const f = try CacheHarness.init();
+    defer f.deinit();
+    const a = try f.client(1, 1, "alpha\n");
+    for (0..2) |_| _ = try f.read(a, "{\"path\":\"file.txt\"}");
+    const b = try f.client(2, 2, "alpha\n");
+    const separate = try f.read(b, "{\"path\":\"file.txt\"}");
+    try testing.expectEqualStrings("miss", separate.object.get("meta").?.object.get("cache").?.string);
+    try testing.expectEqual(@as(usize, 1), f.store.?.stats().entries);
+    const generation = try f.registry.markChanged(a.facade.context.bound_workspace);
+    const changed_generation = try f.read(a, "{\"path\":\"file.txt\"}");
+    try testing.expectEqualStrings("hit", changed_generation.object.get("meta").?.object.get("cache").?.string);
+    try testing.expectEqual(@as(i64, @intCast(generation)), changed_generation.object.get("generation").?.integer);
+    const old = try a.root.dir.statFile(io, "file.txt", .{});
+    try a.root.dir.writeFile(io, .{ .sub_path = "file.txt", .data = "other\n" });
+    const file = try a.root.dir.openFile(io, "file.txt", .{ .mode = .read_write });
+    try file.setTimestamps(io, .{ .modify_timestamp = .{ .new = old.mtime } });
+    file.close(io);
+    const changed = try f.read(a, "{\"path\":\"file.txt\"}");
+    try testing.expect(changed.object.get("ok").?.bool);
+    try testing.expectEqualStrings("miss", changed.object.get("meta").?.object.get("cache").?.string);
+    try testing.expectEqualStrings("other\n", changed.object.get("data").?.object.get("lines").?.array.items[0].object.get("text").?.string);
+    try f.registry.unbindSession(a.facade.context.session_id, f.registry.bootNonce());
+    const refused = try f.read(a, "{\"path\":\"file.txt\"}");
+    try testing.expectEqualStrings("E_SCOPE", refused.object.get("error").?.object.get("code").?.string);
+    try testing.expectEqual(@as(usize, 0), f.store.?.stats().pins);
+}
+
+test "BR-001 runtime cache partial reads do not admit and cancelled or failed hits drain" {
+    const f = try CacheHarness.init();
+    defer f.deinit();
+    const c = try f.client(1, 1, "one\ntwo\n");
+    for (0..3) |_| _ = try f.read(c, "{\"path\":\"file.txt\",\"line_count\":1,\"write_intent\":true}");
+    try testing.expectEqual(@as(usize, 0), f.store.?.stats().entries);
+    try testing.expectEqual(@as(usize, 0), f.store.?.stats().probation);
+    for (0..2) |_| _ = try f.read(c, "{\"path\":\"file.txt\"}");
+    const baseline = f.budget.usage().bytes;
+    const Hook = struct {
+        fn cancel(context: *anyopaque) void {
+            const flag: *std.atomic.Value(bool) = @ptrCast(@alignCast(context));
+            flag.store(true, .release);
+        }
+    };
+    var request_flag = std.atomic.Value(bool).init(false);
+    cache.association.test_hooks = .{ .context = &request_flag, .after_chunk = Hook.cancel };
+    defer cache.association.test_hooks = null;
+    const cancelled = try f.readWithCancel(c, "{\"path\":\"file.txt\"}", .{ .requested = &request_flag });
+    try testing.expectEqualStrings("E_CANCELLED", cancelled.object.get("error").?.object.get("code").?.string);
+    cache.association.test_hooks = null;
+    try testing.expect(!c.flag.load(.acquire));
+    try testing.expect(c.facade.cancel.requested == &c.flag);
+    try testing.expect(c.facade.cancel.deadline == null);
+    var deadline_flag = std.atomic.Value(bool).init(false);
+    const deadline = try f.readWithCancel(c, "{\"path\":\"file.txt\"}", (core.Cancel{ .requested = &deadline_flag }).withTimeout(io, 0));
+    try testing.expectEqualStrings("E_DEADLINE", deadline.object.get("error").?.object.get("code").?.string);
+    try testing.expect(c.facade.request_credit == null);
+    try testing.expectEqual(@as(usize, 0), f.store.?.stats().pins);
+    try testing.expectEqual(baseline, f.budget.usage().bytes);
+    // Scratch allocation succeeds, then the owned result allocation fails after pin acquisition.
+    var failing = testing.FailingAllocator.init(testing.allocator, .{ .fail_index = 1 });
+    c.server.config.allocator = failing.allocator();
+    const failed = try f.read(c, "{\"path\":\"file.txt\"}");
+    c.server.config.allocator = testing.allocator;
+    try testing.expectEqualStrings("E_RESOURCE", failed.object.get("error").?.object.get("code").?.string);
+    try testing.expectEqual(@as(usize, 0), f.store.?.stats().pins);
+    try testing.expectEqual(baseline, f.budget.usage().bytes);
+    const recovered = try f.read(c, "{\"path\":\"file.txt\"}");
+    try testing.expectEqualStrings("hit", recovered.object.get("meta").?.object.get("cache").?.string);
+}
+
+test "BR-001 runtime cache Reader truncation equals the filesystem oracle and unpins before result use" {
+    const f = try CacheHarness.init();
+    defer f.deinit();
+    const c = try f.client(1, 1, "first line\r\nsecond line\nthird line is longer\nlast");
+    for (0..2) |_| _ = try f.read(c, "{\"path\":\"file.txt\"}");
+    var reservation = try f.budget.reserve(c.facade.context, .{ .scratch_bytes = 1024 * 1024, .output_bytes = 24, .fds = 3, .cpu_permits = 1 });
+    defer f.budget.release(&reservation) catch unreachable;
+    var allocation = memory.ReservedAllocator.init(testing.allocator, &reservation, &f.counters, null);
+    const spec: core.ReadSpec = .{ .path = .{ .bytes = "file.txt" }, .lines = try core.LineRange.init(1, 200), .output_bytes = 24, .write_intent = true };
+    const cap = try c.auth.authorize(io, c.facade.context, .read, spec.path);
+    var plain = fs_read.Reader.init(c.root, c.facade.context.bound_workspace, c.server.config.generation);
+    var expected = try plain.readRange(io, allocation.allocator(), cap, spec, &reservation, .{ .requested = &c.flag });
+    defer expected.deinit();
+    var request = try c.facade.forRequest(&f.budget, &reservation, &allocation, .{ .requested = &c.flag });
+    var cached = plain;
+    cached.cache_session = &request;
+    var actual = try cached.readRange(io, allocation.allocator(), cap, spec, &reservation, .{ .requested = &c.flag });
+    defer actual.deinit();
+    try testing.expect(actual.value.status.truncated);
+    try testing.expectEqualDeep(expected.value, actual.value);
+    try testing.expectEqual(core.CacheResult.hit, cached.cache_result);
+    try testing.expectEqual(@as(usize, 0), f.store.?.stats().pins);
+    try testing.expect(f.store.?.evict(0) > 0);
+    // Result bytes have independent reservation-backed ownership after pin release/eviction.
+    try testing.expectEqualStrings("first line\r\n", actual.value.lines[0].text);
+}
+
+test "IS-006 runtime cache host configuration rejects foreign facades and independent budgets" {
+    const f = try CacheHarness.init();
+    defer f.deinit();
+    const a = try f.client(1, 1, "one\n");
+    const b = try f.client(2, 1, "one\n");
+    var wrong = a.server.config;
+    wrong.cache_session = &b.facade;
+    try testing.expectError(error.OutOfScope, mcp.Server.init(wrong));
+    var independent = memory.Budget.init(f.budget.id, f.budget.caps, &f.counters);
+    wrong = a.server.config;
+    wrong.budget = &independent;
+    try testing.expectError(error.OutOfScope, mcp.Server.init(wrong));
 }

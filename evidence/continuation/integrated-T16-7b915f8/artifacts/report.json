@@ -1,0 +1,241 @@
+{
+  "binaries": [
+    {
+      "bytes": 22056077,
+      "path": "/workspace/scratch/3f4ab65dfb82/state/i2/o/bin/T13-test",
+      "sha256": "1ec32ffd2efad507f11cf6323900c735a117cbf3f8a6d9936695b16ee63bff92"
+    },
+    {
+      "bytes": 20360077,
+      "path": "/workspace/scratch/3f4ab65dfb82/state/i2/o/bin/T09-test",
+      "sha256": "449c661fc715234c417ec64cdb2eeae06c97d132881a5eaba77056fb0fc63cc8"
+    },
+    {
+      "bytes": 13052813,
+      "path": "/workspace/scratch/3f4ab65dfb82/state/i2/o/bin/T08-launch-test",
+      "sha256": "621588d86a9058a59b2346d4db1b4411dc46aea3ccc606ad86078a5425a7a983"
+    },
+    {
+      "bytes": 15280741,
+      "path": "/workspace/scratch/3f4ab65dfb82/state/i2/o/bin/T03-test",
+      "sha256": "c6fac379b28dea7f821f8cc1c7fd64803d0c221a3e64d7a099c8e57c91f03407"
+    },
+    {
+      "bytes": 28852045,
+      "path": "/workspace/scratch/3f4ab65dfb82/state/i2/o/bin/T08-test",
+      "sha256": "377aecd99b16d95035596ebc57026338b68f7683dc0f7a6f7f40a63e42ce83b6"
+    }
+  ],
+  "checks": [
+    {
+      "detail": "clean tracked and untracked files",
+      "name": "source-before-clean",
+      "status": "PASS"
+    },
+    {
+      "detail": "clean tracked and untracked files",
+      "name": "source-after-clean",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "after": {
+          "commit": "7b915f8848b7b173b232d8c28e4154d1089d4d78",
+          "config_sha256": "8688c74cc98a91c5437596b0ffc42989451bf4a491f301e97c3478671e1fb323",
+          "contract_config_sha256": "7753ce3bc905ebcc2c67d224321c804ac0d742b7d7f2e37d54921f9dc84dce51",
+          "contract_sha256": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+          "git_status": "",
+          "test_inputs_sha256": "21cc77571eec05e230693185608df472321b84a348a3057ca65816829cf69764",
+          "tracked_files_sha256": "c834b730dd3f8b6b82595d800f3bc8d54fa97c1cc859861c300cf309868bc03f",
+          "tree": "04188e8fa71c5d776a9cd2a30b3202c528981a84"
+        },
+        "before": {
+          "commit": "7b915f8848b7b173b232d8c28e4154d1089d4d78",
+          "config_sha256": "8688c74cc98a91c5437596b0ffc42989451bf4a491f301e97c3478671e1fb323",
+          "contract_config_sha256": "7753ce3bc905ebcc2c67d224321c804ac0d742b7d7f2e37d54921f9dc84dce51",
+          "contract_sha256": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+          "git_status": "",
+          "test_inputs_sha256": "21cc77571eec05e230693185608df472321b84a348a3057ca65816829cf69764",
+          "tracked_files_sha256": "c834b730dd3f8b6b82595d800f3bc8d54fa97c1cc859861c300cf309868bc03f",
+          "tree": "04188e8fa71c5d776a9cd2a30b3202c528981a84"
+        }
+      },
+      "name": "source-unchanged",
+      "status": "PASS"
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-j2",
+        "-Doptimize=Debug",
+        "-Dtest-group=scheduler",
+        "-Dinstall-tests=true",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/i2/o",
+        "--summary",
+        "all"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-work",
+      "duration_seconds": 8.989757299423218,
+      "exit_code": 0,
+      "label": "scheduler-Debug",
+      "required": true,
+      "started_unix": 1789221066.3038611,
+      "status": "PASS",
+      "stderr": {
+        "path": "01-scheduler-Debug.stderr.log",
+        "sha256": "733827b767a5a204e16d4cee468f17dfa93564811b81132de51ac89dd9e13149"
+      },
+      "stdout": {
+        "path": "01-scheduler-Debug.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-j2",
+        "-Doptimize=Debug",
+        "-Dtest-group=memory",
+        "-Dinstall-tests=true",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/i2/o",
+        "--summary",
+        "all"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-work",
+      "duration_seconds": 1.2199070453643799,
+      "exit_code": 0,
+      "label": "memory-Debug",
+      "required": true,
+      "started_unix": 1789221075.2942767,
+      "status": "PASS",
+      "stderr": {
+        "path": "02-memory-Debug.stderr.log",
+        "sha256": "8b0472b8982f82536038695ec37c4aa09c0a487d4842b5a516ec28107b1fdcbc"
+      },
+      "stdout": {
+        "path": "02-memory-Debug.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "argv": [
+        "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+        "build",
+        "test",
+        "-j2",
+        "-Doptimize=Debug",
+        "-Dtest-group=mcp",
+        "-Dinstall-tests=true",
+        "--prefix",
+        "/workspace/scratch/3f4ab65dfb82/state/i2/o",
+        "--summary",
+        "all"
+      ],
+      "cwd": "/workspace/scratch/3f4ab65dfb82/ZCR-work",
+      "duration_seconds": 2.2227022647857666,
+      "exit_code": 0,
+      "label": "mcp-Debug",
+      "required": true,
+      "started_unix": 1789221076.5148344,
+      "status": "PASS",
+      "stderr": {
+        "path": "03-mcp-Debug.stderr.log",
+        "sha256": "ec87865d02998b078f4ab39786b4e47d47e7cfdfd7abb770557460fd44a46c98"
+      },
+      "stdout": {
+        "path": "03-mcp-Debug.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "driver": {
+    "path": "/workspace/scratch/3f4ab65dfb82/state/integration/run_admission.py",
+    "sha256": "bb400967ca84b5c00379b43b711750863b5a5ca9942c8b5aef04b041d46aed54"
+  },
+  "env_overrides": {
+    "TMPDIR": "/workspace/scratch/3f4ab65dfb82/state/i2/t",
+    "ZIG_GLOBAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/i2/g",
+    "ZIG_LOCAL_CACHE_DIR": "/workspace/scratch/3f4ab65dfb82/state/i2/c"
+  },
+  "external_gates": [
+    {
+      "gate": "G07/G08/G13 actual host client and sandbox integration",
+      "reason": "No actual Codex/Claude client or host sandbox in this job.",
+      "status": "NOT_RUN"
+    },
+    {
+      "gate": "G12 paired model coexistence and end-to-end performance",
+      "reason": "No actual model/client benchmark harness in this job.",
+      "status": "NOT_RUN"
+    },
+    {
+      "gate": "G11 macOS 11 Intel runtime",
+      "reason": "The matrix runs macOS 15, not an actual macOS 11 machine.",
+      "status": "NOT_RUN"
+    },
+    {
+      "gate": "G05 complete APFS ACL/xattr/crash-durability qualification",
+      "reason": "Unit tests do not constitute the full destructive APFS qualification harness.",
+      "status": "NOT_RUN"
+    }
+  ],
+  "finished_unix": 1789221078.881548,
+  "host": {
+    "image_os": null,
+    "image_version": null,
+    "machine": "x86_64",
+    "platform": "Linux-6.18.35-x86_64-with-glibc2.39",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "python_executable_sha256": "fa67443527ed9647f760d807e2a38f26340757123e643c4639cf273ed15d5ea7",
+    "runner_arch": null
+  },
+  "performance_claims": false,
+  "runner": "local-restricted-container",
+  "schema": "zcr-native-ci/1",
+  "scope": "required native contract, registered test, codec, and CLI subprocess commands",
+  "source": {
+    "after": {
+      "commit": "7b915f8848b7b173b232d8c28e4154d1089d4d78",
+      "config_sha256": "8688c74cc98a91c5437596b0ffc42989451bf4a491f301e97c3478671e1fb323",
+      "contract_config_sha256": "7753ce3bc905ebcc2c67d224321c804ac0d742b7d7f2e37d54921f9dc84dce51",
+      "contract_sha256": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+      "git_status": "",
+      "test_inputs_sha256": "21cc77571eec05e230693185608df472321b84a348a3057ca65816829cf69764",
+      "tracked_files_sha256": "c834b730dd3f8b6b82595d800f3bc8d54fa97c1cc859861c300cf309868bc03f",
+      "tree": "04188e8fa71c5d776a9cd2a30b3202c528981a84"
+    },
+    "before": {
+      "commit": "7b915f8848b7b173b232d8c28e4154d1089d4d78",
+      "config_sha256": "8688c74cc98a91c5437596b0ffc42989451bf4a491f301e97c3478671e1fb323",
+      "contract_config_sha256": "7753ce3bc905ebcc2c67d224321c804ac0d742b7d7f2e37d54921f9dc84dce51",
+      "contract_sha256": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+      "git_status": "",
+      "test_inputs_sha256": "21cc77571eec05e230693185608df472321b84a348a3057ca65816829cf69764",
+      "tracked_files_sha256": "c834b730dd3f8b6b82595d800f3bc8d54fa97c1cc859861c300cf309868bc03f",
+      "tree": "04188e8fa71c5d776a9cd2a30b3202c528981a84"
+    }
+  },
+  "status": "PASS",
+  "target": "x86_64-linux",
+  "toolchain": {
+    "path": "/workspace/scratch/3f4ab65dfb82/toolchain/ziglang/zig",
+    "sha256": "2317bbb91798556d9d0f38aabdac23db83f0979b25f767259ae474546724087c"
+  },
+  "workflow": {
+    "GITHUB_EVENT_NAME": null,
+    "GITHUB_REF": null,
+    "GITHUB_REPOSITORY": null,
+    "GITHUB_RUN_ATTEMPT": null,
+    "GITHUB_RUN_ID": null,
+    "GITHUB_SHA": null,
+    "GITHUB_WORKFLOW_SHA": null
+  }
+}

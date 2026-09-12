@@ -1,0 +1,44 @@
+{
+  "schema_version": "zcr-t12-fix-round1/1",
+  "status": "FIXED_AWAITING_INDEPENDENT_REVIEW",
+  "reviewed_base": "5e081eef70a8dbf3bcf6fdd0c49aa9e4a4e9c357",
+  "regression_commit": "e29ddc2c52b3d9bf32ea57e6a9edf252a7c82b30",
+  "implementation_commit": "c2c24c76d8289b8769fd4e1cb5c13a10ea197b25",
+  "source_commit": "1f1255328038300114cd2f23b6e077416f30b2b7",
+  "source_tree": "d72a361a8f98b422f91bb56ac07256455b2fb0a4",
+  "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+  "changed_source": {
+    "src/storage/recovery.zig": "0a7c057268758b97e9aa9996db4ee7dc60f5f306ddb5f9b6208e8b4303aa13b6",
+    "tests/t12_child.zig": "6f1492cb6e069c407650f51741e63bb2b6f3575b1ed2043be18952934fdc43fe",
+    "tests/t12_fixtures.zig": "3a710b37608f0cff0342ef229583ac3e64dd6e047893d1c9e219fa4b61fd6a62",
+    "tests/t12_test.zig": "2c20a796d8716d7ded3a08ee13e678333a9442b92d3009be8e9a3b43548215e3"
+  },
+  "build_sha256": "51bbc47cd1aafc90fc865b20cc15d863b0ec19109b6d01f5ac4bf3ae75d04d64",
+  "core_types_sha256": "f6b28697e3e27ed401cd165320dbb9a5816a3020e135bec4d633736ce48ef453",
+  "corpus_sha256": "7a07adabcd109bbf86f65aeb0a4c8f4d1bd49a1c012990cb02cf18b6113b4ec6",
+  "raw_archive_sha256": "1451d927a637012e6af19e3d35b09e48244173ac14e698229fe92e1a69f3247f",
+  "raw_file_count": 1402,
+  "matrix_cases": 40,
+  "covering_history_cases": 9,
+  "covering_terminal_tail_cases": 6,
+  "full_group_results": {
+    "Debug": "65/65 (T11 41 + T12 24)",
+    "ReleaseSafe": "65/65 (T11 41 + T12 24)"
+  },
+  "remaining_gates": [
+    "Independent T12 source/evidence review and combined startup/write integration on integrator commit.",
+    "Trusted actual host launch wiring retaining root/Git/common/state and per-publication parent/temp/original handles with protected one-use grant; cold start stays quarantined.",
+    "Genuine kernel ENOSPC before and after publication: NOT_RUN; no shared-disk filling attempted.",
+    "Genuine kernel short-count return and fsync failure: NOT_RUN; deterministic seven-byte write chunks and injected write/fsync errors passed, not OS fault proof.",
+    "macOS Apple Silicon and Intel / Windows runtime: NOT_RUN; this store rejects non-Linux.",
+    "Power-loss durability and filesystem/platform support qualification: NOT_RUN; SIGKILL establishes process crash handling only.",
+    "Production capabilities/writes remain hard false; no test or recovery enables production."
+  ],
+  "production_writes_enabled": false,
+  "notes": [
+    "Terminal outcomes replay after namespace/state/task/domain/policy binding without current-path inference; pending entries retain publication witness/identity checks.",
+    "Failed terminal suffix preservation reports uncertainty and preserves terminal prefix; complete UNCERTAIN is never normalized to a terminal success.",
+    "Two exact committed functional REDs preserved; c2c24c7 runs failed only at F1 test-helper EOF read limit, corrected by final source. Their filenames are historical labels, not PASS claims.",
+    "Existing historical source/evidence files unchanged. No push or merge."
+  ]
+}
