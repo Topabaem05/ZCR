@@ -1,0 +1,69 @@
+{
+  "schema_version": "zcr-integration-record/0",
+  "id": "INT-007",
+  "source_commit": "2c2f0e780a1d1d68e37fed0ac106615cd133feb0",
+  "branch": "integration",
+  "changes": [
+    "fast-forward integration to task-t07 531cfc3 (T07 S06)",
+    "build.zig: register T08 (tests/t08_test.zig group mcp; zcr_mcp module)"
+  ],
+  "retest_of": [
+    "T00",
+    "T01",
+    "T02",
+    "T03",
+    "T04",
+    "T05",
+    "T06",
+    "T07 BA-001..BA-003 (Debug and ReleaseSafe)"
+  ],
+  "runs": [
+    {
+      "label": "int7-all-debug",
+      "command": "zig build test -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-int7-all-debug",
+      "expected": "103/103 tests pass; step fails only because tests/t08_test.zig is registered but not delivered",
+      "summary": "Build Summary: 28/30 steps succeeded (1 failed); 103/103 tests passed",
+      "log": "logs/int7-all-debug.log",
+      "log_sha256": "d47424dd0ff25e81d50349b9d37352c1c96fda28dccb80bbb5a3bb98c465cf5c",
+      "installed_test_binaries_sha256": {
+        "T00-test": "77810e7bbc55bb883830ee6be8292608af7604b629a8fa0249a1a00d94eeff42",
+        "T01-test": "dd2e632accac28627fe02c5b03a1e1cd0b5ded1d2459d69ab8d99963c1951e6f",
+        "T02-test": "f903b9c7c990574dd3641274ca637a3c9741f1d720757d115f132cc4fd5f6dd3",
+        "T03-test": "8c1ed75b48853beaf143c16edbc1d1345fd2cdef117b181e2e2d0c0870088b16",
+        "T04-test": "d345af3c16a809a21d332804e8141724c2105d9eb0d98c24f59fa9f892624ed2",
+        "T05-test": "fefb2d0802a1e7913799496dd12664088333f233b2323ca945f49c596fd952ad",
+        "T06-test": "0ac70b74a1a4b2fb41867d5a1261f3776198c6683e94fea28aab30a70bb61df6",
+        "T07-test": "5612a77a644a3ba1a5f99bf5cd52fcf2a850d9e0a786913d3b4560c04a437d7e"
+      }
+    },
+    {
+      "label": "int7-batch-releasesafe",
+      "command": "zig build test -Dtest-group=batch -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix $STATE/out-int7-batch-releasesafe",
+      "expected": "pass",
+      "summary": "Build Summary: 4/4 steps succeeded; 18/18 tests passed",
+      "log": "logs/int7-batch-releasesafe.log",
+      "log_sha256": "35d2f2b10626ce1f4e22cadb21a8e04570a0b7a2b581da1e7b002c42a6489eb1",
+      "installed_test_binaries_sha256": {
+        "T07-test": "5adc727896685532da8099d7d63d081f728d5883af4e3b587761fa74baf5681d"
+      }
+    },
+    {
+      "label": "int7-verify-contracts",
+      "command": "zig build verify-contracts -Dinstall-tests=true --prefix $STATE/out-int7-verify-contracts",
+      "expected": "pass",
+      "summary": "Build Summary: 3/3 steps succeeded",
+      "log": "logs/int7-verify-contracts.log",
+      "log_sha256": "f0c1822c46ad867c463e7f61911f9fbda8c4a2b129b20381585a230a5cb216fd",
+      "installed_test_binaries_sha256": {}
+    }
+  ],
+  "not_done": [
+    "main branch not updated",
+    "MANIFEST.sha256 AGENTS.md mismatch open",
+    "E_MANIFEST_UNBOUND decision open",
+    "read cost estimate proposal (T04) open",
+    "Coverage filters proposal (T05) open",
+    "SearchSpec output_bytes/deadline proposal (T06) open",
+    "I06 Cancel and batch admission sizing proposals (T07) open"
+  ]
+}
