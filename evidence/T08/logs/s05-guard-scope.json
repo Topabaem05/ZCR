@@ -1,0 +1,35 @@
+{
+  "task": "T08",
+  "role": "task",
+  "violations": [],
+  "changes": [
+    {
+      "kind": "added",
+      "path": "src/protocol/codec.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "src/protocol/framing.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "src/protocol/mcp.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "tests/t08_test.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    }
+  ]
+}

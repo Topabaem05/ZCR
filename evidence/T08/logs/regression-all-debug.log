@@ -1,0 +1,46 @@
+Build Summary: 32/32 steps succeeded; 116/116 tests passed
+test success
++- install T00-test success
+|  +- compile test T00-test Debug native success 2m MaxRSS:250M
++- run test T00-test 11 pass (11 total) 12s MaxRSS:10M
+|  +- compile test T00-test Debug native (reused)
++- install T01-test success
+|  +- compile test T01-test Debug native success 2m MaxRSS:203M
+|     +- options cached
++- run test T01-test 18 pass (18 total) 1m MaxRSS:10M
+|  +- compile test T01-test Debug native (+1 more reused dependencies)
++- install T02-test success
+|  +- compile test T02-test Debug native success 1m MaxRSS:146M
+|     +- options (reused)
++- run test T02-test 12 pass (12 total) 41s MaxRSS:11M
+|  +- compile test T02-test Debug native (+1 more reused dependencies)
++- install T03-test success
+|  +- compile test T03-test Debug native success 1m MaxRSS:120M
++- run test T03-test 12 pass (12 total) 34s MaxRSS:4M
+|  +- compile test T03-test Debug native (reused)
++- install T04-test success
+|  +- compile test T04-test Debug native success 1m MaxRSS:140M
++- run test T04-test 10 pass (10 total) 26s MaxRSS:19M
+|  +- compile test T04-test Debug native (reused)
++- install T05-test success
+|  +- compile test T05-test Debug native success 1m MaxRSS:152M
++- run test T05-test 11 pass (11 total) 1m MaxRSS:9M
+|  +- compile test T05-test Debug native (reused)
++- install T06-test success
+|  +- compile test T06-test Debug native success 1m MaxRSS:137M
++- run test T06-test 11 pass (11 total) 5s MaxRSS:8M
+|  +- compile test T06-test Debug native (reused)
++- install T07-test success
+|  +- compile test T07-test Debug native success 1m MaxRSS:199M
++- run test T07-test 18 pass (18 total) 4s MaxRSS:7M
+|  +- compile test T07-test Debug native (reused)
++- install T08-test success
+|  +- compile test T08-test Debug native cached 1s MaxRSS:30M
++- run test T08-test 13 pass (13 total) 20s MaxRSS:32M
+|  +- compile test T08-test Debug native (reused)
++- run exe zcr success 150ms
+|  +- compile exe zcr Debug native cached 1s MaxRSS:31M
+|     +- options (reused)
++- run exe zcr success 1s
+   +- compile exe zcr Debug native (+1 more reused dependencies)
+

@@ -1,0 +1,7 @@
+Build Summary: 4/4 steps succeeded; 13/13 tests passed
+test success
++- install T08-test success
+|  +- compile test T08-test Debug native success 42s MaxRSS:197M
++- run test T08-test 13 pass (13 total) 7s MaxRSS:32M
+   +- compile test T08-test Debug native (reused)
+

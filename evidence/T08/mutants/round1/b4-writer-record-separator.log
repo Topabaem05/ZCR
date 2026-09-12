@@ -1,0 +1,49 @@
+test
++- run test T08-test 10 pass, 3 fail (13 total)
+error: 't08_test.test.MC-002 concurrent writers keep one record per line and never interleave' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/json/Scanner.zig:1317:34: 0x104153687 in skipWhitespaceCheckEnd (T08-test)
+           if (self.stackHeight() == 0) return error.SyntaxError;
+                                        ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/json/Scanner.zig:390:21: 0x1041549cb in next (T08-test)
+                       if (try self.skipWhitespaceCheckEnd()) return .end_of_document;
+                           ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/json/static.zig:151:32: 0x104153247 in parseFromTokenSourceLeaky__anon_36749 (T08-test)
+           assert(.end_of_document == try scanner_or_reader.next());
+                                      ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/json/static.zig:97:5: 0x104152d67 in parseFromSliceLeaky__anon_36434 (T08-test)
+           return parseFromTokenSourceLeaky(T, allocator, &scanner, options);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T08/tmp/mut-b4-writer-record-separator/tests/t08_test.zig:403:23: 0x1041eba07 in test.MC-002 concurrent writers keep one record per line and never interleave (T08-test)
+               const value = try std.json.parseFromSliceLeaky(std.json.Value, h.arena, line, .{});
+                             ^
+error: 't08_test.test.MC-002 source content only reaches stdout inside a record, and never stderr' failed:
+       expected 1, found 0
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x10417aa7f in expectEqualInner__anon_46960 (T08-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x1041e9b53 in expectEqual (T08-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T08/tmp/mut-b4-writer-record-separator/tests/t08_test.zig:428:5: 0x1041e9c3f in test.MC-002 source content only reaches stdout inside a record, and never stderr (T08-test)
+           try testing.expectEqual(@as(usize, 1), std.mem.count(u8, written, "\n"));
+           ^
+error: 't08_test.test.MC-004 a slow reader applies backpressure without deadlocking the writer' failed:
+       expected 16, found 0
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x104151adf in expectEqualInner__anon_36563 (T08-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x104177fd3 in expectEqual (T08-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T08/tmp/mut-b4-writer-record-separator/tests/t08_test.zig:715:5: 0x104178057 in test.MC-004 a slow reader applies backpressure without deadlocking the writer (T08-test)
+           try testing.expectEqual(@as(u64, 16), slow.lines.load(.monotonic));
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T08/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T08/zig-local-cache/o/b7450e4b44a8ab7b96188799c0f44561/T08-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T08/zig-local-cache --seed=0x92aca7d1 --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 10/13 tests passed (3 failed)
+test transitive failure
++- run test T08-test 10 pass, 3 fail (13 total)
+   +- compile test T08-test Debug native success 4s MaxRSS:274M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T08/zig-local-cache/o/fb7e68a9978aa67e44cdaa1d0070310a/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T08/tmp/mut-b4-writer-record-separator /Users/guribbong/code/ZCR-state/tasks/T08/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T08/zig-global-cache --seed 0x92aca7d1 -Z53b86206c8f82914 test -Dtest-group=mcp --summary all

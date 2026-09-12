@@ -1,0 +1,29 @@
+test
++- run test T08-test 12 pass, 1 crash (13 total)
+error: 't08_test.test.MC-003 duplicate keys, deep JSON, unknown fields and bad numbers are refused early' terminated with signal ABRT with stderr:
+       thread 27966216 panic: attempt to use null value
+       /Users/guribbong/code/ZCR-state/tasks/T08/tmp/mut-c3-no-jsonrpc-check/tests/t08_test.zig:164:44: 0x100722ed7 in errorCode (T08-test)
+               return response.object.get("error").?.object.get("code").?.integer;
+                                                  ^
+       /Users/guribbong/code/ZCR-state/tasks/T08/tmp/mut-c3-no-jsonrpc-check/tests/t08_test.zig:483:83: 0x10072440b in test.MC-003 duplicate keys, deep JSON, unknown fields and bad numbers are refused early (T08-test)
+           try testing.expectEqual(@as(i64, codec.rpc_invalid_request), Harness.errorCode(no_version));
+                                                                                         ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x10066b12f in mainServer (T08-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x10066b7df in main (T08-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x1006695a3 in callMain (T08-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T08/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T08/zig-local-cache/o/4ed8698b0ae3d429b6359328b34b7c6a/T08-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T08/zig-local-cache --seed=0xbc266302 --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 12/13 tests passed (1 crashed)
+test transitive failure
++- run test T08-test 12 pass, 1 crash (13 total)
+   +- compile test T08-test Debug native success 4s MaxRSS:256M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T08/zig-local-cache/o/fb7e68a9978aa67e44cdaa1d0070310a/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T08/tmp/mut-c3-no-jsonrpc-check /Users/guribbong/code/ZCR-state/tasks/T08/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T08/zig-global-cache --seed 0xbc266302 -Z33975ba21981c5cf test -Dtest-group=mcp --summary all

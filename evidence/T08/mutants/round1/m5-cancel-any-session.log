@@ -1,0 +1,16 @@
+test
++- run test T08-test
+   +- compile test T08-test Debug native 1 errors
+src/protocol/mcp.zig:166:37: error: unused function parameter
+    fn cancel(r: *Registry, io: Io, session: core.SessionId, id: codec.Id) bool {
+                                    ^~~~~~~
+error: 1 compilation errors
+failed command: /Users/guribbong/.local/share/zig/0.16.0/zig test -ODebug --dep zcr_core --dep zcr_policy --dep zcr_memory --dep zcr_admission --dep zcr_fs_read --dep zcr_fs_traverse --dep zcr_search --dep zcr_batch --dep zcr_projection --dep zcr_mcp -Mroot=/Users/guribbong/code/ZCR-state/tasks/T08/tmp/mut-m5-cancel-any-session/tests/t08_test.zig -ODebug -Mzcr_core=/Users/guribbong/code/ZCR-state/tasks/T08/tmp/mut-m5-cancel-any-session/src/core/types.zig -ODebug --dep zcr_core -Mzcr_policy=/Users/guribbong/code/ZCR-state/tasks/T08/tmp/mut-m5-cancel-any-session/src/policy/capability.zig -ODebug --dep zcr_core -Mzcr_memory=/Users/guribbong/code/ZCR-state/tasks/T08/tmp/mut-m5-cancel-any-session/src/memory/budget.zig -ODebug --dep zcr_core --dep zcr_memory -Mzcr_admission=/Users/guribbong/code/ZCR-state/tasks/T08/tmp/mut-m5-cancel-any-session/src/scheduler/admission.zig -ODebug --dep zcr_core --dep zcr_policy --dep zcr_memory -Mzcr_fs_read=/Users/guribbong/code/ZCR-state/tasks/T08/tmp/mut-m5-cancel-any-session/src/fs/read.zig -ODebug --dep zcr_core --dep zcr_policy -Mzcr_fs_traverse=/Users/guribbong/code/ZCR-state/tasks/T08/tmp/mut-m5-cancel-any-session/src/fs/traverse.zig -ODebug --dep zcr_core --dep zcr_policy --dep zcr_fs_read --dep zcr_fs_traverse -Mzcr_search=/Users/guribbong/code/ZCR-state/tasks/T08/tmp/mut-m5-cancel-any-session/src/search/literal.zig -ODebug --dep zcr_core --dep zcr_policy --dep zcr_memory --dep zcr_admission --dep zcr_fs_read -Mzcr_batch=/Users/guribbong/code/ZCR-state/tasks/T08/tmp/mut-m5-cancel-any-session/src/batch/read.zig -ODebug --dep zcr_core -Mzcr_projection=/Users/guribbong/code/ZCR-state/tasks/T08/tmp/mut-m5-cancel-any-session/src/protocol/projection.zig -ODebug --dep zcr_core --dep zcr_policy --dep zcr_memory --dep zcr_admission --dep zcr_fs_read --dep zcr_fs_traverse --dep zcr_search --dep zcr_batch --dep zcr_projection --dep tools_json -Mzcr_mcp=/Users/guribbong/code/ZCR-state/tasks/T08/tmp/mut-m5-cancel-any-session/src/protocol/mcp.zig -Mtools_json=/Users/guribbong/code/ZCR-state/tasks/T08/tmp/mut-m5-cancel-any-session/contracts/tools.json -lc --cache-dir /Users/guribbong/code/ZCR-state/tasks/T08/zig-local-cache --global-cache-dir /Users/guribbong/code/ZCR-state/tasks/T08/zig-global-cache --name T08-test --zig-lib-dir /Users/guribbong/.local/share/zig/0.16.0/lib/ --listen=-
+
+Build Summary: 0/3 steps succeeded (1 failed)
+test transitive failure
++- run test T08-test transitive failure
+   +- compile test T08-test Debug native 1 errors
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T08/zig-local-cache/o/fb7e68a9978aa67e44cdaa1d0070310a/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T08/tmp/mut-m5-cancel-any-session /Users/guribbong/code/ZCR-state/tasks/T08/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T08/zig-global-cache --seed 0xe7f3d6f3 -Z1bf1b016467f0937 test -Dtest-group=mcp --summary all

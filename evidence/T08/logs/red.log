@@ -1,0 +1,182 @@
+test
++- run test T08-test 1 pass, 11 fail, 1 crash (13 total)
+error: 't08_test.test.MC-001 initialize negotiates the supported version and refuses others explicitly' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t08/src/protocol/mcp.zig:145:9: 0x100ff1e37 in serveFrame (T08-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:129:9: 0x100fee1cf in serve (T08-test)
+               return h.server.serveFrame(io, &connection, .{ .bytes = record, .limit = framing.max_frame_bytes });
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:134:24: 0x100fee2cf in call (T08-test)
+               const result = try h.serve(record);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:183:21: 0x10100fe2b in test.MC-001 initialize negotiates the supported version and refuses others explicitly (T08-test)
+           const refused = try h.call(
+                           ^
+error: 't08_test.test.MC-001 tools/list advertises only enabled contract tools and no output schema' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t08/src/protocol/mcp.zig:145:9: 0x100ff1e37 in serveFrame (T08-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:129:9: 0x100fee1cf in serve (T08-test)
+               return h.server.serveFrame(io, &connection, .{ .bytes = record, .limit = framing.max_frame_bytes });
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:134:24: 0x100fee2cf in call (T08-test)
+               const result = try h.serve(record);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:140:26: 0x100fee4cb in initialize (T08-test)
+               const response = try h.call(
+                                ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:215:5: 0x10100d977 in test.MC-001 tools/list advertises only enabled contract tools and no output schema (T08-test)
+           try h.initialize();
+           ^
+error: 't08_test.test.MC-001 every enabled tool answers with one text block holding a zcr/1 response' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t08/src/protocol/mcp.zig:145:9: 0x100ff1e37 in serveFrame (T08-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:129:9: 0x100fee1cf in serve (T08-test)
+               return h.server.serveFrame(io, &connection, .{ .bytes = record, .limit = framing.max_frame_bytes });
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:134:24: 0x100fee2cf in call (T08-test)
+               const result = try h.serve(record);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:140:26: 0x100fee4cb in initialize (T08-test)
+               const response = try h.call(
+                                ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:256:5: 0x101009a47 in test.MC-001 every enabled tool answers with one text block holding a zcr/1 response (T08-test)
+           try h.initialize();
+           ^
+error: 't08_test.test.MC-002 records survive any chunk boundary and keep escaped newlines' failed:
+       expected 0, found 1
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x100fee65b in expectEqualInner__anon_46948 (T08-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x10100939f in expectEqual (T08-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:338:13: 0x101009427 in test.MC-002 records survive any chunk boundary and keep escaped newlines (T08-test)
+                   try testing.expectEqual(@as(usize, 0), input.len);
+                   ^
+error: 't08_test.test.MC-002 a record larger than the buffer is dropped and framing resyncs' terminated with signal ABRT with stderr:
+       thread 27925252 panic: attempt to use null value
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:358:38: 0x1010083a3 in test.MC-002 a record larger than the buffer is dropped and framing resyncs (T08-test)
+           const first = framer.next(&input).?;
+                                            ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x100fa312f in mainServer (T08-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x100fa37df in main (T08-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x100fa15a3 in callMain (T08-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x1862504e3 in start (/usr/lib/dyld)
+error: 't08_test.test.MC-002 concurrent writers keep one record per line and never interleave' failed:
+       expected 0, found 4
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x100d71ba7 in expectEqualInner__anon_36583 (T08-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x100db275b in expectEqual (T08-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:396:5: 0x100db2807 in test.MC-002 concurrent writers keep one record per line and never interleave (T08-test)
+           try testing.expectEqual(@as(u32, 0), chorus.failures.load(.monotonic));
+           ^
+error: 't08_test.test.MC-002 source content only reaches stdout inside a record, and never stderr' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t08/src/protocol/mcp.zig:145:9: 0x100d9de37 in serveFrame (T08-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:129:9: 0x100d9a1cf in serve (T08-test)
+               return h.server.serveFrame(io, &connection, .{ .bytes = record, .limit = framing.max_frame_bytes });
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:134:24: 0x100d9a2cf in call (T08-test)
+               const result = try h.serve(record);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:140:26: 0x100d9a4cb in initialize (T08-test)
+               const response = try h.call(
+                                ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:418:5: 0x100db07df in test.MC-002 source content only reaches stdout inside a record, and never stderr (T08-test)
+           try h.initialize();
+           ^
+error: 't08_test.test.MC-003 duplicate keys, deep JSON, unknown fields and bad numbers are refused early' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t08/src/protocol/mcp.zig:145:9: 0x100d9de37 in serveFrame (T08-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:129:9: 0x100d9a1cf in serve (T08-test)
+               return h.server.serveFrame(io, &connection, .{ .bytes = record, .limit = framing.max_frame_bytes });
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:134:24: 0x100d9a2cf in call (T08-test)
+               const result = try h.serve(record);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:140:26: 0x100d9a4cb in initialize (T08-test)
+               const response = try h.call(
+                                ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:445:5: 0x100daec17 in test.MC-003 duplicate keys, deep JSON, unknown fields and bad numbers are refused early (T08-test)
+           try h.initialize();
+           ^
+error: 't08_test.test.MC-003 frames beyond the raw frame limit are refused before decoding' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t08/src/protocol/mcp.zig:145:9: 0x100d9de37 in serveFrame (T08-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:129:9: 0x100d9a1cf in serve (T08-test)
+               return h.server.serveFrame(io, &connection, .{ .bytes = record, .limit = framing.max_frame_bytes });
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:134:24: 0x100d9a2cf in call (T08-test)
+               const result = try h.serve(record);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:140:26: 0x100d9a4cb in initialize (T08-test)
+               const response = try h.call(
+                                ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:525:5: 0x100dadc43 in test.MC-003 frames beyond the raw frame limit are refused before decoding (T08-test)
+           try h.initialize();
+           ^
+error: 't08_test.test.MC-003 decoding stays inside the request budget' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t08/src/protocol/mcp.zig:145:9: 0x100d9de37 in serveFrame (T08-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:129:9: 0x100d9a1cf in serve (T08-test)
+               return h.server.serveFrame(io, &connection, .{ .bytes = record, .limit = framing.max_frame_bytes });
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:134:24: 0x100d9a2cf in call (T08-test)
+               const result = try h.serve(record);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:140:26: 0x100d9a4cb in initialize (T08-test)
+               const response = try h.call(
+                                ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:554:5: 0x100dac487 in test.MC-003 decoding stays inside the request budget (T08-test)
+           try h.initialize();
+           ^
+error: 't08_test.test.MC-004 a cancellation stops the running request of the same session only' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t08/src/protocol/mcp.zig:145:9: 0x100d9de37 in serveFrame (T08-test)
+               return error.Unsupported;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:129:9: 0x100d9a1cf in serve (T08-test)
+               return h.server.serveFrame(io, &connection, .{ .bytes = record, .limit = framing.max_frame_bytes });
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:134:24: 0x100d9a2cf in call (T08-test)
+               const result = try h.serve(record);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:140:26: 0x100d9a4cb in initialize (T08-test)
+               const response = try h.call(
+                                ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:608:5: 0x100d9b33b in test.MC-004 a cancellation stops the running request of the same session only (T08-test)
+           try h.initialize();
+           ^
+error: 't08_test.test.MC-004 a slow reader applies backpressure without deadlocking the writer' failed:
+       /Users/guribbong/code/ZCR-worktrees/task-t08/src/protocol/framing.zig:53:9: 0x100d98467 in writeRecord (T08-test)
+               return error.IoFailure;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/task-t08/tests/t08_test.zig:697:21: 0x100d97e4f in test.MC-004 a slow reader applies backpressure without deadlocking the writer (T08-test)
+           for (0..16) |_| try writer.writeRecord(io, record);
+                           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T08/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T08/zig-local-cache/o/8f1e1492c7be5927a98834cff759526b/T08-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T08/zig-local-cache --seed=0xf1f2fe2f --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 1/13 tests passed (11 failed, 1 crashed)
+test transitive failure
++- install T08-test success
+|  +- compile test T08-test Debug native cached 95ms MaxRSS:31M
++- run test T08-test 1 pass, 11 fail, 1 crash (13 total)
+   +- compile test T08-test Debug native (reused)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T08/zig-local-cache/o/fb7e68a9978aa67e44cdaa1d0070310a/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-worktrees/task-t08 /Users/guribbong/code/ZCR-state/tasks/T08/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T08/zig-global-cache --seed 0xf1f2fe2f -Z8531db9ec39efe9d test -Dtest-group=mcp -Doptimize=Debug -Dinstall-tests=true --prefix /Users/guribbong/code/ZCR-state/tasks/T08/out-red --summary all

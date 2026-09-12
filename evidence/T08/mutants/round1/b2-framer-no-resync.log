@@ -1,0 +1,5 @@
+Build Summary: 3/3 steps succeeded; 13/13 tests passed
+test success
++- run test T08-test 13 pass (13 total) 2s MaxRSS:32M
+   +- compile test T08-test Debug native success 4s MaxRSS:226M
+

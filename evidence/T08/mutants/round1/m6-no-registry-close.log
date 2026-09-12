@@ -1,0 +1,22 @@
+test
++- run test T08-test 12 pass, 1 fail (13 total)
+error: 't08_test.test.MC-004 a cancellation stops the running request of the same session only' failed:
+       expected 1, found 0
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x104fb5adf in expectEqualInner__anon_36563 (T08-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x104fe07ff in expectEqual (T08-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T08/tmp/mut-m6-no-registry-close/tests/t08_test.zig:661:5: 0x104fe08f7 in test.MC-004 a cancellation stops the running request of the same session only (T08-test)
+           try testing.expectEqual(@as(u64, 1), h.server.report().cancel_ignored);
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T08/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T08/zig-local-cache/o/73c01c7eea5b599f75e1cf93e7ade463/T08-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T08/zig-local-cache --seed=0x614c0bea --listen=-
+
+Build Summary: 1/3 steps succeeded (1 failed); 12/13 tests passed (1 failed)
+test transitive failure
++- run test T08-test 12 pass, 1 fail (13 total)
+   +- compile test T08-test Debug native success 8s MaxRSS:229M
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T08/zig-local-cache/o/fb7e68a9978aa67e44cdaa1d0070310a/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T08/tmp/mut-m6-no-registry-close /Users/guribbong/code/ZCR-state/tasks/T08/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T08/zig-global-cache --seed 0x614c0bea -Z44fb09722190e066 test -Dtest-group=mcp --summary all

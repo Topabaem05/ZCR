@@ -1,0 +1,183 @@
+{
+  "base_note": "integration after INT-007 and INT-007b (T07 merged, T08 registered with the embedded contracts/tools.json)",
+  "owned_paths": [
+    "src/protocol/mcp.zig",
+    "src/protocol/framing.zig",
+    "src/protocol/codec.zig",
+    "tests/t08_test.zig",
+    "evidence/T08/"
+  ],
+  "changed_files": [
+    "src/protocol/mcp.zig",
+    "src/protocol/framing.zig",
+    "src/protocol/codec.zig",
+    "tests/t08_test.zig",
+    "evidence/T08/*"
+  ],
+  "test_evidence": [
+    {
+      "id": "MC-001",
+      "status": "PASS",
+      "tests": 3,
+      "note": "version negotiation and explicit refusal, no second handshake, tools/list from contracts/tools.json without an output schema, every enabled tool answering with one text block"
+    },
+    {
+      "id": "MC-002",
+      "status": "PASS",
+      "tests": 4,
+      "note": "records at every chunk boundary, oversize record dropped and resynced, four concurrent writers with no interleaving, source content only inside records and never on stderr"
+    },
+    {
+      "id": "MC-003",
+      "status": "PASS",
+      "tests": 3,
+      "note": "duplicate members, depth over 64, unknown and out-of-range arguments, 16 MiB + 1 frame refused before decoding, repeated decoding inside the request budget"
+    },
+    {
+      "id": "MC-004",
+      "status": "PASS",
+      "tests": 2,
+      "note": "a running request cancelled from a second connection of the same session while another session's cancellation of the same id is ignored; 16 records of 64 KiB through a pipe with a slow reader"
+    },
+    {
+      "id": "T08 protocol contracts",
+      "status": "PASS",
+      "tests": 1
+    },
+    {
+      "runs": [
+        {
+          "label": "red",
+          "optimize": "Debug",
+          "source_commit": "f0ceb3125b00d9887b2900f0de92974845b3b43c",
+          "exit_code": 1,
+          "summary": "Build Summary: 2/4 steps succeeded (1 failed); 1/13 tests passed (11 failed, 1 crashed)",
+          "installed_test_binaries_sha256": {
+            "T08-test": "c6482114c3abe8adf8bb3b98e6fff05a6c4afac304e3466e1565839aa491c6ae"
+          }
+        },
+        {
+          "label": "green-mcp-debug",
+          "optimize": "Debug",
+          "source_commit": "7333688f806128fccddaab31fcb4157cc367c47e",
+          "exit_code": 0,
+          "summary": "Build Summary: 4/4 steps succeeded; 13/13 tests passed",
+          "installed_test_binaries_sha256": {
+            "T08-test": "ca7f35a332c64ab19d758a2ab9479704599235332aa93c69c5997434a4822b2a"
+          }
+        },
+        {
+          "label": "green-mcp-releasesafe",
+          "optimize": "ReleaseSafe",
+          "source_commit": "7333688f806128fccddaab31fcb4157cc367c47e",
+          "exit_code": 0,
+          "summary": "Build Summary: 4/4 steps succeeded; 13/13 tests passed",
+          "installed_test_binaries_sha256": {
+            "T08-test": "8b2aa430c6c59c239860d0be5767869043e24bb56476b14d196ba9cdc4ad6bdb"
+          }
+        },
+        {
+          "label": "regression-all-debug",
+          "optimize": "Debug",
+          "source_commit": "7333688f806128fccddaab31fcb4157cc367c47e",
+          "exit_code": 0,
+          "summary": "Build Summary: 32/32 steps succeeded; 116/116 tests passed",
+          "installed_test_binaries_sha256": {
+            "T00-test": "98d24cb89ea22d9446d1be851a320e782f4ccddf4f17de1316923c1e607cddae",
+            "T01-test": "6a198b9922ca5602b3c6316be8a565aebf3961d3e5700259ba3d57d5c3a863a1",
+            "T02-test": "0d148e68e16331d4fd6c499295aed2ce4213db15aef733069e2cdac650bcaac0",
+            "T03-test": "c24536924aa4204f9ac83e7562a7f87b23c3cfa80582ffa92751069414bd7d8d",
+            "T04-test": "cc8912224199fc85e34f7e7e6638c5ce15369ff5729710c9f9a24119cb923f15",
+            "T05-test": "1d3b78ea8abc16f01189710cbedadfbb5fc47ecdad335fc18b64b35e3d3ad507",
+            "T06-test": "67194377b49a4063c19f32e515f35af118eb880249f1b1b057cd5d0b286b48f5",
+            "T07-test": "28392e48b0431e270fbb3a4f9869033a86724f89b530b75c3448b09fe991e4a8",
+            "T08-test": "ca7f35a332c64ab19d758a2ab9479704599235332aa93c69c5997434a4822b2a"
+          }
+        },
+        {
+          "label": "verify-contracts",
+          "optimize": "Debug",
+          "source_commit": "7333688f806128fccddaab31fcb4157cc367c47e",
+          "exit_code": 0,
+          "summary": "Build Summary: 3/3 steps succeeded",
+          "installed_test_binaries_sha256": {}
+        }
+      ]
+    }
+  ],
+  "test_changes_after_red": [
+    "framing resync after an oversize record that arrives in chunks (mutant b2-framer-no-resync)",
+    "another session cancelling the same request id while it is in flight (mutant m5b-cancel-any-session)",
+    "empty and over-long path arguments (mutant c6-no-string-length, which still survives as redundant)"
+  ],
+  "semantics": {
+    "framing": "a record is one JSON document plus a newline; input may arrive in any chunking; a record past the caller's buffer or the 16 MiB raw frame limit is dropped as too_large and framing resyncs at the next newline; a blank line is not a record; a trailing CR is trimmed",
+    "writing": "one lock per record covers the record and its newline, so records from concurrent jobs never interleave; a slow reader blocks the writer instead of mixing or dropping bytes; a record containing a newline is refused",
+    "decoding": "UTF-8 and nesting depth are checked over the raw bytes before the parser runs; duplicate members, a missing or wrong jsonrpc, a bad id type, over-long methods and ids and trailing bytes are JSON-RPC errors; params are captured raw and decoded once the method is known",
+    "arguments": "decoded against contracts/tools.json; unknown fields, wrong types, numbers outside the schema range, missing required fields and more than 32 batch items are tool errors with E_INVALID_ARGUMENT, because the request itself was well formed",
+    "handshake": "only 2025-11-25 is accepted and any other version is refused by name; a second initialize is -32600; tools/list and tools/call before initialize are -32600",
+    "discovery": "only enabled tools are advertised, taken from the embedded contract with outputSchema removed; patch and create stay disabled until T12; an unknown or disabled tool is a tool error with E_UNSUPPORTED",
+    "execution": "every call authorizes through I01, reserves through I02 before allocating, registers itself in the Registry, and runs I03-I06 with that cancellation; the result is the T07 logical response in one text block, with isError set for failures",
+    "cancellation": "notifications/cancelled reaches only an in-flight request of the same session; anything else is counted as cancel_ignored and ignored",
+    "memory": "one arena per request bounded by Caps.request_bytes, plus a fixed logical-response buffer and a fixed record buffer; a call's output budget is capped at Caps.output_bytes"
+  },
+  "exports": [
+    "zcr_mcp (src/protocol/mcp.zig): protocol_version, server_name, server_version, output_profile, tools_json, Tools, Caps, Report, Registry, Dependencies, Server{init, deinit, serveFrame (core.ServeFrameFn), report}",
+    "zcr_mcp.framing: max_frame_bytes, Framer{init, next, pending, records, oversize}, Writer{init, writeRecord, records, bytes}",
+    "zcr_mcp.codec: Id, Method, Tool, Args, Request, Fault, Decoded, decode, encodeResult, encodeToolResult, encodeError, encodeEnvelope, toolResultBytes, max_depth, rpc_* codes"
+  ],
+  "limitations": [
+    "serveFrame serves one record at a time on the calling task; a reader loop, per-session queues and concurrent tool execution belong to T09",
+    "the zcr mcp CLI is not wired up: src/main.zig is integrator-owned and still exits EX_UNAVAILABLE, so no end-to-end host transcript was produced (G07 stays open)",
+    "server_version is a constant in this module; the integrator owns the real build version through build_options",
+    "status returns a fixed read_only snapshot and no receipt lookup (T11/T12), and health reports pressure normal with the budget's own counters",
+    "deadline_ms is decoded and carried but not enforced; a deadline must be expressed through cancellation (same gap as T04 and T07)",
+    "structured_compat, resources, prompts, progress notifications and tools/list pagination are not implemented",
+    "one text block per result is built in a fixed buffer, so a call's output is capped by Caps.output_bytes (256 KiB by default) even when the request asks for more",
+    "the 16 MiB frame limit test allocates one oversize frame in the test process; no host actually sent it",
+    "Linux and Intel macOS are cross-compiled only"
+  ],
+  "interface_change_proposals": [
+    {
+      "target": "src/main.zig and build.zig (integrator)",
+      "issue": "zcr mcp --standalone --policy has no runtime; the module is not reachable from the CLI",
+      "needs": "integrator wires the reader loop and policy binding, or assigns it to T09"
+    },
+    {
+      "target": "core.ServeFrameFn (I18)",
+      "issue": "no Cancel parameter and no way to return several records for one frame",
+      "needs": "integrator decision; T08 keeps cancellation in a session registry"
+    },
+    {
+      "target": "contracts/tools.json",
+      "issue": "zcr_read has no max_stale_ms while files and search do, and no tool declares an output profile",
+      "needs": "integrator to confirm both are intentional"
+    },
+    {
+      "target": "tests/catalog.json",
+      "issue": "MC-001..MC-004 execution_status still not_run",
+      "needs": "integrator update after re-test"
+    }
+  ],
+  "remaining_gates": [
+    "integrator re-test of task-t08 on integration",
+    "G07 host transcript and output profile evidence (T23)",
+    "MANIFEST.sha256 AGENTS.md mismatch (T01) open",
+    "E_MANIFEST_UNBOUND decision open",
+    "read cost estimate proposal (T04) open",
+    "core.Coverage filters proposal (T05) open",
+    "SearchSpec output_bytes/deadline proposal (T06) open",
+    "I06 Cancel and batch admission sizing proposals (T07) open"
+  ],
+  "host_note": "the data volume fell to 318 MiB free during the S04 runs; T08 build caches were deleted afterwards (rebuildable) and ZCR-state went back to 573 MiB",
+  "schema_version": "zcr-handoff/1",
+  "state": "completed",
+  "task_id": "T08",
+  "step": "S06",
+  "base_commit": "9333441",
+  "head_commit": "7333688f806128fccddaab31fcb4157cc367c47e",
+  "head_commit_note": "source commit of GREEN evidence; evidence files follow in the S06 commit",
+  "contract_digest": "8aa53314410fe471f0e070c522766684286f60e1ad4d9785c292bb709ea370a4",
+  "source_tree_digest": "600795a0cd5e51eb99a08a711c0a350caa15173e",
+  "binary_sha256": "ca7f35a332c64ab19d758a2ab9479704599235332aa93c69c5997434a4822b2a"
+}

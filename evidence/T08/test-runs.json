@@ -1,0 +1,322 @@
+{
+  "schema_version": "zcr-t08-test-runs/0",
+  "task_id": "T08",
+  "state_dir": "$STATE=/Users/guribbong/code/ZCR-state/tasks/T08",
+  "runs": [
+    {
+      "label": "red",
+      "optimize": "Debug",
+      "source_commit": "f0ceb3125b00d9887b2900f0de92974845b3b43c",
+      "source_tree": "1fcb80e594961faefee607b8e068fe4ffede67e1",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build test -Dtest-group=mcp -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-red --summary all",
+      "exit_code": 1,
+      "summary": "Build Summary: 2/4 steps succeeded (1 failed); 1/13 tests passed (11 failed, 1 crashed)",
+      "installed_test_binaries_sha256": {
+        "T08-test": "c6482114c3abe8adf8bb3b98e6fff05a6c4afac304e3466e1565839aa491c6ae"
+      },
+      "log": "logs/red.log",
+      "log_sha256": "d94a07aa64b6ff2bf22ab25a4a8988dff36eca24dcb6d20bfd2793305575c0eb"
+    },
+    {
+      "label": "green-mcp-debug",
+      "optimize": "Debug",
+      "source_commit": "7333688f806128fccddaab31fcb4157cc367c47e",
+      "source_tree": "600795a0cd5e51eb99a08a711c0a350caa15173e",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build test -Dtest-group=mcp -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-green-mcp-debug --summary all",
+      "exit_code": 0,
+      "summary": "Build Summary: 4/4 steps succeeded; 13/13 tests passed",
+      "installed_test_binaries_sha256": {
+        "T08-test": "ca7f35a332c64ab19d758a2ab9479704599235332aa93c69c5997434a4822b2a"
+      },
+      "log": "logs/green-mcp-debug.log",
+      "log_sha256": "fd1242a40cc02231495bf4b9e92622e202ddeb9b8a7249e153a3f0df45242901"
+    },
+    {
+      "label": "green-mcp-releasesafe",
+      "optimize": "ReleaseSafe",
+      "source_commit": "7333688f806128fccddaab31fcb4157cc367c47e",
+      "source_tree": "600795a0cd5e51eb99a08a711c0a350caa15173e",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build test -Dtest-group=mcp -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix $STATE/out-green-mcp-releasesafe --summary all",
+      "exit_code": 0,
+      "summary": "Build Summary: 4/4 steps succeeded; 13/13 tests passed",
+      "installed_test_binaries_sha256": {
+        "T08-test": "8b2aa430c6c59c239860d0be5767869043e24bb56476b14d196ba9cdc4ad6bdb"
+      },
+      "log": "logs/green-mcp-releasesafe.log",
+      "log_sha256": "b1f3e056b72eee4a060cdcec21fee9a9d8daa8a73c84d032a5db5977e1652b03"
+    },
+    {
+      "label": "regression-all-debug",
+      "optimize": "Debug",
+      "source_commit": "7333688f806128fccddaab31fcb4157cc367c47e",
+      "source_tree": "600795a0cd5e51eb99a08a711c0a350caa15173e",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build test -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-regression-all-debug --summary all",
+      "exit_code": 0,
+      "summary": "Build Summary: 32/32 steps succeeded; 116/116 tests passed",
+      "installed_test_binaries_sha256": {
+        "T00-test": "98d24cb89ea22d9446d1be851a320e782f4ccddf4f17de1316923c1e607cddae",
+        "T01-test": "6a198b9922ca5602b3c6316be8a565aebf3961d3e5700259ba3d57d5c3a863a1",
+        "T02-test": "0d148e68e16331d4fd6c499295aed2ce4213db15aef733069e2cdac650bcaac0",
+        "T03-test": "c24536924aa4204f9ac83e7562a7f87b23c3cfa80582ffa92751069414bd7d8d",
+        "T04-test": "cc8912224199fc85e34f7e7e6638c5ce15369ff5729710c9f9a24119cb923f15",
+        "T05-test": "1d3b78ea8abc16f01189710cbedadfbb5fc47ecdad335fc18b64b35e3d3ad507",
+        "T06-test": "67194377b49a4063c19f32e515f35af118eb880249f1b1b057cd5d0b286b48f5",
+        "T07-test": "28392e48b0431e270fbb3a4f9869033a86724f89b530b75c3448b09fe991e4a8",
+        "T08-test": "ca7f35a332c64ab19d758a2ab9479704599235332aa93c69c5997434a4822b2a"
+      },
+      "log": "logs/regression-all-debug.log",
+      "log_sha256": "8c369826538075b69072457fbdf40bf4f43220d24b570ec31fea6cb9cd4e6dbf"
+    },
+    {
+      "label": "verify-contracts",
+      "optimize": "Debug",
+      "source_commit": "7333688f806128fccddaab31fcb4157cc367c47e",
+      "source_tree": "600795a0cd5e51eb99a08a711c0a350caa15173e",
+      "worktree_dirty_bytes": 0,
+      "command": "zig build verify-contracts -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-verify-contracts --summary all",
+      "exit_code": 0,
+      "summary": "Build Summary: 3/3 steps succeeded",
+      "installed_test_binaries_sha256": {},
+      "log": "logs/verify-contracts.log",
+      "log_sha256": "32d098a5cfb715ba9a79deb74aadd2927c72f32ae3e28e0d1053b7e32c634e65"
+    }
+  ],
+  "mutation_checks": {
+    "round1": [
+      {
+        "log": "mutants/round1/b1-framer-keeps-overlong.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 12/13 tests passed (1 crashed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "MC-002 a record larger than the buffer is dropped and framing resyncs"
+        ]
+      },
+      {
+        "log": "mutants/round1/b2-framer-no-resync.log",
+        "summary": "Build Summary: 3/3 steps succeeded; 13/13 tests passed",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": []
+      },
+      {
+        "log": "mutants/round1/b3-writer-no-lock.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 12/13 tests passed (1 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "MC-002 concurrent writers keep one record per line and never interleave"
+        ]
+      },
+      {
+        "log": "mutants/round1/b4-writer-record-separator.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 10/13 tests passed (3 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "MC-002 concurrent writers keep one record per line and never interleave",
+          "MC-002 source content only reaches stdout inside a record, and never stderr",
+          "MC-004 a slow reader applies backpressure without deadlocking the writer"
+        ]
+      },
+      {
+        "log": "mutants/round1/c1-no-depth-check.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 12/13 tests passed (1 crashed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "MC-003 duplicate keys, deep JSON, unknown fields and bad numbers are refused early"
+        ]
+      },
+      {
+        "log": "mutants/round1/c2-no-duplicate-member.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 12/13 tests passed (1 crashed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "MC-003 duplicate keys, deep JSON, unknown fields and bad numbers are refused early"
+        ]
+      },
+      {
+        "log": "mutants/round1/c3-no-jsonrpc-check.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 12/13 tests passed (1 crashed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "MC-003 duplicate keys, deep JSON, unknown fields and bad numbers are refused early"
+        ]
+      },
+      {
+        "log": "mutants/round1/c4-no-unknown-argument.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 12/13 tests passed (1 crashed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "MC-001 tools/list advertises only enabled contract tools and no output schema"
+        ]
+      },
+      {
+        "log": "mutants/round1/c5-no-integer-range.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 12/13 tests passed (1 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "MC-003 duplicate keys, deep JSON, unknown fields and bad numbers are refused early"
+        ]
+      },
+      {
+        "log": "mutants/round1/c6-no-string-length.log",
+        "summary": "Build Summary: 3/3 steps succeeded; 13/13 tests passed",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": []
+      },
+      {
+        "log": "mutants/round1/m1-no-initialized-gate.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 12/13 tests passed (1 crashed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "MC-001 initialize negotiates the supported version and refuses others explicitly"
+        ]
+      },
+      {
+        "log": "mutants/round1/m2-any-protocol-version.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 12/13 tests passed (1 crashed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "MC-001 initialize negotiates the supported version and refuses others explicitly"
+        ]
+      },
+      {
+        "log": "mutants/round1/m3-second-initialize-ok.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 12/13 tests passed (1 crashed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "MC-001 initialize negotiates the supported version and refuses others explicitly"
+        ]
+      },
+      {
+        "log": "mutants/round1/m4-advertise-disabled.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 12/13 tests passed (1 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "MC-001 tools/list advertises only enabled contract tools and no output schema"
+        ]
+      },
+      {
+        "log": "mutants/round1/m5-cancel-any-session.log",
+        "summary": "Build Summary: 0/3 steps succeeded (1 failed)",
+        "compile_cached": false,
+        "compile_error": true,
+        "failed_tests": []
+      },
+      {
+        "log": "mutants/round1/m6-no-registry-close.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 12/13 tests passed (1 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "MC-004 a cancellation stops the running request of the same session only"
+        ]
+      },
+      {
+        "log": "mutants/round1/m7-arguments-as-rpc-error.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 12/13 tests passed (1 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "MC-003 duplicate keys, deep JSON, unknown fields and bad numbers are refused early"
+        ]
+      },
+      {
+        "log": "mutants/round1/m8-cancel-not-counted.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 12/13 tests passed (1 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "MC-004 a cancellation stops the running request of the same session only"
+        ]
+      },
+      {
+        "log": "mutants/round1/m9-tool-enabled-ignored.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 12/13 tests passed (1 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "MC-001 tools/list advertises only enabled contract tools and no output schema"
+        ]
+      }
+    ],
+    "round2": [
+      {
+        "log": "mutants/round2/b2-framer-no-resync.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 12/13 tests passed (1 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "MC-002 a record larger than the buffer is dropped and framing resyncs"
+        ]
+      },
+      {
+        "log": "mutants/round2/c6-no-string-length.log",
+        "summary": "Build Summary: 3/3 steps succeeded; 13/13 tests passed",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": []
+      },
+      {
+        "log": "mutants/round2/m5b-cancel-any-session.log",
+        "summary": "Build Summary: 1/3 steps succeeded (1 failed); 12/13 tests passed (1 failed)",
+        "compile_cached": false,
+        "compile_error": false,
+        "failed_tests": [
+          "MC-004 a cancellation stops the running request of the same session only"
+        ]
+      }
+    ],
+    "round1_survivors": [
+      "mutants/round1/b2-framer-no-resync.log",
+      "mutants/round1/c6-no-string-length.log"
+    ],
+    "round2_survivors": [
+      "mutants/round2/c6-no-string-length.log"
+    ],
+    "round1_not_compiled": [
+      "mutants/round1/m5-cancel-any-session.log"
+    ],
+    "round2_not_compiled": [],
+    "notes": [
+      "round 1 ran every mutant against the test file of the S03 implementation before the S03 test additions",
+      "round 2 ran the two round-1 survivors and a compiling replacement for m5, against the final test file; b2 and c6 were rerun with a fresh Zig cache because a first attempt reused a cached test binary",
+      "b2-framer-no-resync survived round 1 because the oversize record arrived in one chunk; the new test feeds it in 64-byte chunks and checks that the next record still arrives",
+      "m5-cancel-any-session did not compile (unused parameter) and was replaced by m5b, which survived until the test made another session cancel the same request id while it was in flight",
+      "c6-no-string-length still survives: the argument length check is redundant with the path, literal and item-id checks below it, and both paths report E_INVALID_ARGUMENT; it is kept because it refuses before any authorization I/O",
+      "an earlier shell version of the mutation driver reported every mutant as passing with a cached test compile because its substitutions never matched; it was replaced by mutants.py, which fails when a substitution does not match exactly once"
+    ]
+  },
+  "cross_compile_only": [
+    {
+      "target": "x86_64-linux-musl",
+      "exit_code": 0,
+      "log": "logs/s03-compile-x86_64-linux-musl.log"
+    },
+    {
+      "target": "aarch64-linux-musl",
+      "exit_code": 0,
+      "log": "logs/s03-compile-aarch64-linux-musl.log"
+    },
+    {
+      "target": "x86_64-macos",
+      "exit_code": 0,
+      "log": "logs/s03-compile-x86_64-macos.log"
+    }
+  ]
+}
