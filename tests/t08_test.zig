@@ -361,6 +361,28 @@ test "MC-002 a record larger than the buffer is dropped and framing resyncs" {
     try testing.expectEqualStrings("{\"b\":1}", second.record);
     try testing.expectEqual(@as(u64, 1), framer.oversize);
     try testing.expectEqual(@as(u64, 1), framer.records);
+
+    // The same stream in small chunks: the oversize record is dropped while it
+    // arrives, and framing resyncs on the record after it.
+    var chunked = framing.Framer.init(&buffer);
+    var seen_oversize: u64 = 0;
+    var seen_records: usize = 0;
+    var offset: usize = 0;
+    while (offset < stream.len) {
+        const end = @min(offset + 64, stream.len);
+        var part: []const u8 = stream[offset..end];
+        while (chunked.next(&part)) |item| switch (item) {
+            .too_large => |count| seen_oversize = count,
+            .record => |record| {
+                try testing.expectEqualStrings("{\"b\":1}", record);
+                seen_records += 1;
+            },
+        };
+        offset = end;
+    }
+    try testing.expectEqual(@as(u64, 1), seen_oversize);
+    try testing.expectEqual(@as(usize, 1), seen_records);
+    try testing.expectEqual(@as(u64, 1), chunked.records);
 }
 
 const Chorus = struct {
@@ -449,19 +471,31 @@ test "MC-003 duplicate keys, deep JSON, unknown fields and bad numbers are refus
     );
     try testing.expectEqual(@as(i64, codec.rpc_invalid_request), Harness.errorCode(duplicate));
 
-    const deep = try h.arena.alloc(u8, 0);
-    _ = deep;
+    // Depth is counted over the raw bytes, so a deep record is refused before the
+    // parser runs and never reaches tool argument decoding.
     var nested: std.ArrayList(u8) = .empty;
     try nested.appendSlice(h.arena,
-        \\{"jsonrpc":"2.0","id":2,"method":"tools/call","params":
+        \\{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"zcr_read","arguments":{"path":
     );
     for (0..codec.max_depth + 2) |_| try nested.append(h.arena, '[');
     for (0..codec.max_depth + 2) |_| try nested.append(h.arena, ']');
-    try nested.append(h.arena, '}');
+    try nested.appendSlice(h.arena, "}}}");
     const too_deep = try h.call(nested.items);
-    try testing.expect(Harness.errorCode(too_deep) == codec.rpc_invalid_request or Harness.errorCode(too_deep) == codec.rpc_invalid_params);
+    try testing.expectEqual(@as(i64, codec.rpc_invalid_request), Harness.errorCode(too_deep));
+    try testing.expect(std.mem.indexOf(u8, too_deep.object.get("error").?.object.get("message").?.string, "nesting") != null);
 
-    const broken = try h.call("{\"jsonrpc\":\"2.0\",\"id\":3,\"method\":");
+    // One level below the limit is decoded normally and fails as a tool argument error.
+    var shallow: std.ArrayList(u8) = .empty;
+    try shallow.appendSlice(h.arena,
+        \\{"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"zcr_read","arguments":{"path":
+    );
+    for (0..codec.max_depth - 4) |_| try shallow.append(h.arena, '[');
+    for (0..codec.max_depth - 4) |_| try shallow.append(h.arena, ']');
+    try shallow.appendSlice(h.arena, "}}}");
+    const near_limit = try h.call(shallow.items);
+    try testing.expect(Harness.isError(near_limit));
+
+    const broken = try h.call("{\"jsonrpc\":\"2.0\",\"id\":9,\"method\":");
     try testing.expectEqual(@as(i64, codec.rpc_parse_error), Harness.errorCode(broken));
     const not_json = try h.call("hello");
     try testing.expectEqual(@as(i64, codec.rpc_parse_error), Harness.errorCode(not_json));
@@ -501,6 +535,9 @@ test "MC-003 duplicate keys, deep JSON, unknown fields and bad numbers are refus
         \\{"path":"../outside.txt"}
         , .code = "E_PATH_ESCAPE" },
         .{ .args =
+        \\{"path":""}
+        , .code = "E_INVALID_ARGUMENT" },
+        .{ .args =
         \\{"path":"a.txt","consistency":"bounded_stale"}
         , .code = "E_UNSUPPORTED" },
     };
@@ -511,6 +548,13 @@ test "MC-003 duplicate keys, deep JSON, unknown fields and bad numbers are refus
         try testing.expectEqualStrings(c.code, envelope.object.get("error").?.object.get("code").?.string);
         try testing.expect(!envelope.object.get("ok").?.bool);
     }
+    // A path longer than the schema allows is refused by length, before any lookup.
+    const long_path = try h.arena.alloc(u8, 5000);
+    @memset(long_path, 'p');
+    const long = try h.call(try toolCall(h.arena, 150, "zcr_read", try std.fmt.allocPrint(h.arena, "{{\"path\":\"{s}\"}}", .{long_path})));
+    try testing.expect(Harness.isError(long));
+    try testing.expectEqualStrings("E_INVALID_ARGUMENT", (try h.toolText(long)).object.get("error").?.object.get("code").?.string);
+
     const unknown_tool = try h.call(try toolCall(h.arena, 200, "zcr_teleport", "{}"));
     try testing.expect(Harness.isError(unknown_tool));
 
@@ -587,10 +631,13 @@ const Interrupter = struct {
         while (!self.cancelled.load(.acquire)) std.atomic.spinLoopHint();
     }
 
-    /// Serves the cancellation from a second connection of the same session.
-    fn cancel(self: *Interrupter, other: *mcp.Server, record: []const u8) void {
+    /// While the search runs, another session's cancellation must be ignored and the
+    /// same session's cancellation must reach it.
+    fn cancel(self: *Interrupter, stranger: *mcp.Server, other: *mcp.Server, record: []const u8) void {
         while (!self.inside.load(.acquire)) std.atomic.spinLoopHint();
         var connection: core.Connection = .{ .context = self };
+        const ignored = stranger.serveFrame(io, &connection, .{ .bytes = record, .limit = framing.max_frame_bytes }) catch unreachable;
+        std.debug.assert(ignored.bytes.len == 0);
         const result = other.serveFrame(io, &connection, .{ .bytes = record, .limit = framing.max_frame_bytes }) catch unreachable;
         std.debug.assert(result.bytes.len == 0);
         self.cancelled.store(true, .release);
@@ -618,16 +665,8 @@ test "MC-004 a cancellation stops the running request of the same session only" 
     h.searcher.fault = &fault;
     defer h.searcher.fault = null;
 
-    // Another session cannot cancel this request.
-    var stranger_connection: core.Connection = .{ .context = h };
-    const ignored = try stranger.serveFrame(io, &stranger_connection, .{ .bytes =
-        \\{"jsonrpc":"2.0","method":"notifications/cancelled","params":{"requestId":40,"reason":"stop"}}
-    , .limit = framing.max_frame_bytes });
-    try testing.expectEqual(@as(usize, 0), ignored.bytes.len);
-    try testing.expectEqual(@as(u64, 1), stranger.report().cancel_ignored);
-
     var group: Io.Group = .init;
-    group.async(io, Interrupter.cancel, .{ &interrupter, &other,
+    group.async(io, Interrupter.cancel, .{ &interrupter, &stranger, &other,
         \\{"jsonrpc":"2.0","method":"notifications/cancelled","params":{"requestId":40,"reason":"stop"}}
     });
     const response = try h.call(try toolCall(h.arena, 40, "zcr_search",
@@ -639,6 +678,10 @@ test "MC-004 a cancellation stops the running request of the same session only" 
     const envelope = try h.toolText(response);
     try testing.expectEqualStrings("E_CANCELLED", envelope.object.get("error").?.object.get("code").?.string);
     try testing.expectEqual(@as(u64, 1), h.server.report().cancelled);
+    // The other session named the same id while the request was in flight, and was
+    // ignored because the session differs.
+    try testing.expectEqual(@as(u64, 1), stranger.report().cancel_ignored);
+    try testing.expectEqual(@as(u64, 0), other.report().cancel_ignored);
 
     // The registry is empty again and a later cancellation for the same id is ignored.
     var connection: core.Connection = .{ .context = h };
