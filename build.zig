@@ -203,6 +203,8 @@ pub fn build(b: *std.Build) void {
             .{ .name = "zcr_projection", .module = projection_module },
         },
     });
+    // The MCP adapter advertises exactly the contract tools, so it embeds the contract.
+    mcp_module.addAnonymousImport("tools_json", .{ .root_source_file = b.path("contracts/tools.json") });
     // A tool is installed once its owning task has delivered the source file.
     if (sourceExists(b, "tools/dev/guard.zig")) {
         b.installArtifact(b.addExecutable(.{ .name = "zcr-dev-guard", .root_module = guard_module }));
