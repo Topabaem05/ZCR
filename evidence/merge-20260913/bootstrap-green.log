@@ -1,0 +1,10 @@
+test_plain_python_launch_does_not_write_into_source (test_native_bootstrap.BootstrapTests.test_plain_python_launch_does_not_write_into_source) ... ok
+test_bound_exhaustion_is_a_capture_failure (test_storage_capture.CaptureTests.test_bound_exhaustion_is_a_capture_failure) ... ok
+test_does_not_follow_replaced_repository_parent (test_storage_capture.CaptureTests.test_does_not_follow_replaced_repository_parent) ... ok
+test_missing_fixtures_never_claim_execution (test_storage_capture.CaptureTests.test_missing_fixtures_never_claim_execution) ... ok
+test_retains_raw_evidence_without_source_or_special_files (test_storage_capture.CaptureTests.test_retains_raw_evidence_without_source_or_special_files) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.069s
+
+OK

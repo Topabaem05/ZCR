@@ -8,7 +8,7 @@ pre{background:#f3f6f7;color:#243c49;border:1px solid #e3eaec;padding:18px;borde
 table{width:100%;border-collapse:collapse;margin:20px 0;font-size:12px;line-height:1.65;display:block;overflow-x:auto}thead{background:#e9f2f0}th,td{text-align:left;vertical-align:top;border-bottom:1px solid var(--rule);padding:10px 11px;min-width:85px}th{color:#17493f;font-weight:700}tr:nth-child(even) td{background:#fafcfc}.diagram{margin:24px 0;padding:12px;background:#fbfdfc;overflow:auto;border:1px solid #e2eae7;border-radius:5px}.diagram svg{width:100%;height:auto;min-width:600px;max-height:1500px}footer{font-size:12px;color:var(--muted);padding-top:30px}
 @media(max-width:1000px){nav{position:relative;width:auto;max-height:320px}main{margin:0;padding:28px 22px}.hero h1{font-size:32px}.diagram svg{min-width:520px}}
 @media print{nav{display:none}main{margin:0;padding:0;max-width:none}.hero h1{font-size:28px}.doc{break-before:page;padding-top:10px}h1,h2,h3{break-after:avoid}pre{white-space:pre-wrap;overflow-wrap:anywhere}table{display:table;font-size:9px}th,td{min-width:0;padding:5px}.diagram{break-inside:avoid;border:0}.diagram svg{min-width:0;max-height:820px}a{color:inherit;text-decoration:none}}
-</style></head><body><nav><div class="brand">ZCR / DESIGN</div><div class="sub">Zig 0.16.0 · 2026-09-12<br>설계 · 구현 · 검증 진행 중</div><a href="#doc-README-md" class="main">ZCR · Zig Code Runtime</a><a href="#doc-docs-00-Executive-Brief-md" class="main">00 · 설계 요약과 판단 기준</a><a href="#doc-docs-01-Requirements-and-Traceability-md" class="main">01 · 요구사항과 추적성</a><a href="#doc-docs-02-SDD-md" class="main">02 · Software Design Description (SDD)</a><a href="#doc-docs-03-C4-Architecture-md" class="main">03 · C4 아키텍처</a><a href="#doc-docs-04-Apple-Silicon-Scheduling-md" class="main">04 · Apple Silicon 코어·스레드·에너지 설계</a><a href="#doc-docs-05-Memory-and-Pressure-md" class="main">05 · 메모리 예산·할당·압력 대응</a><a href="#doc-docs-06-Worktree-and-Task-Isolation-md" class="main">06 · Git worktree·동시 task·개발 오염 방지</a><a href="#doc-docs-07-Pipelines-and-Consistency-md" class="main">07 · 실행 파이프라인과 현재성 계약</a><a href="#doc-docs-08-API-and-MCP-md" class="main">08 · API · MCP 계약</a><a href="#doc-docs-09-Storage-Search-and-Edit-md" class="main">09 · 파일 엔진 · 검색 · 편집 저장 계약</a><a href="#doc-docs-10-Portability-x86-md" class="main">10 · x86 및 다른 운영체제의 작동 구성</a><a href="#doc-docs-11-Security-and-Failure-Recovery-md" class="main">11 · 보안 · 실패 · 복구</a><a href="#doc-docs-12-Performance-and-Test-Plan-md" class="main">12 · 성능 목표 · 구현 테스트 · 증거 계약</a><a href="#doc-docs-13-Implementation-Roadmap-md" class="main">13 · 구현 로드맵 · task/step 격리</a><a href="#doc-docs-14-Integration-and-Operations-md" class="main">14 · Codex/Claude 통합 · 운영</a><a href="#doc-docs-15-ADR-md" class="main">15 · Architecture Decision Records</a><a href="#doc-docs-16-Evidence-and-Open-Gates-md" class="main">16 · 외부 근거 · 아직 통과하지 않은 게이트</a><a href="#doc-docs-17-Data-Model-and-Interfaces-md" class="main">17 · 모듈 경계 · 데이터 모델 · 인터페이스</a><a href="#doc-docs-superpowers-plans-2026-09-12-runtime-continuation-md" class="main">ZCR Runtime Continuation Implementation Plan</a><a href="#doc-AGENTS-md" class="main">ZCR 구현 에이전트 규칙</a><a href="#doc-tasks-INDEX-md" class="main">구현 Task 인덱스</a><a href="#doc-tasks-T00-md" class="task">T00 · 측정 기준선과 플랫폼 spike Implementation Plan</a><a href="#doc-tasks-T01-md" class="task">T01 · 계약·build runner·개발 scope 기준선 Implementation Plan</a><a href="#doc-tasks-T02-md" class="task">T02 · Capability·경로·개발 소유권 guard Implementation Plan</a><a href="#doc-tasks-T03-md" class="task">T03 · 예산 allocator와 admission Implementation Plan</a><a href="#doc-tasks-T04-md" class="task">T04 · 정확하고 제한된 범위 Read Implementation Plan</a><a href="#doc-tasks-T05-md" class="task">T05 · Git-aware 탐색과 ignore Implementation Plan</a><a href="#doc-tasks-T06-md" class="task">T06 · Scalar literal 검색과 문맥 투영 Implementation Plan</a><a href="#doc-tasks-T07-md" class="task">T07 · Batch read와 공통 output projection Implementation Plan</a><a href="#doc-tasks-T08-md" class="task">T08 · Direct stdio MCP adapter Implementation Plan</a><a href="#doc-tasks-T09-md" class="task">T09 · Bounded scheduler와 Darwin GCD Implementation Plan</a><a href="#doc-tasks-T10-md" class="task">T10 · Workspace identity와 writer lease Implementation Plan</a><a href="#doc-tasks-T11-md" class="task">T11 · 단일파일 atomic patch/create Implementation Plan</a><a href="#doc-tasks-T12-md" class="task">T12 · Journal·crash recovery·idempotency Implementation Plan</a><a href="#doc-tasks-T13-md" class="task">T13 · Immutable content·line cache Implementation Plan</a><a href="#doc-tasks-T14-md" class="task">T14 · Watcher invalidation와 live fallback Implementation Plan</a><a href="#doc-tasks-T15-md" class="task">T15 · 명시적 broker와 다중세션 budget Implementation Plan</a><a href="#doc-tasks-T16-md" class="task">T16 · Pressure·thermal·LLM 공존 governor Implementation Plan</a><a href="#doc-tasks-T17-md" class="task">T17 · Linux x86-64 backend Implementation Plan</a><a href="#doc-tasks-T18-md" class="task">T18 · Windows 확장 — 선택 Implementation Plan</a><a href="#doc-tasks-T19-md" class="task">T19 · ARM64/x86 SIMD 선택 가속 Implementation Plan</a><a href="#doc-tasks-T20-md" class="task">T20 · Tree-sitter outline — 선택 Implementation Plan</a><a href="#doc-tasks-T21-md" class="task">T21 · 재현 가능한 전체 벤치마크 하네스 Implementation Plan</a><a href="#doc-tasks-T22-md" class="task">T22 · Bounded telemetry와 health Implementation Plan</a><a href="#doc-tasks-T23-md" class="task">T23 · Codex/Claude 실제 라우팅 검증 Implementation Plan</a><a href="#doc-tasks-T24-md" class="task">T24 · 패키징과 실제 지원 행렬 Implementation Plan</a><a href="#doc-tasks-T25-md" class="task">T25 · 최종 통합·격리·성능 release gate Implementation Plan</a><a href="#doc-contracts-README-md" class="main">계약 파일 사용법</a><a href="#doc-references-SOURCES-md" class="main">출처 및 검증 범위</a></nav><main><header class="hero"><div class="eyebrow">CODE AGENT RUNTIME · IMPLEMENTATION & EVIDENCE</div><h1>빠른 모델이<br>코드 도구를 기다리지 않도록.</h1><p>Apple Silicon을 우선하는 Zig native runtime의 C4·SDD, 메모리·워크트리 격리, 처리 파이프라인, x86 이식성, 구현 Task와 검증 계약.</p><div class="meta"><span><strong>26</strong> implementation tasks</span><span><strong>8</strong> core tools</span><span><strong>11</strong> architecture diagrams</span><span><strong>미실측</strong> 성능 목표</span></div></header><section id="doc-README-md" class="doc"><div class="docpath">README.md</div><h1>ZCR · Zig Code Runtime</h1>
+</style></head><body><nav><div class="brand">ZCR / DESIGN</div><div class="sub">Zig 0.16.0 · 2026-09-12<br>설계 · 구현 · 검증 진행 중</div><a href="#doc-README-md" class="main">ZCR · Zig Code Runtime</a><a href="#doc-docs-00-Executive-Brief-md" class="main">00 · 설계 요약과 판단 기준</a><a href="#doc-docs-01-Requirements-and-Traceability-md" class="main">01 · 요구사항과 추적성</a><a href="#doc-docs-02-SDD-md" class="main">02 · Software Design Description (SDD)</a><a href="#doc-docs-03-C4-Architecture-md" class="main">03 · C4 아키텍처</a><a href="#doc-docs-04-Apple-Silicon-Scheduling-md" class="main">04 · Apple Silicon 코어·스레드·에너지 설계</a><a href="#doc-docs-05-Memory-and-Pressure-md" class="main">05 · 메모리 예산·할당·압력 대응</a><a href="#doc-docs-06-Worktree-and-Task-Isolation-md" class="main">06 · Git worktree·동시 task·개발 오염 방지</a><a href="#doc-docs-07-Pipelines-and-Consistency-md" class="main">07 · 실행 파이프라인과 현재성 계약</a><a href="#doc-docs-08-API-and-MCP-md" class="main">08 · API · MCP 계약</a><a href="#doc-docs-09-Storage-Search-and-Edit-md" class="main">09 · 파일 엔진 · 검색 · 편집 저장 계약</a><a href="#doc-docs-10-Portability-x86-md" class="main">10 · x86 및 다른 운영체제의 작동 구성</a><a href="#doc-docs-11-Security-and-Failure-Recovery-md" class="main">11 · 보안 · 실패 · 복구</a><a href="#doc-docs-12-Performance-and-Test-Plan-md" class="main">12 · 성능 목표 · 구현 테스트 · 증거 계약</a><a href="#doc-docs-13-Implementation-Roadmap-md" class="main">13 · 구현 로드맵 · task/step 격리</a><a href="#doc-docs-14-Integration-and-Operations-md" class="main">14 · Codex/Claude 통합 · 운영</a><a href="#doc-docs-15-ADR-md" class="main">15 · Architecture Decision Records</a><a href="#doc-docs-16-Evidence-and-Open-Gates-md" class="main">16 · 외부 근거 · 아직 통과하지 않은 게이트</a><a href="#doc-docs-17-Data-Model-and-Interfaces-md" class="main">17 · 모듈 경계 · 데이터 모델 · 인터페이스</a><a href="#doc-docs-18-Merge-and-Remaining-Work-md" class="main">18 · 메인 병합 점검과 남은 작업</a><a href="#doc-docs-superpowers-plans-2026-09-12-runtime-continuation-md" class="main">ZCR Runtime Continuation Implementation Plan</a><a href="#doc-AGENTS-md" class="main">ZCR 구현 에이전트 규칙</a><a href="#doc-tasks-INDEX-md" class="main">구현 Task 인덱스</a><a href="#doc-tasks-T00-md" class="task">T00 · 측정 기준선과 플랫폼 spike Implementation Plan</a><a href="#doc-tasks-T01-md" class="task">T01 · 계약·build runner·개발 scope 기준선 Implementation Plan</a><a href="#doc-tasks-T02-md" class="task">T02 · Capability·경로·개발 소유권 guard Implementation Plan</a><a href="#doc-tasks-T03-md" class="task">T03 · 예산 allocator와 admission Implementation Plan</a><a href="#doc-tasks-T04-md" class="task">T04 · 정확하고 제한된 범위 Read Implementation Plan</a><a href="#doc-tasks-T05-md" class="task">T05 · Git-aware 탐색과 ignore Implementation Plan</a><a href="#doc-tasks-T06-md" class="task">T06 · Scalar literal 검색과 문맥 투영 Implementation Plan</a><a href="#doc-tasks-T07-md" class="task">T07 · Batch read와 공통 output projection Implementation Plan</a><a href="#doc-tasks-T08-md" class="task">T08 · Direct stdio MCP adapter Implementation Plan</a><a href="#doc-tasks-T09-md" class="task">T09 · Bounded scheduler와 Darwin GCD Implementation Plan</a><a href="#doc-tasks-T10-md" class="task">T10 · Workspace identity와 writer lease Implementation Plan</a><a href="#doc-tasks-T11-md" class="task">T11 · 단일파일 atomic patch/create Implementation Plan</a><a href="#doc-tasks-T12-md" class="task">T12 · Journal·crash recovery·idempotency Implementation Plan</a><a href="#doc-tasks-T13-md" class="task">T13 · Immutable content·line cache Implementation Plan</a><a href="#doc-tasks-T14-md" class="task">T14 · Watcher invalidation와 live fallback Implementation Plan</a><a href="#doc-tasks-T15-md" class="task">T15 · 명시적 broker와 다중세션 budget Implementation Plan</a><a href="#doc-tasks-T16-md" class="task">T16 · Pressure·thermal·LLM 공존 governor Implementation Plan</a><a href="#doc-tasks-T17-md" class="task">T17 · Linux x86-64 backend Implementation Plan</a><a href="#doc-tasks-T18-md" class="task">T18 · Windows 확장 — 선택 Implementation Plan</a><a href="#doc-tasks-T19-md" class="task">T19 · ARM64/x86 SIMD 선택 가속 Implementation Plan</a><a href="#doc-tasks-T20-md" class="task">T20 · Tree-sitter outline — 선택 Implementation Plan</a><a href="#doc-tasks-T21-md" class="task">T21 · 재현 가능한 전체 벤치마크 하네스 Implementation Plan</a><a href="#doc-tasks-T22-md" class="task">T22 · Bounded telemetry와 health Implementation Plan</a><a href="#doc-tasks-T23-md" class="task">T23 · Codex/Claude 실제 라우팅 검증 Implementation Plan</a><a href="#doc-tasks-T24-md" class="task">T24 · 패키징과 실제 지원 행렬 Implementation Plan</a><a href="#doc-tasks-T25-md" class="task">T25 · 최종 통합·격리·성능 release gate Implementation Plan</a><a href="#doc-contracts-README-md" class="main">계약 파일 사용법</a><a href="#doc-references-SOURCES-md" class="main">출처 및 검증 범위</a></nav><main><header class="hero"><div class="eyebrow">CODE AGENT RUNTIME · IMPLEMENTATION & EVIDENCE</div><h1>빠른 모델이<br>코드 도구를 기다리지 않도록.</h1><p>Apple Silicon을 우선하는 Zig native runtime의 C4·SDD, 메모리·워크트리 격리, 처리 파이프라인, x86 이식성, 구현 Task와 검증 계약.</p><div class="meta"><span><strong>26</strong> implementation tasks</span><span><strong>8</strong> core tools</span><span><strong>11</strong> architecture diagrams</span><span><strong>미실측</strong> 성능 목표</span></div></header><section id="doc-README-md" class="doc"><div class="docpath">README.md</div><h1>ZCR · Zig Code Runtime</h1>
 <h2>Coding agent의 파일 도구 병목을 줄이는 Zig 런타임</h2>
 <p><strong>기준일:</strong> 2026-09-12 · <strong>상태:</strong> 구현·검증 진행 중, 릴리스 게이트 미완료</p>
 <p><code>ZCR</code>은 이 문서에서 사용하는 작업명이다. 등록된 제품명·저장소명이라는 뜻은 아니다. 구현 언어는 <strong>Zig 0.16.0으로 고정</strong>한다. Apple Silicon을 우선하되 x86-64 Linux와 Intel Mac을 같은 코어 엔진으로 다룬다.</p>
@@ -58,7 +58,7 @@ table{width:100%;border-collapse:collapse;margin:20px 0;font-size:12px;line-heig
 <p><strong>전체 열람:</strong> <code>DESIGNBOOK.html</code>은 외부 스크립트·폰트·네트워크가 필요 없는 통합 열람본이다. Markdown이 수정 가능한 원본이며, <code>diagrams/</code>의 Mermaid와 DOT는 도식 원본이다.</p>
 <h3>패키지의 사용 경계</h3>
 <p>이 저장소는 API 계약, Zig 구현, 테스트, 실행 증거와 남은 작업 계획을 함께 관리한다. <a href="#doc-docs-superpowers-plans-2026-09-12-runtime-continuation-md">브랜치 조사와 후속 계획</a>, <a href="#doc-tasks-INDEX-md">작업 상태</a>, <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">상태 데이터</a>를 기준으로 이어간다. 각 증거는 해당 source commit·binary·실행 환경에만 적용된다. 과거 Mac probe나 현재 Linux 시험으로 최종 Mac 런타임, 실제 클라이언트 연동, 종단 성능 검증을 대신하지 않는다.</p>
-<p>기본 <code>main</code>은 문서 기준선이며, 이어가는 Zig 코드는 <a href="https://github.com/Topabaem05/ZCR/tree/codex/continue-runtime-20260912/src">작업 브랜치의 src</a>와 <a href="https://github.com/Topabaem05/ZCR/pull/1">Draft PR #1</a>에서 확인한다.</p>
+<p>Zig 구현은 <a data-package-file="src" title="편집 원본은 저장소에 포함">src</a>, 빌드 진입점은 <a data-package-file="build.zig" title="편집 원본은 저장소에 포함">build.zig</a>에 있다. 기존 작업 브랜치를 <code>main</code>으로 통합하는 <a href="https://github.com/Topabaem05/ZCR/pull/1">PR #1</a>과 <a href="#doc-docs-18-Merge-and-Remaining-Work-md">병합 점검·남은 작업</a>을 확인한다. 메인 통합은 개발 체크포인트이며 릴리스 완료를 뜻하지 않는다.</p>
 <p>설정·메모리·지연 수치는 <strong>초기 설계값 또는 합격 목표</strong>이지 실측 성능이 아니다. 계약 파일 검증 결과와 런타임 테스트 결과를 혼동하지 않는다.</p>
 <h3>현재 직접 stdio 실행</h3>
 <p>신뢰된 호스트는 <code>zcr workspace-id --root /absolute/dedicated-worktree</code>로 실제 파일시스템 정체성, HEAD, 계약 digest를 조회한다. 출력의 <code>workspace_id</code>, <code>base_commit</code>, <code>contract_digest</code>를 승인한 task manifest에 바인딩하고, <code>state: active</code>, 양수 <code>fence</code>, 미래 UTC <code>expires_at</code>과 필요한 읽기 범위를 지정한다. launch policy는 <code>status: approved</code>, 절대 <code>root</code>, 절대 <code>task_manifest</code> 경로를 사용한다. <code>examples/</code>의 planned 파일은 실행 권한을 부여하지 않는 작성 예시다.</p>
@@ -3681,6 +3681,191 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <p>content SHA가 같아도 authorization 없이 cache 존재 여부/bytes를 반환하지 않는다. path casefold만으로 alias를 병합하지 않는다. semantic graph를 나중에 추가하면 compiler flags, imports, lockfile/config digests, workspace context가 별도 key로 필요하다.</p>
 <h2>6. 메모리 비용 모델</h2>
 <p><code>ResourceCost</code>는 input buffer, output budget, temporary decode, full-file old/new buffers, per-worker scratch, journal staging을 합산한다. patch8MiB는 old8MiB+new8MiB만으로 끝나지 않으므로 raw JSON/decoded replacements/output까지 더한다. 스트리밍 입출력으로 낮출 수 있는 비용과 commit 전에 반드시 필요한 bytes를 구분한다. budget 계산을 optimistic average만으로 수행하지 않는다.</p>
+</section><section id="doc-docs-18-Merge-and-Remaining-Work-md" class="doc"><div class="docpath">docs/18-Merge-and-Remaining-Work.md</div><h1>18 · 메인 병합 점검과 남은 작업</h1>
+<p><strong>점검일:</strong> 2026-09-13 · <strong>목적:</strong> 기존 구현 이력을 메인에 통합하고 다음 작업을 명확히 한다. <strong>릴리스 상태: BLOCKED.</strong></p>
+<h2>브랜치 포함 관계</h2>
+<p>원격 브랜치 전체를 가져온 뒤 <code>git merge-base --is-ancestor &lt;ref&gt; a911bf8</code>로 검사했다. 아래 모든 ref가 후속 브랜치의 조상이다. 따라서 후속 브랜치를 merge commit으로 메인에 병합하면 원본 작업 commit을 모두 보존한다. 브랜치 삭제나 force push는 필요하지 않다.</p>
+<table>
+<thead>
+<tr>
+<th>브랜치</th>
+<th>점검한 head</th>
+<th>후속 브랜치에 포함</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>main</td>
+<td>7eeab60</td>
+<td>예</td>
+</tr>
+<tr>
+<td>integration</td>
+<td>4bcf01d</td>
+<td>예</td>
+</tr>
+<tr>
+<td>task-t00</td>
+<td>ede012a</td>
+<td>예</td>
+</tr>
+<tr>
+<td>task-t01</td>
+<td>35321ad</td>
+<td>예</td>
+</tr>
+<tr>
+<td>task-t02</td>
+<td>f8c0cb0</td>
+<td>예</td>
+</tr>
+<tr>
+<td>task-t03</td>
+<td>f2fca29</td>
+<td>예</td>
+</tr>
+<tr>
+<td>task-t04</td>
+<td>b933c3a</td>
+<td>예</td>
+</tr>
+<tr>
+<td>task-t05</td>
+<td>91c1b62</td>
+<td>예</td>
+</tr>
+<tr>
+<td>task-t06</td>
+<td>13ee271</td>
+<td>예</td>
+</tr>
+<tr>
+<td>task-t07</td>
+<td>531cfc3</td>
+<td>예</td>
+</tr>
+<tr>
+<td>codex/continue-runtime-20260912</td>
+<td>a911bf8</td>
+<td>통합 기준</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://github.com/Topabaem05/ZCR/pull/1">PR #1</a>의 base를 <code>integration</code>에서 <code>main</code>으로 변경한다. 최신 사용자 요청은 메인 병합을 명시적으로 승인했다. 이전 후속 계획의 미승인 설명은 작성 당시 상태로 보존하며 이번 요청을 제한하지 않는다.</p>
+<h2>현재 구현 경계</h2>
+<ul>
+<li><code>src/</code>에는 Zig 파일 45개가 있으며 <code>build.zig</code>로 빌드한다. Zig 0.16.0을 유지한다.</li>
+<li>T00–T14는 <code>IMPLEMENTED_WITH_OPEN_GATES</code>, T15–T16은 <code>IN_PROGRESS</code>다. 구현 파일의 존재와 Task 완료를 구분한다.</li>
+<li>직접 stdio MCP는 읽기 도구 6개를 연결한다. 실행 정책에서 쓰기 및 broker 활성화를 요청하면 현재는 거부한다.</li>
+<li>T12 journal/recovery의 Linux 구현과 SIGKILL 시험은 존재한다. 현재 <code>journal.metadata</code>는 Linux 이외 OS에 <code>Unsupported</code>를 반환하며 T12 시험에도 Linux 전용 <code>statx</code> 호출이 남아 있다. Darwin port가 별도 세션에서 검토됐다는 과거 설명만으로 원격 브랜치에 구현됐다고 간주하지 않는다.</li>
+<li><code>src/watch/linux.zig</code>가 존재해도 T17 전체 backend·자원 관측·플랫폼 게이트가 완료된 것은 아니다.</li>
+</ul>
+<h2>이번 점검에서 수정한 CI 오류</h2>
+<p><a href="https://github.com/Topabaem05/ZCR/actions/runs/34697951744">이전 실행 34697951744</a>는 세 플랫폼 모두 런타임 시험 전에 종료됐다. <code>native.py</code>가 <code>storage_capture</code>를 import하면서 <code>__pycache__</code>를 생성했고, clean-source 검사에서 이를 거부했다. 자식 프로세스에만 설정한 <code>PYTHONDONTWRITEBYTECODE</code>는 이미 실행 중인 부모 interpreter의 import에 적용되지 않았다.</p>
+<p>로컬 source <code>169be18</code> / 원격 source <code>88546e8</code>은 동일 tree <code>54dba2efb586303f5b60e80bf3834c28519a223e</code>를 가진다. repository module import 전에 <code>sys.dont_write_bytecode = True</code>를 설정하고 workflow에도 환경변수를 지정했다. 소스 무결성 검사는 그대로 유지한다.</p>
+<p>새 회귀 시험은 별도 임시 소스 복사본을 일반 Python으로 실행한다. 수정 전 <code>__pycache__</code> 생성으로 실패했고 수정 후 통과했다. 기존 storage capture 검사까지 5개가 통과했다. 이 결과는 CI 도구 검사이며 Zig 런타임 PASS를 뜻하지 않는다.</p>
+<h2>이번 소스의 검증 결과</h2>
+<p>로컬 Linux에서 <code>python -B tools/ci/native.py --source &lt;clean-checkout&gt; --state &lt;fresh-external-state&gt; --target x86_64-linux --runner local-linux</code>를 실행했다. <a data-package-file="evidence/merge-20260913/local-native-report.json" title="편집 원본은 저장소에 포함">상세 보고서</a>는 command·exit code·source/tree·binary·config/contract/test-input digest와 source 전후 무변경 검사를 포함한다. 원본 로그와 복구 fixture는 <a data-package-file="evidence/merge-20260913/local-native-evidence.tar.gz" title="편집 원본은 저장소에 포함">증거 압축본</a>에 보존했다.</p>
+<table>
+<thead>
+<tr>
+<th>검증</th>
+<th>Debug</th>
+<th>ReleaseSafe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>빌드·계약 검사</td>
+<td>PASS</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>등록된 시험 356개</td>
+<td>346 PASS / 1 SKIP / 9 FAIL</td>
+<td>346 PASS / 1 SKIP / 9 FAIL</td>
+</tr>
+<tr>
+<td>별도 codec 시험</td>
+<td>10 PASS</td>
+<td>10 PASS</td>
+</tr>
+<tr>
+<td>실제 CLI subprocess 검사</td>
+<td>19 PASS</td>
+<td>19 PASS</td>
+</tr>
+<tr>
+<td>capability probe</td>
+<td>PASS</td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>T12 복구 증거 수집</td>
+<td>PASS</td>
+<td>PASS</td>
+</tr>
+</tbody>
+</table>
+<p>9개 실패는 <code>AF_UNIX</code> socket 생성 시 발생했다. 이 컨테이너에서 Python으로 별도 확인한 결과도 <code>errno=1 Operation not permitted</code>였다. 1개 SKIP은 Linux에서 실행할 수 없는 native GCD 시험이다. 로컬 전체 결과는 <strong>FAIL</strong>로 보존하며 제한된 환경의 실패를 통과로 바꾸지 않는다.</p>
+<p><a href="https://github.com/Topabaem05/ZCR/actions/runs/34705666351">GitHub native 실행 34705666351</a>은 source <code>88546e8</code>을 검증한다. Linux job은 최종 <strong>SUCCESS</strong>, Apple Silicon job은 <strong>FAILURE</strong>로 확인했다. 이는 CI 시작 오류가 해결됐음을 보여주지만 Mac 지원 완료를 뜻하지 않는다. 문서만 바뀐 병합 commit에 이 실행의 source별 결과를 새 runtime PASS로 재사용하지 않는다.</p>
+<p>Apple Silicon은 Debug <strong>320 PASS / 12 SKIP / 24 FAIL</strong>, ReleaseSafe <strong>321 PASS / 12 SKIP / 23 FAIL</strong>이다. 두 모드 모두 T12의 Linux 전용 <code>Store.init</code>/<code>metadata</code>가 <code>Unsupported</code>를 반환해 23개 시험이 실패했다. Debug에서는 fixture 초기화 실패 경로의 168개 allocation leak도 보고됐다. 추가 Debug 실패 1개는 T08 <code>MC-004 retiring tool id is detached before gated arena teardown</code>의 <code>entered and accepted_during_retirement</code> assertion이며 재현·원인 분석이 필요하다. 테스트 시간 제한만 늘려 통과 처리하지 않는다. <a data-package-file="evidence/merge-20260913/mac-registered-logs.tar.gz" title="편집 원본은 저장소에 포함">Mac 원본 로그</a>와 <a data-package-file="evidence/merge-20260913/mac-native-report.json" title="편집 원본은 저장소에 포함">보고서</a>를 보존했다. Intel Mac job은 이 문서의 점검 시점에 실행 중이므로 최종 결과를 단정하지 않는다.</p>
+<h2>남은 작업과 완료 조건</h2>
+<table>
+<thead>
+<tr>
+<th>순서</th>
+<th>범위</th>
+<th>다음 작업</th>
+<th>완료 근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>T08 / T12 / native CI</td>
+<td>MC-004 Mac Debug 실패 분석, Darwin storage 이식 및 fixture 초기화 실패 시 자원 회수, Mac crash/lifecycle 검증</td>
+<td>Linux·Apple Silicon·Intel Mac에서 Debug/ReleaseSafe 결과와 raw 복구 증거</td>
+</tr>
+<tr>
+<td>2</td>
+<td>T12 / T15</td>
+<td>신뢰된 supervisor, write/reconnect 수명 관리 및 broker CLI/bridge 연결</td>
+<td>권한·fence·취소·느린 클라이언트·재접속 통합 시험; 승인 전 쓰기 비활성 유지</td>
+</tr>
+<tr>
+<td>3</td>
+<td>T16</td>
+<td>pressure/thermal 신호 수집, governor 정책, 실제 runtime 연결</td>
+<td>admission·회수·공정성 및 모델 공존 시험</td>
+</tr>
+<tr>
+<td>4</td>
+<td>T17 / T19</td>
+<td>Linux backend 완성, 필수 ARM64/x86 SIMD 경로</td>
+<td>플랫폼 자원 관측 검증, scalar 차등·경계 시험</td>
+</tr>
+<tr>
+<td>5</td>
+<td>T21 / T22</td>
+<td>전체 벤치마크 하네스, bounded telemetry/health</td>
+<td>재현 가능한 corpus·config·raw trace, 예산·민감정보 검사</td>
+</tr>
+<tr>
+<td>6</td>
+<td>T23 / T24</td>
+<td>실제 Codex/Claude 라우팅, 패키징·지원 행렬</td>
+<td>실제 클라이언트·호스트 sandbox 실행, 설치 및 지원 플랫폼 검증</td>
+</tr>
+<tr>
+<td>7</td>
+<td>T25</td>
+<td>최종 통합·격리·성능 릴리스 검토</td>
+<td>모든 필수 요구사항의 source별 증거 및 미해결 게이트 해소</td>
+</tr>
+</tbody>
+</table>
+<p>T18 Windows와 T20 Tree-sitter는 선택하지 않은 옵션이다. T19는 필수다. 실제 macOS 11, APFS ACL/xattr 및 crash durability, kernel fault/전원 손실, 실제 모델·클라이언트 E2E 게이트는 미완료 상태를 유지한다. 이 점검에서는 남은 대형 Task를 완료로 승격하지 않는다.</p>
 </section><section id="doc-docs-superpowers-plans-2026-09-12-runtime-continuation-md" class="doc"><div class="docpath">docs/superpowers/plans/2026-09-12-runtime-continuation.md</div><h1>ZCR Runtime Continuation Implementation Plan</h1>
 <blockquote>
 <p><strong>For agentic workers:</strong> REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development to implement this plan task-by-task. Steps use checkbox (<code>- [ ]</code>) syntax for tracking.</p>
@@ -4170,6 +4355,7 @@ zcr-dev-evidence contract-digest --worktree &lt;wt&gt;
 <h2>Handoff</h2>
 <p>각 Step 종료 상태를 저장한다. task handoff에는 changed files, exports, tests, remaining gates, base/head/contract digest를 포함한다. 새로운 모델 세션은 이전 요약만 믿지 말고 ledger와 실제 tree를 확인한다. 작업 범위를 확장하는 도중 원래 Task가 완료됐다고 선언하지 않는다.</p>
 </section><section id="doc-tasks-INDEX-md" class="doc"><div class="docpath">tasks/INDEX.md</div><h1>구현 Task 인덱스</h1>
+<p>최신 브랜치 포함 관계, 재검증 결과와 다음 작업은 <a href="#doc-docs-18-Merge-and-Remaining-Work-md">병합 점검·남은 작업</a>에 정리했다. 메인 통합 후에도 아래 필수 Task와 외부 검증 게이트를 유지한다.</p>
 <p><strong>26 Tasks · 각 Task S01–S06.</strong> 현재 상태는 <a data-package-file="tasks/progress.json" title="편집 원본은 저장소에 포함">progress.json</a>, 실행 순서는 <a href="#doc-docs-superpowers-plans-2026-09-12-runtime-continuation-md">후속 계획</a>을 따른다. T00–T07에는 구현과 과거 증거가 있으며, 새 통합 소스의 재검증과 남은 플랫폼 게이트를 구분한다. 독립 branch/worktree, owned files, dependencies, inputs/outputs, RED/GREEN test, provenance handoff를 기준으로 진행한다. 단순 순서가 아니라 아래 DAG를 따른다.</p>
 <table>
 <thead>

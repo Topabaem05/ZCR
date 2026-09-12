@@ -1,6 +1,6 @@
 {
   "schema_version": "zcr-progress/1",
-  "updated": "2026-09-12",
+  "updated": "2026-09-13",
   "source_baseline": "531cfc378950e6ef6ac6f49cb4e2de3de56312cc",
   "release_status": "BLOCKED",
   "notes": [
@@ -13,7 +13,10 @@
     "Runtime/cache/broker fix source95352af and evidenceec9e5ad passed independent review and were integrated throughdae7ddc. Source-specific prior executions remain pinned; live broker/bridge host wiring and native socket gates remain open.",
     "Darwin T11 source d8e7ac5/evidenceef891f0 passed independent review and was integrated at53b4686/c80508b: Linux41/41 each mode; both Mac semantic targets compile only, actual native execution pending.",
     "Clean integrated source108b906 ran Debug and ReleaseSafe:338/347 registered tests passed each mode, all9 failures in broker AF_UNIX tests under local socket policy. Both builds/contracts, codec10 and actual CLI19 passed each mode. Overall registered suite remains FAIL.",
-    "T16 admission source8bad59b/evidencef5de460 passed independent review and was integrated at7b915f8. Worker scheduler20PASS+1nativeSKIP and memory34PASS each mode; pure governor policy, signal collection and actual runtime wiring remain required."
+    "T16 admission source8bad59b/evidencef5de460 passed independent review and was integrated at7b915f8. Worker scheduler20PASS+1nativeSKIP and memory34PASS each mode; pure governor policy, signal collection and actual runtime wiring remain required.",
+    "Main integration audit: every original remote branch is an ancestor of a911bf8. PR #1 is retargeted to main by explicit user request; release_status remains BLOCKED. See docs/18-Merge-and-Remaining-Work.md.",
+    "CI bootstrap fixed at local169be18 / published88546e8, identical tree54dba2efb586303f5b60e80bf3834c28519a223e. Plain-Python import regression reproduced the source mutation before the fix; all5 CI-tooling tests pass after it. Runtime verification is recorded separately.",
+    "Source88546e8 native CI34705666351: Linux job SUCCESS. Apple Silicon Debug320PASS/12SKIP/24FAIL, ReleaseSafe321PASS/12SKIP/23FAIL. T12 Linux-only Store.init/metadata causes23 failures and Debug fixture cleanup leaks; Debug additionally fails MC-004 retiring tool id assertion. Intel Mac was still running at documentation checkpoint. Release remains BLOCKED. Local169be18 both modes346PASS/1SKIP/9AF_UNIX failures; builds/contracts, codec10, CLI19 pass."
   ],
   "tasks": [
     {

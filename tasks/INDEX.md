@@ -1,5 +1,7 @@
 # 구현 Task 인덱스
 
+최신 브랜치 포함 관계, 재검증 결과와 다음 작업은 [병합 점검·남은 작업](../docs/18-Merge-and-Remaining-Work.md)에 정리했다. 메인 통합 후에도 아래 필수 Task와 외부 검증 게이트를 유지한다.
+
 **26 Tasks · 각 Task S01–S06.** 현재 상태는 [progress.json](progress.json), 실행 순서는 [후속 계획](../docs/superpowers/plans/2026-09-12-runtime-continuation.md)을 따른다. T00–T07에는 구현과 과거 증거가 있으며, 새 통합 소스의 재검증과 남은 플랫폼 게이트를 구분한다. 독립 branch/worktree, owned files, dependencies, inputs/outputs, RED/GREEN test, provenance handoff를 기준으로 진행한다. 단순 순서가 아니라 아래 DAG를 따른다.
 
 | Task | 목적 | 선행 Task | 구분 |

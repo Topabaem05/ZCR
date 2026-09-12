@@ -1,5 +1,7 @@
 # 수행한 검증과 수행하지 않은 검증
 
+이 문서는 최초 설계 패키지의 문서 검증 범위를 기록한다. 아래 "미수행"은 당시 상태이며 현재 저장소의 구현 현황이 아니다. 현재 Zig 실행 결과는 [병합 점검](../docs/18-Merge-and-Remaining-Work.md)과 [작업 상태](../tasks/progress.json), 각 source에 결합된 evidence를 따른다. `report.json`은 계속 문서·schema 검증만 나타낸다.
+
 ## 수행
 
 - JSON 및 JSON Schema 파싱, 8개 tool 입력 예시, logical response/typed read payload.
