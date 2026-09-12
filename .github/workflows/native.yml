@@ -40,6 +40,7 @@ jobs:
           # Each matrix job has its own hosted runner. Keep the fixture prefix
           # short enough for Darwin's 104-byte sockaddr_un path, in both modes.
           CI_STATE: ${{ runner.temp }}/z-${{ github.run_id }}-${{ github.run_attempt }}
+          PYTHONDONTWRITEBYTECODE: '1'
         run: >-
           python "$GITHUB_WORKSPACE/source/tools/ci/native.py"
           --source "$GITHUB_WORKSPACE/source"

@@ -21,6 +21,9 @@ import time
 import traceback
 import urllib.request
 
+# The source-integrity snapshot runs after imports. Disable bytecode in this
+# interpreter before loading a repository module, as well as in child processes.
+sys.dont_write_bytecode = True
 from storage_capture import capture as capture_storage
 
 
