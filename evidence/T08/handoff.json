@@ -1,21 +1,28 @@
 {
   "schema_version": "zcr-task-handoff/1",
   "task": "T08",
-  "status": "IMPLEMENTED_VERIFIED_NATIVE_INTEGRATION_PENDING",
-  "base_commit": "9897f27a18c66c310ae6dda3ee854f7fdcdcfa3d",
-  "source_head": "48d2e8b61a83af444f0914379f8bc75f169413f3",
-  "source_tree": "32e0f1c7db627bfcdf45a8acf475b41e8be718bb",
+  "status": "IMPLEMENTED_WITH_OPEN_GATES",
+  "revision": "MC-004 test revision (PR #3)",
+  "base_commit": "f1c388a7f6b68c5c221d4a7e013c12dfa6993f8c",
+  "source_head": "47dbb296c594783fe1dbd3750af8800794547e1b",
+  "source_tree": "ab13879c4c70b4814ad68f21635ddaf066b79148",
+  "source_head_note": "PASS records bind to source_head, which adds only evidence/T08 files to code_commit; src, tests, build files, contracts, config and tools are identical to code_commit",
+  "code_commit": "ae5e4a4c2fa7ff8771985ca6cdc403952a72ed89",
   "source_commits": [
-    "e742d64fbd40bda605e932a5b4b300a986eea600",
-    "5482a7022fd20ce4b284b17ac48e7c93bfe33280",
-    "48d2e8b61a83af444f0914379f8bc75f169413f3"
+    "bd54afe246bc9640eb1299d7afb60490fcb3cc49",
+    "ae5e4a4c2fa7ff8771985ca6cdc403952a72ed89"
   ],
-  "contract_digest": "8aa53314410fe471f0e070c522766684286f60e1ad4d9785c292bb709ea370a4",
-  "workspace_incarnation": "4d6ae4ae-f3aa-4b20-b1c8-061147f3dfd2",
+  "branch_integration": "PR #2 merged into main as 9226555; main merged into claude/t08-mc004-retirement as 7324a3e with no overlapping files",
+  "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+  "workspace_incarnation": null,
+  "workspace_incarnation_note": "no workspace manifest incarnation was issued for this test-only revision; the previous value belongs to the 48d2e8b handoff",
   "source_owned_files": [
     "src/protocol/mcp.zig",
     "src/protocol/framing.zig",
     "src/protocol/codec.zig",
+    "tests/t08_test.zig"
+  ],
+  "changed_files": [
     "tests/t08_test.zig"
   ],
   "exports": [
@@ -28,20 +35,29 @@
     "codec.preflight/parse/preflightToolArguments/rawRequestId/toolName",
     "framing.Decoder.init/push/finish; framing.RecordWriter.write"
   ],
+  "exports_note": "unchanged; no product source changed in this revision",
   "tests": {
-    "mcp_debug": 15,
-    "mcp_release_safe": 15,
-    "codec_debug": 10,
-    "codec_release_safe": 10,
-    "batch_regression_debug": 24,
-    "batch_regression_release_safe": 24,
-    "record_verify": 6,
-    "contract_verification": "PASS",
+    "mc004_debug": "6/6",
+    "mcp_debug": "29/29 (T08-test 27, T08-launch-test 2), 0 leaks",
+    "mcp_release_safe": "29/29 (T08-test 27, T08-launch-test 2), 0 leaks",
+    "mc004_debug_stress": "idle 10/10, 8 busy loops 30/30, runner exit 0",
+    "record_verify": "6 zcr-evidence/1 records accepted by zcr-dev-evidence verify",
+    "failure_injection": "detach-after-hook mutant fails the retirement test; reader-ignores-failure mutant fails the stdout test; 1 KiB response control fails the pipe-drain test",
+    "codec_and_batch_regression": "NOT_RUN_THIS_REVISION (no product source changed)",
+    "contract_verification": "NOT_RUN_THIS_REVISION (contracts unchanged; digest recorded)",
+    "macOS_runtime": "PASS on Apple M2 macOS 26.6.2 (local records); native CI T08-test 27/27 in every Mac run inspected before the main update",
+    "Linux_runtime": "native CI ubuntu-24.04 success on 3d912c4",
     "actual_host_integration": "NOT_RUN",
-    "macOS_runtime": "NOT_RUN",
     "Windows_runtime": "NOT_RUN"
   },
-  "config_corpus_sha256": "24f7299c4d85acec602a617d3a2c096f97f9a116e9ab3a6acf7fd8c0bfc03fd2",
+  "evidence": {
+    "bundle": "evidence/T08/mc004-retirement-20260913/README.md",
+    "report": "evidence/T08/mc004-retirement-20260913/report.json",
+    "records": "evidence/T08/mc004-retirement-20260913/records/",
+    "runs_index": "evidence/T08/mc004-retirement-20260913/records/runs.json"
+  },
+  "source_config_sha256": "b6f25aa691efa0c305717cb11c8daef09332814e53a801af41d44893baec9d68",
+  "corpus_sha256": "64cb94b486bc2985edda2faba67f59fddaecfc8ce7c9127b2c0212803514351d",
   "limitations": [
     "zcr_files/zcr_search currently require policy authority for the traversal root \".\"; narrower policies fail E_SCOPE rather than broadening authority.",
     "A single engine worker processes a bounded queue; batch reads may use up to two bounded internal workers.",
@@ -49,15 +65,25 @@
     "Actual CLI/host integration, macOS runtime and Windows runtime were not executed in this task.",
     "The launcher must provide validate_authority for registry/session expiry and root-identity validation; Config defaults support independently bound test fixtures.",
     "Trusted global/info excludes and the integrator core.Cancel deadline extension are pending root integration; T08 uses an independent per-request monotonic watcher and flags.",
-    "Direct stdio currently requires public POSIX poll/libc; Windows serve reports Unsupported until its platform gate."
+    "Direct stdio currently requires public POSIX poll/libc; Windows serve reports Unsupported until its platform gate.",
+    "MC-004 deadline test does not verify interruption before filesystem work: a watcher that never cancels still passes. An event-based check needs an observation point in src/protocol/mcp.zig.",
+    "ReleaseSafe mcp binary under 8 busy loops failed four runtime-cache tests (BR-001 x3, IS-006) with IoFailure in 1 of 10 runs; not MC-004, cause not confirmed.",
+    "POLLOUT-based pipe stall detection was observed on macOS only locally; Linux relies on native CI."
+  ],
+  "remaining_gates": [
+    "native CI of the branch updated from main (macos-15, macos-15-intel, ubuntu-24.04)",
+    "deadline-test observation point (product change, not in this revision)",
+    "runtime-cache IoFailure under load (separate task)",
+    "actual host integration and Windows runtime",
+    "docs/18 row 1 update with MANIFEST.sha256 (integrator)"
   ],
   "steps": {
-    "S01": "manifest/docs/base/scope read; later clean-source preflight recorded",
-    "S02": "intended supported-version RED captured before implementation",
-    "S03": "owned modules implemented against real engines",
-    "S04": "native Debug/ReleaseSafe and injected failure paths pass",
-    "S05": "T07 fixed dependency regressions and contract/scope checks pass",
-    "S06": "source commits and scoped evidence prepared; root integration gates remain"
+    "S01": "clean task worktree from main f1c388a; separate caches, TMP and state",
+    "S02": "instrumented the original retirement test under load and showed it passes a detach-after-hook mutant; new tests fail that mutant, the reader-ignores-failure mutant and the 1 KiB control",
+    "S03": "test-only change in tests/t08_test.zig (bd54afe, ae5e4a4)",
+    "S04": "MC-004 Debug and load stress pass; mcp group Debug and ReleaseSafe pass",
+    "S05": "scope limited to tests/t08_test.zig and evidence/T08; mcp group regression in both modes",
+    "S06": "zcr-evidence/1 records at 47dbb29, config/corpus digests and this handoff; remaining gates listed"
   },
   "integration_dependencies": [
     "build imports zcr_core,zcr_policy,zcr_memory,zcr_fs_read,zcr_fs_traverse,zcr_search,zcr_batch_read,zcr_projection",
@@ -69,6 +95,85 @@
   "review_fixes": {
     "R1": "retiring state detaches reader-visible arena slices under lock before cleanup; deterministic gated same-string-ID reuse test",
     "R2": "exclusive stdin uses20ms public POSIX poll to observe stdout failure without requiring input EOF; intended RED and GREEN captured",
-    "R3": "control backing and output credit reserved at startup; health works while ordinary global Budget is fully admitted elsewhere"
-  }
+    "R3": "control backing and output credit reserved at startup; health works while ordinary global Budget is fully admitted elsewhere",
+    "R4": "MC-004 retirement check counts only validations while teardown is gated and asserts responses (bd54afe)",
+    "R5": "stdout-failure and partial-pipe waits are event-based with a 10 s hang guard (ae5e4a4)",
+    "R6": "PR #3 review: evidence under evidence/T08, zcr-evidence/1 records with config/corpus digests, stress runner exit status and signals, records bound to the runner commit, canonical handoff refreshed"
+  },
+  "previous_handoffs": [
+    {
+      "schema_version": "zcr-task-handoff/1",
+      "task": "T08",
+      "status": "IMPLEMENTED_VERIFIED_NATIVE_INTEGRATION_PENDING",
+      "base_commit": "9897f27a18c66c310ae6dda3ee854f7fdcdcfa3d",
+      "source_head": "48d2e8b61a83af444f0914379f8bc75f169413f3",
+      "source_tree": "32e0f1c7db627bfcdf45a8acf475b41e8be718bb",
+      "source_commits": [
+        "e742d64fbd40bda605e932a5b4b300a986eea600",
+        "5482a7022fd20ce4b284b17ac48e7c93bfe33280",
+        "48d2e8b61a83af444f0914379f8bc75f169413f3"
+      ],
+      "contract_digest": "8aa53314410fe471f0e070c522766684286f60e1ad4d9785c292bb709ea370a4",
+      "workspace_incarnation": "4d6ae4ae-f3aa-4b20-b1c8-061147f3dfd2",
+      "source_owned_files": [
+        "src/protocol/mcp.zig",
+        "src/protocol/framing.zig",
+        "src/protocol/codec.zig",
+        "tests/t08_test.zig"
+      ],
+      "exports": [
+        "Config{allocator,io,authorizer,session,generation,budget,tools_json,version,output_bytes,max_search_file_bytes,authority_context,validate_authority,retirement_context,before_tool_release}",
+        "Server.init(Config)!Server",
+        "Server.respond(Allocator,[]const u8,core.Cancel)!?[]const u8",
+        "Server.serve(std.Io.File,std.Io.File)!void",
+        "Server.FrameContext{allocator,cancel}",
+        "Server.serveFrame(std.Io,*core.Connection,core.BoundedBytes) core.ServeError!core.EncodedToolResult",
+        "codec.preflight/parse/preflightToolArguments/rawRequestId/toolName",
+        "framing.Decoder.init/push/finish; framing.RecordWriter.write"
+      ],
+      "tests": {
+        "mcp_debug": 15,
+        "mcp_release_safe": 15,
+        "codec_debug": 10,
+        "codec_release_safe": 10,
+        "batch_regression_debug": 24,
+        "batch_regression_release_safe": 24,
+        "record_verify": 6,
+        "contract_verification": "PASS",
+        "actual_host_integration": "NOT_RUN",
+        "macOS_runtime": "NOT_RUN",
+        "Windows_runtime": "NOT_RUN"
+      },
+      "config_corpus_sha256": "24f7299c4d85acec602a617d3a2c096f97f9a116e9ab3a6acf7fd8c0bfc03fd2",
+      "limitations": [
+        "zcr_files/zcr_search currently require policy authority for the traversal root \".\"; narrower policies fail E_SCOPE rather than broadening authority.",
+        "A single engine worker processes a bounded queue; batch reads may use up to two bounded internal workers.",
+        "Parser resource limits additionally cap 4096 total object keys and 65536 JSON values.",
+        "Actual CLI/host integration, macOS runtime and Windows runtime were not executed in this task.",
+        "The launcher must provide validate_authority for registry/session expiry and root-identity validation; Config defaults support independently bound test fixtures.",
+        "Trusted global/info excludes and the integrator core.Cancel deadline extension are pending root integration; T08 uses an independent per-request monotonic watcher and flags.",
+        "Direct stdio currently requires public POSIX poll/libc; Windows serve reports Unsupported until its platform gate."
+      ],
+      "steps": {
+        "S01": "manifest/docs/base/scope read; later clean-source preflight recorded",
+        "S02": "intended supported-version RED captured before implementation",
+        "S03": "owned modules implemented against real engines",
+        "S04": "native Debug/ReleaseSafe and injected failure paths pass",
+        "S05": "T07 fixed dependency regressions and contract/scope checks pass",
+        "S06": "source commits and scoped evidence prepared; root integration gates remain"
+      },
+      "integration_dependencies": [
+        "build imports zcr_core,zcr_policy,zcr_memory,zcr_fs_read,zcr_fs_traverse,zcr_search,zcr_batch_read,zcr_projection",
+        "tools_json supplied from trusted build_options or Config bytes",
+        "root callback validates registry/session on each tool",
+        "T07 approved fixes 4ff1101 fa80da7 65f747e applied in task worktree",
+        "integrator build commits9542cf7 and9ab9f76 applied in task worktree"
+      ],
+      "review_fixes": {
+        "R1": "retiring state detaches reader-visible arena slices under lock before cleanup; deterministic gated same-string-ID reuse test",
+        "R2": "exclusive stdin uses20ms public POSIX poll to observe stdout failure without requiring input EOF; intended RED and GREEN captured",
+        "R3": "control backing and output credit reserved at startup; health works while ordinary global Budget is fully admitted elsewhere"
+      }
+    }
+  ]
 }
