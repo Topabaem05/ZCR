@@ -501,13 +501,16 @@ test "MC-004 stdout failure stops even when peer keeps stdin open" {
 test "MC-004 retiring tool id is detached before gated arena teardown" {
     const h = try Harness.init();
     defer h.deinit();
+    // A successful tools/call validates authority twice (before and after
+    // execution). Only validations made while the first slot's teardown is
+    // held by the hook count, so the check does not depend on scheduling.
     const Gate = struct {
         entered: std.atomic.Value(bool) = .init(false),
         allow: std.atomic.Value(bool) = .init(false),
-        validated: std.atomic.Value(u32) = .init(0),
+        validated_while_gated: std.atomic.Value(u32) = .init(0),
         fn validate(ctx: ?*anyopaque) core.AuthorizeError!void {
             const g: *@This() = @ptrCast(@alignCast(ctx.?));
-            _ = g.validated.fetchAdd(1, .acq_rel);
+            if (g.entered.load(.acquire) and !g.allow.load(.acquire)) _ = g.validated_while_gated.fetchAdd(1, .acq_rel);
         }
         fn retire(ctx: ?*anyopaque) void {
             const g: *@This() = @ptrCast(@alignCast(ctx.?));
@@ -546,17 +549,38 @@ test "MC-004 retiring tool id is detached before gated arena teardown" {
     const thread = try std.Thread.spawn(.{}, Runner.run, .{&runner});
     const call = "{\"jsonrpc\":\"2.0\",\"id\":\"reused-string-id\",\"method\":\"tools/call\",\"params\":{\"name\":\"zcr_read\",\"arguments\":{\"path\":\"hello.txt\"}}}\n";
     try feed.writeStreamingAll(io, initialize ++ "\n" ++ initialized ++ "\n" ++ call);
+    // Both waits end on an event; the bound only turns a hang into a failure.
+    const hang_guard_ms = 10_000;
     var started = std.Io.Clock.Timestamp.now(io, .awake);
-    while (!gate.entered.load(.acquire) and started.untilNow(io).raw.toMilliseconds() < 250) try std.Io.sleep(io, .fromMilliseconds(1), .awake);
+    while (!gate.entered.load(.acquire) and started.untilNow(io).raw.toMilliseconds() < hang_guard_ms) try std.Io.sleep(io, .fromMilliseconds(1), .awake);
     const entered = gate.entered.load(.acquire);
     if (entered) try feed.writeStreamingAll(io, call);
     started = std.Io.Clock.Timestamp.now(io, .awake);
-    while (gate.validated.load(.acquire) < 2 and started.untilNow(io).raw.toMilliseconds() < 250) try std.Io.sleep(io, .fromMilliseconds(1), .awake);
-    const accepted_during_retirement = gate.validated.load(.acquire) == 2;
+    while (entered and gate.validated_while_gated.load(.acquire) < 2 and started.untilNow(io).raw.toMilliseconds() < hang_guard_ms) try std.Io.sleep(io, .fromMilliseconds(1), .awake);
+    const validated_while_gated = gate.validated_while_gated.load(.acquire);
     gate.allow.store(true, .release);
     feed.close(io);
     thread.join();
-    try testing.expect(entered and accepted_during_retirement);
+    var buffer: [16384]u8 = undefined;
+    var reader = drain.readerStreaming(io, &buffer);
+    const records = try reader.interface.allocRemaining(testing.allocator, .limited(16384));
+    defer testing.allocator.free(records);
+    var accepted: usize = 0;
+    var lines = std.mem.splitScalar(u8, records, '\n');
+    while (lines.next()) |raw| {
+        if (raw.len == 0) continue;
+        const record = (try std.json.parseFromSlice(std.json.Value, h.arena.allocator(), raw, .{})).value;
+        try testing.expect(record.object.get("error") == null);
+        const id = record.object.get("id").?;
+        if (id != .string) continue;
+        try testing.expectEqualStrings("reused-string-id", id.string);
+        try testing.expect((try logical(h, record)).object.get("ok").?.bool);
+        accepted += 1;
+    }
+    try testing.expect(entered);
+    // The reused id was admitted and fully executed while the first slot was retiring.
+    try testing.expectEqual(@as(u32, 2), validated_while_gated);
+    try testing.expectEqual(@as(usize, 2), accepted);
     try testing.expect(!runner.failed.load(.acquire));
 }
 
