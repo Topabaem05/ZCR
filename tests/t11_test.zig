@@ -471,6 +471,7 @@ const LinuxMetadata = struct {
 };
 const DarwinMetadata = struct {
     extern "c" fn fsetxattr(fd: c_int, name: [*:0]const u8, value: [*]const u8, size: usize, position: u32, options: c_int) c_int;
+    extern "c" fn flistxattr(fd: c_int, list: ?[*]u8, size: usize, options: c_int) isize;
     extern "c" fn acl_init(count: c_int) ?*anyopaque;
     extern "c" fn acl_free(acl: *anyopaque) c_int;
     extern "c" fn acl_create_entry(acl: *?*anyopaque, entry: *?*anyopaque) c_int;
@@ -594,6 +595,43 @@ test "WR-007 primitive refuses xattr and ACL metadata it cannot preserve" {
     try expectNoTemps(f, ".");
     try f.expectBytes("file.txt", "base\n");
     try f.expectBytes("acl.txt", "acl\n");
+}
+
+test "WR-007 kernel provenance attribute alone does not block publication" {
+    if (builtin.os.tag != .macos) return error.SkipZigTest;
+    const f = try Fixture.init("base\n");
+    defer f.deinit();
+    const handle = try f.root.dir.openFile(io, "file.txt", .{ .mode = .read_write });
+    defer handle.close(io);
+    var names: [256]u8 = undefined;
+    const size = DarwinMetadata.flistxattr(handle.handle, &names, names.len, 0x0020);
+    try t.expect(size >= 0);
+    const listed = names[0..@intCast(size)];
+    // Every listed attribute must be the kernel provenance tag, or none at all
+    // (hosts that do not attach it); either way the file is publishable.
+    var rest = listed;
+    while (rest.len > 0) {
+        const end = std.mem.indexOfScalar(u8, rest, 0).?;
+        try t.expectEqualStrings(edit.publish.darwin_system_attribute, rest[0..end]);
+        rest = rest[end + 1 ..];
+    }
+    var parent = try edit.publish.Parent.open(io, f.root.dir, "file.txt");
+    defer parent.close(io);
+    const original = try parent.openOriginal(io);
+    original.file.close(io);
+    _ = try f.patch(simplePatch("base\n", "provenance-allowed"));
+    try f.expectBytes("file.txt", "provenance-allowed\n");
+    try expectNoTemps(f, ".");
+
+    // A user attribute next to the provenance tag is still refused.
+    try f.root.dir.writeFile(io, .{ .sub_path = "mixed.txt", .data = "mixed\n" });
+    const mixed = try f.root.dir.openFile(io, "mixed.txt", .{ .mode = .read_write });
+    defer mixed.close(io);
+    try setTestAttribute(mixed.handle);
+    var mixed_parent = try edit.publish.Parent.open(io, f.root.dir, "mixed.txt");
+    defer mixed_parent.close(io);
+    try t.expectError(error.Unsupported, mixed_parent.openOriginal(io));
+    try f.expectBytes("mixed.txt", "mixed\n");
 }
 
 const PublishRace = struct {

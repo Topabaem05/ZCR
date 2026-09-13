@@ -66,15 +66,25 @@ pub const Metadata = struct {
     }
 };
 
+/// The one Darwin attribute that is not refused. The kernel attaches it to files
+/// that processes create (observed on every new file on macOS 26.6.2), and a user
+/// process can neither remove nor change it: `fremovexattr` and `fsetxattr` report
+/// success and leave the value as it was. Refusing it would refuse every file,
+/// while allowing it drops nothing a writer could preserve; the replacement file
+/// receives the kernel's own value like any file this process creates.
+pub const darwin_system_attribute = "com.apple.provenance";
+
 fn noAttributes(fd: std.posix.fd_t) Error!void {
     // POSIX ACLs and security labels are xattrs on Linux. Refuse any attribute
     // rather than silently dropping metadata this baseline cannot preserve.
-    const count = switch (builtin.os.tag) {
-        .linux => LinuxMetadata.flistxattr(fd, null, 0),
-        .macos => Darwin.flistxattr(fd, null, 0, 0x0020), // XATTR_SHOWCOMPRESSION
+    switch (builtin.os.tag) {
+        .linux => {
+            const count = LinuxMetadata.flistxattr(fd, null, 0);
+            if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+        },
+        .macos => try onlySystemAttribute(fd),
         else => return error.Unsupported,
-    };
-    if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+    }
     if (builtin.os.tag == .macos) {
         // Darwin ACLs are separate metadata. Even an explicit empty ACL is
         // refused; acl_get_entry has different end semantics than Linux.
@@ -84,6 +94,22 @@ fn noAttributes(fd: std.posix.fd_t) Error!void {
         }
         // Libc filesec_get_property(FILESEC_ACL) reports no ACL as ENOENT.
         if (std.c.errno(@as(c_int, -1)) != .NOENT) return error.IoFailure;
+    }
+}
+
+/// Refuses every Darwin extended attribute except `darwin_system_attribute`.
+fn onlySystemAttribute(fd: std.posix.fd_t) Error!void {
+    const options = 0x0020; // XATTR_SHOWCOMPRESSION
+    var names: [256]u8 = undefined;
+    const size = Darwin.flistxattr(fd, &names, names.len, options);
+    if (size == 0) return;
+    // A list that does not fit holds more than the one allowed name.
+    if (size < 0) return if (std.c.errno(size) == .RANGE) error.Unsupported else error.IoFailure;
+    var rest = names[0..@intCast(size)];
+    while (rest.len > 0) {
+        const end = std.mem.indexOfScalar(u8, rest, 0) orelse return error.IoFailure;
+        if (!std.mem.eql(u8, rest[0..end], darwin_system_attribute)) return error.Unsupported;
+        rest = rest[end + 1 ..];
     }
 }
 
