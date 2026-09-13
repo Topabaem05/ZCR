@@ -1,0 +1,21 @@
+test
++- run test T08-test 5 pass, 1 fail (6 total)
+error: 't08_test.test.MC-004 stdout failure stops even when peer keeps stdin open' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:615:14: 0x102b6e677 in expect (T08-test)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /Users/guribbong/code/ZCR-state/tasks/MC004/mutant-stdout/tests/t08_test.zig:510:5: 0x102c2a603 in test.MC-004 stdout failure stops even when peer keeps stdin open (T08-test)
+           try testing.expect(stopped_before_eof);
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/MC004/cache-mutant-stdout && /Users/guribbong/code/ZCR-state/tasks/MC004/cache-mutant-stdout/o/cdce3f5ccaba5f3e2d343cb40d6505b5/T08-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/MC004/cache-mutant-stdout --seed=0x8eacbb86 --listen=-
+
+Build Summary: 3/5 steps succeeded (1 failed); 5/6 tests passed (1 failed)
+test transitive failure
++- install T08-test success
+|  +- compile test T08-test Debug native success 14s MaxRSS:252M
+|     +- options success
++- run test T08-test 5 pass, 1 fail (6 total)
+   +- compile test T08-test Debug native (+1 more reused dependencies)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/MC004/cache-mutant-stdout/o/f73c3388e88e2a4fe1e8f77ca63d50d0/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/MC004/mutant-stdout /Users/guribbong/code/ZCR-state/tasks/MC004/cache-mutant-stdout /Users/guribbong/code/ZCR-state/tasks/MC004/zig-global-cache-mut --seed 0x8eacbb86 -Z57544623f26d8dca test -Dtest-group=mcp -Dtest-id=MC-004 -Doptimize=Debug -Dinstall-tests=true --prefix /Users/guribbong/code/ZCR-state/tasks/MC004/out-mutant-stdout --summary all

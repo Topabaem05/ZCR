@@ -1,0 +1,21 @@
+test
++- run test T08-test 5 pass, 1 fail (6 total)
+error: 't08_test.test.MC-004 real partial pipe input cancellation and slow output drain without interleaving' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:615:14: 0x102582677 in expect (T08-test)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /Users/guribbong/code/ZCR-state/tasks/MC004/control-smallfile/tests/t08_test.zig:339:5: 0x1026415f7 in test.MC-004 real partial pipe input cancellation and slow output drain without interleaving (T08-test)
+           try testing.expect(stalled);
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/MC004/cache-control-smallfile && /Users/guribbong/code/ZCR-state/tasks/MC004/cache-control-smallfile/o/e23dc4c56a9ab90394678970b6a06e41/T08-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/MC004/cache-control-smallfile --seed=0x2d2cedfa --listen=-
+
+Build Summary: 3/5 steps succeeded (1 failed); 5/6 tests passed (1 failed)
+test transitive failure
++- install T08-test success
+|  +- compile test T08-test Debug native success 17s MaxRSS:225M
+|     +- options success
++- run test T08-test 5 pass, 1 fail (6 total)
+   +- compile test T08-test Debug native (+1 more reused dependencies)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/MC004/cache-control-smallfile/o/f73c3388e88e2a4fe1e8f77ca63d50d0/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/MC004/control-smallfile /Users/guribbong/code/ZCR-state/tasks/MC004/cache-control-smallfile /Users/guribbong/code/ZCR-state/tasks/MC004/zig-global-cache-mut --seed 0x2d2cedfa -Zb214f934460d2929 test -Dtest-group=mcp -Dtest-id=MC-004 -Doptimize=Debug -Dinstall-tests=true --prefix /Users/guribbong/code/ZCR-state/tasks/MC004/out-control-smallfile --summary all
