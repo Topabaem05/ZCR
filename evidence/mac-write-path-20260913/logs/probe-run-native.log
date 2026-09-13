@@ -1,0 +1,21 @@
+iter=0 cmd=rev-parse ok exit=0 ms=95
+iter=0 cmd=rev-parse ok exit=0 ms=70
+iter=0 cmd=rev-parse ok exit=0 ms=76
+iter=0 cmd=worktree ok exit=0 ms=331
+iter=1 cmd=rev-parse ok exit=0 ms=75
+iter=1 cmd=rev-parse ok exit=0 ms=82
+iter=1 cmd=rev-parse ok exit=0 ms=66
+iter=1 cmd=worktree ok exit=0 ms=75
+iter=2 cmd=rev-parse ok exit=0 ms=62
+iter=2 cmd=rev-parse ok exit=0 ms=91
+iter=2 cmd=rev-parse ok exit=0 ms=70
+iter=2 cmd=worktree ok exit=0 ms=83
+iter=3 cmd=rev-parse ok exit=0 ms=62
+iter=3 cmd=rev-parse ok exit=0 ms=75
+iter=3 cmd=rev-parse ok exit=0 ms=69
+iter=3 cmd=worktree ok exit=0 ms=74
+iter=4 cmd=rev-parse ok exit=0 ms=59
+iter=4 cmd=rev-parse ok exit=0 ms=134
+iter=4 cmd=rev-parse ok exit=0 ms=85
+iter=4 cmd=worktree ok exit=0 ms=73
+failures=0

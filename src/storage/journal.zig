@@ -108,13 +108,14 @@ pub const Store = struct {
     failed: bool = false,
     fault: if (builtin.is_test) ?*Fault else void = if (builtin.is_test) null else {},
     pub fn init(options: Options) E!Store {
-        if (builtin.os.tag != .linux) return error.Unsupported;
+        if (builtin.os.tag != .linux and builtin.os.tag != .macos) return error.Unsupported;
         if (options.caps.entries == 0 or options.caps.entries > max_entries or options.caps.storage_bytes > max_storage_bytes or options.caps.storage_bytes < receipts.max_frame_bytes) return error.InvalidArgument;
         try validateNamespace(options.namespace);
         const path = options.root.canonical_path;
         if (!std.fs.path.isAbsolute(path) or inside(path, options.namespace.root_path) or inside(path, options.namespace.git_path) or inside(path, options.namespace.common_path)) return error.InvalidArgument;
         const meta = try metadata(options.root.dir.handle, true);
         if (meta.mode != 0o700 or meta.uid != std.c.geteuid()) return error.RecoveryRequired;
+        try privateState(options.root.dir.handle);
         var credit = options.budget.reserve(options.session, .{ .parser_bytes = 192 * 1024, .fds = 4 }) catch return error.ResourceExhausted;
         errdefer options.budget.release(&credit) catch {};
         var self: Store = .{ .options = options, .namespace_digest = try options.namespace.digest(), .root_id = meta.id, .reservation = credit };
@@ -159,6 +160,7 @@ pub const Store = struct {
     pub fn validateRoot(self: *Store) E!void {
         const m = try metadata(self.options.root.dir.handle, true);
         if (!std.meta.eql(m.id, self.root_id) or m.mode != 0o700 or m.uid != std.c.geteuid()) return error.RecoveryRequired;
+        try privateState(self.options.root.dir.handle);
         const current = Io.Dir.openDirAbsolute(self.options.io, self.options.root.canonical_path, .{ .follow_symlinks = false, .iterate = true }) catch return error.RecoveryRequired;
         defer current.close(self.options.io);
         if (!std.meta.eql((try metadata(current.handle, true)).id, self.root_id)) return error.RecoveryRequired;
@@ -175,6 +177,7 @@ pub const Store = struct {
         errdefer file.close(self.options.io);
         const meta = try metadata(fd, false);
         if (meta.mode != 0o600 or meta.uid != std.c.geteuid() or !sameId(meta.id, expected.?.identity)) return error.RecoveryRequired;
+        try privateState(fd);
         return file;
     }
     fn createFile(self: *Store, name: [:0]const u8) E!Io.File {
@@ -184,6 +187,7 @@ pub const Store = struct {
         const meta = try metadata(fd, false);
         const named = policy.paths.statAt(self.options.root.dir.handle, name) catch return error.RecoveryRequired;
         if (named == null or !sameId(meta.id, named.?.identity) or meta.mode != 0o600 or meta.uid != std.c.geteuid()) return error.RecoveryRequired;
+        try privateState(fd);
         return file;
     }
     fn allocateEntry(self: *Store, name: [64]u8) E!*Entry {
@@ -517,19 +521,50 @@ pub const Metadata = struct {
         return std.meta.eql(a, b);
     }
 };
+const DarwinAcl = struct {
+    // Public Darwin API: Libc sys/acl.h.
+    extern "c" fn acl_get_fd_np(fd: c_int, kind: c_int) ?*anyopaque;
+    extern "c" fn acl_free(acl: *anyopaque) c_int;
+};
+/// Store state is private by owner and mode. On Darwin an extended ACL can grant
+/// another account access that the mode does not show, so any extended ACL on the
+/// store root or a store file is treated as an outside change.
+fn privateState(fd: std.posix.fd_t) E!void {
+    if (builtin.os.tag != .macos) return;
+    if (DarwinAcl.acl_get_fd_np(fd, 0x100)) |acl| { // ACL_TYPE_EXTENDED
+        _ = DarwinAcl.acl_free(acl);
+        return error.RecoveryRequired;
+    }
+    // Libc reports a file without an extended ACL as ENOENT.
+    if (std.c.errno(@as(c_int, -1)) != .NOENT) return error.IoFailure;
+}
 pub fn metadata(fd: std.posix.fd_t, directory: bool) E!Metadata {
+    const kind: u32 = if (directory) 0o040000 else 0o100000;
+    if (builtin.os.tag == .macos) {
+        // std.c selects fstat$INODE64 on Intel Darwin. The device id uses the same
+        // mapping as policy.paths so journal ids compare with authorized identities.
+        var s: std.c.Stat = undefined;
+        if (std.c.fstat(fd, &s) != 0) return error.IoFailure;
+        // BSD file flags (immutable, append-only, hidden, ...) are not state this
+        // store creates, so any flag means the files were changed outside it.
+        if (@as(u32, s.mode) & 0o170000 != kind or (!directory and s.nlink != 1) or s.mode & 0o7000 != 0 or s.flags != 0 or s.size < 0) return error.RecoveryRequired;
+        const UnsignedDev = std.meta.Int(.unsigned, @bitSizeOf(@TypeOf(s.dev)));
+        return .{ .id = .{ .device = @as(UnsignedDev, @bitCast(s.dev)), .inode = @intCast(s.ino) }, .size = @intCast(s.size), .mode = s.mode & 0o777, .uid = s.uid, .nlink = s.nlink, .mtime = @as(i128, s.mtimespec.sec) * std.time.ns_per_s + s.mtimespec.nsec, .ctime = @as(i128, s.ctimespec.sec) * std.time.ns_per_s + s.ctimespec.nsec };
+    }
     if (builtin.os.tag != .linux) return error.Unsupported;
     const linux = std.os.linux;
     var s: linux.Statx = undefined;
     if (linux.errno(linux.statx(fd, "", linux.AT.EMPTY_PATH, linux.STATX.BASIC_STATS, &s)) != .SUCCESS) return error.IoFailure;
-    const kind: u16 = if (directory) 0o040000 else 0o100000;
     if (s.mode & 0o170000 != kind or (!directory and s.nlink != 1) or s.mode & 0o7000 != 0) return error.RecoveryRequired;
     return .{ .id = .{ .device = (@as(u64, s.dev_major) << 32) | s.dev_minor, .inode = s.ino }, .size = s.size, .mode = s.mode & 0o777, .uid = s.uid, .nlink = s.nlink, .mtime = @as(i128, s.mtime.sec) * std.time.ns_per_s + s.mtime.nsec, .ctime = @as(i128, s.ctime.sec) * std.time.ns_per_s + s.ctime.nsec };
 }
+/// Flushes a file or directory to stable storage. On Darwin `fsync` does not ask
+/// the drive to flush its cache, so durable writes use `F_FULLFSYNC`; a filesystem
+/// that refuses it is a durability failure, never a silent `fsync` fallback.
 pub fn sync(fd: std.posix.fd_t) E!void {
     while (true) {
-        const result = std.c.fsync(fd);
-        if (result == 0) return;
+        const result = if (builtin.os.tag == .macos) std.c.fcntl(fd, std.c.F.FULLFSYNC) else std.c.fsync(fd);
+        if (result != -1) return;
         if (std.c.errno(result) != .INTR) return error.DurabilityFailed;
     }
 }

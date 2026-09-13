@@ -1,0 +1,24 @@
+# probes on 26.6.2 25G83 arm64 2026-09-13T12:18:01Z
+## F_FULLFSYNC (probe.c)
+fs=apfs file_fullfsync=0(Undefined error: 0) file_fsync=0(Undefined error: 0) dir_fullfsync=0(Undefined error: 0) dir_fsync=0(Undefined error: 0)
+## provenance (prov.c)
+orig: flistxattr=21 [com.apple.provenance len=11:01020049677fd8226b2559]
+temp: flistxattr=21 [com.apple.provenance len=11:01020049677fd8226b2559]
+remove on temp=0 errno=0
+temp-after-remove: flistxattr=21 [com.apple.provenance len=11:01020049677fd8226b2559]
+set orig value on temp=0 errno=0
+set arbitrary value=0 errno=0
+temp-after-set: flistxattr=21 [com.apple.provenance len=11:01020049677fd8226b2559]
+fcopyfile xattr=0 errno=0
+copied: flistxattr=21 [com.apple.provenance len=11:01020049677fd8226b2559]
+## xattr -l on shell and native files
+/Users/guribbong/code/ZCR-state/tasks/T12-darwin/tmp/xattr-probe/shell.txt: com.apple.provenance: 
+/Users/guribbong/code/ZCR-state/tasks/T12-darwin/tmp/xattr-probe/native.txt: com.apple.provenance: 
+## foreign provenance probe (prov2.c), source file name withheld
+foreign-source len=11 value=010200f75a622268942d0e
+set-target-before len=11 value=01020049677fd8226b2559
+fsetxattr foreign value rc=0 errno=0
+set-target-after len=11 value=01020049677fd8226b2559
+copy-target-before len=11 value=01020049677fd8226b2559
+fcopyfile(COPYFILE_XATTR) rc=0 errno=0
+copy-target-after len=11 value=01020049677fd8226b2559

@@ -1,0 +1,29 @@
+test
++- run test T11-test failure
+error: the host system (aarch64-macos.26.6.2...26.6.2-none) is unable to execute binaries from the target (aarch64-linux.5.10...6.19-gnu.2.31)
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/MAC-WRITE/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/MAC-WRITE/zig-local-cache/o/a6d677d599a6d308bda6b24240cec700/T11-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/MAC-WRITE/zig-local-cache --seed=0xab1e8a7 --listen=-
+
+test
++- run test T12-test failure
+error: the host system (aarch64-macos.26.6.2...26.6.2-none) is unable to execute binaries from the target (aarch64-linux.5.10...6.19-gnu.2.31)
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/MAC-WRITE/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/MAC-WRITE/zig-local-cache/o/30bcf5bc450a611b9256d4cf22b44198/T12-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/MAC-WRITE/zig-local-cache --seed=0xab1e8a7 --listen=-
+
+Build Summary: 8/11 steps succeeded (2 failed)
+test transitive failure
++- install T11-test success
+|  +- compile test T11-test Debug aarch64-linux-gnu success 35s MaxRSS:226M
++- run test T11-test failure
+|  +- compile test T11-test Debug aarch64-linux-gnu (reused)
++- install T12-child success
+|  +- compile test T12-child Debug aarch64-linux-gnu success 35s MaxRSS:244M
+|     +- options cached
++- install T12-test success
+|  +- compile test T12-test Debug aarch64-linux-gnu success 1m MaxRSS:218M
+|     +- options (reused)
+|     +- options success
+|        +- compile test T12-child Debug aarch64-linux-gnu (+1 more reused dependencies)
++- run test T12-test failure
+   +- compile test T12-test Debug aarch64-linux-gnu (+2 more reused dependencies)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/MAC-WRITE/zig-local-cache/o/c7f5141f8980aec12592e9f22c535a40/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-worktrees/mac-write-path /Users/guribbong/code/ZCR-state/tasks/MAC-WRITE/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/MAC-WRITE/zig-global-cache --seed 0xab1e8a7 -Z51d897cf2ae5c45e test -Dtarget=aarch64-linux-gnu -Dtest-group=write -Dinstall-tests=true --prefix /Users/guribbong/code/ZCR-state/tasks/MAC-WRITE/out-cross-aarch64-linux-gnu --summary all

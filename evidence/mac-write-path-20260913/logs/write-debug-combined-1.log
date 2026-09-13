@@ -1,0 +1,68 @@
+test
++- run test T11-test 41 pass, 1 fail (42 total)
+error: 't11_test.test.WR-007 kernel provenance attribute alone does not block publication' failed:
+       ====== expected this output: =========
+       provenance-allowed
+       ␃
+       
+       ======== instead found this: =========
+       Xase
+       ␃
+       
+       ======================================
+       First difference occurs on line 1:
+       expected:
+       provenance-allowed
+       ^ ('\x70')
+       found:
+       Xase
+       ^ ('\x58')
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:682:9: 0x102f981af in expectEqualStrings (T11-test)
+               return error.TestExpectedEqual;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/mac-write-path/tests/t11_test.zig:192:9: 0x102f98423 in expectBytes (T11-test)
+               try t.expectEqualStrings(expected, try self.root.dir.readFileAlloc(io, path, self.arena.allocator(), .limited(9 * MiB)));
+               ^
+       /Users/guribbong/code/ZCR-worktrees/mac-write-path/tests/t11_test.zig:623:5: 0x102ff87db in test.WR-007 kernel provenance attribute alone does not block publication (T11-test)
+           try f.expectBytes("file.txt", "provenance-allowed\n");
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/MAC-WRITE/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/MAC-WRITE/zig-local-cache/o/14a39193912008b01bc0d3bc11630e22/T11-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/MAC-WRITE/zig-local-cache --seed=0xf8d13eb8 --listen=-
+
+test
++- run test T12-test w
+T12 C01 patch pid=12460 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C02 patch pid=12661 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C03 patch pid=12792 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C04 patch pid=12924 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=1
+T12 C05 patch pid=13052 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C06 patch pid=13179 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C07 patch pid=13308 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C08 patch pid=13413 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C09 patch pid=13486 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C10 patch pid=13534 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C01 create pid=13581 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C02 create pid=13629 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C03 create pid=13674 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C04 create pid=13719 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=1
+T12 C05 create pid=13767 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C06 create pid=13811 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C07 create pid=13856 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C08 create pid=13903 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C09 create pid=13950 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C10 create pid=13996 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 recovery append SIGKILL verified
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/MAC-WRITE/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/MAC-WRITE/zig-local-cache/o/f38d47055c003da93e9b1caf80aa0882/T12-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/MAC-WRITE/zig-local-cache --seed=0xf8d13eb8 --listen=-
+
+Build Summary: 6/8 steps succeeded (1 failed); 65/66 tests passed (1 failed)
+test transitive failure
++- run test T11-test 41 pass, 1 fail (42 total)
+|  +- compile test T11-test Debug native success 47s MaxRSS:201M
++- run test T12-test 24 pass (24 total) 4m MaxRSS:10M
+   +- compile test T12-test Debug native success 1m MaxRSS:240M
+      +- options success
+      +- options success
+         +- compile test T12-child Debug native success 49s MaxRSS:218M
+            +- options (reused)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/MAC-WRITE/zig-local-cache/o/c7f5141f8980aec12592e9f22c535a40/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-worktrees/mac-write-path /Users/guribbong/code/ZCR-state/tasks/MAC-WRITE/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/MAC-WRITE/zig-global-cache --seed 0xf8d13eb8 -Z081f33295b58e049 test -Dtest-group=write -Doptimize=Debug --summary all

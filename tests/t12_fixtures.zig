@@ -96,24 +96,34 @@ pub const Fixture = struct {
     lease: ?core.WriterLease = null,
     pub fn init(root_path: []const u8, state_path: []const u8, create: bool, namespace: ?storage.Namespace) !*Fixture {
         const self = try A.create(Fixture);
+        errdefer A.destroy(self);
         self.* = .{ .arena = .init(A), .root = undefined, .state = undefined, .registry = undefined, .identity = undefined, .session = undefined, .authorizer = undefined, .budget = undefined, .reservation = undefined, .reserved = undefined, .store = undefined, .adapter = undefined, .old = undefined, .new = undefined, .create = create };
+        // Every step that succeeds is undone if a later one fails, so a refused
+        // store (for example on an unsupported platform) leaks nothing.
+        errdefer self.arena.deinit();
         const a = self.arena.allocator();
         self.root = .{ .dir = try std.Io.Dir.openDirAbsolute(io, root_path, .{}), .canonical_path = root_path };
+        errdefer self.root.dir.close(io);
         self.state = .{ .dir = try std.Io.Dir.openDirAbsolute(io, state_path, .{ .iterate = true }), .canonical_path = state_path };
+        errdefer self.state.dir.close(io);
         self.registry = try workspace.Registry.init(a, io, .{ .git_executable = "/usr/bin/git" });
+        errdefer self.registry.deinit() catch {};
         const id = try self.registry.registerWorkspace(io, self.root, approved);
         self.session = .{ .session_id = .{ .uuid = @splat(7) }, .security_domain = .{ .id = 1 }, .policy_digest = approved.digest, .bound_workspace = id, .bound_task = task.task_id, .capability_handle = @enumFromInt(1) };
         try self.registry.bindSession(self.session, task, self.registry.bootNonce());
         const snapshot = try self.registry.snapshot(id);
         self.identity = try workspace.identity.discover(a, io, "/usr/bin/git", self.root);
+        errdefer self.identity.deinit(io);
         self.authorizer = try policy.Authorizer.init(a, io, snapshot.root, id, task.task_id, approved, snapshot.git);
         self.budget = memory.Budget.init(1, .{ .bytes = 96 * core.limits.MiB, .fds = 64, .cpu = 1, .output_bytes = 8 * core.limits.MiB }, &self.counters);
         self.reservation = try self.budget.reserve(self.session, .{ .scratch_bytes = 24 * core.limits.MiB, .fds = 12 });
+        errdefer self.budget.release(&self.reservation) catch {};
         self.reserved = memory.ReservedAllocator.init(A, &self.reservation, &self.allocations, null);
         self.old = try content(a, false);
         self.new = try content(a, true);
         const ns = namespace orelse storage.Namespace.fromIdentity(&self.identity, self.session, @splat(12));
         self.store = try storage.Store.init(.{ .allocator = a, .io = io, .root = self.state, .namespace = ns, .budget = &self.budget, .session = self.session, .create = namespace == null });
+        errdefer self.store.deinit();
         self.adapter = try storage.Adapter.init(&self.store, task.task_id, key, self.digest());
         return self;
     }
