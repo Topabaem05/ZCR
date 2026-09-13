@@ -1,0 +1,13 @@
+{
+  "schema_version": "zcr-evidence/1",
+  "task_id": "T08",
+  "label": "mcp-releasesafe",
+  "command": "zig build test -Dtest-group=mcp -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix $STATE/rec2-out-mcp-releasesafe --summary all",
+  "exit_code": 0,
+  "source_commit": "4e7cc0fcbb0049c0bf22b389e00d150d388b0ff6",
+  "source_tree": "5c8c01adbabfaf866291187da3375578b47257a3",
+  "worktree_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/t08-mc004-rec2",
+  "binary_path": "/Users/guribbong/code/ZCR-state/tasks/MC004/rec2-out-mcp-releasesafe/bin/T08-test",
+  "binary_sha256": "fcd352e5ac38fb5b36c66d7c181e0e47a02855210e0aaf01733774f8e8fd5aed",
+  "recorded_at_unix_ms": 1789317093673
+}

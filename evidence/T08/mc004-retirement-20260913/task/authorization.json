@@ -1,0 +1,8 @@
+{
+  "scope": "T08 MC-004 test revision: tests/t08_test.zig and evidence/T08 only",
+  "authorized_by": "repository owner's explicit requests in this session: analyse and fix the MC-004 load failure, make the remaining MC-004 wall-clock waits event-based, merge PR #2, update PR #3 from main and merge PR #3",
+  "workspace": "/Users/guribbong/code/ZCR-worktrees/t08-mc004-rec2",
+  "manifest": "task/manifest.json",
+  "issued_at": "2026-09-13T16:23:12Z",
+  "note": "Issued when the PASS records were re-made at the runner commit; development commits bd54afe and ae5e4a4 predate this manifest. Does not enable production writes or change product source. Base is main 9226555 (after PR #2), merged into the branch at 7324a3e; the revision started from main f1c388a."
+}

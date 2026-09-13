@@ -1,0 +1,18 @@
+{
+  "contracts/tools.json": "6537c0961f85dd623cf76c195dab534f583052c31eff2eda54727e97083a0b4b",
+  "derivation": "sha256 of this file's bytes is corpus_sha256; test and contract hashes are sha256 of blobs at source_commit; the stress script hash is sha256 of the committed evidence copy at stress.script",
+  "description": "MCP frames, file contents (hello.txt, 128 KiB 'large', escaped, cache fixtures) and concurrency gates are embedded in the compiled test source. Temporary directories and, for runtime-cache tests, git repositories created with /usr/bin/git are generated independently in each run.",
+  "schema": "zcr-t08-corpus/1",
+  "source_commit": "ae5e4a4c2fa7ff8771985ca6cdc403952a72ed89",
+  "stress": {
+    "arguments": "<T08-test> <log dir> 10 30",
+    "exit_status": "0 only if every run exited 0; 1 if any run failed",
+    "idle_runs": 10,
+    "load": "8 concurrent `yes > /dev/null` busy loops, one per CPU, only during loaded runs",
+    "loaded_runs": 30,
+    "script": "evidence/T08/mc004-retirement-20260913/probes/mc004_stress.sh",
+    "script_sha256": "333cb0a97c4390473de532d4a887e8852b564534e0e2f40b5bbec564d983c508",
+    "superseded": "the first stress record used the earlier copy of this script, which exited 0 even after a failed run (PR #3 review); that run had fail=0 in both series and is replaced by this record"
+  },
+  "tests/t08_test.zig": "c1b25796d46b737164be49490e5f7223b54087909bb0b523398d3fe222afcb8e"
+}
