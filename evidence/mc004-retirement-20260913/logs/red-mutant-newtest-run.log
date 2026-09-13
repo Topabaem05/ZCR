@@ -1,0 +1,13 @@
+1/6 t08_test.test.MC-004 request cancellation remains local and authority revalidation rejects stale root...OK
+2/6 t08_test.test.MC-004 real partial pipe input cancellation and slow output drain without interleaving...OK
+3/6 t08_test.test.MC-004 deadline watcher interrupts before filesystem work and output failure drains...OK
+4/6 t08_test.test.MC-004 stdout failure stops even when peer keeps stdin open...OK
+5/6 t08_test.test.MC-004 retiring tool id is detached before gated arena teardown...FAIL (TestUnexpectedResult)
+/Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:615:14: 0x104fee677 in expect (T08-test)
+    if (!ok) return error.TestUnexpectedResult;
+             ^
+/Users/guribbong/code/ZCR-state/tasks/MC004/mutant/tests/t08_test.zig:573:9: 0x1050a4adf in test.MC-004 retiring tool id is detached before gated arena teardown (T08-test)
+        try testing.expect(record.object.get("error") == null);
+        ^
+6/6 t08_test.test.MC-004 pre-reserved health control credit survives ordinary budget exhaustion...OK
+5 passed; 0 skipped; 1 failed.

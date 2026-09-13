@@ -1,0 +1,13 @@
+test
++- run test T08-test w
+MC004DIAG entered=true validated_at_read=2 validated_final=4 dup=false ok_count=2
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/MC004/cache-diag && /Users/guribbong/code/ZCR-state/tasks/MC004/cache-diag/o/8e656ccb5e3e6c4ef5ee7faf351aaa31/T08-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/MC004/cache-diag --seed=0x8ac1012a --listen=-
+
+Build Summary: 5/5 steps succeeded; 6/6 tests passed
+test success
++- install T08-test success
+|  +- compile test T08-test Debug native success 13s MaxRSS:314M
+|     +- options success
++- run test T08-test 6 pass (6 total) 913ms MaxRSS:26M
+   +- compile test T08-test Debug native (+1 more reused dependencies)
+

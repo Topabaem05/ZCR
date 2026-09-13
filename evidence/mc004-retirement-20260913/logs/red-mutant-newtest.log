@@ -1,0 +1,19 @@
+test
++- run test T08-test 5 pass, 1 fail (6 total)
+error: 't08_test.test.MC-004 retiring tool id is detached before gated arena teardown' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:615:14: 0x101072677 in expect (T08-test)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /Users/guribbong/code/ZCR-state/tasks/MC004/mutant/tests/t08_test.zig:573:9: 0x101128adf in test.MC-004 retiring tool id is detached before gated arena teardown (T08-test)
+               try testing.expect(record.object.get("error") == null);
+               ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/MC004/cache-mutant-newtest && /Users/guribbong/code/ZCR-state/tasks/MC004/cache-mutant-newtest/o/5f8be1d33bda080e583e7fa7fd0ab435/T08-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/MC004/cache-mutant-newtest --seed=0x53b0c2bf --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 5/6 tests passed (1 failed)
+test transitive failure
++- run test T08-test 5 pass, 1 fail (6 total)
+   +- compile test T08-test Debug native success 18s MaxRSS:240M
+      +- options success
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/MC004/cache-mutant-newtest/o/f73c3388e88e2a4fe1e8f77ca63d50d0/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/MC004/mutant /Users/guribbong/code/ZCR-state/tasks/MC004/cache-mutant-newtest /Users/guribbong/code/ZCR-state/tasks/MC004/zig-global-cache-mut --seed 0x53b0c2bf -Z1f91a83cb20e4598 test -Dtest-group=mcp -Dtest-id=MC-004 -Doptimize=Debug --summary all

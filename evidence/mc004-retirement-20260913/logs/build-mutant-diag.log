@@ -1,0 +1,13 @@
+test
++- run test T08-test w
+MC004DIAG entered=true validated_at_read=2 validated_final=2 dup=true ok_count=1
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/MC004/cache-mutant-diag && /Users/guribbong/code/ZCR-state/tasks/MC004/cache-mutant-diag/o/05f1bb73765199044c35d2064daf5ca7/T08-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/MC004/cache-mutant-diag --seed=0xa17f37f4 --listen=-
+
+Build Summary: 5/5 steps succeeded; 6/6 tests passed
+test success
++- install T08-test success
+|  +- compile test T08-test Debug native success 12s MaxRSS:316M
+|     +- options success
++- run test T08-test 6 pass (6 total) 989ms MaxRSS:26M
+   +- compile test T08-test Debug native (+1 more reused dependencies)
+

@@ -1,0 +1,129 @@
+{
+  "schema": "zcr-evidence-bundle/1",
+  "host": {
+    "machine": "Apple M2 8 GB",
+    "os": "macOS 26.6.2 (25G83)",
+    "zig": "0.16.0"
+  },
+  "base_commit": "f1c388a7f6b68c5c221d4a7e013c12dfa6993f8c",
+  "source_commit": "bd54afe246bc9640eb1299d7afb60490fcb3cc49",
+  "source_tree": "cfb7225d576773591481f073d41c9e588536e313",
+  "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+  "changed_files": [
+    "tests/t08_test.zig"
+  ],
+  "cause": "validate_authority runs twice per successful tools/call (mcp.zig:192, mcp.zig:155), so the counter is 2 after the first call; the test required exactly 2 after sending the reused id, which passed only if the test thread read before the server executed the second call, and also passed when the reused id was rejected as a duplicate",
+  "probes": [
+    {
+      "label": "original test instrumented, 8 busy loops",
+      "source": "f1c388a + probes/instrument_diag.py (copy)",
+      "binary_sha256": "40df75b31222dc2ec23d69677f18acaf47adfa056ec27686a7ebe42200eb7ff9",
+      "runs": 20,
+      "pass": 16,
+      "fail": 4,
+      "failure_values": "entered=true validated_at_read=4 validated_final=4 dup=false ok_count=2",
+      "log": "logs/diag-original-test-loaded-20.tar.gz"
+    },
+    {
+      "label": "mutant detach-after-hook, original test",
+      "source": "f1c388a + probes/mutant_detach_after_hook.py (copy)",
+      "command": "zig build test -Dtest-group=mcp -Dtest-id=MC-004 -Doptimize=Debug --summary all",
+      "exit_code": 0,
+      "binary_sha256": "31ad7b6c2d91509efb126edf965c5ce8349dae4dab25c8a85bc8689fc3daf65f",
+      "summary": "6/6 tests passed",
+      "log": "logs/build-mutant-origtest.log"
+    },
+    {
+      "label": "mutant detach-after-hook, original test instrumented",
+      "source": "f1c388a + both probes (copy)",
+      "exit_code": 0,
+      "binary_sha256": "ad26389f481577d369d452815e5a4b1d464254f3cdaaf28c42b8e5442bed7c34",
+      "values": "validated_final=2 dup=true ok_count=1",
+      "log": "logs/build-mutant-diag.log"
+    }
+  ],
+  "runs": [
+    {
+      "label": "RED new test on mutant",
+      "source": "bd54afe test + probes/mutant_detach_after_hook.py (copy)",
+      "command": "zig build test -Dtest-group=mcp -Dtest-id=MC-004 -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/<out> --summary all",
+      "exit_code": 1,
+      "binary_sha256": "ca5363245b5d8c9778f42aa0aea851969273ee3166055b60f70944a3845bf641",
+      "summary": "5/6 passed, MC-004 retirement FAIL at record error == null",
+      "log": "logs/red-mutant-newtest.log",
+      "direct_run_log": "logs/red-mutant-newtest-run.log"
+    },
+    {
+      "label": "GREEN MC-004 Debug",
+      "source": "bd54afe",
+      "command": "zig build test -Dtest-group=mcp -Dtest-id=MC-004 -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/<out> --summary all",
+      "exit_code": 0,
+      "binary_sha256": "d832bf7675a4a9dbb6cee19658cee89d35dddcffde98727ffe7120c05b387c05",
+      "summary": "6/6 tests passed",
+      "log": "logs/commit-mc004-debug.log",
+      "pre_commit_log": "logs/green-mc004-debug.log"
+    },
+    {
+      "label": "stress new test",
+      "source": "bd54afe",
+      "command": "probes/mc004_stress.sh loop (inline): idle 10, 8 busy loops 30",
+      "binary_sha256": "d832bf7675a4a9dbb6cee19658cee89d35dddcffde98727ffe7120c05b387c05",
+      "idle": "10/10",
+      "loaded": "30/30",
+      "log": "logs/new-test-stress-idle10-loaded30.tar.gz"
+    },
+    {
+      "label": "mcp group Debug",
+      "source": "bd54afe",
+      "command": "zig build test -Dtest-group=mcp -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-commit-mcp-Debug --summary all",
+      "exit_code": 0,
+      "summary": "8/8 steps succeeded; 29/29 tests passed; 0 leaks",
+      "log": "logs/commit-mcp-Debug.log",
+      "pre_commit_log": "logs/mcp-Debug.log"
+    },
+    {
+      "label": "mcp group ReleaseSafe",
+      "source": "bd54afe",
+      "command": "zig build test -Dtest-group=mcp -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix $STATE/out-commit-mcp-ReleaseSafe --summary all",
+      "exit_code": 0,
+      "summary": "8/8 steps succeeded; 29/29 tests passed; 0 leaks",
+      "log": "logs/commit-mcp-ReleaseSafe.log",
+      "pre_commit_log": "logs/mcp-ReleaseSafe.log"
+    }
+  ],
+  "test_binaries_sha256": {
+    "Debug/T08-test": "5d6ec0265c1afd1b72b8d5f3d51a832e76662f8b801fac5f36fb3ec0e8b26676",
+    "Debug/T08-launch-test": "fbbdc04304660f0aad9672300e8ff87adc4b8eb2698ab344e50125c7e9642e83",
+    "ReleaseSafe/T08-test": "1581876c73c1a38fa4a34473fe64fcd1be2e1a3f515d9b08f0de952e0ce9c096",
+    "ReleaseSafe/T08-launch-test": "a0b6f4f33e8ec5de8d17a6d1ba46524e40a775ce62e650b6e96321f5509d9c8e",
+    "Debug/T08-test (MC-004 only)": "d832bf7675a4a9dbb6cee19658cee89d35dddcffde98727ffe7120c05b387c05"
+  },
+  "historical": {
+    "main_f1c388a_stress": "binary cc4f2983..., idle 15/15, 8 busy loops 12/15 (evidence/mac-write-path-20260913 on claude/mac-write-path)",
+    "ci_88546e8": "macOS 15 Debug failed at entered and accepted_during_retirement"
+  },
+  "not_run": [
+    "ReleaseSafe under CPU load",
+    "Linux runtime",
+    "Intel Mac runtime",
+    "macOS 15 runner"
+  ],
+  "files_sha256": {
+    "logs/build-diag.log": "de6582a940fe8b866b2ad82e3f4d1d2770f884cfd595e71d303252d60fb9ff2b",
+    "logs/build-mutant-diag.log": "8d5589fd1be6e24ade216aac4e93e1162a4b1d304b4882b67fc69394ee6e2637",
+    "logs/build-mutant-origtest.log": "716dd2ddd1d912ee9b27d4dc218d2207a451cf7d3f730eefa6ccfada20277d32",
+    "logs/commit-mc004-debug.log": "1de9c74d769d5ed9f928f6cd96c4d929d4dcaa7c190ebfe864a60242689cd880",
+    "logs/commit-mcp-Debug.log": "63e230b732f880d5405288e11da6438b378f4a4bd4e0ba1eb0a65ed12b77a3ad",
+    "logs/commit-mcp-ReleaseSafe.log": "5643b88bb92edcdf3348414e6b633e5f785dc3095c4c68fd969832ee9250d2eb",
+    "logs/diag-original-test-loaded-20.tar.gz": "9b641f15f63e9423be0e09d3892f2c855b81004e6f573b20ffc8be5fac39617c",
+    "logs/green-mc004-debug.log": "f88ba926cb450ea5aae6495ad6bd242403a586e51c2c13fcff5dcec36e5b55a7",
+    "logs/mcp-Debug.log": "965d1f402b3af530a3630c661c65ee0f3b4c7e7c5eaff2f8e3c9648b25a3399e",
+    "logs/mcp-ReleaseSafe.log": "56cd812cf1df1d76daa9a7570b0d13437967dbc39fad967b418853a310354b37",
+    "logs/new-test-stress-idle10-loaded30.tar.gz": "4d8089923d1302ef6c61aabb8932a4cfa4b43f8bd7132c93521ee9d48926fa02",
+    "logs/red-mutant-newtest-run.log": "7a18af0f1bff838f434d5f3f543d8e0b467058edf7a9c9db83e74faf09315178",
+    "logs/red-mutant-newtest.log": "42b24e4a5ddfc89ac342116548353423f58422422a0c51ca233aff642c7b779f",
+    "probes/instrument_diag.py": "319d8bba63f8702dcd5e1fdbac61413910ee738e8fc0c6ca84d4e3d714e82c79",
+    "probes/mc004_stress.sh": "d4773b5fa4dfbb50b68c2cce6f9e2ac5785221f19533f038bbe3c5e0b0b89778",
+    "probes/mutant_detach_after_hook.py": "738c25a23b47c526af48eef7003a5bb0279c7b37395b0d9a8eef6b5cab0df9da"
+  }
+}
