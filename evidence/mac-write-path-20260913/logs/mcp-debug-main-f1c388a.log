@@ -1,0 +1,9 @@
+Build Summary: 6/6 steps succeeded; 29/29 tests passed
+test success
++- run test T08-test 27 pass (27 total) 18s MaxRSS:54M
+|  +- compile test T08-test Debug native success 42s MaxRSS:229M
+|     +- options success
++- run test T08-launch-test 2 pass (2 total) 862ms MaxRSS:2M
+   +- compile test T08-launch-test Debug native success 21s MaxRSS:182M
+      +- options (reused)
+
