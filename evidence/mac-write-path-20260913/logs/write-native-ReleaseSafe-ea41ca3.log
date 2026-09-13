@@ -1,0 +1,42 @@
+test
++- run test T12-test w
+T12 C01 patch pid=36955 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C02 patch pid=37002 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C03 patch pid=37056 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C04 patch pid=37138 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=1
+T12 C05 patch pid=37277 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C06 patch pid=37329 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C07 patch pid=37379 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C08 patch pid=37474 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C09 patch pid=37577 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C10 patch pid=37667 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C01 create pid=37820 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C02 create pid=37945 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C03 create pid=38023 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C04 create pid=38074 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=1
+T12 C05 create pid=38161 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C06 create pid=38262 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C07 create pid=38384 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C08 create pid=38615 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C09 create pid=38684 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C10 create pid=38744 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 recovery append SIGKILL verified
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/MAC-WRITE/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/MAC-WRITE/zig-local-cache/o/88f4d489ccdd261e612fe95a990b34a7/T12-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/MAC-WRITE/zig-local-cache --seed=0x10d92ac9 --listen=-
+
+Build Summary: 11/11 steps succeeded; 68/68 tests passed
+test success
++- install T11-test success
+|  +- compile test T11-test ReleaseSafe native success 5m MaxRSS:241M
++- run test T11-test 43 pass (43 total) 4m MaxRSS:10M
+|  +- compile test T11-test ReleaseSafe native (reused)
++- install T12-child success
+|  +- compile test T12-child ReleaseSafe native success 6m MaxRSS:224M
+|     +- options cached
++- install T12-test success
+|  +- compile test T12-test ReleaseSafe native success 4m MaxRSS:383M
+|     +- options (reused)
+|     +- options success
+|        +- compile test T12-child ReleaseSafe native (+1 more reused dependencies)
++- run test T12-test 25 pass (25 total) 4m MaxRSS:9M
+   +- compile test T12-test ReleaseSafe native (+2 more reused dependencies)
+

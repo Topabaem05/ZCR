@@ -4,6 +4,7 @@ const t = std.testing;
 const storage = f.storage;
 const core = f.core;
 const child_exe = @import("t12_options").child_exe;
+extern "c" fn mkfifo(path: [*:0]const u8, mode: std.c.mode_t) c_int;
 const Repo = struct {
     tmp: t.TmpDir,
     arena: std.heap.ArenaAllocator,
@@ -99,9 +100,9 @@ const PublicationWitness = struct {
         return .{ .parent = parent, .temp = temp, .original = original, .parent_id = pubid.parent_id, .temp_id = pubid.temp_id, .old_id = pubid.old_file_id, .digest = try storage.recovery.publicationDigest(p) };
     }
     fn retained(fd: std.posix.fd_t, id: core.FileId) !void {
-        var st: std.os.linux.Statx = undefined;
-        try t.expectEqual(std.os.linux.E.SUCCESS, std.os.linux.errno(std.os.linux.statx(fd, "", std.os.linux.AT.EMPTY_PATH, std.os.linux.STATX.BASIC_STATS, &st)));
-        try t.expectEqual(id, core.FileId{ .device = (@as(u64, st.dev_major) << 32) | st.dev_minor, .inode = st.ino });
+        // The same identity mapping the authorizer and journal use, on every platform.
+        const entry = try f.policy.paths.statHandle(fd);
+        try t.expectEqual(id, core.FileId{ .device = entry.identity.device, .inode = entry.identity.inode });
     }
     fn validate(self: *PublicationWitness) !core.Sha256 {
         try retained(self.parent.handle, self.parent_id);
@@ -465,6 +466,60 @@ test "WR-008 malicious paths and private state modes are side effect free refusa
     try t.expectEqual(@as(c_int, 0), std.c.fchmod(fixture.state.dir.handle, 0o700));
     try repo.bytes(false, false);
 }
+const DarwinAcl = struct {
+    extern "c" fn acl_init(count: c_int) ?*anyopaque;
+    extern "c" fn acl_free(acl: *anyopaque) c_int;
+    extern "c" fn acl_create_entry(acl: *?*anyopaque, entry: *?*anyopaque) c_int;
+    extern "c" fn acl_set_tag_type(entry: *anyopaque, tag: c_int) c_int;
+    extern "c" fn acl_set_qualifier(entry: *anyopaque, qualifier: *const anyopaque) c_int;
+    extern "c" fn acl_get_permset(entry: *anyopaque, perms: *?*anyopaque) c_int;
+    extern "c" fn acl_add_perm(perms: *anyopaque, perm: c_int) c_int;
+    extern "c" fn acl_set_fd_np(fd: c_int, acl: *anyopaque, kind: c_int) c_int;
+    /// One ACL_EXTENDED_ALLOW read entry for a synthetic principal, as in t11_test.zig.
+    fn grantRead(fd: c_int) !void {
+        var acl: ?*anyopaque = acl_init(1) orelse return error.AclFixtureFailed;
+        defer _ = acl_free(acl.?);
+        var entry: ?*anyopaque = null;
+        try t.expectEqual(@as(c_int, 0), acl_create_entry(&acl, &entry));
+        try t.expectEqual(@as(c_int, 0), acl_set_tag_type(entry.?, 1)); // ACL_EXTENDED_ALLOW
+        const principal: [16]u8 = .{ 0x98, 0x21, 0x34, 0x56, 0x78, 0x9a, 0x4b, 0xcd, 0x8e, 0xf0, 0x12, 0x34, 0x56, 0x78, 0x9a, 0xbc };
+        try t.expectEqual(@as(c_int, 0), acl_set_qualifier(entry.?, &principal));
+        var perms: ?*anyopaque = null;
+        try t.expectEqual(@as(c_int, 0), acl_get_permset(entry.?, &perms));
+        try t.expectEqual(@as(c_int, 0), acl_add_perm(perms.?, 1 << 1)); // ACL_READ_DATA
+        try t.expectEqual(@as(c_int, 0), acl_set_fd_np(fd, acl.?, 0x100)); // ACL_TYPE_EXTENDED
+    }
+    /// An empty extended ACL removes every entry.
+    fn clear(fd: c_int) !void {
+        const acl = acl_init(0) orelse return error.AclFixtureFailed;
+        defer _ = acl_free(acl);
+        try t.expectEqual(@as(c_int, 0), acl_set_fd_np(fd, acl, 0x100));
+    }
+};
+test "WR-008 extended ACLs on private Darwin store state are refusals" {
+    if (@import("builtin").os.tag != .macos) return error.SkipZigTest;
+    var repo = try Repo.init(false);
+    defer repo.deinit();
+    const fixture = try f.Fixture.init(repo.root.canonical_path, repo.state, false, null);
+    defer fixture.deinit();
+    var options = fixture.store.options;
+    options.create = false;
+
+    // Mode 0700 and the right owner do not make a root with an extended ACL private.
+    try DarwinAcl.grantRead(fixture.state.dir.handle);
+    try t.expectError(error.RecoveryRequired, storage.Store.init(options));
+    try t.expectError(error.RecoveryRequired, fixture.store.validateRoot());
+    try DarwinAcl.clear(fixture.state.dir.handle);
+    try fixture.store.validateRoot();
+
+    // The same holds for a store file the store opens.
+    const header = try fixture.state.dir.openFile(f.io, "namespace", .{ .mode = .read_write });
+    defer header.close(f.io);
+    try DarwinAcl.grantRead(header.handle);
+    try t.expectError(error.RecoveryRequired, storage.Store.init(options));
+    try DarwinAcl.clear(header.handle);
+    try repo.bytes(false, false);
+}
 test "WR-005 killed recovery terminal append resumes in another fresh process" {
     var repo = try Repo.init(false);
     defer repo.deinit();
@@ -520,7 +575,9 @@ test "WR-008 temp FIFO hardlink replacement and unrecorded decoys remain untouch
         try old.root.dir.writeFile(f.io, .{ .sub_path = decoy, .data = "unrecorded decoy" });
         try old.root.dir.deleteFile(f.io, temp_name);
         if (variant == 0) {
-            try t.expectEqual(std.os.linux.E.SUCCESS, std.os.linux.errno(std.os.linux.mknodat(old.root.dir.handle, temp_name, 0o010600, 0)));
+            // mkfifo takes a path on every POSIX system; mknodat/mkfifoat need macOS 13.
+            const fifo = try std.fmt.allocPrintSentinel(repo.arena.allocator(), "{s}/{s}", .{ old.root.canonical_path, temp_name }, 0);
+            try t.expectEqual(@as(c_int, 0), mkfifo(fifo.ptr, 0o600));
         } else if (variant == 1) {
             try t.expectEqual(@as(c_int, 0), std.c.linkat(old.root.dir.handle, "sentinel", old.root.dir.handle, temp_name, 0));
         } else try old.root.dir.writeFile(f.io, .{ .sub_path = temp_name, .data = old.new });

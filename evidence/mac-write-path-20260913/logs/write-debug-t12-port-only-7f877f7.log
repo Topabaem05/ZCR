@@ -1,0 +1,785 @@
+test
++- run test T11-test 10 pass, 31 fail (41 total)
+error: 't11_test.test.WR-001 exact digest and original nonoverlap spans preserve unchanged bytes' failed:
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x104df178b in noAttributes (T11-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x104e1f63f in openOriginal (T11-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104e1a7ef in applyPatch (T11-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:186:9: 0x104e1737b in patch (T11-test)
+               return self.editor.applyPatch(io, try self.capability(.patch, spec.path.bytes), &self.lease, spec);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:200:21: 
+error: 't11_test.test.WR-001 journal receives exact live publication identities and applied transition' failed:
+       0x104e4862b in test.WR-001 exact digest and original nonoverlap spans preserve unchanged bytes (T11-test)
+           const receipt = try f.patch(.{ .path = .{ .bytes = "file.txt" }, .expected_sha256 = hash(old), .replacements = &.{ .{ .span = .{ .start = 0, .end = 5 }, .text = "ALPHA" }, .{ .span = .{ .start = 13, .end = 20 }, .text = "CHARLIE" } }, .idempotency_key = "patch-1" });
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x104df178b in noAttributes (T11-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x104e1f63f in openOriginal (T11-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104e1a7ef in applyPatch (T11-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:186:9: 0x104e1737b in patch (T11-test)
+               return self.editor.applyPatch(io, try self.capability(.patch, spec.path.bytes), &self.lease, spec);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:215:21: 0x104e46ffb in test.WR-001 journal receives exact live publication identities and applied transition (T11-test)
+           const receipt = try f.patch(simplePatch("base\n", "publication-metadata"));
+                           ^
+error: 't11_test.test.WR-004 journal records established precommit abort with truthful cancellation' failed:
+       expected error.Cancelled, found error.Unsupported
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x104df178b in noAttributes (T11-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x104e1f63f in openOriginal (T11-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104e1a7ef in applyPatch (T11-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:186:9: 0x104e1737b in patch (T11-test)
+               return self.editor.applyPatch(io, try self.capability(.patch, spec.path.bytes), &self.lease, spec);
+               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x104e17517 in expectError__anon_42427 (T11-test)
+                   return error.TestUnexpectedError;
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:241:5: 0x104e466e7 in test.WR-004 journal records established precommit abort with truthful cancellation (T11-test)
+           try t.expectError(error.Cancelled, f.patch(simplePatch("base\n", "journal-abort")));
+           ^
+error: 't11_test.test.WR-007 applied journal transition failure returns applied recovery receipt and quarantine' failed:
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x104df178b in noAttributes (T11-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x104e1f63f in openOriginal (T11-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104e1a7ef in applyPatch (T11-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:186:9: 0x104e1737b in patch (T11-test)
+               return self.editor.applyPatch(io, try self.capability(.patch, spec.path.bytes), &self.lease, spec);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:255:21: 0x104e45a53 in test.WR-007 applied journal transition failure returns applied recovery receipt and quarantine (T11-test)
+           const receipt = try f.patch(simplePatch("base\n", "transition-failure"));
+                           ^
+error: 't11_test.test.WR-010 new create publishes only complete bytes' failed:
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77
+error: 't11_test.test.WR-002 stale expected digest leaves mediated writers bytes unchanged' failed:
+       :21: 0x104df178b in noAttributes (T11-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:304:9: 0x104df118f in copyMetadata (T11-test)
+               try noAttributes(self.file.handle);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:218:9: 0x104de6d3f in finishPublish (T11-test)
+               try temp.copyMetadata(original);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:205:13: 0x104de32db in prepareAndPublish (T11-test)
+                   return err;
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:82:9: 0x104de240b in createFile (T11-test)
+               return self.prepareAndPublish(io, &parent, null, &.{}, spec.content, null, digest, spec.idempotency_key, spec.durability, generation, ticket, lease.fence);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:189:9: 0x104e2a0ef in create (T11-test)
+               return self.editor.createFile(io, try self.capability(.create, path), &self.lease, .{ .path = .{ .bytes = path }, .content = content, .idempotency_key = key });
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:271:21: 0x104e451fb in test.WR-010 new create publishes only complete bytes (T11-test)
+           const receipt = try f.create("new.txt", "whole new content\n", "create-new");
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x104df178b in noAttributes (T11-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x104e1f63f in openOriginal (T11-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104e1a7ef in applyPatch (T11-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:186:9: 0x104e1737b in patch (T11-test)
+               return self.editor.applyPatch(io, try self.capability(.patch, spec.path.bytes), &self.lease, spec);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:284:9: 0x104e44eff in test.WR-002 stale expected digest lea
+error: 't11_test.test.WR-003 overlap overflow order and UTF-8 split fail before mutation' failed:
+       ves mediated writers bytes unchanged (T11-test)
+           _ = try f.patch(simplePatch("base\n", "first"));
+               ^
+       expected error.InvalidArgument, found error.Unsupported
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x104df178b in noAttributes (T11-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x104e1f63f in openOriginal (T11-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104e1a7ef in applyPatch (T11-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:186:9: 0x104e1737b in patch (T11-test)
+               return self.editor.applyPatch(io, try self.capability(.patch, spec.path.bytes), &self.lease, spec);
+               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x104e17517 in expectError__anon_42427 (T11-test)
+                   return error.TestUnexpectedError;
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:306:9: 0x104e44bf7 in test.WR-003 overlap overflow order and UTF-8 split fail before mutation (T11-test)
+               try t.expectError(error.InvalidArgument, f.patch(spec));
+               ^
+error: 't11_test.test.WR-002 mediated change after original read is a final version conflict' failed:
+       expected error.VersionConflict, found error.Unsupported
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x104df178b in noAttributes (T11-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x104e1f63f in openOriginal (T11-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104e1a7ef in applyPatch (T11-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:186:9: 0x104e1737b in patch (T11-test)
+               return self.editor.applyPatch(io, try self.capability(.patch, spec.path.bytes), &self.lease, spec);
+               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x104e17517 in expectError__anon_42427 (T11-test)
+                   return error.TestUnexpectedError;
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:372:5: 0x104e442fb in test.WR-002 mediated change after original read is a final version conflict (T11-test)
+           try t.expectError(error.VersionConflict, f.patch(simplePatch("base\n", "paused-original")));
+           ^
+error: 't11_test.test.WR-007 ambiguous temp cleanup quarantines before and after guard admission' failed:
+       expected error.RecoveryRequired, found error.Unsupported
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x104df178b in noAttributes (T11-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x104e1f63f in openOriginal (T11-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104e1a7ef in applyPatch (T11-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:186:9: 0x104e1737b in patch (T11-test)
+               return self.editor.applyPatch(io, try self.capability(.patch, spec.path.bytes), &self.lease, spec);
+               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x104e17517 in expectError__anon_42427 (T11-test)
+                   return error.TestUnexpectedError;
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:387:9: 0x104e43d67 in test.WR-007 ambiguous temp cleanu
+error: 't11_test.test.WR-004 precommit cancellation preserves original and drains callback' failed:
+       p quarantines before and after guard admission (T11-test)
+               try t.expectError(error.RecoveryRequired, f.patch(simplePatch("base\n", "uncertain-cleanup")));
+               ^
+       expected error.Cancelled, found error.Unsupported
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x104df178b in noAttributes (T11-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x104e1f63f in openOriginal (T11-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104e1a7ef in applyPatch (T11-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:186:9: 0x104e1737b in patch (T11-test)
+               return self.editor.applyPatch(io, try self.capability(.patch, spec.path.bytes), &self.lease, spec);
+               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x104e17517 in expectError__anon_42427 (T11-test)
+                   return error.TestUnexpectedError;
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:401:5: 0x104e4391f in test.WR-004 precommit ca
+error: 't11_test.test.WR-004 postcommit cancellation returns applied receipt with observation' failed:
+       ncellation preserves original and drains callback (T11-test)
+           try t.expectError(error.Cancelled, f.patch(simplePatch("base\n", "cancel-before")));
+           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x104df178b in noAttributes (T11-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x104e1f63f in openOriginal (T11-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104e1a7ef in applyPatch (T11-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:186:9: 0x104e1737b in patch (T11-test)
+               return self.editor.applyPatch(io, try self.capability(.patch, spec.path.bytes), &self.lease, spec);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:412:21: 0x104e43527 in test.WR-004 postcommit cancellation returns applied receipt with observation (T11-test)
+           const receipt = try
+error: 't11_test.test.WR-007 injected ENOSPC read-only metadata and prepare failures preserve original' failed:
+        f.patch(simplePatch("base\n", "cancel-after"));
+                           ^
+       expected error.IoFailure, found error.Unsupported
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x104df178b in noAttributes (T11-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x104e1f63f in openOriginal (T11-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104e1a7ef in applyPatch (T11-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:186:9: 0x104e1737b in patch (T11-test)
+               return self.editor.applyPatch(io, try self.capability(.patch, spec.path.bytes), &self.lease, spec);
+               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x104e17517 in expectError__anon_42427 (T11-test)
+                   return error.TestUnexpectedError;
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:424:9: 0x104e4329f in test.WR-007 injected ENOSPC read-only metadata and prepare failures preserve original (T11-test)
+               try t.expectError(error.IoFailure, f.patch(simplePatch("base\n", "io-fail")));
+               ^
+error: 't11_test.test.WR-007 postcommit sync failure is applied with durability error' failed:
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x104df178b in noAttributes (T11-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x104e1f63f in openOriginal (T11-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104e1a7ef in applyPatch (T11-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:186:9: 0x104e1737b in patch (T11-test)
+               return self.editor.applyPatch(io, try self.capability(.patch, spec.path.bytes), &self.lease, spec);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:436:21: 0x104e42d9b in test.WR-007 postcommit sync failure is applied with durability error (T11-test)
+           const receipt = try f.patch(spec);
+                           ^
+error: 't11_test.test.WR-004 revoked callback cannot pass final publication fence' failed:
+       expected error.FenceMismatch, found error.Unsupported
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x104df178b in noAttributes (T11-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x104e1f63f in openOriginal (T11-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104e1a7ef in applyPatch (T11-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:186:9: 0x104e1737b in patch (T11-test)
+               return self.editor.applyPatch(io, try self.capability(.patch, spec.path.bytes), &self.lease, spec);
+               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x104e17517 in expectError__anon_42427 (T11-test)
+                   return error.TestUnexpectedError;
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:448:5: 0x104e42a5f in test.WR-004 revoked callback cannot pass final publication fence (T11-test)
+           try t.expectError(error.FenceMismatch, f.patch(simplePatch("base\n", "revoked")));
+           ^
+error: 't11_test.test.IS-007 moved parent is refused after temp preparation' failed:
+       expected error.RecoveryRequired, found error.Unsupported
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x104df178b in noAt
+error: 't11_test.test.WR-001 primitive preserves ordinary mode and exact source identity' failed:
+       tributes (T11-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x104e1f63f in openOriginal (T11-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104e1a7ef in applyPatch (T11-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:186:9: 0x104e1737b in patch (T11-test)
+               return self.editor.applyPatch(io, try self.capability(.patch, spec.path.bytes), &self.lease, spec);
+               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x104e17517 in expectError__anon_42427 (T11-test)
+                   return error.TestUnexpectedError;
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:463:5: 0x104e42703 in test.IS-007 moved parent is refused after temp preparation (T11-test)
+           try t.expectError(error.RecoveryRequired, f.patch(spec));
+           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x104df178b in noAttributes (T11-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x104e1f63f in openOriginal (T11-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:539:20: 0x104e4109f in test.WR-001 primitive preserves ordinary mode and exact source identity (T11-test)
+           var original = try parent.openOriginal(io);
+                          ^
+error: 't11_test.test.WR-001 idempotency reuses receipt and rejects altered canonical payload' failed:
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x104df178b in noAttributes (T11-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x104e1f63f in openOriginal (T11-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104e1a7ef in applyPatch (T11-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:186:9: 0x104e1737b in patch (T11-test)
+               return self.editor.applyPatch(io, try self.capability(.patch, spec.path.bytes), &self.lease, spec);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:654:19: 0x104e3762b in test.WR-001 idempotency reuses receipt and rejects altered canonical payload (T11-test)
+           const first = try f.patch(spec);
+                         ^
+error: 't11_test.test.WR-003 full 8 MiB boundary and decoded output growth stay bounded' failed:
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x104df178b in noAttributes (T11-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:304:9: 0x104df118f in copyMetadata (T11-test)
+               try noAttributes(self.file.handle);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:218:9: 0x104de6d3f in finishPublish (T11-test)
+               try temp.copyMetadata(original);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:205:13: 0x104de32db in prepareAndPublish (T11-test)
+                   return err;
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:82:9: 0x104de240b in createFile (T11-test)
+               return self.prepareAndPublish(io, &parent, null, &.{}, spec.content, null, digest, spec.idempotency_key, spec.durability, generation, ticket, lease.fence);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:189:9: 0x104e2a0ef in create (T11-test)
+               return self.editor.createFile(io, try self.capability(.create, path), &self.lease, .{ .path = .{ .bytes = path }, .content = content, .idempotency_key = key });
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:677:9: 0x104e36dd3 in test.WR-003 full 8 MiB boundary and decoded output growth stay bounded (T11-test)
+           _ = try f.create("limit.txt", text[0 .. 8 * MiB], "exact-limit");
+               ^
+error: 't11_test.test.WR-004 precommit deadline and missing reservation leave original unchanged' failed:
+       expected error.ResourceExhausted, found error.Unsupported
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x104df178b in noAttributes (T11-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x104e1f63f in openOriginal (T11-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104e1a7ef in applyPatch (T11-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:186:9: 0x104e1737b in patch (T11-test)
+               return self.editor.applyPatch(io, try self.capability(.patch, spec.path.bytes), &self.lease, spec);
+               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x104e17517 in expectError__anon_42427 (T11-test)
+                   return error.TestUnexpectedError;
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:710:5: 0x104e35feb in test.WR-004 precommit deadline and missing reservation leave original unchanged (T11-test)
+           try t.expectError(error.ResourceExhausted, f.patch(simplePatch("base\n", "no-memory")));
+           ^
+error: 't11_test.test.WR-007 allocation faults free all buffers and never publish partial text' failed:
+       expected error.OutOfMemory, found error.Unsupported
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x104df178b in noAttributes (T11-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x104e1f63f in openOriginal (T11-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104e1a7ef in applyPatch (T11-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:186:9: 0x104e1737b in patch (T11-test)
+               return self.editor.applyPatch(io, try self.capability(.patch, spec.path.bytes), &self.lease, spec);
+               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x104e34e07 in expectEqualInner__anon_44800 (T11-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x104e35297 in expectEqual (T11-test)
+           ret
+error: 't11_test.test.WR-007 receipt failure preserves applied outcome and disables further writes' failed:
+       urn expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:728:13: 0x104e35353 in test.WR-007 allocation faults free all buffers and never publish partial text (T11-test)
+                   try t.expectEqual(error.OutOfMemory, err);
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x104df178b in noAttributes (T11-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x104e1f63f in openOriginal (T11-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104e1a7ef in applyPatch (T11-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:186:9: 0x104e1737b in patch (T11-test)
+               return self.editor.applyPatch(io, try self.capability(.patch, spec.path.bytes), &self.lease, spec);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:742:21: 0x104e34473 in test.WR-007 receipt failure preserves applied outcome and disables further writes (T11-test)
+           const receipt = try f.patch(simp
+error: 't11_test.test.WR-010 concurrent callbacks racing one create yield one truthful applied receipt' failed:
+       lePatch("base\n", "receipt-failure"));
+                           ^
+       expected error.VersionConflict, found error.Unsupported
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x104e32277 in expectEqualInner__anon_44610 (T11-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x104e32e43 in expectEqual (T11-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:802:22: 0x104e32f1b in test.WR-010 concurrent callbacks racing one create yield one truthful applied receipt (T11-test)
+               } else |err| try t.expectEqual(error.VersionConflict, err);
+                            ^
+error: 't11_test.test.WR-010 distinct bound sessions cannot bypass the exclusive task writer lease' failed:
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x104df178b in noAttributes (T11-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:304:9: 0x104df118f in copyMetadata (T11-test)
+               try noAttributes(self.file.handle);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:218:9: 0x104de6d3f in finishPublish (T11-test)
+               try temp.copyMetadata(original);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:205:13: 0x104de32db in prepareAndPublish (T11-test)
+                   return err;
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:82:9: 0x104de240b in createFile (T11-test)
+               return self.prepareAndPublish(io, &parent, null, &.{}, spec.content, null, digest, spec.idempotency_key, spec.durability, generation, ticket, lease.fence);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:189:9: 0x104e2a0ef in create (T11-test)
+               return self.editor.createFile(io, try self.capability(.create, path), &self.lease, .{ .path = .{ .bytes = path }, .content = content, .idempotency_key = key });
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:819:21: 0x104e304a3 in test.WR-010 distinct bound sessions cannot bypass the exclusive task writer lease (T11-test)
+           const receipt = try f.create("new.txt", "session a complete bytes\n", "session-a-only");
+                           ^
+error: 't11_test.test.WR-004 actual publication linearizes before concurrent lease revocation returns' failed:
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x104df178b in noAttributes (T11-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x104e1f63f in openOriginal (T11-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104e1a7ef in applyPatch (T11-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:186:9: 0x104e1737b in patch (T11-test)
+               return self.editor.applyPatch(io, try self.capability(.patch, spec.path.bytes), &self.lease, spec);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:889:21: 0x104e2e673 in test.WR-004 actual publication linearizes before concurrent lease revocation returns (T11-test)
+           const receipt = try outcome;
+                           ^
+error: 't11_test.test.WR-007 syscall error after successful rename reconciles to applied receipt' failed:
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x104df178b in noAttributes (T11-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x104e1f63f in openOriginal (T11-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104e1a7ef in applyPatch (T11-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:186:9: 0x104e1737b in patch (T11-test)
+               return self.editor.applyPatch(io, try self.capability(.patch, spec.path.bytes), &self.lease, spec);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:905:101: 0x104e2c92b in test.WR-007 syscall error after successful rename reconciles to applied receipt (T11-test)
+               const receipt = if (create) try f.create("new.txt", "complete\n", "uncertain-syscall") else try f.patch(simplePatch("base\n", "uncertain-syscall"));
+                                                                                                           ^
+error: 't11_test.test.WR-007 failed receipt atomically blocks an already queued filesystem publisher' failed:
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x104df178b in noAttributes (T11-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x104e1f63f in openOriginal (T11-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104e1a7ef in applyPatch (T11-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:186:9: 0x104e1737b in patch (T11-test)
+               return self.editor.applyPatch(io, try self.capability(.patch, spec.path.bytes), &self.lease, spec);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:1012:21: 0x104e229c3 in queuedFailureCase (T11-test)
+           const receipt = try outcome;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:1022:5: 0x104e24ffb in test.WR-007 failed receipt atomically blocks an already queued filesystem publisher (T11-test)
+           try queuedFailureCase(.record, .E_RECOVERY_REQUIRED);
+           ^
+error: 't11_test.test.WR-007 unresolved durability blocks an already queued filesystem publisher' failed:
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x104df178b in noAttributes (T11-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x104e1f63f in openOriginal (T11-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104e1a7ef in applyPatch (T11-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:186:9: 0x104e1737b in patch (T11-test)
+               return self.editor.applyPatch(io, try self.capability(.patch, spec.path.bytes), &self.lease, spec);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:1012:21: 0x104e229c3 in queuedFailureCase (T11-test)
+           const receipt = try outcome;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:1026:5: 0x104e234a3 in test.WR-007 unresolved durability blocks an already queued filesystem publisher (T11-test)
+           try queuedFailureCase(.sync, .E_DURABILITY);
+           ^
+error: 't11_test.test.WR-007 ambiguous prepare errors preserve exact pending temp and quarantine' failed:
+       expected error.RecoveryRequired, found error.Unsupported
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x104df178b in noAttributes (T11-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x104e1f63f in openOriginal (T11-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104e1a7ef in applyPatch (T11-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:186:9: 0x104e1737b in patch (T11-test)
+               return self.editor.applyPatch(io, try self.capability(.patch, spec.path.bytes), &self.lease, spec);
+               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x104e17517 in expectError__anon_42427 (T11-test)
+                   return error.TestUnexpectedError;
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:1048:9: 0x104e2158f in test.WR-007 ambiguous prepare errors preserve exact pending temp and quarantine (T11-test)
+               try t.expectError(error.RecoveryRequired, f.patch(simplePatch("base\n", "prepare-error")));
+               ^
+error: 't11_test.test.WR-007 impossible journal result shapes preserve uncertainty and quarantine' failed:
+       expected error.RecoveryRequired, found error.Unsupported
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x104df178b in noAttributes (T11-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x104e1f63f in openOriginal (T11-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104e1a7ef in applyPatch (T11-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:186:9: 0x104e1737b in patch (T11-test)
+               return self.editor.applyPatch(io, try self.capability(.patch, spec.path.bytes), &self.lease, spec);
+               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x104e17517 in expectError__anon_42427 (T11-test)
+                   return error.TestUnexpectedError;
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:1063:9: 0x104e20f87 in test.WR-007 impossi
+error: 't11_test.test.WR-007 failed abort persistence keeps pending state and quarantines' failed:
+       ble journal result shapes preserve uncertainty and quarantine (T11-test)
+               try t.expectError(error.RecoveryRequired, f.patch(simplePatch("base\n", "impossible-shape")));
+               ^
+       expected error.RecoveryRequired, found error.Unsupported
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x104df178b in noAttributes (T11-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x104e1f63f in openOriginal (T11-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104e1a7ef in applyPatch (T11-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:186:9: 0x104e1737b in patch (T11-test)
+               return self.editor.applyPatch(io, try self.capability(.patch, spec.path.bytes), &self.lease, spec);
+               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x104e17517 in expectError__anon_42427 (T11-test)
+                   return error.TestUnexpectedError;
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:1081:5: 0x104e17d6b in test.WR-007 failed abort persistence keeps pending state and quarantines (T11-test)
+           try t.expectError(error.RecoveryRequired, f.patch(simplePatch("base\n", "abort-failure")));
+           ^
+error: 't11_test.test.WR-001 durable create exposes actual chunk metadata sync and receipt crash boundaries' failed:
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x104df178b in noAttributes (T11-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:304:9: 0x104df118f in copyMetadata (T11-test)
+               try noAttributes(self.file.handle);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:218:9: 0x104de6d3f in finishPublish (T11-test)
+               try temp.copyMetadata(original);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:205:13: 0x104de32db in prepareAndPublish (T11-test)
+                   return err;
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:82:9: 0x104de240b in createFile (T11-test)
+               return self.prepareAndPublish(io, &parent, null, &.{}, spec.content, null, digest, spec.idempotency_key, spec.durability, generation, ticket, lease.fence);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t11_test.zig:1109:21: 0x104ddd78b in test.WR-001 durable create exposes actual chunk metadata sync and receipt crash boundaries (T11-test)
+           const receipt = try f.editor.createFile(io, try f.capability(.create, "durable.txt"), &f.lease, .{ .path = .{ .bytes = "durable.txt" }, .content = text, .idempotency_key = "durable-create", .durability = .durable });
+                           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T12-darwin/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T12-darwin/zig-local-cache/o/5bcb1152d65a46f02807e2d6ad8a06a3/T11-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T12-darwin/zig-local-cache --seed=0x281b556e --listen=-
+
+test
++- run test T12-test 14 pass, 10 fail (24 total)
+error: 't12_test.test.WR-005 ten real SIGKILL writer points each patch create and fresh recovery twice' failed:
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_fixtures.zig:43:21: 0x1045cf923 in read (T12-test)
+               if (n <= 0) return error.ProtocolClosed;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_fixtures.zig:49:5: 0x1045d0867 in receive__anon_49060 (T12-test)
+           try read(fd, buf[0..4]);
+           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_test.zig:120:15: 0x10463c89f in writerAck (T12-test)
+           var ack = try f.receive(child.stdout.?.handle, f.Ack, repo.arena.allocator());
+                     ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_test.zig:188:21: 0x10464d00f in test.WR-005 ten real SIGKILL writer points each patch create and fresh recovery twice (T12-test)
+               const ack = try writerAck(&repo, &child);
+                           ^
+error: 't12_test.test.WR-007 actual T11 persistent append failures preserve applied and quarantine' failed:
+       expected error.RecoveryRequired, found error.Unsupported
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x10456fd4f in noAttributes (T12-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x1045727c3 in openOriginal (T12-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104565d8f in applyPatch (T12-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_fixtures.zig:165:9: 0x10452dab3 in runKey (T12-test)
+               return editor.applyPatch(io, cap, &lease, .{ .path = .{ .bytes = "file.txt" }, .expected_sha256 = storage.receipts.hash(self.old), .replacements = &.{.{ .span = .{ .start = 0, .end = size }, .text = self.new }}, .idempotency_key = operation_key, .durability = .durable });
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_fixtures.zig:155:9: 0x10452db67 in run (T12-test)
+               return self.runKey(key, fault);
+               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x10452dd03 in expectError__anon_38147 (T12-test)
+                   return error.TestUnexpectedError;
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_test.zig:386:13: 0x104640537 in test.WR-007 actual T11 persistent append failures preserve applied and quarantine (T12-test)
+                   try t.expectError(error.RecoveryRequired, fixture.run(null));
+                   ^
+error: 't12_test.test.WR-005 killed recovery terminal append resumes in another fresh process' failed:
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_fixtures.zig:43:21: 0x1045cf923 in read (T12-test)
+               if (n <= 0) return error.ProtocolClosed;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_fixtures.zig:49:5: 0x1045d0867 in receive__anon_49060 (T12-test)
+           try read(fd, buf[0..4]);
+           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_test.zig:120:15: 0x10463c89f in writerAck (T12-test)
+           var ack = try f.receive(child.stdout.?.handle, f.Ack, repo.arena.allocator());
+                     ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_test.zig:479:17: 0x10463d3ef in test.WR-005 killed recovery terminal append resumes in another fresh process (T12-test)
+           const ack = try writerAck(&repo, &child);
+                       ^
+error: 't12_test.test.WR-007 durable success short writes and parent sync failure retain truth' failed:
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x10456fd4f in noAttributes (T12-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x1045727c3 in openOriginal (T12-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104565d8f in applyPatch (T12-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_fixtures.zig:165:9: 0x10452dab3 in runKey (T12-test)
+               return editor.applyPatch(io, cap, &lease, .{ .path = .{ .bytes = "file.txt" }, .expected_sha256 = storage.receipts.hash(self.old), .replacements = &.{.{ .span = .{ .start = 0, .end = size }, .text = self.new }}, .idempotency_key = operation_key, .durability = .durable });
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_fixtures.zig:155:9: 0x10452db67 in run (T12-test)
+               return self.runKey(key, fault);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_test.zig:501:25: 0x10463bd2b in test.WR-007 durable success short writes and parent sync failure retain truth (T12-test)
+               const receipt = try fixture.run(if (fail_sync) &edit_fault else null)
+error: 't12_test.test.WR-007 real persistent failures atomically block queued filesystem publication' failed:
+       ;
+                               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x10456fd4f in noAttributes (T12-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x1045727c3 in openOriginal (T12-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104565d8f in applyPatch (T12-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_fixtures.zig:165:9: 0x10452dab3 in runKey (T12-test)
+               return editor.applyPatch(io, cap, &lease, .{ .path = .{ .bytes = "file.txt" }, .expected_sha256 = storage.receipts.hash(self.old), .replacements = &.{.{ .span = .{ .start = 0, .end = size }, .text = self.new }}, .idempotency_key = operation_key, .durability = .durable });
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_fixtures.zig:155:9: 0x10452db67 in run (T12-test)
+               return self.runKey(key, fault);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_test.zig:626:25: 0x104636a73 in test.WR-007 real persistent failures atomically block queued filesystem publication (T12-test)
+               const receipt = try outcome;
+                               ^
+error: 't12_test.test.WR-007 actual kernel EACCES before PREPARED after publish and before receipt' failed:
+       expected error.RecoveryRequired, found error.Unsupported
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x10456fd4f in noAttributes (T12-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x1045727c3 in openOriginal (T12-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104565d8f in applyPatch (T12-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_fixtures.zig:165:9: 0x10452dab3 in runKey (T12-test)
+               return editor.applyPatch(io, cap, &lease, .{ .path = .{ .bytes = "file.txt" }, .expected_sha256 = storage.receipts.hash(self.old), .replacements = &.{.{ .span = .{ .start = 0, .end = size }, .text = self.new }}, .idempotency_key = operation_key, .durability = .durable });
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_fixtures.zig:155:9: 0x10452db67 in run (T12-test)
+               return self.runKey(key, fault);
+               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x10452dd03 in expectError__anon_38147 (T12-test)
+                   return error.TestUnexpectedError;
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_test.zig:731:27: 0x1045fddbf in test.WR-007 actual kernel EACCES before PREPARED after publish and before receipt (T12-test)
+               if (variant == 0) try t.expectError(error.RecoveryRequired, fixture.run(&edit_fault)) else {
+                                 ^
+error: 't12_test.test.WR-006 ancient and future receipt clocks retain borrowed output under cap pressure' failed:
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x10456fd4f in noAttributes (T12-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x1045727c3 in openOriginal (T12-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104565d8f in applyPatch (T12-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_fixtures.zig:165:9: 0x10452dab3 in runKey (T12-test)
+               return editor.applyPatch(io, cap, &lease, .{ .path = .{ .bytes = "file.txt" }, .expected_sha256 = storage.receipts.hash(self.old), .replacements = &.{.{ .span = .{ .start = 0, .end = size }, .text = self.new }}, .idempotency_key = operation_key, .durability = .durable });
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_fixtures.zig:155:9: 0x10452db67 in run (T12-test)
+               return self.runKey(key, fault);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_test.zig:851:25: 0x1045f0dd3 in test.WR-006 ancient and future receipt clocks retain borrowed output under cap pressure (T12-test)
+               const receipt = try fixture.run(null);
+                               ^
+error: 't12_test.test.WR-006 F1 terminal history survives actual commit commit and abort commit fresh restart' failed:
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x10456fd4f in noAttributes (T12-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x1045727c3 in openOriginal (T12-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104565d8f in applyPatch (T12-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_fixtures.zig:165:9: 0x10452dab3 in runKey (T12-test)
+               return editor.applyPatch(io, cap, &lease, .{ .path = .{ .bytes = "file.txt" }, .expected_sha256 = storage.receipts.hash(self.old), .replacements = &.{.{ .span = .{ .start = 0, .end = size }, .text = self.new }}, .idempotency_key = operation_key, .durability = .durable });
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_fixtures.zig:155:9: 0x10452db67 in run (T12-test)
+               return self.runKey(key, fault);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_test.zig:955:16: 0x1045e73eb in test.WR-006 F1 terminal history survives actual commit commit and abort commit fresh restart (T12-test)
+               } else try fixture.run(&fault);
+                      ^
+error: 't12_test.test.WR-005 F2 terminal prefixes normalize incomplete uncertainty tails before replay' failed:
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x10456fd4f in noAttributes (T12-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x1045727c3 in openOriginal (T12-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104565d8f in applyPatch (T12-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_fixtures.zig:165:9: 0x10452dab3 in runKey (T12-test)
+               return editor.applyPatch(io, cap, &lease, .{ .path = .{ .bytes = "file.txt" }, .expected_sha256 = storage.receipts.hash(self.old), .replacements = &.{.{ .span = .{ .start = 0, .end = size }, .text = self.new }}, .idempotency_key = operation_key, .durability = .durable });
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_fixtures.zig:155:9: 0x10452db67 in run (T12-test)
+               return self.runKey(key, fault);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_test.zig:1003:16: 0x1045d2c1f in test.WR-005 F2 terminal prefixes normalize incomplete uncertainty tails before replay (T12-test)
+               } else try fixture.run(&fault);
+                      ^
+error: 't12_test.test.WR-008 F2 failed tail preservation and complete uncertainty remain quarantined' failed:
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:77:21: 0x10456fd4f in noAttributes (T12-test)
+           if (count != 0) return if (count > 0) error.Unsupported else error.IoFailure;
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/publish.zig:157:9: 0x1045727c3 in openOriginal (T12-test)
+               try noAttributes(fd);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/src/fs/edit.zig:50:24: 0x104565d8f in applyPatch (T12-test)
+               var original = try parent.openOriginal(io);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_fixtures.zig:165:9: 0x10452dab3 in runKey (T12-test)
+               return editor.applyPatch(io, cap, &lease, .{ .path = .{ .bytes = "file.txt" }, .expected_sha256 = storage.receipts.hash(self.old), .replacements = &.{.{ .span = .{ .start = 0, .end = size }, .text = self.new }}, .idempotency_key = operation_key, .durability = .durable });
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_fixtures.zig:155:9: 0x10452db67 in run (T12-test)
+               return self.runKey(key, fault);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-darwin/tests/t12_test.zig:1042:16: 0x1045317d7 in test.WR-008 F2 failed tail preservation and complete uncertainty remain quarantined (T12-test)
+               } else try old.run(&fault);
+                      ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T12-darwin/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T12-darwin/zig-local-cache/o/fcf4a1a68263d40d0f980986ccb805c6/T12-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T12-darwin/zig-local-cache --seed=0x281b556e --listen=-
+
+Build Summary: 5/8 steps succeeded (2 failed); 24/65 tests passed (41 failed)
+test transitive failure
++- run test T11-test 10 pass, 31 fail (41 total)
+|  +- compile test T11-test Debug native success 16s MaxRSS:219M
++- run test T12-test 14 pass, 10 fail (24 total)
+   +- compile test T12-test Debug native success 17s MaxRSS:276M
+      +- options success
+      +- options success
+         +- compile test T12-child Debug native success 17s MaxRSS:234M
+            +- options (reused)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T12-darwin/zig-local-cache/o/c7f5141f8980aec12592e9f22c535a40/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-worktrees/t12-darwin /Users/guribbong/code/ZCR-state/tasks/T12-darwin/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T12-darwin/zig-global-cache --seed 0x281b556e -Za6d0e885a85693b8 test -Dtest-group=write -Doptimize=Debug --summary all
