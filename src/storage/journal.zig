@@ -108,7 +108,7 @@ pub const Store = struct {
     failed: bool = false,
     fault: if (builtin.is_test) ?*Fault else void = if (builtin.is_test) null else {},
     pub fn init(options: Options) E!Store {
-        if (builtin.os.tag != .linux) return error.Unsupported;
+        if (builtin.os.tag != .linux and builtin.os.tag != .macos) return error.Unsupported;
         if (options.caps.entries == 0 or options.caps.entries > max_entries or options.caps.storage_bytes > max_storage_bytes or options.caps.storage_bytes < receipts.max_frame_bytes) return error.InvalidArgument;
         try validateNamespace(options.namespace);
         const path = options.root.canonical_path;
@@ -518,18 +518,32 @@ pub const Metadata = struct {
     }
 };
 pub fn metadata(fd: std.posix.fd_t, directory: bool) E!Metadata {
+    const kind: u32 = if (directory) 0o040000 else 0o100000;
+    if (builtin.os.tag == .macos) {
+        // std.c selects fstat$INODE64 on Intel Darwin. The device id uses the same
+        // mapping as policy.paths so journal ids compare with authorized identities.
+        var s: std.c.Stat = undefined;
+        if (std.c.fstat(fd, &s) != 0) return error.IoFailure;
+        // BSD file flags (immutable, append-only, hidden, ...) are not state this
+        // store creates, so any flag means the files were changed outside it.
+        if (@as(u32, s.mode) & 0o170000 != kind or (!directory and s.nlink != 1) or s.mode & 0o7000 != 0 or s.flags != 0 or s.size < 0) return error.RecoveryRequired;
+        const UnsignedDev = std.meta.Int(.unsigned, @bitSizeOf(@TypeOf(s.dev)));
+        return .{ .id = .{ .device = @as(UnsignedDev, @bitCast(s.dev)), .inode = @intCast(s.ino) }, .size = @intCast(s.size), .mode = s.mode & 0o777, .uid = s.uid, .nlink = s.nlink, .mtime = @as(i128, s.mtimespec.sec) * std.time.ns_per_s + s.mtimespec.nsec, .ctime = @as(i128, s.ctimespec.sec) * std.time.ns_per_s + s.ctimespec.nsec };
+    }
     if (builtin.os.tag != .linux) return error.Unsupported;
     const linux = std.os.linux;
     var s: linux.Statx = undefined;
     if (linux.errno(linux.statx(fd, "", linux.AT.EMPTY_PATH, linux.STATX.BASIC_STATS, &s)) != .SUCCESS) return error.IoFailure;
-    const kind: u16 = if (directory) 0o040000 else 0o100000;
     if (s.mode & 0o170000 != kind or (!directory and s.nlink != 1) or s.mode & 0o7000 != 0) return error.RecoveryRequired;
     return .{ .id = .{ .device = (@as(u64, s.dev_major) << 32) | s.dev_minor, .inode = s.ino }, .size = s.size, .mode = s.mode & 0o777, .uid = s.uid, .nlink = s.nlink, .mtime = @as(i128, s.mtime.sec) * std.time.ns_per_s + s.mtime.nsec, .ctime = @as(i128, s.ctime.sec) * std.time.ns_per_s + s.ctime.nsec };
 }
+/// Flushes a file or directory to stable storage. On Darwin `fsync` does not ask
+/// the drive to flush its cache, so durable writes use `F_FULLFSYNC`; a filesystem
+/// that refuses it is a durability failure, never a silent `fsync` fallback.
 pub fn sync(fd: std.posix.fd_t) E!void {
     while (true) {
-        const result = std.c.fsync(fd);
-        if (result == 0) return;
+        const result = if (builtin.os.tag == .macos) std.c.fcntl(fd, std.c.F.FULLFSYNC) else std.c.fsync(fd);
+        if (result != -1) return;
         if (std.c.errno(result) != .INTR) return error.DurabilityFailed;
     }
 }
