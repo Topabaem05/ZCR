@@ -619,8 +619,9 @@ test "WR-007 kernel provenance attribute alone does not block publication" {
     defer parent.close(io);
     const original = try parent.openOriginal(io);
     original.file.close(io);
+    // simplePatch replaces the first byte with "X"; its second argument is the idempotency key.
     _ = try f.patch(simplePatch("base\n", "provenance-allowed"));
-    try f.expectBytes("file.txt", "provenance-allowed\n");
+    try f.expectBytes("file.txt", "Xase\n");
     try expectNoTemps(f, ".");
 
     // A user attribute next to the provenance tag is still refused.
