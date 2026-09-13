@@ -14,12 +14,16 @@ Exact commands, exit codes, source/tree, contract digest and test binary SHA-256
 
 ## Results on this host
 
+The reviewed source is `ea41ca3` (tree `ea7f602c…`), which includes the PR #2 review fixes. `report.json` `runs` and `test_binaries_sha256` come from builds of that commit; earlier runs are kept under `historical_runs` with their own sources.
+
 | Run | Source | Result |
 |---|---|---|
-| write group Debug, unmodified `main` | `f1c388a` | 11/65 pass, 54 fail, 168 leaks |
-| write group Debug, T12 port only | `7f877f7` | T11 10/41, T12 14/24, 0 leaks |
-| write group Debug, combined | `5142fae` | **66/66 pass, 0 leaks** |
-| write group ReleaseSafe, combined | `5142fae` | **66/66 pass, 0 leaks** |
+| **write group Debug** | **`ea41ca3`** | **68/68 pass (T11 43, T12 25), 0 leaks** |
+| **write group ReleaseSafe** | **`ea41ca3`** | **68/68 pass (T11 43, T12 25), 0 leaks** |
+| x86_64-linux-gnu write tests | `ea41ca3` | T11, T12, T12-child compile and install; not executed |
+| earlier: write group Debug and ReleaseSafe, combined before review fixes | `5142fae` | 66/66 each, 0 leaks |
+| earlier: write group Debug, T12 port only | `7f877f7` | T11 10/41, T12 14/24, 0 leaks |
+| baseline: write group Debug, unmodified `main` | `f1c388a` | 11/65 pass, 54 fail, 168 leaks |
 | mcp group Debug, `main` | `f1c388a` | 29/29 pass (MC-004 passed) |
 | x86_64-macos under Rosetta, combined before test fix | `6354a52` | 60/66; see below |
 | x86_64/aarch64 Linux | `6354a52` | test binaries compile and install; not executed (foreign target) |
@@ -35,7 +39,9 @@ For comparison, the macOS 15.7.9 CI run of `88546e8` (evidence/merge-20260913) h
 
 - `journal.metadata` on macOS uses `fstat` with the device mapping of `policy.paths`; BSD file flags on store files are `RecoveryRequired`.
 - `journal.sync` on macOS uses `F_FULLFSYNC`; a refusal is `DurabilityFailed`, with no `fsync` fallback.
-- `publish.noAttributes` on Darwin allows exactly `com.apple.provenance` and still refuses every other attribute and every ACL. Linux is unchanged.
+- `publish.noAttributes` on Darwin allows the name `com.apple.provenance` and still refuses every other attribute and every ACL. Linux is unchanged.
+- `publish.Temp.copyMetadata` on Darwin reads the provenance value of the original and the temp file and refuses before the commit point unless both are equal or both are absent. The kernel gives the temp this process's value and ignores attempts to set or copy another, so a different value cannot be preserved (PR #2 review).
+- `journal.privateState` on Darwin refuses an extended ACL on the store root and on every store file opened or created, because owner and mode checks do not show an ACL that grants another account access (PR #2 review). Linux is unchanged.
 - T12 tests use `policy.paths.statHandle` and `mkfifo`; `Fixture.init` has an `errdefer` chain.
 
 ## Probes

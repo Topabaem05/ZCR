@@ -7,16 +7,66 @@
     "filesystem": "APFS",
     "zig": "0.16.0 official aarch64-macos tarball"
   },
-  "source_commit": "5142fae3d4401b920c7a626a7c0258ab75e5f056",
-  "source_tree": "e36713322c88dc69e30d6b991e30ec175fa63bbe",
+  "source_commit": "ea41ca38501e9756b6141a8f129267332cb46987",
+  "source_tree": "ea7f602c1117dcd0fd39457e5350886990925e8f",
   "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+  "source_note": "runs and test_binaries_sha256 come from builds of source_commit; the evidence commit that adds this file changes only evidence/",
   "base": "f1c388a (main, PR #1 merge)",
   "branches": {
-    "claude/t12-darwin-storage": "7f877f7",
-    "claude/t11-macos-provenance": "026a335",
-    "claude/mac-write-path": "5142fae"
+    "claude/t12-darwin-storage": "fda734f",
+    "claude/t11-macos-provenance": "7b53abc",
+    "claude/mac-write-path": "ea41ca3"
+  },
+  "review_follow_up": {
+    "source_commit": "ea41ca3",
+    "changes": [
+      "7b53abc: T11 copyMetadata refuses unless original and temp provenance values are equal or both absent",
+      "fda734f: T12 privateState refuses extended ACLs on the Darwin store root and store files"
+    ]
   },
   "runs": [
+    {
+      "label": "native Debug write",
+      "source": "ea41ca3",
+      "command": "zig build test -Dtest-group=write -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-native-Debug --summary all",
+      "exit_code": 0,
+      "summary": "11/11 steps succeeded; 68/68 tests passed",
+      "T11": "43/43",
+      "T12": "25/25",
+      "leaks": 0,
+      "passed": true,
+      "log": "logs/write-native-Debug-ea41ca3.log"
+    },
+    {
+      "label": "native ReleaseSafe write",
+      "source": "ea41ca3",
+      "command": "zig build test -Dtest-group=write -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix $STATE/out-native-ReleaseSafe --summary all",
+      "exit_code": 0,
+      "summary": "11/11 steps succeeded; 68/68 tests passed",
+      "T11": "43/43",
+      "T12": "25/25",
+      "leaks": 0,
+      "passed": true,
+      "log": "logs/write-native-ReleaseSafe-ea41ca3.log"
+    },
+    {
+      "label": "x86_64-linux-gnu compile",
+      "source": "ea41ca3",
+      "command": "zig build test -Dtarget=x86_64-linux-gnu -Dtest-group=write -Dinstall-tests=true --prefix $STATE/out-cross-linux --summary all",
+      "exit_code": 1,
+      "summary": "test binaries compiled and installed (T11-test, T12-child, T12-test); run refused as foreign target",
+      "log": "logs/cross-linux-ea41ca3.log"
+    }
+  ],
+  "test_binaries_sha256": {
+    "Debug/T11-test": "c76a9ba20b5fb7a84912b5b2d7cbb11aed9764fdc4bbe269dd3c5cd3abd73468",
+    "Debug/T12-test": "fb85e76e5f870752bb0ceb7a41fedec028d953be803bb6b8edec0a115e80513e",
+    "Debug/T12-child": "11e9762f4d236bd06e5015499bf74544df00f34b1aaed31b4f303947e86a3518",
+    "ReleaseSafe/T11-test": "aab2ccde5fc6c9e780dc3225f2e20d36b5583023ae9e2d45ba3334111a9e2cee",
+    "ReleaseSafe/T12-test": "221c50971749d1c72b65432a870e61394bd4f0ae56dc3bf92c6ea5feaaf46843",
+    "ReleaseSafe/T12-child": "ee49b77324095df5848feaa53a2f66ed0f5ed890e902502fd995f1b5eeb8e256"
+  },
+  "historical_runs": [
     {
       "label": "native Debug write",
       "source": "5142fae",
@@ -126,15 +176,20 @@
       "log": "logs/mc004-stress-summary.log"
     }
   ],
-  "test_binaries_sha256": {
-    "Debug/T11-test": "abf604fabf3a411b4eb1b7d9c23440f2998f532dba0b7d6c42f598329eccea71",
-    "Debug/T12-test": "b7bac3461b71058c4b23065cf3d1c547acbd29f997749fab22cb3a24650ac113",
-    "Debug/T12-child": "34038a56448870eb28f1e187b8e9db3a16ac94019115295bda50cbbc6e93d848",
-    "ReleaseSafe/T11-test": "ad4c80fb88681672994bb9a79f74eb22aa347f827ae1e19ecf1cebc161322c56",
-    "ReleaseSafe/T12-test": "44fed4229ef52304a8af69cd60a9f1447924a568570ae746a0ec77125ff1640e",
-    "ReleaseSafe/T12-child": "98db8aae458c56794f7b9002a359ca309a0088f1de3a8cf0e269131af6837551"
-  },
+  "open": [
+    "Rosetta-only git subprocess failures in workspace/identity.zig: not reproduced by the standalone probe; cause unknown",
+    "MC-004 retirement test fails under CPU load; which condition fails and whether it is timing only is not established"
+  ],
+  "not_run": [
+    "native Intel Mac hardware",
+    "macOS 11-12",
+    "power loss and kernel fault injection",
+    "host supervisor and real clients",
+    "Linux runtime of this branch (covered by PR CI)"
+  ],
+  "production_writes_enabled": false,
   "files_sha256": {
+    "logs/cross-linux-ea41ca3.log": "fe1d1a0fbdb70dcd6e2e02a266d0b379a8e39f44781e5c7854fedea067c6f223",
     "logs/cross-test-aarch64-linux-gnu.log": "11892ce99a6801eda19a6b9f29885b95c33ddfec17a005d703a7a3d9a958ade0",
     "logs/cross-test-x86_64-linux-gnu.log": "800c960996830dce79713d6808a64a6a59f2fa3eb84eff19e91abfaa0939e3c5",
     "logs/main-f1c388a-baselines.tar.gz": "f27d0edc0d78261731e7a82669e1ddafbeae5edf2523ead32c90d737764c1c0f",
@@ -147,7 +202,9 @@
     "logs/write-debug-combined-1.log": "d809ff05e898fba32e74b61ed7032a5b532f0084ffc95133a456306162a6ff6b",
     "logs/write-debug-t12-port-only-7f877f7.log": "9246dde7b2d53d44800d90be2b2a7f35364cb06e2c4e7d62fd4e147d2fed7050",
     "logs/write-native-Debug-5142fae.log": "1d84978710f6ce590f80830e2dcdabcdb972f6495ff52bdd7bacc2ac38b2288e",
+    "logs/write-native-Debug-ea41ca3.log": "d14d8e16f1b9b46b1dcf6a611180b958aeced6ab148d8ae62048bebe2445b435",
     "logs/write-native-ReleaseSafe-5142fae.log": "aab178783d8e0d80112364b3db2821e644f2a331c3a623ea9f6a9bfd866997af",
+    "logs/write-native-ReleaseSafe-ea41ca3.log": "32ca5caeac989e48e8771a01057ca174ac722c69537c1cb0233b6eb100b682f1",
     "probes/git_spawn_probe.zig": "0d7ce99c8c6218ef7dda07e51e51d1bac3306fdc02243266060d238319791d2b",
     "probes/mc004_stress.sh": "0f6bf169838638aecb76121b7aecb3cb5c42d91facbe30a902aac88ac51be461",
     "probes/mk.c": "b2deea04842913e1eee39045c47b000a061ecffe39ba2f6c504486a257e23309",
@@ -155,17 +212,5 @@
     "probes/prov.c": "e555461d890d68c0181fe2ebd840fada684373632b12d5763dfdaa2d04165df6",
     "probes/prov2.c": "6eb7525b4eefa9f5ba65d52e56b09f92c9ad3a1bab8cecf180d402322fc12ea9",
     "probes/results.txt": "25cec96972ec9b41e9818035826dd79f2b0f9ece3d05771a10f6177e7e2132c0"
-  },
-  "not_run": [
-    "native Intel Mac hardware",
-    "macOS 11-12",
-    "power loss and kernel fault injection",
-    "host supervisor and real clients",
-    "Linux runtime of this branch (covered by PR CI)"
-  ],
-  "production_writes_enabled": false,
-  "open": [
-    "Rosetta-only git subprocess failures in workspace/identity.zig: not reproduced by the standalone probe; cause unknown",
-    "MC-004 retirement test fails under CPU load; which condition fails and whether it is timing only is not established"
-  ]
+  }
 }
