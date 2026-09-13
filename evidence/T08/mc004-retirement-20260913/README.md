@@ -2,7 +2,7 @@
 
 **Date:** 2026-09-13 · **Host:** Apple M2 8 GB, macOS 26.6.2 (25G83), Zig 0.16.0 · **Base:** `main` `f1c388a` · **Source:** `ae5e4a4` (tests `bd54afe`, `ae5e4a4`)
 
-PASS evidence is the `zcr-evidence/1` records in [records/](records/), made with `zcr-dev-evidence record` in a clean worktree at `ae5e4a4` and accepted by `zcr-dev-evidence verify`; [records/runs.json](records/runs.json) adds each run's log digest, `source_config_sha256` and `corpus_sha256`. [report.json](report.json) indexes those records plus the probes, mutants, controls and supporting runs. The evidence commit on top changes only `evidence/T08/`. Earlier `bd54afe` runs are kept under `historical_runs`. Each result applies only to its binary and this host.
+PASS evidence is the `zcr-evidence/1` records in [records/](records/), made with `zcr-dev-evidence record` in a clean worktree at `47dbb29` (code identical to `ae5e4a4`, plus the fixed stress runner) and accepted by `zcr-dev-evidence verify`; [records/runs.json](records/runs.json) adds each run's log digest, `source_config_sha256` and `corpus_sha256`. [report.json](report.json) indexes those records plus the probes, mutants, controls and supporting runs. The evidence commit on top changes only `evidence/T08/`. Earlier `bd54afe` runs are kept under `historical_runs`. Each result applies only to its binary and this host.
 
 The bundle lives under `evidence/T08/` as `tasks/T08.md` requires (PR #3 review).
 
@@ -66,20 +66,28 @@ In run 10 of the ReleaseSafe mcp binary under 8 busy loops, the last four runtim
 
 The other 9 runs passed all 27 tests. This PR does not change these tests. Their `CacheHarness` creates git repositories with `/usr/bin/git` and snapshots workspaces through `workspace.Registry`, whose git runs map errors to `IoFailure`. That matches the Rosetta-only `identity.zig` failures recorded in PR #2, but the cause is **not confirmed** here.
 
-## Verifiable records on `ae5e4a4` (PASS evidence)
+## Verifiable records on `47dbb29` (PASS evidence)
 
-These runs were built and executed in a clean detached worktree at `ae5e4a4` (tree `e5a587fb…`). Each has a `zcr-evidence/1` record from `zcr-dev-evidence record`, and `zcr-dev-evidence verify` accepted every record against that worktree. [records/runs.json](records/runs.json) binds each record to its log and log digest, [source-config.json](records/source-config.json) (`source_config_sha256` `45251a7e…`: build/config, contract, source file, toolchain and host hashes), and [corpus.json](records/corpus.json) (`corpus_sha256` `115dcf7d…`: embedded fixtures, test source, stress script and settings).
+The records bind to `47dbb29` (tree `ab13879c…`), which adds only evidence files on top of the code commit `ae5e4a4`. Its `src`, `tests`, build files, contracts, config and tools are identical to `ae5e4a4`. Its tree also contains the stress runner, which the stress record runs by its in-tree path. Every run was built and executed in a clean detached worktree at that commit, recorded with `zcr-dev-evidence record`, and accepted by `zcr-dev-evidence verify`. [records/runs.json](records/runs.json) binds each record to its log and log digest and to two input digests:
+
+- [source-config.json](records/source-config.json), `source_config_sha256` `b6f25aa6…`: build, config, contract, source file, toolchain and host hashes.
+- [corpus.json](records/corpus.json), `corpus_sha256` `64cb94b4…`: embedded fixtures, test source, and the runner's blob at `47dbb29`.
 
 | Record | Binary | Result |
 |---|---|---|
-| [mc004-debug](records/mc004-debug.json) | `T08-test 3653f833…` | 6/6 ([log](logs/src-mc004-debug.log)) |
-| [mc004-debug-stress](records/mc004-debug-stress.json) | `T08-test 3653f833…` | idle 10/10, 8 busy loops **30/30**, script exit 0 ([logs](logs/src-stress2.tar.gz)) |
-| [mcp-debug](records/mcp-debug.json), [launch](records/mcp-debug-launch.json) | `T08-test 3af733e5…`, `T08-launch-test ede38b5a…` | 29/29, 0 leaks ([log](logs/src-mcp-debug.log)) |
-| [mcp-releasesafe](records/mcp-releasesafe.json), [launch](records/mcp-releasesafe-launch.json) | `T08-test b5006a4c…`, `T08-launch-test 69d3f1a3…` | 29/29, 0 leaks ([log](logs/src-mcp-releasesafe.log)) |
+| [mc004-debug](records/mc004-debug.json) | `T08-test 580a1825…` | 6/6 ([log](logs/rec-mc004-debug.log)) |
+| [mc004-debug-stress](records/mc004-debug-stress.json) | `T08-test 580a1825…` | idle 10/10, 8 busy loops **30/30**, `stress PASS`, runner exit 0 ([logs](logs/rec-stress.tar.gz)) |
+| [mcp-debug](records/mcp-debug.json), [launch](records/mcp-debug-launch.json) | `T08-test 7eff0831…`, `T08-launch-test cb95d082…` | 29/29, 0 leaks ([log](logs/rec-mcp-debug.log)) |
+| [mcp-releasesafe](records/mcp-releasesafe.json), [launch](records/mcp-releasesafe-launch.json) | `T08-test b42de407…`, `T08-launch-test 85f1dbf6…` | 29/29, 0 leaks ([log](logs/rec-mcp-releasesafe.log)) |
 
-A record verifies only in a clean worktree at `source_commit` with the recorded git dir and binary, as with the existing `evidence/T08/records`. A record cannot name the commit that adds it, because committing it changes the tree.
+A record verifies only in a clean worktree at its source commit, with the recorded git dir and binary, as with the existing `evidence/T08/records`. A record cannot name the commit that adds it, because committing it changes the tree.
 
-**Stress script exit status (PR #3 review).** The first copy of [`mc004_stress.sh`](probes/mc004_stress.sh) counted failed runs but always exited 0. Its recorded exit code therefore could not show a failure, although that run had `fail=0` in both series. The script now exits 1 if any run fails and stops the busy loops on exit. The fixed script exited 1 on the stdout mutant binary, 1 idle and 1 loaded run, both failing ([log](logs/script-check-mutant.tar.gz)), and 0 on the clean `ae5e4a4` binary ([log](logs/script-check-clean.tar.gz)). The stress was then rerun with the fixed script and re-recorded, and `records/corpus.json` now carries the fixed script's digest.
+**Stress runner (PR #3 review).** [`mc004_stress.sh`](probes/mc004_stress.sh) needed two fixes before its exit status could back a PASS record:
+
+- **Failed runs:** the first copy counted failed runs but always exited 0. It now exits 1 if any run fails (`f96ff72`).
+- **Signals:** INT and TERM stopped the load and returned to the loop, so an interrupted run could still end in `stress PASS`. They now clean up and exit 130 or 143, and EXIT only cleans up (`47dbb29`).
+- **Checks:** with that runner, a failing mutant binary exits 1, a passing binary exits 0, and SIGTERM and SIGINT during the loaded series exit 143 and 130 with no busy loops left ([logs](logs/script-checks.tar.gz)).
+- **Superseded records:** earlier records bound to `ae5e4a4` named a runner path absent from that tree. They are kept in [records/superseded-ae5e4a4/](records/superseded-ae5e4a4/) and are not PASS evidence.
 
 ## Supporting observations on `ae5e4a4` (task worktree builds, not PASS records)
 

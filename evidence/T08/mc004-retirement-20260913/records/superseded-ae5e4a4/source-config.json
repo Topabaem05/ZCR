@@ -24,15 +24,13 @@
     "MC-004 only": "-Dtest-group=mcp -Dtest-id=MC-004 -Doptimize=Debug -Dinstall-tests=true",
     "mcp group": "-Dtest-group=mcp -Doptimize=<Debug|ReleaseSafe> -Dinstall-tests=true"
   },
-  "code_commit": "ae5e4a4c2fa7ff8771985ca6cdc403952a72ed89",
-  "code_note": "source_commit adds only evidence/ files on top of code_commit; src, tests, build files, contracts, config and tools are identical",
   "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
   "derivation": "sha256 of this file's bytes is source_config_sha256; every file hash below is sha256 of the blob at source_commit (git show HEAD:<path>)",
   "environment": {
     "STATE": "/Users/guribbong/code/ZCR-state/tasks/MC004",
-    "TMPDIR": "$STATE/rec-tmp",
-    "ZIG_GLOBAL_CACHE_DIR": "$STATE/rec-global-cache",
-    "ZIG_LOCAL_CACHE_DIR": "$STATE/rec-local-cache"
+    "TMPDIR": "$STATE/src-tmp",
+    "ZIG_GLOBAL_CACHE_DIR": "$STATE/src-global-cache",
+    "ZIG_LOCAL_CACHE_DIR": "$STATE/src-local-cache"
   },
   "host": {
     "machine": "arm64",
@@ -43,7 +41,7 @@
   },
   "production_writes_enabled": false,
   "schema": "zcr-t08-source-config/1",
-  "source_commit": "47dbb296c594783fe1dbd3750af8800794547e1b",
+  "source_commit": "ae5e4a4c2fa7ff8771985ca6cdc403952a72ed89",
   "source_file_hashes": {
     "src/batch/read.zig": "a0627a93212db8d864deb37037a9b4c27e5bee4948f4602ed4c9da2c7339e6e6",
     "src/cache/association.zig": "69cb402708d851060c5bc5fda6a6b77e6ef47fefced33b6556bfe646d0d358f4",
@@ -76,7 +74,7 @@
     "src/workspace/lease.zig": "b7b19b516e2dfe25f8e38df3962659cab90600e469cc1c0623050b2016d52e60",
     "src/workspace/registry.zig": "322e0147763b238f32a46d5a4b6921b46f2524e6d0134411b424960329ba68bf"
   },
-  "source_tree": "ab13879c4c70b4814ad68f21635ddaf066b79148",
+  "source_tree": "e5a587fbc91f7e69650171869a8f1681e1b86251",
   "toolchain": {
     "executable_sha256": "e6cd688d25664983833aae272f501d4bceeae304875b8f1741209d15fd13a4ec",
     "version": "0.16.0"

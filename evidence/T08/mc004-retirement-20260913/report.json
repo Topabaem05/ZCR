@@ -6,10 +6,10 @@
     "zig": "0.16.0"
   },
   "base_commit": "f1c388a7f6b68c5c221d4a7e013c12dfa6993f8c",
-  "source_commit": "ae5e4a4c2fa7ff8771985ca6cdc403952a72ed89",
-  "source_tree": "e5a587fbc91f7e69650171869a8f1681e1b86251",
+  "source_commit": "47dbb296c594783fe1dbd3750af8800794547e1b",
+  "source_tree": "ab13879c4c70b4814ad68f21635ddaf066b79148",
   "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
-  "source_note": "pass_evidence comes from zcr-evidence/1 records made in a clean worktree at source_commit; supporting_runs were built in the task worktree at the same commit (different embedded path, so different digests) and are not PASS records; the evidence commit on top changes only evidence/T08/",
+  "source_note": "pass_evidence comes from zcr-evidence/1 records made in a clean worktree at source_commit, which adds only evidence/ files to the code commit ae5e4a4; supporting_runs were built in the task worktree and are not PASS records",
   "changed_files": [
     "tests/t08_test.zig"
   ],
@@ -78,20 +78,36 @@
       "log": "logs/mutant-deadline-origtest.log"
     },
     {
-      "label": "stress script exit status: failing binary",
+      "label": "stress script exit status: failing binary, 1 idle 1 loaded",
       "source": "stdout mutant binary (probes/mutant_ignore_output_failure.py)",
-      "command": "zsh evidence/T08/mc004-retirement-20260913/probes/mc004_stress.sh <mutant T08-test> <log dir> 1 1",
+      "runner": "evidence/T08/mc004-retirement-20260913/probes/mc004_stress.sh at 47dbb29 (bytes identical to the committed file)",
       "exit_code": 1,
-      "result": "script exits 1 after failed runs",
-      "log": "logs/script-check-mutant.tar.gz"
+      "result": "stress FAIL failed_runs=2",
+      "log": "logs/script-checks.tar.gz"
     },
     {
-      "label": "stress script exit status: passing binary",
-      "source": "ae5e4a4 clean worktree binary",
-      "command": "zsh evidence/T08/mc004-retirement-20260913/probes/mc004_stress.sh <T08-test> <log dir> 1 1",
+      "label": "stress script exit status: passing binary, 1 idle 1 loaded",
+      "source": "clean ae5e4a4 binary",
+      "runner": "evidence/T08/mc004-retirement-20260913/probes/mc004_stress.sh at 47dbb29 (bytes identical to the committed file)",
       "exit_code": 0,
-      "result": "script exits 0 when every run passes",
-      "log": "logs/script-check-clean.tar.gz"
+      "result": "stress PASS",
+      "log": "logs/script-checks.tar.gz"
+    },
+    {
+      "label": "stress script exit status: SIGTERM during loaded series",
+      "source": "clean ae5e4a4 binary",
+      "runner": "evidence/T08/mc004-retirement-20260913/probes/mc004_stress.sh at 47dbb29 (bytes identical to the committed file)",
+      "exit_code": 143,
+      "result": "stress INTERRUPTED signal=TERM; no busy loops left",
+      "log": "logs/script-checks.tar.gz"
+    },
+    {
+      "label": "stress script exit status: SIGINT during loaded series",
+      "source": "clean ae5e4a4 binary",
+      "runner": "evidence/T08/mc004-retirement-20260913/probes/mc004_stress.sh at 47dbb29 (bytes identical to the committed file)",
+      "exit_code": 130,
+      "result": "stress INTERRUPTED signal=INT; no busy loops left",
+      "log": "logs/script-checks.tar.gz"
     }
   ],
   "historical_runs": {
@@ -181,12 +197,17 @@
     "logs/mcp-ReleaseSafe.log": "56cd812cf1df1d76daa9a7570b0d13437967dbc39fad967b418853a310354b37",
     "logs/mutant-deadline-origtest.log": "ba141b343c1502861a5cce524b46918cefbc034f484412605bded9ae242065b0",
     "logs/new-test-stress-idle10-loaded30.tar.gz": "4d8089923d1302ef6c61aabb8932a4cfa4b43f8bd7132c93521ee9d48926fa02",
+    "logs/rec-mc004-debug.log": "74b03466e9e8883a476cde6ce1b0afb6f0a208ab499808d5e7a973158b836646",
+    "logs/rec-mcp-debug.log": "84f27cebd21583a8e0c5578117e864f257b423174ca12f9e077dee7ef426c070",
+    "logs/rec-mcp-releasesafe.log": "e9659668737be5ffb11287877ba64fcb8c408a580fa8b281d420ef149957d5a7",
+    "logs/rec-stress.tar.gz": "2118293541e292b73f2c15a1e8aa1964f064f55c3205eee889b3e801ddd420be",
     "logs/red-control-smallfile.log": "b65c8484034fca0196376bfad3eff4df13ef25c6e4214c973edc0263e5fb64e6",
     "logs/red-mutant-newtest-run.log": "7a18af0f1bff838f434d5f3f543d8e0b467058edf7a9c9db83e74faf09315178",
     "logs/red-mutant-newtest.log": "42b24e4a5ddfc89ac342116548353423f58422422a0c51ca233aff642c7b779f",
     "logs/red-mutant-stdout.log": "d505fd05dd47e23f7ecad6b05911e2e317ac407d5ddd6da5a14f446d9feed25e",
     "logs/script-check-clean.tar.gz": "8e9e82e60cb275962614dfc147e6e0f7fc5acb56e734491c410483600a0c63e1",
     "logs/script-check-mutant.tar.gz": "0118d2538e0c3a457e21da994101e6aad5ae088ada7c0f3789be1e813055c7f3",
+    "logs/script-checks.tar.gz": "65ae8324dfc4f50cff8010f73000fb319a46ff77bf7d3fde93a431244cfeb21f",
     "logs/src-mc004-debug.log": "c1ff7f4425f3155802fb58ec05797a8af0d6a140f00dd07a3271d0c73c11bd50",
     "logs/src-mcp-debug.log": "8bbd6a52518b86505e65dfb3bdc1f2e2dcdcb71af76ac6da51ec85c80d6937b2",
     "logs/src-mcp-releasesafe.log": "9cacce8987f973c2a63d2d9c2871bc87c34ed79cb0b3ff712e3cacb130ddd691",
@@ -194,87 +215,27 @@
     "logs/stress-ae5.tar.gz": "fa8627099a22409df27c07ae09bc88b179bc6484b33e87527cf6e420bc414826",
     "probes/control_no_pipe_stall.py": "93732bc28dce63ee0b9b0eda704eeaff6415c1d20241bc2f60a7ac05418c13f6",
     "probes/instrument_diag.py": "319d8bba63f8702dcd5e1fdbac61413910ee738e8fc0c6ca84d4e3d714e82c79",
-    "probes/mc004_stress.sh": "333cb0a97c4390473de532d4a887e8852b564534e0e2f40b5bbec564d983c508",
+    "probes/mc004_stress.sh": "7567e9a68bc2faaa71af35890a4a667be638218d87092d2441d57e1a960c6daa",
     "probes/mutant_detach_after_hook.py": "738c25a23b47c526af48eef7003a5bb0279c7b37395b0d9a8eef6b5cab0df9da",
     "probes/mutant_ignore_output_failure.py": "0360b5d1b2496ca1684ee2635ffef88d3da885c9b3b9bad37c679b0d2930d86e",
-    "records/corpus.json": "115dcf7d2f09f9abde29dc8a18757386fd9de3a84a2ec37ae9827988a4ed7244",
-    "records/mc004-debug-stress.json": "d183d4f3f3b4ef3d208f44360aad564e568032813ec280061b841253963d549c",
-    "records/mc004-debug.json": "643c0b363a9f43081aea6a76670d03e8bd976b0ee38e6febd46ebe298dbd7f4a",
-    "records/mcp-debug-launch.json": "855c4ba4907fc04099ec2931eda31a20e41b23bd06964701ec90364c741d1904",
-    "records/mcp-debug.json": "bf4bb9a63cfebdbe4f5ef3f7332c3377e527ec10800824e2f4808e8ae1b4e394",
-    "records/mcp-releasesafe-launch.json": "f04f03df54e84e26d9d6ab6feb1d3fb3f362b8214f6403bcf5b206c828f46fd0",
-    "records/mcp-releasesafe.json": "02aab6a179f920f9263c4184b068e66e0f48e846db12f18725cf155abc668a05",
-    "records/runs.json": "771514e90123d130ebe04ecbde5eb686e2155c2d1b39dc8e4e620ecb8a63a374",
-    "records/source-config.json": "45251a7e9a9f565810abde2d70b8bee7d491a5b774180194e0acca268f375b11"
-  },
-  "pass_evidence": {
-    "schema_version": "zcr-evidence/1",
-    "tool": "zcr-dev-evidence record/verify built from source_commit",
-    "worktree_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/t08-mc004-src",
-    "source_commit": "ae5e4a4c2fa7ff8771985ca6cdc403952a72ed89",
-    "source_tree": "e5a587fbc91f7e69650171869a8f1681e1b86251",
-    "source_config": "records/source-config.json",
-    "source_config_sha256": "45251a7e9a9f565810abde2d70b8bee7d491a5b774180194e0acca268f375b11",
-    "corpus": "records/corpus.json",
-    "corpus_sha256": "115dcf7d2f09f9abde29dc8a18757386fd9de3a84a2ec37ae9827988a4ed7244",
-    "runs_index": "records/runs.json",
-    "records": {
-      "mc004-debug": {
-        "record": "records/mc004-debug.json",
-        "binary_sha256": "3653f833d16d4ac1f27775d33a6a0e9a7fe674766322984b51c0a07cf1f16300",
-        "exit_code": 0,
-        "log": "logs/src-mc004-debug.log",
-        "log_sha256": "c1ff7f4425f3155802fb58ec05797a8af0d6a140f00dd07a3271d0c73c11bd50",
-        "summary": "5/5 steps succeeded; 6/6 tests passed; 0 leaks",
-        "verify": "accepted"
-      },
-      "mcp-debug": {
-        "record": "records/mcp-debug.json",
-        "binary_sha256": "3af733e51f7613379fdda168c644f7ad099cf76abce4b9bda511f43bce46407e",
-        "exit_code": 0,
-        "log": "logs/src-mcp-debug.log",
-        "log_sha256": "8bbd6a52518b86505e65dfb3bdc1f2e2dcdcb71af76ac6da51ec85c80d6937b2",
-        "summary": "8/8 steps succeeded; 29/29 tests passed; 0 leaks",
-        "verify": "accepted"
-      },
-      "mcp-releasesafe": {
-        "record": "records/mcp-releasesafe.json",
-        "binary_sha256": "b5006a4c1c6fb9f8efacfba18af297368ceea030bef4b54ad9d4282b420e216b",
-        "exit_code": 0,
-        "log": "logs/src-mcp-releasesafe.log",
-        "log_sha256": "9cacce8987f973c2a63d2d9c2871bc87c34ed79cb0b3ff712e3cacb130ddd691",
-        "summary": "8/8 steps succeeded; 29/29 tests passed; 0 leaks",
-        "verify": "accepted"
-      },
-      "mcp-debug-launch": {
-        "record": "records/mcp-debug-launch.json",
-        "binary_sha256": "ede38b5abfa9961a5571b51aa158cceca742bbf2ac721ffd07fea52ac1cc1ece",
-        "exit_code": 0,
-        "log": "logs/src-mcp-debug.log",
-        "log_sha256": "8bbd6a52518b86505e65dfb3bdc1f2e2dcdcb71af76ac6da51ec85c80d6937b2",
-        "summary": "T08-launch-test in the mcp Debug run above",
-        "verify": "accepted"
-      },
-      "mcp-releasesafe-launch": {
-        "record": "records/mcp-releasesafe-launch.json",
-        "binary_sha256": "69d3f1a33af40cfd7fb8dc3da5859b5bbf2f36af1ddd9d8173f202b5db225edb",
-        "exit_code": 0,
-        "log": "logs/src-mcp-releasesafe.log",
-        "log_sha256": "9cacce8987f973c2a63d2d9c2871bc87c34ed79cb0b3ff712e3cacb130ddd691",
-        "summary": "T08-launch-test in the mcp ReleaseSafe run above",
-        "verify": "accepted"
-      },
-      "mc004-debug-stress": {
-        "record": "records/mc004-debug-stress.json",
-        "binary_sha256": "3653f833d16d4ac1f27775d33a6a0e9a7fe674766322984b51c0a07cf1f16300",
-        "exit_code": 0,
-        "log": "logs/src-stress2.tar.gz",
-        "log_sha256": "8697de1077ea5b4b13960e5927667e2dde9e771d10269827aeea3ae5e86920aa",
-        "summary": "idle pass=10 fail=0, 8 busy loops pass=30 fail=0, script exit 0",
-        "verify": "accepted"
-      }
-    },
-    "note": "records bind to the clean source commit; a record cannot name the evidence commit that adds it"
+    "records/corpus.json": "64cb94b486bc2985edda2faba67f59fddaecfc8ce7c9127b2c0212803514351d",
+    "records/mc004-debug-stress.json": "dfeb54caac9cd6424254b716277a18a4fa772910f9084dcdd72c6027807652eb",
+    "records/mc004-debug.json": "7e3b989001700db132406f03c5a2d062cae7d6c91ca6f1b645e5dc5f41b3c968",
+    "records/mcp-debug-launch.json": "c12aa152fdbd6007f16b75981864846cc3ff827d4e98d7511863f6fc921c1336",
+    "records/mcp-debug.json": "e9a69c9fde79199df10072e23e048f602d3fa6b626a455aff23c94f18675460e",
+    "records/mcp-releasesafe-launch.json": "9c9e53ed5664748cc7587eb0dc30b26fea05d98eff175fc1168362198310da8e",
+    "records/mcp-releasesafe.json": "de4a90fc055a6c70af26dc587a22fec57fe9e03d19e9c2bb4b55ece8dce789f8",
+    "records/runs.json": "61dae69f70d0012484a8666a9f1035a1320f15e27917f84354159d2be5c29554",
+    "records/source-config.json": "b6f25aa691efa0c305717cb11c8daef09332814e53a801af41d44893baec9d68",
+    "records/superseded-ae5e4a4/corpus.json": "115dcf7d2f09f9abde29dc8a18757386fd9de3a84a2ec37ae9827988a4ed7244",
+    "records/superseded-ae5e4a4/mc004-debug-stress.json": "d183d4f3f3b4ef3d208f44360aad564e568032813ec280061b841253963d549c",
+    "records/superseded-ae5e4a4/mc004-debug.json": "643c0b363a9f43081aea6a76670d03e8bd976b0ee38e6febd46ebe298dbd7f4a",
+    "records/superseded-ae5e4a4/mcp-debug-launch.json": "855c4ba4907fc04099ec2931eda31a20e41b23bd06964701ec90364c741d1904",
+    "records/superseded-ae5e4a4/mcp-debug.json": "bf4bb9a63cfebdbe4f5ef3f7332c3377e527ec10800824e2f4808e8ae1b4e394",
+    "records/superseded-ae5e4a4/mcp-releasesafe-launch.json": "f04f03df54e84e26d9d6ab6feb1d3fb3f362b8214f6403bcf5b206c828f46fd0",
+    "records/superseded-ae5e4a4/mcp-releasesafe.json": "02aab6a179f920f9263c4184b068e66e0f48e846db12f18725cf155abc668a05",
+    "records/superseded-ae5e4a4/runs.json": "771514e90123d130ebe04ecbde5eb686e2155c2d1b39dc8e4e620ecb8a63a374",
+    "records/superseded-ae5e4a4/source-config.json": "45251a7e9a9f565810abde2d70b8bee7d491a5b774180194e0acca268f375b11"
   },
   "supporting_runs": [
     {
@@ -329,5 +290,145 @@
     "Debug/T08-launch-test": "fbbdc04304660f0aad9672300e8ff87adc4b8eb2698ab344e50125c7e9642e83",
     "ReleaseSafe/T08-test": "bdf2473cd7b96c3133c57aa136a228d3259f8eb4049fb4d65ae2456bf0bdc79f",
     "ReleaseSafe/T08-launch-test": "a0b6f4f33e8ec5de8d17a6d1ba46524e40a775ce62e650b6e96321f5509d9c8e"
+  },
+  "superseded_pass_evidence": {
+    "schema_version": "zcr-evidence/1",
+    "tool": "zcr-dev-evidence record/verify built from source_commit",
+    "worktree_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/t08-mc004-src",
+    "source_commit": "ae5e4a4c2fa7ff8771985ca6cdc403952a72ed89",
+    "source_tree": "e5a587fbc91f7e69650171869a8f1681e1b86251",
+    "source_config": "records/source-config.json",
+    "source_config_sha256": "45251a7e9a9f565810abde2d70b8bee7d491a5b774180194e0acca268f375b11",
+    "corpus": "records/corpus.json",
+    "corpus_sha256": "115dcf7d2f09f9abde29dc8a18757386fd9de3a84a2ec37ae9827988a4ed7244",
+    "runs_index": "records/runs.json",
+    "records": {
+      "mc004-debug": {
+        "record": "records/superseded-ae5e4a4/mc004-debug.json",
+        "binary_sha256": "3653f833d16d4ac1f27775d33a6a0e9a7fe674766322984b51c0a07cf1f16300",
+        "exit_code": 0,
+        "log": "logs/src-mc004-debug.log",
+        "log_sha256": "c1ff7f4425f3155802fb58ec05797a8af0d6a140f00dd07a3271d0c73c11bd50",
+        "summary": "5/5 steps succeeded; 6/6 tests passed; 0 leaks",
+        "verify": "accepted"
+      },
+      "mcp-debug": {
+        "record": "records/superseded-ae5e4a4/mcp-debug.json",
+        "binary_sha256": "3af733e51f7613379fdda168c644f7ad099cf76abce4b9bda511f43bce46407e",
+        "exit_code": 0,
+        "log": "logs/src-mcp-debug.log",
+        "log_sha256": "8bbd6a52518b86505e65dfb3bdc1f2e2dcdcb71af76ac6da51ec85c80d6937b2",
+        "summary": "8/8 steps succeeded; 29/29 tests passed; 0 leaks",
+        "verify": "accepted"
+      },
+      "mcp-releasesafe": {
+        "record": "records/superseded-ae5e4a4/mcp-releasesafe.json",
+        "binary_sha256": "b5006a4c1c6fb9f8efacfba18af297368ceea030bef4b54ad9d4282b420e216b",
+        "exit_code": 0,
+        "log": "logs/src-mcp-releasesafe.log",
+        "log_sha256": "9cacce8987f973c2a63d2d9c2871bc87c34ed79cb0b3ff712e3cacb130ddd691",
+        "summary": "8/8 steps succeeded; 29/29 tests passed; 0 leaks",
+        "verify": "accepted"
+      },
+      "mcp-debug-launch": {
+        "record": "records/superseded-ae5e4a4/mcp-debug-launch.json",
+        "binary_sha256": "ede38b5abfa9961a5571b51aa158cceca742bbf2ac721ffd07fea52ac1cc1ece",
+        "exit_code": 0,
+        "log": "logs/src-mcp-debug.log",
+        "log_sha256": "8bbd6a52518b86505e65dfb3bdc1f2e2dcdcb71af76ac6da51ec85c80d6937b2",
+        "summary": "T08-launch-test in the mcp Debug run above",
+        "verify": "accepted"
+      },
+      "mcp-releasesafe-launch": {
+        "record": "records/superseded-ae5e4a4/mcp-releasesafe-launch.json",
+        "binary_sha256": "69d3f1a33af40cfd7fb8dc3da5859b5bbf2f36af1ddd9d8173f202b5db225edb",
+        "exit_code": 0,
+        "log": "logs/src-mcp-releasesafe.log",
+        "log_sha256": "9cacce8987f973c2a63d2d9c2871bc87c34ed79cb0b3ff712e3cacb130ddd691",
+        "summary": "T08-launch-test in the mcp ReleaseSafe run above",
+        "verify": "accepted"
+      },
+      "mc004-debug-stress": {
+        "record": "records/superseded-ae5e4a4/mc004-debug-stress.json",
+        "binary_sha256": "3653f833d16d4ac1f27775d33a6a0e9a7fe674766322984b51c0a07cf1f16300",
+        "exit_code": 0,
+        "log": "logs/src-stress2.tar.gz",
+        "log_sha256": "8697de1077ea5b4b13960e5927667e2dde9e771d10269827aeea3ae5e86920aa",
+        "summary": "idle pass=10 fail=0, 8 busy loops pass=30 fail=0, script exit 0",
+        "verify": "accepted"
+      }
+    },
+    "note": "records bind to the clean source commit; a record cannot name the evidence commit that adds it",
+    "superseded_reason": "bound to ae5e4a4, whose tree lacks the stress runner the stress record names (PR #3 review); records moved to records/superseded-ae5e4a4/"
+  },
+  "pass_evidence": {
+    "schema_version": "zcr-evidence/1",
+    "tool": "zcr-dev-evidence record/verify built from source_commit",
+    "worktree_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/t08-mc004-rec",
+    "source_commit": "47dbb296c594783fe1dbd3750af8800794547e1b",
+    "source_tree": "ab13879c4c70b4814ad68f21635ddaf066b79148",
+    "code_commit": "ae5e4a4c2fa7ff8771985ca6cdc403952a72ed89",
+    "note": "source_commit adds only evidence/ files on top of code_commit and contains the stress runner; records cannot name the later commit that adds them",
+    "source_config": "records/source-config.json",
+    "source_config_sha256": "b6f25aa691efa0c305717cb11c8daef09332814e53a801af41d44893baec9d68",
+    "corpus": "records/corpus.json",
+    "corpus_sha256": "64cb94b486bc2985edda2faba67f59fddaecfc8ce7c9127b2c0212803514351d",
+    "runs_index": "records/runs.json",
+    "records": {
+      "mc004-debug": {
+        "record": "records/mc004-debug.json",
+        "binary_sha256": "580a18259828a8f48a41c335651b0edebf449314eb60297ec126c34aedc3495b",
+        "exit_code": 0,
+        "log": "logs/rec-mc004-debug.log",
+        "log_sha256": "74b03466e9e8883a476cde6ce1b0afb6f0a208ab499808d5e7a973158b836646",
+        "summary": "5/5 steps succeeded; 6/6 tests passed; 0 leaks",
+        "verify": "accepted"
+      },
+      "mcp-debug": {
+        "record": "records/mcp-debug.json",
+        "binary_sha256": "7eff083127bbde28570d426a02ea8536c777e3963459d943a753c67dabc48c79",
+        "exit_code": 0,
+        "log": "logs/rec-mcp-debug.log",
+        "log_sha256": "84f27cebd21583a8e0c5578117e864f257b423174ca12f9e077dee7ef426c070",
+        "summary": "8/8 steps succeeded; 29/29 tests passed; 0 leaks",
+        "verify": "accepted"
+      },
+      "mcp-releasesafe": {
+        "record": "records/mcp-releasesafe.json",
+        "binary_sha256": "b42de40705f5fb0100c5759a15bea21bea02551bc7cf52c2129488099ce1cb0c",
+        "exit_code": 0,
+        "log": "logs/rec-mcp-releasesafe.log",
+        "log_sha256": "e9659668737be5ffb11287877ba64fcb8c408a580fa8b281d420ef149957d5a7",
+        "summary": "8/8 steps succeeded; 29/29 tests passed; 0 leaks",
+        "verify": "accepted"
+      },
+      "mcp-debug-launch": {
+        "record": "records/mcp-debug-launch.json",
+        "binary_sha256": "cb95d082d884e034720fb080765b1c984da4b85c9fe7400a5455943a90b6e8c0",
+        "exit_code": 0,
+        "log": "logs/rec-mcp-debug.log",
+        "log_sha256": "84f27cebd21583a8e0c5578117e864f257b423174ca12f9e077dee7ef426c070",
+        "summary": "T08-launch-test in the mcp Debug run above",
+        "verify": "accepted"
+      },
+      "mcp-releasesafe-launch": {
+        "record": "records/mcp-releasesafe-launch.json",
+        "binary_sha256": "85f1dbf663f3c9d330a5ed81f3cb944b64b31d39eeec0cd99f08cdb325173191",
+        "exit_code": 0,
+        "log": "logs/rec-mcp-releasesafe.log",
+        "log_sha256": "e9659668737be5ffb11287877ba64fcb8c408a580fa8b281d420ef149957d5a7",
+        "summary": "T08-launch-test in the mcp ReleaseSafe run above",
+        "verify": "accepted"
+      },
+      "mc004-debug-stress": {
+        "record": "records/mc004-debug-stress.json",
+        "binary_sha256": "580a18259828a8f48a41c335651b0edebf449314eb60297ec126c34aedc3495b",
+        "exit_code": 0,
+        "log": "logs/rec-stress.tar.gz",
+        "log_sha256": "2118293541e292b73f2c15a1e8aa1964f064f55c3205eee889b3e801ddd420be",
+        "summary": "idle pass=10 fail=0, 8 busy loops pass=30 fail=0, stress PASS, runner exit 0",
+        "verify": "accepted"
+      }
+    }
   }
 }
