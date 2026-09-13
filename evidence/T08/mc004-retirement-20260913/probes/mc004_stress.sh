@@ -3,12 +3,18 @@
 # occupy every CPU. The same loop ran the instrumented original test (loaded 20) and the
 # new test (idle 10, loaded 30); per-run logs are in ../logs/*.tar.gz.
 #
+# Exit status: 0 only if every run exited 0; 1 if any run failed.
+#
 # usage: mc004_stress.sh <T08-test binary> <log dir> <idle runs> <loaded runs>
 set -u
 BIN=$1; L=$2; IDLE=${3:-10}; LOADED=${4:-30}
 mkdir -p $L
 CWD=$(mktemp -d)
 echo "binary sha256 $(shasum -a 256 $BIN | cut -d' ' -f1)"
+failed=0
+pids=()
+stop_load() { [ ${#pids[@]} -gt 0 ] && kill ${pids[@]} 2>/dev/null; wait 2>/dev/null; pids=(); }
+trap stop_load EXIT INT TERM
 series() {
   p=0; f=0
   for i in $(seq 1 $2); do
@@ -17,11 +23,13 @@ series() {
     grep -h MC004DIAG $L/$1-$i.log
   done
   echo "$1 tally pass=$p fail=$f"
+  failed=$((failed+f))
 }
 [ $IDLE -gt 0 ] && series idle $IDLE
-pids=()
 for c in $(seq 1 $(sysctl -n hw.ncpu)); do yes > /dev/null & pids+=($!); done
 echo "load: $(sysctl -n hw.ncpu) busy loops"
 series loaded $LOADED
-kill ${pids[@]} 2>/dev/null
-wait 2>/dev/null
+stop_load
+if [ $failed -gt 0 ]; then echo "stress FAIL failed_runs=$failed"; exit 1; fi
+echo "stress PASS"
+exit 0

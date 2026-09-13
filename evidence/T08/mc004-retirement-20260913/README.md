@@ -68,16 +68,18 @@ The other 9 runs passed all 27 tests. This PR does not change these tests. Their
 
 ## Verifiable records on `ae5e4a4` (PASS evidence)
 
-These runs were built and executed in a clean detached worktree at `ae5e4a4` (tree `e5a587fb…`). Each has a `zcr-evidence/1` record from `zcr-dev-evidence record`, and `zcr-dev-evidence verify` accepted every record against that worktree. [records/runs.json](records/runs.json) binds each record to its log and log digest, [source-config.json](records/source-config.json) (`source_config_sha256` `45251a7e…`: build/config, contract, source file, toolchain and host hashes), and [corpus.json](records/corpus.json) (`corpus_sha256` `1ab4ac94…`: embedded fixtures, test source and stress settings).
+These runs were built and executed in a clean detached worktree at `ae5e4a4` (tree `e5a587fb…`). Each has a `zcr-evidence/1` record from `zcr-dev-evidence record`, and `zcr-dev-evidence verify` accepted every record against that worktree. [records/runs.json](records/runs.json) binds each record to its log and log digest, [source-config.json](records/source-config.json) (`source_config_sha256` `45251a7e…`: build/config, contract, source file, toolchain and host hashes), and [corpus.json](records/corpus.json) (`corpus_sha256` `115dcf7d…`: embedded fixtures, test source, stress script and settings).
 
 | Record | Binary | Result |
 |---|---|---|
 | [mc004-debug](records/mc004-debug.json) | `T08-test 3653f833…` | 6/6 ([log](logs/src-mc004-debug.log)) |
-| [mc004-debug-stress](records/mc004-debug-stress.json) | `T08-test 3653f833…` | idle 10/10, 8 busy loops **30/30** ([logs](logs/src-stress.tar.gz)) |
+| [mc004-debug-stress](records/mc004-debug-stress.json) | `T08-test 3653f833…` | idle 10/10, 8 busy loops **30/30**, script exit 0 ([logs](logs/src-stress2.tar.gz)) |
 | [mcp-debug](records/mcp-debug.json), [launch](records/mcp-debug-launch.json) | `T08-test 3af733e5…`, `T08-launch-test ede38b5a…` | 29/29, 0 leaks ([log](logs/src-mcp-debug.log)) |
 | [mcp-releasesafe](records/mcp-releasesafe.json), [launch](records/mcp-releasesafe-launch.json) | `T08-test b5006a4c…`, `T08-launch-test 69d3f1a3…` | 29/29, 0 leaks ([log](logs/src-mcp-releasesafe.log)) |
 
 A record verifies only in a clean worktree at `source_commit` with the recorded git dir and binary, as with the existing `evidence/T08/records`. A record cannot name the commit that adds it, because committing it changes the tree.
+
+**Stress script exit status (PR #3 review).** The first copy of [`mc004_stress.sh`](probes/mc004_stress.sh) counted failed runs but always exited 0. Its recorded exit code therefore could not show a failure, although that run had `fail=0` in both series. The script now exits 1 if any run fails and stops the busy loops on exit. The fixed script exited 1 on the stdout mutant binary, 1 idle and 1 loaded run, both failing ([log](logs/script-check-mutant.tar.gz)), and 0 on the clean `ae5e4a4` binary ([log](logs/script-check-clean.tar.gz)). The stress was then rerun with the fixed script and re-recorded, and `records/corpus.json` now carries the fixed script's digest.
 
 ## Supporting observations on `ae5e4a4` (task worktree builds, not PASS records)
 
