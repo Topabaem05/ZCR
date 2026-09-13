@@ -2,7 +2,7 @@
 
 **Date:** 2026-09-13 · **Host:** Apple M2 8 GB, macOS 26.6.2 (25G83), Zig 0.16.0 · **Base:** `main` `f1c388a` · **Source:** `ae5e4a4` (tests `bd54afe`, `ae5e4a4`)
 
-Exact commands, exit codes, source/tree, contract digest and binary SHA-256 values are in [report.json](report.json). `runs` and `test_binaries_sha256` come from builds of `ae5e4a4`; the evidence commit on top changes only `evidence/T08/`. Earlier `bd54afe` runs are kept under `historical_runs`. Each result applies only to its binary and this host.
+PASS evidence is the `zcr-evidence/1` records in [records/](records/), made with `zcr-dev-evidence record` in a clean worktree at `ae5e4a4` and accepted by `zcr-dev-evidence verify`; [records/runs.json](records/runs.json) adds each run's log digest, `source_config_sha256` and `corpus_sha256`. [report.json](report.json) indexes those records plus the probes, mutants, controls and supporting runs. The evidence commit on top changes only `evidence/T08/`. Earlier `bd54afe` runs are kept under `historical_runs`. Each result applies only to its binary and this host.
 
 The bundle lives under `evidence/T08/` as `tasks/T08.md` requires (PR #3 review).
 
@@ -66,15 +66,29 @@ In run 10 of the ReleaseSafe mcp binary under 8 busy loops, the last four runtim
 
 The other 9 runs passed all 27 tests. This PR does not change these tests. Their `CacheHarness` creates git repositories with `/usr/bin/git` and snapshots workspaces through `workspace.Registry`, whose git runs map errors to `IoFailure`. That matches the Rosetta-only `identity.zig` failures recorded in PR #2, but the cause is **not confirmed** here.
 
-## Results on `ae5e4a4`
+## Verifiable records on `ae5e4a4` (PASS evidence)
+
+These runs were built and executed in a clean detached worktree at `ae5e4a4` (tree `e5a587fb…`). Each has a `zcr-evidence/1` record from `zcr-dev-evidence record`, and `zcr-dev-evidence verify` accepted every record against that worktree. [records/runs.json](records/runs.json) binds each record to its log and log digest, [source-config.json](records/source-config.json) (`source_config_sha256` `45251a7e…`: build/config, contract, source file, toolchain and host hashes), and [corpus.json](records/corpus.json) (`corpus_sha256` `1ab4ac94…`: embedded fixtures, test source and stress settings).
+
+| Record | Binary | Result |
+|---|---|---|
+| [mc004-debug](records/mc004-debug.json) | `T08-test 3653f833…` | 6/6 ([log](logs/src-mc004-debug.log)) |
+| [mc004-debug-stress](records/mc004-debug-stress.json) | `T08-test 3653f833…` | idle 10/10, 8 busy loops **30/30** ([logs](logs/src-stress.tar.gz)) |
+| [mcp-debug](records/mcp-debug.json), [launch](records/mcp-debug-launch.json) | `T08-test 3af733e5…`, `T08-launch-test ede38b5a…` | 29/29, 0 leaks ([log](logs/src-mcp-debug.log)) |
+| [mcp-releasesafe](records/mcp-releasesafe.json), [launch](records/mcp-releasesafe-launch.json) | `T08-test b5006a4c…`, `T08-launch-test 69d3f1a3…` | 29/29, 0 leaks ([log](logs/src-mcp-releasesafe.log)) |
+
+A record verifies only in a clean worktree at `source_commit` with the recorded git dir and binary, as with the existing `evidence/T08/records`. A record cannot name the commit that adds it, because committing it changes the tree.
+
+## Supporting observations on `ae5e4a4` (task worktree builds, not PASS records)
+
+Built in the task worktree at the same commit, whose binaries embed a different path.
 
 | Run | Binary | Result |
 |---|---|---|
 | MC-004 Debug | `83461adf…` | 6/6 ([log](logs/ae5-mc004-debug.log)); identical to the pre-commit build ([log](logs/green2-mc004-debug.log)) |
-| stress, [`mc004_stress.sh`](probes/mc004_stress.sh) loop, Debug MC-004 | `83461adf…` | idle 10/10, 8 busy loops **30/30** ([logs](logs/stress-ae5.tar.gz)) |
+| stress, Debug MC-004 | `83461adf…` | idle 10/10, 8 busy loops 30/30 ([logs](logs/stress-ae5.tar.gz)) |
 | stress, ReleaseSafe mcp group binary, 8 busy loops | `T08-test bdf2473c…` | 9/10. All MC-004 tests passed in every run. Run 10 failed four runtime-cache tests, not MC-004 (see section 4) ([logs](logs/stress-ae5.tar.gz)) |
-| mcp group Debug | `T08-test 9c792e73…` | 29/29, 0 leaks ([log](logs/ae5-mcp-Debug.log)) |
-| mcp group ReleaseSafe | `T08-test bdf2473c…` | 29/29, 0 leaks ([log](logs/ae5-mcp-ReleaseSafe.log)) |
+| mcp group Debug / ReleaseSafe | `T08-test 9c792e73…` / `bdf2473c…` | 29/29 each, 0 leaks ([Debug](logs/ae5-mcp-Debug.log), [ReleaseSafe](logs/ae5-mcp-ReleaseSafe.log)) |
 
 Earlier on `bd54afe` (retirement fix only): MC-004 Debug 6/6, stress idle 10/10 and loaded 30/30, mcp group Debug and ReleaseSafe 29/29 with matching rebuild digests ([logs](logs/)). The stress loops ran as inline shell with the same structure as `mc004_stress.sh`.
 

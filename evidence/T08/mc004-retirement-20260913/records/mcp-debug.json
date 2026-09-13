@@ -1,0 +1,13 @@
+{
+  "schema_version": "zcr-evidence/1",
+  "task_id": "T08",
+  "label": "mcp-debug",
+  "command": "zig build test -Dtest-group=mcp -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/src-out-mcp-debug --summary all",
+  "exit_code": 0,
+  "source_commit": "ae5e4a4c2fa7ff8771985ca6cdc403952a72ed89",
+  "source_tree": "e5a587fbc91f7e69650171869a8f1681e1b86251",
+  "worktree_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/t08-mc004-src",
+  "binary_path": "/Users/guribbong/code/ZCR-state/tasks/MC004/src-out-mcp-debug/bin/T08-test",
+  "binary_sha256": "3af733e51f7613379fdda168c644f7ad099cf76abce4b9bda511f43bce46407e",
+  "recorded_at_unix_ms": 1789312593810
+}
