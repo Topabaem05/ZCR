@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "state": {
+    "toplevel": "/Users/guribbong/code/ZCR-worktrees/t08-mc004-rec2",
+    "absolute_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/t08-mc004-rec2",
+    "common_dir": "/Users/guribbong/code/ZCR/.git",
+    "head_commit": "4e7cc0fcbb0049c0bf22b389e00d150d388b0ff6",
+    "head_tree": "5c8c01adbabfaf866291187da3375578b47257a3",
+    "branch": null,
+    "entries": []
+  },
+  "reasons": []
+}

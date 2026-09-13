@@ -20,15 +20,19 @@
     "contracts/task-manifest.schema.json": "d65a9082b5b4896e6e1017d4bfa6a37dc12efe88b362ed809491a5f3b2c965cc",
     "contracts/tools.json": "6537c0961f85dd623cf76c195dab534f583052c31eff2eda54727e97083a0b4b"
   },
+  "build_options": {
+    "MC-004 only": "-Dtest-group=mcp -Dtest-id=MC-004 -Doptimize=Debug -Dinstall-tests=true",
+    "mcp group": "-Dtest-group=mcp -Doptimize=<Debug|ReleaseSafe> -Dinstall-tests=true"
+  },
   "code_commit": "ae5e4a4c2fa7ff8771985ca6cdc403952a72ed89",
-  "code_note": "source_commit is the PR #3 branch after merging main 9226555 (PR #2) at 7324a3e: T08-owned sources (src/protocol, tests/t08_test.zig) are identical to code_commit; the only other code differences from code_commit are PR #2 files from main (src/fs/publish.zig, src/storage/journal.zig, tests/t11_test.zig, tests/t12_fixtures.zig, tests/t12_test.zig)",
+  "code_note": "source_commit adds only evidence/ files on top of code_commit; src, tests, build files, contracts, config and tools are identical",
   "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
   "derivation": "sha256 of this file's bytes is source_config_sha256; every file hash below is sha256 of the blob at source_commit (git show HEAD:<path>)",
   "environment": {
     "STATE": "/Users/guribbong/code/ZCR-state/tasks/MC004",
-    "TMPDIR": "$STATE/rec2-tmp",
-    "ZIG_GLOBAL_CACHE_DIR": "$STATE/rec2-global-cache",
-    "ZIG_LOCAL_CACHE_DIR": "$STATE/rec2-local-cache"
+    "TMPDIR": "$STATE/rec-tmp",
+    "ZIG_GLOBAL_CACHE_DIR": "$STATE/rec-global-cache",
+    "ZIG_LOCAL_CACHE_DIR": "$STATE/rec-local-cache"
   },
   "host": {
     "machine": "arm64",
@@ -39,7 +43,7 @@
   },
   "production_writes_enabled": false,
   "schema": "zcr-t08-source-config/1",
-  "source_commit": "4e7cc0fcbb0049c0bf22b389e00d150d388b0ff6",
+  "source_commit": "47dbb296c594783fe1dbd3750af8800794547e1b",
   "source_file_hashes": {
     "src/batch/read.zig": "a0627a93212db8d864deb37037a9b4c27e5bee4948f4602ed4c9da2c7339e6e6",
     "src/cache/association.zig": "69cb402708d851060c5bc5fda6a6b77e6ef47fefced33b6556bfe646d0d358f4",
@@ -51,7 +55,7 @@
     "src/fs/edit.zig": "0c7cd32028ef7920ad973a3226198916dfece42acb408692f82602b384f3fea2",
     "src/fs/ignore.zig": "4d398d96174d7a52d4a895494ba5c75a17205146518be3feef38d60f4c8379cd",
     "src/fs/metadata.zig": "ecbe8d94bfed6bc6b032e811ec75941585963e4d61848cdb864004a0566fabca",
-    "src/fs/publish.zig": "94653c1ce0fa965470a6f02d068793ada9ad0cf70806c382596f541fcb428e34",
+    "src/fs/publish.zig": "7f0d3f1541be08e9d511b906753c1817cf891d1022884434a2c0e5dee5a72936",
     "src/fs/read.zig": "78ce9fc92750103d73fe4b1eea68b4da2e674064c0bf533b550e68515de4b7b1",
     "src/fs/traverse.zig": "4e40d6b5ac76549174efde0c36ac5aab1bf14066fd2959e513d0eb1e6715e7a8",
     "src/launch.zig": "75e065d80a64717e5ecfedf1bbdddbdfc7cf8e27724f84760910c84be84fea93",
@@ -72,10 +76,9 @@
     "src/workspace/lease.zig": "b7b19b516e2dfe25f8e38df3962659cab90600e469cc1c0623050b2016d52e60",
     "src/workspace/registry.zig": "322e0147763b238f32a46d5a4b6921b46f2524e6d0134411b424960329ba68bf"
   },
-  "source_tree": "5c8c01adbabfaf866291187da3375578b47257a3",
+  "source_tree": "ab13879c4c70b4814ad68f21635ddaf066b79148",
   "toolchain": {
     "executable_sha256": "e6cd688d25664983833aae272f501d4bceeae304875b8f1741209d15fd13a4ec",
     "version": "0.16.0"
-  },
-  "workspace_id": "fs:16777232:649219198:16777232:649219196:16777232:647053195"
+  }
 }

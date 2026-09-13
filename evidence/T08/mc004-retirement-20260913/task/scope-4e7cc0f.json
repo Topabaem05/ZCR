@@ -1,0 +1,427 @@
+{
+  "task": "T08",
+  "role": "task",
+  "violations": [],
+  "changes": [
+    {
+      "kind": "modified",
+      "path": "evidence/T08/handoff.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/README.md",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/ae5-mc004-debug.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/ae5-mcp-Debug.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/ae5-mcp-ReleaseSafe.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/build-diag.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/build-mutant-diag.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/build-mutant-origtest.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/commit-mc004-debug.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/commit-mcp-Debug.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/commit-mcp-ReleaseSafe.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/control-smallfile-oldtest.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/diag-original-test-loaded-20.tar.gz",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/green-mc004-debug.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/green2-mc004-debug.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/mcp-Debug.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/mcp-ReleaseSafe.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/mutant-deadline-origtest.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/new-test-stress-idle10-loaded30.tar.gz",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/rec-mc004-debug.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/rec-mcp-debug.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/rec-mcp-releasesafe.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/rec-stress.tar.gz",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/red-control-smallfile.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/red-mutant-newtest-run.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/red-mutant-newtest.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/red-mutant-stdout.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/script-check-clean.tar.gz",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/script-check-mutant.tar.gz",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/script-checks.tar.gz",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/src-mc004-debug.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/src-mcp-debug.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/src-mcp-releasesafe.log",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/src-stress2.tar.gz",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/logs/stress-ae5.tar.gz",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/probes/control_no_pipe_stall.py",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/probes/instrument_diag.py",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/probes/mc004_stress.sh",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/probes/mutant_detach_after_hook.py",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/probes/mutant_ignore_output_failure.py",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/records/corpus.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/records/mc004-debug-stress.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/records/mc004-debug.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/records/mcp-debug-launch.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/records/mcp-debug.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/records/mcp-releasesafe-launch.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/records/mcp-releasesafe.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/records/runs.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/records/source-config.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/records/superseded-ae5e4a4/corpus.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/records/superseded-ae5e4a4/mc004-debug-stress.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/records/superseded-ae5e4a4/mc004-debug.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/records/superseded-ae5e4a4/mcp-debug-launch.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/records/superseded-ae5e4a4/mcp-debug.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/records/superseded-ae5e4a4/mcp-releasesafe-launch.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/records/superseded-ae5e4a4/mcp-releasesafe.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/records/superseded-ae5e4a4/runs.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/records/superseded-ae5e4a4/source-config.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/T08/mc004-retirement-20260913/report.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "modified",
+      "path": "tests/t08_test.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    }
+  ]
+}

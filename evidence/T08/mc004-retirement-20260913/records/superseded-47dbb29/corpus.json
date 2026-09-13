@@ -3,16 +3,16 @@
   "derivation": "sha256 of this file's bytes is corpus_sha256; every file hash below is sha256 of the blob at source_commit",
   "description": "MCP frames, file contents (hello.txt, 128 KiB 'large', escaped, cache fixtures) and concurrency gates are embedded in the compiled test source. Temporary directories and, for runtime-cache tests, git repositories created with /usr/bin/git are generated independently in each run.",
   "schema": "zcr-t08-corpus/1",
-  "source_commit": "4e7cc0fcbb0049c0bf22b389e00d150d388b0ff6",
+  "source_commit": "47dbb296c594783fe1dbd3750af8800794547e1b",
   "stress": {
     "arguments": "<T08-test> <log dir> 10 30",
-    "exit_status": "0 only if every run exited 0 with all load workers alive around every loaded run; 1 if any run failed; 2 if load workers did not start or disappeared; 130 or 143 if interrupted",
+    "exit_status": "0 only if every run exited 0; 1 if any run failed; 130 or 143 if interrupted by INT or TERM",
     "idle_runs": 10,
-    "load": "8 concurrent `yes > /dev/null` busy loops, one per CPU, liveness-checked before and after every loaded run",
+    "load": "8 concurrent `yes > /dev/null` busy loops, one per CPU, only during loaded runs",
     "loaded_runs": 30,
     "run_from": "the clean source_commit worktree, by its in-tree relative path",
     "script": "evidence/T08/mc004-retirement-20260913/probes/mc004_stress.sh",
-    "script_sha256": "fae767dfbcdfac83967398940746b1438a7b54ad95ccc396dd5cf738a1df8bb2"
+    "script_sha256": "7567e9a68bc2faaa71af35890a4a667be638218d87092d2441d57e1a960c6daa"
   },
   "tests/t08_test.zig": "c1b25796d46b737164be49490e5f7223b54087909bb0b523398d3fe222afcb8e"
 }

@@ -3,10 +3,10 @@
   "task": "T08",
   "status": "IMPLEMENTED_WITH_OPEN_GATES",
   "revision": "MC-004 test revision (PR #3)",
-  "base_commit": "f1c388a7f6b68c5c221d4a7e013c12dfa6993f8c",
-  "source_head": "47dbb296c594783fe1dbd3750af8800794547e1b",
-  "source_tree": "ab13879c4c70b4814ad68f21635ddaf066b79148",
-  "source_head_note": "PASS records bind to source_head, which adds only evidence/T08 files to code_commit; src, tests, build files, contracts, config and tools are identical to code_commit",
+  "base_commit": "9226555ce3abad17e5a9c856d952bbd2bfb3eca8",
+  "source_head": "4e7cc0fcbb0049c0bf22b389e00d150d388b0ff6",
+  "source_tree": "5c8c01adbabfaf866291187da3375578b47257a3",
+  "source_head_note": "PASS records bind to source_head, the branch head after merging main 9226555; relative to base_commit it changes only tests/t08_test.zig and evidence/T08, and T08-owned sources are identical to code_commit",
   "code_commit": "ae5e4a4c2fa7ff8771985ca6cdc403952a72ed89",
   "source_commits": [
     "bd54afe246bc9640eb1299d7afb60490fcb3cc49",
@@ -14,8 +14,8 @@
   ],
   "branch_integration": "PR #2 merged into main as 9226555; main merged into claude/t08-mc004-retirement as 7324a3e with no overlapping files",
   "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
-  "workspace_incarnation": null,
-  "workspace_incarnation_note": "no workspace manifest incarnation was issued for this test-only revision; the previous value belongs to the 48d2e8b handoff",
+  "workspace_incarnation": "fs:16777232:649219198:16777232:649219196:16777232:647053195",
+  "workspace_incarnation_note": "filesystem workspace identity of the clean recording worktree (root, git dir, common dir device:inode), in the form src/launch.zig uses; bound by task/manifest.json",
   "source_owned_files": [
     "src/protocol/mcp.zig",
     "src/protocol/framing.zig",
@@ -40,13 +40,13 @@
     "mc004_debug": "6/6",
     "mcp_debug": "29/29 (T08-test 27, T08-launch-test 2), 0 leaks",
     "mcp_release_safe": "29/29 (T08-test 27, T08-launch-test 2), 0 leaks",
-    "mc004_debug_stress": "idle 10/10, 8 busy loops 30/30, runner exit 0",
-    "record_verify": "6 zcr-evidence/1 records accepted by zcr-dev-evidence verify",
+    "mc004_debug_stress": "idle pass=10 fail=0, 8 busy loops pass=30 fail=0, stress PASS, runner exit 0",
+    "record_verify": "6 zcr-evidence/1 records at 4e7cc0f accepted by zcr-dev-evidence verify",
     "failure_injection": "detach-after-hook mutant fails the retirement test; reader-ignores-failure mutant fails the stdout test; 1 KiB response control fails the pipe-drain test",
     "codec_and_batch_regression": "NOT_RUN_THIS_REVISION (no product source changed)",
     "contract_verification": "NOT_RUN_THIS_REVISION (contracts unchanged; digest recorded)",
-    "macOS_runtime": "PASS on Apple M2 macOS 26.6.2 (local records); native CI T08-test 27/27 in every Mac run inspected before the main update",
-    "Linux_runtime": "native CI ubuntu-24.04 success on 3d912c4",
+    "macOS_runtime": "PASS on Apple M2 macOS 26.6.2 (local records); native CI run 34767687224 on 5b0dc65 (branch updated from main 9226555) succeeded on macos-15 and macos-15-intel",
+    "Linux_runtime": "native CI run 34767687224 on 5b0dc65 succeeded on ubuntu-24.04",
     "actual_host_integration": "NOT_RUN",
     "Windows_runtime": "NOT_RUN"
   },
@@ -56,8 +56,8 @@
     "records": "evidence/T08/mc004-retirement-20260913/records/",
     "runs_index": "evidence/T08/mc004-retirement-20260913/records/runs.json"
   },
-  "source_config_sha256": "b6f25aa691efa0c305717cb11c8daef09332814e53a801af41d44893baec9d68",
-  "corpus_sha256": "64cb94b486bc2985edda2faba67f59fddaecfc8ce7c9127b2c0212803514351d",
+  "source_config_sha256": "8b14ce6221722963a35212c9a894afc4962b5fbbcf3ad662b09af3426cf941ac",
+  "corpus_sha256": "cf102b540363c3ddced89bab6155635dbdc08153a098bf38b9914942824ec330",
   "limitations": [
     "zcr_files/zcr_search currently require policy authority for the traversal root \".\"; narrower policies fail E_SCOPE rather than broadening authority.",
     "A single engine worker processes a bounded queue; batch reads may use up to two bounded internal workers.",
@@ -78,12 +78,12 @@
     "docs/18 row 1 update with MANIFEST.sha256 (integrator)"
   ],
   "steps": {
-    "S01": "clean task worktree from main f1c388a; separate caches, TMP and state",
+    "S01": "clean task worktree from main f1c388a, later updated from main 9226555; separate caches, TMP and state; task manifest, authorization and preflight recorded for the recording worktree at 4e7cc0f (development commits predate the manifest)",
     "S02": "instrumented the original retirement test under load and showed it passes a detach-after-hook mutant; new tests fail that mutant, the reader-ignores-failure mutant and the 1 KiB control",
     "S03": "test-only change in tests/t08_test.zig (bd54afe, ae5e4a4)",
     "S04": "MC-004 Debug and load stress pass; mcp group Debug and ReleaseSafe pass",
     "S05": "scope limited to tests/t08_test.zig and evidence/T08; mcp group regression in both modes",
-    "S06": "zcr-evidence/1 records at 47dbb29, config/corpus digests and this handoff; remaining gates listed"
+    "S06": "zcr-evidence/1 records at 4e7cc0f, config/corpus digests, task manifest, scope report and this handoff; remaining gates listed"
   },
   "integration_dependencies": [
     "build imports zcr_core,zcr_policy,zcr_memory,zcr_fs_read,zcr_fs_traverse,zcr_search,zcr_batch_read,zcr_projection",
@@ -98,7 +98,8 @@
     "R3": "control backing and output credit reserved at startup; health works while ordinary global Budget is fully admitted elsewhere",
     "R4": "MC-004 retirement check counts only validations while teardown is gated and asserts responses (bd54afe)",
     "R5": "stdout-failure and partial-pipe waits are event-based with a 10 s hang guard (ae5e4a4)",
-    "R6": "PR #3 review: evidence under evidence/T08, zcr-evidence/1 records with config/corpus digests, stress runner exit status and signals, records bound to the runner commit, canonical handoff refreshed"
+    "R6": "PR #3 review: evidence under evidence/T08, zcr-evidence/1 records with config/corpus digests, stress runner exit status and signals, records bound to the runner commit, canonical handoff refreshed",
+    "R7": "PR #3 review: runner fails when load workers are missing; workspace identity, task manifest and scope report recorded; macOS limitation narrowed (4e7cc0f)"
   },
   "previous_handoffs": [
     {
@@ -175,5 +176,18 @@
         "R3": "control backing and output credit reserved at startup; health works while ordinary global Budget is fully admitted elsewhere"
       }
     }
-  ]
+  ],
+  "base_note": "the revision started from main f1c388a; main 9226555 (PR #2) was merged into the branch at 7324a3e",
+  "workspace_id": "fs:16777232:649219198:16777232:649219196:16777232:647053195",
+  "task_manifest": "evidence/T08/mc004-retirement-20260913/task/manifest.json",
+  "task_manifest_sha256": "b87b90d4904e977568866e6300609a8b17585b126077bac18068d36a4f6a79c6",
+  "authorization": "evidence/T08/mc004-retirement-20260913/task/authorization.json",
+  "scope_report": "evidence/T08/mc004-retirement-20260913/task/scope-4e7cc0f.json (zcr-dev-guard scope, base 9226555, 0 violations)",
+  "record_to_head_check": {
+    "command": "git diff --stat 4e7cc0f -- . ':!evidence/T08'",
+    "expected_output": "",
+    "observed_at_bundle_commit": ""
+  },
+  "state_dir": "ZCR-state/tasks/MC004 (outside the source tree; raw logs, caches and TMP for this revision)",
+  "merge_method": "merge commit, so the record commit stays reachable"
 }

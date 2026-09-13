@@ -2,12 +2,12 @@
   "schema_version": "zcr-evidence/1",
   "task_id": "T08",
   "label": "mc004-debug",
-  "command": "zig build test -Dtest-group=mcp -Dtest-id=MC-004 -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/rec-out-mc004-debug --summary all",
+  "command": "zig build test -Dtest-group=mcp -Dtest-id=MC-004 -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/rec2-out-mc004-debug --summary all",
   "exit_code": 0,
-  "source_commit": "47dbb296c594783fe1dbd3750af8800794547e1b",
-  "source_tree": "ab13879c4c70b4814ad68f21635ddaf066b79148",
-  "worktree_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/t08-mc004-rec",
-  "binary_path": "/Users/guribbong/code/ZCR-state/tasks/MC004/rec-out-mc004-debug/bin/T08-test",
-  "binary_sha256": "580a18259828a8f48a41c335651b0edebf449314eb60297ec126c34aedc3495b",
-  "recorded_at_unix_ms": 1789314236570
+  "source_commit": "4e7cc0fcbb0049c0bf22b389e00d150d388b0ff6",
+  "source_tree": "5c8c01adbabfaf866291187da3375578b47257a3",
+  "worktree_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/t08-mc004-rec2",
+  "binary_path": "/Users/guribbong/code/ZCR-state/tasks/MC004/rec2-out-mc004-debug/bin/T08-test",
+  "binary_sha256": "6e234acc0412100f2dfd3134b8588a975f0d550c8d770ad65480c5769b615052",
+  "recorded_at_unix_ms": 1789317092119
 }

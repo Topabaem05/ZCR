@@ -2,7 +2,7 @@
 
 **Date:** 2026-09-13 · **Host:** Apple M2 8 GB, macOS 26.6.2 (25G83), Zig 0.16.0 · **Base:** `main` `f1c388a` · **Source:** `ae5e4a4` (tests `bd54afe`, `ae5e4a4`)
 
-PASS evidence is the `zcr-evidence/1` records in [records/](records/), made with `zcr-dev-evidence record` in a clean worktree at `47dbb29` (code identical to `ae5e4a4`, plus the fixed stress runner) and accepted by `zcr-dev-evidence verify`; [records/runs.json](records/runs.json) adds each run's log digest, `source_config_sha256` and `corpus_sha256`. [report.json](report.json) indexes those records plus the probes, mutants, controls and supporting runs. The evidence commit on top changes only `evidence/T08/`. Earlier `bd54afe` runs are kept under `historical_runs`. Each result applies only to its binary and this host.
+PASS evidence is the `zcr-evidence/1` records in [records/](records/), made with `zcr-dev-evidence record` in a clean worktree at `4e7cc0f` (the branch after the `main` update, whose T08 sources are identical to `ae5e4a4`) and accepted by `zcr-dev-evidence verify`; [records/runs.json](records/runs.json) adds each run's log digest, `source_config_sha256` and `corpus_sha256`. [report.json](report.json) indexes those records plus the probes, mutants, controls and supporting runs. The evidence commit on top changes only `evidence/T08/`. Earlier `bd54afe` runs are kept under `historical_runs`. Each result applies only to its binary and this host.
 
 The bundle lives under `evidence/T08/` as `tasks/T08.md` requires (PR #3 review).
 
@@ -66,28 +66,50 @@ In run 10 of the ReleaseSafe mcp binary under 8 busy loops, the last four runtim
 
 The other 9 runs passed all 27 tests. This PR does not change these tests. Their `CacheHarness` creates git repositories with `/usr/bin/git` and snapshots workspaces through `workspace.Registry`, whose git runs map errors to `IoFailure`. That matches the Rosetta-only `identity.zig` failures recorded in PR #2, but the cause is **not confirmed** here.
 
-## Verifiable records on `47dbb29` (PASS evidence)
+## Verifiable records on `4e7cc0f` (PASS evidence)
 
-The records bind to `47dbb29` (tree `ab13879c…`), which adds only evidence files on top of the code commit `ae5e4a4`. Its `src`, `tests`, build files, contracts, config and tools are identical to `ae5e4a4`. Its tree also contains the stress runner, which the stress record runs by its in-tree path. Every run was built and executed in a clean detached worktree at that commit, recorded with `zcr-dev-evidence record`, and accepted by `zcr-dev-evidence verify`. [records/runs.json](records/runs.json) binds each record to its log and log digest and to two input digests:
+The records bind to `4e7cc0f` (tree `5c8c01ad…`). That commit is the branch after `main` `9226555` (PR #2) was merged in at `7324a3e`, plus evidence-only commits.
+- **T08 sources:** `src/protocol` and `tests/t08_test.zig` are identical to the code commit `ae5e4a4`.
+- **Other code differences:** only PR #2's files from `main`.
+- **Stress runner:** the tree contains the runner, and the stress record runs it by its in-tree path.
 
-- [source-config.json](records/source-config.json), `source_config_sha256` `b6f25aa6…`: build, config, contract, source file, toolchain and host hashes.
-- [corpus.json](records/corpus.json), `corpus_sha256` `64cb94b4…`: embedded fixtures, test source, and the runner's blob at `47dbb29`.
+Every run was built and executed in a clean detached worktree at that commit, recorded with `zcr-dev-evidence record`, and accepted by `zcr-dev-evidence verify`.
 
 | Record | Binary | Result |
 |---|---|---|
-| [mc004-debug](records/mc004-debug.json) | `T08-test 580a1825…` | 6/6 ([log](logs/rec-mc004-debug.log)) |
-| [mc004-debug-stress](records/mc004-debug-stress.json) | `T08-test 580a1825…` | idle 10/10, 8 busy loops **30/30**, `stress PASS`, runner exit 0 ([logs](logs/rec-stress.tar.gz)) |
-| [mcp-debug](records/mcp-debug.json), [launch](records/mcp-debug-launch.json) | `T08-test 7eff0831…`, `T08-launch-test cb95d082…` | 29/29, 0 leaks ([log](logs/rec-mcp-debug.log)) |
-| [mcp-releasesafe](records/mcp-releasesafe.json), [launch](records/mcp-releasesafe-launch.json) | `T08-test b42de407…`, `T08-launch-test 85f1dbf6…` | 29/29, 0 leaks ([log](logs/rec-mcp-releasesafe.log)) |
+| [mc004-debug](records/mc004-debug.json) | `T08-test 6e234acc…` | 6/6 ([log](logs/rec2-mc004-debug.log)) |
+| [mc004-debug-stress](records/mc004-debug-stress.json) | `T08-test 6e234acc…` | idle 10/10, 8 busy loops **30/30**, `stress PASS`, runner exit 0 ([logs](logs/rec2-stress.tar.gz)) |
+| [mcp-debug](records/mcp-debug.json), [launch](records/mcp-debug-launch.json) | `T08-test 72bab377…`, `T08-launch-test 38ce82c0…` | 29/29, 0 leaks ([log](logs/rec2-mcp-debug.log)) |
+| [mcp-releasesafe](records/mcp-releasesafe.json), [launch](records/mcp-releasesafe-launch.json) | `T08-test fcd352e5…`, `T08-launch-test 695747f8…` | 29/29, 0 leaks ([log](logs/rec2-mcp-releasesafe.log)) |
 
-A record verifies only in a clean worktree at its source commit, with the recorded git dir and binary, as with the existing `evidence/T08/records`. A record cannot name the commit that adds it, because committing it changes the tree.
+[records/runs.json](records/runs.json) binds each record to the following:
+- its log and log digest;
+- [source-config.json](records/source-config.json) (`source_config_sha256` `8b14ce62…`);
+- [corpus.json](records/corpus.json) (`corpus_sha256` `cf102b54…`);
+- the task manifest.
 
-**Stress runner (PR #3 review).** [`mc004_stress.sh`](probes/mc004_stress.sh) needed two fixes before its exit status could back a PASS record:
+**Task identity and scope.**
+- **Manifest:** [task/manifest.json](task/manifest.json) (`zcr-task/1`, sha256 `b87b90d4…`) binds T08 to the workspace id `fs:16777232:649219198:16777232:649219196:16777232:647053195`, base `9226555`, the contract digest, fence 1, an expiry, and write paths `tests/t08_test.zig` and `evidence/T08`.
+- **Workspace id:** it is the filesystem identity of the recording worktree (root, git dir and common dir, as device:inode), in the `fs:` form `src/launch.zig` uses.
+- **Supporting files:** [task/authorization.json](task/authorization.json) cites the repository owner's explicit requests in the session. [task/preflight.json](task/preflight.json) is the clean-worktree preflight. [task/scope-4e7cc0f.json](task/scope-4e7cc0f.json) is `zcr-dev-guard scope` against base `9226555`, with 0 violations.
+- **Timing:** the manifest was issued when these records were made. The development commits `bd54afe` and `ae5e4a4` predate it, and their scope is covered after the fact by the same guard.
 
-- **Failed runs:** the first copy counted failed runs but always exited 0. It now exits 1 if any run fails (`f96ff72`).
-- **Signals:** INT and TERM stopped the load and returned to the loop, so an interrupted run could still end in `stress PASS`. They now clean up and exit 130 or 143, and EXIT only cleans up (`47dbb29`).
-- **Checks:** with that runner, a failing mutant binary exits 1, a passing binary exits 0, and SIGTERM and SIGINT during the loaded series exit 143 and 130 with no busy loops left ([logs](logs/script-checks.tar.gz)).
-- **Superseded records:** earlier records bound to `ae5e4a4` named a runner path absent from that tree. They are kept in [records/superseded-ae5e4a4/](records/superseded-ae5e4a4/) and are not PASS evidence.
+**From the record commit to the PR head.** A record cannot name a later commit that adds it. To check that the PR head differs from the record commit only in evidence, run this in a checkout of the head:
+
+```sh
+git diff --stat 4e7cc0f -- . ':!evidence/T08'
+```
+
+The output was empty when this bundle was committed. PR #3's native CI then covers the head's exact tree.
+
+**Stress runner (PR #3 review).** [`mc004_stress.sh`](probes/mc004_stress.sh) exits with:
+- 1 if any run fails (`f96ff72`);
+- 130 or 143 if interrupted (`47dbb29`);
+- 2 if its load workers do not start or disappear around any loaded run (`4e7cc0f`).
+
+With that runner, a failing mutant exits 1, a passing binary 0, SIGTERM 143, SIGINT 130, and a load worker killed during the loaded series 2. No load workers were left behind ([logs](logs/script-checks-liveness.tar.gz), earlier checks in [logs](logs/script-checks.tar.gz)). Records made with earlier runners are kept in [records/superseded-ae5e4a4/](records/superseded-ae5e4a4/) and [records/superseded-47dbb29/](records/superseded-47dbb29/) and are not PASS evidence.
+
+**Raw state.** Caches, TMP and raw logs were kept outside the source tree under `ZCR-state/tasks/MC004` (see `records/source-config.json`). Their digests are in this bundle.
 
 ## Supporting observations on `ae5e4a4` (task worktree builds, not PASS records)
 
