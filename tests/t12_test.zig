@@ -4,6 +4,7 @@ const t = std.testing;
 const storage = f.storage;
 const core = f.core;
 const child_exe = @import("t12_options").child_exe;
+extern "c" fn mkfifo(path: [*:0]const u8, mode: std.c.mode_t) c_int;
 const Repo = struct {
     tmp: t.TmpDir,
     arena: std.heap.ArenaAllocator,
@@ -99,9 +100,9 @@ const PublicationWitness = struct {
         return .{ .parent = parent, .temp = temp, .original = original, .parent_id = pubid.parent_id, .temp_id = pubid.temp_id, .old_id = pubid.old_file_id, .digest = try storage.recovery.publicationDigest(p) };
     }
     fn retained(fd: std.posix.fd_t, id: core.FileId) !void {
-        var st: std.os.linux.Statx = undefined;
-        try t.expectEqual(std.os.linux.E.SUCCESS, std.os.linux.errno(std.os.linux.statx(fd, "", std.os.linux.AT.EMPTY_PATH, std.os.linux.STATX.BASIC_STATS, &st)));
-        try t.expectEqual(id, core.FileId{ .device = (@as(u64, st.dev_major) << 32) | st.dev_minor, .inode = st.ino });
+        // The same identity mapping the authorizer and journal use, on every platform.
+        const entry = try f.policy.paths.statHandle(fd);
+        try t.expectEqual(id, core.FileId{ .device = entry.identity.device, .inode = entry.identity.inode });
     }
     fn validate(self: *PublicationWitness) !core.Sha256 {
         try retained(self.parent.handle, self.parent_id);
@@ -520,7 +521,9 @@ test "WR-008 temp FIFO hardlink replacement and unrecorded decoys remain untouch
         try old.root.dir.writeFile(f.io, .{ .sub_path = decoy, .data = "unrecorded decoy" });
         try old.root.dir.deleteFile(f.io, temp_name);
         if (variant == 0) {
-            try t.expectEqual(std.os.linux.E.SUCCESS, std.os.linux.errno(std.os.linux.mknodat(old.root.dir.handle, temp_name, 0o010600, 0)));
+            // mkfifo takes a path on every POSIX system; mknodat/mkfifoat need macOS 13.
+            const fifo = try std.fmt.allocPrintSentinel(repo.arena.allocator(), "{s}/{s}", .{ old.root.canonical_path, temp_name }, 0);
+            try t.expectEqual(@as(c_int, 0), mkfifo(fifo.ptr, 0o600));
         } else if (variant == 1) {
             try t.expectEqual(@as(c_int, 0), std.c.linkat(old.root.dir.handle, "sentinel", old.root.dir.handle, temp_name, 0));
         } else try old.root.dir.writeFile(f.io, .{ .sub_path = temp_name, .data = old.new });
