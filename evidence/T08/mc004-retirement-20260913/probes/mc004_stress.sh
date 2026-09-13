@@ -8,6 +8,7 @@
 # usage: mc004_stress.sh <T08-test binary> <log dir> <idle runs> <loaded runs>
 set -u
 BIN=$1; L=$2; IDLE=${3:-10}; LOADED=${4:-30}
+NCPU=$(sysctl -n hw.ncpu)
 mkdir -p $L
 CWD=$(mktemp -d)
 echo "binary sha256 $(shasum -a 256 $BIN | cut -d' ' -f1)"
@@ -19,10 +20,17 @@ stop_load() { [ ${#pids[@]} -gt 0 ] && kill ${pids[@]} 2>/dev/null; wait 2>/dev/
 trap stop_load EXIT
 trap 'stop_load; echo "stress INTERRUPTED signal=INT"; exit 130' INT
 trap 'stop_load; echo "stress INTERRUPTED signal=TERM"; exit 143' TERM
+# Loaded runs count only while every load worker is alive before and after the run.
+load_alive() {
+  [ ${#pids[@]} -eq $NCPU ] || return 1
+  for pid in ${pids[@]}; do kill -0 $pid 2>/dev/null || return 1; done
+}
 series() {
   p=0; f=0
   for i in $(seq 1 $2); do
+    if [ $1 = loaded ] && ! load_alive; then echo "stress FAIL load workers missing before loaded run $i"; exit 2; fi
     (cd $CWD && $BIN > $L/$1-$i.log 2>&1); c=$?
+    if [ $1 = loaded ] && ! load_alive; then echo "stress FAIL load workers missing after loaded run $i"; exit 2; fi
     if [ $c -eq 0 ]; then p=$((p+1)); else f=$((f+1)); echo "$1 run=$i exit=$c $(grep -m1 FAIL $L/$1-$i.log)"; fi
     grep -h MC004DIAG $L/$1-$i.log
   done
@@ -30,8 +38,10 @@ series() {
   failed=$((failed+f))
 }
 [ $IDLE -gt 0 ] && series idle $IDLE
-for c in $(seq 1 $(sysctl -n hw.ncpu)); do yes > /dev/null & pids+=($!); done
-echo "load: $(sysctl -n hw.ncpu) busy loops"
+for c in $(seq 1 $NCPU); do yes > /dev/null & pids+=($!); done
+sleep 1
+if ! load_alive; then echo "stress FAIL load workers did not start"; exit 2; fi
+echo "load: $NCPU busy loops"
 series loaded $LOADED
 stop_load
 if [ $failed -gt 0 ]; then echo "stress FAIL failed_runs=$failed"; exit 1; fi

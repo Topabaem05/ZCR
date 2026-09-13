@@ -62,7 +62,7 @@
     "zcr_files/zcr_search currently require policy authority for the traversal root \".\"; narrower policies fail E_SCOPE rather than broadening authority.",
     "A single engine worker processes a bounded queue; batch reads may use up to two bounded internal workers.",
     "Parser resource limits additionally cap 4096 total object keys and 65536 JSON values.",
-    "Actual CLI/host integration, macOS runtime and Windows runtime were not executed in this task.",
+    "Actual CLI/host integration and Windows runtime were not executed. The 48d2e8b revision did not run macOS runtime; this revision records macOS runtime under tests.macOS_runtime.",
     "The launcher must provide validate_authority for registry/session expiry and root-identity validation; Config defaults support independently bound test fixtures.",
     "Trusted global/info excludes and the integrator core.Cancel deadline extension are pending root integration; T08 uses an independent per-request monotonic watcher and flags.",
     "Direct stdio currently requires public POSIX poll/libc; Windows serve reports Unsupported until its platform gate.",
