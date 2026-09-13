@@ -15,6 +15,7 @@ const LinuxMetadata = struct {
 const Darwin = struct {
     // Public Darwin APIs: xnu bsd/sys/{xattr,stdio}.h and Libc sys/acl.h.
     extern "c" fn flistxattr(fd: c_int, list: ?[*]u8, size: usize, options: c_int) isize;
+    extern "c" fn fgetxattr(fd: c_int, name: [*:0]const u8, value: ?[*]u8, size: usize, position: u32, options: c_int) isize;
     extern "c" fn acl_get_fd_np(fd: c_int, kind: c_int) ?*anyopaque;
     extern "c" fn acl_free(acl: *anyopaque) c_int;
     extern "c" fn renameatx_np(from_fd: c_int, from: [*:0]const u8, to_fd: c_int, to: [*:0]const u8, flags: c_uint) c_int;
@@ -66,13 +67,32 @@ pub const Metadata = struct {
     }
 };
 
-/// The one Darwin attribute that is not refused. The kernel attaches it to files
-/// that processes create (observed on every new file on macOS 26.6.2), and a user
-/// process can neither remove nor change it: `fremovexattr` and `fsetxattr` report
-/// success and leave the value as it was. Refusing it would refuse every file,
-/// while allowing it drops nothing a writer could preserve; the replacement file
-/// receives the kernel's own value like any file this process creates.
+/// The one Darwin attribute whose name is not refused. The kernel attaches it to
+/// files that processes create (observed on every new file on macOS 26.6.2), and a
+/// user process can neither remove, change nor copy it: `fremovexattr`, `fsetxattr`
+/// and `fcopyfile` report success and leave the value as it was. So the value can
+/// be kept only when the temp file already carries the same one; `copyMetadata`
+/// refuses a replacement whose value differs from the original's.
 pub const darwin_system_attribute = "com.apple.provenance";
+
+/// Provenance value of a descriptor, or null when it has none.
+fn provenanceValue(fd: std.posix.fd_t, buffer: []u8) Error!?[]const u8 {
+    const size = Darwin.fgetxattr(fd, darwin_system_attribute, buffer.ptr, buffer.len, 0, 0);
+    if (size >= 0) return buffer[0..@intCast(size)];
+    return switch (std.c.errno(size)) {
+        .NOATTR => null,
+        .RANGE => error.Unsupported,
+        else => error.IoFailure,
+    };
+}
+
+/// A replacement preserves provenance only when both files carry the same value
+/// or neither carries one.
+pub fn provenanceCompatible(original: ?[]const u8, replacement: ?[]const u8) bool {
+    const a = original orelse return replacement == null;
+    const b = replacement orelse return false;
+    return std.mem.eql(u8, a, b);
+}
 
 fn noAttributes(fd: std.posix.fd_t) Error!void {
     // POSIX ACLs and security labels are xattrs on Linux. Refuse any attribute
@@ -328,6 +348,14 @@ pub const Temp = struct {
             if (current.uid != old.metadata.uid or current.gid != old.metadata.gid) return error.Unsupported;
         }
         try noAttributes(self.file.handle);
+        if (builtin.os.tag == .macos) if (original) |old| {
+            var old_value: [64]u8 = undefined;
+            var new_value: [64]u8 = undefined;
+            // The kernel gives the temp its own provenance and ignores attempts to set
+            // another, so a differing value cannot be preserved: refuse before commit.
+            const kept = provenanceCompatible(try provenanceValue(old.file.handle, &old_value), try provenanceValue(self.file.handle, &new_value));
+            if (!kept) return error.Unsupported;
+        };
         self.observe(.before_metadata);
         if (std.c.fchmod(self.file.handle, @intCast(mode)) != 0) return error.IoFailure;
     }

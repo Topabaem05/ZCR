@@ -635,6 +635,17 @@ test "WR-007 kernel provenance attribute alone does not block publication" {
     try f.expectBytes("mixed.txt", "mixed\n");
 }
 
+test "WR-007 provenance is kept only when both values match or neither exists" {
+    const own = [_]u8{ 0x01, 0x02, 0x00, 0x49, 0x67, 0x7f, 0xd8, 0x22, 0x6b, 0x25, 0x59 };
+    const foreign = [_]u8{ 0x01, 0x02, 0x00, 0xf7, 0x5a, 0x62, 0x22, 0x68, 0x94, 0x2d, 0x0e };
+    try t.expect(edit.publish.provenanceCompatible(null, null));
+    try t.expect(edit.publish.provenanceCompatible(&own, &own));
+    // Another application's value cannot be reproduced on the temp file.
+    try t.expect(!edit.publish.provenanceCompatible(&foreign, &own));
+    try t.expect(!edit.publish.provenanceCompatible(&own, null));
+    try t.expect(!edit.publish.provenanceCompatible(null, &own));
+}
+
 const PublishRace = struct {
     parent: *edit.publish.Parent,
     temp: *edit.publish.Temp,
