@@ -71,19 +71,18 @@
     "POLLOUT-based pipe stall detection was observed on macOS only locally; Linux relies on native CI."
   ],
   "remaining_gates": [
-    "native CI of the branch updated from main (macos-15, macos-15-intel, ubuntu-24.04)",
     "deadline-test observation point (product change, not in this revision)",
     "runtime-cache IoFailure under load (separate task)",
     "actual host integration and Windows runtime",
     "docs/18 row 1 update with MANIFEST.sha256 (integrator)"
   ],
   "steps": {
-    "S01": "clean task worktree from main f1c388a, later updated from main 9226555; separate caches, TMP and state; task manifest, authorization and preflight recorded for the recording worktree at 4e7cc0f (development commits predate the manifest)",
+    "S01": "PARTIAL (see process_deviations): clean per-task worktree from main f1c388a with separate caches, TMP and state; no pre-issued manifest for the development commits. A manifest, authorization and preflight were issued for the recording worktree at 4e7cc0f",
     "S02": "instrumented the original retirement test under load and showed it passes a detach-after-hook mutant; new tests fail that mutant, the reader-ignores-failure mutant and the 1 KiB control",
     "S03": "test-only change in tests/t08_test.zig (bd54afe, ae5e4a4)",
     "S04": "MC-004 Debug and load stress pass; mcp group Debug and ReleaseSafe pass",
     "S05": "scope limited to tests/t08_test.zig and evidence/T08; mcp group regression in both modes",
-    "S06": "zcr-evidence/1 records at 4e7cc0f, config/corpus digests, task manifest, scope report and this handoff; remaining gates listed"
+    "S06": "zcr-evidence/1 records at 4e7cc0f, config/corpus digests, task manifest for the recording, scope report and this handoff; S01 deviation and remaining gates listed"
   },
   "integration_dependencies": [
     "build imports zcr_core,zcr_policy,zcr_memory,zcr_fs_read,zcr_fs_traverse,zcr_search,zcr_batch_read,zcr_projection",
@@ -99,7 +98,8 @@
     "R4": "MC-004 retirement check counts only validations while teardown is gated and asserts responses (bd54afe)",
     "R5": "stdout-failure and partial-pipe waits are event-based with a 10 s hang guard (ae5e4a4)",
     "R6": "PR #3 review: evidence under evidence/T08, zcr-evidence/1 records with config/corpus digests, stress runner exit status and signals, records bound to the runner commit, canonical handoff refreshed",
-    "R7": "PR #3 review: runner fails when load workers are missing; workspace identity, task manifest and scope report recorded; macOS limitation narrowed (4e7cc0f)"
+    "R7": "PR #3 review: runner fails when load workers are missing; workspace identity, task manifest and scope report recorded; macOS limitation narrowed (4e7cc0f)",
+    "R8": "PR #3 review: S01 claim narrowed and the missing pre-issued manifest recorded as a process deviation; completed native CI removed from remaining gates"
   },
   "previous_handoffs": [
     {
@@ -189,5 +189,15 @@
     "observed_at_bundle_commit": ""
   },
   "state_dir": "ZCR-state/tasks/MC004 (outside the source tree; raw logs, caches and TMP for this revision)",
-  "merge_method": "merge commit, so the record commit stays reachable"
+  "merge_method": "merge commit, so the record commit stays reachable",
+  "ci_note": "native CI run 34767687224 on 5b0dc65 passed on all three runners; each later evidence-only head is checked by the PR's own native CI, which must pass on the exact merge head before merge",
+  "process_deviations": [
+    {
+      "requirement": "AGENTS.md task isolation: read the approved manifest, base commit and workspace incarnation before work (S01)",
+      "what_happened": "development commits bd54afe and ae5e4a4 were made in a clean per-task worktree with separate caches, TMP and state, but without a pre-issued zcr-task/1 manifest",
+      "what_is_covered": "task/manifest.json, preflight.json and the zcr-dev-guard scope report cover the PASS re-recording at 4e7cc0f; the guard also shows that every change since base 9226555 is inside the manifest write paths (0 violations)",
+      "not_claimed": "that the test edits were made under an approved manifest before S02/S03; S01 is not claimed as satisfied for the development commits",
+      "accepted_by": "left to the repository owner at merge; a replay from a pre-issued manifest would produce the same tests/t08_test.zig diff"
+    }
+  ]
 }
