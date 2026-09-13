@@ -14,7 +14,11 @@ echo "binary sha256 $(shasum -a 256 $BIN | cut -d' ' -f1)"
 failed=0
 pids=()
 stop_load() { [ ${#pids[@]} -gt 0 ] && kill ${pids[@]} 2>/dev/null; wait 2>/dev/null; pids=(); }
-trap stop_load EXIT INT TERM
+# EXIT only cleans up. An interrupted run is never a PASS, and no iteration may run
+# after the load is gone under the `loaded` label, so INT and TERM exit nonzero.
+trap stop_load EXIT
+trap 'stop_load; echo "stress INTERRUPTED signal=INT"; exit 130' INT
+trap 'stop_load; echo "stress INTERRUPTED signal=TERM"; exit 143' TERM
 series() {
   p=0; f=0
   for i in $(seq 1 $2); do
