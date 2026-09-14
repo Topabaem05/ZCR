@@ -1136,8 +1136,10 @@ test "WR-008 host witness grants once and refuses a replaced temp name after unl
     const p = try prepared(fixture);
     const ns = fixture.store.options.namespace;
     const attested = [_]core.Sha256{try storage.recovery.publicationDigest(p)};
+    var tasks = [_]core.TaskId{f.task.task_id};
     var data = try grantFor(fixture, ns);
     data.publication_digests = &attested;
+    data.approved_tasks = &tasks;
     // The production host retains the root/Git/common identity, the private state
     // directory and, per pending publication, the parent, temp and original handles.
     var witness = storage.recovery.HostWitness.init(f.io, &repo.witness, repo.state_witness);
@@ -1147,6 +1149,11 @@ test "WR-008 host witness grants once and refuses a replaced temp name after unl
     const grant = witness.grant(data);
     // Issuing the grant fixes the retained set: later retention would expand what it authorizes.
     try t.expectError(error.Busy, witness.retainPublication(try std.Io.Dir.openDirAbsolute(f.io, repo.root.canonical_path, .{}), p));
+    // Every authority-bearing field is bound at issuance: editing the approved task list behind the
+    // grant's slice is refused before the one-use check is consumed, and restoring it validates again.
+    tasks[0].uuid[0] +%= 1;
+    try t.expectError(error.RecoveryRequired, grant.validate(grant.context, data, ns));
+    tasks[0].uuid[0] -%= 1;
     const validate_publication = grant.validate_publication.?;
     // A publication is never attested before the one-use continuity check.
     try t.expectError(error.RecoveryRequired, validate_publication(grant.context, data, p));

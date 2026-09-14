@@ -335,9 +335,10 @@ pub const HostWitness = struct {
     count: usize = 0,
     /// Set by grant(): the retained set is then fixed, so retention cannot widen what a grant authorizes.
     granted: bool = false,
-    /// Digest of the attested publication set captured by grant(). Validation compares against it,
-    /// so replacing or editing GrantData.publication_digests afterwards cannot widen the set.
-    attested_set: core.Sha256 = undefined,
+    /// Digest of every GrantData field captured by grant(), including the contents of its slices.
+    /// Validation compares against it, so replacing or editing the approved tasks, attested
+    /// publications or any other field afterwards cannot widen what the grant authorizes.
+    grant_digest: core.Sha256 = undefined,
     used: bool = false,
 
     /// Borrows `identity` and `state`; both must outlive the witness.
@@ -394,14 +395,14 @@ pub const HostWitness = struct {
 
     pub fn grant(self: *HostWitness, data: GrantData) ContinuityGrant {
         self.granted = true;
-        self.attested_set = attestedSetDigest(data.publication_digests);
+        self.grant_digest = grantDigest(data);
         return .{ .data = data, .context = self, .validate = validate, .validate_publication = validatePublication };
     }
 
     fn validate(context: ?*anyopaque, data: GrantData, ns: journal.Namespace) E!void {
         const self: *HostWitness = @ptrCast(@alignCast(context.?));
         if (self.used) return error.RecoveryRequired;
-        if (!self.granted or !std.meta.eql(attestedSetDigest(data.publication_digests), self.attested_set)) return error.RecoveryRequired;
+        if (!self.granted or !std.meta.eql(grantDigest(data), self.grant_digest)) return error.RecoveryRequired;
         const state = journal.metadata(self.state.handle, true) catch return error.RecoveryRequired;
         if (!std.meta.eql(state.id, data.store_root_id)) return error.RecoveryRequired;
         self.identity.validate(self.io) catch return error.RecoveryRequired;
@@ -412,7 +413,7 @@ pub const HostWitness = struct {
     fn validatePublication(context: ?*anyopaque, data: GrantData, p: core.PreparedRecord) E!void {
         const self: *HostWitness = @ptrCast(@alignCast(context.?));
         if (!self.used) return error.RecoveryRequired;
-        if (!std.meta.eql(attestedSetDigest(data.publication_digests), self.attested_set)) return error.RecoveryRequired;
+        if (!std.meta.eql(grantDigest(data), self.grant_digest)) return error.RecoveryRequired;
         const digest = try publicationDigest(p);
         // A retained witness never attests a publication the protected grant did not list.
         for (data.publication_digests) |attested| {
@@ -424,13 +425,32 @@ pub const HostWitness = struct {
         return error.RecoveryRequired;
     }
 
-    fn attestedSetDigest(digests: []const core.Sha256) core.Sha256 {
+    /// Field-by-field encoding (no struct padding), with slice lengths before their contents.
+    fn grantDigest(data: GrantData) core.Sha256 {
         var hasher = std.crypto.hash.sha2.Sha256.init(.{});
-        var count: [8]u8 = undefined;
-        std.mem.writeInt(u64, &count, digests.len, .little);
-        hasher.update(&count);
-        for (digests) |d| hasher.update(&d);
+        hasher.update("zcr-continuity-grant/1");
+        hasher.update(&data.store_id);
+        updateInt(&hasher, data.store_root_id.device);
+        updateInt(&hasher, data.store_root_id.inode);
+        hasher.update(&data.original_workspace.registry_uuid);
+        hasher.update(&data.original_workspace.incarnation);
+        hasher.update(&data.current_workspace.registry_uuid);
+        hasher.update(&data.current_workspace.incarnation);
+        hasher.update(&data.current_boot);
+        hasher.update(&data.namespace_digest);
+        updateInt(&hasher, data.security_domain.id);
+        hasher.update(&data.policy_digest);
+        updateInt(&hasher, data.approved_tasks.len);
+        for (data.approved_tasks) |task| hasher.update(&task.uuid);
+        hasher.update(&[_]u8{@intFromBool(data.exclusive_recovery)});
+        updateInt(&hasher, data.publication_digests.len);
+        for (data.publication_digests) |d| hasher.update(&d);
         return hasher.finalResult();
+    }
+    fn updateInt(hasher: *std.crypto.hash.sha2.Sha256, value: u64) void {
+        var bytes: [8]u8 = undefined;
+        std.mem.writeInt(u64, &bytes, value, .little);
+        hasher.update(&bytes);
     }
     fn handleId(fd: std.posix.fd_t) policy.paths.StatError!policy.paths.Identity {
         return (try policy.paths.statHandle(fd)).identity;
