@@ -120,6 +120,21 @@ fn readAll(a: std.mem.Allocator, file: std.Io.File) ![]const u8 {
     return out.items;
 }
 
+/// Reads until end of file, failing instead of blocking when the writer keeps the pipe open.
+fn readAllWithin(a: std.mem.Allocator, file: std.Io.File, milliseconds: u32) ![]const u8 {
+    var out: std.ArrayList(u8) = .empty;
+    var chunk: [4096]u8 = undefined;
+    const started = std.Io.Clock.Timestamp.now(io, .awake);
+    while (started.untilNow(io).raw.toMilliseconds() < milliseconds) {
+        var fds = [_]std.c.pollfd{.{ .fd = file.handle, .events = std.c.POLL.IN, .revents = 0 }};
+        if (std.c.poll(&fds, 1, 100) <= 0) continue;
+        const n = std.c.read(file.handle, &chunk, chunk.len);
+        if (n <= 0) return out.items;
+        try out.appendSlice(a, chunk[0..@intCast(n)]);
+    }
+    return error.Timeout;
+}
+
 fn expectExit(child: *std.process.Child, code: u8) !void {
     const term = try child.wait(io);
     try t.expect(term == .exited);
@@ -181,10 +196,48 @@ test "BR-004 zcr broker serve and mcp --broker take the token from an inherited 
     try t.expect(std.mem.indexOf(u8, responses, "E_UNSUPPORTED") != null);
     try expectExit(&bridge, 0);
 
-    // The operator ends the broker explicitly by closing its stdin.
+    // The disconnect ended the only grant's host binding. The broker stops instead of listening
+    // for bridges it could only refuse, and removes its socket.
+    try t.expect(std.mem.indexOf(u8, try readAllWithin(a, broker.stderr.?, 10_000), "grant ended") != null);
+    try expectExit(&broker, 0);
+    try t.expectError(error.FileNotFound, f.tmp.dir.statFile(io, "s", .{}));
+
+    // A second bridge finds no broker, is refused clearly, and starts nothing.
+    const again_fd = try tokenPipe(&token);
+    var again = try std.process.spawn(io, .{
+        .argv = &.{ cli.zcr_exe, "mcp", "--broker", "--socket", f.socket_path, "--domain", domain, "--token-fd", try std.fmt.allocPrint(a, "{d}", .{again_fd}) },
+        .stdin = .ignore,
+        .stdout = .pipe,
+        .stderr = .pipe,
+    });
+    _ = std.c.close(again_fd);
+    try t.expectEqualStrings("", try readAll(a, again.stdout.?));
+    try t.expect(std.mem.indexOf(u8, try readAll(a, again.stderr.?), "standalone") != null);
+    try expectExit(&again, 69);
+    try t.expectError(error.FileNotFound, f.tmp.dir.statFile(io, "s", .{}));
+}
+
+test "BR-004 zcr broker serve stops when the operator closes its stdin before any bridge" {
+    const f = try Fixture.init();
+    defer f.deinit();
+    const a = f.arena.allocator();
+    const token = try randomToken();
+    const fd = try tokenPipe(&token);
+    var broker = try std.process.spawn(io, .{
+        .argv = &.{ cli.zcr_exe, "broker", "serve", "--socket", f.socket_path, "--policy", f.policy_path, "--token-fd", try std.fmt.allocPrint(a, "{d}", .{fd}) },
+        .stdin = .pipe,
+        .stdout = .ignore,
+        .stderr = .pipe,
+    });
+    _ = std.c.close(fd);
+    defer broker.kill(io);
+    var line_buffer: [512]u8 = undefined;
+    try t.expect(std.mem.startsWith(u8, try readLine(broker.stderr.?, &line_buffer), "zcr broker: listening domain="));
     broker.stdin.?.close(io);
     broker.stdin = null;
+    _ = try readAllWithin(a, broker.stderr.?, 10_000);
     try expectExit(&broker, 0);
+    try t.expectError(error.FileNotFound, f.tmp.dir.statFile(io, "s", .{}));
 }
 
 test "BR-004 zcr mcp --broker without a running broker refuses clearly and starts nothing" {

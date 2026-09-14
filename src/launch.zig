@@ -270,7 +270,7 @@ fn run(a: A, io: Io, policy_path: []const u8, role: Role) !void {
             defer server.deinit() catch @panic("broker teardown with live sessions");
             var ready: [64]u8 = undefined;
             try Io.File.stderr().writeStreamingAll(io, try std.fmt.bufPrint(&ready, "zcr broker: listening domain={d}\n", .{session.security_domain.id}));
-            var watch: StdinWatch = .{ .server = server };
+            var watch: StdinWatch = .{ .server = server, .registry = &registry, .session = session, .boot = registry.bootNonce() };
             const watcher = try std.Thread.spawn(.{}, StdinWatch.run, .{&watch});
             // Joined before server.deinit, so the watcher never outlives the server.
             defer {
@@ -278,17 +278,28 @@ fn run(a: A, io: Io, policy_path: []const u8, role: Role) !void {
                 watcher.join();
             }
             try server.serve();
+            if (watch.grant_ended.load(.acquire)) try Io.File.stderr().writeStreamingAll(io, "zcr broker: grant ended after its bridge disconnected; start zcr broker serve again for a new bridge\n");
         },
     }
 }
 
-/// The operator ends an explicit broker by closing its stdin.
+/// The operator ends an explicit broker by closing its stdin. The broker also ends when its only
+/// grant's host binding is gone: closing a bridge session unbinds it, and later bridges could only
+/// be refused, so a new bridge needs a new `zcr broker serve`.
 const StdinWatch = struct {
     server: *broker.Server,
+    registry: *workspace.Registry,
+    session: core.SessionContext,
+    boot: core.Uuid,
     done: std.atomic.Value(bool) = .init(false),
+    grant_ended: std.atomic.Value(bool) = .init(false),
     fn run(w: *StdinWatch) void {
         var buffer: [256]u8 = undefined;
         while (!w.done.load(.acquire)) {
+            w.registry.validateSession(w.session, w.boot) catch {
+                w.grant_ended.store(true, .release);
+                break;
+            };
             var fds = [_]std.c.pollfd{.{ .fd = 0, .events = std.c.POLL.IN, .revents = 0 }};
             const rc = std.c.poll(&fds, 1, 100);
             if (rc < 0) {
