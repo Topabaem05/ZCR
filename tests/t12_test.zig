@@ -1182,3 +1182,33 @@ test "WR-008 host witness accepts an applied publication and refuses a foreign t
     try repo.root.dir.writeFile(f.io, .{ .sub_path = "file.txt", .data = fixture.new });
     try t.expectError(error.RecoveryRequired, grant.validate_publication.?(grant.context, data, p));
 }
+
+test "WR-008 host witness retires terminal publications so its limit bounds pending ones" {
+    var repo = try Repo.init(false);
+    defer repo.deinit();
+    const fixture = try f.Fixture.init(repo.root.canonical_path, repo.state, false, null);
+    defer fixture.deinit();
+    const p = try prepared(fixture);
+    const ns = fixture.store.options.namespace;
+    const data = try grantFor(fixture, ns);
+    var witness = storage.recovery.HostWitness.init(f.io, &repo.witness, repo.state_witness);
+    defer witness.deinit();
+    for (0..storage.recovery.HostWitness.max_publications) |_| {
+        try witness.retainPublication(try std.Io.Dir.openDirAbsolute(f.io, repo.root.canonical_path, .{}), p);
+    }
+    // The limit counts retained, not-yet-retired publications.
+    try t.expectError(error.ResourceExhausted, witness.retainPublication(try std.Io.Dir.openDirAbsolute(f.io, repo.root.canonical_path, .{}), p));
+    // A terminal publication is retired: its handles close and its slot is free again.
+    try witness.retirePublication(p);
+    try witness.retainPublication(try std.Io.Dir.openDirAbsolute(f.io, repo.root.canonical_path, .{}), p);
+    try t.expectError(error.ResourceExhausted, witness.retainPublication(try std.Io.Dir.openDirAbsolute(f.io, repo.root.canonical_path, .{}), p));
+    // Only a retained publication can be retired.
+    var other = p;
+    other.generation += 1;
+    try t.expectError(error.RecoveryRequired, witness.retirePublication(other));
+    // Once recovery has started, retained witnesses stay until deinit.
+    const grant = witness.grant(data);
+    try grant.validate(grant.context, data, ns);
+    try t.expectError(error.Busy, witness.retirePublication(p));
+    try grant.validate_publication.?(grant.context, data, p);
+}

@@ -369,6 +369,23 @@ pub const HostWitness = struct {
         self.count += 1;
     }
 
+    /// Closes and forgets the witness of a publication that reached a terminal
+    /// state, so `max_publications` bounds pending publications rather than
+    /// lifetime writes. Refused once recovery has started: the grant's checks may
+    /// still need every retained witness.
+    pub fn retirePublication(self: *HostWitness, p: core.PreparedRecord) E!void {
+        if (self.used) return error.Busy;
+        const digest = try publicationDigest(p);
+        for (self.retained[0..self.count], 0..) |*r, i| {
+            if (!std.meta.eql(r.digest, digest)) continue;
+            r.close(self.io);
+            self.count -= 1;
+            if (i != self.count) self.retained[i] = self.retained[self.count];
+            return;
+        }
+        return error.RecoveryRequired;
+    }
+
     pub fn grant(self: *HostWitness, data: GrantData) ContinuityGrant {
         return .{ .data = data, .context = self, .validate = validate, .validate_publication = validatePublication };
     }
