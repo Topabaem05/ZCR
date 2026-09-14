@@ -300,6 +300,8 @@ fn observe(io: Io, dir: Io.Dir, name: [:0]const u8, auth: *policy.Authorizer) E!
 /// the temp). Recovery still classifies the outcome from those names.
 pub const HostWitness = struct {
     pub const max_publications = 16;
+    /// Bound on GrantData.approved_tasks copied into the witness at grant().
+    pub const max_grant_tasks = 16;
     const name_capacity = 4097;
     const Retained = struct {
         parent: Io.Dir,
@@ -349,6 +351,11 @@ pub const HostWitness = struct {
     /// Validation compares against it, so replacing or editing the approved tasks, attested
     /// publications or any other field afterwards cannot widen what the grant authorizes.
     grant_digest: core.Sha256 = undefined,
+    /// Witness-owned copies of the grant's authority slices. The returned grant references this
+    /// storage, so it stays valid after the caller's arrays are freed or reused; the witness must
+    /// outlive the grant.
+    grant_tasks: [max_grant_tasks]core.TaskId = undefined,
+    grant_digests: [max_publications]core.Sha256 = undefined,
     used: bool = false,
 
     /// Borrows `identity` and `state`; both must outlive the witness.
@@ -403,10 +410,16 @@ pub const HostWitness = struct {
         return error.RecoveryRequired;
     }
 
-    pub fn grant(self: *HostWitness, data: GrantData) ContinuityGrant {
+    pub fn grant(self: *HostWitness, data: GrantData) E!ContinuityGrant {
+        if (data.approved_tasks.len > max_grant_tasks or data.publication_digests.len > max_publications) return error.ResourceExhausted;
+        @memcpy(self.grant_tasks[0..data.approved_tasks.len], data.approved_tasks);
+        @memcpy(self.grant_digests[0..data.publication_digests.len], data.publication_digests);
+        var owned = data;
+        owned.approved_tasks = self.grant_tasks[0..data.approved_tasks.len];
+        owned.publication_digests = self.grant_digests[0..data.publication_digests.len];
         self.granted = true;
-        self.grant_digest = grantDigest(data);
-        return .{ .data = data, .context = self, .validate = validate, .validate_publication = validatePublication };
+        self.grant_digest = grantDigest(owned);
+        return .{ .data = owned, .context = self, .validate = validate, .validate_publication = validatePublication };
     }
 
     fn validate(context: ?*anyopaque, data: GrantData, ns: journal.Namespace) E!void {
