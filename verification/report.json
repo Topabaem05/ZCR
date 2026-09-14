@@ -1,7 +1,7 @@
 {
   "scope": "document/schema/fixture/package validation ONLY; no Zig runtime, Mac hardware, or actual host integration was tested",
   "status": "pass",
-  "checks_total": 323,
+  "checks_total": 324,
   "checks_failed": 0,
   "counts": {
     "main_design_docs": 19,
@@ -16,7 +16,7 @@
     {
       "check": "all_json_parse",
       "status": "pass",
-      "detail": "456"
+      "detail": "470"
     },
     {
       "check": "schema:contracts/data.schema.json",
@@ -1435,6 +1435,11 @@
     },
     {
       "check": "no_unfinished_markers:evidence/continuation/legacy/report.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/continuation/broker-cli-20260914/README.md",
       "status": "pass",
       "detail": ""
     },

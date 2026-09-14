@@ -1,0 +1,46 @@
+{
+  "schema_version": "zcr-task/1",
+  "state": "active",
+  "task_id": "T01",
+  "workspace_id": "fs:16777232:649568737:16777232:649568735:16777232:647053195",
+  "base_commit": "961a6863de3d760703ad96d3bc2bc7d5bfdbad72",
+  "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+  "fence": 3,
+  "expires_at": "2026-09-15T04:58:28Z",
+  "read_paths": [
+    "."
+  ],
+  "write_paths": [
+    "build.zig",
+    "src/main.zig",
+    "src/launch.zig",
+    "tasks/tasks.json",
+    "tests/broker_cli_test.zig",
+    "MANIFEST.sha256",
+    "verification/report.json",
+    "evidence/continuation/broker-cli-20260914",
+    "tasks/T01.md",
+    "DESIGNBOOK.html"
+  ],
+  "immutable_paths": [
+    "build.zig.zon",
+    "src/core",
+    "src/broker",
+    "src/protocol",
+    "src/workspace",
+    "src/storage",
+    "src/fs",
+    "contracts",
+    "config",
+    "AGENTS.md",
+    ".github"
+  ],
+  "operations": [
+    "read",
+    "enumerate",
+    "search",
+    "status",
+    "health"
+  ],
+  "max_changed_files": 64
+}

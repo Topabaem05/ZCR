@@ -39,7 +39,8 @@
         "src/core/errors.zig",
         "src/core/limits.zig",
         "AGENTS.md",
-        "tools/dev/evidence.zig"
+        "tools/dev/evidence.zig",
+        "src/launch.zig"
       ],
       "consumes": [
         "all schemas v1",

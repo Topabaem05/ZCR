@@ -8,6 +8,8 @@ const workspace = @import("zcr_workspace");
 const memory = @import("zcr_memory");
 const cache = @import("zcr_cache");
 const mcp = @import("zcr_mcp");
+const broker = @import("zcr_broker");
+const executor = @import("zcr_executor");
 const options = @import("build_options");
 const ignores = @import("launch_ignore.zig");
 const Io = std.Io;
@@ -38,6 +40,30 @@ fn decimal(comptime T: type, text: []const u8) error{InvalidArgument}!T {
 }
 pub fn workspaceFingerprint(buffer: []u8, root: core.FileId, git: core.FileId, common: core.FileId) error{InvalidArgument}![]const u8 {
     return std.fmt.bufPrint(buffer, "fs:{d}:{d}:{d}:{d}:{d}:{d}", .{ root.device, root.inode, git.device, git.inode, common.device, common.inode }) catch error.InvalidArgument;
+}
+
+/// Reads the host capability token from an inherited descriptor and closes it.
+/// The descriptor must hold exactly 64 lowercase hex digits, optionally followed by one newline.
+pub fn readToken(fd: std.c.fd_t) error{InvalidArgument}!broker.auth.Token {
+    defer _ = std.c.close(fd);
+    var text: [66]u8 = undefined;
+    var used: usize = 0;
+    while (used < text.len) {
+        const n = std.c.read(fd, text[used..].ptr, text.len - used);
+        if (n < 0) {
+            if (std.posix.errno(n) == .INTR) continue;
+            return error.InvalidArgument;
+        }
+        if (n == 0) break;
+        used += @intCast(n);
+    }
+    var hex: []const u8 = text[0..used];
+    if (hex.len == 65 and hex[64] == '\n') hex = hex[0..64];
+    if (hex.len != 64) return error.InvalidArgument;
+    for (hex) |c| if (!std.ascii.isDigit(c) and !(c >= 'a' and c <= 'f')) return error.InvalidArgument;
+    var token: broker.auth.Token = undefined;
+    _ = std.fmt.hexToBytes(&token, hex) catch return error.InvalidArgument;
+    return token;
 }
 
 const LaunchPolicy = struct {
@@ -124,13 +150,40 @@ const Authority = struct {
     }
 };
 
+const Role = union(enum) {
+    standalone,
+    broker: struct { socket_path: []const u8, token: broker.auth.Token },
+};
+
+/// Direct stdio MCP server. Refuses a policy that allows the broker.
 pub fn serve(a: A, io: Io, policy_path: []const u8) !void {
+    return run(a, io, policy_path, .standalone);
+}
+
+/// Explicit shared broker for one approved grant. The policy must allow the broker.
+/// Runs until stdin reaches end of file; the token comes from an inherited descriptor.
+pub fn serveBroker(a: A, io: Io, policy_path: []const u8, socket_path: []const u8, token_fd: std.c.fd_t) !void {
+    const token = try readToken(token_fd);
+    if (!std.fs.path.isAbsolute(socket_path)) return error.InvalidArgument;
+    return run(a, io, policy_path, .{ .broker = .{ .socket_path = socket_path, .token = token } });
+}
+
+/// Broker bridge: relays stdio to an already running broker. Never starts one.
+pub fn bridge(a: A, io: Io, socket_path: []const u8, domain: core.SecurityDomain, token_fd: std.c.fd_t) !void {
+    const token = try readToken(token_fd);
+    var client = try broker.bridge.Client.connect(a, io, socket_path, token, domain);
+    defer client.close();
+    var cancelled = std.atomic.Value(bool).init(false);
+    try client.forward(Io.File.stdin(), Io.File.stdout(), .{ .requested = &cancelled });
+}
+
+fn run(a: A, io: Io, policy_path: []const u8, role: Role) !void {
     var launch = try readJson(LaunchPolicy, a, io, policy_path);
     defer launch.deinit();
     const cfg = launch.value;
     if (!std.mem.eql(u8, cfg.status, "approved")) return error.ManifestUnbound;
     if (!std.fs.path.isAbsolute(cfg.root) or !std.fs.path.isAbsolute(cfg.git_executable)) return error.InvalidArgument;
-    if (cfg.write_mode != .read_only or cfg.broker_allowed or cfg.additional_roots.len != 0 or cfg.network_allowed or cfg.arbitrary_exec_allowed) return error.Unsupported;
+    if (cfg.write_mode != .read_only or cfg.broker_allowed != (role == .broker) or cfg.additional_roots.len != 0 or cfg.network_allowed or cfg.arbitrary_exec_allowed) return error.Unsupported;
     if (!std.mem.eql(u8, cfg.profile, "balanced") or !std.mem.eql(u8, cfg.memory_profile, "auto")) return error.Unsupported;
     var manifest = try readJson(Manifest, a, io, cfg.task_manifest);
     defer manifest.deinit();
@@ -201,6 +254,64 @@ pub fn serve(a: A, io: Io, policy_path: []const u8) !void {
     var cache_cancel = std.atomic.Value(bool).init(false);
     var cache_session = try cache.Session.init(cache_store, &registry, &authorizer, session, .{ .requested = &cache_cancel });
     var authority: Authority = .{ .registry = &registry, .session = session, .boot = registry.bootNonce(), .io = io, .info_exclude = &info_exclude, .global_exclude = if (global_exclude) |*global| global else null };
-    var server = try mcp.Server.init(.{ .allocator = a, .io = io, .authorizer = &authorizer, .session = session, .generation = snapshot.generation, .budget = &budget, .cache_session = &cache_session, .tools_json = options.tools_json, .version = options.version, .authority_context = &authority, .validate_authority = Authority.validate, .trusted_excludes = .{ .git_info_exclude = info_exclude.file, .global_exclude = if (global_exclude) |global| global.binding.file else null } });
-    try server.serve(Io.File.stdin(), Io.File.stdout());
+    const protocol: mcp.Config = .{ .allocator = a, .io = io, .authorizer = &authorizer, .session = session, .generation = snapshot.generation, .budget = &budget, .cache_session = &cache_session, .tools_json = options.tools_json, .version = options.version, .authority_context = &authority, .validate_authority = Authority.validate, .trusted_excludes = .{ .git_info_exclude = info_exclude.file, .global_exclude = if (global_exclude) |global| global.binding.file else null } };
+    switch (role) {
+        .standalone => {
+            var server = try mcp.Server.init(protocol);
+            try server.serve(Io.File.stdin(), Io.File.stdout());
+        },
+        .broker => |explicit| {
+            // One executor and one group budget own every broker session and bridge charge.
+            var exec: executor.Executor = undefined;
+            try exec.init(a, &budget, .{ .cpu_permits = launch_caps.cpu, .io_permits = 1, .usable_physical_cpus = 1 });
+            defer exec.deinit();
+            const grants = [_]broker.Grant{.{ .token = explicit.token, .host_ceiling = bound_policy, .config = protocol, .cache_session = &cache_session }};
+            const server = try broker.Server.create(.{ .allocator = a, .io = io, .socket_path = explicit.socket_path, .grants = &grants, .budget = &budget, .executor = &exec, .store = cache_store, .registry = &registry });
+            defer server.deinit() catch @panic("broker teardown with live sessions");
+            var ready: [64]u8 = undefined;
+            try Io.File.stderr().writeStreamingAll(io, try std.fmt.bufPrint(&ready, "zcr broker: listening domain={d}\n", .{session.security_domain.id}));
+            var watch: StdinWatch = .{ .server = server, .registry = &registry, .session = session, .boot = registry.bootNonce() };
+            const watcher = try std.Thread.spawn(.{}, StdinWatch.run, .{&watch});
+            // Joined before server.deinit, so the watcher never outlives the server.
+            defer {
+                watch.done.store(true, .release);
+                watcher.join();
+            }
+            try server.serve();
+            if (watch.grant_ended.load(.acquire)) try Io.File.stderr().writeStreamingAll(io, "zcr broker: grant ended after its bridge disconnected; start zcr broker serve again for a new bridge\n");
+        },
+    }
 }
+
+/// The operator ends an explicit broker by closing its stdin. The broker also ends when its only
+/// grant's host binding is gone: closing a bridge session unbinds it, and later bridges could only
+/// be refused, so a new bridge needs a new `zcr broker serve`.
+const StdinWatch = struct {
+    server: *broker.Server,
+    registry: *workspace.Registry,
+    session: core.SessionContext,
+    boot: core.Uuid,
+    done: std.atomic.Value(bool) = .init(false),
+    grant_ended: std.atomic.Value(bool) = .init(false),
+    fn run(w: *StdinWatch) void {
+        var buffer: [256]u8 = undefined;
+        while (!w.done.load(.acquire)) {
+            w.registry.validateSession(w.session, w.boot) catch {
+                w.grant_ended.store(true, .release);
+                break;
+            };
+            var fds = [_]std.c.pollfd{.{ .fd = 0, .events = std.c.POLL.IN, .revents = 0 }};
+            const rc = std.c.poll(&fds, 1, 100);
+            if (rc < 0) {
+                if (std.posix.errno(rc) == .INTR) continue;
+                break;
+            }
+            if (rc == 0) continue;
+            const n = std.c.read(0, &buffer, buffer.len);
+            if (n > 0) continue;
+            if (n < 0 and std.posix.errno(n) == .INTR) continue;
+            break;
+        }
+        w.server.stop();
+    }
+};

@@ -50,6 +50,7 @@ const test_files = [_]TestFile{
     .{ .task = "T13", .path = "tests/t13_test.zig", .group = .memory, .imports = &.{ .core, .policy, .memory, .workspace, .cache } },
     .{ .task = "T14", .path = "tests/t14_test.zig", .group = .watch, .imports = &.{ .core, .policy, .memory, .workspace, .cache, .fs_traverse, .watch } },
     .{ .task = "T15", .path = "tests/t15_test.zig", .group = .broker, .imports = &.{ .core, .policy, .memory, .workspace, .cache, .executor, .mcp, .broker, .build_options } },
+    .{ .task = "T01-broker-cli", .path = "tests/broker_cli_test.zig", .group = .broker, .imports = &.{.build_options} },
 };
 
 /// Exit code for CLI roles that exist in the contract but are not built yet (EX_UNAVAILABLE).
@@ -344,6 +345,9 @@ pub fn build(b: *std.Build) void {
         },
     });
     launch_module.addImport("zcr_cache", cache_module);
+    // `zcr broker serve` and `zcr mcp --broker` (explicit operator roles; writes stay disabled).
+    launch_module.addImport("zcr_broker", broker_module);
+    launch_module.addImport("zcr_executor", executor_module);
     zcr.root_module.addImport("zcr_launch", launch_module);
     // A tool is installed once its owning task has delivered the source file.
     if (sourceExists(b, "tools/dev/guard.zig")) {
@@ -414,6 +418,12 @@ pub fn build(b: *std.Build) void {
             }),
         };
 
+        if (std.mem.eql(u8, file.task, "T01-broker-cli")) {
+            // The CLI test runs the installed-equivalent zcr binary as real subprocesses.
+            const cli_options = b.addOptions();
+            cli_options.addOptionPath("zcr_exe", zcr.getEmittedBin());
+            module.addOptions("cli_options", cli_options);
+        }
         if (std.mem.eql(u8, file.task, "T12")) {
             // Separate real exec image: builtin.is_test preserves the production
             // write gate, and child declarations never run in the parent suite.

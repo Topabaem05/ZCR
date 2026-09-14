@@ -1,0 +1,9 @@
+Build Summary: 6/6 steps succeeded; 4/4 tests passed
+test success
++- run test T01-broker-cli-test 4 pass (4 total) 10s MaxRSS:14M
+   +- compile test T01-broker-cli-test Debug native success 17s MaxRSS:199M
+      +- options cached
+      +- options success
+         +- compile exe zcr Debug native success 18s MaxRSS:251M
+            +- options (reused)
+

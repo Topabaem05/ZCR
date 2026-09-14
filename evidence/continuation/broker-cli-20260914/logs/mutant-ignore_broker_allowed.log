@@ -1,0 +1,22 @@
+test
++- run test T01-broker-cli-test 3 pass, 1 fail (4 total)
+error: 'broker_cli_test.test.BR-004 zcr broker serve refuses a token on argv and a policy without broker_allowed' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:615:14: 0x102cc5847 in expect (T01-broker-cli-test)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /Users/guribbong/code/ZCR-state/tasks/T01/bc/c-ignore_broker_allowed/tests/broker_cli_test.zig:284:5: 0x102cc89eb in test.BR-004 zcr broker serve refuses a token on argv and a policy without broker_allowed (T01-broker-cli-test)
+           try t.expect(std.mem.indexOf(u8, try readAll(a, broker.stderr.?), "refused") != null);
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T01/bc/mi && /Users/guribbong/code/ZCR-state/tasks/T01/bc/mi/o/9ccf26acc88c5045b9fba6da8c334091/T01-broker-cli-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T01/bc/mi --seed=0x5d6eedeb --listen=-
+
+Build Summary: 4/6 steps succeeded (1 failed); 3/4 tests passed (1 failed)
+test transitive failure
++- run test T01-broker-cli-test 3 pass, 1 fail (4 total)
+   +- compile test T01-broker-cli-test Debug native success 16s MaxRSS:206M
+      +- options cached
+      +- options success
+         +- compile exe zcr Debug native success 16s MaxRSS:276M
+            +- options (reused)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T01/bc/mi/o/5f15203ba6d2bbbd6399c942228aeef5/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T01/bc/c-ignore_broker_allowed /Users/guribbong/code/ZCR-state/tasks/T01/bc/mi /Users/guribbong/code/ZCR-state/tasks/T01/bc/zgc --seed 0x5d6eedeb -Z26c1733e24118ace test -Dtest-group=broker -Dtest-id=BR-004 zcr -Doptimize=Debug --summary all

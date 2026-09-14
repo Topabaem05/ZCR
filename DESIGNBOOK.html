@@ -5232,7 +5232,8 @@ zcr-dev-evidence contract-digest --worktree &lt;wt&gt;
 <li><code>src/core/limits.zig</code></li>
 <li><code>AGENTS.md</code></li>
 <li><code>tools/dev/evidence.zig</code></li>
-<li>Test: <code>tests/t01_test.zig</code></li>
+<li><code>src/launch.zig</code> (trusted launch binding and the explicit <code>zcr broker serve</code> / <code>zcr mcp --broker</code> roles)</li>
+<li>Test: <code>tests/t01_test.zig</code>, <code>tests/broker_cli_test.zig</code></li>
 <li>Evidence: <code>evidence/T01/</code> (사용자 source와 다른 task 경로는 금지)</li>
 </ul>
 <p>공유 <code>build.zig</code>, <code>src/core/types.zig</code>, schemas는 통합자 소유다. 이 Task가 그 파일 소유자인 T01이 아닌 경우 export/contract 변경은 handoff로 요청한다. dependency의 파일을 몰래 수정해서 test를 통과시키지 않는다.</p>

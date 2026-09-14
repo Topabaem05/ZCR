@@ -1,0 +1,9 @@
+{
+  "scope": "integrator broker CLI wiring (docs/18 row 2 slice C): zcr broker serve --socket --policy --token-fd and zcr mcp --broker --token-fd in src/main.zig and src/launch.zig, src/launch.zig assigned to T01 in tasks/tasks.json, a subprocess test registered in build.zig, regenerated MANIFEST.sha256 and verification/report.json, evidence/continuation",
+  "authorized_by": "repository owner's answer in this session: CLI owner 'Yes, as T01 integrator'; topology 'No supervisor for now'; T11 hook 'Record proposal only'",
+  "workspace": "/Users/guribbong/code/ZCR-worktrees/t01-broker-cli",
+  "manifest": "task/manifest.json",
+  "issued_at": "2026-09-14T04:58:28Z",
+  "note": "Issued before any edit. The host token is never passed on argv. Production writes stay disabled: the broker handshake keeps writes:false and patch/create remain unsupported. No supervisor is added. Fence 2 adds tasks/T01.md and DESIGNBOOK.html before either is edited: verification/validate_bundle.py requires every path in a task's owns list to appear in its task document (task_file_ownership), and tools/render_book.py renders tasks/T01.md into DESIGNBOOK.html. The fence-1 manifest is kept as manifest-fence1.json. Fence 3 raises max_changed_files from 16 to 64 with the same paths. It was issued after the evidence commit dcc3c6b, which brought the branch to 45 changed files against the base (8 code, ownership and book files plus the evidence bundle and the regenerated report and manifest); the limit of 16 had been sized for the code change alone and was not checked before that commit. The fence-2 manifest is kept as manifest-fence2.json.",
+  "amended_at": "2026-09-14T06:09:23Z"
+}
