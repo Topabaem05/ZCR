@@ -3867,7 +3867,7 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <tr>
 <td>2</td>
 <td>T12 / T15</td>
-<td>신뢰된 supervisor, write/reconnect 수명 관리 및 broker CLI/bridge 연결. (진행: native CI 34793696720에서 실제 UDS broker assertion을 포함한 T15-test가 Linux·Apple Silicon·Intel Mac의 Debug/ReleaseSafe 모두 28/28 통과. 이전 컨테이너 실행의 NOT_RUN 9개를 해소했다. supervisor와 CLI/bridge 연결은 남음)</td>
+<td>신뢰된 supervisor, write/reconnect 수명 관리 및 broker CLI/bridge 연결. (진행: native CI 34793696720에서 실제 UDS broker assertion을 포함한 T15-test가 Linux·Apple Silicon·Intel Mac의 Debug/ReleaseSafe 모두 28/28 통과. 이전 제한 컨테이너 실행은 FAIL로 남는다. 두 모드 모두 28개가 실행돼 19개 통과, 9개가 AF_UNIX socket 생성에서 실패했다. supervisor와 CLI/bridge 연결은 남음)</td>
 <td>권한·fence·취소·느린 클라이언트·재접속 통합 시험; 승인 전 쓰기 비활성 유지</td>
 </tr>
 <tr>

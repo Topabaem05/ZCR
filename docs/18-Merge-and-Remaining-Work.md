@@ -81,7 +81,7 @@ Apple Silicon은 Debug **320 PASS / 12 SKIP / 24 FAIL**, ReleaseSafe **321 PASS 
 | 순서 | 범위 | 다음 작업 | 완료 근거 |
 |---|---|---|---|
 | 1 | T08 / T12 / native CI | **대부분 완료**(PR #2·#3, 실행 34793696720): MC-004 원인 분석·수정, Darwin storage 이식, fixture 초기화 실패 시 자원 회수, Mac의 T12 SIGKILL 복구 시험과 storage 증거 수집. 남음: G05 APFS 파괴적 crash-durability 검증, G11 macOS 11 Intel. MC-004 deadline 시험 관찰 지점은 PR #5로 완료, 부하 시 runtime-cache `IoFailure`는 원인 확인, T10 수정은 PR #6(`9c94517`)으로 병합 | Linux·Apple Silicon·Intel Mac에서 Debug/ReleaseSafe 결과와 raw 복구 증거(위 병합 후 native CI 절) |
-| 2 | T12 / T15 | 신뢰된 supervisor, write/reconnect 수명 관리 및 broker CLI/bridge 연결. (진행: native CI 34793696720에서 실제 UDS broker assertion을 포함한 T15-test가 Linux·Apple Silicon·Intel Mac의 Debug/ReleaseSafe 모두 28/28 통과. 이전 컨테이너 실행의 NOT_RUN 9개를 해소했다. supervisor와 CLI/bridge 연결은 남음) | 권한·fence·취소·느린 클라이언트·재접속 통합 시험; 승인 전 쓰기 비활성 유지 |
+| 2 | T12 / T15 | 신뢰된 supervisor, write/reconnect 수명 관리 및 broker CLI/bridge 연결. (진행: native CI 34793696720에서 실제 UDS broker assertion을 포함한 T15-test가 Linux·Apple Silicon·Intel Mac의 Debug/ReleaseSafe 모두 28/28 통과. 이전 제한 컨테이너 실행은 FAIL로 남는다. 두 모드 모두 28개가 실행돼 19개 통과, 9개가 AF_UNIX socket 생성에서 실패했다. supervisor와 CLI/bridge 연결은 남음) | 권한·fence·취소·느린 클라이언트·재접속 통합 시험; 승인 전 쓰기 비활성 유지 |
 | 3 | T16 | pressure/thermal 신호 수집, governor 정책, 실제 runtime 연결 | admission·회수·공정성 및 모델 공존 시험 |
 | 4 | T17 / T19 | Linux backend 완성, 필수 ARM64/x86 SIMD 경로 | 플랫폼 자원 관측 검증, scalar 차등·경계 시험 |
 | 5 | T21 / T22 | 전체 벤치마크 하네스, bounded telemetry/health | 재현 가능한 corpus·config·raw trace, 예산·민감정보 검사 |
