@@ -4,10 +4,10 @@
   "label": "quiet-mcp-debug",
   "command": "zig build test -Dtest-group=mcp -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-quiet-mcp-debug --summary all (ZIG_LOCAL_CACHE_DIR=/Users/guribbong/code/ZCR-state/tasks/T01/bc/zlc)",
   "exit_code": 0,
-  "source_commit": "0039251edae9c069c56524c3dedb1df905f86dc0",
-  "source_tree": "568da60c48bc8d821de4bd1d3ee7bc24fe117d4b",
+  "source_commit": "5716cea5bf0df159b94884be36efa194dc0b2c94",
+  "source_tree": "3ca68fc6a2ccb5f17b70be8af324dd5d462dae37",
   "worktree_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/t01-broker-cli",
   "binary_path": "/Users/guribbong/code/ZCR-state/tasks/T01/broker-cli-20260914/out-quiet-mcp-debug/bin/T08-launch-test",
-  "binary_sha256": "2ce5337fd5ae8e80253208af40fe0eb88d1667263c5d852e126e1062cdcebf97",
-  "recorded_at_unix_ms": 1789366051894
+  "binary_sha256": "c5d164dbfad432923f784f53259a22b0a2a2b24f91d0acf3295ca3b3e3019b90",
+  "recorded_at_unix_ms": 1789368321559
 }

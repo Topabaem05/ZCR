@@ -39,7 +39,7 @@
     "system": "Darwin"
   },
   "schema": "zcr-t01-broker-cli-source-config/1",
-  "source_commit": "0039251edae9c069c56524c3dedb1df905f86dc0",
+  "source_commit": "5716cea5bf0df159b94884be36efa194dc0b2c94",
   "source_file_hashes": {
     "src/broker/auth.zig": "f2fe14aaf6a28c25a80005663664313c8cd5b89199fed1bce959cb45fa88384f",
     "src/broker/bridge.zig": "baa1cb7500a69ea973632377ce9be19a374b13e9236dab5a3f03b61f9856f834",
@@ -50,7 +50,7 @@
     "src/core/errors.zig": "4166c1278c889e703cebc67925acfa9e768f5a4119fe42bfb8e29084a4752f1c",
     "src/core/limits.zig": "41771a1b441e7710a5c27ac6d5cc92170f023764b74ace4e5519e28161a65137",
     "src/core/types.zig": "f6b28697e3e27ed401cd165320dbb9a5816a3020e135bec4d633736ce48ef453",
-    "src/launch.zig": "32b46b82755c7132ad0f988b838e803be35c836bfc78e712ac6c5e64b944a160",
+    "src/launch.zig": "4f9961906b0c3068799f87e694b40d07d1ff75edac7965427c438be0365b7c34",
     "src/launch_ignore.zig": "58eff3d9eca3c2fe4b8a4192c1c66596333b14f6e5a2a879ab201bc55d59b127",
     "src/main.zig": "22d2b48b6ba9485656dac47e88c9e5a880ffbfee44c6bfbe3d755d9b75059306",
     "src/memory/accounting.zig": "c71ff2d39979bd03b3dd73d93285ba9dbc97d41fe2437e3fbc156c5a9e0fd654",
@@ -70,7 +70,7 @@
     "src/workspace/lease.zig": "b7b19b516e2dfe25f8e38df3962659cab90600e469cc1c0623050b2016d52e60",
     "src/workspace/registry.zig": "451f2569413e0769422cad98984624a93968e26d4f141e588b9d631bbea485ab"
   },
-  "source_tree": "568da60c48bc8d821de4bd1d3ee7bc24fe117d4b",
+  "source_tree": "3ca68fc6a2ccb5f17b70be8af324dd5d462dae37",
   "toolchain": {
     "executable_sha256": "e6cd688d25664983833aae272f501d4bceeae304875b8f1741209d15fd13a4ec",
     "version": "0.16.0"

@@ -1,0 +1,23 @@
+test
++- run test T01-broker-cli-test 3 pass, 1 fail (4 total)
+test)
+    return error.Timeout;
+    ^
+/Users/guribbong/code/ZCR-worktrees/t01-broker-cli/tests/broker_cli_test.zig:201:38: 0x100f1809b in test.BR-004 zcr broker serve and mcp --broker take the token from an inherited fd and serve reads only (T01-broker-cli-test)
+    try t.expect(std.mem.indexOf(u8, try readAllWithin(a, broker.stderr.?, 10_000), "grant ended") != null);
+                                     ^
+error: 'broker_cli_test.test.BR-004 zcr broker serve and mcp --broker take the token from an inherited fd and serve reads only' failed:
+       /Users/guribbong/code/ZCR-worktrees/t01-broker-cli/tests/broker_cli_test.zig:135:5: 0x100f15883 in readAllWithin (T01-broker-cli-
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T01/bc/zlc && /Users/guribbong/code/ZCR-state/tasks/T01/bc/zlc/o/ebf2aae467cfb4d4de444ea22574dfe7/T01-broker-cli-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T01/bc/zlc --seed=0x51da21bc --listen=-
+
+Build Summary: 4/6 steps succeeded (1 failed); 3/4 tests passed (1 failed)
+test transitive failure
++- run test T01-broker-cli-test 3 pass, 1 fail (4 total)
+   +- compile test T01-broker-cli-test Debug native success 11s MaxRSS:206M
+      +- options cached
+      +- options cached
+         +- compile exe zcr Debug native cached 377ms MaxRSS:31M
+            +- options (reused)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T01/bc/zlc/o/5f15203ba6d2bbbd6399c942228aeef5/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-worktrees/t01-broker-cli /Users/guribbong/code/ZCR-state/tasks/T01/bc/zlc /Users/guribbong/code/ZCR-state/tasks/T01/bc/zgc --seed 0x51da21bc -Z074eff5ad57cec2a test -Dtest-group=broker -Dtest-id=BR-004 zcr -Doptimize=Debug --summary all

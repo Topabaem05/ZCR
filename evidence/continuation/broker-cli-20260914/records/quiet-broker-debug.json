@@ -4,10 +4,10 @@
   "label": "quiet-broker-debug",
   "command": "zig build test -Dtest-group=broker -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-quiet-broker-debug --summary all (ZIG_LOCAL_CACHE_DIR=/Users/guribbong/code/ZCR-state/tasks/T01/bc/zlc)",
   "exit_code": 0,
-  "source_commit": "0039251edae9c069c56524c3dedb1df905f86dc0",
-  "source_tree": "568da60c48bc8d821de4bd1d3ee7bc24fe117d4b",
+  "source_commit": "5716cea5bf0df159b94884be36efa194dc0b2c94",
+  "source_tree": "3ca68fc6a2ccb5f17b70be8af324dd5d462dae37",
   "worktree_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/t01-broker-cli",
   "binary_path": "/Users/guribbong/code/ZCR-state/tasks/T01/broker-cli-20260914/out-quiet-broker-debug/bin/T01-broker-cli-test",
-  "binary_sha256": "5c93c0ff90888139982f7ce4d8e74aeac0b2578b38096276abb3cc268a9d3d17",
-  "recorded_at_unix_ms": 1789365565981
+  "binary_sha256": "45c2a4e409a1ea59f7c7f8b33679cdc838510810800eba20e9d1e962820baa4b",
+  "recorded_at_unix_ms": 1789368216072
 }

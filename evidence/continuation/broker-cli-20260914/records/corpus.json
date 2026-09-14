@@ -2,8 +2,8 @@
   "derivation": "sha256 of this file's bytes is corpus_sha256; file hashes are sha256 of blobs at source_commit",
   "description": "Each CLI test creates a Git repository with one file.txt, a zcr-task/1 manifest and an approved launch policy in a private temporary directory; tokens are random per run.",
   "schema": "zcr-t01-broker-cli-corpus/1",
-  "source_commit": "0039251edae9c069c56524c3dedb1df905f86dc0",
-  "tests/broker_cli_test.zig": "3dc2c4b7f54f0e40a87bf217e9e34c7fa9bdaa648e38969508e605ca8f80c497",
+  "source_commit": "5716cea5bf0df159b94884be36efa194dc0b2c94",
+  "tests/broker_cli_test.zig": "42434ebb8a95d4dd69ec7d38668a36e2280683e5f6b24cc355842c48e31c46ef",
   "tests/launch_test.zig": "a6a3b649bce194c35c9d7daa4b35a197cf372df8f0917d097c7785e846a98fcf",
   "tests/t01_test.zig": "ddcd0b411b4fbd691be91d45915604c67f3065ebe1989bbab70d7f548a82c0e9",
   "tests/t15_test.zig": "78671b51b83e8eb41dfbc093ba04ccbe203c9b93dacbaebbd1057d8a70209cb1"

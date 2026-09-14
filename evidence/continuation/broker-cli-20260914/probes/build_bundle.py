@@ -21,9 +21,11 @@ E = f"{WT}/evidence/continuation/broker-cli-20260914"
 MAIN = "BR-004 zcr broker serve and mcp --broker take the token from an inherited fd and serve reads only"
 NO_BROKER = "BR-004 zcr mcp --broker without a running broker refuses clearly and starts nothing"
 REFUSE = "BR-004 zcr broker serve refuses a token on argv and a policy without broker_allowed"
+STDIN = "BR-004 zcr broker serve stops when the operator closes its stdin before any bridge"
 MUTANTS = {
     "ignore_broker_allowed": ("broker role no longer requires broker_allowed", REFUSE),
     "bridge_zero_token": ("bridge sends an all-zero token", MAIN),
+    "watcher_ignores_grant_end": ("broker keeps listening after its only grant's binding ends", MAIN),
 }
 RECORDS = {
     "quiet-broker-debug": "broker group Debug (T01-broker-cli-test binary)",
@@ -71,6 +73,8 @@ def main():
     src = open(f"{WT}/tests/broker_cli_test.zig").read().splitlines()
     red = failures("red-br004-cli-debug")
     assert set(red) == {MAIN, NO_BROKER, REFUSE}, list(red)
+    red2 = failures("red2-grant-ended-debug")
+    assert set(red2) == {MAIN}, list(red2)
     mutants = {}
     for name, (what, must) in MUTANTS.items():
         f = failures(f"mutant-{name}")
@@ -86,15 +90,15 @@ def main():
         r = json.load(open(f"{ST}/records/{label}.json"))
         assert r["source_commit"] == C and r["source_tree"] == tree, label
         shutil.copy(f"{ST}/records/{label}.json", f"{E}/records/")
-    for name in ("manifest.json", "manifest-fence1.json", "authorization.json", "preflight.json", "scope-start.json", "scope-commit1.json"):
+    for name in ("manifest.json", "manifest-fence1.json", "manifest-fence2.json", "authorization.json", "preflight.json", "scope-start.json", "scope-commit1.json"):
         shutil.copy(f"{ST}/task/{name}", f"{E}/task/{name}")
     for name in ("mutants.py", "record_runs.sh", "build_bundle.py"):
         shutil.copy(f"{ST}/task/{name}", f"{E}/probes/{name}")
-    logs = ["red-br004-cli-debug", "green-br004-cli-debug", "validate2", "rec-preflight", "rec-contracts"] + list(RECORDS) + \
-           [f"verify-{l}" for l in RECORDS] + [f"mutant-{m}" for m in MUTANTS]
+    logs = ["red-br004-cli-debug", "green-br004-cli-debug", "red2-grant-ended-debug", "green2-grant-ended-debug", "validate2", "rec-preflight", "rec-contracts"] + list(RECORDS) + \
+           [f"verify-{l}" for l in RECORDS] + [f"mutant-{m}" for m in MUTANTS] + ["mutant-ignore_broker_allowed-v1", "mutant-bridge_zero_token-v1"]
     for name in logs:
         shutil.copy(f"{ST}/logs/{name}.log", f"{E}/logs/{name}.log")
-    for name in ("red-br004-cli-debug.uptime", "green-br004-cli-debug.uptime", "mutants.uptime", "record_runs.uptime"):
+    for name in ("red-br004-cli-debug.uptime", "green-br004-cli-debug.uptime", "red2-grant-ended-debug.uptime", "green2-grant-ended-debug.uptime", "mutants.uptime", "mutants2.uptime", "record_runs.uptime"):
         shutil.copy(f"{ST}/logs/{name}", f"{E}/logs/{name}")
 
     manifest = json.load(open(f"{E}/task/manifest.json"))
@@ -153,6 +157,7 @@ The repository owner chose, in this session, to wire the broker CLI as the T01 i
 ## Change (`{C[:7]}`)
 
 - **`zcr broker serve --socket /abs --policy /abs --token-fd FD`** reads the token from descriptor FD (at least 3, 64 lowercase hex digits and an optional newline) and closes it. It binds one approved grant through the same launch path as standalone: approved policy, manifest, workspace identity, registry, session, authorizer and cache. The launch policy must set `broker_allowed`. It creates the UDS broker with one executor and one group budget, writes `zcr broker: listening domain=N` to stderr and serves until its stdin closes.
+- **Grant lifecycle:** a broker holds one grant. When its bridge disconnects, closing the session removes the grant's host binding, so later bridges could only be refused. The broker therefore stops once that binding is gone, prints `zcr broker: grant ended after its bridge disconnected; start zcr broker serve again for a new bridge` and removes its socket. A new bridge needs a new `zcr broker serve`. The operator can still stop it earlier by closing stdin.
 - **`zcr mcp --broker --socket /abs --domain N --token-fd FD`** relays stdio to a running broker. A missing broker or a wrong token exits 69 with a message that no broker was started and that `zcr mcp --standalone` is the alternative.
 - **Refusals:** a `--token` on argv exits 64 (usage), and the token is not echoed. Standalone `zcr mcp` still refuses a policy that allows the broker. Writes stay disabled: the handshake keeps `"writes":false`, and patch/create remain unsupported.
 - **Ownership:** `src/launch.zig` is assigned to T01 in `tasks/tasks.json` and `tasks/T01.md`. `build.zig` gives the launch module the broker and executor imports, registers `tests/broker_cli_test.zig` (group broker), and passes it the built `zcr` path. `DESIGNBOOK.html` and `MANIFEST.sha256` are regenerated, and `validate_bundle.py` passes.
@@ -171,10 +176,13 @@ RED before the change ([log](logs/red-br004-cli-debug.log)):
 
 GREEN after the change: {summary('green-br004-cli-debug')} ([log](logs/green-br004-cli-debug.log)). This run was not quiet ([uptime](logs/green-br004-cli-debug.uptime)).
 
+Review on PR #9 found that a first bridge's disconnect left the broker listening for bridges it could only refuse. The main test was extended: after the bridge exits, the broker must stop by itself with "grant ended" and remove its socket, and a second bridge must be refused with the standalone hint. A new test keeps the stdin-close stop covered. RED before the fix: {red2[MAIN]['message'] or 'the bounded wait for grant ended timed out'} at line {red2[MAIN]['test_line']} ([log](logs/red2-grant-ended-debug.log)); the stdin-close test already passed. GREEN after the fix: {summary('green2-grant-ended-debug')} ([log](logs/green2-grant-ended-debug.log)). Earlier mutant runs against the first version are kept as `logs/mutant-*-v1.log`.
+
 | Mutant | Change | Result |
 |---|---|---|
 {mrow('ignore_broker_allowed')}
 {mrow('bridge_zero_token')}
+{mrow('watcher_ignores_grant_end')}
 
 ## Records (`zcr-evidence/1`, verified after recording)
 
@@ -191,11 +199,11 @@ The runs started with no other zig process, no other evidence run and a 1-minute
 
 ## Task identity
 
-[task/manifest.json](task/manifest.json) (`zcr-task/1`, workspace `{manifest['workspace_id']}`, base `{manifest['base_commit'][:7]}`), [task/authorization.json](task/authorization.json) and [task/preflight.json](task/preflight.json) were issued before any edit. Fence 2 added `tasks/T01.md` and `DESIGNBOOK.html` before either was edited, because `validate_bundle.py` requires every owned path to appear in the task document and `render_book.py` renders that document. The fence-1 manifest is kept. `zcr-dev-guard scope` reported 0 violations at the start ([task/scope-start.json](task/scope-start.json)) and on the code commit ([task/scope-commit1.json](task/scope-commit1.json)).
+[task/manifest.json](task/manifest.json) (`zcr-task/1`, workspace `{manifest['workspace_id']}`, base `{manifest['base_commit'][:7]}`), [task/authorization.json](task/authorization.json) and [task/preflight.json](task/preflight.json) were issued before any edit. Fence 2 added `tasks/T01.md` and `DESIGNBOOK.html` before either was edited, because `validate_bundle.py` requires every owned path to appear in the task document and `render_book.py` renders that document. The fence-1 manifest is kept. Fence 3 raised `max_changed_files` from 16 to 64 after the first evidence commit `dcc3c6b` brought the branch to 45 changed files; the limit had been sized for the code change alone. The fence-2 manifest is kept as `manifest-fence2.json`. `zcr-dev-guard scope` reported 0 violations at the start ([task/scope-start.json](task/scope-start.json)) and on the code commit ([task/scope-commit1.json](task/scope-commit1.json)).
 
 ## Limits
 
-- One grant per broker process. Several grants, and a supervisor that rebinds sessions after a broker crash, are not implemented (no supervisor, by decision).
+- One grant and one bridge session per broker process: the broker stops when that bridge disconnects. Several grants, and a supervisor that rebinds sessions or restarts the broker, are not implemented (no supervisor, by decision).
 - The broker keeps the conservative launch budget: the first memory profile's inflight bucket and one CPU permit.
 - Not verified: Linux and Intel Mac runtime (native CI on the PR), Windows named pipes, actual host (Claude Code) registration of the bridge.
 """
