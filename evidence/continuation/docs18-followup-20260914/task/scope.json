@@ -53,6 +53,13 @@
       "source": "committed"
     },
     {
+      "kind": "added",
+      "path": "evidence/continuation/docs18-followup-20260914/task/scope.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
       "kind": "modified",
       "path": "tasks/progress.json",
       "orig_path": null,
