@@ -1,0 +1,8 @@
+{
+  "scope": "docs/18 row 2 slice A: production retained host witness for T12 recovery (retained root/Git/common/state handles, per-publication parent/temp/original handles, one-use grant bound to the current boot): src/storage/recovery.zig, tests/t12_test.zig, tests/t12_child.zig, evidence/T12",
+  "authorized_by": "repository owner's explicit requests in this session: continue the remaining work; row 2 decisions (CLI wiring as T01 integrator approved, no supervisor process for now, record the T11 pre-publish hook as an interface-change proposal only)",
+  "workspace": "/Users/guribbong/code/ZCR-worktrees/t12-host-witness",
+  "manifest": "task/manifest.json",
+  "issued_at": "2026-09-14T04:08:49Z",
+  "note": "Issued before any edit. Writes stay disabled; no supervisor process; cold start after a crash stays quarantined; no T11 source change."
+}

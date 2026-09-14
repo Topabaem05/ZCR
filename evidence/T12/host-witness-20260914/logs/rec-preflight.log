@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "state": {
+    "toplevel": "/Users/guribbong/code/ZCR-worktrees/t12-host-witness",
+    "absolute_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/t12-host-witness",
+    "common_dir": "/Users/guribbong/code/ZCR/.git",
+    "head_commit": "0a8627d6285def5e7f3efd6463b61fe7da372a61",
+    "head_tree": "e753bf9314974a54fbb1ee456bd61fb20b4fa4fc",
+    "branch": "claude/t12-host-witness",
+    "entries": []
+  },
+  "reasons": []
+}

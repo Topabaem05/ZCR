@@ -1,0 +1,23 @@
+test
++- run test T12-test 13 pass, 1 fail (14 total)
+error: 't12_test.test.WR-008 host witness grants once and refuses a replaced temp name after unlink' failed:
+       expected error.RecoveryRequired, found void
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:65:9: 0x104f05c13 in expectError__anon_38276 (T12-test)
+               return error.TestExpectedError;
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-no_temp_name_check/tests/t12_test.zig:1159:5: 0x104f7555b in test.WR-008 host witness grants once and refuses a replaced temp name after unlink (T12-test)
+           try t.expectError(error.RecoveryRequired, validate_publication(grant.context, data, p));
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-no_temp_name_check && /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-no_temp_name_check/o/2b5a4ca025c5ddc4dfb4001a3f202576/T12-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-no_temp_name_check --seed=0xa18337ea --listen=-
+
+Build Summary: 4/6 steps succeeded (1 failed); 13/14 tests passed (1 failed)
+test transitive failure
++- run test T12-test 13 pass, 1 fail (14 total)
+   +- compile test T12-test Debug native success 46s MaxRSS:246M
+      +- options success
+      +- options success
+         +- compile test T12-child Debug native success 1m MaxRSS:234M
+            +- options (reused)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-no_temp_name_check/o/c7f5141f8980aec12592e9f22c535a40/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-no_temp_name_check /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-no_temp_name_check /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/zig-global-cache-mut --seed 0xa18337ea -Zc940f0c218af0b82 test -Dtest-group=write -Dtest-id=WR-008 -Doptimize=Debug --summary all

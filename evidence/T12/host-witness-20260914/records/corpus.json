@@ -1,0 +1,10 @@
+{
+  "derivation": "sha256 of this file's bytes is corpus_sha256; file hashes are sha256 of blobs at source_commit",
+  "description": "Git repositories, journals and publication fixtures are generated per test run by tests/t12_fixtures.zig with /usr/bin/git; no checked-in data files.",
+  "schema": "zcr-t12-corpus/1",
+  "source_commit": "0a8627d6285def5e7f3efd6463b61fe7da372a61",
+  "tests/t11_test.zig": "a99e69c4a90ad334a8b65248aeaf748fd8560d0d1b50383186bd0d7f5d437101",
+  "tests/t12_child.zig": "6f1492cb6e069c407650f51741e63bb2b6f3575b1ed2043be18952934fdc43fe",
+  "tests/t12_fixtures.zig": "9383ad3aa0d81d93406c0957d36385788d7e8d509bd39ef7ab9a77d8aa2ce845",
+  "tests/t12_test.zig": "beb46b5fb23583c22716a1bd9877138761a9cc77fe9c0b434ff7b9e0255a1650"
+}

@@ -1,0 +1,34 @@
+test
++- run test T12-test w
+T12 C01 patch pid=3516 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C02 patch pid=3562 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C03 patch pid=3606 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C04 patch pid=3650 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=1
+T12 C05 patch pid=3696 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C06 patch pid=3740 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C07 patch pid=3787 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C08 patch pid=3833 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C09 patch pid=3877 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C10 patch pid=3921 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C01 create pid=3967 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C02 create pid=4011 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C03 create pid=4055 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C04 create pid=4099 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=1
+T12 C05 create pid=4143 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C06 create pid=4189 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C07 create pid=4233 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C08 create pid=4277 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C09 create pid=4323 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C10 create pid=4380 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 recovery append SIGKILL verified
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/diag-wr005/cache && /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/diag-wr005/cache/o/158c7699dc6923dda055dd5ff2528db5/T12-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/diag-wr005/cache --seed=0xe6c0bdda --listen=-
+
+Build Summary: 6/6 steps succeeded; 5/5 tests passed
+test success
++- run test T12-test 5 pass (5 total) 32s MaxRSS:13M
+   +- compile test T12-test Debug native cached 159ms MaxRSS:31M
+      +- options cached
+      +- options cached
+         +- compile test T12-child Debug native cached 132ms MaxRSS:31M
+            +- options (reused)
+
