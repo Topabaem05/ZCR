@@ -40,7 +40,10 @@ run_group() {
   [ -x $out/bin/T15-test ] || { echo "$label: no installed T15-test"; return 1; }
   $TOOLS/zcr-dev-evidence record --worktree $WT --task T15 --label $label-t15 --command "$cmd" --exit $rc --binary $out/bin/T15-test --out $STATE/records/$label-t15.json || return 1
   $TOOLS/zcr-dev-evidence verify --worktree $WT --evidence $STATE/records/$label-t15.json > $STATE/logs/verify-$label-t15.log 2>&1
-  echo "$label-t15 verify exit=$?"
+  local vrc=$?
+  echo "$label-t15 verify exit=$vrc"
+  # A rejected record must fail the run, not only print its status.
+  return $vrc
 }
 run_group quiet-broker-debug Debug || exit 1
 run_group quiet-broker-releasesafe ReleaseSafe || exit 1
