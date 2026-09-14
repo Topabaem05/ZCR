@@ -8,18 +8,123 @@
       "path": "MANIFEST.sha256",
       "orig_path": null,
       "symlink": false,
-      "source": "working_tree"
+      "source": "committed"
     },
     {
       "kind": "modified",
       "path": "docs/18-Merge-and-Remaining-Work.md",
       "orig_path": null,
       "symlink": false,
-      "source": "working_tree"
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/continuation/native-ci-34793696720/README.md",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/continuation/native-ci-34793696720/aarch64-macos-report.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/continuation/native-ci-34793696720/artifacts.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/continuation/native-ci-34793696720/registered-logs.tar.gz",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/continuation/native-ci-34793696720/run.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/continuation/native-ci-34793696720/task/authorization.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/continuation/native-ci-34793696720/task/manifest.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/continuation/native-ci-34793696720/task/preflight.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/continuation/native-ci-34793696720/task/scope.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/continuation/native-ci-34793696720/x86_64-linux-report.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/continuation/native-ci-34793696720/x86_64-macos-report.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
     },
     {
       "kind": "modified",
       "path": "tasks/progress.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "modified",
+      "path": "verification/report.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "modified",
+      "path": "DESIGNBOOK.html",
+      "orig_path": null,
+      "symlink": false,
+      "source": "working_tree"
+    },
+    {
+      "kind": "modified",
+      "path": "MANIFEST.sha256",
+      "orig_path": null,
+      "symlink": false,
+      "source": "working_tree"
+    },
+    {
+      "kind": "modified",
+      "path": "evidence/continuation/native-ci-34793696720/task/scope.json",
       "orig_path": null,
       "symlink": false,
       "source": "working_tree"
@@ -27,83 +132,6 @@
     {
       "kind": "modified",
       "path": "verification/report.json",
-      "orig_path": null,
-      "symlink": false,
-      "source": "working_tree"
-    },
-    {
-      "kind": "untracked",
-      "path": "evidence/continuation/native-ci-34793696720/README.md",
-      "orig_path": null,
-      "symlink": false,
-      "source": "working_tree"
-    },
-    {
-      "kind": "untracked",
-      "path": "evidence/continuation/native-ci-34793696720/aarch64-macos-report.json",
-      "orig_path": null,
-      "symlink": false,
-      "source": "working_tree"
-    },
-    {
-      "kind": "untracked",
-      "path": "evidence/continuation/native-ci-34793696720/artifacts.json",
-      "orig_path": null,
-      "symlink": false,
-      "source": "working_tree"
-    },
-    {
-      "kind": "untracked",
-      "path": "evidence/continuation/native-ci-34793696720/registered-logs.tar.gz",
-      "orig_path": null,
-      "symlink": false,
-      "source": "working_tree"
-    },
-    {
-      "kind": "untracked",
-      "path": "evidence/continuation/native-ci-34793696720/run.json",
-      "orig_path": null,
-      "symlink": false,
-      "source": "working_tree"
-    },
-    {
-      "kind": "untracked",
-      "path": "evidence/continuation/native-ci-34793696720/task/authorization.json",
-      "orig_path": null,
-      "symlink": false,
-      "source": "working_tree"
-    },
-    {
-      "kind": "untracked",
-      "path": "evidence/continuation/native-ci-34793696720/task/manifest.json",
-      "orig_path": null,
-      "symlink": false,
-      "source": "working_tree"
-    },
-    {
-      "kind": "untracked",
-      "path": "evidence/continuation/native-ci-34793696720/task/preflight.json",
-      "orig_path": null,
-      "symlink": false,
-      "source": "working_tree"
-    },
-    {
-      "kind": "untracked",
-      "path": "evidence/continuation/native-ci-34793696720/task/scope.json",
-      "orig_path": null,
-      "symlink": false,
-      "source": "working_tree"
-    },
-    {
-      "kind": "untracked",
-      "path": "evidence/continuation/native-ci-34793696720/x86_64-linux-report.json",
-      "orig_path": null,
-      "symlink": false,
-      "source": "working_tree"
-    },
-    {
-      "kind": "untracked",
-      "path": "evidence/continuation/native-ci-34793696720/x86_64-macos-report.json",
       "orig_path": null,
       "symlink": false,
       "source": "working_tree"
