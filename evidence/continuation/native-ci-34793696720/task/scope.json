@@ -5,6 +5,13 @@
   "changes": [
     {
       "kind": "modified",
+      "path": "DESIGNBOOK.html",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "modified",
       "path": "MANIFEST.sha256",
       "orig_path": null,
       "symlink": false,
@@ -110,14 +117,14 @@
     },
     {
       "kind": "modified",
-      "path": "DESIGNBOOK.html",
+      "path": "evidence/continuation/native-ci-34793696720/task/authorization.json",
       "orig_path": null,
       "symlink": false,
       "source": "working_tree"
     },
     {
       "kind": "modified",
-      "path": "MANIFEST.sha256",
+      "path": "evidence/continuation/native-ci-34793696720/task/manifest.json",
       "orig_path": null,
       "symlink": false,
       "source": "working_tree"
@@ -130,8 +137,8 @@
       "source": "working_tree"
     },
     {
-      "kind": "modified",
-      "path": "verification/report.json",
+      "kind": "untracked",
+      "path": "evidence/continuation/native-ci-34793696720/task/manifest-fence1.json",
       "orig_path": null,
       "symlink": false,
       "source": "working_tree"
