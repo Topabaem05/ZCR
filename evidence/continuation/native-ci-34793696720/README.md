@@ -2,7 +2,7 @@
 
 **Run:** [34793696720](https://github.com/Topabaem05/ZCR/actions/runs/34793696720), `workflow_dispatch` on `main` at `a15b127` (merge of PR #3 after PR #2). Result: **success** on ubuntu-24.04, macos-15 and macos-15-intel.
 
-This bundle keeps each platform's `report.json` from the job artifact, the registered-test logs, the artifact names, sizes and digests ([artifacts.json](artifacts.json)) and the job conclusions ([run.json](run.json)). The results apply to source `a15b127` only.
+This bundle keeps each platform's `report.json` from the job artifact, every per-command stdout and stderr log the reports reference ([command-logs.tar.gz](command-logs.tar.gz), 150 files, per-file digests in [command-logs-index.json](command-logs-index.json)), the artifact names, sizes and digests ([artifacts.json](artifacts.json)) and the job conclusions ([run.json](run.json)). Test binaries inside the artifacts are not kept. The results apply to source `a15b127` only.
 
 ## Registered tests
 
@@ -12,7 +12,7 @@ This bundle keeps each platform's `report.json` from the job artifact, the regis
 | Apple Silicon, macOS 15 ([report](aarch64-macos-report.json)) | 347 PASS / 12 SKIP / 0 FAIL | 347 PASS / 12 SKIP / 0 FAIL | T14 12 |
 | Intel Mac, macOS 15 ([report](x86_64-macos-report.json)) | 347 PASS / 12 SKIP / 0 FAIL | 347 PASS / 12 SKIP / 0 FAIL | T14 12 |
 
-No allocation leaks were reported. On both Macs T08 is 27/27, T11 43/43 and T12 25/25 in both modes. Every recorded command (contracts, registered tests, codec tests, CLI subprocess, capability build and runtime) exited 0 on all three platforms, and each report's status is `PASS`. Logs: [registered-logs.tar.gz](registered-logs.tar.gz).
+No allocation leaks were reported. On both Macs T08 is 27/27, T11 43/43 and T12 25/25 in both modes. Every recorded command (contracts, registered tests, codec tests, CLI subprocess, capability build and runtime) exited 0 on all three platforms, and each report's status is `PASS`. Logs for every command: [command-logs.tar.gz](command-logs.tar.gz).
 
 ## What this closes and what stays open
 
