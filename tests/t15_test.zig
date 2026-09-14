@@ -751,3 +751,46 @@ test "BR-004 coalesced UDS request and cancellation cancel the preceding idle re
     var buffer: [8192]u8 = undefined;
     try t.expect(std.mem.indexOf(u8, try client.readLine(&buffer), "E_CANCELLED") != null);
 }
+
+test "BR-005 real UDS reconnect after disconnect and broker restart needs a host rebind at a new fence and replays nothing" {
+    const f = try Fixture.init(1);
+    defer f.deinit();
+    const session = f.grants[0].config.session;
+    const old_task: core.TaskContext = .{ .task_id = session.bound_task, .base_commit = f.snapshot_.head[0..f.snapshot_.head_len], .scope_digest = read_policy.digest, .fence = 1, .expires_at_unix_ms = std.math.maxInt(i64) };
+    var new_task = old_task;
+    new_task.fence = 2;
+    var buffer: [8192]u8 = undefined;
+    try f.start();
+    {
+        var client = try f.connect(0);
+        defer client.close();
+        try startProtocol(&client);
+        try client.sendAll(read_request);
+        try t.expect(std.mem.indexOf(u8, try client.readLine(&buffer), "\"id\":2") != null);
+    }
+    const started = std.Io.Clock.Timestamp.now(io, .awake);
+    while (f.server.?.snapshot().connected != 0 and started.untilNow(io).raw.toMilliseconds() < 5000) try std.Io.sleep(io, .fromMilliseconds(1), .awake);
+    try t.expectEqual(@as(u32, 0), f.server.?.snapshot().connected);
+    // The disconnect ended the host binding, so the grant cannot resume on its own.
+    try expectRefused(f.connect(0));
+    // Broker restart: the old instance drains and releases its endpoint.
+    f.server.?.stop();
+    f.thread.?.join();
+    f.thread = null;
+    try t.expect(f.run_error == null);
+    try f.server.?.deinit();
+    f.server = null;
+    try expectRefused(f.connect(0));
+    // Only the host can bind the session again, at a new fence. The old fence stays invalid.
+    try f.registry.bindSession(session, new_task, f.registry.bootNonce());
+    try t.expectError(error.FenceMismatch, f.registry.acquireWriter(old_task, session.bound_workspace));
+    try f.start();
+    var client = try f.connect(0);
+    defer client.close();
+    try startProtocol(&client);
+    // Nothing from the first connection is replayed: the next line answers the new request.
+    try client.sendAll("{\"jsonrpc\":\"2.0\",\"id\":9,\"method\":\"ping\"}\n");
+    const line = try client.readLine(&buffer);
+    try t.expect(std.mem.indexOf(u8, line, "\"id\":9") != null);
+    try t.expect(std.mem.indexOf(u8, line, "\"id\":2") == null);
+}
