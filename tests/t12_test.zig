@@ -1239,3 +1239,46 @@ test "WR-008 host witness retires terminal publications so its limit bounds pend
     try t.expectError(error.Busy, witness.retirePublication(p));
     try grant.validate_publication.?(grant.context, data, p);
 }
+
+/// Delegates to LocalWitness, then edits the caller-owned approved task array after the continuity
+/// check passes, as another holder of that memory could while recovery performs identity I/O.
+const MutatingWitness = struct {
+    inner: LocalWitness,
+    tasks: *[1]core.TaskId,
+    fn validate(ctx: ?*anyopaque, data: storage.recovery.GrantData, ns: storage.Namespace) core.RecoverError!void {
+        const self: *MutatingWitness = @ptrCast(@alignCast(ctx.?));
+        try LocalWitness.validate(&self.inner, data, ns);
+        self.tasks[0].uuid[0] +%= 1;
+    }
+    fn publication(ctx: ?*anyopaque, data: storage.recovery.GrantData, p: core.PreparedRecord) core.RecoverError!void {
+        const self: *MutatingWitness = @ptrCast(@alignCast(ctx.?));
+        return LocalWitness.publication(&self.inner, data, p);
+    }
+};
+
+test "WR-008 recovery keeps the grant-time approved tasks when the caller edits them during validation" {
+    var repo = try Repo.init(false);
+    defer repo.deinit();
+    const old = try f.Fixture.init(repo.root.canonical_path, repo.state, false, null);
+    defer old.deinit();
+    const p = try prepared(old);
+    _ = try old.adapter.interface().prepare(p);
+    repo.publication = try PublicationWitness.acquire(&repo, p);
+    try old.root.dir.rename(temp_name, old.root.dir, "file.txt", f.io);
+    const fresh = try f.Fixture.init(repo.root.canonical_path, repo.state, false, old.store.options.namespace);
+    defer fresh.deinit();
+    fresh.adapter.expected_digest = p.op_digest;
+    var tasks = [_]core.TaskId{f.task.task_id};
+    var data = try grantFor(fresh, old.store.options.namespace);
+    data.approved_tasks = &tasks;
+    var witness: MutatingWitness = .{ .inner = .{ .repo = &repo }, .tasks = &tasks };
+    var recoverer = storage.recovery.Recoverer.init(fresh.root, &fresh.registry, &fresh.store, .{ .data = data, .context = &witness, .validate = MutatingWitness.validate, .validate_publication = MutatingWitness.publication }, f.approved);
+    // The caller's array no longer lists this task once validation returns; recovery must keep using
+    // the approved tasks it validated rather than reading the edited memory.
+    var result = try recoverer.recover(f.io, fresh.reserved.allocator(), fresh.session.bound_workspace, fresh.adapter.interface());
+    defer result.deinit();
+    try t.expect(!std.meta.eql(tasks[0], f.task.task_id));
+    try t.expectEqual(@as(u64, 0), result.value.uncertain);
+    const receipt = (try fresh.adapter.interface().lookup(fresh.adapter.key)).found;
+    try t.expect(receipt.applied and receipt.durable);
+}

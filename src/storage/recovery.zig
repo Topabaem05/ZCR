@@ -54,8 +54,18 @@ pub const Recoverer = struct {
         const adapter: *journal.Adapter = @ptrCast(@alignCast(interface.context));
         if (adapter.store != self.store) return error.RecoveryRequired;
         const grant = self.grant orelse return error.RecoveryRequired;
-        const data = grant.data;
         const ns = self.store.options.namespace;
+        // The grant's slices point into caller-owned memory. Copy them once, validate the copy (a
+        // host witness compares it with the grant-time digest) and use only the copy for the rest
+        // of recovery, so editing the caller's arrays during or after validation changes nothing.
+        if (grant.data.approved_tasks.len > journal.max_entries or grant.data.publication_digests.len > journal.max_entries) return error.RecoveryRequired;
+        const owned_tasks = allocator.dupe(core.TaskId, grant.data.approved_tasks) catch return error.RecoveryRequired;
+        defer allocator.free(owned_tasks);
+        const owned_digests = allocator.dupe(core.Sha256, grant.data.publication_digests) catch return error.RecoveryRequired;
+        defer allocator.free(owned_digests);
+        var data = grant.data;
+        data.approved_tasks = owned_tasks;
+        data.publication_digests = owned_digests;
         if (!data.current_workspace.eql(current) or current.eql(ns.workspace_id) or !data.original_workspace.eql(ns.workspace_id) or !std.meta.eql(data.current_boot, self.registry.bootNonce()) or !std.meta.eql(data.store_id, ns.store_id) or !std.meta.eql(data.store_root_id, self.store.root_id) or !std.meta.eql(data.namespace_digest, self.store.namespace_digest) or data.security_domain.id != ns.security_domain.id or !std.meta.eql(data.policy_digest, ns.policy_digest) or !std.meta.eql(self.approved_policy.digest, ns.policy_digest) or !data.exclusive_recovery or data.approved_tasks.len == 0 or data.approved_tasks.len > journal.max_entries or !approved(data, adapter.key.task_id)) return error.RecoveryRequired;
         try grant.validate(grant.context, data, ns);
         self.registry.validateWorkspace(current) catch return error.RecoveryRequired;
