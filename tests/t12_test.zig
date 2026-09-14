@@ -1157,6 +1157,14 @@ test "WR-008 host witness grants once and refuses a replaced temp name after unl
     var unattested = data;
     unattested.publication_digests = &.{};
     try t.expectError(error.RecoveryRequired, validate_publication(grant.context, unattested, p));
+    // The attested set is bound when the grant is issued: a later, wider list is refused even
+    // though it still lists this publication.
+    var other_digest = attested[0];
+    other_digest[0] +%= 1;
+    const widened_list = [_]core.Sha256{ attested[0], other_digest };
+    var widened = data;
+    widened.publication_digests = &widened_list;
+    try t.expectError(error.RecoveryRequired, validate_publication(grant.context, widened, p));
     var other = p;
     other.generation += 1;
     try t.expectError(error.RecoveryRequired, validate_publication(grant.context, data, other));

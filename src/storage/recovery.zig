@@ -335,6 +335,9 @@ pub const HostWitness = struct {
     count: usize = 0,
     /// Set by grant(): the retained set is then fixed, so retention cannot widen what a grant authorizes.
     granted: bool = false,
+    /// Digest of the attested publication set captured by grant(). Validation compares against it,
+    /// so replacing or editing GrantData.publication_digests afterwards cannot widen the set.
+    attested_set: core.Sha256 = undefined,
     used: bool = false,
 
     /// Borrows `identity` and `state`; both must outlive the witness.
@@ -391,12 +394,14 @@ pub const HostWitness = struct {
 
     pub fn grant(self: *HostWitness, data: GrantData) ContinuityGrant {
         self.granted = true;
+        self.attested_set = attestedSetDigest(data.publication_digests);
         return .{ .data = data, .context = self, .validate = validate, .validate_publication = validatePublication };
     }
 
     fn validate(context: ?*anyopaque, data: GrantData, ns: journal.Namespace) E!void {
         const self: *HostWitness = @ptrCast(@alignCast(context.?));
         if (self.used) return error.RecoveryRequired;
+        if (!self.granted or !std.meta.eql(attestedSetDigest(data.publication_digests), self.attested_set)) return error.RecoveryRequired;
         const state = journal.metadata(self.state.handle, true) catch return error.RecoveryRequired;
         if (!std.meta.eql(state.id, data.store_root_id)) return error.RecoveryRequired;
         self.identity.validate(self.io) catch return error.RecoveryRequired;
@@ -407,6 +412,7 @@ pub const HostWitness = struct {
     fn validatePublication(context: ?*anyopaque, data: GrantData, p: core.PreparedRecord) E!void {
         const self: *HostWitness = @ptrCast(@alignCast(context.?));
         if (!self.used) return error.RecoveryRequired;
+        if (!std.meta.eql(attestedSetDigest(data.publication_digests), self.attested_set)) return error.RecoveryRequired;
         const digest = try publicationDigest(p);
         // A retained witness never attests a publication the protected grant did not list.
         for (data.publication_digests) |attested| {
@@ -418,6 +424,14 @@ pub const HostWitness = struct {
         return error.RecoveryRequired;
     }
 
+    fn attestedSetDigest(digests: []const core.Sha256) core.Sha256 {
+        var hasher = std.crypto.hash.sha2.Sha256.init(.{});
+        var count: [8]u8 = undefined;
+        std.mem.writeInt(u64, &count, digests.len, .little);
+        hasher.update(&count);
+        for (digests) |d| hasher.update(&d);
+        return hasher.finalResult();
+    }
     fn handleId(fd: std.posix.fd_t) policy.paths.StatError!policy.paths.Identity {
         return (try policy.paths.statHandle(fd)).identity;
     }
