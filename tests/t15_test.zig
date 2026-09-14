@@ -810,7 +810,10 @@ test "BR-005 real UDS stale grant is refused and a broker restart needs a host r
     try t.expect(f.run_error == null);
     try f.server.?.deinit();
     f.server = null;
-    try t.expectError(error.OutOfScope, broker.Server.create(f.config()));
+    // Through Fixture.start, like every other test: Server.create keeps its large per-session
+    // temporaries in that frame. Inlined into this test, they overflowed the ReleaseSafe stack.
+    try t.expectError(error.OutOfScope, f.start());
+    try t.expect(f.server == null and f.thread == null);
 
     // Only the host can bind the sessions again, at a new fence. The old fence stays invalid.
     try f.registry.bindSession(session, new_task, f.registry.bootNonce());
