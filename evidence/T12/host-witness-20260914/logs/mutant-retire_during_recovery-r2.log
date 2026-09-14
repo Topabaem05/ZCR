@@ -1,0 +1,23 @@
+test
++- run test T12-test 14 pass, 1 fail (15 total)
+error: 't12_test.test.WR-008 host witness retires terminal publications so its limit bounds pending ones' failed:
+       expected error.Busy, found void
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:65:9: 0x102215c13 in expectError__anon_38252 (T12-test)
+               return error.TestExpectedError;
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-retire_during_recovery-r2/tests/t12_test.zig:1212:5: 0x1022169bf in test.WR-008 host witness retires terminal publications so its limit bounds pending ones (T12-test)
+           try t.expectError(error.Busy, witness.retirePublication(p));
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-retire_during_recovery-r2 && /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-retire_during_recovery-r2/o/bef432e0eb9e0e18885b88db1116eb2d/T12-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-retire_during_recovery-r2 --seed=0x33f0522c --listen=-
+
+Build Summary: 4/6 steps succeeded (1 failed); 14/15 tests passed (1 failed)
+test transitive failure
++- run test T12-test 14 pass, 1 fail (15 total)
+   +- compile test T12-test Debug native success 5s MaxRSS:328M
+      +- options success
+      +- options success
+         +- compile test T12-child Debug native success 3s MaxRSS:288M
+            +- options (reused)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-retire_during_recovery-r2/o/f73c3388e88e2a4fe1e8f77ca63d50d0/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-retire_during_recovery-r2 /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-retire_during_recovery-r2 /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/zig-global-cache --seed 0x33f0522c -Zfb7737af51db2836 test -Dtest-group=write -Dtest-id=WR-008 -Doptimize=Debug --summary all

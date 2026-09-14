@@ -1,0 +1,9 @@
+Build Summary: 6/6 steps succeeded; 15/15 tests passed
+test success
++- run test T12-test 15 pass (15 total) 32s MaxRSS:19M
+   +- compile test T12-test ReleaseSafe native success 21s MaxRSS:396M
+      +- options success
+      +- options success
+         +- compile test T12-child ReleaseSafe native success 19s MaxRSS:407M
+            +- options (reused)
+

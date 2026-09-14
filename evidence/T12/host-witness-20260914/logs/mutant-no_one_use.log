@@ -1,0 +1,80 @@
+test
++- run test T12-test 10 pass, 4 fail (14 total)
+error: 't12_test.test.WR-008 changed Git marker and missing parent witness reject reconciliation' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/process.zig:531:21: 0x104c38cb3 in run (T12-test)
+               else => |e| return e,
+                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-no_one_use/src/workspace/identity.zig:103:20: 0x104c351ef in output (T12-test)
+           }) catch |err| return switch (err) {
+                          ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-no_one_use/src/workspace/identity.zig:147:34: 0x104c330f7 in discoverWith (T12-test)
+           const common_path = try line(try output(temp, io, exe, top, &.{ "rev-parse", "--path-format=absolute", "--git-common-dir" }, options.timeout_ms));
+                                        ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-no_one_use/src/workspace/registry.zig:227:30: 0x104c30e47 in registerWorkspace (T12-test)
+                   var discovered = try identity.discoverWith(self.allocator, io, self.git_executable, root, .{ .timeout_ms = self.git_timeout_ms });
+                                    ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-no_one_use/tests/t12_fixtures.zig:111:20: 0x104bd3f7b in init (T12-test)
+               const id = try self.registry.registerWorkspace(io, self.root, approved);
+                          ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-no_one_use/tests/t12_test.zig:605:23: 0x104cbf5af in test.WR-008 changed Git marker and missing parent witness reject reconciliation (T12-test)
+               const fresh = try f.Fixture.init(repo.root.canonical_path, repo.state, false, old.store.options.namespace);
+                             ^
+error: 't12_test.test.WR-008 moved and recreated roots cannot use retained namespace continuity' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/process.zig:531:21: 0x104c38cb3 in run (T12-test)
+               else => |e| return e,
+                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-no_one_use/src/workspace/identity.zig:103:20: 0x104c351ef in output (T12-test)
+           }) catch |err| return switch (err) {
+                          ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-no_one_use/src/workspace/identity.zig:147:34: 0x104c330f7 in discoverWith (T12-test)
+           const common_path = try line(try output(temp, io, exe, top, &.{ "rev-parse", "--path-format=absolute", "--git-common-dir" }, options.timeout_ms));
+                                        ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-no_one_use/src/workspace/identity.zig:131:5: 0x104c36717 in discover (T12-test)
+           return discoverWith(a, io, exe, trusted, .{});
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-no_one_use/tests/t12_fixtures.zig:115:25: 0x104bd44bb in init (T12-test)
+               self.identity = try workspace.identity.discover(a, io, "/usr/bin/git", self.root);
+                               ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-no_one_use/tests/t12_test.zig:694:21: 0x104cbe673 in test.WR-008 moved and recreated roots cannot use retained namespace continuity (T12-test)
+               const old = try f.Fixture.init(repo.root.canonical_path, repo.state, false, null);
+                           ^
+error: 't12_test.test.WR-008 complete checksummed receipt chains reject generation and durability drift' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/process.zig:531:21: 0x104c38cb3 in run (T12-test)
+               else => |e| return e,
+                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-no_one_use/src/workspace/identity.zig:103:20: 0x104c351ef in output (T12-test)
+           }) catch |err| return switch (err) {
+                          ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-no_one_use/src/workspace/identity.zig:146:31: 0x104c32f4b in discoverWith (T12-test)
+           const git_path = try line(try output(temp, io, exe, top, &.{ "rev-parse", "--absolute-git-dir" }, options.timeout_ms));
+                                     ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-no_one_use/src/workspace/identity.zig:131:5: 0x104c36717 in discover (T12-test)
+           return discoverWith(a, io, exe, trusted, .{});
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-no_one_use/tests/t12_fixtures.zig:115:25: 0x104bd44bb in init (T12-test)
+               self.identity = try workspace.identity.discover(a, io, "/usr/bin/git", self.root);
+                               ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-no_one_use/tests/t12_test.zig:716:25: 0x104c89607 in test.WR-008 complete checksummed receipt chains reject generation and durability drift (T12-test)
+               const fixture = try f.Fixture.init(repo.root.canonical_path, repo.state, false, null);
+                               ^
+error: 't12_test.test.WR-008 host witness grants once and refuses a replaced temp name after unlink' failed:
+       expected error.RecoveryRequired, found void
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:65:9: 0x104bd5c13 in expectError__anon_38276 (T12-test)
+               return error.TestExpectedError;
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-no_one_use/tests/t12_test.zig:1150:5: 0x104c450eb in test.WR-008 host witness grants once and refuses a replaced temp name after unlink (T12-test)
+           try t.expectError(error.RecoveryRequired, grant.validate(grant.context, data, ns));
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-no_one_use && /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-no_one_use/o/0d8beb289515c1b6d5696aeab7ceda12/T12-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-no_one_use --seed=0x9fa9af55 --listen=-
+
+Build Summary: 4/6 steps succeeded (1 failed); 10/14 tests passed (4 failed)
+test transitive failure
++- run test T12-test 10 pass, 4 fail (14 total)
+   +- compile test T12-test Debug native success 26s MaxRSS:261M
+      +- options success
+      +- options success
+         +- compile test T12-child Debug native success 26s MaxRSS:235M
+            +- options (reused)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-no_one_use/o/f73c3388e88e2a4fe1e8f77ca63d50d0/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-no_one_use /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-no_one_use /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/zig-global-cache-mut --seed 0x9fa9af55 -Zd28797646f31fed7 test -Dtest-group=write -Dtest-id=WR-008 -Doptimize=Debug --summary all

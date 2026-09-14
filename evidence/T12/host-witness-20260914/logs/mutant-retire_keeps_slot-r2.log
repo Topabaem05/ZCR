@@ -1,0 +1,54 @@
+test
++- run test T12-test 14 pass, 1 crash (15 total)
+error: 't12_test.test.WR-008 host witness retires terminal publications so its limit bounds pending ones' terminated with signal ABRT with stderr:
+       thread 1550854 panic: reached unreachable code
+       error return context:
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-retire_keeps_slot-r2/src/storage/recovery.zig:353:45: 0x100363037 in retainPublication (T12-test)
+               if (self.count == max_publications) return error.ResourceExhausted;
+                                                   ^
+       
+       stack trace:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/Io/Threaded.zig:14084:19: 0x1002cbc1b in recoverableOsBugDetected (T12-test)
+           if (is_debug) unreachable;
+                         ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/Io/Threaded.zig:18899:42: 0x1002cba83 in closeFd (T12-test)
+               .BADF => recoverableOsBugDetected(), // use after free
+                                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/Io/Threaded.zig:9577:20: 0x1002f4bf3 in fileClose (T12-test)
+                   closeFd(file.handle);
+                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/Io/File.zig:222:31: 0x100231a4b in close (T12-test)
+           return io.vtable.fileClose(io.userdata, (&file)[0..1]);
+                                     ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-retire_keeps_slot-r2/src/storage/recovery.zig:325:49: 0x10036296b in close (T12-test)
+                   if (self.original) |file| file.close(io);
+                                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-retire_keeps_slot-r2/src/storage/recovery.zig:344:56: 0x100364397 in deinit (T12-test)
+               for (self.retained[0..self.count]) |*r| r.close(self.io);
+                                                              ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-retire_keeps_slot-r2/tests/t12_test.zig:1195:25: 0x1003524c3 in test.WR-008 host witness retires terminal publications so its limit bounds pending ones (T12-test)
+           defer witness.deinit();
+                               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x10032b12f in mainServer (T12-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x10032b7df in main (T12-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x1003295a3 in callMain (T12-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x180a244e3 in start (/usr/lib/dyld)
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-retire_keeps_slot-r2 && /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-retire_keeps_slot-r2/o/5f2c551d66d74703b1f38e95dc614aca/T12-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-retire_keeps_slot-r2 --seed=0xa459663b --listen=-
+
+Build Summary: 4/6 steps succeeded (1 failed); 14/15 tests passed (1 crashed)
+test transitive failure
++- run test T12-test 14 pass, 1 crash (15 total)
+   +- compile test T12-test Debug native success 4s MaxRSS:355M
+      +- options success
+      +- options success
+         +- compile test T12-child Debug native success 4s MaxRSS:291M
+            +- options (reused)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-retire_keeps_slot-r2/o/f73c3388e88e2a4fe1e8f77ca63d50d0/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-retire_keeps_slot-r2 /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-retire_keeps_slot-r2 /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/zig-global-cache --seed 0xa459663b -Zef0c17d54aaf4a65 test -Dtest-group=write -Dtest-id=WR-008 -Doptimize=Debug --summary all

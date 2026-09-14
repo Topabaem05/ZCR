@@ -1,0 +1,82 @@
+test
++- run test T12-test 10 pass, 4 fail (14 total)
+error: 't12_test.test.WR-008 cold start and wrong grants fail closed without source mutation' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/process.zig:531:21: 0x104fb0cc7 in run (T12-test)
+               else => |e| return e,
+                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-leaf_original_only/src/workspace/identity.zig:103:20: 0x104fad203 in output (T12-test)
+           }) catch |err| return switch (err) {
+                          ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-leaf_original_only/src/workspace/identity.zig:146:31: 0x104faaf5f in discoverWith (T12-test)
+           const git_path = try line(try output(temp, io, exe, top, &.{ "rev-parse", "--absolute-git-dir" }, options.timeout_ms));
+                                     ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-leaf_original_only/src/workspace/registry.zig:227:30: 0x104fa8e5b in registerWorkspace (T12-test)
+                   var discovered = try identity.discoverWith(self.allocator, io, self.git_executable, root, .{ .timeout_ms = self.git_timeout_ms });
+                                    ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-leaf_original_only/tests/t12_fixtures.zig:111:20: 0x104f4bf7b in init (T12-test)
+               const id = try self.registry.registerWorkspace(io, self.root, approved);
+                          ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-leaf_original_only/tests/t12_test.zig:307:23: 0x10503febb in test.WR-008 cold start and wrong grants fail closed without source mutation (T12-test)
+               const fresh = try f.Fixture.init(repo.root.canonical_path, repo.state, false, old.store.options.namespace);
+                             ^
+error: 't12_test.test.WR-008 target mismatch temp replacement noop identity and generation reconciliation' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/process.zig:531:21: 0x104fb0cc7 in run (T12-test)
+               else => |e| return e,
+                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-leaf_original_only/src/workspace/identity.zig:103:20: 0x104fad203 in output (T12-test)
+           }) catch |err| return switch (err) {
+                          ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-leaf_original_only/src/workspace/identity.zig:146:31: 0x104faaf5f in discoverWith (T12-test)
+           const git_path = try line(try output(temp, io, exe, top, &.{ "rev-parse", "--absolute-git-dir" }, options.timeout_ms));
+                                     ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-leaf_original_only/src/workspace/identity.zig:131:5: 0x104fae72b in discover (T12-test)
+           return discoverWith(a, io, exe, trusted, .{});
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-leaf_original_only/src/storage/recovery.zig:64:107: 0x104fd07cb in recover (T12-test)
+               var discovered = workspace.identity.discover(allocator, io, self.git_executable, self.root) catch return error.RecoveryRequired;
+                                                                                                                 ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-leaf_original_only/tests/t12_test.zig:363:22: 0x10503e7f7 in test.WR-008 target mismatch temp replacement noop identity and generation reconciliation (T12-test)
+               var result = try recoverer.recover(f.io, fresh.reserved.allocator(), fresh.session.bound_workspace, fresh.adapter.interface());
+                            ^
+error: 't12_test.test.WR-008 extended ACLs on private Darwin store state are refusals' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/process.zig:531:21: 0x104fb0cc7 in run (T12-test)
+               else => |e| return e,
+                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-leaf_original_only/src/workspace/identity.zig:103:20: 0x104fad203 in output (T12-test)
+           }) catch |err| return switch (err) {
+                          ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-leaf_original_only/src/workspace/identity.zig:147:34: 0x104fab10b in discoverWith (T12-test)
+           const common_path = try line(try output(temp, io, exe, top, &.{ "rev-parse", "--path-format=absolute", "--git-common-dir" }, options.timeout_ms));
+                                        ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-leaf_original_only/src/workspace/identity.zig:131:5: 0x104fae72b in discover (T12-test)
+           return discoverWith(a, io, exe, trusted, .{});
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-leaf_original_only/tests/t12_fixtures.zig:115:25: 0x104f4c4bb in init (T12-test)
+               self.identity = try workspace.identity.discover(a, io, "/usr/bin/git", self.root);
+                               ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-leaf_original_only/tests/t12_test.zig:503:21: 0x10503ac7f in test.WR-008 extended ACLs on private Darwin store state are refusals (T12-test)
+           const fixture = try f.Fixture.init(repo.root.canonical_path, repo.state, false, null);
+                           ^
+error: 't12_test.test.WR-008 host witness accepts an applied publication and refuses a foreign target' failed:
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-leaf_original_only/src/storage/recovery.zig:321:32: 0x104f504b7 in check (T12-test)
+                       if (!original) return error.RecoveryRequired;
+                                      ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-leaf_original_only/src/storage/recovery.zig:391:49: 0x104f4fc17 in validatePublication (T12-test)
+                   if (std.meta.eql(r.digest, digest)) return r.check();
+                                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-leaf_original_only/tests/t12_test.zig:1179:5: 0x104f4e41f in test.WR-008 host witness accepts an applied publication and refuses a foreign target (T12-test)
+           try grant.validate_publication.?(grant.context, data, p);
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-leaf_original_only && /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-leaf_original_only/o/7de6b8a0b006c4101d5afb6ca2753c8a/T12-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-leaf_original_only --seed=0x5b94c5bb --listen=-
+
+Build Summary: 4/6 steps succeeded (1 failed); 10/14 tests passed (4 failed)
+test transitive failure
++- run test T12-test 10 pass, 4 fail (14 total)
+   +- compile test T12-test Debug native success 51s MaxRSS:237M
+      +- options success
+      +- options success
+         +- compile test T12-child Debug native success 24s MaxRSS:237M
+            +- options (reused)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-leaf_original_only/o/f73c3388e88e2a4fe1e8f77ca63d50d0/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-leaf_original_only /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-leaf_original_only /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/zig-global-cache-mut --seed 0x5b94c5bb -Z70b88f6ea543afcd test -Dtest-group=write -Dtest-id=WR-008 -Doptimize=Debug --summary all

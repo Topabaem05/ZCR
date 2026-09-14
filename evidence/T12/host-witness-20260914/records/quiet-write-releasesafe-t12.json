@@ -1,0 +1,13 @@
+{
+  "schema_version": "zcr-evidence/1",
+  "task_id": "T12",
+  "label": "quiet-write-releasesafe-t12",
+  "command": "zig build test -Dtest-group=write -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix $STATE/out-quiet-write-releasesafe --summary all",
+  "exit_code": 0,
+  "source_commit": "a17020aeae3d44c4e5ebf4d666523dcfba5e7df2",
+  "source_tree": "cfd20d8c10db667a7ae28f0731071597fe2e2906",
+  "worktree_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/t12-host-witness",
+  "binary_path": "/Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/out-quiet-write-releasesafe/bin/T12-test",
+  "binary_sha256": "8997f219ea060c7bea40019f6a76f19063235418fbd6140e270d1b9fb362c825",
+  "recorded_at_unix_ms": 1789369757301
+}

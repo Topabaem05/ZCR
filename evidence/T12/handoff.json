@@ -224,5 +224,103 @@
     "Production capabilities/writes remain hard false; no test or recovery enables production."
   ],
   "scope_note": "Only six owned source/tests changed from base; evidence added under evidence/T12. No push or merge. Precommit logs are supplemental and not final committed proof.",
-  "retention_note": "No eviction; borrowed receipts remain valid until Store.deinit. Clock rollback cannot evict entries. Full worst-case journal+tail credit makes default storage cap refuse after at most 255 operations, before 10000 entry ceiling. No actual 10000-entry population test is claimed."
+  "retention_note": "No eviction; borrowed receipts remain valid until Store.deinit. Clock rollback cannot evict entries. Full worst-case journal+tail credit makes default storage cap refuse after at most 255 operations, before 10000 entry ceiling. No actual 10000-entry population test is claimed.",
+  "revisions": [
+    {
+      "revision": "host witness for continuity and publication",
+      "date": "2026-09-14",
+      "base_commit": "9c94517fd393866f66a6eddcf3131c950b537e4c",
+      "head_commit": "a17020aeae3d44c4e5ebf4d666523dcfba5e7df2",
+      "source_tree": "cfd20d8c10db667a7ae28f0731071597fe2e2906",
+      "head_commit_note": "Tested source commit; the evidence-only commit follows.",
+      "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+      "workspace_id": "fs:16777232:649526621:16777232:649526619:16777232:647053195",
+      "task_manifest": "evidence/T12/host-witness-20260914/task/manifest.json",
+      "task_manifest_sha256": "72954eff46cf79afb5d9152c11ab55d37a6763258790dae5f64970e0ec1a4699",
+      "scope_report": "evidence/T12/host-witness-20260914/task/scope-commit1.json (0 violations)",
+      "changed_files": [
+        "src/storage/recovery.zig",
+        "tests/t12_test.zig"
+      ],
+      "exports_added": [
+        "recovery.HostWitness.init(Io, *const workspace.identity.Identity, Io.Dir)",
+        "HostWitness.deinit()",
+        "HostWitness.retainPublication(Io.Dir, core.PreparedRecord) !void (takes ownership of the parent handle)",
+        "HostWitness.retirePublication(core.PreparedRecord) !void (Busy once recovery started, RecoveryRequired if not retained)",
+        "HostWitness.grant(GrantData) ContinuityGrant",
+        "HostWitness.max_publications = 16 (pending)"
+      ],
+      "tests": {
+        "quiet-write-debug-t12": {
+          "record": "records/quiet-write-debug-t12.json",
+          "exit_code": 0,
+          "summary": "11/11 steps succeeded; 71/71 tests passed; 0 leaks"
+        },
+        "quiet-write-releasesafe-t12": {
+          "record": "records/quiet-write-releasesafe-t12.json",
+          "exit_code": 0,
+          "summary": "11/11 steps succeeded; 71/71 tests passed; 0 leaks"
+        }
+      },
+      "mutants": {
+        "no_temp_name_check": {
+          "log": "logs/mutant-no_temp_name_check-r2.log",
+          "summary": "4/6 steps succeeded (1 failed); 14/15 tests passed (1 failed); 0 leaks",
+          "failed_tests": [
+            "WR-008 host witness grants once and refuses a replaced temp name after unlink"
+          ],
+          "intended": "WR-008 host witness grants once and refuses a replaced temp name after unlink"
+        },
+        "no_one_use": {
+          "log": "logs/mutant-no_one_use-r2.log",
+          "summary": "4/6 steps succeeded (1 failed); 14/15 tests passed (1 failed); 0 leaks",
+          "failed_tests": [
+            "WR-008 host witness grants once and refuses a replaced temp name after unlink"
+          ],
+          "intended": "WR-008 host witness grants once and refuses a replaced temp name after unlink"
+        },
+        "leaf_original_only": {
+          "log": "logs/mutant-leaf_original_only-r2.log",
+          "summary": "4/6 steps succeeded (1 failed); 14/15 tests passed (1 failed); 0 leaks",
+          "failed_tests": [
+            "WR-008 host witness accepts an applied publication and refuses a foreign target"
+          ],
+          "intended": "WR-008 host witness accepts an applied publication and refuses a foreign target"
+        },
+        "retire_keeps_slot": {
+          "log": "logs/mutant-retire_keeps_slot-r2.log",
+          "summary": "4/6 steps succeeded (1 failed); 14/15 tests passed (1 crashed); 0 leaks",
+          "failed_tests": [
+            "WR-008 host witness retires terminal publications so its limit bounds pending ones"
+          ],
+          "intended": "WR-008 host witness retires terminal publications so its limit bounds pending ones"
+        },
+        "retire_during_recovery": {
+          "log": "logs/mutant-retire_during_recovery-r2.log",
+          "summary": "4/6 steps succeeded (1 failed); 14/15 tests passed (1 failed); 0 leaks",
+          "failed_tests": [
+            "WR-008 host witness retires terminal publications so its limit bounds pending ones"
+          ],
+          "intended": "WR-008 host witness retires terminal publications so its limit bounds pending ones"
+        }
+      },
+      "source_config_sha256": "821abc5ce38d4cafed1fc640e25aa7a87be013f2a0efb5f0e5ed574be5aaa632",
+      "corpus_sha256": "d372d9293ae41cbe3ab6ed859877debea0eaf865bbbbcd7f7077df22ebd3bee0",
+      "interface_change_proposal": {
+        "owner_needed": "T11 (tasks/tasks.json owns src/fs/edit.zig and src/fs/publish.zig)",
+        "status": "proposal only; not implemented (repository owner's decision in this session: record proposal only)",
+        "problem": "recovery.HostWitness.retainPublication must own the parent directory, temp and original handles of each publication before the target rename, so validatePublication can re-stat retained handles. The production editor never hands those handles out: Editor.finishPublish builds core.PublicationIdentity, stores it with journal.prepare, then calls registry.acquireCommit, parent.revalidate and parent.publishReplace or parent.publishCreate. No host code can retain the handles between PREPARED and the rename.",
+        "change": "Add an optional Editor.Options pre-publish hook, e.g. retain_publication: ?struct { context: *anyopaque, retain: *const fn (context: *anyopaque, parent: std.Io.Dir, record: core.PreparedRecord) core.WriteError!void }. Editor.finishPublish calls it after journal.prepare returns .stored and before registry.acquireCommit, passing a duplicated parent directory handle whose ownership transfers to the hook, and the same PreparedRecord it gave journal.prepare. HostWitness.retainPublication(parent, record) takes the target leaf from record.path and the publication digest from the whole record, copies temp_name, and opens the temp and original itself by observed identity. A hook error aborts before commit through the existing pending cleanup path, so no rename happens without a retained witness. The null default keeps current behavior for tests and the unchanged launcher.",
+        "not_in_scope": "No change to core.PublicationIdentity or the JournalStore vtable (src/core is integrator owned). Production writes stay disabled; the launcher (src/launch.zig) wiring is a separate integrator change.",
+        "tests": "T11: the hook runs exactly once after PREPARED and before the rename for create and replace; a hook error leaves the target untouched and the temp cleaned or recovery-required as today. T12: a real Editor publication retained by HostWitness passes validatePublication after the rename and refuses a replaced temp name.",
+        "raised_by": "slice A (T12 HostWitness) of docs/18 row 2"
+      },
+      "remaining_gates": [
+        "T11 pre-publish hook (proposal only) and launcher wiring before any production caller constructs HostWitness",
+        "native Linux/Intel Mac runtime for this revision beyond PR CI, Windows and actual host integration NOT_RUN",
+        "production writes remain disabled"
+      ],
+      "evidence": "evidence/T12/host-witness-20260914/README.md"
+    }
+  ]
 }

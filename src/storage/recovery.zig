@@ -54,8 +54,18 @@ pub const Recoverer = struct {
         const adapter: *journal.Adapter = @ptrCast(@alignCast(interface.context));
         if (adapter.store != self.store) return error.RecoveryRequired;
         const grant = self.grant orelse return error.RecoveryRequired;
-        const data = grant.data;
         const ns = self.store.options.namespace;
+        // The grant's slices point into caller-owned memory. Copy them once, validate the copy (a
+        // host witness compares it with the grant-time digest) and use only the copy for the rest
+        // of recovery, so editing the caller's arrays during or after validation changes nothing.
+        if (grant.data.approved_tasks.len > journal.max_entries or grant.data.publication_digests.len > journal.max_entries) return error.RecoveryRequired;
+        const owned_tasks = allocator.dupe(core.TaskId, grant.data.approved_tasks) catch return error.RecoveryRequired;
+        defer allocator.free(owned_tasks);
+        const owned_digests = allocator.dupe(core.Sha256, grant.data.publication_digests) catch return error.RecoveryRequired;
+        defer allocator.free(owned_digests);
+        var data = grant.data;
+        data.approved_tasks = owned_tasks;
+        data.publication_digests = owned_digests;
         if (!data.current_workspace.eql(current) or current.eql(ns.workspace_id) or !data.original_workspace.eql(ns.workspace_id) or !std.meta.eql(data.current_boot, self.registry.bootNonce()) or !std.meta.eql(data.store_id, ns.store_id) or !std.meta.eql(data.store_root_id, self.store.root_id) or !std.meta.eql(data.namespace_digest, self.store.namespace_digest) or data.security_domain.id != ns.security_domain.id or !std.meta.eql(data.policy_digest, ns.policy_digest) or !std.meta.eql(self.approved_policy.digest, ns.policy_digest) or !data.exclusive_recovery or data.approved_tasks.len == 0 or data.approved_tasks.len > journal.max_entries or !approved(data, adapter.key.task_id)) return error.RecoveryRequired;
         try grant.validate(grant.context, data, ns);
         self.registry.validateWorkspace(current) catch return error.RecoveryRequired;
@@ -279,6 +289,205 @@ fn observe(io: Io, dir: Io.Dir, name: [:0]const u8, auth: *policy.Authorizer) E!
     hasher.final(&digest);
     return .{ .id = id, .hash = digest };
 }
+
+/// Production host continuity witness. The host keeps the discovered workspace
+/// identity, the private journal-state directory and, for each pending
+/// publication, the parent directory, temp file and original target open across
+/// writer death. `grant` issues a one-use continuity check; publications are
+/// attested only after it. A retained descriptor keeps its inode after unlink, so
+/// every publication check also requires each current name to resolve to a
+/// retained identity (temp: absent or the temp; target: absent, the original or
+/// the temp). Recovery still classifies the outcome from those names.
+pub const HostWitness = struct {
+    pub const max_publications = 16;
+    /// Bound on GrantData.approved_tasks copied into the witness at grant().
+    pub const max_grant_tasks = 16;
+    const name_capacity = 4097;
+    const Retained = struct {
+        parent: Io.Dir,
+        temp: Io.File,
+        original: ?Io.File,
+        parent_id: core.FileId,
+        temp_id: core.FileId,
+        old_id: ?core.FileId,
+        temp_name: [name_capacity]u8,
+        temp_name_len: usize,
+        leaf: [name_capacity]u8,
+        leaf_len: usize,
+        digest: core.Sha256,
+        fn tempName(self: *const Retained) [:0]const u8 {
+            return self.temp_name[0..self.temp_name_len :0];
+        }
+        fn leafName(self: *const Retained) [:0]const u8 {
+            return self.leaf[0..self.leaf_len :0];
+        }
+        fn check(self: *const Retained) E!void {
+            if (!sameId(handleId(self.parent.handle) catch return error.RecoveryRequired, self.parent_id)) return error.RecoveryRequired;
+            if (!sameId(handleId(self.temp.handle) catch return error.RecoveryRequired, self.temp_id)) return error.RecoveryRequired;
+            if (self.original) |file| if (!sameId(handleId(file.handle) catch return error.RecoveryRequired, self.old_id.?)) return error.RecoveryRequired;
+            const temp_now = policy.paths.statAt(self.parent.handle, self.tempName()) catch return error.RecoveryRequired;
+            if (temp_now) |entry| if (!sameEntry(entry, self.temp_id)) return error.RecoveryRequired;
+            const leaf_now = policy.paths.statAt(self.parent.handle, self.leafName()) catch return error.RecoveryRequired;
+            if (leaf_now) |entry| {
+                const original = if (self.old_id) |id| sameEntry(entry, id) else false;
+                if (!original and !sameEntry(entry, self.temp_id)) return error.RecoveryRequired;
+            }
+        }
+        fn close(self: *Retained, io: Io) void {
+            if (self.original) |file| file.close(io);
+            self.temp.close(io);
+            self.parent.close(io);
+        }
+    };
+
+    io: Io,
+    identity: *const workspace.identity.Identity,
+    state: Io.Dir,
+    retained: [max_publications]Retained = undefined,
+    count: usize = 0,
+    /// Set by grant(): the retained set is then fixed, so retention cannot widen what a grant authorizes.
+    granted: bool = false,
+    /// Digest of every GrantData field captured by grant(), including the contents of its slices.
+    /// Validation compares against it, so replacing or editing the approved tasks, attested
+    /// publications or any other field afterwards cannot widen what the grant authorizes.
+    grant_digest: core.Sha256 = undefined,
+    /// Witness-owned copies of the grant's authority slices. The returned grant references this
+    /// storage, so it stays valid after the caller's arrays are freed or reused; the witness must
+    /// outlive the grant.
+    grant_tasks: [max_grant_tasks]core.TaskId = undefined,
+    grant_digests: [max_publications]core.Sha256 = undefined,
+    used: bool = false,
+
+    /// Borrows `identity` and `state`; both must outlive the witness.
+    pub fn init(io: Io, identity: *const workspace.identity.Identity, state: Io.Dir) HostWitness {
+        return .{ .io = io, .identity = identity, .state = state };
+    }
+
+    pub fn deinit(self: *HostWitness) void {
+        for (self.retained[0..self.count]) |*r| r.close(self.io);
+        self.count = 0;
+    }
+
+    /// Retains the handles one PREPARED publication names. Takes ownership of
+    /// `parent` in every case; the caller resolves it without following links.
+    pub fn retainPublication(self: *HostWitness, parent: Io.Dir, p: core.PreparedRecord) E!void {
+        errdefer parent.close(self.io);
+        if (self.granted) return error.Busy;
+        const pubid = p.publication orelse return error.RecoveryRequired;
+        if (self.count == max_publications) return error.ResourceExhausted;
+        if (!std.meta.eql(pubid.root_id, self.identity.root_id)) return error.RecoveryRequired;
+        if (!sameId(handleId(parent.handle) catch return error.RecoveryRequired, pubid.parent_id)) return error.RecoveryRequired;
+        const leaf = std.fs.path.basename(p.path.bytes);
+        if (pubid.temp_name.len == 0 or pubid.temp_name.len >= name_capacity or leaf.len == 0 or leaf.len >= name_capacity) return error.RecoveryRequired;
+        var r: Retained = .{ .parent = parent, .temp = undefined, .original = null, .parent_id = pubid.parent_id, .temp_id = pubid.temp_id, .old_id = pubid.old_file_id, .temp_name = undefined, .temp_name_len = pubid.temp_name.len, .leaf = undefined, .leaf_len = leaf.len, .digest = try publicationDigest(p) };
+        @memcpy(r.temp_name[0..pubid.temp_name.len], pubid.temp_name);
+        r.temp_name[pubid.temp_name.len] = 0;
+        @memcpy(r.leaf[0..leaf.len], leaf);
+        r.leaf[leaf.len] = 0;
+        r.temp = try openObserved(self.io, parent, r.tempName(), pubid.temp_id);
+        errdefer r.temp.close(self.io);
+        if (pubid.old_file_id) |id| {
+            r.original = try openObserved(self.io, parent, r.leafName(), id);
+        } else if ((policy.paths.statAt(parent.handle, r.leafName()) catch return error.RecoveryRequired) != null) return error.RecoveryRequired;
+        self.retained[self.count] = r;
+        self.count += 1;
+    }
+
+    /// Closes and forgets the witness of a publication that reached a terminal
+    /// state, so `max_publications` bounds pending publications rather than
+    /// lifetime writes. Refused once recovery has started: the grant's checks may
+    /// still need every retained witness.
+    pub fn retirePublication(self: *HostWitness, p: core.PreparedRecord) E!void {
+        if (self.used) return error.Busy;
+        const digest = try publicationDigest(p);
+        for (self.retained[0..self.count], 0..) |*r, i| {
+            if (!std.meta.eql(r.digest, digest)) continue;
+            r.close(self.io);
+            self.count -= 1;
+            if (i != self.count) self.retained[i] = self.retained[self.count];
+            return;
+        }
+        return error.RecoveryRequired;
+    }
+
+    pub fn grant(self: *HostWitness, data: GrantData) E!ContinuityGrant {
+        // One grant per witness: the issued grant references this witness's authority storage and
+        // digest, so reissuing would silently replace what an earlier grant authorizes.
+        if (self.granted) return error.Busy;
+        if (data.approved_tasks.len > max_grant_tasks or data.publication_digests.len > max_publications) return error.ResourceExhausted;
+        @memcpy(self.grant_tasks[0..data.approved_tasks.len], data.approved_tasks);
+        @memcpy(self.grant_digests[0..data.publication_digests.len], data.publication_digests);
+        var owned = data;
+        owned.approved_tasks = self.grant_tasks[0..data.approved_tasks.len];
+        owned.publication_digests = self.grant_digests[0..data.publication_digests.len];
+        self.granted = true;
+        self.grant_digest = grantDigest(owned);
+        return .{ .data = owned, .context = self, .validate = validate, .validate_publication = validatePublication };
+    }
+
+    fn validate(context: ?*anyopaque, data: GrantData, ns: journal.Namespace) E!void {
+        const self: *HostWitness = @ptrCast(@alignCast(context.?));
+        if (self.used) return error.RecoveryRequired;
+        if (!self.granted or !std.meta.eql(grantDigest(data), self.grant_digest)) return error.RecoveryRequired;
+        const state = journal.metadata(self.state.handle, true) catch return error.RecoveryRequired;
+        if (!std.meta.eql(state.id, data.store_root_id)) return error.RecoveryRequired;
+        self.identity.validate(self.io) catch return error.RecoveryRequired;
+        if (!identityMatches(self.identity, ns)) return error.RecoveryRequired;
+        self.used = true;
+    }
+
+    fn validatePublication(context: ?*anyopaque, data: GrantData, p: core.PreparedRecord) E!void {
+        const self: *HostWitness = @ptrCast(@alignCast(context.?));
+        if (!self.used) return error.RecoveryRequired;
+        if (!std.meta.eql(grantDigest(data), self.grant_digest)) return error.RecoveryRequired;
+        const digest = try publicationDigest(p);
+        // A retained witness never attests a publication the protected grant did not list.
+        for (data.publication_digests) |attested| {
+            if (std.meta.eql(attested, digest)) break;
+        } else return error.RecoveryRequired;
+        for (self.retained[0..self.count]) |*r| {
+            if (std.meta.eql(r.digest, digest)) return r.check();
+        }
+        return error.RecoveryRequired;
+    }
+
+    /// Field-by-field encoding (no struct padding), with slice lengths before their contents.
+    fn grantDigest(data: GrantData) core.Sha256 {
+        var hasher = std.crypto.hash.sha2.Sha256.init(.{});
+        hasher.update("zcr-continuity-grant/1");
+        hasher.update(&data.store_id);
+        updateInt(&hasher, data.store_root_id.device);
+        updateInt(&hasher, data.store_root_id.inode);
+        hasher.update(&data.original_workspace.registry_uuid);
+        hasher.update(&data.original_workspace.incarnation);
+        hasher.update(&data.current_workspace.registry_uuid);
+        hasher.update(&data.current_workspace.incarnation);
+        hasher.update(&data.current_boot);
+        hasher.update(&data.namespace_digest);
+        updateInt(&hasher, data.security_domain.id);
+        hasher.update(&data.policy_digest);
+        updateInt(&hasher, data.approved_tasks.len);
+        for (data.approved_tasks) |task| hasher.update(&task.uuid);
+        hasher.update(&[_]u8{@intFromBool(data.exclusive_recovery)});
+        updateInt(&hasher, data.publication_digests.len);
+        for (data.publication_digests) |d| hasher.update(&d);
+        return hasher.finalResult();
+    }
+    fn updateInt(hasher: *std.crypto.hash.sha2.Sha256, value: u64) void {
+        var bytes: [8]u8 = undefined;
+        std.mem.writeInt(u64, &bytes, value, .little);
+        hasher.update(&bytes);
+    }
+    fn handleId(fd: std.posix.fd_t) policy.paths.StatError!policy.paths.Identity {
+        return (try policy.paths.statHandle(fd)).identity;
+    }
+    fn sameId(identity: policy.paths.Identity, id: core.FileId) bool {
+        return identity.device == id.device and identity.inode == id.inode;
+    }
+    fn sameEntry(entry: policy.paths.Entry, id: core.FileId) bool {
+        return entry.kind == .regular and sameId(entry.identity, id);
+    }
+};
 
 /// A digest binds a protected host attestation to every field of PREPARED. It
 /// authenticates nothing by itself and must never be sourced from disk grants.

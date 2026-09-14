@@ -1,0 +1,23 @@
+--- tests/t12_test.zig	2026-09-14 13:20:09
++++ /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/diag-wr005/src/tests/t12_test.zig	2026-09-14 15:40:20
+@@ -126,6 +126,7 @@
+     }
+     return ack;
+ }
++var diag_counter: usize = 0;
+ fn spawn(repo: *Repo) !std.process.Child {
+     var env: std.process.Environ.Map = .init(f.A);
+     defer env.deinit();
+@@ -136,8 +137,10 @@
+     const a = repo.arena.allocator();
+     const trace_name = try std.fmt.allocPrint(a, "child-{d}.stdout", .{repo.children});
+     f.transcript = try repo.tmp.dir.createFile(f.io, trace_name, .{});
+-    const err_name = try std.fmt.allocPrint(a, "child-{d}.stderr", .{repo.children});
+-    const stderr = try repo.tmp.dir.createFile(f.io, err_name, .{});
++    // Diagnostic copy only: keep each child's stderr outside the deleted temporary directory.
++    diag_counter += 1;
++    const err_name = try std.fmt.allocPrint(a, "/Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/diag-wr005/child-stderr/child-{d}-{d}.stderr", .{ std.c.getpid(), diag_counter });
++    const stderr = try std.Io.Dir.cwd().createFile(f.io, err_name, .{});
+     defer stderr.close(f.io);
+     return std.process.spawn(f.io, .{ .argv = &.{child_exe}, .environ_map = &env, .cwd = .{ .path = repo.state }, .stdin = .pipe, .stdout = .pipe, .stderr = .{ .file = stderr } });
+ }

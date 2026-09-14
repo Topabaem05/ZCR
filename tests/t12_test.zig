@@ -256,6 +256,10 @@ const LocalWitness = struct {
         self.used = true;
     }
 };
+/// Unwraps the grant a host witness issued.
+fn issued(g: anytype) !storage.recovery.ContinuityGrant {
+    return g;
+}
 fn grantFor(fixture: *f.Fixture, ns: storage.Namespace) !storage.recovery.GrantData {
     return .{ .store_id = ns.store_id, .store_root_id = fixture.store.root_id, .original_workspace = ns.workspace_id, .current_workspace = fixture.session.bound_workspace, .current_boot = fixture.registry.bootNonce(), .namespace_digest = try ns.digest(), .security_domain = ns.security_domain, .policy_digest = ns.policy_digest, .approved_tasks = &.{f.task.task_id}, .exclusive_recovery = true, .publication_digests = &.{} };
 }
@@ -1126,4 +1130,193 @@ test "WR-008 F2 failed tail preservation and complete uncertainty remain quarant
         try t.expectEqualSlices(u8, raw, try fresh.state.dir.readFileAlloc(f.io, &entry.name, repo.arena.allocator(), .limited(storage.operation_credit)));
         try repo.bytes(false, !abort);
     };
+}
+
+test "WR-008 host witness grants once and refuses a replaced temp name after unlink" {
+    var repo = try Repo.init(false);
+    defer repo.deinit();
+    const fixture = try f.Fixture.init(repo.root.canonical_path, repo.state, false, null);
+    defer fixture.deinit();
+    const p = try prepared(fixture);
+    const ns = fixture.store.options.namespace;
+    const attested = [_]core.Sha256{try storage.recovery.publicationDigest(p)};
+    var tasks = [_]core.TaskId{f.task.task_id};
+    var data = try grantFor(fixture, ns);
+    data.publication_digests = &attested;
+    data.approved_tasks = &tasks;
+    // The production host retains the root/Git/common identity, the private state
+    // directory and, per pending publication, the parent, temp and original handles.
+    var witness = storage.recovery.HostWitness.init(f.io, &repo.witness, repo.state_witness);
+    defer witness.deinit();
+    const parent = try std.Io.Dir.openDirAbsolute(f.io, repo.root.canonical_path, .{});
+    try witness.retainPublication(parent, p);
+    const grant = try issued(witness.grant(data));
+    // A witness issues one grant: a second issuance would overwrite the authority storage and
+    // digest the first grant references.
+    try t.expectError(error.Busy, issued(witness.grant(data)));
+    // Issuing the grant fixes the retained set: later retention would expand what it authorizes.
+    try t.expectError(error.Busy, witness.retainPublication(try std.Io.Dir.openDirAbsolute(f.io, repo.root.canonical_path, .{}), p));
+    // Every authority-bearing field is bound at issuance: editing the approved task list behind the
+    // grant's slice is refused before the one-use check is consumed, and restoring it validates again.
+    tasks[0].uuid[0] +%= 1;
+    try t.expectError(error.RecoveryRequired, grant.validate(grant.context, data, ns));
+    tasks[0].uuid[0] -%= 1;
+    const validate_publication = grant.validate_publication.?;
+    // A publication is never attested before the one-use continuity check.
+    try t.expectError(error.RecoveryRequired, validate_publication(grant.context, data, p));
+    try grant.validate(grant.context, data, ns);
+    try t.expectError(error.RecoveryRequired, grant.validate(grant.context, data, ns));
+    try validate_publication(grant.context, data, p);
+    // A retained publication outside the grant's attested digests is refused, even an empty set.
+    var unattested = data;
+    unattested.publication_digests = &.{};
+    try t.expectError(error.RecoveryRequired, validate_publication(grant.context, unattested, p));
+    // The attested set is bound when the grant is issued: a later, wider list is refused even
+    // though it still lists this publication.
+    var other_digest = attested[0];
+    other_digest[0] +%= 1;
+    const widened_list = [_]core.Sha256{ attested[0], other_digest };
+    var widened = data;
+    widened.publication_digests = &widened_list;
+    try t.expectError(error.RecoveryRequired, validate_publication(grant.context, widened, p));
+    var other = p;
+    other.generation += 1;
+    try t.expectError(error.RecoveryRequired, validate_publication(grant.context, data, other));
+    // The retained descriptor keeps its inode after unlink, so only the current
+    // name's identity shows that the temp file was replaced.
+    try repo.root.dir.deleteFile(f.io, temp_name);
+    try repo.root.dir.writeFile(f.io, .{ .sub_path = temp_name, .data = fixture.new });
+    try t.expectError(error.RecoveryRequired, validate_publication(grant.context, data, p));
+}
+
+test "WR-008 host witness accepts an applied publication and refuses a foreign target" {
+    var repo = try Repo.init(false);
+    defer repo.deinit();
+    const fixture = try f.Fixture.init(repo.root.canonical_path, repo.state, false, null);
+    defer fixture.deinit();
+    const p = try prepared(fixture);
+    const ns = fixture.store.options.namespace;
+    const attested = [_]core.Sha256{try storage.recovery.publicationDigest(p)};
+    var data = try grantFor(fixture, ns);
+    data.publication_digests = &attested;
+    var witness = storage.recovery.HostWitness.init(f.io, &repo.witness, repo.state_witness);
+    defer witness.deinit();
+    const parent = try std.Io.Dir.openDirAbsolute(f.io, repo.root.canonical_path, .{});
+    try witness.retainPublication(parent, p);
+    const grant = try issued(witness.grant(data));
+    try grant.validate(grant.context, data, ns);
+    // Publication renames the temp onto the target: the target name now resolves
+    // to the retained temp and the temp name is gone. Recovery must still see it.
+    try repo.root.dir.rename(temp_name, repo.root.dir, "file.txt", f.io);
+    try grant.validate_publication.?(grant.context, data, p);
+    // A file that is neither the retained original nor the temp is refused.
+    try repo.root.dir.deleteFile(f.io, "file.txt");
+    try repo.root.dir.writeFile(f.io, .{ .sub_path = "file.txt", .data = fixture.new });
+    try t.expectError(error.RecoveryRequired, grant.validate_publication.?(grant.context, data, p));
+}
+
+test "WR-008 host witness retires terminal publications so its limit bounds pending ones" {
+    var repo = try Repo.init(false);
+    defer repo.deinit();
+    const fixture = try f.Fixture.init(repo.root.canonical_path, repo.state, false, null);
+    defer fixture.deinit();
+    const p = try prepared(fixture);
+    const ns = fixture.store.options.namespace;
+    const attested = [_]core.Sha256{try storage.recovery.publicationDigest(p)};
+    var data = try grantFor(fixture, ns);
+    data.publication_digests = &attested;
+    var witness = storage.recovery.HostWitness.init(f.io, &repo.witness, repo.state_witness);
+    defer witness.deinit();
+    for (0..storage.recovery.HostWitness.max_publications) |_| {
+        try witness.retainPublication(try std.Io.Dir.openDirAbsolute(f.io, repo.root.canonical_path, .{}), p);
+    }
+    // The limit counts retained, not-yet-retired publications.
+    try t.expectError(error.ResourceExhausted, witness.retainPublication(try std.Io.Dir.openDirAbsolute(f.io, repo.root.canonical_path, .{}), p));
+    // A terminal publication is retired: its handles close and its slot is free again.
+    try witness.retirePublication(p);
+    try witness.retainPublication(try std.Io.Dir.openDirAbsolute(f.io, repo.root.canonical_path, .{}), p);
+    try t.expectError(error.ResourceExhausted, witness.retainPublication(try std.Io.Dir.openDirAbsolute(f.io, repo.root.canonical_path, .{}), p));
+    // Only a retained publication can be retired.
+    var other = p;
+    other.generation += 1;
+    try t.expectError(error.RecoveryRequired, witness.retirePublication(other));
+    // Once recovery has started, retained witnesses stay until deinit.
+    const grant = try issued(witness.grant(data));
+    try grant.validate(grant.context, data, ns);
+    try t.expectError(error.Busy, witness.retirePublication(p));
+    try grant.validate_publication.?(grant.context, data, p);
+}
+
+/// Delegates to LocalWitness, then edits the caller-owned approved task array after the continuity
+/// check passes, as another holder of that memory could while recovery performs identity I/O.
+const MutatingWitness = struct {
+    inner: LocalWitness,
+    tasks: *[1]core.TaskId,
+    fn validate(ctx: ?*anyopaque, data: storage.recovery.GrantData, ns: storage.Namespace) core.RecoverError!void {
+        const self: *MutatingWitness = @ptrCast(@alignCast(ctx.?));
+        try LocalWitness.validate(&self.inner, data, ns);
+        self.tasks[0].uuid[0] +%= 1;
+    }
+    fn publication(ctx: ?*anyopaque, data: storage.recovery.GrantData, p: core.PreparedRecord) core.RecoverError!void {
+        const self: *MutatingWitness = @ptrCast(@alignCast(ctx.?));
+        return LocalWitness.publication(&self.inner, data, p);
+    }
+};
+
+test "WR-008 recovery keeps the grant-time approved tasks when the caller edits them during validation" {
+    var repo = try Repo.init(false);
+    defer repo.deinit();
+    const old = try f.Fixture.init(repo.root.canonical_path, repo.state, false, null);
+    defer old.deinit();
+    const p = try prepared(old);
+    _ = try old.adapter.interface().prepare(p);
+    repo.publication = try PublicationWitness.acquire(&repo, p);
+    try old.root.dir.rename(temp_name, old.root.dir, "file.txt", f.io);
+    const fresh = try f.Fixture.init(repo.root.canonical_path, repo.state, false, old.store.options.namespace);
+    defer fresh.deinit();
+    fresh.adapter.expected_digest = p.op_digest;
+    var tasks = [_]core.TaskId{f.task.task_id};
+    var data = try grantFor(fresh, old.store.options.namespace);
+    data.approved_tasks = &tasks;
+    var witness: MutatingWitness = .{ .inner = .{ .repo = &repo }, .tasks = &tasks };
+    var recoverer = storage.recovery.Recoverer.init(fresh.root, &fresh.registry, &fresh.store, .{ .data = data, .context = &witness, .validate = MutatingWitness.validate, .validate_publication = MutatingWitness.publication }, f.approved);
+    // The caller's array no longer lists this task once validation returns; recovery must keep using
+    // the approved tasks it validated rather than reading the edited memory.
+    var result = try recoverer.recover(f.io, fresh.reserved.allocator(), fresh.session.bound_workspace, fresh.adapter.interface());
+    defer result.deinit();
+    try t.expect(!std.meta.eql(tasks[0], f.task.task_id));
+    try t.expectEqual(@as(u64, 0), result.value.uncertain);
+    const receipt = (try fresh.adapter.interface().lookup(fresh.adapter.key)).found;
+    try t.expect(receipt.applied and receipt.durable);
+}
+
+test "WR-008 host witness grant owns its authority data after the caller's storage is reused" {
+    var repo = try Repo.init(false);
+    defer repo.deinit();
+    const fixture = try f.Fixture.init(repo.root.canonical_path, repo.state, false, null);
+    defer fixture.deinit();
+    const p = try prepared(fixture);
+    const ns = fixture.store.options.namespace;
+    var scratch_tasks = [_]core.TaskId{f.task.task_id};
+    var scratch_digests = [_]core.Sha256{try storage.recovery.publicationDigest(p)};
+    var data = try grantFor(fixture, ns);
+    data.approved_tasks = &scratch_tasks;
+    data.publication_digests = &scratch_digests;
+    var witness = storage.recovery.HostWitness.init(f.io, &repo.witness, repo.state_witness);
+    defer witness.deinit();
+    try witness.retainPublication(try std.Io.Dir.openDirAbsolute(f.io, repo.root.canonical_path, .{}), p);
+    const grant = try issued(witness.grant(data));
+    // The caller's temporary storage is reused after issuance; the retained grant must not read it.
+    @memset(std.mem.sliceAsBytes(&scratch_tasks), 0xaa);
+    @memset(std.mem.sliceAsBytes(&scratch_digests), 0xbb);
+    try t.expect(std.meta.eql(grant.data.approved_tasks[0], f.task.task_id));
+    try grant.validate(grant.context, grant.data, ns);
+    try grant.validate_publication.?(grant.context, grant.data, p);
+    // Authority lists beyond the witness's bounds are refused at issuance.
+    var other = storage.recovery.HostWitness.init(f.io, &repo.witness, repo.state_witness);
+    defer other.deinit();
+    var many = [_]core.TaskId{f.task.task_id} ** (storage.recovery.HostWitness.max_publications + 1);
+    var wide = data;
+    wide.approved_tasks = &many;
+    try t.expectError(error.ResourceExhausted, issued(other.grant(wide)));
 }

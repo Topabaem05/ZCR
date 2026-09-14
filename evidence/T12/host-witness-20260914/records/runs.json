@@ -1,0 +1,45 @@
+{
+  "schema": "zcr-t12-runs/1",
+  "verify": "zcr-dev-evidence verify --worktree <clean worktree at source_commit> --evidence <record>",
+  "note": "exit codes are recorded as observed; the loaded run started at load average about 220, the others with no other zig process and load below the CPU count, and other applications could load the host during a run",
+  "runs": [
+    {
+      "label": "quiet-write-debug-t12",
+      "record": "records/quiet-write-debug-t12.json",
+      "record_sha256": "92d7523c97f0b1aa68340030e5668c38ceb7afebea9fa9d01c3c01f3f9959103",
+      "source_commit": "a17020aeae3d44c4e5ebf4d666523dcfba5e7df2",
+      "source_tree": "cfd20d8c10db667a7ae28f0731071597fe2e2906",
+      "worktree_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/t12-host-witness",
+      "workspace_id": "fs:16777232:649526621:16777232:649526619:16777232:647053195",
+      "command": "zig build test -Dtest-group=write -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-quiet-write-debug --summary all",
+      "exit_code": 0,
+      "binary_sha256": "f2221e2d3294a5cb6837055e2803dcc751f28ebc4f51641ceb484f1edc0f3648",
+      "source_config_sha256": "821abc5ce38d4cafed1fc640e25aa7a87be013f2a0efb5f0e5ed574be5aaa632",
+      "corpus_sha256": "d372d9293ae41cbe3ab6ed859877debea0eaf865bbbbcd7f7077df22ebd3bee0",
+      "log": "logs/quiet-write-debug.log",
+      "log_sha256": "8e7d5533e61ed0af26bb010fa9ca159eccaec10b9b239eb73355c2762945c557",
+      "verify_log": "logs/verify-quiet-write-debug-t12.log",
+      "summary": "11/11 steps succeeded; 71/71 tests passed; 0 leaks",
+      "status": "PASS"
+    },
+    {
+      "label": "quiet-write-releasesafe-t12",
+      "record": "records/quiet-write-releasesafe-t12.json",
+      "record_sha256": "35490f7673ebbe2ebbcbd5f89c5795af5fa08e658f41d96a0831638f36ebfd6b",
+      "source_commit": "a17020aeae3d44c4e5ebf4d666523dcfba5e7df2",
+      "source_tree": "cfd20d8c10db667a7ae28f0731071597fe2e2906",
+      "worktree_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/t12-host-witness",
+      "workspace_id": "fs:16777232:649526621:16777232:649526619:16777232:647053195",
+      "command": "zig build test -Dtest-group=write -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix $STATE/out-quiet-write-releasesafe --summary all",
+      "exit_code": 0,
+      "binary_sha256": "8997f219ea060c7bea40019f6a76f19063235418fbd6140e270d1b9fb362c825",
+      "source_config_sha256": "821abc5ce38d4cafed1fc640e25aa7a87be013f2a0efb5f0e5ed574be5aaa632",
+      "corpus_sha256": "d372d9293ae41cbe3ab6ed859877debea0eaf865bbbbcd7f7077df22ebd3bee0",
+      "log": "logs/quiet-write-releasesafe.log",
+      "log_sha256": "db694e4c02edfeede415389a1fb1deae8d5403c3e202a4948928438ba70b61a8",
+      "verify_log": "logs/verify-quiet-write-releasesafe-t12.log",
+      "summary": "11/11 steps succeeded; 71/71 tests passed; 0 leaks",
+      "status": "PASS"
+    }
+  ]
+}

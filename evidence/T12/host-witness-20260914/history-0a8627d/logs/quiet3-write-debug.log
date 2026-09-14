@@ -1,0 +1,42 @@
+test
++- run test T12-test w
+T12 C01 patch pid=6665 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C02 patch pid=6756 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C03 patch pid=6855 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C04 patch pid=6949 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=1
+T12 C05 patch pid=7062 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C06 patch pid=7208 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C07 patch pid=7331 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C08 patch pid=7464 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C09 patch pid=7568 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C10 patch pid=7729 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C01 create pid=7861 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C02 create pid=7976 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C03 create pid=8073 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C04 create pid=8139 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=1
+T12 C05 create pid=8273 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C06 create pid=8325 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C07 create pid=8376 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C08 create pid=8431 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C09 create pid=8485 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C10 create pid=8553 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 recovery append SIGKILL verified
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/zig-local-cache/o/de727d8affd43a83b354d75fadf9a441/T12-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/zig-local-cache --seed=0xb31c167c --listen=-
+
+Build Summary: 11/11 steps succeeded; 70/70 tests passed
+test success
++- install T11-test success
+|  +- compile test T11-test Debug native cached 219ms MaxRSS:31M
++- run test T11-test 43 pass (43 total) 1m MaxRSS:12M
+|  +- compile test T11-test Debug native (reused)
++- install T12-child success
+|  +- compile test T12-child Debug native cached 219ms MaxRSS:31M
+|     +- options cached
++- install T12-test success
+|  +- compile test T12-test Debug native cached 180ms MaxRSS:31M
+|     +- options (reused)
+|     +- options cached
+|        +- compile test T12-child Debug native (+1 more reused dependencies)
++- run test T12-test 27 pass (27 total) 3m MaxRSS:13M
+   +- compile test T12-test Debug native (+2 more reused dependencies)
+

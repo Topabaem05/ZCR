@@ -1,0 +1,542 @@
+test
++- run test T11-test 41 pass, 2 fail (43 total); 8 leaks
+error: 't11_test.test.WR-007 ambiguous temp cleanup quarantines before and after guard admission' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/process.zig:531:21: 0x1044dc9b3 in run (T11-test)
+               else => |e| return e,
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/src/workspace/identity.zig:103:20: 0x1044d9233 in output (T11-test)
+           }) catch |err| return switch (err) {
+                          ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/src/workspace/identity.zig:147:34: 0x1044d713b in discoverWith (T11-test)
+           const common_path = try line(try output(temp, io, exe, top, &.{ "rev-parse", "--path-format=absolute", "--git-common-dir" }, options.timeout_ms));
+                                        ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/src/workspace/registry.zig:227:30: 0x1044d49b7 in registerWorkspace (T11-test)
+                   var discovered = try identity.discoverWith(self.allocator, io, self.git_executable, root, .{ .timeout_ms = self.git_timeout_ms });
+                                    ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t11_test.zig:157:20: 0x1044ab52f in init (T11-test)
+               const id = try self.registry.registerWorkspace(io, self.root, approved);
+                          ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t11_test.zig:381:19: 0x1045158df in test.WR-007 ambiguous temp cleanup quarantines before and after guard admission (T11-test)
+               const f = try Fixture.init("base\n");
+                         ^
+       [DebugAllocator] (err): memory address 0x109320000 leaked: 
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x1043a1623 in rawAlloc (T11-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:286:40: 0x1043a14cf in allocWithSizeAndAlignment__anon_8301 (T11-test)
+           return self.allocBytesWithAlignment(alignment, byte_count, return_address);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:274:89: 0x1043a11a3 in allocAdvancedWithRetAddr (T11-test)
+           const ptr: [*]align(a.toByteUnits()) T = @ptrCast(try self.allocWithSizeAndAlignment(@sizeOf(T), a, n, return_address));
+                                                                                               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:472:40: 0x104440c7b in dupeSentinel__anon_19304 (T11-test)
+           const new_buf = try allocator.alloc(T, m.len + 1);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:462:34: 0x104440af3 in dupeZ__anon_18438 (T11-test)
+           return allocator.dupeSentinel(T, m, 0);
+                                        ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/Io/Dir.zig:947:27: 0x1044e4e57 in realPathFileAlloc (T11-test)
+           return allocator.dupeZ(u8, buffer[0..n]);
+                                 ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t11_test.zig:144:56: 0x1044aa4cf in init (T11-test)
+               const path = try self.tmp.dir.realPathFileAlloc(io, ".", a);
+                                                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t11_test.zig:381:35: 0x104515743 in test.WR-007 ambiguous temp cleanup quarantines before and after guard admission (T11-test)
+               const f = try Fixture.init("base\n");
+                                         ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x10448712f in mainServer (T11-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x1044877df in main (T11-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       (additional stack frames may have been skipped...)
+       
+       [DebugAllocator] (err): memory address 0x109340000 leaked: 
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x1043a1623 in rawAlloc (T11-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:286:40: 0x1043a14cf in allocWithSizeAndAlignment__anon_8301 (T11-test)
+           return self.allocBytesWithAlignment(alignment, byte_count, return_address);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:274:89: 0x1043a11a3 in allocAdvancedWithRetAddr (T11-test)
+           const ptr: [*]align(a.toByteUnits()) T = @ptrCast(try self.allocWithSizeAndAlignment(@sizeOf(T), a, n, return_address));
+                                                                                               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/Io/File/MultiReader.zig:262:34: 0x1044dec93 in rebaseGrowing (T11-test)
+               const new = try gpa.alloc(u8, adjusted_capacity);
+                                        ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/Io/File/MultiReader.zig:87:22: 0x1044df097 in init (T11-test)
+               rebaseGrowing(mr, context, 1) catch |err| {
+                            ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/process.zig:514:22: 0x1044dc6b3 in run (T11-test)
+           multi_reader.init(gpa, io, multi_reader_buffer.toStreams(), &.{ child.stdout.?, child.stderr.? });
+                            ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t11_test.zig:153:46: 0x1044aaef3 in init (T11-test)
+               const committed = try std.process.run(a, io, .{ .argv = &.{ "/usr/bin/git", "-C", path, "-c", "user.name=T11", "-c", "user.email=t11@example.invalid", "commit", "-q", "-m", "fixture" }, .environ_map = &env });
+                                                    ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t11_test.zig:381:35: 0x104515743 in test.WR-007 ambiguous temp cleanup quarantines before and after guard admission (T11-test)
+               const f = try Fixture.init("base\n");
+                                         ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x10448712f in mainServer (T11-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x1044877df in main (T11-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       (additional stack frames may have been skipped...)
+       
+       [DebugAllocator] (err): memory address 0x109360000 leaked: 
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x1043a2ecf in rawAlloc (T11-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x1043a2ecf in rawAlloc (T11-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x1043ae30f in rawAlloc (T11-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:286:40: 0x1043b7bd7 in allocWithSizeAndAlignment__anon_9797 (T11-test)
+           return self.allocBytesWithAlignment(alignment, byte_count, return_address);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:274:89: 0x1043b79f3 in allocAdvancedWithRetAddr (T11-test)
+           const ptr: [*]align(a.toByteUnits()) T = @ptrCast(try self.allocWithSizeAndAlignment(@sizeOf(T), a, n, return_address));
+                                                                                               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/multi_array_list.zig:542:51: 0x1044e3e7f in setCapacity (T11-test)
+                   const new_bytes = try gpa.alignedAlloc(u8, sizes.big_align, capacityInBytes(new_capacity));
+                                                         ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/multi_array_list.zig:516:36: 0x1044e3d43 in ensureTotalCapacity (T11-test)
+                   return self.setCapacity(gpa, growCapacity(new_capacity));
+                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/array_hash_map.zig:425:49: 0x1044e284f in ensureTotalCapacityContext (T11-test)
+                   try self.entries.ensureTotalCapacity(gpa, new_capacity);
+                                                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/array_hash_map.zig:320:44: 0x1044e025f in getOrPutContextAdapted__anon_42260 (T11-test)
+                   self.ensureTotalCapacityContext(gpa, self.entries.len + 1, ctx) catch |err| {
+                                                  ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/array_hash_map.zig:308:56: 0x1044dfee3 in getOrPutContext (T11-test)
+                   const gop = try self.getOrPutContextAdapted(gpa, key, ctx, ctx);
+                                                              ^
+       (additional stack frames may have been skipped...)
+       
+       [DebugAllocator] (err): memory address 0x109380000 leaked: 
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x1043a2ecf in rawAlloc (T11-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x1043a2ecf in rawAlloc (T11-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x1043a1623 in rawAlloc (T11-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:286:40: 0x1043a14cf in allocWithSizeAndAlignment__anon_8301 (T11-test)
+           return self.allocBytesWithAlignment(alignment, byte_count, return_address);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:274:89: 0x1043a11a3 in allocAdvancedWithRetAddr (T11-test)
+           const ptr: [*]align(a.toByteUnits()) T = @ptrCast(try self.allocWithSizeAndAlignment(@sizeOf(T), a, n, return_address));
+                                                                                               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/Io/File/MultiReader.zig:262:34: 0x1044dec93 in rebaseGrowing (T11-test)
+               const new = try gpa.alloc(u8, adjusted_capacity);
+                                        ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/Io/File/MultiReader.zig:87:22: 0x1044df097 in init (T11-test)
+               rebaseGrowing(mr, context, 1) catch |err| {
+                            ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/process.zig:514:22: 0x1044dc6b3 in run (T11-test)
+           multi_reader.init(gpa, io, multi_reader_buffer.toStreams(), &.{ child.stdout.?, child.stderr.? });
+                            ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/src/workspace/identity.zig:97:30: 0x1044d90db in output (T11-test)
+           const r = std.process.run(a, io, .{
+                                    ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/src/workspace/identity.zig:146:41: 0x1044d6e63 in discoverWith (T11-test)
+           const git_path = try line(try output(temp, io, exe, top, &.{ "rev-parse", "--absolute-git-dir" }, options.timeout_ms));
+                                               ^
+       (additional stack frames may have been skipped...)
+error: 't11_test.test.WR-007 ambiguous prepare errors preserve exact pending temp and quarantine' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/process.zig:531:21: 0x1044dc9b3 in run (T11-test)
+               else => |e| return e,
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/src/workspace/identity.zig:103:20: 0x1044d9233 in output (T11-test)
+           }) catch |err| return switch (err) {
+                          ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/src/workspace/identity.zig:146:31: 0x1044d6f8f in discoverWith (T11-test)
+           const git_path = try line(try output(temp, io, exe, top, &.{ "rev-parse", "--absolute-git-dir" }, options.timeout_ms));
+                                     ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/src/workspace/registry.zig:227:30: 0x1044d49b7 in registerWorkspace (T11-test)
+                   var discovered = try identity.discoverWith(self.allocator, io, self.git_executable, root, .{ .timeout_ms = self.git_timeout_ms });
+                                    ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t11_test.zig:157:20: 0x1044ab52f in init (T11-test)
+               const id = try self.registry.registerWorkspace(io, self.root, approved);
+                          ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t11_test.zig:1094:19: 0x1044f1e33 in test.WR-007 ambiguous prepare errors preserve exact pending temp and quarantine (T11-test)
+               const f = try Fixture.init("base\n");
+                         ^
+       [DebugAllocator] (err): memory address 0x10b460000 leaked: 
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x1043a1623 in rawAlloc (T11-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:286:40: 0x1043a14cf in allocWithSizeAndAlignment__anon_8301 (T11-test)
+           return self.allocBytesWithAlignment(alignment, byte_count, return_address);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:274:89: 0x1043a11a3 in allocAdvancedWithRetAddr (T11-test)
+           const ptr: [*]align(a.toByteUnits()) T = @ptrCast(try self.allocWithSizeAndAlignment(@sizeOf(T), a, n, return_address));
+                                                                                               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:472:40: 0x104440c7b in dupeSentinel__anon_19304 (T11-test)
+           const new_buf = try allocator.alloc(T, m.len + 1);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:462:34: 0x104440af3 in dupeZ__anon_18438 (T11-test)
+           return allocator.dupeSentinel(T, m, 0);
+                                        ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/Io/Dir.zig:947:27: 0x1044e4e57 in realPathFileAlloc (T11-test)
+           return allocator.dupeZ(u8, buffer[0..n]);
+                                 ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t11_test.zig:144:56: 0x1044aa4cf in init (T11-test)
+               const path = try self.tmp.dir.realPathFileAlloc(io, ".", a);
+                                                              ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t11_test.zig:1094:35: 0x1044f1cf7 in test.WR-007 ambiguous prepare errors preserve exact pending temp and quarantine (T11-test)
+               const f = try Fixture.init("base\n");
+                                         ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x10448712f in mainServer (T11-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x1044877df in main (T11-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       (additional stack frames may have been skipped...)
+       
+       [DebugAllocator] (err): memory address 0x10b440000 leaked: 
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x1043a1623 in rawAlloc (T11-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:286:40: 0x1043a14cf in allocWithSizeAndAlignment__anon_8301 (T11-test)
+           return self.allocBytesWithAlignment(alignment, byte_count, return_address);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:274:89: 0x1043a11a3 in allocAdvancedWithRetAddr (T11-test)
+           const ptr: [*]align(a.toByteUnits()) T = @ptrCast(try self.allocWithSizeAndAlignment(@sizeOf(T), a, n, return_address));
+                                                                                               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/Io/File/MultiReader.zig:262:34: 0x1044dec93 in rebaseGrowing (T11-test)
+               const new = try gpa.alloc(u8, adjusted_capacity);
+                                        ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/Io/File/MultiReader.zig:87:22: 0x1044df097 in init (T11-test)
+               rebaseGrowing(mr, context, 1) catch |err| {
+                            ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/process.zig:514:22: 0x1044dc6b3 in run (T11-test)
+           multi_reader.init(gpa, io, multi_reader_buffer.toStreams(), &.{ child.stdout.?, child.stderr.? });
+                            ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t11_test.zig:153:46: 0x1044aaef3 in init (T11-test)
+               const committed = try std.process.run(a, io, .{ .argv = &.{ "/usr/bin/git", "-C", path, "-c", "user.name=T11", "-c", "user.email=t11@example.invalid", "commit", "-q", "-m", "fixture" }, .environ_map = &env });
+                                                    ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t11_test.zig:1094:35: 0x1044f1cf7 in test.WR-007 ambiguous prepare errors preserve exact pending temp and quarantine (T11-test)
+               const f = try Fixture.init("base\n");
+                                         ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x10448712f in mainServer (T11-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x1044877df in main (T11-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       (additional stack frames may have been skipped...)
+       
+       [DebugAllocator] (err): memory address 0x10b400000 leaked: 
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x1043a2ecf in rawAlloc (T11-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x1043a2ecf in rawAlloc (T11-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x1043ae30f in rawAlloc (T11-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:286:40: 0x1043b7bd7 in allocWithSizeAndAlignment__anon_9797 (T11-test)
+           return self.allocBytesWithAlignment(alignment, byte_count, return_address);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:274:89: 0x1043b79f3 in allocAdvancedWithRetAddr (T11-test)
+           const ptr: [*]align(a.toByteUnits()) T = @ptrCast(try self.allocWithSizeAndAlignment(@sizeOf(T), a, n, return_address));
+                                                                                               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/multi_array_list.zig:542:51: 0x1044e3e7f in setCapacity (T11-test)
+                   const new_bytes = try gpa.alignedAlloc(u8, sizes.big_align, capacityInBytes(new_capacity));
+                                                         ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/multi_array_list.zig:516:36: 0x1044e3d43 in ensureTotalCapacity (T11-test)
+                   return self.setCapacity(gpa, growCapacity(new_capacity));
+                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/array_hash_map.zig:425:49: 0x1044e284f in ensureTotalCapacityContext (T11-test)
+                   try self.entries.ensureTotalCapacity(gpa, new_capacity);
+                                                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/array_hash_map.zig:320:44: 0x1044e025f in getOrPutContextAdapted__anon_42260 (T11-test)
+                   self.ensureTotalCapacityContext(gpa, self.entries.len + 1, ctx) catch |err| {
+                                                  ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/array_hash_map.zig:308:56: 0x1044dfee3 in getOrPutContext (T11-test)
+                   const gop = try self.getOrPutContextAdapted(gpa, key, ctx, ctx);
+                                                              ^
+       (additional stack frames may have been skipped...)
+       
+       [DebugAllocator] (err): memory address 0x10b4a0000 leaked: 
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x1043a2ecf in rawAlloc (T11-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x1043a2ecf in rawAlloc (T11-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x1043a1623 in rawAlloc (T11-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:286:40: 0x1043a14cf in allocWithSizeAndAlignment__anon_8301 (T11-test)
+           return self.allocBytesWithAlignment(alignment, byte_count, return_address);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:274:89: 0x1043a11a3 in allocAdvancedWithRetAddr (T11-test)
+           const ptr: [*]align(a.toByteUnits()) T = @ptrCast(try self.allocWithSizeAndAlignment(@sizeOf(T), a, n, return_address));
+                                                                                               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/Io/File/MultiReader.zig:262:34: 0x1044dec93 in rebaseGrowing (T11-test)
+               const new = try gpa.alloc(u8, adjusted_capacity);
+                                        ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/Io/File/MultiReader.zig:87:22: 0x1044df097 in init (T11-test)
+               rebaseGrowing(mr, context, 1) catch |err| {
+                            ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/process.zig:514:22: 0x1044dc6b3 in run (T11-test)
+           multi_reader.init(gpa, io, multi_reader_buffer.toStreams(), &.{ child.stdout.?, child.stderr.? });
+                            ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/src/workspace/identity.zig:97:30: 0x1044d90db in output (T11-test)
+           const r = std.process.run(a, io, .{
+                                    ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/src/workspace/identity.zig:146:41: 0x1044d6e63 in discoverWith (T11-test)
+           const git_path = try line(try output(temp, io, exe, top, &.{ "rev-parse", "--absolute-git-dir" }, options.timeout_ms));
+                                               ^
+       (additional stack frames may have been skipped...)
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/zig-local-cache/o/e7d74fc56b0bb1fade8374e4bdc1cab7/T11-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/zig-local-cache --seed=0x9bf32337 --listen=-
+
+test
++- run test T12-test 23 pass, 4 fail (27 total); 4 leaks
+error: 't12_test.test.WR-005 ten real SIGKILL writer points each patch create and fresh recovery twice' failed:
+       T12 C01 patch pid=73059 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+       T12 C02 patch pid=73194 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+       T12 C03 patch pid=73305 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+       T12 C04 patch pid=73412 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=1
+       T12 C05 patch pid=73509 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+       T12 C06 patch pid=73613 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+       T12 C07 patch pid=73724 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+       T12 C08 patch pid=73875 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+       T12 C09 patch pid=73972 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/process.zig:531:21: 0x1027b0d0b in run (T12-test)
+               else => |e| return e,
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/src/workspace/identity.zig:103:20: 0x1027ad247 in output (T12-test)
+           }) catch |err| return switch (err) {
+                          ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/src/workspace/identity.zig:147:34: 0x1027ab14f in discoverWith (T12-test)
+           const common_path = try line(try output(temp, io, exe, top, &.{ "rev-parse", "--path-format=absolute", "--git-common-dir" }, options.timeout_ms));
+                                        ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/src/workspace/identity.zig:131:5: 0x1027ae76f in discover (T12-test)
+           return discoverWith(a, io, exe, trusted, .{});
+           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t12_test.zig:31:198: 0x10274b46b in init (T12-test)
+               return .{ .tmp = tmp, .arena = arena, .root = root, .state = state, .state_witness = try std.Io.Dir.openDirAbsolute(f.io, state, .{ .iterate = true, .follow_symlinks = false }), .witness = try f.workspace.identity.discover(f.A, f.io, "/usr/bin/git", root) };
+                                                                                                                                                                                                            ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t12_test.zig:177:20: 0x1028720d7 in test.WR-005 ten real SIGKILL writer points each patch create and fresh recovery twice (T12-test)
+               var repo = try Repo.init(create);
+                          ^
+       [DebugAllocator] (err): memory address 0x108440000 leaked: 
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x102641623 in rawAlloc (T12-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:286:40: 0x1026414cf in allocWithSizeAndAlignment__anon_8301 (T12-test)
+           return self.allocBytesWithAlignment(alignment, byte_count, return_address);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:274:89: 0x1026411a3 in allocAdvancedWithRetAddr (T12-test)
+           const ptr: [*]align(a.toByteUnits()) T = @ptrCast(try self.allocWithSizeAndAlignment(@sizeOf(T), a, n, return_address));
+                                                                                               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:472:40: 0x1026e0c7b in dupeSentinel__anon_19304 (T12-test)
+           const new_buf = try allocator.alloc(T, m.len + 1);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:462:34: 0x1026e0af3 in dupeZ__anon_18438 (T12-test)
+           return allocator.dupeSentinel(T, m, 0);
+                                        ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/Io/Dir.zig:947:27: 0x1027ba3b7 in realPathFileAlloc (T12-test)
+           return allocator.dupeZ(u8, buffer[0..n]);
+                                 ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t12_test.zig:23:51: 0x10274aafb in init (T12-test)
+               const path = try tmp.dir.realPathFileAlloc(f.io, "repo", a);
+                                                         ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t12_test.zig:177:33: 0x10287201b in test.WR-005 ten real SIGKILL writer points each patch create and fresh recovery twice (T12-test)
+               var repo = try Repo.init(create);
+                                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x10272712f in mainServer (T12-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x1027277df in main (T12-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       (additional stack frames may have been skipped...)
+       
+       [DebugAllocator] (err): memory address 0x108420000 leaked: 
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x102641623 in rawAlloc (T12-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:286:40: 0x1026414cf in allocWithSizeAndAlignment__anon_8301 (T12-test)
+           return self.allocBytesWithAlignment(alignment, byte_count, return_address);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:274:89: 0x1026411a3 in allocAdvancedWithRetAddr (T12-test)
+           const ptr: [*]align(a.toByteUnits()) T = @ptrCast(try self.allocWithSizeAndAlignment(@sizeOf(T), a, n, return_address));
+                                                                                               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:454:40: 0x10264388b in dupe__anon_8256 (T12-test)
+           const new_buf = try allocator.alloc(T, m.len);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/process/Environ.zig:268:48: 0x1027b3f33 in put (T12-test)
+                   get_or_put.key_ptr.* = try gpa.dupe(u8, key);
+                                                      ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t12_fixtures.zig:71:16: 0x10274a3cf in git (T12-test)
+           try env.put("GIT_CONFIG_NOSYSTEM", "1");
+                      ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t12_test.zig:25:18: 0x10274ac93 in init (T12-test)
+               try f.git(a, path, &.{ "init", "-q", "-b", "main" });
+                        ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t12_test.zig:177:33: 0x10287201b in test.WR-005 ten real SIGKILL writer points each patch create and fresh recovery twice (T12-test)
+               var repo = try Repo.init(create);
+                                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x10272712f in mainServer (T12-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x1027277df in main (T12-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       (additional stack frames may have been skipped...)
+       
+       [DebugAllocator] (err): memory address 0x1083e0000 leaked: 
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x102641623 in rawAlloc (T12-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:286:40: 0x1026414cf in allocWithSizeAndAlignment__anon_8301 (T12-test)
+           return self.allocBytesWithAlignment(alignment, byte_count, return_address);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:274:89: 0x1026411a3 in allocAdvancedWithRetAddr (T12-test)
+           const ptr: [*]align(a.toByteUnits()) T = @ptrCast(try self.allocWithSizeAndAlignment(@sizeOf(T), a, n, return_address));
+                                                                                               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/Io/File/MultiReader.zig:262:34: 0x1027b2feb in rebaseGrowing (T12-test)
+               const new = try gpa.alloc(u8, adjusted_capacity);
+                                        ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/Io/File/MultiReader.zig:87:22: 0x1027b33ef in init (T12-test)
+               rebaseGrowing(mr, context, 1) catch |err| {
+                            ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/process.zig:514:22: 0x1027b0a0b in run (T12-test)
+           multi_reader.init(gpa, io, multi_reader_buffer.toStreams(), &.{ child.stdout.?, child.stderr.? });
+                            ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t12_fixtures.zig:72:39: 0x10274a50f in git (T12-test)
+           const result = try std.process.run(a, io, .{ .argv = argv.items, .environ_map = &env });
+                                             ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t12_test.zig:25:18: 0x10274ac93 in init (T12-test)
+               try f.git(a, path, &.{ "init", "-q", "-b", "main" });
+                        ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t12_test.zig:177:33: 0x10287201b in test.WR-005 ten real SIGKILL writer points each patch create and fresh recovery twice (T12-test)
+               var repo = try Repo.init(create);
+                                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x10272712f in mainServer (T12-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       (additional stack frames may have been skipped...)
+       
+       [DebugAllocator] (err): memory address 0x1082bc000 leaked: 
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x102641623 in rawAlloc (T12-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:286:40: 0x1026414cf in allocWithSizeAndAlignment__anon_8301 (T12-test)
+           return self.allocBytesWithAlignment(alignment, byte_count, return_address);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:274:89: 0x1026411a3 in allocAdvancedWithRetAddr (T12-test)
+           const ptr: [*]align(a.toByteUnits()) T = @ptrCast(try self.allocWithSizeAndAlignment(@sizeOf(T), a, n, return_address));
+                                                                                               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t12_fixtures.zig:16:30: 0x10274a7db in content (T12-test)
+           const bytes = try a.alloc(u8, size);
+                                    ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t12_test.zig:28:99: 0x10274af5f in init (T12-test)
+               if (!create) try root.dir.writeFile(f.io, .{ .sub_path = "file.txt", .data = try f.content(a, false) });
+                                                                                                         ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t12_test.zig:177:33: 0x10287201b in test.WR-005 ten real SIGKILL writer points each patch create and fresh recovery twice (T12-test)
+               var repo = try Repo.init(create);
+                                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x10272712f in mainServer (T12-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x1027277df in main (T12-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/start.zig:699:88: 0x1027255a3 in callMain (T12-test)
+           if (fn_info.params[0].type.? == std.process.Init.Minimal) return wrapMain(root.main(.{
+                                                                                              ^
+       ???:?:?: 0x180a244e3 in start (/usr/lib/dyld)
+       (additional stack frames may have been skipped...)
+error: 't12_test.test.WR-008 malformed complete journals never decode as absent or success' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/process.zig:531:21: 0x1027b0d0b in run (T12-test)
+               else => |e| return e,
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/src/workspace/identity.zig:103:20: 0x1027ad247 in output (T12-test)
+           }) catch |err| return switch (err) {
+                          ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/src/workspace/identity.zig:147:34: 0x1027ab14f in discoverWith (T12-test)
+           const common_path = try line(try output(temp, io, exe, top, &.{ "rev-parse", "--path-format=absolute", "--git-common-dir" }, options.timeout_ms));
+                                        ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/src/workspace/identity.zig:131:5: 0x1027ae76f in discover (T12-test)
+           return discoverWith(a, io, exe, trusted, .{});
+           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t12_fixtures.zig:115:25: 0x10274c4bb in init (T12-test)
+               self.identity = try workspace.identity.discover(a, io, "/usr/bin/git", self.root);
+                               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t12_test.zig:401:25: 0x10286429f in test.WR-008 malformed complete journals never decode as absent or success (T12-test)
+               const fixture = try f.Fixture.init(repo.root.canonical_path, repo.state, false, null);
+                               ^
+error: 't12_test.test.WR-007 real persistent failures atomically block queued filesystem publication' failed:
+       T12 recovery append SIGKILL verified
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/process.zig:531:21: 0x1027b0d0b in run (T12-test)
+               else => |e| return e,
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/src/workspace/identity.zig:103:20: 0x1027ad247 in output (T12-test)
+           }) catch |err| return switch (err) {
+                          ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/src/workspace/identity.zig:147:34: 0x1027ab14f in discoverWith (T12-test)
+           const common_path = try line(try output(temp, io, exe, top, &.{ "rev-parse", "--path-format=absolute", "--git-common-dir" }, options.timeout_ms));
+                                        ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/src/workspace/registry.zig:227:30: 0x1027a8e9f in registerWorkspace (T12-test)
+                   var discovered = try identity.discoverWith(self.allocator, io, self.git_executable, root, .{ .timeout_ms = self.git_timeout_ms });
+                                    ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t12_fixtures.zig:111:20: 0x10274bf7b in init (T12-test)
+               const id = try self.registry.registerWorkspace(io, self.root, approved);
+                          ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t12_test.zig:665:25: 0x10285aa43 in test.WR-007 real persistent failures atomically block queued filesystem publication (T12-test)
+               const fixture = try f.Fixture.init(repo.root.canonical_path, repo.state, false, null);
+                               ^
+error: 't12_test.test.WR-008 complete checksummed receipt chains reject generation and durability drift' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/process.zig:531:21: 0x1027b0d0b in run (T12-test)
+               else => |e| return e,
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/src/workspace/identity.zig:103:20: 0x1027ad247 in output (T12-test)
+           }) catch |err| return switch (err) {
+                          ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/src/workspace/identity.zig:148:21: 0x1027ab36f in discoverWith (T12-test)
+           const listing = try output(temp, io, exe, top, &.{ "worktree", "list", "--porcelain", "-z" }, options.timeout_ms);
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/src/workspace/identity.zig:131:5: 0x1027ae76f in discover (T12-test)
+           return discoverWith(a, io, exe, trusted, .{});
+           ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t12_fixtures.zig:115:25: 0x10274c4bb in init (T12-test)
+               self.identity = try workspace.identity.discover(a, io, "/usr/bin/git", self.root);
+                               ^
+       /Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t12_test.zig:716:25: 0x102824c47 in test.WR-008 complete checksummed receipt chains reject generation and durability drift (T12-test)
+               const fixture = try f.Fixture.init(repo.root.canonical_path, repo.state, false, null);
+                               ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/zig-local-cache/o/de727d8affd43a83b354d75fadf9a441/T12-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/zig-local-cache --seed=0x9bf32337 --listen=-
+
+Build Summary: 8/11 steps succeeded (2 failed); 64/70 tests passed (6 failed)
+test transitive failure
++- install T11-test success
+|  +- compile test T11-test Debug native success 37s MaxRSS:215M
++- run test T11-test 41 pass, 2 fail (43 total); 8 leaks
+|  +- compile test T11-test Debug native (reused)
++- install T12-child success
+|  +- compile test T12-child Debug native cached 796ms MaxRSS:31M
+|     +- options cached
++- install T12-test success
+|  +- compile test T12-test Debug native success 55s MaxRSS:248M
+|     +- options (reused)
+|     +- options cached
+|        +- compile test T12-child Debug native (+1 more reused dependencies)
++- run test T12-test 23 pass, 4 fail (27 total); 4 leaks
+   +- compile test T12-test Debug native (+2 more reused dependencies)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/zig-local-cache/o/c7f5141f8980aec12592e9f22c535a40/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-worktrees/t12-host-witness /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/zig-global-cache --seed 0x9bf32337 -Z211444f05ffe4031 test -Dtest-group=write -Doptimize=Debug -Dinstall-tests=true --prefix /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/out-quiet-write-debug --summary all

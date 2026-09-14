@@ -1,0 +1,25 @@
+test
++- run test T12-test 13 pass, 1 fail (14 total)
+error: 't12_test.test.WR-008 host witness accepts an applied publication and refuses a foreign target' failed:
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-leaf_original_only-quiet/src/storage/recovery.zig:321:32: 0x1047dc4b7 in check (T12-test)
+                       if (!original) return error.RecoveryRequired;
+                                      ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-leaf_original_only-quiet/src/storage/recovery.zig:391:49: 0x1047dbc17 in validatePublication (T12-test)
+                   if (std.meta.eql(r.digest, digest)) return r.check();
+                                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-leaf_original_only-quiet/tests/t12_test.zig:1179:5: 0x1047da41f in test.WR-008 host witness accepts an applied publication and refuses a foreign target (T12-test)
+           try grant.validate_publication.?(grant.context, data, p);
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-leaf_original_only-quiet && /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-leaf_original_only-quiet/o/6e8e738e19da31f116f4acf98b7d6e9d/T12-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-leaf_original_only-quiet --seed=0xd88874be --listen=-
+
+Build Summary: 4/6 steps succeeded (1 failed); 13/14 tests passed (1 failed)
+test transitive failure
++- run test T12-test 13 pass, 1 fail (14 total)
+   +- compile test T12-test Debug native success 9s MaxRSS:309M
+      +- options success
+      +- options success
+         +- compile test T12-child Debug native success 10s MaxRSS:302M
+            +- options (reused)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-leaf_original_only-quiet/o/f73c3388e88e2a4fe1e8f77ca63d50d0/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-leaf_original_only-quiet /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-leaf_original_only-quiet /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/zig-global-cache --seed 0xd88874be -Z17026d0ecde0c13d test -Dtest-group=write -Dtest-id=WR-008 -Doptimize=Debug --summary all

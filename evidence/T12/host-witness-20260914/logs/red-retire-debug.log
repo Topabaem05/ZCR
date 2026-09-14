@@ -1,0 +1,23 @@
+test
++- run test T12-test
+   +- compile test T12-test Debug native 1 errors
+tests/t12_test.zig:1202:16: error: no field or member function named 'retirePublication' in 'recovery.HostWitness'
+    try witness.retirePublication(p);
+        ~~~~~~~^~~~~~~~~~~~~~~~~~
+src/storage/recovery.zig:291:25: note: struct declared here
+pub const HostWitness = struct {
+                        ^~~~~~
+error: 1 compilation errors
+failed command: /Users/guribbong/.local/share/zig/0.16.0/zig test -ODebug --dep zcr_core --dep zcr_policy --dep zcr_memory --dep zcr_fs_read --dep zcr_workspace --dep zcr_fs_edit --dep zcr_storage --dep build_options --dep t12_options -Mroot=/Users/guribbong/code/ZCR-worktrees/t12-host-witness/tests/t12_test.zig -ODebug -Mzcr_core=/Users/guribbong/code/ZCR-worktrees/t12-host-witness/src/core/types.zig -ODebug --dep zcr_core -Mzcr_policy=/Users/guribbong/code/ZCR-worktrees/t12-host-witness/src/policy/capability.zig -ODebug --dep zcr_core -Mzcr_memory=/Users/guribbong/code/ZCR-worktrees/t12-host-witness/src/memory/budget.zig -ODebug --dep zcr_core --dep zcr_policy --dep zcr_memory --dep zcr_cache -Mzcr_fs_read=/Users/guribbong/code/ZCR-worktrees/t12-host-witness/src/fs/read.zig -ODebug --dep zcr_core --dep zcr_policy -Mzcr_workspace=/Users/guribbong/code/ZCR-worktrees/t12-host-witness/src/workspace/registry.zig -ODebug --dep zcr_core --dep zcr_policy --dep zcr_memory --dep zcr_fs_read --dep zcr_workspace -Mzcr_fs_edit=/Users/guribbong/code/ZCR-worktrees/t12-host-witness/src/fs/edit.zig -ODebug --dep zcr_core --dep zcr_policy --dep zcr_memory --dep zcr_workspace --dep zcr_fs_read -Mzcr_storage=/Users/guribbong/code/ZCR-worktrees/t12-host-witness/src/storage/journal.zig -Mbuild_options=/Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/zig-local-cache/c/11b5894f5948b856a4520361e4c08486/options.zig -Mt12_options=/Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/zig-local-cache/c/67e0242462ffbdce943a26bfc65b1a94/options.zig -ODebug --dep zcr_core --dep zcr_policy --dep zcr_memory --dep zcr_workspace -Mzcr_cache=/Users/guribbong/code/ZCR-worktrees/t12-host-witness/src/cache/content.zig -lc --test-filter WR-008 --cache-dir /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/zig-local-cache --global-cache-dir /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/zig-global-cache --name T12-test --zig-lib-dir /Users/guribbong/.local/share/zig/0.16.0/lib/ --listen=-
+
+Build Summary: 3/6 steps succeeded (1 failed)
+test transitive failure
++- run test T12-test transitive failure
+   +- compile test T12-test Debug native 1 errors
+      +- options cached
+      +- options cached
+         +- compile test T12-child Debug native cached 69ms MaxRSS:31M
+            +- options (reused)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/zig-local-cache/o/c7f5141f8980aec12592e9f22c535a40/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-worktrees/t12-host-witness /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/zig-global-cache --seed 0x9bf5d89e -Z46935553bd53b932 test -Dtest-group=write -Dtest-id=WR-008 -Doptimize=Debug --summary all
