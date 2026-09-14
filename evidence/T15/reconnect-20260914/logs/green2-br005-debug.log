@@ -1,0 +1,25 @@
+test
++- run test T15-test 3 pass, 1 fail (4 total)
+error: 't15_test.test.BR-005 real UDS broker restart refuses the stale grant until a host rebind at a new fence and the bridge does not reconnect or resend' failed:
+       /Users/guribbong/code/ZCR-worktrees/t15-reconnect/src/workspace/registry.zig:366:9: 0x1024970cf in validateSession (T15-test)
+               return error.OutOfScope;
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t15-reconnect/src/broker/server.zig:94:13: 0x1023cdb33 in create (T15-test)
+                   try config.registry.validateSession(g.config.session, config.registry.bootNonce());
+                   ^
+       /Users/guribbong/code/ZCR-worktrees/t15-reconnect/tests/t15_test.zig:113:20: 0x1023cf51b in start (T15-test)
+               f.server = try broker.Server.create(f.config());
+                          ^
+       /Users/guribbong/code/ZCR-worktrees/t15-reconnect/tests/t15_test.zig:795:5: 0x1023d2207 in test.BR-005 real UDS broker restart refuses the stale grant until a host rebind at a new fence and the bridge does not reconnect or resend (T15-test)
+           try f.start();
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T15/r/zlc && /Users/guribbong/code/ZCR-state/tasks/T15/r/zlc/o/f52bb7be7584150303b2112196564df8/T15-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T15/r/zlc --seed=0x1ee91472 --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 3/4 tests passed (1 failed)
+test transitive failure
++- run test T15-test 3 pass, 1 fail (4 total)
+   +- compile test T15-test Debug native success 41s MaxRSS:209M
+      +- options cached
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T15/r/zlc/o/c7f5141f8980aec12592e9f22c535a40/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-worktrees/t15-reconnect /Users/guribbong/code/ZCR-state/tasks/T15/r/zlc /Users/guribbong/code/ZCR-state/tasks/T15/r/zgc --seed 0x1ee91472 -Z5366a636edc2cbf0 test -Dtest-group=broker -Dtest-id=BR-005 -Doptimize=Debug --summary all

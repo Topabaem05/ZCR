@@ -1,0 +1,7 @@
+{
+  "derivation": "sha256 of this file's bytes is corpus_sha256; file hashes are sha256 of blobs at source_commit",
+  "description": "Each test creates a Git repository with one file.txt and a private socket directory under its temporary directory with /usr/bin/git; no checked-in data files.",
+  "schema": "zcr-t15-corpus/1",
+  "source_commit": "17a5cf350e9f15b6acdfa361ba96075cc9550798",
+  "tests/t15_test.zig": "5733c98a4aae3a464e0acb8ca0865c4fb1ebe5e0975535f5ad52f871f6ef508a"
+}

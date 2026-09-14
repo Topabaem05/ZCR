@@ -1,0 +1,6 @@
+Build Summary: 4/4 steps succeeded; 4/4 tests passed
+test success
++- run test T15-test 4 pass (4 total) 1s MaxRSS:14M
+   +- compile test T15-test Debug native success 17s MaxRSS:238M
+      +- options cached
+

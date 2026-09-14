@@ -1,0 +1,23 @@
+test
++- run test T15-test 3 pass, 1 fail (4 total)
+error: 't15_test.test.BR-005 real UDS reconnect after disconnect and broker restart needs a host rebind at a new fence and replays nothing' failed:
+       expected 2, found 0
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x100e31417 in expectEqualInner__anon_38469 (T15-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x100e327fb in expectEqual (T15-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-worktrees/t15-reconnect/tests/t15_test.zig:796:5: 0x100e328bf in test.BR-005 real UDS reconnect after disconnect and broker restart needs a host rebind at a new fence and replays nothing (T15-test)
+           try t.expectEqual(@as(u64, 2), f.server.?.snapshot().completed);
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T15/r/zlc && /Users/guribbong/code/ZCR-state/tasks/T15/r/zlc/o/0355208d43ad03c5a5947244d5eaa0d8/T15-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T15/r/zlc --seed=0xcc9bbff5 --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 3/4 tests passed (1 failed)
+test transitive failure
++- run test T15-test 3 pass, 1 fail (4 total)
+   +- compile test T15-test Debug native success 1m MaxRSS:236M
+      +- options success
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T15/r/zlc/o/c7f5141f8980aec12592e9f22c535a40/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-worktrees/t15-reconnect /Users/guribbong/code/ZCR-state/tasks/T15/r/zlc /Users/guribbong/code/ZCR-state/tasks/T15/r/zgc --seed 0xcc9bbff5 -Z055affc1a937dab0 test -Dtest-group=broker -Dtest-id=BR-005 -Doptimize=Debug --summary all

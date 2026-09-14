@@ -1,0 +1,28 @@
+test
++- run test T15-test 3 pass, 1 fail (4 total)
+error: 't15_test.test.BR-005 real UDS reconnect after disconnect and broker restart needs a host rebind at a new fence and replays nothing' failed:
+       /Users/guribbong/code/ZCR-worktrees/t15-reconnect/src/broker/auth.zig:46:131: 0x1006a6ab3 in address (T15-test)
+           if (!std.fs.path.isAbsolute(path) or path.len == 0 or path.len >= out.path.len or std.mem.indexOfScalar(u8, path, 0) != null) return error.InvalidArgument;
+                                                                                                                                         ^
+       /Users/guribbong/code/ZCR-worktrees/t15-reconnect/src/broker/auth.zig:69:9: 0x1005e0fab in privateParent (T15-test)
+           _ = try address(path);
+               ^
+       /Users/guribbong/code/ZCR-worktrees/t15-reconnect/src/broker/server.zig:106:24: 0x1005e2367 in create (T15-test)
+               const parent = try auth.privateParent(config.allocator, config.io, config.socket_path);
+                              ^
+       /Users/guribbong/code/ZCR-worktrees/t15-reconnect/tests/t15_test.zig:113:20: 0x1005e351b in start (T15-test)
+               f.server = try broker.Server.create(f.config());
+                          ^
+       /Users/guribbong/code/ZCR-worktrees/t15-reconnect/tests/t15_test.zig:763:5: 0x1005e5707 in test.BR-005 real UDS reconnect after disconnect and broker restart needs a host rebind at a new fence and replays nothing (T15-test)
+           try f.start();
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T15/reconnect-20260914/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T15/reconnect-20260914/zig-local-cache/o/0355208d43ad03c5a5947244d5eaa0d8/T15-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T15/reconnect-20260914/zig-local-cache --seed=0x9220a317 --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 3/4 tests passed (1 failed)
+test transitive failure
++- run test T15-test 3 pass, 1 fail (4 total)
+   +- compile test T15-test Debug native success 1m MaxRSS:259M
+      +- options success
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T15/reconnect-20260914/zig-local-cache/o/c7f5141f8980aec12592e9f22c535a40/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-worktrees/t15-reconnect /Users/guribbong/code/ZCR-state/tasks/T15/reconnect-20260914/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T15/reconnect-20260914/zig-global-cache --seed 0x9220a317 -Zef939ad47c0cb013 test -Dtest-group=broker -Dtest-id=BR-005 -Doptimize=Debug --summary all

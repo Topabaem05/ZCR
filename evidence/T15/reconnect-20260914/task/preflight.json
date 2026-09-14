@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "state": {
+    "toplevel": "/Users/guribbong/code/ZCR-worktrees/t15-reconnect",
+    "absolute_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/t15-reconnect",
+    "common_dir": "/Users/guribbong/code/ZCR/.git",
+    "head_commit": "9c94517fd393866f66a6eddcf3131c950b537e4c",
+    "head_tree": "3463d5d45cbd9c4adfc3829bb8d850a078390a01",
+    "branch": "claude/t15-reconnect-lifecycle",
+    "entries": []
+  },
+  "reasons": []
+}

@@ -751,3 +751,119 @@ test "BR-004 coalesced UDS request and cancellation cancel the preceding idle re
     var buffer: [8192]u8 = undefined;
     try t.expect(std.mem.indexOf(u8, try client.readLine(&buffer), "E_CANCELLED") != null);
 }
+
+/// A running broker refuses this grant during authentication: the peer closes the connection after
+/// the hello and the server counts one more refusal. A missing listener (IoFailure) does not qualify.
+/// The counter is read before connecting, because the server counts the refusal before the client
+/// observes the closed connection.
+fn expectAuthRefused(f: *Fixture, grant: usize) !void {
+    const before = f.server.?.snapshot().refused;
+    if (f.connect(grant)) |value| {
+        var client = value;
+        client.close();
+        return error.TestUnexpectedResult;
+    } else |err| switch (err) {
+        error.OutOfScope, error.Disconnected => {},
+        else => return err,
+    }
+    const started = std.Io.Clock.Timestamp.now(io, .awake);
+    while (f.server.?.snapshot().refused == before and started.untilNow(io).raw.toMilliseconds() < 5000) try std.Io.sleep(io, .fromMilliseconds(1), .awake);
+    try t.expectEqual(before + 1, f.server.?.snapshot().refused);
+}
+
+test "BR-005 real UDS stale grant is refused and a broker restart needs a host rebind at a new fence and the bridge does not reconnect or resend" {
+    const f = try Fixture.init(2);
+    defer f.deinit();
+    const session = f.grants[0].config.session;
+    const bridge_session = f.grants[1].config.session;
+    const old_task: core.TaskContext = .{ .task_id = session.bound_task, .base_commit = f.snapshot_.head[0..f.snapshot_.head_len], .scope_digest = read_policy.digest, .fence = 1, .expires_at_unix_ms = std.math.maxInt(i64) };
+    var new_task = old_task;
+    new_task.fence = 2;
+    var bridge_task = new_task;
+    bridge_task.task_id = bridge_session.bound_task;
+    var buffer: [8192]u8 = undefined;
+    try f.start();
+    // Grant 1's bridge client stays open across the broker restart.
+    var stale = try f.connect(1);
+    defer stale.close();
+    try startProtocol(&stale);
+
+    // Grant 0 reads and disconnects. Closing the session ends its host binding, so the running,
+    // listening broker refuses the same grant at authentication.
+    {
+        var client = try f.connect(0);
+        defer client.close();
+        try startProtocol(&client);
+        try client.sendAll(read_request);
+        try t.expect(std.mem.indexOf(u8, try client.readLine(&buffer), "\"id\":2") != null);
+    }
+    const drained = std.Io.Clock.Timestamp.now(io, .awake);
+    while (f.server.?.snapshot().connected != 1 and drained.untilNow(io).raw.toMilliseconds() < 5000) try std.Io.sleep(io, .fromMilliseconds(1), .awake);
+    try t.expectEqual(@as(u32, 1), f.server.?.snapshot().connected);
+    try expectAuthRefused(f, 0);
+
+    // Broker restart: the old instance closes every session, which ends every host binding.
+    // A broker cannot even be created for unbound grants.
+    f.server.?.stop();
+    f.thread.?.join();
+    f.thread = null;
+    try t.expect(f.run_error == null);
+    try f.server.?.deinit();
+    f.server = null;
+    // Through Fixture.start, like every other test: Server.create keeps its large per-session
+    // temporaries in that frame. Inlined into this test, they overflowed the ReleaseSafe stack.
+    try t.expectError(error.OutOfScope, f.start());
+    try t.expect(f.server == null and f.thread == null);
+
+    // Only the host can bind the sessions again, at a new fence. The old fence stays invalid.
+    try f.registry.bindSession(session, new_task, f.registry.bootNonce());
+    try f.registry.bindSession(bridge_session, bridge_task, f.registry.bootNonce());
+    try t.expectError(error.FenceMismatch, f.registry.acquireWriter(old_task, session.bound_workspace));
+    try f.start();
+
+    // The old bridge gets a request its broker never answers. Its forward path must end with
+    // Disconnected, write no response, and neither reconnect to the restarted broker nor resend.
+    var input: [2]std.c.fd_t = undefined;
+    var output: [2]std.c.fd_t = undefined;
+    try t.expect(Pipes.pipe(&input) == 0);
+    try t.expect(Pipes.pipe(&output) == 0);
+    defer _ = std.c.close(output[0]);
+    const Run = struct {
+        client: *broker.bridge.Client,
+        input: std.c.fd_t,
+        output: std.c.fd_t,
+        flag: *std.atomic.Value(bool),
+        result: ?anyerror = null,
+        done: std.atomic.Value(bool) = .init(false),
+        fn run(r: *@This()) void {
+            defer r.done.store(true, .release);
+            defer _ = std.c.close(r.output);
+            defer _ = std.c.close(r.input);
+            r.client.forward(.{ .handle = r.input, .flags = .{ .nonblocking = false } }, .{ .handle = r.output, .flags = .{ .nonblocking = false } }, .{ .requested = r.flag }) catch |err| {
+                r.result = err;
+            };
+        }
+    };
+    const unanswered = "{\"jsonrpc\":\"2.0\",\"id\":7,\"method\":\"tools/call\",\"params\":{\"name\":\"zcr_read\",\"arguments\":{\"path\":\"file.txt\"}}}\n";
+    try t.expectEqual(@as(isize, unanswered.len), std.c.write(input[1], unanswered.ptr, unanswered.len));
+    _ = std.c.close(input[1]);
+    var run: Run = .{ .client = &stale, .input = input[0], .output = output[1], .flag = &f.flag };
+    const thread = try std.Thread.spawn(.{}, Run.run, .{&run});
+    const started = std.Io.Clock.Timestamp.now(io, .awake);
+    while (!run.done.load(.acquire) and started.untilNow(io).raw.toMilliseconds() < 5000) try std.Io.sleep(io, .fromMilliseconds(1), .awake);
+    if (!run.done.load(.acquire)) f.flag.store(true, .release);
+    thread.join();
+    try t.expectEqual(error.Disconnected, run.result.?);
+    try t.expectEqual(@as(isize, 0), std.c.read(output[0], &buffer, buffer.len));
+    const after = f.server.?.snapshot();
+    try t.expectEqual(@as(u32, 0), after.authenticated);
+    try t.expectEqual(@as(u64, 0), after.completed);
+    try t.expectEqual(@as(u64, 0), after.refused);
+
+    // The rebound grant connects to the restarted broker and is served normally.
+    var client = try f.connect(0);
+    defer client.close();
+    try startProtocol(&client);
+    try client.sendAll("{\"jsonrpc\":\"2.0\",\"id\":9,\"method\":\"ping\"}\n");
+    try t.expect(std.mem.indexOf(u8, try client.readLine(&buffer), "\"id\":9") != null);
+}

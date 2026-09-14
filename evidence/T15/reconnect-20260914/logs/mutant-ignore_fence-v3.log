@@ -1,0 +1,35 @@
+test
++- run test T15-test 3 pass, 1 fail (4 total)
+error: 't15_test.test.BR-005 real UDS stale grant is refused and a broker restart needs a host rebind at a new fence and the bridge does not reconnect or resend' failed:
+       expected 2, found 1
+       /Users/guribbong/code/ZCR-state/tasks/T15/r/c-ignore_fence/src/broker/bridge.zig:59:29: 0x10051fbb3 in readLine (T15-test)
+                       if (n == 0) return error.Disconnected;
+                                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T15/r/c-ignore_fence/src/broker/bridge.zig:28:26: 0x100520637 in connect (T15-test)
+               const response = try c.readLine(&ack);
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T15/r/c-ignore_fence/tests/t15_test.zig:117:16: 0x10052098b in connect (T15-test)
+               return try broker.bridge.Client.connect(A, io, f.socket_path, f.grants[i].token, f.grants[i].config.session.security_domain);
+                      ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x100520dfb in expectEqualInner__anon_38391 (T15-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x100521273 in expectEqual (T15-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T15/r/c-ignore_fence/tests/t15_test.zig:769:5: 0x1005212ff in expectAuthRefused (T15-test)
+           try t.expectEqual(before + 1, f.server.?.snapshot().refused);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T15/r/c-ignore_fence/tests/t15_test.zig:801:5: 0x100522703 in test.BR-005 real UDS stale grant is refused and a broker restart needs a host rebind at a new fence and the bridge does not reconnect or resend (T15-test)
+           try expectAuthRefused(f, f.connect(0));
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T15/r/mf && /Users/guribbong/code/ZCR-state/tasks/T15/r/mf/o/4c5b1b9b3290bdc8a48f2ecdec22f78a/T15-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T15/r/mf --seed=0x67650a8a --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 3/4 tests passed (1 failed)
+test transitive failure
++- run test T15-test 3 pass, 1 fail (4 total)
+   +- compile test T15-test Debug native success 49s MaxRSS:297M
+      +- options cached
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T15/r/mf/o/f73c3388e88e2a4fe1e8f77ca63d50d0/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T15/r/c-ignore_fence /Users/guribbong/code/ZCR-state/tasks/T15/r/mf /Users/guribbong/code/ZCR-state/tasks/T15/r/zgc --seed 0x67650a8a -Zf3c5e130a6d3044e test -Dtest-group=broker -Dtest-id=BR-005 -Doptimize=Debug --summary all
