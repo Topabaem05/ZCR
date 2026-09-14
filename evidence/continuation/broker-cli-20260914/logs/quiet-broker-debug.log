@@ -1,0 +1,16 @@
+Build Summary: 10/10 steps succeeded; 31/31 tests passed
+test success
++- install T15-test success
+|  +- compile test T15-test Debug native success 23s MaxRSS:259M
+|     +- options cached
++- run test T15-test 28 pass (28 total) 12s MaxRSS:15M
+|  +- compile test T15-test Debug native (+1 more reused dependencies)
++- install T01-broker-cli-test success
+|  +- compile test T01-broker-cli-test Debug native success 15s MaxRSS:194M
+|     +- options (reused)
+|     +- options cached
+|        +- compile exe zcr Debug native cached 338ms MaxRSS:31M
+|           +- options (reused)
++- run test T01-broker-cli-test 3 pass (3 total) 7s MaxRSS:14M
+   +- compile test T01-broker-cli-test Debug native (+2 more reused dependencies)
+

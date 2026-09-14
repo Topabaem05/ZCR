@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "state": {
+    "toplevel": "/Users/guribbong/code/ZCR-worktrees/t01-broker-cli",
+    "absolute_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/t01-broker-cli",
+    "common_dir": "/Users/guribbong/code/ZCR/.git",
+    "head_commit": "0039251edae9c069c56524c3dedb1df905f86dc0",
+    "head_tree": "568da60c48bc8d821de4bd1d3ee7bc24fe117d4b",
+    "branch": "claude/broker-cli",
+    "entries": []
+  },
+  "reasons": []
+}

@@ -1,0 +1,63 @@
+{
+  "task": "T01",
+  "role": "integrator",
+  "violations": [],
+  "changes": [
+    {
+      "kind": "modified",
+      "path": "DESIGNBOOK.html",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "modified",
+      "path": "MANIFEST.sha256",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "modified",
+      "path": "build.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "modified",
+      "path": "src/launch.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "modified",
+      "path": "src/main.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "modified",
+      "path": "tasks/T01.md",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "modified",
+      "path": "tasks/tasks.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "tests/broker_cli_test.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    }
+  ]
+}

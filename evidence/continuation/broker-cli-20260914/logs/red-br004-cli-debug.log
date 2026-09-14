@@ -1,0 +1,43 @@
+test
++- run test T01-broker-cli-test 0 pass, 3 fail (3 total)
+error: 'broker_cli_test.test.BR-004 zcr broker serve and mcp --broker take the token from an inherited fd and serve reads only' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:615:14: 0x1025bd847 in expect (T01-broker-cli-test)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /Users/guribbong/code/ZCR-worktrees/t01-broker-cli/tests/broker_cli_test.zig:147:5: 0x1025f9e53 in test.BR-004 zcr broker serve and mcp --broker take the token from an inherited fd and serve reads only (T01-broker-cli-test)
+           try t.expect(std.mem.startsWith(u8, ready, marker));
+           ^
+error: 'broker_cli_test.test.BR-004 zcr mcp --broker without a running broker refuses clearly and starts nothing' failed:
+       expected 69, found 64
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x1025bf8af in expectEqualInner__anon_37608 (T01-broker-cli-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x1025bfa9f in expectEqual (T01-broker-cli-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-worktrees/t01-broker-cli/tests/broker_cli_test.zig:126:5: 0x1025bfb1b in expectExit (T01-broker-cli-test)
+           try t.expectEqual(code, term.exited);
+           ^
+       /Users/guribbong/code/ZCR-worktrees/t01-broker-cli/tests/broker_cli_test.zig:205:5: 0x1025f70cb in test.BR-004 zcr mcp --broker without a running broker refuses clearly and starts nothing (T01-broker-cli-test)
+           try expectExit(&bridge, 69);
+           ^
+error: 'broker_cli_test.test.BR-004 zcr broker serve refuses a token on argv and a policy without broker_allowed' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:615:14: 0x1025bd847 in expect (T01-broker-cli-test)
+           if (!ok) return error.TestUnexpectedResult;
+                    ^
+       /Users/guribbong/code/ZCR-worktrees/t01-broker-cli/tests/broker_cli_test.zig:216:5: 0x1025c0153 in test.BR-004 zcr broker serve refuses a token on argv and a policy without broker_allowed (T01-broker-cli-test)
+           try t.expect(on_argv.term == .exited and on_argv.term.exited == 64);
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T01/bc/zlc && /Users/guribbong/code/ZCR-state/tasks/T01/bc/zlc/o/a9ef6a435d7e205d2aba9852dee77b46/T01-broker-cli-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T01/bc/zlc --seed=0x9b24c706 --listen=-
+
+Build Summary: 4/6 steps succeeded (1 failed); 0/3 tests passed (3 failed)
+test transitive failure
++- run test T01-broker-cli-test 0 pass, 3 fail (3 total)
+   +- compile test T01-broker-cli-test Debug native success 26s MaxRSS:206M
+      +- options success
+      +- options success
+         +- compile exe zcr Debug native success 1m MaxRSS:237M
+            +- options (reused)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T01/bc/zlc/o/94e945021a17a75dc04d17e816a65322/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-worktrees/t01-broker-cli /Users/guribbong/code/ZCR-state/tasks/T01/bc/zlc /Users/guribbong/code/ZCR-state/tasks/T01/bc/zgc --seed 0x9b24c706 -Za3a72675c4374fec test -Dtest-group=broker -Dtest-id=BR-004 zcr -Doptimize=Debug --summary all

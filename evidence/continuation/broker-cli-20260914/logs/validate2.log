@@ -1,0 +1,15 @@
+{
+  "scope": "document/schema/fixture/package validation ONLY; no Zig runtime, Mac hardware, or actual host integration was tested",
+  "status": "pass",
+  "checks_total": 323,
+  "checks_failed": 0,
+  "counts": {
+    "main_design_docs": 19,
+    "tasks": 26,
+    "task_steps": 156,
+    "test_specifications": 94,
+    "core_tools": 8,
+    "svg_diagrams": 11,
+    "primary_sources": 26
+  }
+}

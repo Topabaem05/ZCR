@@ -1,0 +1,13 @@
+{
+  "schema_version": "zcr-evidence/1",
+  "task_id": "T01",
+  "label": "quiet-broker-releasesafe",
+  "command": "zig build test -Dtest-group=broker -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix $STATE/out-quiet-broker-releasesafe --summary all (ZIG_LOCAL_CACHE_DIR=/Users/guribbong/code/ZCR-state/tasks/T01/bc/zlc)",
+  "exit_code": 0,
+  "source_commit": "0039251edae9c069c56524c3dedb1df905f86dc0",
+  "source_tree": "568da60c48bc8d821de4bd1d3ee7bc24fe117d4b",
+  "worktree_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/t01-broker-cli",
+  "binary_path": "/Users/guribbong/code/ZCR-state/tasks/T01/broker-cli-20260914/out-quiet-broker-releasesafe/bin/T01-broker-cli-test",
+  "binary_sha256": "6f553ebb2841954a8d185f137c683929245a82a904be3ae255ab1769c75d1468",
+  "recorded_at_unix_ms": 1789365794344
+}
