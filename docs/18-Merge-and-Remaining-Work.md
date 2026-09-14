@@ -27,7 +27,7 @@
 - `src/`에는 Zig 파일 45개가 있으며 `build.zig`로 빌드한다. Zig 0.16.0을 유지한다.
 - T00–T14는 `IMPLEMENTED_WITH_OPEN_GATES`, T15–T16은 `IN_PROGRESS`다. 구현 파일의 존재와 Task 완료를 구분한다.
 - 직접 stdio MCP는 읽기 도구 6개를 연결한다. 실행 정책에서 쓰기 및 broker 활성화를 요청하면 현재는 거부한다.
-- T12 journal/recovery의 Linux 구현과 SIGKILL 시험은 존재한다. 현재 `journal.metadata`는 Linux 이외 OS에 `Unsupported`를 반환하며 T12 시험에도 Linux 전용 `statx` 호출이 남아 있다. Darwin port가 별도 세션에서 검토됐다는 과거 설명만으로 원격 브랜치에 구현됐다고 간주하지 않는다.
+- T12 journal/recovery는 Linux와 Darwin에서 동작한다. PR #2(`9226555`)가 Darwin의 `fstat` 기반 metadata, `F_FULLFSYNC` 내구 동기화, store 파일의 extended ACL 거부를 넣었고, T11은 커널이 붙이는 `com.apple.provenance` 속성을 원본과 교체본의 값이 같을 때만 허용한다. 운영 쓰기는 여전히 비활성이다.
 - `src/watch/linux.zig`가 존재해도 T17 전체 backend·자원 관측·플랫폼 게이트가 완료된 것은 아니다.
 
 ## 이번 점검에서 수정한 CI 오류
@@ -57,11 +57,30 @@
 
 Apple Silicon은 Debug **320 PASS / 12 SKIP / 24 FAIL**, ReleaseSafe **321 PASS / 12 SKIP / 23 FAIL**이다. 두 모드 모두 T12의 Linux 전용 `Store.init`/`metadata`가 `Unsupported`를 반환해 23개 시험이 실패했다. Debug에서는 fixture 초기화 실패 경로의 168개 allocation leak도 보고됐다. 추가 Debug 실패 1개는 T08 `MC-004 retiring tool id is detached before gated arena teardown`의 `entered and accepted_during_retirement` assertion이며 재현·원인 분석이 필요하다. 테스트 시간 제한만 늘려 통과 처리하지 않는다. [Mac 원본 로그](../evidence/merge-20260913/mac-registered-logs.tar.gz)와 [보고서](../evidence/merge-20260913/mac-native-report.json)를 보존했다. Intel Mac job은 이 문서의 점검 시점에 실행 중이므로 최종 결과를 단정하지 않는다.
 
+이 절의 Mac 실패는 `88546e8` 시점의 기록이다. 아래 병합 후 실행에서 해소됐다.
+
+## PR #2·#3 병합 후 native CI
+
+[실행 34793696720](https://github.com/Topabaem05/ZCR/actions/runs/34793696720)은 PR #3 병합 commit인 `main` `a15b127`을 세 플랫폼에서 검증했다. 세 job 모두 **SUCCESS**다. 플랫폼별 보고서, 등록 시험 로그, artifact digest는 [증거 묶음](../evidence/continuation/native-ci-34793696720/README.md)에 보존했다.
+
+| 플랫폼 | Debug | ReleaseSafe |
+|---|---|---|
+| x86_64 Linux | 356 PASS / 3 SKIP / 0 FAIL | 356 PASS / 3 SKIP / 0 FAIL |
+| Apple Silicon (macOS 15) | 347 PASS / 12 SKIP / 0 FAIL | 347 PASS / 12 SKIP / 0 FAIL |
+| Intel Mac (macOS 15) | 347 PASS / 12 SKIP / 0 FAIL | 347 PASS / 12 SKIP / 0 FAIL |
+
+- **leak과 명령:** 세 플랫폼 모두 allocation leak이 없다. contracts, codec, 실제 CLI subprocess, capability 검사가 모두 exit 0이다.
+- **Mac 시험:** 두 Mac에서 T08 27/27, T11 43/43, T12 25/25를 통과했다. Mac의 SKIP 12개는 T14 시험이다. Linux의 SKIP 3개는 T09, T11, T12의 플랫폼 전용 시험이다.
+- **PR #2:** T12의 Linux 전용 guard와 fixture leak을 없앴다. 원인과 probe는 `evidence/mac-write-path-20260913/README.md`에 있다.
+- **PR #3:** MC-004 retirement 실패의 원인을 찾아 고쳤다. 시험이 요청마다 두 번 오르는 authority 검증 카운터를 `== 2`로 읽어 서버 스레드와 경쟁했다. 증거는 `evidence/T08/mc004-retirement-20260913/README.md`에 있다.
+- **아직 NOT_RUN인 외부 gate:** G05 APFS 전체 ACL/xattr/crash-durability 검증, G07/G08/G13 실제 host client·sandbox 연동, G11 macOS 11 Intel 실행, G12 모델 공존·E2E 성능. release 상태는 계속 **BLOCKED**다.
+- **남은 발견:** MC-004 deadline 시험은 watcher의 취소를 관찰하지 못한다(T08). 로컬에서 CPU 부하를 걸었을 때 runtime-cache 시험이 한 번 `IoFailure`로 실패했다(T10/T13).
+
 ## 남은 작업과 완료 조건
 
 | 순서 | 범위 | 다음 작업 | 완료 근거 |
 |---|---|---|---|
-| 1 | T08 / T12 / native CI | MC-004 Mac Debug 실패 분석, Darwin storage 이식 및 fixture 초기화 실패 시 자원 회수, Mac crash/lifecycle 검증 | Linux·Apple Silicon·Intel Mac에서 Debug/ReleaseSafe 결과와 raw 복구 증거 |
+| 1 | T08 / T12 / native CI | **대부분 완료**(PR #2·#3, 실행 34793696720): MC-004 원인 분석·수정, Darwin storage 이식, fixture 초기화 실패 시 자원 회수, Mac의 T12 SIGKILL 복구 시험과 storage 증거 수집. 남음: G05 APFS 파괴적 crash-durability 검증, G11 macOS 11 Intel, MC-004 deadline 시험 관찰 지점, 부하 시 runtime-cache `IoFailure` | Linux·Apple Silicon·Intel Mac에서 Debug/ReleaseSafe 결과와 raw 복구 증거(위 병합 후 native CI 절) |
 | 2 | T12 / T15 | 신뢰된 supervisor, write/reconnect 수명 관리 및 broker CLI/bridge 연결 | 권한·fence·취소·느린 클라이언트·재접속 통합 시험; 승인 전 쓰기 비활성 유지 |
 | 3 | T16 | pressure/thermal 신호 수집, governor 정책, 실제 runtime 연결 | admission·회수·공정성 및 모델 공존 시험 |
 | 4 | T17 / T19 | Linux backend 완성, 필수 ARM64/x86 SIMD 경로 | 플랫폼 자원 관측 검증, scalar 차등·경계 시험 |

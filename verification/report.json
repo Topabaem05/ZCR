@@ -1,7 +1,7 @@
 {
   "scope": "document/schema/fixture/package validation ONLY; no Zig runtime, Mac hardware, or actual host integration was tested",
   "status": "pass",
-  "checks_total": 317,
+  "checks_total": 320,
   "checks_failed": 0,
   "counts": {
     "main_design_docs": 19,
@@ -16,10 +16,10 @@
     {
       "check": "all_json_parse",
       "status": "pass",
-      "detail": "374"
+      "detail": "412"
     },
     {
-      "check": "schema:contracts/response.schema.json",
+      "check": "schema:contracts/data.schema.json",
       "status": "pass",
       "detail": ""
     },
@@ -29,12 +29,7 @@
       "detail": ""
     },
     {
-      "check": "schema:contracts/data.schema.json",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "schema:contracts/inputs/zcr_read.schema.json",
+      "check": "schema:contracts/response.schema.json",
       "status": "pass",
       "detail": ""
     },
@@ -44,7 +39,7 @@
       "detail": ""
     },
     {
-      "check": "schema:contracts/inputs/zcr_status.schema.json",
+      "check": "schema:contracts/inputs/zcr_read.schema.json",
       "status": "pass",
       "detail": ""
     },
@@ -59,12 +54,17 @@
       "detail": ""
     },
     {
+      "check": "schema:contracts/inputs/zcr_search.schema.json",
+      "status": "pass",
+      "detail": ""
+    },
+    {
       "check": "schema:contracts/inputs/zcr_create.schema.json",
       "status": "pass",
       "detail": ""
     },
     {
-      "check": "schema:contracts/inputs/zcr_search.schema.json",
+      "check": "schema:contracts/inputs/zcr_status.schema.json",
       "status": "pass",
       "detail": ""
     },
@@ -1014,7 +1014,7 @@
       "detail": "{}"
     },
     {
-      "check": "no_unfinished_markers:CLAUDE.md",
+      "check": "no_unfinished_markers:README.md",
       "status": "pass",
       "detail": ""
     },
@@ -1024,47 +1024,12 @@
       "detail": ""
     },
     {
-      "check": "no_unfinished_markers:README.md",
+      "check": "no_unfinished_markers:CLAUDE.md",
       "status": "pass",
       "detail": ""
     },
     {
-      "check": "no_unfinished_markers:tasks/T04.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:tasks/T16.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:tasks/INDEX.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:tasks/T00.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:tasks/T17.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:tasks/T15.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:tasks/T24.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:tasks/T03.md",
+      "check": "no_unfinished_markers:bench/baseline.md",
       "status": "pass",
       "detail": ""
     },
@@ -1074,22 +1039,7 @@
       "detail": ""
     },
     {
-      "check": "no_unfinished_markers:tasks/T02.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:tasks/T13.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:tasks/T21.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:tasks/T10.md",
+      "check": "no_unfinished_markers:tasks/T25.md",
       "status": "pass",
       "detail": ""
     },
@@ -1099,37 +1049,12 @@
       "detail": ""
     },
     {
-      "check": "no_unfinished_markers:tasks/T20.md",
+      "check": "no_unfinished_markers:tasks/T21.md",
       "status": "pass",
       "detail": ""
     },
     {
-      "check": "no_unfinished_markers:tasks/T06.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:tasks/T23.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:tasks/T12.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:tasks/T18.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:tasks/T22.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:tasks/T14.md",
+      "check": "no_unfinished_markers:tasks/T15.md",
       "status": "pass",
       "detail": ""
     },
@@ -1139,17 +1064,42 @@
       "detail": ""
     },
     {
-      "check": "no_unfinished_markers:tasks/T08.md",
+      "check": "no_unfinished_markers:tasks/T20.md",
       "status": "pass",
       "detail": ""
     },
     {
-      "check": "no_unfinished_markers:tasks/T19.md",
+      "check": "no_unfinished_markers:tasks/T14.md",
       "status": "pass",
       "detail": ""
     },
     {
-      "check": "no_unfinished_markers:tasks/T25.md",
+      "check": "no_unfinished_markers:tasks/T04.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T10.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T24.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T00.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T23.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T17.md",
       "status": "pass",
       "detail": ""
     },
@@ -1159,117 +1109,62 @@
       "detail": ""
     },
     {
+      "check": "no_unfinished_markers:tasks/T13.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T03.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/INDEX.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T12.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T02.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T22.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T16.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T06.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:tasks/T19.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
       "check": "no_unfinished_markers:tasks/T09.md",
       "status": "pass",
       "detail": ""
     },
     {
-      "check": "no_unfinished_markers:verification/README.md",
+      "check": "no_unfinished_markers:tasks/T18.md",
       "status": "pass",
       "detail": ""
     },
     {
-      "check": "no_unfinished_markers:docs/01-Requirements-and-Traceability.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:docs/03-C4-Architecture.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:docs/10-Portability-x86.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:docs/11-Security-and-Failure-Recovery.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:docs/17-Data-Model-and-Interfaces.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:docs/15-ADR.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:docs/13-Implementation-Roadmap.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:docs/07-Pipelines-and-Consistency.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:docs/12-Performance-and-Test-Plan.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:docs/14-Integration-and-Operations.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:docs/18-Merge-and-Remaining-Work.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:docs/09-Storage-Search-and-Edit.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:docs/04-Apple-Silicon-Scheduling.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:docs/08-API-and-MCP.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:docs/00-Executive-Brief.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:docs/05-Memory-and-Pressure.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:docs/16-Evidence-and-Open-Gates.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:docs/02-SDD.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:docs/06-Worktree-and-Task-Isolation.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:contracts/README.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:bench/baseline.md",
+      "check": "no_unfinished_markers:tasks/T08.md",
       "status": "pass",
       "detail": ""
     },
@@ -1284,57 +1179,112 @@
       "detail": ""
     },
     {
+      "check": "no_unfinished_markers:contracts/README.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
       "check": "no_unfinished_markers:diagrams/README.md",
       "status": "pass",
       "detail": ""
     },
     {
-      "check": "no_unfinished_markers:docs/superpowers/designs/2026-09-12-supervised-recovery.md",
+      "check": "no_unfinished_markers:docs/02-SDD.md",
       "status": "pass",
       "detail": ""
     },
     {
-      "check": "no_unfinished_markers:docs/superpowers/plans/2026-09-12-runtime-continuation.md",
+      "check": "no_unfinished_markers:docs/01-Requirements-and-Traceability.md",
       "status": "pass",
       "detail": ""
     },
     {
-      "check": "no_unfinished_markers:evidence/T13/review.md",
+      "check": "no_unfinished_markers:docs/00-Executive-Brief.md",
       "status": "pass",
       "detail": ""
     },
     {
-      "check": "no_unfinished_markers:evidence/T13/report.md",
+      "check": "no_unfinished_markers:docs/09-Storage-Search-and-Edit.md",
       "status": "pass",
       "detail": ""
     },
     {
-      "check": "no_unfinished_markers:evidence/T14/review.md",
+      "check": "no_unfinished_markers:docs/03-C4-Architecture.md",
       "status": "pass",
       "detail": ""
     },
     {
-      "check": "no_unfinished_markers:evidence/T14/references.md",
+      "check": "no_unfinished_markers:docs/07-Pipelines-and-Consistency.md",
       "status": "pass",
       "detail": ""
     },
     {
-      "check": "no_unfinished_markers:evidence/T14/report.md",
+      "check": "no_unfinished_markers:docs/16-Evidence-and-Open-Gates.md",
       "status": "pass",
       "detail": ""
     },
     {
-      "check": "no_unfinished_markers:evidence/T12/README.md",
+      "check": "no_unfinished_markers:docs/04-Apple-Silicon-Scheduling.md",
       "status": "pass",
       "detail": ""
     },
     {
-      "check": "no_unfinished_markers:evidence/T08/report.md",
+      "check": "no_unfinished_markers:docs/14-Integration-and-Operations.md",
       "status": "pass",
       "detail": ""
     },
     {
-      "check": "no_unfinished_markers:evidence/T11/report.md",
+      "check": "no_unfinished_markers:docs/08-API-and-MCP.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:docs/10-Portability-x86.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:docs/13-Implementation-Roadmap.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:docs/17-Data-Model-and-Interfaces.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:docs/05-Memory-and-Pressure.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:docs/11-Security-and-Failure-Recovery.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:docs/06-Worktree-and-Task-Isolation.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:docs/15-ADR.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:docs/12-Performance-and-Test-Plan.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:docs/18-Merge-and-Remaining-Work.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:verification/README.md",
       "status": "pass",
       "detail": ""
     },
@@ -1344,12 +1294,137 @@
       "detail": ""
     },
     {
-      "check": "no_unfinished_markers:evidence/T07/continuation-2026-09-12/report.md",
+      "check": "no_unfinished_markers:evidence/T11/report.md",
       "status": "pass",
       "detail": ""
     },
     {
-      "check": "no_unfinished_markers:evidence/continuation/test-harness/README.md",
+      "check": "no_unfinished_markers:evidence/mac-write-path-20260913/README.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/T12/README.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/T13/report.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/T13/review.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/T14/report.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/T14/references.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/T14/review.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/T08/report.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/T11/darwin/README.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/T11/checkpoint-9a8473a/report.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/T16/admission/report.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/T12/fix-round1/README.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/continuation/review-checkpoints/T16-admission.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/continuation/review-checkpoints/T12-initial.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/continuation/review-checkpoints/runtime-wave-final.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/continuation/review-checkpoints/Darwin-T11.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/continuation/review-checkpoints/T12-fix1.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/continuation/review-checkpoints/native-capture.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/continuation/native-storage-capture/report.historical.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/continuation/native-storage-capture/correction.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/continuation/native-storage-capture/report.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/continuation/native-storage-capture/brief.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/continuation/native-ci-34692959158/README.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/continuation/integrated-108b906/README.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/continuation/pressure-admission/README.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/continuation/pressure-admission/review.md",
       "status": "pass",
       "detail": ""
     },
@@ -1359,12 +1434,22 @@
       "detail": ""
     },
     {
-      "check": "no_unfinished_markers:evidence/continuation/runtime-checkpoint/t13-review.md",
+      "check": "no_unfinished_markers:evidence/continuation/native-ci-34681109500/README.md",
       "status": "pass",
       "detail": ""
     },
     {
-      "check": "no_unfinished_markers:evidence/continuation/runtime-checkpoint/commit-coordinator-review.md",
+      "check": "no_unfinished_markers:evidence/continuation/integrated-T16-7b915f8/README.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/continuation/native-ci-34793696720/README.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/continuation/test-harness/README.md",
       "status": "pass",
       "detail": ""
     },
@@ -1389,87 +1474,17 @@
       "detail": ""
     },
     {
+      "check": "no_unfinished_markers:evidence/continuation/runtime-checkpoint/t13-review.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
       "check": "no_unfinished_markers:evidence/continuation/runtime-checkpoint/launch-review.md",
       "status": "pass",
       "detail": ""
     },
     {
-      "check": "no_unfinished_markers:evidence/continuation/integrated-108b906/README.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:evidence/continuation/pressure-admission/review.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:evidence/continuation/pressure-admission/README.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:evidence/continuation/integrated-T16-7b915f8/README.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:evidence/continuation/native-ci-34692959158/README.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:evidence/continuation/review-checkpoints/native-capture.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:evidence/continuation/review-checkpoints/T12-initial.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:evidence/continuation/review-checkpoints/Darwin-T11.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:evidence/continuation/review-checkpoints/T16-admission.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:evidence/continuation/review-checkpoints/runtime-wave-final.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:evidence/continuation/review-checkpoints/T12-fix1.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:evidence/continuation/native-ci-34681109500/README.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:evidence/continuation/native-storage-capture/report.historical.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:evidence/continuation/native-storage-capture/brief.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:evidence/continuation/native-storage-capture/correction.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "no_unfinished_markers:evidence/continuation/native-storage-capture/report.md",
+      "check": "no_unfinished_markers:evidence/continuation/runtime-checkpoint/commit-coordinator-review.md",
       "status": "pass",
       "detail": ""
     },
@@ -1479,32 +1494,32 @@
       "detail": ""
     },
     {
-      "check": "no_unfinished_markers:evidence/continuation/test-harness/red/README.md",
-      "status": "pass",
-      "detail": ""
-    },
-    {
       "check": "no_unfinished_markers:evidence/continuation/runtime-review-fixes/r2/README.md",
       "status": "pass",
       "detail": ""
     },
     {
-      "check": "no_unfinished_markers:evidence/T12/fix-round1/README.md",
+      "check": "no_unfinished_markers:evidence/continuation/test-harness/red/README.md",
       "status": "pass",
       "detail": ""
     },
     {
-      "check": "no_unfinished_markers:evidence/T16/admission/report.md",
+      "check": "no_unfinished_markers:evidence/T07/continuation-2026-09-12/report.md",
       "status": "pass",
       "detail": ""
     },
     {
-      "check": "no_unfinished_markers:evidence/T11/darwin/README.md",
+      "check": "no_unfinished_markers:evidence/T08/mc004-retirement-20260913/README.md",
       "status": "pass",
       "detail": ""
     },
     {
-      "check": "no_unfinished_markers:evidence/T11/checkpoint-9a8473a/report.md",
+      "check": "no_unfinished_markers:docs/superpowers/designs/2026-09-12-supervised-recovery.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:docs/superpowers/plans/2026-09-12-runtime-continuation.md",
       "status": "pass",
       "detail": ""
     },
@@ -1519,42 +1534,7 @@
       "detail": "[]"
     },
     {
-      "check": "svg_xml:core-scheduling.svg",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "svg_xml:edit-state.svg",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "svg_xml:c4-ownership.svg",
-      "status": "pass",
-      "detail": ""
-    },
-    {
       "check": "svg_xml:c3-components.svg",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "svg_xml:memory-pressure.svg",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "svg_xml:worktree-isolation.svg",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "svg_xml:c1-context.svg",
-      "status": "pass",
-      "detail": ""
-    },
-    {
-      "check": "svg_xml:search-pipeline.svg",
       "status": "pass",
       "detail": ""
     },
@@ -1564,12 +1544,47 @@
       "detail": ""
     },
     {
-      "check": "svg_xml:deployment.svg",
+      "check": "svg_xml:core-scheduling.svg",
       "status": "pass",
       "detail": ""
     },
     {
       "check": "svg_xml:c2-containers.svg",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "svg_xml:worktree-isolation.svg",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "svg_xml:deployment.svg",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "svg_xml:c4-ownership.svg",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "svg_xml:search-pipeline.svg",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "svg_xml:c1-context.svg",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "svg_xml:memory-pressure.svg",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "svg_xml:edit-state.svg",
       "status": "pass",
       "detail": ""
     },

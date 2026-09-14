@@ -1,0 +1,1 @@
+{"conclusion":"success","createdAt":"2026-09-14T00:45:31Z","event":"workflow_dispatch","headSha":"a15b127ccc407d5404f03196787c18625ea20d1f","jobs":[{"conclusion":"success","name":"native / macos-15-intel"},{"conclusion":"success","name":"native / macos-15"},{"conclusion":"success","name":"native / ubuntu-24.04"}]}
