@@ -1,0 +1,8 @@
+{
+  "scope": "integrator status follow-up: docs/18 row 1 (deadline-test gate resolved by PR #5, runtime-cache IoFailure diagnosis), DESIGNBOOK.html regenerated from docs, tasks/progress.json, MANIFEST.sha256, verification/report.json, evidence/continuation",
+  "authorized_by": "repository owner's explicit request in this session to continue the remaining work",
+  "workspace": "/Users/guribbong/code/ZCR-worktrees/t01-docs18-followup",
+  "manifest": "task/manifest.json",
+  "issued_at": "2026-09-14T03:18:46Z",
+  "note": "Issued before any edit. Documentation and status only; no runtime source changes. DESIGNBOOK.html is listed from the start because docs changes require regenerating it."
+}

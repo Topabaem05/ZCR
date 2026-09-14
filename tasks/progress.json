@@ -17,7 +17,9 @@
     "Main integration audit: every original remote branch is an ancestor of a911bf8. PR #1 is retargeted to main by explicit user request; release_status remains BLOCKED. See docs/18-Merge-and-Remaining-Work.md.",
     "CI bootstrap fixed at local169be18 / published88546e8, identical tree54dba2efb586303f5b60e80bf3834c28519a223e. Plain-Python import regression reproduced the source mutation before the fix; all5 CI-tooling tests pass after it. Runtime verification is recorded separately.",
     "Source88546e8 native CI34705666351: Linux job SUCCESS. Apple Silicon Debug320PASS/12SKIP/24FAIL, ReleaseSafe321PASS/12SKIP/23FAIL. T12 Linux-only Store.init/metadata causes23 failures and Debug fixture cleanup leaks; Debug additionally fails MC-004 retiring tool id assertion. Intel Mac was still running at documentation checkpoint. Release remains BLOCKED. Local169be18 both modes346PASS/1SKIP/9AF_UNIX failures; builds/contracts, codec10, CLI19 pass.",
-    "Main a15b127 (PR #2 T12 Darwin storage and T11 provenance; PR #3 MC-004 tests) native CI 34793696720 succeeded: Linux Debug/ReleaseSafe 356 PASS/3 SKIP/0 FAIL; Apple Silicon and Intel Mac 347 PASS/12 SKIP/0 FAIL each mode; 0 leaks; contracts, codec, CLI subprocess and capability commands exit 0. External gates G05/G07/G08/G11/G12/G13 remain NOT_RUN and release remains BLOCKED. Open: MC-004 deadline test observation point (T08) and runtime-cache IoFailure under local CPU load (T10/T13). See docs/18-Merge-and-Remaining-Work.md."
+    "Main a15b127 (PR #2 T12 Darwin storage and T11 provenance; PR #3 MC-004 tests) native CI 34793696720 succeeded: Linux Debug/ReleaseSafe 356 PASS/3 SKIP/0 FAIL; Apple Silicon and Intel Mac 347 PASS/12 SKIP/0 FAIL each mode; 0 leaks; contracts, codec, CLI subprocess and capability commands exit 0. External gates G05/G07/G08/G11/G12/G13 remain NOT_RUN and release remains BLOCKED. Open: MC-004 deadline test observation point (T08) and runtime-cache IoFailure under local CPU load (T10/T13). See docs/18-Merge-and-Remaining-Work.md.",
+    "PR #5 merged at 96c2666: the MC-004 deadline test waits for the deadline watcher's after_deadline_cancel hook and requires exactly one authority check; a watcher that never cancels now fails it. Records at 3621430 under a task manifest issued before any edit; native CI passed on all three runners. See evidence/T08/deadline-20260914/README.md.",
+    "Runtime-cache IoFailure under local CPU load diagnosed: workspace discovery git calls exceeded the 5000 ms timeout under oversubscription (git worktree list 6932 ms with 16 busy loops on 8 CPUs) and identity.zig reported the Timeout as IoFailure. A binary from unmodified main fails the same way under the same load, so this is a documented limit rather than a gate. The T10 change reporting it as retryable Busy with a configurable budget is under review in PR #6."
   ],
   "tasks": [
     {
@@ -168,7 +170,8 @@
         "evidence/continuation/native-ci-34692959158/README.md",
         "evidence/continuation/integrated-108b906/README.md",
         "evidence/T08/mc004-retirement-20260913/README.md",
-        "evidence/continuation/native-ci-34793696720/README.md"
+        "evidence/continuation/native-ci-34793696720/README.md",
+        "evidence/T08/deadline-20260914/README.md"
       ],
       "required_tests": [
         "MC-001",
