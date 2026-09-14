@@ -1,0 +1,8 @@
+{
+  "scope": "T08 deadline-test observation point: src/protocol/mcp.zig, tests/t08_test.zig, evidence/T08",
+  "authorized_by": "repository owner's explicit request in this session to continue the remaining work after PR #3 (the open deadline-test gate recorded in evidence/T08/handoff.json)",
+  "workspace": "/Users/guribbong/code/ZCR-worktrees/t08-deadline",
+  "manifest": "task/manifest.json",
+  "issued_at": "2026-09-14T00:47:32Z",
+  "note": "Issued before any edit in this worktree. Production writes stay disabled; no core public type or contract changes."
+}

@@ -1,0 +1,25 @@
+test
++- run test T08-test 5 pass, 1 fail (6 total)
+error: 't08_test.test.MC-004 deadline watcher interrupts before filesystem work and output failure drains' failed:
+       expected 1, found 2
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:118:17: 0x1026dbb93 in expectEqualInner__anon_58174 (T08-test)
+                       return error.TestExpectedEqual;
+                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:83:5: 0x1026e3c2b in expectEqual (T08-test)
+           return expectEqualInner(T, expected, actual);
+           ^
+       /Users/guribbong/code/ZCR-state/tasks/T08/deadline-20260914/mutant-no-cancel/tests/t08_test.zig:412:5: 0x1026e3d0b in test.MC-004 deadline watcher interrupts before filesystem work and output failure drains (T08-test)
+           try testing.expectEqual(@as(u32, 1), gate.validated.load(.acquire));
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T08/deadline-20260914/cache-mutant2 && /Users/guribbong/code/ZCR-state/tasks/T08/deadline-20260914/cache-mutant2/o/526b9098ae61094c1794853b3e3905ff/T08-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T08/deadline-20260914/cache-mutant2 --seed=0xac7495b4 --listen=-
+
+Build Summary: 3/5 steps succeeded (1 failed); 5/6 tests passed (1 failed)
+test transitive failure
++- install T08-test success
+|  +- compile test T08-test Debug native success 25s MaxRSS:247M
+|     +- options success
++- run test T08-test 5 pass, 1 fail (6 total)
+   +- compile test T08-test Debug native (+1 more reused dependencies)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T08/deadline-20260914/cache-mutant2/o/f73c3388e88e2a4fe1e8f77ca63d50d0/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T08/deadline-20260914/mutant-no-cancel /Users/guribbong/code/ZCR-state/tasks/T08/deadline-20260914/cache-mutant2 /Users/guribbong/code/ZCR-state/tasks/T08/deadline-20260914/zig-global-cache-mut --seed 0xac7495b4 -Zffb135f657663048 test -Dtest-group=mcp -Dtest-id=MC-004 -Doptimize=Debug -Dinstall-tests=true --prefix /Users/guribbong/code/ZCR-state/tasks/T08/deadline-20260914/out-mutant2 --summary all

@@ -1,0 +1,13 @@
+{
+  "schema_version": "zcr-evidence/1",
+  "task_id": "T08",
+  "label": "mc004-debug-stress",
+  "command": "zsh evidence/T08/mc004-retirement-20260913/probes/mc004_stress.sh $STATE/out-mc004-debug/bin/T08-test $STATE/logs/stress 10 30",
+  "exit_code": 0,
+  "source_commit": "362143001256a9076a3cd0245b958b78cfaa1370",
+  "source_tree": "ddcf33e6f1a629e9470bb82ef14099fc7d60c750",
+  "worktree_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/t08-deadline",
+  "binary_path": "/Users/guribbong/code/ZCR-state/tasks/T08/deadline-20260914/out-mc004-debug/bin/T08-test",
+  "binary_sha256": "e2d3ee2ea504a4b8e158660f26af2fa913f0989249e243b68b95ae8b8802b4e0",
+  "recorded_at_unix_ms": 1789348123312
+}

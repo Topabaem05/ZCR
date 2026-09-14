@@ -49,6 +49,10 @@ pub const Config = struct {
     /// Optional deterministic lifecycle fault hook; never called under a lock.
     retirement_context: ?*anyopaque = null,
     before_tool_release: ?*const fn (?*anyopaque) void = null,
+    /// Optional deterministic deadline hook: called once for each request the
+    /// watcher expires, after its cancellation flag is set; never called under a lock.
+    deadline_context: ?*anyopaque = null,
+    after_deadline_cancel: ?*const fn (?*anyopaque) void = null,
 };
 
 pub const Server = struct {
@@ -878,11 +882,14 @@ const Transport = struct {
         while (!t.finished.load(.acquire)) {
             t.mutex.lockUncancelable(io);
             const current = t.now();
+            var cancelled: usize = 0;
             for (&t.slots) |*slot| if ((slot.state == .queued or slot.state == .running) and slot.deadline > 0 and current >= slot.deadline and !slot.cancel.load(.acquire)) {
                 slot.expired.store(true, .release);
                 slot.cancel.store(true, .release);
+                cancelled += 1;
             };
             t.mutex.unlock(io);
+            if (t.server.config.after_deadline_cancel) |hook| for (0..cancelled) |_| hook(t.server.config.deadline_context);
             std.Io.sleep(io, .fromMilliseconds(1), .awake) catch return;
         }
     }

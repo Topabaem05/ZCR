@@ -1,0 +1,21 @@
+{
+  "task": "T08",
+  "role": "task",
+  "violations": [],
+  "changes": [
+    {
+      "kind": "modified",
+      "path": "src/protocol/mcp.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "modified",
+      "path": "tests/t08_test.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    }
+  ]
+}

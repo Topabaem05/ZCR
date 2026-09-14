@@ -2,20 +2,19 @@
   "schema_version": "zcr-task-handoff/1",
   "task": "T08",
   "status": "IMPLEMENTED_WITH_OPEN_GATES",
-  "revision": "MC-004 test revision (PR #3)",
-  "base_commit": "9226555ce3abad17e5a9c856d952bbd2bfb3eca8",
-  "source_head": "4e7cc0fcbb0049c0bf22b389e00d150d388b0ff6",
-  "source_tree": "5c8c01adbabfaf866291187da3375578b47257a3",
-  "source_head_note": "PASS records bind to source_head, the branch head after merging main 9226555; relative to base_commit it changes only tests/t08_test.zig and evidence/T08, and T08-owned sources are identical to code_commit",
-  "code_commit": "ae5e4a4c2fa7ff8771985ca6cdc403952a72ed89",
+  "revision": "MC-004 deadline observation point",
+  "base_commit": "a15b127ccc407d5404f03196787c18625ea20d1f",
+  "source_head": "362143001256a9076a3cd0245b958b78cfaa1370",
+  "source_tree": "ddcf33e6f1a629e9470bb82ef14099fc7d60c750",
+  "source_head_note": "PASS records bind to source_head; later commits on the branch change only evidence/T08",
+  "code_commit": "362143001256a9076a3cd0245b958b78cfaa1370",
   "source_commits": [
-    "bd54afe246bc9640eb1299d7afb60490fcb3cc49",
-    "ae5e4a4c2fa7ff8771985ca6cdc403952a72ed89"
+    "362143001256a9076a3cd0245b958b78cfaa1370"
   ],
-  "branch_integration": "PR #2 merged into main as 9226555; main merged into claude/t08-mc004-retirement as 7324a3e with no overlapping files",
+  "branch_integration": "branch claude/t08-deadline-observation from main a15b127 (PR #3 merge)",
   "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
-  "workspace_incarnation": "fs:16777232:649219198:16777232:649219196:16777232:647053195",
-  "workspace_incarnation_note": "filesystem workspace identity of the clean recording worktree (root, git dir, common dir device:inode), in the form src/launch.zig uses; bound by task/manifest.json",
+  "workspace_incarnation": "fs:16777232:649333702:16777232:649333700:16777232:647053195",
+  "workspace_incarnation_note": "filesystem workspace identity of the task worktree, bound by a task manifest issued before any edit",
   "source_owned_files": [
     "src/protocol/mcp.zig",
     "src/protocol/framing.zig",
@@ -23,10 +22,11 @@
     "tests/t08_test.zig"
   ],
   "changed_files": [
+    "src/protocol/mcp.zig",
     "tests/t08_test.zig"
   ],
   "exports": [
-    "Config{allocator,io,authorizer,session,generation,budget,tools_json,version,output_bytes,max_search_file_bytes,authority_context,validate_authority,retirement_context,before_tool_release}",
+    "Config{allocator,io,authorizer,session,generation,budget,tools_json,version,output_bytes,max_search_file_bytes,authority_context,validate_authority,retirement_context,before_tool_release,deadline_context,after_deadline_cancel}",
     "Server.init(Config)!Server",
     "Server.respond(Allocator,[]const u8,core.Cancel)!?[]const u8",
     "Server.serve(std.Io.File,std.Io.File)!void",
@@ -35,29 +35,28 @@
     "codec.preflight/parse/preflightToolArguments/rawRequestId/toolName",
     "framing.Decoder.init/push/finish; framing.RecordWriter.write"
   ],
-  "exports_note": "unchanged; no product source changed in this revision",
+  "exports_note": "Config gains optional deadline_context/after_deadline_cancel (null by default, behaviour unchanged when unset)",
   "tests": {
-    "mc004_debug": "6/6",
-    "mcp_debug": "29/29 (T08-test 27, T08-launch-test 2), 0 leaks",
-    "mcp_release_safe": "29/29 (T08-test 27, T08-launch-test 2), 0 leaks",
-    "mc004_debug_stress": "idle pass=10 fail=0, 8 busy loops pass=30 fail=0, stress PASS, runner exit 0",
-    "record_verify": "6 zcr-evidence/1 records at 4e7cc0f accepted by zcr-dev-evidence verify",
-    "failure_injection": "detach-after-hook mutant fails the retirement test; reader-ignores-failure mutant fails the stdout test; 1 KiB response control fails the pipe-drain test",
-    "codec_and_batch_regression": "NOT_RUN_THIS_REVISION (no product source changed)",
+    "mc004_debug": "5/5 steps succeeded; 6/6 tests passed",
+    "mcp_debug": "8/8 steps succeeded; 29/29 tests passed",
+    "mcp_release_safe": "8/8 steps succeeded; 29/29 tests passed",
+    "mc004_debug_stress": "idle pass=10 fail=0, 8 busy loops pass=30 fail=0, runner exit 0",
+    "record_verify": "6 zcr-evidence/1 records at 3621430 accepted by zcr-dev-evidence verify",
+    "failure_injection": "watcher-never-cancels mutant fails the deadline test (expected 1 authority check, found 2); the earlier 1 ms variant could not detect it because the read engine's own timeout stopped the read",
+    "codec_and_batch_regression": "NOT_RUN_THIS_REVISION (codec, batch and framing sources unchanged)",
     "contract_verification": "NOT_RUN_THIS_REVISION (contracts unchanged; digest recorded)",
-    "macOS_runtime": "PASS on Apple M2 macOS 26.6.2 (local records); native CI run 34767687224 on 5b0dc65 (branch updated from main 9226555) succeeded on macos-15 and macos-15-intel",
-    "Linux_runtime": "native CI run 34767687224 on 5b0dc65 succeeded on ubuntu-24.04",
+    "macOS_runtime": "PASS on Apple M2 (local records); native CI on the PR covers Apple Silicon and Intel",
+    "Linux_runtime": "native CI on the PR",
     "actual_host_integration": "NOT_RUN",
     "Windows_runtime": "NOT_RUN"
   },
   "evidence": {
-    "bundle": "evidence/T08/mc004-retirement-20260913/README.md",
-    "report": "evidence/T08/mc004-retirement-20260913/report.json",
-    "records": "evidence/T08/mc004-retirement-20260913/records/",
-    "runs_index": "evidence/T08/mc004-retirement-20260913/records/runs.json"
+    "bundle": "evidence/T08/deadline-20260914/README.md",
+    "records": "evidence/T08/deadline-20260914/records/",
+    "runs_index": "evidence/T08/deadline-20260914/records/runs.json"
   },
-  "source_config_sha256": "8b14ce6221722963a35212c9a894afc4962b5fbbcf3ad662b09af3426cf941ac",
-  "corpus_sha256": "cf102b540363c3ddced89bab6155635dbdc08153a098bf38b9914942824ec330",
+  "source_config_sha256": "0c3177d8e1c8f20970774f2eb7605643cc3e04c09a9b55ce59316ce9438cfe67",
+  "corpus_sha256": "36a3160cbf0e3bd1288515824fb93ddcb58b5fab94ef49419a10557afaa43bd6",
   "limitations": [
     "zcr_files/zcr_search currently require policy authority for the traversal root \".\"; narrower policies fail E_SCOPE rather than broadening authority.",
     "A single engine worker processes a bounded queue; batch reads may use up to two bounded internal workers.",
@@ -66,23 +65,21 @@
     "The launcher must provide validate_authority for registry/session expiry and root-identity validation; Config defaults support independently bound test fixtures.",
     "Trusted global/info excludes and the integrator core.Cancel deadline extension are pending root integration; T08 uses an independent per-request monotonic watcher and flags.",
     "Direct stdio currently requires public POSIX poll/libc; Windows serve reports Unsupported until its platform gate.",
-    "MC-004 deadline test does not verify interruption before filesystem work: a watcher that never cancels still passes. An event-based check needs an observation point in src/protocol/mcp.zig.",
     "ReleaseSafe mcp binary under 8 busy loops failed four runtime-cache tests (BR-001 x3, IS-006) with IoFailure in 1 of 10 runs; not MC-004, cause not confirmed.",
     "POLLOUT-based pipe stall detection was observed on macOS only locally; Linux relies on native CI."
   ],
   "remaining_gates": [
-    "deadline-test observation point (product change, not in this revision)",
     "runtime-cache IoFailure under load (separate task)",
     "actual host integration and Windows runtime",
-    "docs/18 row 1 update with MANIFEST.sha256 (integrator)"
+    "docs/18 row 1 update with MANIFEST.sha256 (integrator; proposed in PR #4)"
   ],
   "steps": {
-    "S01": "PARTIAL (see process_deviations): clean per-task worktree from main f1c388a with separate caches, TMP and state; no pre-issued manifest for the development commits. A manifest, authorization and preflight were issued for the recording worktree at 4e7cc0f",
-    "S02": "instrumented the original retirement test under load and showed it passes a detach-after-hook mutant; new tests fail that mutant, the reader-ignores-failure mutant and the 1 KiB control",
-    "S03": "test-only change in tests/t08_test.zig (bd54afe, ae5e4a4)",
+    "S01": "task manifest, authorization and preflight issued in a clean worktree from main a15b127 before any edit; scope 0 violations",
+    "S02": "new deadline test fails to compile before the hook exists; watcher-never-cancels mutant fails the final test",
+    "S03": "optional deadline hook in src/protocol/mcp.zig and the event-based deadline test",
     "S04": "MC-004 Debug and load stress pass; mcp group Debug and ReleaseSafe pass",
-    "S05": "scope limited to tests/t08_test.zig and evidence/T08; mcp group regression in both modes",
-    "S06": "zcr-evidence/1 records at 4e7cc0f, config/corpus digests, task manifest for the recording, scope report and this handoff; S01 deviation and remaining gates listed"
+    "S05": "scope limited to src/protocol/mcp.zig, tests/t08_test.zig and evidence/T08 (guard 0 violations)",
+    "S06": "zcr-evidence/1 records at 3621430, config/corpus digests, task identity and this handoff"
   },
   "integration_dependencies": [
     "build imports zcr_core,zcr_policy,zcr_memory,zcr_fs_read,zcr_fs_traverse,zcr_search,zcr_batch_read,zcr_projection",
@@ -99,7 +96,8 @@
     "R5": "stdout-failure and partial-pipe waits are event-based with a 10 s hang guard (ae5e4a4)",
     "R6": "PR #3 review: evidence under evidence/T08, zcr-evidence/1 records with config/corpus digests, stress runner exit status and signals, records bound to the runner commit, canonical handoff refreshed",
     "R7": "PR #3 review: runner fails when load workers are missing; workspace identity, task manifest and scope report recorded; macOS limitation narrowed (4e7cc0f)",
-    "R8": "PR #3 review: S01 claim narrowed and the missing pre-issued manifest recorded as a process deviation; completed native CI removed from remaining gates"
+    "R8": "PR #3 review: S01 claim narrowed and the missing pre-issued manifest recorded as a process deviation; completed native CI removed from remaining gates",
+    "R9": "deadline watcher observation hook and event-based deadline test (3621430)"
   },
   "previous_handoffs": [
     {
@@ -175,29 +173,146 @@
         "R2": "exclusive stdin uses20ms public POSIX poll to observe stdout failure without requiring input EOF; intended RED and GREEN captured",
         "R3": "control backing and output credit reserved at startup; health works while ordinary global Budget is fully admitted elsewhere"
       }
+    },
+    {
+      "schema_version": "zcr-task-handoff/1",
+      "task": "T08",
+      "status": "IMPLEMENTED_WITH_OPEN_GATES",
+      "revision": "MC-004 test revision (PR #3)",
+      "base_commit": "9226555ce3abad17e5a9c856d952bbd2bfb3eca8",
+      "source_head": "4e7cc0fcbb0049c0bf22b389e00d150d388b0ff6",
+      "source_tree": "5c8c01adbabfaf866291187da3375578b47257a3",
+      "source_head_note": "PASS records bind to source_head, the branch head after merging main 9226555; relative to base_commit it changes only tests/t08_test.zig and evidence/T08, and T08-owned sources are identical to code_commit",
+      "code_commit": "ae5e4a4c2fa7ff8771985ca6cdc403952a72ed89",
+      "source_commits": [
+        "bd54afe246bc9640eb1299d7afb60490fcb3cc49",
+        "ae5e4a4c2fa7ff8771985ca6cdc403952a72ed89"
+      ],
+      "branch_integration": "PR #2 merged into main as 9226555; main merged into claude/t08-mc004-retirement as 7324a3e with no overlapping files",
+      "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+      "workspace_incarnation": "fs:16777232:649219198:16777232:649219196:16777232:647053195",
+      "workspace_incarnation_note": "filesystem workspace identity of the clean recording worktree (root, git dir, common dir device:inode), in the form src/launch.zig uses; bound by task/manifest.json",
+      "source_owned_files": [
+        "src/protocol/mcp.zig",
+        "src/protocol/framing.zig",
+        "src/protocol/codec.zig",
+        "tests/t08_test.zig"
+      ],
+      "changed_files": [
+        "tests/t08_test.zig"
+      ],
+      "exports": [
+        "Config{allocator,io,authorizer,session,generation,budget,tools_json,version,output_bytes,max_search_file_bytes,authority_context,validate_authority,retirement_context,before_tool_release}",
+        "Server.init(Config)!Server",
+        "Server.respond(Allocator,[]const u8,core.Cancel)!?[]const u8",
+        "Server.serve(std.Io.File,std.Io.File)!void",
+        "Server.FrameContext{allocator,cancel}",
+        "Server.serveFrame(std.Io,*core.Connection,core.BoundedBytes) core.ServeError!core.EncodedToolResult",
+        "codec.preflight/parse/preflightToolArguments/rawRequestId/toolName",
+        "framing.Decoder.init/push/finish; framing.RecordWriter.write"
+      ],
+      "exports_note": "unchanged; no product source changed in this revision",
+      "tests": {
+        "mc004_debug": "6/6",
+        "mcp_debug": "29/29 (T08-test 27, T08-launch-test 2), 0 leaks",
+        "mcp_release_safe": "29/29 (T08-test 27, T08-launch-test 2), 0 leaks",
+        "mc004_debug_stress": "idle pass=10 fail=0, 8 busy loops pass=30 fail=0, stress PASS, runner exit 0",
+        "record_verify": "6 zcr-evidence/1 records at 4e7cc0f accepted by zcr-dev-evidence verify",
+        "failure_injection": "detach-after-hook mutant fails the retirement test; reader-ignores-failure mutant fails the stdout test; 1 KiB response control fails the pipe-drain test",
+        "codec_and_batch_regression": "NOT_RUN_THIS_REVISION (no product source changed)",
+        "contract_verification": "NOT_RUN_THIS_REVISION (contracts unchanged; digest recorded)",
+        "macOS_runtime": "PASS on Apple M2 macOS 26.6.2 (local records); native CI run 34767687224 on 5b0dc65 (branch updated from main 9226555) succeeded on macos-15 and macos-15-intel",
+        "Linux_runtime": "native CI run 34767687224 on 5b0dc65 succeeded on ubuntu-24.04",
+        "actual_host_integration": "NOT_RUN",
+        "Windows_runtime": "NOT_RUN"
+      },
+      "evidence": {
+        "bundle": "evidence/T08/mc004-retirement-20260913/README.md",
+        "report": "evidence/T08/mc004-retirement-20260913/report.json",
+        "records": "evidence/T08/mc004-retirement-20260913/records/",
+        "runs_index": "evidence/T08/mc004-retirement-20260913/records/runs.json"
+      },
+      "source_config_sha256": "8b14ce6221722963a35212c9a894afc4962b5fbbcf3ad662b09af3426cf941ac",
+      "corpus_sha256": "cf102b540363c3ddced89bab6155635dbdc08153a098bf38b9914942824ec330",
+      "limitations": [
+        "zcr_files/zcr_search currently require policy authority for the traversal root \".\"; narrower policies fail E_SCOPE rather than broadening authority.",
+        "A single engine worker processes a bounded queue; batch reads may use up to two bounded internal workers.",
+        "Parser resource limits additionally cap 4096 total object keys and 65536 JSON values.",
+        "Actual CLI/host integration and Windows runtime were not executed. The 48d2e8b revision did not run macOS runtime; this revision records macOS runtime under tests.macOS_runtime.",
+        "The launcher must provide validate_authority for registry/session expiry and root-identity validation; Config defaults support independently bound test fixtures.",
+        "Trusted global/info excludes and the integrator core.Cancel deadline extension are pending root integration; T08 uses an independent per-request monotonic watcher and flags.",
+        "Direct stdio currently requires public POSIX poll/libc; Windows serve reports Unsupported until its platform gate.",
+        "MC-004 deadline test does not verify interruption before filesystem work: a watcher that never cancels still passes. An event-based check needs an observation point in src/protocol/mcp.zig.",
+        "ReleaseSafe mcp binary under 8 busy loops failed four runtime-cache tests (BR-001 x3, IS-006) with IoFailure in 1 of 10 runs; not MC-004, cause not confirmed.",
+        "POLLOUT-based pipe stall detection was observed on macOS only locally; Linux relies on native CI."
+      ],
+      "remaining_gates": [
+        "deadline-test observation point (product change, not in this revision)",
+        "runtime-cache IoFailure under load (separate task)",
+        "actual host integration and Windows runtime",
+        "docs/18 row 1 update with MANIFEST.sha256 (integrator)"
+      ],
+      "steps": {
+        "S01": "PARTIAL (see process_deviations): clean per-task worktree from main f1c388a with separate caches, TMP and state; no pre-issued manifest for the development commits. A manifest, authorization and preflight were issued for the recording worktree at 4e7cc0f",
+        "S02": "instrumented the original retirement test under load and showed it passes a detach-after-hook mutant; new tests fail that mutant, the reader-ignores-failure mutant and the 1 KiB control",
+        "S03": "test-only change in tests/t08_test.zig (bd54afe, ae5e4a4)",
+        "S04": "MC-004 Debug and load stress pass; mcp group Debug and ReleaseSafe pass",
+        "S05": "scope limited to tests/t08_test.zig and evidence/T08; mcp group regression in both modes",
+        "S06": "zcr-evidence/1 records at 4e7cc0f, config/corpus digests, task manifest for the recording, scope report and this handoff; S01 deviation and remaining gates listed"
+      },
+      "integration_dependencies": [
+        "build imports zcr_core,zcr_policy,zcr_memory,zcr_fs_read,zcr_fs_traverse,zcr_search,zcr_batch_read,zcr_projection",
+        "tools_json supplied from trusted build_options or Config bytes",
+        "root callback validates registry/session on each tool",
+        "T07 approved fixes 4ff1101 fa80da7 65f747e applied in task worktree",
+        "integrator build commits9542cf7 and9ab9f76 applied in task worktree"
+      ],
+      "review_fixes": {
+        "R1": "retiring state detaches reader-visible arena slices under lock before cleanup; deterministic gated same-string-ID reuse test",
+        "R2": "exclusive stdin uses20ms public POSIX poll to observe stdout failure without requiring input EOF; intended RED and GREEN captured",
+        "R3": "control backing and output credit reserved at startup; health works while ordinary global Budget is fully admitted elsewhere",
+        "R4": "MC-004 retirement check counts only validations while teardown is gated and asserts responses (bd54afe)",
+        "R5": "stdout-failure and partial-pipe waits are event-based with a 10 s hang guard (ae5e4a4)",
+        "R6": "PR #3 review: evidence under evidence/T08, zcr-evidence/1 records with config/corpus digests, stress runner exit status and signals, records bound to the runner commit, canonical handoff refreshed",
+        "R7": "PR #3 review: runner fails when load workers are missing; workspace identity, task manifest and scope report recorded; macOS limitation narrowed (4e7cc0f)",
+        "R8": "PR #3 review: S01 claim narrowed and the missing pre-issued manifest recorded as a process deviation; completed native CI removed from remaining gates"
+      },
+      "base_note": "the revision started from main f1c388a; main 9226555 (PR #2) was merged into the branch at 7324a3e",
+      "workspace_id": "fs:16777232:649219198:16777232:649219196:16777232:647053195",
+      "task_manifest": "evidence/T08/mc004-retirement-20260913/task/manifest.json",
+      "task_manifest_sha256": "b87b90d4904e977568866e6300609a8b17585b126077bac18068d36a4f6a79c6",
+      "authorization": "evidence/T08/mc004-retirement-20260913/task/authorization.json",
+      "scope_report": "evidence/T08/mc004-retirement-20260913/task/scope-4e7cc0f.json (zcr-dev-guard scope, base 9226555, 0 violations)",
+      "record_to_head_check": {
+        "command": "git diff --stat 4e7cc0f -- . ':!evidence/T08'",
+        "expected_output": "",
+        "observed_at_bundle_commit": ""
+      },
+      "state_dir": "ZCR-state/tasks/MC004 (outside the source tree; raw logs, caches and TMP for this revision)",
+      "merge_method": "merge commit, so the record commit stays reachable",
+      "ci_note": "native CI run 34767687224 on 5b0dc65 passed on all three runners; each later evidence-only head is checked by the PR's own native CI, which must pass on the exact merge head before merge",
+      "process_deviations": [
+        {
+          "requirement": "AGENTS.md task isolation: read the approved manifest, base commit and workspace incarnation before work (S01)",
+          "what_happened": "development commits bd54afe and ae5e4a4 were made in a clean per-task worktree with separate caches, TMP and state, but without a pre-issued zcr-task/1 manifest",
+          "what_is_covered": "task/manifest.json, preflight.json and the zcr-dev-guard scope report cover the PASS re-recording at 4e7cc0f; the guard also shows that every change since base 9226555 is inside the manifest write paths (0 violations)",
+          "not_claimed": "that the test edits were made under an approved manifest before S02/S03; S01 is not claimed as satisfied for the development commits",
+          "accepted_by": "left to the repository owner at merge; a replay from a pre-issued manifest would produce the same tests/t08_test.zig diff"
+        }
+      ]
     }
   ],
-  "base_note": "the revision started from main f1c388a; main 9226555 (PR #2) was merged into the branch at 7324a3e",
-  "workspace_id": "fs:16777232:649219198:16777232:649219196:16777232:647053195",
-  "task_manifest": "evidence/T08/mc004-retirement-20260913/task/manifest.json",
-  "task_manifest_sha256": "b87b90d4904e977568866e6300609a8b17585b126077bac18068d36a4f6a79c6",
-  "authorization": "evidence/T08/mc004-retirement-20260913/task/authorization.json",
-  "scope_report": "evidence/T08/mc004-retirement-20260913/task/scope-4e7cc0f.json (zcr-dev-guard scope, base 9226555, 0 violations)",
-  "record_to_head_check": {
-    "command": "git diff --stat 4e7cc0f -- . ':!evidence/T08'",
-    "expected_output": "",
-    "observed_at_bundle_commit": ""
-  },
+  "workspace_id": "fs:16777232:649333702:16777232:649333700:16777232:647053195",
+  "task_manifest": "evidence/T08/deadline-20260914/task/manifest.json",
+  "task_manifest_sha256": "d935a23f66ea522cb7c92e5756862d0767cb6ca4137c7b9a275d8c90ced514ca",
+  "authorization": "evidence/T08/deadline-20260914/task/authorization.json",
+  "scope_report": "evidence/T08/deadline-20260914/task/scope-code.json (zcr-dev-guard scope, 0 violations)",
   "state_dir": "ZCR-state/tasks/MC004 (outside the source tree; raw logs, caches and TMP for this revision)",
   "merge_method": "merge commit, so the record commit stays reachable",
-  "ci_note": "native CI run 34767687224 on 5b0dc65 passed on all three runners; each later evidence-only head is checked by the PR's own native CI, which must pass on the exact merge head before merge",
-  "process_deviations": [
-    {
-      "requirement": "AGENTS.md task isolation: read the approved manifest, base commit and workspace incarnation before work (S01)",
-      "what_happened": "development commits bd54afe and ae5e4a4 were made in a clean per-task worktree with separate caches, TMP and state, but without a pre-issued zcr-task/1 manifest",
-      "what_is_covered": "task/manifest.json, preflight.json and the zcr-dev-guard scope report cover the PASS re-recording at 4e7cc0f; the guard also shows that every change since base 9226555 is inside the manifest write paths (0 violations)",
-      "not_claimed": "that the test edits were made under an approved manifest before S02/S03; S01 is not claimed as satisfied for the development commits",
-      "accepted_by": "left to the repository owner at merge; a replay from a pre-issued manifest would produce the same tests/t08_test.zig diff"
-    }
-  ]
+  "process_deviations": [],
+  "record_to_head_check": {
+    "command": "git diff --stat 3621430 -- . ':!evidence/T08'",
+    "expected_output": ""
+  },
+  "process_deviations_note": "none for this revision; the MC-004 test revision's S01 deviation stays recorded in previous_handoffs"
 }
