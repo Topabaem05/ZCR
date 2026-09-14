@@ -1151,6 +1151,9 @@ test "WR-008 host witness grants once and refuses a replaced temp name after unl
     const parent = try std.Io.Dir.openDirAbsolute(f.io, repo.root.canonical_path, .{});
     try witness.retainPublication(parent, p);
     const grant = try issued(witness.grant(data));
+    // A witness issues one grant: a second issuance would overwrite the authority storage and
+    // digest the first grant references.
+    try t.expectError(error.Busy, issued(witness.grant(data)));
     // Issuing the grant fixes the retained set: later retention would expand what it authorizes.
     try t.expectError(error.Busy, witness.retainPublication(try std.Io.Dir.openDirAbsolute(f.io, repo.root.canonical_path, .{}), p));
     // Every authority-bearing field is bound at issuance: editing the approved task list behind the

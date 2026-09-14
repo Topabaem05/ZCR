@@ -411,6 +411,9 @@ pub const HostWitness = struct {
     }
 
     pub fn grant(self: *HostWitness, data: GrantData) E!ContinuityGrant {
+        // One grant per witness: the issued grant references this witness's authority storage and
+        // digest, so reissuing would silently replace what an earlier grant authorizes.
+        if (self.granted) return error.Busy;
         if (data.approved_tasks.len > max_grant_tasks or data.publication_digests.len > max_publications) return error.ResourceExhausted;
         @memcpy(self.grant_tasks[0..data.approved_tasks.len], data.approved_tasks);
         @memcpy(self.grant_digests[0..data.publication_digests.len], data.publication_digests);
