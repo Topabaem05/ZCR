@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "state": {
+    "toplevel": "/Users/guribbong/code/ZCR-worktrees/t08-deadline",
+    "absolute_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/t08-deadline",
+    "common_dir": "/Users/guribbong/code/ZCR/.git",
+    "head_commit": "a15b127ccc407d5404f03196787c18625ea20d1f",
+    "head_tree": "726fc173c065ec52cab6dae533edefcb80aed24e",
+    "branch": "claude/t08-deadline-observation",
+    "entries": []
+  },
+  "reasons": []
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": "zcr-evidence/1",
+  "task_id": "T08",
+  "label": "mc004-debug",
+  "command": "zig build test -Dtest-group=mcp -Dtest-id=MC-004 -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-mc004-debug --summary all",
+  "exit_code": 0,
+  "source_commit": "362143001256a9076a3cd0245b958b78cfaa1370",
+  "source_tree": "ddcf33e6f1a629e9470bb82ef14099fc7d60c750",
+  "worktree_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/t08-deadline",
+  "binary_path": "/Users/guribbong/code/ZCR-state/tasks/T08/deadline-20260914/out-mc004-debug/bin/T08-test",
+  "binary_sha256": "e2d3ee2ea504a4b8e158660f26af2fa913f0989249e243b68b95ae8b8802b4e0",
+  "recorded_at_unix_ms": 1789348114858
+}

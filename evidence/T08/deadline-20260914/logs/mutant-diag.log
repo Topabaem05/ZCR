@@ -1,0 +1,13 @@
+test
++- run test T08-test w
+DEADLINEDIAG validated=1 cancelled=true out={"jsonrpc":"2.0","id":1,"result":{"protocolVersion":"2025-11-25","capabilities":{"tools":{"listChanged":false}},"serverInfo":{"name":"zcr","version":"0.1.0"}}}
+{"jsonrpc":"2.0","id":"deadline","result":{"content":[{"type":"text","text":"{\"schema_version\":\"zcr/1\",\"request_id\":\"transport-3\",\"workspace_id\":\"01010101010101010101010101010101:02020202020202020202020202020202\",\"generation\":7,\"ok\":false,\"complete\":false,\"truncated\":false,\"consistency\":\"not_applicable\",\"coverage\":{\"scope\":\"\",\"skipped\":0,\"index_state\":\"not_applicable\"},\"data\":{},\"error\":{\"code\":\"E_DEADLINE\",\"message\":\"DeadlineExceeded\",\"retryable\":false},\"meta\":{\"returned_bytes\":2}}"}],"isError":true}}
+
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T08/deadline-20260914/cache-mutant-diag && /Users/guribbong/code/ZCR-state/tasks/T08/deadline-20260914/cache-mutant-diag/o/53b7bbe8f66673eed706e0828ecdd38e/T08-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T08/deadline-20260914/cache-mutant-diag --seed=0xaa9dd84d --listen=-
+
+Build Summary: 4/4 steps succeeded; 6/6 tests passed
+test success
++- run test T08-test 6 pass (6 total) 1s MaxRSS:26M
+   +- compile test T08-test Debug native success 18s MaxRSS:313M
+      +- options success
+

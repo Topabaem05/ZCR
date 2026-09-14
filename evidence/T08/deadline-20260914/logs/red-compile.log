@@ -1,0 +1,20 @@
+test
++- run test T08-test
+   +- compile test T08-test Debug native 1 errors
+tests/t08_test.zig:395:21: error: no field named 'deadline_context' in struct 'mcp.Config'
+    h.server.config.deadline_context = &gate;
+                    ^~~~~~~~~~~~~~~~
+src/protocol/mcp.zig:27:20: note: struct declared here
+pub const Config = struct {
+                   ^~~~~~
+error: 1 compilation errors
+failed command: /Users/guribbong/.local/share/zig/0.16.0/zig test -ODebug --dep zcr_core --dep zcr_policy --dep zcr_memory --dep zcr_admission --dep zcr_fs_read --dep zcr_fs_traverse --dep zcr_search --dep zcr_batch=zcr_batch_read --dep zcr_projection --dep zcr_mcp --dep zcr_workspace --dep zcr_cache --dep build_options -Mroot=/Users/guribbong/code/ZCR-worktrees/t08-deadline/tests/t08_test.zig -ODebug -Mzcr_core=/Users/guribbong/code/ZCR-worktrees/t08-deadline/src/core/types.zig -ODebug --dep zcr_core -Mzcr_policy=/Users/guribbong/code/ZCR-worktrees/t08-deadline/src/policy/capability.zig -ODebug --dep zcr_core -Mzcr_memory=/Users/guribbong/code/ZCR-worktrees/t08-deadline/src/memory/budget.zig -ODebug --dep zcr_core --dep zcr_memory -Mzcr_admission=/Users/guribbong/code/ZCR-worktrees/t08-deadline/src/scheduler/admission.zig -ODebug --dep zcr_core --dep zcr_policy --dep zcr_memory --dep zcr_cache -Mzcr_fs_read=/Users/guribbong/code/ZCR-worktrees/t08-deadline/src/fs/read.zig -ODebug --dep zcr_core --dep zcr_policy -Mzcr_fs_traverse=/Users/guribbong/code/ZCR-worktrees/t08-deadline/src/fs/traverse.zig -ODebug --dep zcr_core --dep zcr_policy --dep zcr_fs_read --dep zcr_fs_traverse -Mzcr_search=/Users/guribbong/code/ZCR-worktrees/t08-deadline/src/search/literal.zig -ODebug --dep zcr_core --dep zcr_policy --dep zcr_memory --dep zcr_admission --dep zcr_fs_read -Mzcr_batch_read=/Users/guribbong/code/ZCR-worktrees/t08-deadline/src/batch/read.zig -ODebug --dep zcr_core -Mzcr_projection=/Users/guribbong/code/ZCR-worktrees/t08-deadline/src/protocol/projection.zig -ODebug --dep zcr_core --dep zcr_policy --dep zcr_memory --dep zcr_admission --dep zcr_fs_read --dep zcr_fs_traverse --dep zcr_search --dep zcr_batch_read --dep zcr_projection --dep zcr_cache -Mzcr_mcp=/Users/guribbong/code/ZCR-worktrees/t08-deadline/src/protocol/mcp.zig -ODebug --dep zcr_core --dep zcr_policy -Mzcr_workspace=/Users/guribbong/code/ZCR-worktrees/t08-deadline/src/workspace/registry.zig -ODebug --dep zcr_core --dep zcr_policy --dep zcr_memory --dep zcr_workspace -Mzcr_cache=/Users/guribbong/code/ZCR-worktrees/t08-deadline/src/cache/content.zig -Mbuild_options=/Users/guribbong/code/ZCR-state/tasks/T08/deadline-20260914/zig-local-cache/c/5b8b18f739e7d6482a7ac49cb00a24f9/options.zig -lc --test-filter MC-004 --cache-dir /Users/guribbong/code/ZCR-state/tasks/T08/deadline-20260914/zig-local-cache --global-cache-dir /Users/guribbong/code/ZCR-state/tasks/T08/deadline-20260914/zig-global-cache --name T08-test --zig-lib-dir /Users/guribbong/.local/share/zig/0.16.0/lib/ --listen=-
+
+Build Summary: 1/4 steps succeeded (1 failed)
+test transitive failure
++- run test T08-test transitive failure
+   +- compile test T08-test Debug native 1 errors
+      +- options success
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T08/deadline-20260914/zig-local-cache/o/c7f5141f8980aec12592e9f22c535a40/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-worktrees/t08-deadline /Users/guribbong/code/ZCR-state/tasks/T08/deadline-20260914/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T08/deadline-20260914/zig-global-cache --seed 0x991f5f98 -Z87ab36d5ac74b23f test -Dtest-group=mcp -Dtest-id=MC-004 -Doptimize=Debug --summary all

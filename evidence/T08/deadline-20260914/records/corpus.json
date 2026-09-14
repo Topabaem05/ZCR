@@ -1,0 +1,17 @@
+{
+  "contracts/tools.json": "6537c0961f85dd623cf76c195dab534f583052c31eff2eda54727e97083a0b4b",
+  "derivation": "sha256 of this file's bytes is corpus_sha256; file hashes are sha256 of blobs at source_commit",
+  "description": "MCP frames, file contents and concurrency gates are embedded in the compiled test source; the deadline test reads hello.txt with deadline_ms 500 while its first authority check waits for the watcher's cancellation event. Temporary directories and cache-test git repositories are generated per run.",
+  "schema": "zcr-t08-corpus/1",
+  "source_commit": "362143001256a9076a3cd0245b958b78cfaa1370",
+  "stress": {
+    "arguments": "<T08-test> <log dir> 10 30",
+    "exit_status": "0 only if every run exited 0 with all load workers alive around every loaded run; 1 failed run; 2 missing load workers; 130/143 interrupted",
+    "idle_runs": 10,
+    "loaded_runs": 30,
+    "run_from": "the clean source_commit worktree by in-tree path",
+    "script": "evidence/T08/mc004-retirement-20260913/probes/mc004_stress.sh",
+    "script_sha256": "fae767dfbcdfac83967398940746b1438a7b54ad95ccc396dd5cf738a1df8bb2"
+  },
+  "tests/t08_test.zig": "5d255580e9e4ea11b65c45b7a023ea2b0783686293120f854a367e24af2fd722"
+}
