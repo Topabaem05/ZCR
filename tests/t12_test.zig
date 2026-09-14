@@ -1135,7 +1135,9 @@ test "WR-008 host witness grants once and refuses a replaced temp name after unl
     defer fixture.deinit();
     const p = try prepared(fixture);
     const ns = fixture.store.options.namespace;
-    const data = try grantFor(fixture, ns);
+    const attested = [_]core.Sha256{try storage.recovery.publicationDigest(p)};
+    var data = try grantFor(fixture, ns);
+    data.publication_digests = &attested;
     // The production host retains the root/Git/common identity, the private state
     // directory and, per pending publication, the parent, temp and original handles.
     var witness = storage.recovery.HostWitness.init(f.io, &repo.witness, repo.state_witness);
@@ -1143,12 +1145,18 @@ test "WR-008 host witness grants once and refuses a replaced temp name after unl
     const parent = try std.Io.Dir.openDirAbsolute(f.io, repo.root.canonical_path, .{});
     try witness.retainPublication(parent, p);
     const grant = witness.grant(data);
+    // Issuing the grant fixes the retained set: later retention would expand what it authorizes.
+    try t.expectError(error.Busy, witness.retainPublication(try std.Io.Dir.openDirAbsolute(f.io, repo.root.canonical_path, .{}), p));
     const validate_publication = grant.validate_publication.?;
     // A publication is never attested before the one-use continuity check.
     try t.expectError(error.RecoveryRequired, validate_publication(grant.context, data, p));
     try grant.validate(grant.context, data, ns);
     try t.expectError(error.RecoveryRequired, grant.validate(grant.context, data, ns));
     try validate_publication(grant.context, data, p);
+    // A retained publication outside the grant's attested digests is refused, even an empty set.
+    var unattested = data;
+    unattested.publication_digests = &.{};
+    try t.expectError(error.RecoveryRequired, validate_publication(grant.context, unattested, p));
     var other = p;
     other.generation += 1;
     try t.expectError(error.RecoveryRequired, validate_publication(grant.context, data, other));
@@ -1166,7 +1174,9 @@ test "WR-008 host witness accepts an applied publication and refuses a foreign t
     defer fixture.deinit();
     const p = try prepared(fixture);
     const ns = fixture.store.options.namespace;
-    const data = try grantFor(fixture, ns);
+    const attested = [_]core.Sha256{try storage.recovery.publicationDigest(p)};
+    var data = try grantFor(fixture, ns);
+    data.publication_digests = &attested;
     var witness = storage.recovery.HostWitness.init(f.io, &repo.witness, repo.state_witness);
     defer witness.deinit();
     const parent = try std.Io.Dir.openDirAbsolute(f.io, repo.root.canonical_path, .{});
@@ -1190,7 +1200,9 @@ test "WR-008 host witness retires terminal publications so its limit bounds pend
     defer fixture.deinit();
     const p = try prepared(fixture);
     const ns = fixture.store.options.namespace;
-    const data = try grantFor(fixture, ns);
+    const attested = [_]core.Sha256{try storage.recovery.publicationDigest(p)};
+    var data = try grantFor(fixture, ns);
+    data.publication_digests = &attested;
     var witness = storage.recovery.HostWitness.init(f.io, &repo.witness, repo.state_witness);
     defer witness.deinit();
     for (0..storage.recovery.HostWitness.max_publications) |_| {

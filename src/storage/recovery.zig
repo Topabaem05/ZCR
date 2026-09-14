@@ -333,6 +333,8 @@ pub const HostWitness = struct {
     state: Io.Dir,
     retained: [max_publications]Retained = undefined,
     count: usize = 0,
+    /// Set by grant(): the retained set is then fixed, so retention cannot widen what a grant authorizes.
+    granted: bool = false,
     used: bool = false,
 
     /// Borrows `identity` and `state`; both must outlive the witness.
@@ -349,6 +351,7 @@ pub const HostWitness = struct {
     /// `parent` in every case; the caller resolves it without following links.
     pub fn retainPublication(self: *HostWitness, parent: Io.Dir, p: core.PreparedRecord) E!void {
         errdefer parent.close(self.io);
+        if (self.granted) return error.Busy;
         const pubid = p.publication orelse return error.RecoveryRequired;
         if (self.count == max_publications) return error.ResourceExhausted;
         if (!std.meta.eql(pubid.root_id, self.identity.root_id)) return error.RecoveryRequired;
@@ -387,6 +390,7 @@ pub const HostWitness = struct {
     }
 
     pub fn grant(self: *HostWitness, data: GrantData) ContinuityGrant {
+        self.granted = true;
         return .{ .data = data, .context = self, .validate = validate, .validate_publication = validatePublication };
     }
 
@@ -400,10 +404,14 @@ pub const HostWitness = struct {
         self.used = true;
     }
 
-    fn validatePublication(context: ?*anyopaque, _: GrantData, p: core.PreparedRecord) E!void {
+    fn validatePublication(context: ?*anyopaque, data: GrantData, p: core.PreparedRecord) E!void {
         const self: *HostWitness = @ptrCast(@alignCast(context.?));
         if (!self.used) return error.RecoveryRequired;
         const digest = try publicationDigest(p);
+        // A retained witness never attests a publication the protected grant did not list.
+        for (data.publication_digests) |attested| {
+            if (std.meta.eql(attested, digest)) break;
+        } else return error.RecoveryRequired;
         for (self.retained[0..self.count]) |*r| {
             if (std.meta.eql(r.digest, digest)) return r.check();
         }
