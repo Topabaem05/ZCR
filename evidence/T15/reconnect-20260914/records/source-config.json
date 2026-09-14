@@ -38,7 +38,7 @@
     "system": "Darwin"
   },
   "schema": "zcr-t15-source-config/1",
-  "source_commit": "a029e061ef3f4b2c8b493dad8148eebbb7bb778b",
+  "source_commit": "17a5cf350e9f15b6acdfa361ba96075cc9550798",
   "source_file_hashes": {
     "src/broker/auth.zig": "f2fe14aaf6a28c25a80005663664313c8cd5b89199fed1bce959cb45fa88384f",
     "src/broker/bridge.zig": "baa1cb7500a69ea973632377ce9be19a374b13e9236dab5a3f03b61f9856f834",
@@ -63,7 +63,7 @@
     "src/workspace/lease.zig": "b7b19b516e2dfe25f8e38df3962659cab90600e469cc1c0623050b2016d52e60",
     "src/workspace/registry.zig": "451f2569413e0769422cad98984624a93968e26d4f141e588b9d631bbea485ab"
   },
-  "source_tree": "24372c44e62bfa4b370ca0b38c640c9bbf3db79d",
+  "source_tree": "04938245d0c4b905e0d09ba096f71b210b319633",
   "toolchain": {
     "executable_sha256": "e6cd688d25664983833aae272f501d4bceeae304875b8f1741209d15fd13a4ec",
     "version": "0.16.0"

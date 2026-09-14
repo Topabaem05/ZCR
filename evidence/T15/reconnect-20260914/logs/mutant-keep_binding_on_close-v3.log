@@ -1,0 +1,19 @@
+test
++- run test T15-test 3 pass, 1 fail (4 total)
+error: 't15_test.test.BR-005 real UDS stale grant is refused and a broker restart needs a host rebind at a new fence and the bridge does not reconnect or resend' failed:
+       /Users/guribbong/code/ZCR-state/tasks/T15/r/c-keep_binding_on_close/tests/t15_test.zig:762:9: 0x100384f5b in expectAuthRefused (T15-test)
+               return error.TestUnexpectedResult;
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T15/r/c-keep_binding_on_close/tests/t15_test.zig:801:5: 0x100386703 in test.BR-005 real UDS stale grant is refused and a broker restart needs a host rebind at a new fence and the bridge does not reconnect or resend (T15-test)
+           try expectAuthRefused(f, f.connect(0));
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T15/r/mk && /Users/guribbong/code/ZCR-state/tasks/T15/r/mk/o/1613b09900dfd54006e5392043378818/T15-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T15/r/mk --seed=0x8b3e8b87 --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 3/4 tests passed (1 failed)
+test transitive failure
++- run test T15-test 3 pass, 1 fail (4 total)
+   +- compile test T15-test Debug native success 26s MaxRSS:301M
+      +- options cached
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T15/r/mk/o/f73c3388e88e2a4fe1e8f77ca63d50d0/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T15/r/c-keep_binding_on_close /Users/guribbong/code/ZCR-state/tasks/T15/r/mk /Users/guribbong/code/ZCR-state/tasks/T15/r/zgc --seed 0x8b3e8b87 -Zdee7a6a92a7275c6 test -Dtest-group=broker -Dtest-id=BR-005 -Doptimize=Debug --summary all

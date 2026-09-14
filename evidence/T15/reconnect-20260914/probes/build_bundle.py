@@ -19,7 +19,7 @@ ST = "/Users/guribbong/code/ZCR-state/tasks/T15/reconnect-20260914"
 SHORT = "/Users/guribbong/code/ZCR-state/tasks/T15/r"
 WT = "/Users/guribbong/code/ZCR-worktrees/t15-reconnect"
 E = f"{WT}/evidence/T15/reconnect-20260914"
-TEST = "BR-005 real UDS reconnect after disconnect and broker restart needs a host rebind at a new fence and replays nothing"
+TEST = "BR-005 real UDS stale grant is refused and a broker restart needs a host rebind at a new fence and the bridge does not reconnect or resend"
 MUTANTS = {
     "keep_binding_on_close": "closeSession keeps the grant's registry binding",
     "ignore_fence": "task binding matches regardless of fence",
@@ -86,7 +86,7 @@ def main():
     for name in ("mutants.py", "record_runs.sh", "build_bundle.py"):
         shutil.copy(f"{ST}/task/{name}", f"{E}/probes/{name}")
     logs = ["probe1-br005-debug", "probe2-br005-debug", "green-br005-debug", "rec-preflight", "rec-contracts",
-            "quiet-broker-debug", "quiet-broker-releasesafe", "verify-quiet-broker-debug-t15", "verify-quiet-broker-releasesafe-t15"] + [f"mutant-{m}" for m in MUTANTS]
+            "quiet-broker-debug", "quiet-broker-releasesafe", "verify-quiet-broker-debug-t15", "verify-quiet-broker-releasesafe-t15", "green2-br005-debug", "green3-br005-debug", "green4-br005-debug", "repro-br005-releasesafe", "green5-br005-ReleaseSafe", "green5-br005-Debug"] + [f"mutant-{m}" for m in MUTANTS] + [f"mutant-{m}-v1" for m in MUTANTS] + [f"mutant-{m}-v2" for m in MUTANTS] + [f"mutant-{m}-v3" for m in MUTANTS] + [f"mutant-{m}-v4" for m in MUTANTS]
     for name in logs:
         shutil.copy(f"{ST}/logs/{name}.log", f"{E}/logs/{name}.log")
     shutil.copy(f"{ST}/logs/record_runs.uptime", f"{E}/logs/record_runs.uptime")
@@ -144,10 +144,14 @@ docs/18 row 2 lists the write/reconnect lifecycle as open. BR-005 requires that 
 
 `{TEST}`. Over a real UDS broker:
 
-1. A client reads `file.txt` and disconnects. The grant is then refused, because closing the session removed its host binding.
-2. The broker stops and a new instance is created. The grant is still refused.
-3. The host binds the session again at fence 2. A writer lease for the fence-1 task is refused with `FenceMismatch`.
-4. The grant reconnects. The first response line answers the new request (`id` 9), not the earlier one (`id` 2).
+1. Grant 1's bridge client authenticates and stays open across the restart.
+2. Grant 0 reads `file.txt` and disconnects. Closing the session ends its host binding, so the running, listening broker refuses the same grant at authentication: the connection fails with `OutOfScope` or `Disconnected`, and the server's `refused` counter rises by one. A missing listener (`IoFailure`) does not satisfy this check.
+3. The broker stops, which closes every session and ends every host binding. `Server.create` for the same grants then fails with `OutOfScope`: a broker cannot even start for unbound grants.
+4. The host binds both sessions again at fence 2. A writer lease for the fence-1 task is refused with `FenceMismatch`, and the broker starts.
+5. Grant 1's old bridge client gets a request (`id` 7) that its stopped broker never answers. Its real `forward` path returns `Disconnected` and writes no response. The restarted broker records no authenticated session, no completed frame and no refusal, so the bridge neither reconnected nor resent.
+6. Rebound grant 0 connects to the restarted broker and its `ping` (`id` 9) is answered.
+
+Review on PR #8 found the first version weak in two places. Its post-restart refusal ran before any new broker listened, so a missing socket (`IoFailure`) passed the check, and its no-replay assertion used a fresh client with nothing to replay. A second version started the new broker before checking the stale grant; it failed because `Server.create` refuses unbound grants ([log](logs/green2-br005-debug.log)). The test above checks the refusal on the broker that is still listening and checks the restart through `Server.create`.
 
 ## Result: existing behavior, no production change
 
@@ -163,6 +167,11 @@ The test passed against unchanged broker, bridge and registry code, so this is c
 | first probe, long state cache path | FAIL before any broker assertion: `auth.address` refused the 110-byte socket path (macOS limit 104) ([log](logs/probe1-br005-debug.log)) |
 | second probe, short cache root | lifecycle assertions passed; an extra `completed == 2` counter assertion failed (found 0) because `initialize` and `ping` do not use the counted job path. The assertion was removed ([log](logs/probe2-br005-debug.log)) |
 | BR-005 Debug after that change | {summary('green-br005-debug')} ([log](logs/green-br005-debug.log)) |
+| BR-005 Debug, second version (restart before the stale check) | {summary('green2-br005-debug')}: `Server.create` refused the unbound grants ([log](logs/green2-br005-debug.log)) |
+| BR-005 Debug, third version | {summary('green3-br005-debug')}: the new refusal helper read the counter after connecting, when the server had already counted the refusal ([log](logs/green3-br005-debug.log)) |
+| BR-005 Debug, fourth version | {summary('green4-br005-debug')} ([log](logs/green4-br005-debug.log)); native CI then crashed it in ReleaseSafe on macOS: a segmentation fault at a stack address in `Fixture.initWithIo`, reproduced locally ([log](logs/repro-br005-releasesafe.log)). The test called `Server.create` directly, and inlined into the test function its per-session literals (each `Session` embeds a 512 KiB control buffer) exhausted the stack |
+| BR-005 ReleaseSafe, final test (broker creation checked through `Fixture.start`) | {summary('green5-br005-ReleaseSafe')} ([log](logs/green5-br005-ReleaseSafe.log)) |
+| BR-005 Debug, final test | {summary('green5-br005-Debug')} ([log](logs/green5-br005-Debug.log)); earlier versions' mutant runs are kept as `logs/mutant-*-v1.log` to `-v4.log` |
 
 ## Records (`zcr-evidence/1`, verified after recording)
 
@@ -179,7 +188,7 @@ The test passed against unchanged broker, bridge and registry code, so this is c
 
 ## Limits
 
-- Writes stay disabled (`"writes":false`), so no write is in flight during the disconnect. The no-resend and receipt-lookup rules for an uncertain write remain covered only by the `bridge.Reconnect` unit tests.
+- Writes stay disabled (`"writes":false`), so the unanswered request is a read. A truly uncertain write cannot be staged over UDS, and the no-resend and receipt-lookup rules for an uncertain write remain covered only by the `bridge.Reconnect` unit tests. `bridge.Reconnect` is not wired into `Client.forward`; the bridge has no reconnect path at all.
 - The broker restart is simulated in one process with a shared registry, not a killed process. The host rebind is done by the test, not by a supervisor (there is no supervisor yet).
 - Not verified: Linux and Intel Mac runtime (native CI on the PR), Windows, actual host launch integration.
 """
@@ -210,7 +219,8 @@ The test passed against unchanged broker, bridge and registry code, so this is c
                             "native Linux/Intel Mac runtime for this revision beyond PR CI, Windows and actual host integration NOT_RUN"],
         "evidence": "evidence/T15/reconnect-20260914/README.md",
     }
-    hd.setdefault("revisions", []).append(revision)
+    # One revision per task run: a rebuild after review replaces the earlier build of the same revision.
+    hd["revisions"] = [r for r in hd.get("revisions", []) if r.get("revision") != revision["revision"]] + [revision]
     json.dump(hd, open(hp, "w"), indent=2)
     open(hp, "a").write("\n")
     print(json.dumps({"code_commit": C[:7], "base": base[:7], "runs": [(x["label"], x["exit_code"], x["summary"]) for x in runs],
