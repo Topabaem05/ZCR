@@ -62,5 +62,8 @@ Every loaded failure on both binaries took the same discovery-timeout path. The 
 ## Limits and findings
 
 - Heavy CPU oversubscription can still make discovery exceed 5 s. Registration then returns retryable `Busy` instead of `IoFailure`. This is a documented limit, not a gate, and it is not load-tested in CI.
+- **Production launcher not wired (PR #6 review).** `zcr mcp --standalone` cannot set the new budget yet. `src/launch.zig` builds its `LaunchPolicy` without a timeout field, calls `identity.discover` with the default at lines 102 and 156, and initializes `Registry` without `git_timeout_ms`. So production discovery keeps the 5000 ms default. That now fails as retryable `Busy` instead of `IoFailure`, but it is not configurable in production.
+  - **Why not fixed here:** `src/launch.zig` has no owner in `tasks/tasks.json`, and `LaunchPolicy` is parsed launch configuration, so both are outside the T10 manifest.
+  - **Proposed interface change:** add a validated `LaunchPolicy.git_timeout_ms` (1 to 60000, default 5000). Pass it through `identity.discoverWith` at both launcher discovery calls and through `Registry.Options.git_timeout_ms`. Add a launch test that rejects out-of-range values and passes the value to discovery.
 - T11's test fixture leaks allocations when registration fails (3 leaks in the concurrent write run). T11 owns that file, so it is left to a separate task.
 - Not verified: Linux and Intel Mac runtime (native CI on the PR), actual host integration, Windows.

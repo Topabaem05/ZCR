@@ -234,12 +234,20 @@
       "corpus_sha256": "c942758a5a8411d3fbee355d51d73831ff995595bc0d82b418077ab7d131c10e",
       "limitations": [
         "CPU oversubscription can still exceed the 5 s discovery budget; registration then returns retryable Busy (documented limit, not a gate)",
-        "T11 fixture leaks on registration failure (separate T11 task)"
+        "T11 fixture leaks on registration failure (separate T11 task)",
+        "production launcher (src/launch.zig, no task owner; LaunchPolicy is parsed launch configuration) does not pass git_timeout_ms: both discovery calls and Registry.init use the 5000 ms default, so the budget is configurable only for direct Zig callers"
       ],
       "remaining_gates": [
-        "native macOS/Windows and actual host integration NOT_RUN for this revision beyond PR CI"
+        "native macOS/Windows and actual host integration NOT_RUN for this revision beyond PR CI",
+        "launcher wiring of git_timeout_ms (interface change, outside T10)"
       ],
-      "evidence": "evidence/T10/git-timeout-20260914/README.md"
+      "evidence": "evidence/T10/git-timeout-20260914/README.md",
+      "interface_change_proposal": {
+        "owner_needed": "integrator or launcher owner (src/launch.zig has no task owner in tasks/tasks.json)",
+        "change": "LaunchPolicy.git_timeout_ms: u32 = 5000, validated 1..60000; pass to identity.discoverWith at src/launch.zig discovery calls (lines 102 and 156 at d301d9d) and to Registry.Options.git_timeout_ms at Registry.init",
+        "tests": "launch config rejects 0 and 60001 and threads the value into discovery; default stays 5000",
+        "raised_by": "PR #6 review comment 4002017844"
+      }
     }
   ]
 }
