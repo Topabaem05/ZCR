@@ -81,7 +81,7 @@ fn validatePath(io: Io, path: []const u8, retained: Io.Dir, expected: core.FileI
     const len = current.realPath(io, &buf) catch return error.IoFailure;
     if (!std.mem.eql(u8, path, buf[0..len])) return error.PathEscape;
 }
-fn output(a: A, io: Io, exe: []const u8, root: []const u8, args: []const []const u8) core.RegisterError![]const u8 {
+fn output(a: A, io: Io, exe: []const u8, root: []const u8, args: []const []const u8, timeout_ms: u32) core.RegisterError![]const u8 {
     var env: std.process.Environ.Map = .init(a);
     defer env.deinit();
     try env.put("GIT_CONFIG_GLOBAL", "/dev/null");
@@ -99,10 +99,12 @@ fn output(a: A, io: Io, exe: []const u8, root: []const u8, args: []const []const
         .environ_map = &env,
         .stdout_limit = .limited(max_git_output),
         .stderr_limit = .limited(4096),
-        .timeout = .{ .duration = .{ .raw = .fromMilliseconds(5000), .clock = .awake } },
+        .timeout = .{ .duration = .{ .raw = .fromMilliseconds(timeout_ms), .clock = .awake } },
     }) catch |err| return switch (err) {
         error.OutOfMemory => error.OutOfMemory,
         error.StreamTooLong => error.ResourceExhausted,
+        // Identity was not established and nothing was written; the caller may retry.
+        error.Timeout => error.Busy,
         else => error.IoFailure,
     };
     switch (r.term) {
@@ -118,7 +120,19 @@ fn line(bytes: []const u8) core.RegisterError![]const u8 {
     return value;
 }
 
+pub const DiscoverOptions = struct {
+    /// Budget for each Git subprocess; expiry is reported as retryable Busy.
+    timeout_ms: u32 = default_git_timeout_ms,
+};
+pub const default_git_timeout_ms: u32 = 5000;
+pub const max_git_timeout_ms: u32 = 60_000;
+
 pub fn discover(a: A, io: Io, exe: []const u8, trusted: core.TrustedRoot) core.RegisterError!Identity {
+    return discoverWith(a, io, exe, trusted, .{});
+}
+
+pub fn discoverWith(a: A, io: Io, exe: []const u8, trusted: core.TrustedRoot, options: DiscoverOptions) core.RegisterError!Identity {
+    if (options.timeout_ms == 0 or options.timeout_ms > max_git_timeout_ms) return error.InvalidArgument;
     try checkAbsolute(exe);
     try checkAbsolute(trusted.canonical_path);
     const root_id = try fileId(trusted.dir);
@@ -127,11 +141,11 @@ pub fn discover(a: A, io: Io, exe: []const u8, trusted: core.TrustedRoot) core.R
     var scratch = std.heap.ArenaAllocator.init(a);
     defer scratch.deinit();
     const temp = scratch.allocator();
-    const top = try line(try output(temp, io, exe, trusted.canonical_path, &.{ "rev-parse", "--path-format=absolute", "--show-toplevel" }));
+    const top = try line(try output(temp, io, exe, trusted.canonical_path, &.{ "rev-parse", "--path-format=absolute", "--show-toplevel" }, options.timeout_ms));
     if (!std.mem.eql(u8, top, trusted.canonical_path)) return error.OutOfScope;
-    const git_path = try line(try output(temp, io, exe, top, &.{ "rev-parse", "--absolute-git-dir" }));
-    const common_path = try line(try output(temp, io, exe, top, &.{ "rev-parse", "--path-format=absolute", "--git-common-dir" }));
-    const listing = try output(temp, io, exe, top, &.{ "worktree", "list", "--porcelain", "-z" });
+    const git_path = try line(try output(temp, io, exe, top, &.{ "rev-parse", "--absolute-git-dir" }, options.timeout_ms));
+    const common_path = try line(try output(temp, io, exe, top, &.{ "rev-parse", "--path-format=absolute", "--git-common-dir" }, options.timeout_ms));
+    const listing = try output(temp, io, exe, top, &.{ "worktree", "list", "--porcelain", "-z" }, options.timeout_ms);
     var head: [64]u8 = @splat(0);
     var head_len: u8 = 0;
     var fields = std.mem.splitScalar(u8, listing, 0);
