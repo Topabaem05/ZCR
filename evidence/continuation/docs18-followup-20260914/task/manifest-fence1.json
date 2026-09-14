@@ -3,9 +3,9 @@
   "state": "active",
   "task_id": "T01",
   "workspace_id": "fs:16777232:649499633:16777232:649499631:16777232:647053195",
-  "base_commit": "9c94517fd393866f66a6eddcf3131c950b537e4c",
+  "base_commit": "c5c3e80351b3ba92dc0f6f22d93cc883dc3ae3ae",
   "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
-  "fence": 2,
+  "fence": 1,
   "expires_at": "2026-09-15T03:18:46Z",
   "read_paths": [
     "."
