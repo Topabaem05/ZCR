@@ -47,7 +47,14 @@
     },
     {
       "kind": "added",
-      "path": "evidence/continuation/native-ci-34793696720/registered-logs.tar.gz",
+      "path": "evidence/continuation/native-ci-34793696720/command-logs-index.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/continuation/native-ci-34793696720/command-logs.tar.gz",
       "orig_path": null,
       "symlink": false,
       "source": "committed"
@@ -61,7 +68,63 @@
     },
     {
       "kind": "added",
+      "path": "evidence/continuation/native-ci-34793696720/storage/aarch64-macos-Debug-raw-fixtures.tar.gz",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/continuation/native-ci-34793696720/storage/aarch64-macos-ReleaseSafe-raw-fixtures.tar.gz",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/continuation/native-ci-34793696720/storage/index.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/continuation/native-ci-34793696720/storage/x86_64-linux-Debug-raw-fixtures.tar.gz",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/continuation/native-ci-34793696720/storage/x86_64-linux-ReleaseSafe-raw-fixtures.tar.gz",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/continuation/native-ci-34793696720/storage/x86_64-macos-Debug-raw-fixtures.tar.gz",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/continuation/native-ci-34793696720/storage/x86_64-macos-ReleaseSafe-raw-fixtures.tar.gz",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
       "path": "evidence/continuation/native-ci-34793696720/task/authorization.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/continuation/native-ci-34793696720/task/manifest-fence1.json",
       "orig_path": null,
       "symlink": false,
       "source": "committed"
@@ -117,28 +180,7 @@
     },
     {
       "kind": "modified",
-      "path": "evidence/continuation/native-ci-34793696720/task/authorization.json",
-      "orig_path": null,
-      "symlink": false,
-      "source": "working_tree"
-    },
-    {
-      "kind": "modified",
-      "path": "evidence/continuation/native-ci-34793696720/task/manifest.json",
-      "orig_path": null,
-      "symlink": false,
-      "source": "working_tree"
-    },
-    {
-      "kind": "modified",
       "path": "evidence/continuation/native-ci-34793696720/task/scope.json",
-      "orig_path": null,
-      "symlink": false,
-      "source": "working_tree"
-    },
-    {
-      "kind": "untracked",
-      "path": "evidence/continuation/native-ci-34793696720/task/manifest-fence1.json",
       "orig_path": null,
       "symlink": false,
       "source": "working_tree"
