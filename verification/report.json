@@ -1,7 +1,7 @@
 {
   "scope": "document/schema/fixture/package validation ONLY; no Zig runtime, Mac hardware, or actual host integration was tested",
   "status": "pass",
-  "checks_total": 321,
+  "checks_total": 323,
   "checks_failed": 0,
   "counts": {
     "main_design_docs": 19,
@@ -16,7 +16,7 @@
     {
       "check": "all_json_parse",
       "status": "pass",
-      "detail": "433"
+      "detail": "454"
     },
     {
       "check": "schema:contracts/data.schema.json",
@@ -1354,6 +1354,11 @@
       "detail": ""
     },
     {
+      "check": "no_unfinished_markers:evidence/T10/git-timeout-20260914/README.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
       "check": "no_unfinished_markers:evidence/T12/fix-round1/README.md",
       "status": "pass",
       "detail": ""
@@ -1450,6 +1455,11 @@
     },
     {
       "check": "no_unfinished_markers:evidence/continuation/test-harness/README.md",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "check": "no_unfinished_markers:evidence/continuation/docs18-followup-20260914/README.md",
       "status": "pass",
       "detail": ""
     },
