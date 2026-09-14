@@ -74,14 +74,14 @@ Apple Silicon은 Debug **320 PASS / 12 SKIP / 24 FAIL**, ReleaseSafe **321 PASS 
 - **PR #2:** T12의 Linux 전용 guard와 fixture leak을 없앴다. 원인과 probe는 `evidence/mac-write-path-20260913/README.md`에 있다.
 - **PR #3:** MC-004 retirement 실패의 원인을 찾아 고쳤다. 시험이 요청마다 두 번 오르는 authority 검증 카운터를 `== 2`로 읽어 서버 스레드와 경쟁했다. 증거는 `evidence/T08/mc004-retirement-20260913/README.md`에 있다.
 - **아직 NOT_RUN인 외부 gate:** G05 APFS 전체 ACL/xattr/crash-durability 검증, G07/G08/G13 실제 host client·sandbox 연동, G11 macOS 11 Intel 실행, G12 모델 공존·E2E 성능. release 상태는 계속 **BLOCKED**다.
-- **남은 발견:** MC-004 deadline 시험은 watcher의 취소를 관찰하지 못한다(T08). 로컬에서 CPU 부하를 걸었을 때 runtime-cache 시험이 한 번 `IoFailure`로 실패했다(T10/T13).
+- **남은 발견:** 로컬에서 CPU 부하를 걸었을 때 runtime-cache 시험이 `IoFailure`로 실패한 원인을 확인했다. 과다 할당된 CPU에서 workspace discovery의 git 호출(`git worktree list`, `git rev-parse`)이 5000 ms timeout을 넘겼고(16 busy loop에서 6932 ms), `identity.zig`가 이를 `IoFailure`로 보고했다. timeout을 재시도 가능한 `Busy`로 보고하고 예산을 설정 가능하게 하는 T10 수정은 [PR #6](https://github.com/Topabaem05/ZCR/pull/6)으로 병합됐다(`9c94517`). 수정 전 `main` binary도 같은 부하에서 같은 경로로 실패했으므로, 부하 경합으로 생기는 기존 현상이며 CI gate가 아니라 문서화된 한계로 둔다. 증거(명령, binary·config/corpus digest, 비교 로그)는 `evidence/T10/git-timeout-20260914/README.md`에 있다. launcher는 아직 예산을 전달하지 않는다(interface change 제안). MC-004 deadline 시험이 watcher의 취소를 관찰하지 못하던 문제는 PR #5(`96c2666`)로 해소됐다. 시험은 watcher의 취소 hook을 기다린 뒤 authority 검사가 정확히 1회인지 확인하며, 증거는 `evidence/T08/deadline-20260914/README.md`에 있다.
 
 ## 남은 작업과 완료 조건
 
 | 순서 | 범위 | 다음 작업 | 완료 근거 |
 |---|---|---|---|
-| 1 | T08 / T12 / native CI | **대부분 완료**(PR #2·#3, 실행 34793696720): MC-004 원인 분석·수정, Darwin storage 이식, fixture 초기화 실패 시 자원 회수, Mac의 T12 SIGKILL 복구 시험과 storage 증거 수집. 남음: G05 APFS 파괴적 crash-durability 검증, G11 macOS 11 Intel, MC-004 deadline 시험 관찰 지점, 부하 시 runtime-cache `IoFailure` | Linux·Apple Silicon·Intel Mac에서 Debug/ReleaseSafe 결과와 raw 복구 증거(위 병합 후 native CI 절) |
-| 2 | T12 / T15 | 신뢰된 supervisor, write/reconnect 수명 관리 및 broker CLI/bridge 연결 | 권한·fence·취소·느린 클라이언트·재접속 통합 시험; 승인 전 쓰기 비활성 유지 |
+| 1 | T08 / T12 / native CI | **대부분 완료**(PR #2·#3, 실행 34793696720): MC-004 원인 분석·수정, Darwin storage 이식, fixture 초기화 실패 시 자원 회수, Mac의 T12 SIGKILL 복구 시험과 storage 증거 수집. 남음: G05 APFS 파괴적 crash-durability 검증, G11 macOS 11 Intel. MC-004 deadline 시험 관찰 지점은 PR #5로 완료, 부하 시 runtime-cache `IoFailure`는 원인 확인, T10 수정은 PR #6(`9c94517`)으로 병합 | Linux·Apple Silicon·Intel Mac에서 Debug/ReleaseSafe 결과와 raw 복구 증거(위 병합 후 native CI 절) |
+| 2 | T12 / T15 | 신뢰된 supervisor, write/reconnect 수명 관리 및 broker CLI/bridge 연결. (진행: native CI 34793696720에서 실제 UDS broker assertion을 포함한 T15-test가 Linux·Apple Silicon·Intel Mac의 Debug/ReleaseSafe 모두 28/28 통과. 이전 제한 컨테이너 실행은 FAIL로 남는다. 두 모드 모두 28개가 실행돼 19개 통과, 9개가 AF_UNIX socket 생성에서 실패했다. supervisor와 CLI/bridge 연결은 남음) | 권한·fence·취소·느린 클라이언트·재접속 통합 시험; 승인 전 쓰기 비활성 유지 |
 | 3 | T16 | pressure/thermal 신호 수집, governor 정책, 실제 runtime 연결 | admission·회수·공정성 및 모델 공존 시험 |
 | 4 | T17 / T19 | Linux backend 완성, 필수 ARM64/x86 SIMD 경로 | 플랫폼 자원 관측 검증, scalar 차등·경계 시험 |
 | 5 | T21 / T22 | 전체 벤치마크 하네스, bounded telemetry/health | 재현 가능한 corpus·config·raw trace, 예산·민감정보 검사 |

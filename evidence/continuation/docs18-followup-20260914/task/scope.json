@@ -1,0 +1,91 @@
+{
+  "task": "T01",
+  "role": "integrator",
+  "violations": [],
+  "changes": [
+    {
+      "kind": "modified",
+      "path": "DESIGNBOOK.html",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "modified",
+      "path": "MANIFEST.sha256",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "modified",
+      "path": "docs/18-Merge-and-Remaining-Work.md",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/continuation/docs18-followup-20260914/README.md",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/continuation/docs18-followup-20260914/task/authorization.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/continuation/docs18-followup-20260914/task/manifest-fence1.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/continuation/docs18-followup-20260914/task/manifest.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/continuation/docs18-followup-20260914/task/merge-audit.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/continuation/docs18-followup-20260914/task/preflight.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/continuation/docs18-followup-20260914/task/scope.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "modified",
+      "path": "tasks/progress.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "modified",
+      "path": "verification/report.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    }
+  ]
+}

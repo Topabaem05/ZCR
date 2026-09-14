@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "state": {
+    "toplevel": "/Users/guribbong/code/ZCR-worktrees/t01-docs18-followup",
+    "absolute_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/t01-docs18-followup",
+    "common_dir": "/Users/guribbong/code/ZCR/.git",
+    "head_commit": "c5c3e80351b3ba92dc0f6f22d93cc883dc3ae3ae",
+    "head_tree": "a3f1562b4d3c7954aacad277d11c402e7b6f7950",
+    "branch": "claude/docs18-row1-followup",
+    "entries": []
+  },
+  "reasons": []
+}

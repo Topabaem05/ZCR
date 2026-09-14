@@ -1,0 +1,47 @@
+{
+  "fence1": {
+    "base_commit": "c5c3e80351b3ba92dc0f6f22d93cc883dc3ae3ae",
+    "head": "a4047ea871253c38f0ac74ebbea9d84f5307d45b",
+    "scope_violations": [],
+    "changed_paths": [
+      "DESIGNBOOK.html",
+      "MANIFEST.sha256",
+      "docs/18-Merge-and-Remaining-Work.md",
+      "evidence/continuation/docs18-followup-20260914/README.md",
+      "evidence/continuation/docs18-followup-20260914/task/authorization.json",
+      "evidence/continuation/docs18-followup-20260914/task/manifest.json",
+      "evidence/continuation/docs18-followup-20260914/task/preflight.json",
+      "evidence/continuation/docs18-followup-20260914/task/scope.json",
+      "tasks/progress.json",
+      "verification/report.json"
+    ]
+  },
+  "merge": {
+    "commit": "53c1703c9f5edd664347ac745e6131b40e4edb06",
+    "parents": [
+      "a4047ea871253c38f0ac74ebbea9d84f5307d45b",
+      "9c94517fd393866f66a6eddcf3131c950b537e4c"
+    ],
+    "paths_differing_from_main": [
+      "DESIGNBOOK.html",
+      "MANIFEST.sha256",
+      "docs/18-Merge-and-Remaining-Work.md",
+      "evidence/continuation/docs18-followup-20260914/README.md",
+      "evidence/continuation/docs18-followup-20260914/task/authorization.json",
+      "evidence/continuation/docs18-followup-20260914/task/manifest.json",
+      "evidence/continuation/docs18-followup-20260914/task/preflight.json",
+      "evidence/continuation/docs18-followup-20260914/task/scope.json",
+      "tasks/progress.json",
+      "verification/report.json"
+    ],
+    "all_within_write_paths": true
+  },
+  "fence2": {
+    "base_commit": "9c94517fd393866f66a6eddcf3131c950b537e4c"
+  },
+  "commands": [
+    "git diff --name-only c5c3e80351b3ba92dc0f6f22d93cc883dc3ae3ae a4047ea",
+    "git diff --name-only 9c94517fd393866f66a6eddcf3131c950b537e4c 53c1703",
+    "git rev-list --parents -n1 53c1703"
+  ]
+}
