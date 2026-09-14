@@ -177,13 +177,6 @@
       "orig_path": null,
       "symlink": false,
       "source": "committed"
-    },
-    {
-      "kind": "modified",
-      "path": "evidence/continuation/native-ci-34793696720/task/scope.json",
-      "orig_path": null,
-      "symlink": false,
-      "source": "working_tree"
     }
   ]
 }
