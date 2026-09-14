@@ -1,0 +1,13 @@
+{
+  "schema_version": "zcr-evidence/1",
+  "task_id": "T10",
+  "label": "mcp-debug-t08",
+  "command": "zig build test -Dtest-group=mcp -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-mcp-debug --summary all",
+  "exit_code": 0,
+  "source_commit": "ad99dc3636f0825fab26a6a6c4787bbb950dfbff",
+  "source_tree": "4ae5a707ff95a842dfd2823b792d85c5bde11c88",
+  "worktree_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/t10-git-ioerror",
+  "binary_path": "/Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/out-mcp-debug/bin/T08-test",
+  "binary_sha256": "3f77ac35d0fe970e857c06eca4f0a72b50d2077eb02630f1e0274cc4b9285229",
+  "recorded_at_unix_ms": 1789353074260
+}

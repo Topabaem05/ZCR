@@ -1,0 +1,42 @@
+test
++- run test T12-test w
+T12 C01 patch pid=54094 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C02 patch pid=54189 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C03 patch pid=54285 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C04 patch pid=54387 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=1
+T12 C05 patch pid=54481 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C06 patch pid=54579 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C07 patch pid=54674 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C08 patch pid=54769 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C09 patch pid=54865 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C10 patch pid=54960 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C01 create pid=55059 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C02 create pid=55156 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C03 create pid=55217 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C04 create pid=55270 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=1
+T12 C05 create pid=55322 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C06 create pid=55371 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C07 create pid=55416 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C08 create pid=55467 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C09 create pid=55517 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C10 create pid=55567 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 recovery append SIGKILL verified
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/zig-local-cache/o/3dda4c6af799be6b46ad942bdf2b63c3/T12-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/zig-local-cache --seed=0xdda3c389 --listen=-
+
+Build Summary: 11/11 steps succeeded; 68/68 tests passed
+test success
++- install T11-test success
+|  +- compile test T11-test Debug native cached 473ms MaxRSS:31M
++- run test T11-test 43 pass (43 total) 1m MaxRSS:12M
+|  +- compile test T11-test Debug native (reused)
++- install T12-child success
+|  +- compile test T12-child Debug native cached 483ms MaxRSS:31M
+|     +- options cached
++- install T12-test success
+|  +- compile test T12-test Debug native cached 818ms MaxRSS:31M
+|     +- options (reused)
+|     +- options cached
+|        +- compile test T12-child Debug native (+1 more reused dependencies)
++- run test T12-test 25 pass (25 total) 7m MaxRSS:10M
+   +- compile test T12-test Debug native (+2 more reused dependencies)
+

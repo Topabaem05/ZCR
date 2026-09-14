@@ -1,0 +1,165 @@
+test
++- run test T11-test 42 pass, 1 fail (43 total); 3 leaks
+error: 't11_test.test.WR-010 new create publishes only complete bytes' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/process.zig:531:21: 0x102e889b3 in run (T11-test)
+               else => |e| return e,
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t10-git-ioerror/src/workspace/identity.zig:103:20: 0x102e85233 in output (T11-test)
+           }) catch |err| return switch (err) {
+                          ^
+       /Users/guribbong/code/ZCR-worktrees/t10-git-ioerror/src/workspace/identity.zig:144:26: 0x102e82d5b in discoverWith (T11-test)
+           const top = try line(try output(temp, io, exe, trusted.canonical_path, &.{ "rev-parse", "--path-format=absolute", "--show-toplevel" }, options.timeout_ms));
+                                ^
+       /Users/guribbong/code/ZCR-worktrees/t10-git-ioerror/src/workspace/registry.zig:227:30: 0x102e809b7 in registerWorkspace (T11-test)
+                   var discovered = try identity.discoverWith(self.allocator, io, self.git_executable, root, .{ .timeout_ms = self.git_timeout_ms });
+                                    ^
+       /Users/guribbong/code/ZCR-worktrees/t10-git-ioerror/tests/t11_test.zig:157:20: 0x102e5752f in init (T11-test)
+               const id = try self.registry.registerWorkspace(io, self.root, approved);
+                          ^
+       /Users/guribbong/code/ZCR-worktrees/t10-git-ioerror/tests/t11_test.zig:269:15: 0x102ec2d6f in test.WR-010 new create publishes only complete bytes (T11-test)
+           const f = try Fixture.init("original\n");
+                     ^
+       [DebugAllocator] (err): memory address 0x107c40000 leaked: 
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x102d4d623 in rawAlloc (T11-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:286:40: 0x102d4d4cf in allocWithSizeAndAlignment__anon_8301 (T11-test)
+           return self.allocBytesWithAlignment(alignment, byte_count, return_address);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:274:89: 0x102d4d1a3 in allocAdvancedWithRetAddr (T11-test)
+           const ptr: [*]align(a.toByteUnits()) T = @ptrCast(try self.allocWithSizeAndAlignment(@sizeOf(T), a, n, return_address));
+                                                                                               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:472:40: 0x102decc7b in dupeSentinel__anon_19304 (T11-test)
+           const new_buf = try allocator.alloc(T, m.len + 1);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:462:34: 0x102decaf3 in dupeZ__anon_18438 (T11-test)
+           return allocator.dupeSentinel(T, m, 0);
+                                        ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/Io/Dir.zig:947:27: 0x102e90e57 in realPathFileAlloc (T11-test)
+           return allocator.dupeZ(u8, buffer[0..n]);
+                                 ^
+       /Users/guribbong/code/ZCR-worktrees/t10-git-ioerror/tests/t11_test.zig:144:56: 0x102e564cf in init (T11-test)
+               const path = try self.tmp.dir.realPathFileAlloc(io, ".", a);
+                                                              ^
+       /Users/guribbong/code/ZCR-worktrees/t10-git-ioerror/tests/t11_test.zig:269:31: 0x102ec2cbb in test.WR-010 new create publishes only complete bytes (T11-test)
+           const f = try Fixture.init("original\n");
+                                     ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102e3312f in mainServer (T11-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102e337df in main (T11-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       (additional stack frames may have been skipped...)
+       
+       [DebugAllocator] (err): memory address 0x107c20000 leaked: 
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x102d4d623 in rawAlloc (T11-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:286:40: 0x102d4d4cf in allocWithSizeAndAlignment__anon_8301 (T11-test)
+           return self.allocBytesWithAlignment(alignment, byte_count, return_address);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:274:89: 0x102d4d1a3 in allocAdvancedWithRetAddr (T11-test)
+           const ptr: [*]align(a.toByteUnits()) T = @ptrCast(try self.allocWithSizeAndAlignment(@sizeOf(T), a, n, return_address));
+                                                                                               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/Io/File/MultiReader.zig:262:34: 0x102e8ac93 in rebaseGrowing (T11-test)
+               const new = try gpa.alloc(u8, adjusted_capacity);
+                                        ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/Io/File/MultiReader.zig:87:22: 0x102e8b097 in init (T11-test)
+               rebaseGrowing(mr, context, 1) catch |err| {
+                            ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/process.zig:514:22: 0x102e886b3 in run (T11-test)
+           multi_reader.init(gpa, io, multi_reader_buffer.toStreams(), &.{ child.stdout.?, child.stderr.? });
+                            ^
+       /Users/guribbong/code/ZCR-worktrees/t10-git-ioerror/tests/t11_test.zig:153:46: 0x102e56ef3 in init (T11-test)
+               const committed = try std.process.run(a, io, .{ .argv = &.{ "/usr/bin/git", "-C", path, "-c", "user.name=T11", "-c", "user.email=t11@example.invalid", "commit", "-q", "-m", "fixture" }, .environ_map = &env });
+                                                    ^
+       /Users/guribbong/code/ZCR-worktrees/t10-git-ioerror/tests/t11_test.zig:269:31: 0x102ec2cbb in test.WR-010 new create publishes only complete bytes (T11-test)
+           const f = try Fixture.init("original\n");
+                                     ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:140:68: 0x102e3312f in mainServer (T11-test)
+                       const status: TestResults.Status = if (test_fn.func()) |v| s: {
+                                                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/compiler/test_runner.zig:71:26: 0x102e337df in main (T11-test)
+               return mainServer(init) catch |err| panic("internal test runner failure: {t}", .{err});
+                                ^
+       (additional stack frames may have been skipped...)
+       
+       [DebugAllocator] (err): memory address 0x107be0000 leaked: 
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x102d4eecf in rawAlloc (T11-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x102d4eecf in rawAlloc (T11-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:142:26: 0x102d5a30f in rawAlloc (T11-test)
+           return a.vtable.alloc(a.ptr, len, alignment, ret_addr);
+                                ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:286:40: 0x102d63bd7 in allocWithSizeAndAlignment__anon_9797 (T11-test)
+           return self.allocBytesWithAlignment(alignment, byte_count, return_address);
+                                              ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/mem/Allocator.zig:274:89: 0x102d639f3 in allocAdvancedWithRetAddr (T11-test)
+           const ptr: [*]align(a.toByteUnits()) T = @ptrCast(try self.allocWithSizeAndAlignment(@sizeOf(T), a, n, return_address));
+                                                                                               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/multi_array_list.zig:542:51: 0x102e8fe7f in setCapacity (T11-test)
+                   const new_bytes = try gpa.alignedAlloc(u8, sizes.big_align, capacityInBytes(new_capacity));
+                                                         ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/multi_array_list.zig:516:36: 0x102e8fd43 in ensureTotalCapacity (T11-test)
+                   return self.setCapacity(gpa, growCapacity(new_capacity));
+                                          ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/array_hash_map.zig:425:49: 0x102e8e84f in ensureTotalCapacityContext (T11-test)
+                   try self.entries.ensureTotalCapacity(gpa, new_capacity);
+                                                       ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/array_hash_map.zig:320:44: 0x102e8c25f in getOrPutContextAdapted__anon_42260 (T11-test)
+                   self.ensureTotalCapacityContext(gpa, self.entries.len + 1, ctx) catch |err| {
+                                                  ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/array_hash_map.zig:308:56: 0x102e8bee3 in getOrPutContext (T11-test)
+                   const gop = try self.getOrPutContextAdapted(gpa, key, ctx, ctx);
+                                                              ^
+       (additional stack frames may have been skipped...)
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/zig-local-cache/o/e7d74fc56b0bb1fade8374e4bdc1cab7/T11-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/zig-local-cache --seed=0xc1d37bce --listen=-
+
+test
++- run test T12-test w
+T12 C01 patch pid=34150 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C02 patch pid=34293 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C03 patch pid=34497 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C04 patch pid=34644 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=1
+T12 C05 patch pid=34783 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C06 patch pid=34924 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C07 patch pid=35069 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C08 patch pid=35189 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C09 patch pid=35284 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C10 patch pid=35382 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C01 create pid=35478 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C02 create pid=35576 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C03 create pid=35674 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=0
+T12 C04 create pid=35770 SIGKILL fresh=2 sequence=0 committed=0 aborted=0 uncertain=1
+T12 C05 create pid=35869 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C06 create pid=35967 SIGKILL fresh=2 sequence=2 committed=0 aborted=1 uncertain=0
+T12 C07 create pid=36066 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C08 create pid=36156 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C09 create pid=36253 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 C10 create pid=36355 SIGKILL fresh=2 sequence=3 committed=1 aborted=0 uncertain=0
+T12 recovery append SIGKILL verified
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/zig-local-cache/o/3dda4c6af799be6b46ad942bdf2b63c3/T12-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/zig-local-cache --seed=0xc1d37bce --listen=-
+
+Build Summary: 9/11 steps succeeded (1 failed); 67/68 tests passed (1 failed)
+test transitive failure
++- install T11-test success
+|  +- compile test T11-test Debug native success 1m MaxRSS:187M
++- run test T11-test 42 pass, 1 fail (43 total); 3 leaks
+|  +- compile test T11-test Debug native (reused)
++- install T12-child success
+|  +- compile test T12-child Debug native success 1m MaxRSS:192M
+|     +- options cached
++- install T12-test success
+|  +- compile test T12-test Debug native success 2m MaxRSS:225M
+|     +- options (reused)
+|     +- options success
+|        +- compile test T12-child Debug native (+1 more reused dependencies)
++- run test T12-test 25 pass (25 total) 10m MaxRSS:10M
+   +- compile test T12-test Debug native (+2 more reused dependencies)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/zig-local-cache/o/f73c3388e88e2a4fe1e8f77ca63d50d0/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-worktrees/t10-git-ioerror /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/zig-global-cache --seed 0xc1d37bce -Z70b053e108a9ccd3 test -Dtest-group=write -Doptimize=Debug -Dinstall-tests=true --prefix /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/out-write-debug --summary all

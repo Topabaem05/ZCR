@@ -1,0 +1,5 @@
+Build Summary: 3/3 steps succeeded; 3/3 tests passed
+test success
++- run test T10-test 3 pass (3 total) 5s MaxRSS:5M
+   +- compile test T10-test Debug native success 16s MaxRSS:212M
+

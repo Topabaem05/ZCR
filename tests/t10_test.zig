@@ -1226,3 +1226,36 @@ test "WR-008 precommit recovery quarantine drains a different publication withou
     try t.expectError(error.LeaseExpired, r.acquireWriter(task(), id));
     r.failRecovery(id); // Already quarantined is idempotent.
 }
+
+test "IS-008 discovery git timeout is retryable Busy while a failing git stays IoFailure" {
+    var f = try Fixture.init();
+    defer f.deinit();
+    const root = try f.root("repo");
+    defer root.dir.close(io);
+    // Stand-ins for git: one never answers within the discovery budget, one fails at once.
+    try f.tmp.dir.writeFile(io, .{ .sub_path = "slow-git", .data = "#!/bin/sh\nexec /bin/sleep 30\n" });
+    try f.tmp.dir.writeFile(io, .{ .sub_path = "failing-git", .data = "#!/bin/sh\nexit 1\n" });
+    const slow = try f.path("slow-git");
+    const failing = try f.path("failing-git");
+    for ([_][]const u8{ slow, failing }) |exe| {
+        const chmod = try std.process.run(f.arena.allocator(), io, .{ .argv = &.{ "/bin/chmod", "755", exe } });
+        try t.expect(chmod.term == .exited and chmod.term.exited == 0);
+    }
+    try t.expectError(error.InvalidArgument, workspace.Registry.init(A, io, .{ .git_executable = "/usr/bin/git", .git_timeout_ms = 0 }));
+    try t.expectError(error.InvalidArgument, workspace.Registry.init(A, io, .{ .git_executable = "/usr/bin/git", .git_timeout_ms = 60_001 }));
+    var timed = try workspace.Registry.init(A, io, .{ .git_executable = slow, .git_timeout_ms = 200 });
+    defer timed.deinit() catch unreachable;
+    const started = std.Io.Clock.Timestamp.now(io, .awake);
+    // Identity is not established, so registration is still refused, but as a
+    // retryable Busy rather than a non-retryable I/O failure.
+    try t.expectError(error.Busy, timed.registerWorkspace(io, root, policy));
+    // The timeout kills the stand-in instead of waiting for its 30 s sleep.
+    try t.expect(started.untilNow(io).raw.toMilliseconds() < 10_000);
+    // The default budget keeps a slow start of the failing stand-in from turning into Busy.
+    var failed = try workspace.Registry.init(A, io, .{ .git_executable = failing });
+    defer failed.deinit() catch unreachable;
+    try t.expectError(error.IoFailure, failed.registerWorkspace(io, root, policy));
+    var defaults = try registry();
+    defer defaults.deinit() catch unreachable;
+    try t.expectEqual(@as(u32, 5000), defaults.git_timeout_ms);
+}

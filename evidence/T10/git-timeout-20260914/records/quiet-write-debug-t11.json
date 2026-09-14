@@ -1,0 +1,13 @@
+{
+  "schema_version": "zcr-evidence/1",
+  "task_id": "T10",
+  "label": "quiet-write-debug-t11",
+  "command": "zig build test -Dtest-group=write -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-quiet-write-debug --summary all",
+  "exit_code": 0,
+  "source_commit": "ad99dc3636f0825fab26a6a6c4787bbb950dfbff",
+  "source_tree": "4ae5a707ff95a842dfd2823b792d85c5bde11c88",
+  "worktree_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/t10-git-ioerror",
+  "binary_path": "/Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/out-quiet-write-debug/bin/T11-test",
+  "binary_sha256": "aad37404818a054bf169472046b61ad51370de695b269d723546d5f92de8587b",
+  "recorded_at_unix_ms": 1789356552759
+}

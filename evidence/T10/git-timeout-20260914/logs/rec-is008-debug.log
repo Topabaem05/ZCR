@@ -1,0 +1,7 @@
+Build Summary: 4/4 steps succeeded; 3/3 tests passed
+test success
++- install T10-test success
+|  +- compile test T10-test Debug native cached 380ms MaxRSS:31M
++- run test T10-test 3 pass (3 total) 6s MaxRSS:5M
+   +- compile test T10-test Debug native (reused)
+

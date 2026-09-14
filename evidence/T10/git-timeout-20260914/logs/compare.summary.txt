@@ -1,0 +1,25 @@
+baseline head 96c26663a471317a5f6e92565e7875bbed3dc226 dirty=0
+baseline isolation Debug exit=0 Build Summary: 8/8 steps succeeded; 59/59 tests passed run test T10-test 44 pass (44 total)
+busy loops before compare: 0
+fix      sha256 45b84a4f250fae8518ac18139df95b2a9edd87501af0ab8330f29980f943880f
+baseline sha256 175d09824b5442ea2eeaee88d8831b951950497858a058859bb60289b7614274
+idle fix run=1 exit=0 secs=91 
+idle baseline run=1 exit=0 secs=75 
+idle fix run=2 exit=0 secs=63 
+idle baseline run=2 exit=0 secs=38 
+idle fix run=3 exit=0 secs=56 
+idle baseline run=3 exit=0 secs=55 
+load: 8 busy loops
+loaded fix run=1 exit=0 secs=303 
+loaded baseline run=1 exit=1 secs=344 IS-005 blocked mutex callback commit check rejects expiry...FAIL IS-002 Git marker FIFO replacement between stat and open cannot block...FAIL IS-002 Git marker size change after read invalidates discovery...FAIL 
+loaded fix run=2 exit=0 secs=266 
+loaded baseline run=2 exit=0 secs=292 
+loaded fix run=3 exit=1 secs=308 IS-008 shared editor and invalid bound scopes cannot acquire writer...FAIL 
+loaded baseline run=3 exit=1 secs=147 IS-002 commit guard serializes rediscovered HEAD generation...FAIL 
+tally idle-fix pass=3 fail=0
+tally idle-baseline pass=3 fail=0
+tally loaded-fix pass=2 fail=1
+tally loaded-baseline pass=1 fail=2
+busy loops after compare: 0
+
+[exited with code 0]

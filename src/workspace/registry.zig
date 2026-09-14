@@ -87,6 +87,7 @@ pub const Registry = struct {
     allocator: A,
     io: Io,
     git_executable: []const u8,
+    git_timeout_ms: u32,
     boot_nonce: core.Uuid,
     registry_uuid: core.Uuid,
     mutex: Io.Mutex = .init,
@@ -103,15 +104,21 @@ pub const Registry = struct {
         enter: *const fn (*anyopaque) void,
     } else void = if (@import("builtin").is_test) null else {},
 
-    pub const Options = struct { git_executable: []const u8, capacity: usize = max_workspaces };
+    pub const Options = struct {
+        git_executable: []const u8,
+        capacity: usize = max_workspaces,
+        /// Per-subprocess Git discovery budget; expiry makes registration return Busy.
+        git_timeout_ms: u32 = identity.default_git_timeout_ms,
+    };
     pub fn init(allocator: A, io: Io, options: Options) core.RegisterError!Registry {
         if (options.capacity == 0 or options.capacity > max_workspaces or !std.fs.path.isAbsolute(options.git_executable) or
-            options.git_executable.len > 4096 or std.mem.indexOfScalar(u8, options.git_executable, 0) != null) return error.InvalidArgument;
+            options.git_executable.len > 4096 or std.mem.indexOfScalar(u8, options.git_executable, 0) != null or
+            options.git_timeout_ms == 0 or options.git_timeout_ms > identity.max_git_timeout_ms) return error.InvalidArgument;
         var boot: core.Uuid = undefined;
         var uuid: core.Uuid = undefined;
         io.randomSecure(&boot) catch return error.IoFailure;
         io.randomSecure(&uuid) catch return error.IoFailure;
-        return .{ .allocator = allocator, .io = io, .git_executable = try allocator.dupe(u8, options.git_executable), .boot_nonce = boot, .registry_uuid = uuid, .capacity = options.capacity };
+        return .{ .allocator = allocator, .io = io, .git_executable = try allocator.dupe(u8, options.git_executable), .git_timeout_ms = options.git_timeout_ms, .boot_nonce = boot, .registry_uuid = uuid, .capacity = options.capacity };
     }
 
     /// Exclusive teardown only, after callers stop. Busy preserves every handle
@@ -217,7 +224,7 @@ pub const Registry = struct {
         // Rediscover outside the lock and rescan every slot rather than reuse
         // stale root metadata or a decision made before the wait.
         discover_again: while (true) {
-            var discovered = try identity.discover(self.allocator, io, self.git_executable, root);
+            var discovered = try identity.discoverWith(self.allocator, io, self.git_executable, root, .{ .timeout_ms = self.git_timeout_ms });
             var transferred = false;
             defer if (!transferred) discovered.deinit(io);
             const owned_policy = try clonePolicy(discovered.arena.allocator(), policy);
