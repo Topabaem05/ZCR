@@ -1,0 +1,26 @@
+test
++- run test T15-test 3 pass, 1 fail (4 total)
+error: 't15_test.test.BR-005 real UDS reconnect after disconnect and broker restart needs a host rebind at a new fence and replays nothing' failed:
+       expected error.FenceMismatch, found error.LeaseExpired
+       /Users/guribbong/code/ZCR-state/tasks/T15/r/c-ignore_fence/src/workspace/registry.zig:404:57: 0x102fe9d07 in authorizeTask (T15-test)
+               if (!e.managed_write or !allowsWrite(e.policy)) return error.LeaseExpired;
+                                                               ^
+       /Users/guribbong/code/ZCR-state/tasks/T15/r/c-ignore_fence/src/workspace/registry.zig:411:9: 0x102fe70e7 in acquireWriter (T15-test)
+               try self.authorizeTask(e, task, wall);
+               ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x102fe534b in expectError__anon_38434 (T15-test)
+                   return error.TestUnexpectedError;
+                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T15/r/c-ignore_fence/tests/t15_test.zig:786:5: 0x102fe61eb in test.BR-005 real UDS reconnect after disconnect and broker restart needs a host rebind at a new fence and replays nothing (T15-test)
+           try t.expectError(error.FenceMismatch, f.registry.acquireWriter(old_task, session.bound_workspace));
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T15/r/mf && /Users/guribbong/code/ZCR-state/tasks/T15/r/mf/o/e2a496231ab0c5ac05f72c4387071c26/T15-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T15/r/mf --seed=0x5358b5c9 --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 3/4 tests passed (1 failed)
+test transitive failure
++- run test T15-test 3 pass, 1 fail (4 total)
+   +- compile test T15-test Debug native success 1m MaxRSS:237M
+      +- options success
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T15/r/mf/o/f73c3388e88e2a4fe1e8f77ca63d50d0/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T15/r/c-ignore_fence /Users/guribbong/code/ZCR-state/tasks/T15/r/mf /Users/guribbong/code/ZCR-state/tasks/T15/r/zgc --seed 0x5358b5c9 -Zd1d334e3feed4f72 test -Dtest-group=broker -Dtest-id=BR-005 -Doptimize=Debug --summary all

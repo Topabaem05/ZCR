@@ -1,0 +1,8 @@
+Build Summary: 5/5 steps succeeded; 29/29 tests passed
+test success
++- install T15-test success
+|  +- compile test T15-test Debug native success 19s MaxRSS:271M
+|     +- options cached
++- run test T15-test 29 pass (29 total) 12s MaxRSS:15M
+   +- compile test T15-test Debug native (+1 more reused dependencies)
+

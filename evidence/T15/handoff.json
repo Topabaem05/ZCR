@@ -1,0 +1,74 @@
+{
+  "schema_version": "zcr-t15-handoff/1",
+  "task": "T15",
+  "prior_evidence": [
+    "evidence/continuation/runtime-review-fixes/r2/README.md",
+    "evidence/continuation/review-checkpoints/runtime-wave-final.md",
+    "evidence/continuation/integrated-108b906/README.md"
+  ],
+  "revisions": [
+    {
+      "revision": "BR-005 real UDS reconnect characterization",
+      "date": "2026-09-14",
+      "base_commit": "9c94517fd393866f66a6eddcf3131c950b537e4c",
+      "head_commit": "a029e061ef3f4b2c8b493dad8148eebbb7bb778b",
+      "source_tree": "24372c44e62bfa4b370ca0b38c640c9bbf3db79d",
+      "head_commit_note": "Tested source commit; the evidence-only commit follows.",
+      "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+      "workspace_id": "fs:16777232:649540255:16777232:649540253:16777232:647053195",
+      "task_manifest": "evidence/T15/reconnect-20260914/task/manifest.json",
+      "task_manifest_sha256": "5ba6a97fef1baa9b0c678259e2591301f8290f5ae04d816208619fd5c82b6850",
+      "scope_report": "evidence/T15/reconnect-20260914/task/scope-commit1.json (0 violations)",
+      "changed_files": [
+        "tests/t15_test.zig"
+      ],
+      "exports_added": [],
+      "behaviour_change": "none; the test characterizes existing broker, bridge and registry behavior",
+      "tests": {
+        "quiet-broker-debug-t15": {
+          "record": "records/quiet-broker-debug-t15.json",
+          "exit_code": 0,
+          "summary": "5/5 steps succeeded; 29/29 tests passed; 0 leaks"
+        },
+        "quiet-broker-releasesafe-t15": {
+          "record": "records/quiet-broker-releasesafe-t15.json",
+          "exit_code": 0,
+          "summary": "5/5 steps succeeded; 29/29 tests passed; 0 leaks"
+        }
+      },
+      "mutants": {
+        "keep_binding_on_close": {
+          "change": "closeSession keeps the grant's registry binding",
+          "log": "logs/mutant-keep_binding_on_close.log",
+          "summary": "2/4 steps succeeded (1 failed); 3/4 tests passed (1 failed); 0 leaks",
+          "failed_tests": [
+            "BR-005 real UDS reconnect after disconnect and broker restart needs a host rebind at a new fence and replays nothing"
+          ],
+          "test_line": 775,
+          "assertion": "try expectRefused(f.connect(0));",
+          "message": ""
+        },
+        "ignore_fence": {
+          "change": "task binding matches regardless of fence",
+          "log": "logs/mutant-ignore_fence.log",
+          "summary": "2/4 steps succeeded (1 failed); 3/4 tests passed (1 failed); 0 leaks",
+          "failed_tests": [
+            "BR-005 real UDS reconnect after disconnect and broker restart needs a host rebind at a new fence and replays nothing"
+          ],
+          "test_line": 786,
+          "assertion": "try t.expectError(error.FenceMismatch, f.registry.acquireWriter(old_task, session.bound_workspace));",
+          "message": "expected error.FenceMismatch, found error.LeaseExpired"
+        }
+      },
+      "source_config_sha256": "707f38cf329598b0804a58309f82792e0d4345ad9ff6a9a546676ab469dbd595",
+      "corpus_sha256": "6b842ed0e69204988df63a75c6fa0c0d2f4f5ddde05e8b9edf3931a79d468268",
+      "remaining_gates": [
+        "write-enabled reconnect with an uncertain write (writes stay disabled; unit coverage only)",
+        "supervisor-driven rebind after a real broker process crash (no supervisor by decision)",
+        "broker CLI wiring (T01 slice C)",
+        "native Linux/Intel Mac runtime for this revision beyond PR CI, Windows and actual host integration NOT_RUN"
+      ],
+      "evidence": "evidence/T15/reconnect-20260914/README.md"
+    }
+  ]
+}

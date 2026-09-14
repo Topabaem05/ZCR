@@ -1,0 +1,8 @@
+{
+  "scope": "docs/18 row 2 slice B: broker write/reconnect lifecycle with writes still disabled (session drop advances the fence, reconnect gets a new session, stale fence refused, no write replay, zcr_patch/zcr_create stay unsupported over UDS): src/broker/{server,bridge,auth}.zig, tests/t15_test.zig, evidence/T15",
+  "authorized_by": "repository owner's explicit requests in this session: continue the remaining work; row 2 decisions (CLI wiring as T01 integrator, no supervisor process for now, T11 pre-publish hook as an interface-change proposal only)",
+  "workspace": "/Users/guribbong/code/ZCR-worktrees/t15-reconnect",
+  "manifest": "task/manifest.json",
+  "issued_at": "2026-09-14T04:25:06Z",
+  "note": "Issued before any edit. Production writes stay disabled; no implicit daemon spawn; no TCP; no changes to T08, T10, T12 or core files."
+}

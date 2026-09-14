@@ -1,0 +1,45 @@
+{
+  "schema": "zcr-t15-runs/1",
+  "verify": "zcr-dev-evidence verify --worktree <clean worktree at source_commit> --evidence <record>",
+  "note": "exit codes are recorded as observed; the runs started only with no other zig process and a 1-minute load average below the CPU count; other applications could still load the host during the run",
+  "runs": [
+    {
+      "label": "quiet-broker-debug-t15",
+      "record": "records/quiet-broker-debug-t15.json",
+      "record_sha256": "09c3ba188062409f73aac9fa0780f50d144a142c3d45a560e39286ddea778fdd",
+      "source_commit": "a029e061ef3f4b2c8b493dad8148eebbb7bb778b",
+      "source_tree": "24372c44e62bfa4b370ca0b38c640c9bbf3db79d",
+      "worktree_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/t15-reconnect",
+      "workspace_id": "fs:16777232:649540255:16777232:649540253:16777232:647053195",
+      "command": "zig build test -Dtest-group=broker -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-quiet-broker-debug --summary all (ZIG_LOCAL_CACHE_DIR=/Users/guribbong/code/ZCR-state/tasks/T15/r/zlc)",
+      "exit_code": 0,
+      "binary_sha256": "fb51c5c03649075ba7f456410354e704a8418cf6041029a7724576c86ae2f36c",
+      "source_config_sha256": "707f38cf329598b0804a58309f82792e0d4345ad9ff6a9a546676ab469dbd595",
+      "corpus_sha256": "6b842ed0e69204988df63a75c6fa0c0d2f4f5ddde05e8b9edf3931a79d468268",
+      "log": "logs/quiet-broker-debug.log",
+      "log_sha256": "53bd40c4506131823e4047f373766ff1d1821a6675f2d075bdb637130c99cdf6",
+      "verify_log": "logs/verify-quiet-broker-debug-t15.log",
+      "summary": "5/5 steps succeeded; 29/29 tests passed; 0 leaks",
+      "status": "PASS"
+    },
+    {
+      "label": "quiet-broker-releasesafe-t15",
+      "record": "records/quiet-broker-releasesafe-t15.json",
+      "record_sha256": "7b71243ff48f6b83d9130ad63f72e1035b6cad7cd8cf42176dd7bce4e3aebb18",
+      "source_commit": "a029e061ef3f4b2c8b493dad8148eebbb7bb778b",
+      "source_tree": "24372c44e62bfa4b370ca0b38c640c9bbf3db79d",
+      "worktree_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/t15-reconnect",
+      "workspace_id": "fs:16777232:649540255:16777232:649540253:16777232:647053195",
+      "command": "zig build test -Dtest-group=broker -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix $STATE/out-quiet-broker-releasesafe --summary all (ZIG_LOCAL_CACHE_DIR=/Users/guribbong/code/ZCR-state/tasks/T15/r/zlc)",
+      "exit_code": 0,
+      "binary_sha256": "4f613930d8cf51c51fe7544ed7d554969cdb7c759f18d25a76dd698eea3d7bd1",
+      "source_config_sha256": "707f38cf329598b0804a58309f82792e0d4345ad9ff6a9a546676ab469dbd595",
+      "corpus_sha256": "6b842ed0e69204988df63a75c6fa0c0d2f4f5ddde05e8b9edf3931a79d468268",
+      "log": "logs/quiet-broker-releasesafe.log",
+      "log_sha256": "be00c74f08694c86917db704231f9d4a13360dce4d1c1500e9bcb2189e34077f",
+      "verify_log": "logs/verify-quiet-broker-releasesafe-t15.log",
+      "summary": "5/5 steps succeeded; 29/29 tests passed; 0 leaks",
+      "status": "PASS"
+    }
+  ]
+}

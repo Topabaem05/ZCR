@@ -1,0 +1,13 @@
+{
+  "schema_version": "zcr-evidence/1",
+  "task_id": "T15",
+  "label": "quiet-broker-debug-t15",
+  "command": "zig build test -Dtest-group=broker -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-quiet-broker-debug --summary all (ZIG_LOCAL_CACHE_DIR=/Users/guribbong/code/ZCR-state/tasks/T15/r/zlc)",
+  "exit_code": 0,
+  "source_commit": "a029e061ef3f4b2c8b493dad8148eebbb7bb778b",
+  "source_tree": "24372c44e62bfa4b370ca0b38c640c9bbf3db79d",
+  "worktree_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/t15-reconnect",
+  "binary_path": "/Users/guribbong/code/ZCR-state/tasks/T15/reconnect-20260914/out-quiet-broker-debug/bin/T15-test",
+  "binary_sha256": "fb51c5c03649075ba7f456410354e704a8418cf6041029a7724576c86ae2f36c",
+  "recorded_at_unix_ms": 1789365432736
+}
