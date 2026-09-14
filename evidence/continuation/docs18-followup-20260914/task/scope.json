@@ -40,7 +40,21 @@
     },
     {
       "kind": "added",
+      "path": "evidence/continuation/docs18-followup-20260914/task/manifest-fence1.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
       "path": "evidence/continuation/docs18-followup-20260914/task/manifest.json",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "added",
+      "path": "evidence/continuation/docs18-followup-20260914/task/merge-audit.json",
       "orig_path": null,
       "symlink": false,
       "source": "committed"
