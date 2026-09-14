@@ -29,4 +29,6 @@ grep "error: '" $STATE/logs/$LABEL.log
 [ -x $out/bin/T12-test ] || { echo "no installed T12-test"; exit 1; }
 $TOOLS/zcr-dev-evidence record --worktree $WT --task T12 --label $LABEL-t12 --command "$cmd" --exit $rc --binary $out/bin/T12-test --out $STATE/records/$LABEL-t12.json || exit 1
 $TOOLS/zcr-dev-evidence verify --worktree $WT --evidence $STATE/records/$LABEL-t12.json > $STATE/logs/verify-$LABEL-t12.log 2>&1
-echo "$LABEL-t12 verify exit=$?"
+vrc=$?
+echo "$LABEL-t12 verify exit=$vrc"
+exit $vrc

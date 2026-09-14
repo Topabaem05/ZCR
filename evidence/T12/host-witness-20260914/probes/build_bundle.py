@@ -73,6 +73,7 @@ def main():
         r = json.load(open(f"{ST}/records/{label}.json"))
         assert r["source_commit"] == C and r["source_tree"] == tree, label
         shutil.copy(f"{ST}/records/{label}.json", f"{E}/records/")
+        assert open(f"{ST}/logs/verify-{label}.log").read().strip() == "verify: accepted", ("verification not accepted", label)
     for name in ("manifest.json", "authorization.json", "preflight.json", "scope-start.json", "scope-commit1.json", "t11-hook-proposal.json"):
         shutil.copy(f"{ST}/task/{name}", f"{E}/task/{name}")
     for name in ("mutants.py", "record_runs.sh", "build_bundle.py"):

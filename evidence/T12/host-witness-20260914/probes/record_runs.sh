@@ -37,7 +37,10 @@ run_group() {
   [ -x $out/bin/T12-test ] || { echo "$label: no installed T12-test"; return 1; }
   $TOOLS/zcr-dev-evidence record --worktree $WT --task T12 --label $label-t12 --command "$cmd" --exit $rc --binary $out/bin/T12-test --out $STATE/records/$label-t12.json || return 1
   $TOOLS/zcr-dev-evidence verify --worktree $WT --evidence $STATE/records/$label-t12.json > $STATE/logs/verify-$label-t12.log 2>&1
-  echo "$label-t12 verify exit=$?"
+  local vrc=$?
+  echo "$label-t12 verify exit=$vrc"
+  # A rejected record must fail the run, not only print its status.
+  return $vrc
 }
 run_group quiet-write-debug Debug || exit 1
 run_group quiet-write-releasesafe ReleaseSafe || exit 1
