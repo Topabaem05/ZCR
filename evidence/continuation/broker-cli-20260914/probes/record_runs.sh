@@ -43,7 +43,10 @@ run_group() {
   [ -x $out/bin/$bin ] || { echo "$label: no installed $bin"; return 1; }
   $TOOLS/zcr-dev-evidence record --worktree $WT --task T01 --label $label --command "$cmd" --exit $rc --binary $out/bin/$bin --out $STATE/records/$label.json || return 1
   $TOOLS/zcr-dev-evidence verify --worktree $WT --evidence $STATE/records/$label.json > $STATE/logs/verify-$label.log 2>&1
-  echo "$label verify exit=$?"
+  local vrc=$?
+  echo "$label verify exit=$vrc"
+  # A rejected record must fail the run, not only print its status.
+  return $vrc
 }
 run_group broker Debug quiet-broker-debug T01-broker-cli-test || exit 1
 run_group broker ReleaseSafe quiet-broker-releasesafe T01-broker-cli-test || exit 1
