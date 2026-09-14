@@ -1,0 +1,5 @@
+16 busy loops on 8 CPUs, ReleaseSafe instrumented T08-test cc27b00e (stopped early after cause confirmed)
+run logs present: 14 (last may be partial)
+   1 IDENTDIAG args=rev-parse elapsed_ms=5767 run_error=Timeout
+   1 IDENTDIAG args=worktree elapsed_ms=6932 run_error=Timeout
+max elapsed_ms: 6932

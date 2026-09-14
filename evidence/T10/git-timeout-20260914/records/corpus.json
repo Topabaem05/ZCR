@@ -1,0 +1,10 @@
+{
+  "derivation": "sha256 of this file's bytes is corpus_sha256; file hashes are sha256 of blobs at source_commit",
+  "description": "Git repositories, linked worktrees and marker fixtures are generated per test run with /usr/bin/git; IS-008 writes two stand-in git scripts (exec /bin/sleep 30; exit 1) into its temporary directory.",
+  "schema": "zcr-t10-corpus/1",
+  "source_commit": "ad99dc3636f0825fab26a6a6c4787bbb950dfbff",
+  "tests/t08_test.zig": "c1b25796d46b737164be49490e5f7223b54087909bb0b523398d3fe222afcb8e",
+  "tests/t10_test.zig": "05487de2091040b9730920dc37cfbd4b13571b9e3d1ef8146a8bda0ca08aefa4",
+  "tests/t11_test.zig": "a99e69c4a90ad334a8b65248aeaf748fd8560d0d1b50383186bd0d7f5d437101",
+  "tests/t12_test.zig": "26a98f3817afe4fdcfddacbdd64efd52b2ee93937e39d35fb4b39c90a2d59e6c"
+}

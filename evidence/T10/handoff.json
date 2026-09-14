@@ -150,5 +150,96 @@
     "design": "Per-workspace publishing slot and bounded condition waiters release registry mutex during filesystem work; all revoking/expiring/retiring/generation mutation paths wait, then revalidate filesystem identity or relookup bindings as appropriate. Guard ID is monotonic and registry-wide; stored reservation defeats duplicate/stale releases or modified next_generation.",
     "consumer_contract": "Retain snapshot before acquiring guard. acquireCommit(ticket); publish filesystem; markApplied(); release(); endCallback(ticket). Release without markApplied on abort. No ordinary same-workspace Registry calls while guarded. T11 confirms compliance.",
     "review": "APPROVE at f8a3b24f44a02aa882ec72c170ad57296e02c815; /workspace/scratch/3f4ab65dfb82/state/reviews/commit-coordinator-review.md. Reviewer verified all four source hashes, ten final binary/log hashes, 13-failure RED hashes, all 32 historical archive member hashes and preserved prior marker runtime object. No additional tests requested."
-  }
+  },
+  "revisions": [
+    {
+      "revision": "git discovery timeout reported as Busy",
+      "date": "2026-09-14",
+      "base_commit": "a15b127ccc407d5404f03196787c18625ea20d1f",
+      "head_commit": "ad99dc3636f0825fab26a6a6c4787bbb950dfbff",
+      "source_tree": "4ae5a707ff95a842dfd2823b792d85c5bde11c88",
+      "head_commit_note": "Tested source commit; the evidence-only commit follows.",
+      "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+      "workspace_id": "fs:16777232:649346710:16777232:649346708:16777232:647053195",
+      "task_manifest": "evidence/T10/git-timeout-20260914/task/manifest.json",
+      "task_manifest_sha256": "30654fb85ce06198e365fc9b1814abdbcf8e3aace52be65fd3e8d4ea372df04e",
+      "scope_report": "evidence/T10/git-timeout-20260914/task/scope-code.json (0 violations)",
+      "changed_files": [
+        "src/workspace/identity.zig",
+        "src/workspace/registry.zig",
+        "tests/t10_test.zig"
+      ],
+      "exports_added": [
+        "identity.DiscoverOptions{timeout_ms}",
+        "identity.discoverWith(A,Io,[]const u8,TrustedRoot,DiscoverOptions) RegisterError!Identity",
+        "identity.default_git_timeout_ms",
+        "identity.max_git_timeout_ms",
+        "Registry.Options.git_timeout_ms (default 5000)"
+      ],
+      "behaviour_change": "a discovery git subprocess timeout returns error.Busy instead of error.IoFailure; spawn failure and non-zero exit stay IoFailure",
+      "tests": {
+        "is008-debug": {
+          "record": "records/is008-debug.json",
+          "exit_code": 0,
+          "summary": "4/4 steps succeeded; 3/3 tests passed; 0 leaks"
+        },
+        "isolation-debug-t10": {
+          "record": "records/isolation-debug-t10.json",
+          "exit_code": 1,
+          "summary": "6/8 steps succeeded (1 failed); 59/60 tests passed (1 failed); 0 leaks"
+        },
+        "isolation-releasesafe-t10": {
+          "record": "records/isolation-releasesafe-t10.json",
+          "exit_code": 1,
+          "summary": "6/8 steps succeeded (1 failed); 57/60 tests passed (3 failed); 0 leaks"
+        },
+        "write-debug-t12": {
+          "record": "records/write-debug-t12.json",
+          "exit_code": 1,
+          "summary": "9/11 steps succeeded (1 failed); 67/68 tests passed (1 failed); 3 leaks"
+        },
+        "mcp-debug-t08": {
+          "record": "records/mcp-debug-t08.json",
+          "exit_code": 0,
+          "summary": "8/8 steps succeeded; 29/29 tests passed; 0 leaks"
+        },
+        "quiet-isolation-debug-t10": {
+          "record": "records/quiet-isolation-debug-t10.json",
+          "exit_code": 0,
+          "summary": "8/8 steps succeeded; 60/60 tests passed; 0 leaks"
+        },
+        "quiet-isolation-releasesafe-t10": {
+          "record": "records/quiet-isolation-releasesafe-t10.json",
+          "exit_code": 0,
+          "summary": "8/8 steps succeeded; 60/60 tests passed; 0 leaks"
+        },
+        "quiet-write-debug-t12": {
+          "record": "records/quiet-write-debug-t12.json",
+          "exit_code": 0,
+          "summary": "11/11 steps succeeded; 68/68 tests passed; 0 leaks"
+        },
+        "quiet-write-debug-t11": {
+          "record": "records/quiet-write-debug-t11.json",
+          "exit_code": 0,
+          "summary": "11/11 steps succeeded; 68/68 tests passed; 0 leaks"
+        }
+      },
+      "comparison": {
+        "idle-fix": "3 fail=0",
+        "idle-baseline": "3 fail=0",
+        "loaded-fix": "2 fail=1",
+        "loaded-baseline": "1 fail=2"
+      },
+      "source_config_sha256": "b18dcf02710fa8aaf089cf3bbb118d8157001ab7ca6409442dd51aaddbddce22",
+      "corpus_sha256": "c942758a5a8411d3fbee355d51d73831ff995595bc0d82b418077ab7d131c10e",
+      "limitations": [
+        "CPU oversubscription can still exceed the 5 s discovery budget; registration then returns retryable Busy (documented limit, not a gate)",
+        "T11 fixture leaks on registration failure (separate T11 task)"
+      ],
+      "remaining_gates": [
+        "native macOS/Windows and actual host integration NOT_RUN for this revision beyond PR CI"
+      ],
+      "evidence": "evidence/T10/git-timeout-20260914/README.md"
+    }
+  ]
 }

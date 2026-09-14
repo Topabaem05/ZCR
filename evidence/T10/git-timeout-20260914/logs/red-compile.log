@@ -1,0 +1,19 @@
+test
++- run test T10-test
+   +- compile test T10-test Debug native 1 errors
+tests/t10_test.zig:1244:115: error: no field named 'git_timeout_ms' in struct 'registry.Registry.Options'
+    try t.expectError(error.InvalidArgument, workspace.Registry.init(A, io, .{ .git_executable = "/usr/bin/git", .git_timeout_ms = 0 }));
+                                                                                                                  ^~~~~~~~~~~~~~
+src/workspace/registry.zig:106:25: note: struct declared here
+    pub const Options = struct { git_executable: []const u8, capacity: usize = max_workspaces };
+                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+error: 1 compilation errors
+failed command: /Users/guribbong/.local/share/zig/0.16.0/zig test -ODebug --dep zcr_core --dep zcr_policy --dep zcr_workspace -Mroot=/Users/guribbong/code/ZCR-worktrees/t10-git-ioerror/tests/t10_test.zig -ODebug -Mzcr_core=/Users/guribbong/code/ZCR-worktrees/t10-git-ioerror/src/core/types.zig -ODebug --dep zcr_core -Mzcr_policy=/Users/guribbong/code/ZCR-worktrees/t10-git-ioerror/src/policy/capability.zig -ODebug --dep zcr_core --dep zcr_policy -Mzcr_workspace=/Users/guribbong/code/ZCR-worktrees/t10-git-ioerror/src/workspace/registry.zig -lc --test-filter IS-008 --cache-dir /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/zig-local-cache --global-cache-dir /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/zig-global-cache --name T10-test --zig-lib-dir /Users/guribbong/.local/share/zig/0.16.0/lib/ --listen=-
+
+Build Summary: 0/3 steps succeeded (1 failed)
+test transitive failure
++- run test T10-test transitive failure
+   +- compile test T10-test Debug native 1 errors
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/zig-local-cache/o/f73c3388e88e2a4fe1e8f77ca63d50d0/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-worktrees/t10-git-ioerror /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/zig-global-cache --seed 0xd831b9c4 -Zd50aa76910797e26 test -Dtest-group=isolation -Dtest-id=IS-008 -Doptimize=Debug --summary all

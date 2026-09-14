@@ -1,0 +1,37 @@
+test
++- run test T10-test 44 pass, 1 fail (45 total)
+error: 't10_test.test.IS-005 commit guard serializes dirty generation changes' failed:
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/process.zig:531:21: 0x102900307 in run (T10-test)
+               else => |e| return e,
+                           ^
+       /Users/guribbong/code/ZCR-worktrees/t10-git-ioerror/src/workspace/identity.zig:103:20: 0x1028c00e7 in output (T10-test)
+           }) catch |err| return switch (err) {
+                          ^
+       /Users/guribbong/code/ZCR-worktrees/t10-git-ioerror/src/workspace/identity.zig:144:26: 0x1028bd33b in discoverWith (T10-test)
+           const top = try line(try output(temp, io, exe, trusted.canonical_path, &.{ "rev-parse", "--path-format=absolute", "--show-toplevel" }, options.timeout_ms));
+                                ^
+       /Users/guribbong/code/ZCR-worktrees/t10-git-ioerror/src/workspace/registry.zig:227:30: 0x1028ba4d7 in registerWorkspace (T10-test)
+                   var discovered = try identity.discoverWith(self.allocator, io, self.git_executable, root, .{ .timeout_ms = self.git_timeout_ms });
+                                    ^
+       /Users/guribbong/code/ZCR-worktrees/t10-git-ioerror/tests/t10_test.zig:806:16: 0x1029298e7 in commitMutationWaits (T10-test)
+           const id = try r.registerWorkspace(io, root, policy);
+                      ^
+       /Users/guribbong/code/ZCR-worktrees/t10-git-ioerror/tests/t10_test.zig:888:5: 0x10292da37 in test.IS-005 commit guard serializes dirty generation changes (T10-test)
+           try commitMutationWaits(.mark_changed);
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/zig-local-cache/o/3618624aca4beb85af70fc365ad06f1d/T10-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/zig-local-cache --seed=0x35d58fb9 --listen=-
+
+Build Summary: 6/8 steps succeeded (1 failed); 59/60 tests passed (1 failed)
+test transitive failure
++- install T02-test success
+|  +- compile test T02-test Debug native success 37s MaxRSS:218M
+|     +- options cached
++- run test T02-test 15 pass (15 total) 40s MaxRSS:5M
+|  +- compile test T02-test Debug native (+1 more reused dependencies)
++- install T10-test success
+|  +- compile test T10-test Debug native success 42s MaxRSS:212M
++- run test T10-test 44 pass, 1 fail (45 total)
+   +- compile test T10-test Debug native (reused)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/zig-local-cache/o/f73c3388e88e2a4fe1e8f77ca63d50d0/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-worktrees/t10-git-ioerror /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/zig-global-cache --seed 0x35d58fb9 -Zadb5024e21d96731 test -Dtest-group=isolation -Doptimize=Debug -Dinstall-tests=true --prefix /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/out-isolation-debug --summary all

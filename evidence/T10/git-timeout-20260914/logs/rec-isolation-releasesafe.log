@@ -1,0 +1,21 @@
+test
++- run test T10-test 42 pass, 3 fail (45 total)
+error: 't10_test.test.IS-001 checkout changes workspace generation and restart rejects previous boot' failed without output
+error: 't10_test.test.IS-005 blocked mutex callback commit check rejects expiry' failed without output
+error: 't10_test.test.IS-002 commit guard serializes rediscovered HEAD generation' failed without output
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/zig-local-cache && /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/zig-local-cache/o/95d8fd743085c97a0eaf14e044226494/T10-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/zig-local-cache --seed=0xb23021fa --listen=-
+
+Build Summary: 6/8 steps succeeded (1 failed); 57/60 tests passed (3 failed)
+test transitive failure
++- install T02-test success
+|  +- compile test T02-test ReleaseSafe native success 1m MaxRSS:282M
+|     +- options cached
++- run test T02-test 15 pass (15 total) 48s MaxRSS:5M
+|  +- compile test T02-test ReleaseSafe native (+1 more reused dependencies)
++- install T10-test success
+|  +- compile test T10-test ReleaseSafe native success 1m MaxRSS:307M
++- run test T10-test 42 pass, 3 fail (45 total)
+   +- compile test T10-test ReleaseSafe native (reused)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/zig-local-cache/o/f73c3388e88e2a4fe1e8f77ca63d50d0/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-worktrees/t10-git-ioerror /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/zig-local-cache /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/zig-global-cache --seed 0xb23021fa -Z1ec293ba3265a0ee test -Dtest-group=isolation -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/out-isolation-releasesafe --summary all

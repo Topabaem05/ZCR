@@ -1,0 +1,13 @@
+{
+  "schema_version": "zcr-evidence/1",
+  "task_id": "T10",
+  "label": "isolation-releasesafe-t10",
+  "command": "zig build test -Dtest-group=isolation -Doptimize=ReleaseSafe -Dinstall-tests=true --prefix $STATE/out-isolation-releasesafe --summary all",
+  "exit_code": 1,
+  "source_commit": "ad99dc3636f0825fab26a6a6c4787bbb950dfbff",
+  "source_tree": "4ae5a707ff95a842dfd2823b792d85c5bde11c88",
+  "worktree_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/t10-git-ioerror",
+  "binary_path": "/Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/out-isolation-releasesafe/bin/T10-test",
+  "binary_sha256": "12bd83e2e5587642203e490eeba6978d3cce8647936b8be0ea4240d4b2490200",
+  "recorded_at_unix_ms": 1789353063984
+}

@@ -1,0 +1,33 @@
+test
++- run test T10-test 2 pass, 1 fail (3 total)
+error: 't10_test.test.IS-008 discovery git timeout is retryable Busy while a failing git stays IoFailure' failed:
+       expected error.Busy, found error.IoFailure
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/process.zig:531:21: 0x10080c2e7 in run (T10-test)
+               else => |e| return e,
+                           ^
+       /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/mutant-timeout-ioerror/src/workspace/identity.zig:103:20: 0x1007cc0c7 in output (T10-test)
+           }) catch |err| return switch (err) {
+                          ^
+       /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/mutant-timeout-ioerror/src/workspace/identity.zig:143:26: 0x1007c933b in discoverWith (T10-test)
+           const top = try line(try output(temp, io, exe, trusted.canonical_path, &.{ "rev-parse", "--path-format=absolute", "--show-toplevel" }, options.timeout_ms));
+                                ^
+       /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/mutant-timeout-ioerror/src/workspace/registry.zig:227:30: 0x1007c64d7 in registerWorkspace (T10-test)
+                   var discovered = try identity.discoverWith(self.allocator, io, self.git_executable, root, .{ .timeout_ms = self.git_timeout_ms });
+                                    ^
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:72:13: 0x1007c2b1f in expectError__anon_37596 (T10-test)
+                   return error.TestUnexpectedError;
+                   ^
+       /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/mutant-timeout-ioerror/tests/t10_test.zig:1251:5: 0x1007c39b3 in test.IS-008 discovery git timeout is retryable Busy while a failing git stays IoFailure (T10-test)
+           try t.expectError(error.Busy, timed.registerWorkspace(io, root, policy));
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/cache-mutant && /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/cache-mutant/o/9a2dc048d2c36fc588b772199b0692c7/T10-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/cache-mutant --seed=0x38e169ba --listen=-
+
+Build Summary: 2/4 steps succeeded (1 failed); 2/3 tests passed (1 failed)
+test transitive failure
++- install T10-test success
+|  +- compile test T10-test Debug native success 13s MaxRSS:207M
++- run test T10-test 2 pass, 1 fail (3 total)
+   +- compile test T10-test Debug native (reused)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/cache-mutant/o/c7f5141f8980aec12592e9f22c535a40/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/mutant-timeout-ioerror /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/cache-mutant /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/zig-global-cache-mut --seed 0x38e169ba -Z0ec0e0a568a17b95 test -Dtest-group=isolation -Dtest-id=IS-008 -Doptimize=Debug -Dinstall-tests=true --prefix /Users/guribbong/code/ZCR-state/tasks/T10/git-ioerror-20260914/out-mutant --summary all
