@@ -47,7 +47,7 @@ The runs started with no other zig process, no other evidence run and a 1-minute
 
 ## Task identity
 
-[task/manifest.json](task/manifest.json) (`zcr-task/1`, workspace `fs:16777232:649568737:16777232:649568735:16777232:647053195`, base `961a686`), [task/authorization.json](task/authorization.json) and [task/preflight.json](task/preflight.json) were issued before any edit. Fence 2 added `tasks/T01.md` and `DESIGNBOOK.html` before either was edited, because `validate_bundle.py` requires every owned path to appear in the task document and `render_book.py` renders that document. The fence-1 manifest is kept. `zcr-dev-guard scope` reported 0 violations at the start ([task/scope-start.json](task/scope-start.json)) and on the code commit ([task/scope-commit1.json](task/scope-commit1.json)).
+[task/manifest.json](task/manifest.json) (`zcr-task/1`, workspace `fs:16777232:649568737:16777232:649568735:16777232:647053195`, base `961a686`), [task/authorization.json](task/authorization.json) and [task/preflight.json](task/preflight.json) were issued before any edit. Fence 2 added `tasks/T01.md` and `DESIGNBOOK.html` before either was edited, because `validate_bundle.py` requires every owned path to appear in the task document and `render_book.py` renders that document. The fence-1 manifest is kept. Fence 3 raised `max_changed_files` from 16 to 64 after the evidence commit `dcc3c6b` brought the branch to 45 changed files; the limit had been sized for the code change alone. The fence-2 manifest is kept as `manifest-fence2.json`. `zcr-dev-guard scope` reported 0 violations at the start ([task/scope-start.json](task/scope-start.json)) and on the code commit ([task/scope-commit1.json](task/scope-commit1.json)).
 
 ## Limits
 

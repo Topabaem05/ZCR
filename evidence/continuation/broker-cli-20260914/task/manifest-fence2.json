@@ -5,7 +5,7 @@
   "workspace_id": "fs:16777232:649568737:16777232:649568735:16777232:647053195",
   "base_commit": "961a6863de3d760703ad96d3bc2bc7d5bfdbad72",
   "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
-  "fence": 3,
+  "fence": 2,
   "expires_at": "2026-09-15T04:58:28Z",
   "read_paths": [
     "."
@@ -42,5 +42,5 @@
     "status",
     "health"
   ],
-  "max_changed_files": 64
+  "max_changed_files": 16
 }
