@@ -1,0 +1,9 @@
+{
+  "scope": "T10: report git discovery subprocess timeout as retryable Busy and make the discovery timeout configurable (default 5000 ms): src/workspace/identity.zig, src/workspace/registry.zig, tests/t10_test.zig, evidence/T10",
+  "authorized_by": "repository owner's explicit request in this session to continue the remaining work after PR #3 (open runtime-cache IoFailure finding)",
+  "workspace": "/Users/guribbong/code/ZCR-worktrees/t10-git-ioerror",
+  "manifest": "task/manifest.json",
+  "issued_at": "2026-09-14T01:04:42Z",
+  "note": "Issued before investigation or edits. Instrumentation runs on copies; product changes only after the cause is confirmed. Fence 2 adds src/workspace/registry.zig after the cause was confirmed (git worktree list Timeout under 16 busy loops); issued before any edit; the fence-1 manifest is kept as manifest-fence1.json.",
+  "amended_at": "2026-09-14T01:46:05Z"
+}

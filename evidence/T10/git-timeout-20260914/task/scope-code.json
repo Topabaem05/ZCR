@@ -1,0 +1,28 @@
+{
+  "task": "T10",
+  "role": "task",
+  "violations": [],
+  "changes": [
+    {
+      "kind": "modified",
+      "path": "src/workspace/identity.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "modified",
+      "path": "src/workspace/registry.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    },
+    {
+      "kind": "modified",
+      "path": "tests/t10_test.zig",
+      "orig_path": null,
+      "symlink": false,
+      "source": "committed"
+    }
+  ]
+}
