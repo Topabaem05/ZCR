@@ -365,13 +365,39 @@ test "MC-004 real partial pipe input cancellation and slow output drain without 
 test "MC-004 deadline watcher interrupts before filesystem work and output failure drains" {
     const h = try Harness.init();
     defer h.deinit();
-    const SlowValidate = struct {
-        fn call(_: ?*anyopaque) core.AuthorizeError!void {
-            std.Io.sleep(io, .fromMilliseconds(15), .awake) catch return error.IoFailure;
+    // The first authority check blocks until the deadline watcher reports that it
+    // cancelled the request, so the cancellation check that precedes filesystem
+    // work must stop it. A read that ran would succeed and validate authority again.
+    // The read engine starts its own deadline_ms timeout only after that check, so
+    // 500 ms leaves the read time to finish if the watcher's cancellation were
+    // missing; with a 1 ms deadline the engine's timeout alone would stop the read.
+    const Gate = struct {
+        cancelled: std.atomic.Value(bool) = .init(false),
+        validated: std.atomic.Value(u32) = .init(0),
+        timed_out: std.atomic.Value(bool) = .init(false),
+        fn validate(ctx: ?*anyopaque) core.AuthorizeError!void {
+            const g: *@This() = @ptrCast(@alignCast(ctx.?));
+            if (g.validated.fetchAdd(1, .acq_rel) > 0) return;
+            const started = std.Io.Clock.Timestamp.now(io, .awake);
+            while (!g.cancelled.load(.acquire)) {
+                if (started.untilNow(io).raw.toMilliseconds() >= hang_guard_ms) {
+                    g.timed_out.store(true, .release);
+                    return;
+                }
+                std.Io.sleep(io, .fromMilliseconds(1), .awake) catch return error.IoFailure;
+            }
+        }
+        fn deadline(ctx: ?*anyopaque) void {
+            const g: *@This() = @ptrCast(@alignCast(ctx.?));
+            g.cancelled.store(true, .release);
         }
     };
-    h.server.config.validate_authority = SlowValidate.call;
-    try h.tmp.dir.writeFile(io, .{ .sub_path = "input", .data = initialize ++ "\n" ++ initialized ++ "\n" ++ "{\"jsonrpc\":\"2.0\",\"id\":\"deadline\",\"method\":\"tools/call\",\"params\":{\"name\":\"zcr_read\",\"arguments\":{\"path\":\"missing\",\"deadline_ms\":1}}}\n" });
+    var gate: Gate = .{};
+    h.server.config.authority_context = &gate;
+    h.server.config.validate_authority = Gate.validate;
+    h.server.config.deadline_context = &gate;
+    h.server.config.after_deadline_cancel = Gate.deadline;
+    try h.tmp.dir.writeFile(io, .{ .sub_path = "input", .data = initialize ++ "\n" ++ initialized ++ "\n" ++ "{\"jsonrpc\":\"2.0\",\"id\":\"deadline\",\"method\":\"tools/call\",\"params\":{\"name\":\"zcr_read\",\"arguments\":{\"path\":\"hello.txt\",\"deadline_ms\":500}}}\n" });
     const input = try h.tmp.dir.openFile(io, "input", .{});
     defer input.close(io);
     const output = try h.tmp.dir.createFile(io, "output", .{ .read = true });
@@ -380,7 +406,10 @@ test "MC-004 deadline watcher interrupts before filesystem work and output failu
     var bytes: [8192]u8 = undefined;
     const n = try output.readPositionalAll(io, &bytes, 0);
     try testing.expect(std.mem.indexOf(u8, bytes[0..n], "E_DEADLINE") != null);
-    try testing.expect(std.mem.indexOf(u8, bytes[0..n], "E_NOT_FOUND") == null);
+    try testing.expect(std.mem.indexOf(u8, bytes[0..n], "alpha") == null);
+    try testing.expect(gate.cancelled.load(.acquire));
+    try testing.expect(!gate.timed_out.load(.acquire));
+    try testing.expectEqual(@as(u32, 1), gate.validated.load(.acquire));
     const bad_input = try h.tmp.dir.openFile(io, "input", .{});
     defer bad_input.close(io);
     const readonly_output = try h.tmp.dir.openFile(io, "hello.txt", .{});
