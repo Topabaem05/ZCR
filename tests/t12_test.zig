@@ -1127,3 +1127,58 @@ test "WR-008 F2 failed tail preservation and complete uncertainty remain quarant
         try repo.bytes(false, !abort);
     };
 }
+
+test "WR-008 host witness grants once and refuses a replaced temp name after unlink" {
+    var repo = try Repo.init(false);
+    defer repo.deinit();
+    const fixture = try f.Fixture.init(repo.root.canonical_path, repo.state, false, null);
+    defer fixture.deinit();
+    const p = try prepared(fixture);
+    const ns = fixture.store.options.namespace;
+    const data = try grantFor(fixture, ns);
+    // The production host retains the root/Git/common identity, the private state
+    // directory and, per pending publication, the parent, temp and original handles.
+    var witness = storage.recovery.HostWitness.init(f.io, &repo.witness, repo.state_witness);
+    defer witness.deinit();
+    const parent = try std.Io.Dir.openDirAbsolute(f.io, repo.root.canonical_path, .{});
+    try witness.retainPublication(parent, p);
+    const grant = witness.grant(data);
+    const validate_publication = grant.validate_publication.?;
+    // A publication is never attested before the one-use continuity check.
+    try t.expectError(error.RecoveryRequired, validate_publication(grant.context, data, p));
+    try grant.validate(grant.context, data, ns);
+    try t.expectError(error.RecoveryRequired, grant.validate(grant.context, data, ns));
+    try validate_publication(grant.context, data, p);
+    var other = p;
+    other.generation += 1;
+    try t.expectError(error.RecoveryRequired, validate_publication(grant.context, data, other));
+    // The retained descriptor keeps its inode after unlink, so only the current
+    // name's identity shows that the temp file was replaced.
+    try repo.root.dir.deleteFile(f.io, temp_name);
+    try repo.root.dir.writeFile(f.io, .{ .sub_path = temp_name, .data = fixture.new });
+    try t.expectError(error.RecoveryRequired, validate_publication(grant.context, data, p));
+}
+
+test "WR-008 host witness accepts an applied publication and refuses a foreign target" {
+    var repo = try Repo.init(false);
+    defer repo.deinit();
+    const fixture = try f.Fixture.init(repo.root.canonical_path, repo.state, false, null);
+    defer fixture.deinit();
+    const p = try prepared(fixture);
+    const ns = fixture.store.options.namespace;
+    const data = try grantFor(fixture, ns);
+    var witness = storage.recovery.HostWitness.init(f.io, &repo.witness, repo.state_witness);
+    defer witness.deinit();
+    const parent = try std.Io.Dir.openDirAbsolute(f.io, repo.root.canonical_path, .{});
+    try witness.retainPublication(parent, p);
+    const grant = witness.grant(data);
+    try grant.validate(grant.context, data, ns);
+    // Publication renames the temp onto the target: the target name now resolves
+    // to the retained temp and the temp name is gone. Recovery must still see it.
+    try repo.root.dir.rename(temp_name, repo.root.dir, "file.txt", f.io);
+    try grant.validate_publication.?(grant.context, data, p);
+    // A file that is neither the retained original nor the temp is refused.
+    try repo.root.dir.deleteFile(f.io, "file.txt");
+    try repo.root.dir.writeFile(f.io, .{ .sub_path = "file.txt", .data = fixture.new });
+    try t.expectError(error.RecoveryRequired, grant.validate_publication.?(grant.context, data, p));
+}

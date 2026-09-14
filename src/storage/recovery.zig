@@ -280,6 +280,130 @@ fn observe(io: Io, dir: Io.Dir, name: [:0]const u8, auth: *policy.Authorizer) E!
     return .{ .id = id, .hash = digest };
 }
 
+/// Production host continuity witness. The host keeps the discovered workspace
+/// identity, the private journal-state directory and, for each pending
+/// publication, the parent directory, temp file and original target open across
+/// writer death. `grant` issues a one-use continuity check; publications are
+/// attested only after it. A retained descriptor keeps its inode after unlink, so
+/// every publication check also requires each current name to resolve to a
+/// retained identity (temp: absent or the temp; target: absent, the original or
+/// the temp). Recovery still classifies the outcome from those names.
+pub const HostWitness = struct {
+    pub const max_publications = 16;
+    const name_capacity = 4097;
+    const Retained = struct {
+        parent: Io.Dir,
+        temp: Io.File,
+        original: ?Io.File,
+        parent_id: core.FileId,
+        temp_id: core.FileId,
+        old_id: ?core.FileId,
+        temp_name: [name_capacity]u8,
+        temp_name_len: usize,
+        leaf: [name_capacity]u8,
+        leaf_len: usize,
+        digest: core.Sha256,
+        fn tempName(self: *const Retained) [:0]const u8 {
+            return self.temp_name[0..self.temp_name_len :0];
+        }
+        fn leafName(self: *const Retained) [:0]const u8 {
+            return self.leaf[0..self.leaf_len :0];
+        }
+        fn check(self: *const Retained) E!void {
+            if (!sameId(handleId(self.parent.handle) catch return error.RecoveryRequired, self.parent_id)) return error.RecoveryRequired;
+            if (!sameId(handleId(self.temp.handle) catch return error.RecoveryRequired, self.temp_id)) return error.RecoveryRequired;
+            if (self.original) |file| if (!sameId(handleId(file.handle) catch return error.RecoveryRequired, self.old_id.?)) return error.RecoveryRequired;
+            const temp_now = policy.paths.statAt(self.parent.handle, self.tempName()) catch return error.RecoveryRequired;
+            if (temp_now) |entry| if (!sameEntry(entry, self.temp_id)) return error.RecoveryRequired;
+            const leaf_now = policy.paths.statAt(self.parent.handle, self.leafName()) catch return error.RecoveryRequired;
+            if (leaf_now) |entry| {
+                const original = if (self.old_id) |id| sameEntry(entry, id) else false;
+                if (!original and !sameEntry(entry, self.temp_id)) return error.RecoveryRequired;
+            }
+        }
+        fn close(self: *Retained, io: Io) void {
+            if (self.original) |file| file.close(io);
+            self.temp.close(io);
+            self.parent.close(io);
+        }
+    };
+
+    io: Io,
+    identity: *const workspace.identity.Identity,
+    state: Io.Dir,
+    retained: [max_publications]Retained = undefined,
+    count: usize = 0,
+    used: bool = false,
+
+    /// Borrows `identity` and `state`; both must outlive the witness.
+    pub fn init(io: Io, identity: *const workspace.identity.Identity, state: Io.Dir) HostWitness {
+        return .{ .io = io, .identity = identity, .state = state };
+    }
+
+    pub fn deinit(self: *HostWitness) void {
+        for (self.retained[0..self.count]) |*r| r.close(self.io);
+        self.count = 0;
+    }
+
+    /// Retains the handles one PREPARED publication names. Takes ownership of
+    /// `parent` in every case; the caller resolves it without following links.
+    pub fn retainPublication(self: *HostWitness, parent: Io.Dir, p: core.PreparedRecord) E!void {
+        errdefer parent.close(self.io);
+        const pubid = p.publication orelse return error.RecoveryRequired;
+        if (self.count == max_publications) return error.ResourceExhausted;
+        if (!std.meta.eql(pubid.root_id, self.identity.root_id)) return error.RecoveryRequired;
+        if (!sameId(handleId(parent.handle) catch return error.RecoveryRequired, pubid.parent_id)) return error.RecoveryRequired;
+        const leaf = std.fs.path.basename(p.path.bytes);
+        if (pubid.temp_name.len == 0 or pubid.temp_name.len >= name_capacity or leaf.len == 0 or leaf.len >= name_capacity) return error.RecoveryRequired;
+        var r: Retained = .{ .parent = parent, .temp = undefined, .original = null, .parent_id = pubid.parent_id, .temp_id = pubid.temp_id, .old_id = pubid.old_file_id, .temp_name = undefined, .temp_name_len = pubid.temp_name.len, .leaf = undefined, .leaf_len = leaf.len, .digest = try publicationDigest(p) };
+        @memcpy(r.temp_name[0..pubid.temp_name.len], pubid.temp_name);
+        r.temp_name[pubid.temp_name.len] = 0;
+        @memcpy(r.leaf[0..leaf.len], leaf);
+        r.leaf[leaf.len] = 0;
+        r.temp = try openObserved(self.io, parent, r.tempName(), pubid.temp_id);
+        errdefer r.temp.close(self.io);
+        if (pubid.old_file_id) |id| {
+            r.original = try openObserved(self.io, parent, r.leafName(), id);
+        } else if ((policy.paths.statAt(parent.handle, r.leafName()) catch return error.RecoveryRequired) != null) return error.RecoveryRequired;
+        self.retained[self.count] = r;
+        self.count += 1;
+    }
+
+    pub fn grant(self: *HostWitness, data: GrantData) ContinuityGrant {
+        return .{ .data = data, .context = self, .validate = validate, .validate_publication = validatePublication };
+    }
+
+    fn validate(context: ?*anyopaque, data: GrantData, ns: journal.Namespace) E!void {
+        const self: *HostWitness = @ptrCast(@alignCast(context.?));
+        if (self.used) return error.RecoveryRequired;
+        const state = journal.metadata(self.state.handle, true) catch return error.RecoveryRequired;
+        if (!std.meta.eql(state.id, data.store_root_id)) return error.RecoveryRequired;
+        self.identity.validate(self.io) catch return error.RecoveryRequired;
+        if (!identityMatches(self.identity, ns)) return error.RecoveryRequired;
+        self.used = true;
+    }
+
+    fn validatePublication(context: ?*anyopaque, _: GrantData, p: core.PreparedRecord) E!void {
+        const self: *HostWitness = @ptrCast(@alignCast(context.?));
+        if (!self.used) return error.RecoveryRequired;
+        const digest = try publicationDigest(p);
+        for (self.retained[0..self.count]) |*r| {
+            if (std.meta.eql(r.digest, digest)) return r.check();
+        }
+        return error.RecoveryRequired;
+    }
+
+    fn handleId(fd: std.posix.fd_t) policy.paths.StatError!policy.paths.Identity {
+        return (try policy.paths.statHandle(fd)).identity;
+    }
+    fn sameId(identity: policy.paths.Identity, id: core.FileId) bool {
+        return identity.device == id.device and identity.inode == id.inode;
+    }
+    fn sameEntry(entry: policy.paths.Entry, id: core.FileId) bool {
+        return entry.kind == .regular and sameId(entry.identity, id);
+    }
+};
+
 /// A digest binds a protected host attestation to every field of PREPARED. It
 /// authenticates nothing by itself and must never be sourced from disk grants.
 pub fn publicationDigest(p: core.PreparedRecord) E!core.Sha256 {
