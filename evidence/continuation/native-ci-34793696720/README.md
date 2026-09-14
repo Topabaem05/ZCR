@@ -2,7 +2,7 @@
 
 **Run:** [34793696720](https://github.com/Topabaem05/ZCR/actions/runs/34793696720), `workflow_dispatch` on `main` at `a15b127` (merge of PR #3 after PR #2). Result: **success** on ubuntu-24.04, macos-15 and macos-15-intel.
 
-This bundle keeps each platform's `report.json` from the job artifact, every per-command stdout and stderr log the reports reference ([command-logs.tar.gz](command-logs.tar.gz), 150 files, per-file digests in [command-logs-index.json](command-logs-index.json)), the artifact names, sizes and digests ([artifacts.json](artifacts.json)) and the job conclusions ([run.json](run.json)). Test binaries inside the artifacts are not kept. The results apply to source `a15b127` only.
+This bundle keeps each platform's `report.json` from the job artifact, every per-command stdout and stderr log the reports reference ([command-logs.tar.gz](command-logs.tar.gz), 150 files, per-file digests in [command-logs-index.json](command-logs-index.json)), the artifact names, sizes and digests ([artifacts.json](artifacts.json)) and the job conclusions ([run.json](run.json)). It also keeps the six raw T12 recovery fixture archives: Debug and ReleaseSafe on each platform, in [storage/](storage/). Each archive's SHA-256 matches the `storage_evidence.archive_sha256` in that platform's report ([storage/index.json](storage/index.json)). Test binaries inside the artifacts are not kept. The results apply to source `a15b127` only.
 
 ## Registered tests
 
