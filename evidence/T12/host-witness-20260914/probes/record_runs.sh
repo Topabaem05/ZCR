@@ -46,7 +46,9 @@ run_group quiet-write-debug Debug || exit 1
 run_group quiet-write-releasesafe ReleaseSafe || exit 1
 
 # Quiet reruns, one at a time, of the mutants whose first runs shared the CPU with other builds.
-# Each runs on a copy; the task worktree is never modified.
+# Each runs on a copy; the task worktree is never modified. SKIP_MUTANT_RERUNS=1 records only the
+# group runs, for a rerun whose mutants already ran against the same source.
+[ "${SKIP_MUTANT_RERUNS:-0}" = "1" ] && { echo "$C" > $STATE/code-commit; echo "mutant reruns skipped"; exit 0; }
 for M in no_one_use leaf_original_only; do
   rm -rf $STATE/mutant-$M-quiet
   rsync -a --exclude .git --exclude .zig-cache --exclude zig-out $WT/ $STATE/mutant-$M-quiet/ || exit 1

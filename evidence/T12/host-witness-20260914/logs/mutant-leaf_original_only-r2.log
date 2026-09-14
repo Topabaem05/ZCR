@@ -1,0 +1,25 @@
+test
++- run test T12-test 14 pass, 1 fail (15 total)
+error: 't12_test.test.WR-008 host witness accepts an applied publication and refuses a foreign target' failed:
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-leaf_original_only-r2/src/storage/recovery.zig:321:32: 0x100cffb3b in check (T12-test)
+                       if (!original) return error.RecoveryRequired;
+                                      ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-leaf_original_only-r2/src/storage/recovery.zig:408:49: 0x100cff18b in validatePublication (T12-test)
+                   if (std.meta.eql(r.digest, digest)) return r.check();
+                                                       ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-leaf_original_only-r2/tests/t12_test.zig:1179:5: 0x100d6d6df in test.WR-008 host witness accepts an applied publication and refuses a foreign target (T12-test)
+           try grant.validate_publication.?(grant.context, data, p);
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-leaf_original_only-r2 && /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-leaf_original_only-r2/o/22024747f7eab879af303c484d95794f/T12-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-leaf_original_only-r2 --seed=0x603dd01a --listen=-
+
+Build Summary: 4/6 steps succeeded (1 failed); 14/15 tests passed (1 failed)
+test transitive failure
++- run test T12-test 14 pass, 1 fail (15 total)
+   +- compile test T12-test Debug native success 5s MaxRSS:308M
+      +- options success
+      +- options success
+         +- compile test T12-child Debug native success 3s MaxRSS:292M
+            +- options (reused)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-leaf_original_only-r2/o/f73c3388e88e2a4fe1e8f77ca63d50d0/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-leaf_original_only-r2 /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-leaf_original_only-r2 /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/zig-global-cache --seed 0x603dd01a -Zd1257679c7d68778 test -Dtest-group=write -Dtest-id=WR-008 -Doptimize=Debug --summary all

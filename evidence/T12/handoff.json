@@ -230,8 +230,8 @@
       "revision": "host witness for continuity and publication",
       "date": "2026-09-14",
       "base_commit": "9c94517fd393866f66a6eddcf3131c950b537e4c",
-      "head_commit": "0a8627d6285def5e7f3efd6463b61fe7da372a61",
-      "source_tree": "e753bf9314974a54fbb1ee456bd61fb20b4fa4fc",
+      "head_commit": "a17020aeae3d44c4e5ebf4d666523dcfba5e7df2",
+      "source_tree": "cfd20d8c10db667a7ae28f0731071597fe2e2906",
       "head_commit_note": "Tested source commit; the evidence-only commit follows.",
       "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
       "workspace_id": "fs:16777232:649526621:16777232:649526619:16777232:647053195",
@@ -246,64 +246,66 @@
         "recovery.HostWitness.init(Io, *const workspace.identity.Identity, Io.Dir)",
         "HostWitness.deinit()",
         "HostWitness.retainPublication(Io.Dir, core.PreparedRecord) !void (takes ownership of the parent handle)",
+        "HostWitness.retirePublication(core.PreparedRecord) !void (Busy once recovery started, RecoveryRequired if not retained)",
         "HostWitness.grant(GrantData) ContinuityGrant",
-        "HostWitness.max_publications = 16"
+        "HostWitness.max_publications = 16 (pending)"
       ],
       "tests": {
-        "loaded-write-debug-t12": {
-          "record": "records/loaded-write-debug-t12.json",
-          "exit_code": 1,
-          "summary": "8/11 steps succeeded (2 failed); 64/70 tests passed (6 failed); 12 leaks"
-        },
         "quiet-write-debug-t12": {
           "record": "records/quiet-write-debug-t12.json",
-          "exit_code": 1,
-          "summary": "8/11 steps succeeded (2 failed); 68/70 tests passed (2 failed); 3 leaks"
+          "exit_code": 0,
+          "summary": "11/11 steps succeeded; 71/71 tests passed; 0 leaks"
         },
         "quiet-write-releasesafe-t12": {
           "record": "records/quiet-write-releasesafe-t12.json",
           "exit_code": 0,
-          "summary": "11/11 steps succeeded; 70/70 tests passed; 0 leaks"
-        },
-        "quiet2-write-debug-t12": {
-          "record": "records/quiet2-write-debug-t12.json",
-          "exit_code": 1,
-          "summary": "8/11 steps succeeded (2 failed); 68/70 tests passed (2 failed); 4 leaks"
-        },
-        "quiet3-write-debug-t12": {
-          "record": "records/quiet3-write-debug-t12.json",
-          "exit_code": 0,
-          "summary": "11/11 steps succeeded; 70/70 tests passed; 0 leaks"
+          "summary": "11/11 steps succeeded; 71/71 tests passed; 0 leaks"
         }
       },
       "mutants": {
         "no_temp_name_check": {
-          "log": "logs/mutant-no_temp_name_check.log",
-          "summary": "4/6 steps succeeded (1 failed); 13/14 tests passed (1 failed); 0 leaks",
+          "log": "logs/mutant-no_temp_name_check-r2.log",
+          "summary": "4/6 steps succeeded (1 failed); 14/15 tests passed (1 failed); 0 leaks",
           "failed_tests": [
             "WR-008 host witness grants once and refuses a replaced temp name after unlink"
           ],
           "intended": "WR-008 host witness grants once and refuses a replaced temp name after unlink"
         },
         "no_one_use": {
-          "log": "logs/mutant-no_one_use-quiet.log",
-          "summary": "4/6 steps succeeded (1 failed); 13/14 tests passed (1 failed); 0 leaks",
+          "log": "logs/mutant-no_one_use-r2.log",
+          "summary": "4/6 steps succeeded (1 failed); 14/15 tests passed (1 failed); 0 leaks",
           "failed_tests": [
             "WR-008 host witness grants once and refuses a replaced temp name after unlink"
           ],
           "intended": "WR-008 host witness grants once and refuses a replaced temp name after unlink"
         },
         "leaf_original_only": {
-          "log": "logs/mutant-leaf_original_only-quiet.log",
-          "summary": "4/6 steps succeeded (1 failed); 13/14 tests passed (1 failed); 0 leaks",
+          "log": "logs/mutant-leaf_original_only-r2.log",
+          "summary": "4/6 steps succeeded (1 failed); 14/15 tests passed (1 failed); 0 leaks",
           "failed_tests": [
             "WR-008 host witness accepts an applied publication and refuses a foreign target"
           ],
           "intended": "WR-008 host witness accepts an applied publication and refuses a foreign target"
+        },
+        "retire_keeps_slot": {
+          "log": "logs/mutant-retire_keeps_slot-r2.log",
+          "summary": "4/6 steps succeeded (1 failed); 14/15 tests passed (1 crashed); 0 leaks",
+          "failed_tests": [
+            "WR-008 host witness retires terminal publications so its limit bounds pending ones"
+          ],
+          "intended": "WR-008 host witness retires terminal publications so its limit bounds pending ones"
+        },
+        "retire_during_recovery": {
+          "log": "logs/mutant-retire_during_recovery-r2.log",
+          "summary": "4/6 steps succeeded (1 failed); 14/15 tests passed (1 failed); 0 leaks",
+          "failed_tests": [
+            "WR-008 host witness retires terminal publications so its limit bounds pending ones"
+          ],
+          "intended": "WR-008 host witness retires terminal publications so its limit bounds pending ones"
         }
       },
-      "source_config_sha256": "27f3af4e0addf3efe0ded8ce1d92cfe31d2cc7388c9cb6c00447a6ce9ddb3750",
-      "corpus_sha256": "e3db5865a7fd1687d1f160eb4979fcb8ff15c44aa2bb43d9e56361821f54dcd0",
+      "source_config_sha256": "821abc5ce38d4cafed1fc640e25aa7a87be013f2a0efb5f0e5ed574be5aaa632",
+      "corpus_sha256": "d372d9293ae41cbe3ab6ed859877debea0eaf865bbbbcd7f7077df22ebd3bee0",
       "interface_change_proposal": {
         "owner_needed": "T11 (tasks/tasks.json owns src/fs/edit.zig and src/fs/publish.zig)",
         "status": "proposal only; not implemented (repository owner's decision in this session: record proposal only)",

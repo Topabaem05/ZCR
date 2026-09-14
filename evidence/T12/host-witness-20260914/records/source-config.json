@@ -37,7 +37,7 @@
     "system": "Darwin"
   },
   "schema": "zcr-t12-source-config/1",
-  "source_commit": "0a8627d6285def5e7f3efd6463b61fe7da372a61",
+  "source_commit": "a17020aeae3d44c4e5ebf4d666523dcfba5e7df2",
   "source_file_hashes": {
     "src/core/errors.zig": "4166c1278c889e703cebc67925acfa9e768f5a4119fe42bfb8e29084a4752f1c",
     "src/core/limits.zig": "41771a1b441e7710a5c27ac6d5cc92170f023764b74ace4e5519e28161a65137",
@@ -53,12 +53,12 @@
     "src/policy/scope.zig": "ff9b6246f4451a851d406cdcb82ad805f3668e40455ce0782d1f7d5ab641696c",
     "src/storage/journal.zig": "993ea757675ff1ffe30c7d42538532c7fcc823892368883a15a652865ef48b3a",
     "src/storage/receipts.zig": "57095c1d1e5356be2ff78798bf13e6e61b068419faf3154f2938d89f66765332",
-    "src/storage/recovery.zig": "2244f06e93c56c17cf18ebfec8a4db77807c16b8389f66d33698837c0c55fe3c",
+    "src/storage/recovery.zig": "1a08c52ef8a3b433a80b6957153687f605f8d92e63ee1af2e287c65aecf31dc2",
     "src/workspace/identity.zig": "9e82ae4bc3e557eb75c19f01f4d45cc73268155879f56bd1f5b58f12c2dc2456",
     "src/workspace/lease.zig": "b7b19b516e2dfe25f8e38df3962659cab90600e469cc1c0623050b2016d52e60",
     "src/workspace/registry.zig": "451f2569413e0769422cad98984624a93968e26d4f141e588b9d631bbea485ab"
   },
-  "source_tree": "e753bf9314974a54fbb1ee456bd61fb20b4fa4fc",
+  "source_tree": "cfd20d8c10db667a7ae28f0731071597fe2e2906",
   "toolchain": {
     "executable_sha256": "e6cd688d25664983833aae272f501d4bceeae304875b8f1741209d15fd13a4ec",
     "version": "0.16.0"

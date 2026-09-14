@@ -1,0 +1,23 @@
+test
++- run test T12-test 14 pass, 1 fail (15 total)
+error: 't12_test.test.WR-008 host witness grants once and refuses a replaced temp name after unlink' failed:
+       expected error.RecoveryRequired, found void
+       /Users/guribbong/.local/share/zig/0.16.0/lib/std/testing.zig:65:9: 0x102b91c13 in expectError__anon_38252 (T12-test)
+               return error.TestExpectedError;
+               ^
+       /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-no_one_use-r2/tests/t12_test.zig:1150:5: 0x102c0229b in test.WR-008 host witness grants once and refuses a replaced temp name after unlink (T12-test)
+           try t.expectError(error.RecoveryRequired, grant.validate(grant.context, data, ns));
+           ^
+failed command: cd /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-no_one_use-r2 && /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-no_one_use-r2/o/4cde8d696bf1b44147b9887ae07d3eaa/T12-test --cache-dir=/Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-no_one_use-r2 --seed=0x925eb1ef --listen=-
+
+Build Summary: 4/6 steps succeeded (1 failed); 14/15 tests passed (1 failed)
+test transitive failure
++- run test T12-test 14 pass, 1 fail (15 total)
+   +- compile test T12-test Debug native success 5s MaxRSS:381M
+      +- options success
+      +- options success
+         +- compile test T12-child Debug native success 4s MaxRSS:295M
+            +- options (reused)
+
+error: the following build command failed with exit code 1:
+/Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-no_one_use-r2/o/f73c3388e88e2a4fe1e8f77ca63d50d0/build /Users/guribbong/.local/share/zig/0.16.0/zig /Users/guribbong/.local/share/zig/0.16.0/lib /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/mutant-no_one_use-r2 /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/cache-mutant-no_one_use-r2 /Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/zig-global-cache --seed 0x925eb1ef -Zb9c56e9d5c4bb1b8 test -Dtest-group=write -Dtest-id=WR-008 -Doptimize=Debug --summary all

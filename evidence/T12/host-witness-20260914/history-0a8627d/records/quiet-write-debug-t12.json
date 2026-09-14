@@ -3,11 +3,11 @@
   "task_id": "T12",
   "label": "quiet-write-debug-t12",
   "command": "zig build test -Dtest-group=write -Doptimize=Debug -Dinstall-tests=true --prefix $STATE/out-quiet-write-debug --summary all",
-  "exit_code": 0,
-  "source_commit": "a17020aeae3d44c4e5ebf4d666523dcfba5e7df2",
-  "source_tree": "cfd20d8c10db667a7ae28f0731071597fe2e2906",
+  "exit_code": 1,
+  "source_commit": "0a8627d6285def5e7f3efd6463b61fe7da372a61",
+  "source_tree": "e753bf9314974a54fbb1ee456bd61fb20b4fa4fc",
   "worktree_git_dir": "/Users/guribbong/code/ZCR/.git/worktrees/t12-host-witness",
   "binary_path": "/Users/guribbong/code/ZCR-state/tasks/T12/host-witness-20260914/out-quiet-write-debug/bin/T12-test",
-  "binary_sha256": "f2221e2d3294a5cb6837055e2803dcc751f28ebc4f51641ceb484f1edc0f3648",
-  "recorded_at_unix_ms": 1789369627382
+  "binary_sha256": "1796f953b6b1c3994415105da0253a7e6555c9063adbf2393c95a94b4511dd80",
+  "recorded_at_unix_ms": 1789364849304
 }
