@@ -1,0 +1,38 @@
+{
+  "schema_version": "zcr-task/1",
+  "state": "active",
+  "task_id": "T01",
+  "workspace_id": "fs:16777232:649335459:16777232:649335457:16777232:647053195",
+  "base_commit": "a15b127ccc407d5404f03196787c18625ea20d1f",
+  "contract_digest": "bc75e601b8d3f6e5f5b1d52084f8cd9ca16ea81eda11c25e6c42494f5816bab6",
+  "fence": 1,
+  "expires_at": "2026-09-15T00:47:42Z",
+  "read_paths": [
+    "."
+  ],
+  "write_paths": [
+    "docs/18-Merge-and-Remaining-Work.md",
+    "tasks/progress.json",
+    "MANIFEST.sha256",
+    "verification/report.json",
+    "evidence/continuation"
+  ],
+  "immutable_paths": [
+    "build.zig",
+    "build.zig.zon",
+    "src",
+    "contracts",
+    "config",
+    "AGENTS.md",
+    ".github",
+    "tests"
+  ],
+  "operations": [
+    "read",
+    "enumerate",
+    "search",
+    "status",
+    "health"
+  ],
+  "max_changed_files": 32
+}

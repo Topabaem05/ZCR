@@ -1,6 +1,6 @@
 {
   "schema_version": "zcr-progress/1",
-  "updated": "2026-09-13",
+  "updated": "2026-09-14",
   "source_baseline": "531cfc378950e6ef6ac6f49cb4e2de3de56312cc",
   "release_status": "BLOCKED",
   "notes": [
@@ -16,7 +16,8 @@
     "T16 admission source8bad59b/evidencef5de460 passed independent review and was integrated at7b915f8. Worker scheduler20PASS+1nativeSKIP and memory34PASS each mode; pure governor policy, signal collection and actual runtime wiring remain required.",
     "Main integration audit: every original remote branch is an ancestor of a911bf8. PR #1 is retargeted to main by explicit user request; release_status remains BLOCKED. See docs/18-Merge-and-Remaining-Work.md.",
     "CI bootstrap fixed at local169be18 / published88546e8, identical tree54dba2efb586303f5b60e80bf3834c28519a223e. Plain-Python import regression reproduced the source mutation before the fix; all5 CI-tooling tests pass after it. Runtime verification is recorded separately.",
-    "Source88546e8 native CI34705666351: Linux job SUCCESS. Apple Silicon Debug320PASS/12SKIP/24FAIL, ReleaseSafe321PASS/12SKIP/23FAIL. T12 Linux-only Store.init/metadata causes23 failures and Debug fixture cleanup leaks; Debug additionally fails MC-004 retiring tool id assertion. Intel Mac was still running at documentation checkpoint. Release remains BLOCKED. Local169be18 both modes346PASS/1SKIP/9AF_UNIX failures; builds/contracts, codec10, CLI19 pass."
+    "Source88546e8 native CI34705666351: Linux job SUCCESS. Apple Silicon Debug320PASS/12SKIP/24FAIL, ReleaseSafe321PASS/12SKIP/23FAIL. T12 Linux-only Store.init/metadata causes23 failures and Debug fixture cleanup leaks; Debug additionally fails MC-004 retiring tool id assertion. Intel Mac was still running at documentation checkpoint. Release remains BLOCKED. Local169be18 both modes346PASS/1SKIP/9AF_UNIX failures; builds/contracts, codec10, CLI19 pass.",
+    "Main a15b127 (PR #2 T12 Darwin storage and T11 provenance; PR #3 MC-004 tests) native CI 34793696720 succeeded: Linux Debug/ReleaseSafe 356 PASS/3 SKIP/0 FAIL; Apple Silicon and Intel Mac 347 PASS/12 SKIP/0 FAIL each mode; 0 leaks; contracts, codec, CLI subprocess and capability commands exit 0. External gates G05/G07/G08/G11/G12/G13 remain NOT_RUN and release remains BLOCKED. Open: MC-004 deadline test observation point (T08) and runtime-cache IoFailure under local CPU load (T10/T13). See docs/18-Merge-and-Remaining-Work.md."
   ],
   "tasks": [
     {
@@ -165,7 +166,9 @@
         "evidence/T08/handoff.json",
         "evidence/continuation/native-ci-34681109500/README.md",
         "evidence/continuation/native-ci-34692959158/README.md",
-        "evidence/continuation/integrated-108b906/README.md"
+        "evidence/continuation/integrated-108b906/README.md",
+        "evidence/T08/mc004-retirement-20260913/README.md",
+        "evidence/continuation/native-ci-34793696720/README.md"
       ],
       "required_tests": [
         "MC-001",
@@ -218,7 +221,9 @@
         "evidence/continuation/native-ci-34692959158/README.md",
         "evidence/T11/darwin/README.md",
         "evidence/continuation/review-checkpoints/Darwin-T11.md",
-        "evidence/continuation/integrated-108b906/README.md"
+        "evidence/continuation/integrated-108b906/README.md",
+        "evidence/mac-write-path-20260913/README.md",
+        "evidence/continuation/native-ci-34793696720/README.md"
       ],
       "required_tests": [
         "WR-001",
@@ -240,7 +245,9 @@
         "evidence/T12/fix-round1/handoff.json",
         "evidence/continuation/review-checkpoints/T12-fix1.md",
         "evidence/continuation/integrated-T12-ad577ab/README.md",
-        "evidence/continuation/integrated-108b906/README.md"
+        "evidence/continuation/integrated-108b906/README.md",
+        "evidence/mac-write-path-20260913/README.md",
+        "evidence/continuation/native-ci-34793696720/README.md"
       ],
       "required_tests": [
         "WR-005",

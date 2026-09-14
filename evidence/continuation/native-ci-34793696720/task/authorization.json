@@ -1,0 +1,9 @@
+{
+  "scope": "integrator status update after PR #2 and PR #3: docs/18 row 1, DESIGNBOOK.html (regenerated from docs/18 by tools/render_book.py), tasks/progress.json, MANIFEST.sha256, verification/report.json, evidence/continuation",
+  "authorized_by": "repository owner's explicit request in this session to continue the remaining work after PR #3",
+  "workspace": "/Users/guribbong/code/ZCR-worktrees/t01-docs18",
+  "manifest": "task/manifest.json",
+  "issued_at": "2026-09-14T00:47:42Z",
+  "note": "Issued before any edit in this worktree. Documentation and status only; no runtime source changes. Fence 2 adds DESIGNBOOK.html. It was regenerated at a PR #4 review's request (commit f55cecb) before this amendment, so the fence-1 manifest (manifest-fence1.json) did not list it; the regeneration changes only the rendered docs/18 section.",
+  "amended_at": "2026-09-14T02:04:18Z"
+}

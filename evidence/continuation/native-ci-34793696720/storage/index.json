@@ -1,0 +1,38 @@
+[
+  {
+    "path": "storage/x86_64-linux-Debug-raw-fixtures.tar.gz",
+    "bytes": 54497,
+    "sha256": "1a2f7d987fe0ea42492f45997983ecd6efe5d42f92e865694725945137d6cd1f",
+    "files_in_report": 225
+  },
+  {
+    "path": "storage/x86_64-linux-ReleaseSafe-raw-fixtures.tar.gz",
+    "bytes": 55043,
+    "sha256": "a4206a5533f8ceb311380fe1abcdd1cebd72d4fe0bffde991a73089c46e54411",
+    "files_in_report": 225
+  },
+  {
+    "path": "storage/aarch64-macos-Debug-raw-fixtures.tar.gz",
+    "bytes": 53949,
+    "sha256": "7114b3389ce0ddabef34c8c0fbc245f65952c37ba02b445cc6cdbf5d44a4da4f",
+    "files_in_report": 225
+  },
+  {
+    "path": "storage/aarch64-macos-ReleaseSafe-raw-fixtures.tar.gz",
+    "bytes": 56144,
+    "sha256": "b48eb6b4a340820928e5c022bd504efcae99985cc198af678cb802da99412e32",
+    "files_in_report": 225
+  },
+  {
+    "path": "storage/x86_64-macos-Debug-raw-fixtures.tar.gz",
+    "bytes": 55181,
+    "sha256": "e5ec56314774f2a1a1e3fe370f888dbd97d8f66340f8564643b4cbbbea5c0c7f",
+    "files_in_report": 225
+  },
+  {
+    "path": "storage/x86_64-macos-ReleaseSafe-raw-fixtures.tar.gz",
+    "bytes": 55356,
+    "sha256": "74f8c087866e7babcc0b763efe1de2a53b877c6813896e3479523e329d640e2d",
+    "files_in_report": 225
+  }
+]

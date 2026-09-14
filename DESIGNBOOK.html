@@ -3757,7 +3757,7 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <li><code>src/</code>에는 Zig 파일 45개가 있으며 <code>build.zig</code>로 빌드한다. Zig 0.16.0을 유지한다.</li>
 <li>T00–T14는 <code>IMPLEMENTED_WITH_OPEN_GATES</code>, T15–T16은 <code>IN_PROGRESS</code>다. 구현 파일의 존재와 Task 완료를 구분한다.</li>
 <li>직접 stdio MCP는 읽기 도구 6개를 연결한다. 실행 정책에서 쓰기 및 broker 활성화를 요청하면 현재는 거부한다.</li>
-<li>T12 journal/recovery의 Linux 구현과 SIGKILL 시험은 존재한다. 현재 <code>journal.metadata</code>는 Linux 이외 OS에 <code>Unsupported</code>를 반환하며 T12 시험에도 Linux 전용 <code>statx</code> 호출이 남아 있다. Darwin port가 별도 세션에서 검토됐다는 과거 설명만으로 원격 브랜치에 구현됐다고 간주하지 않는다.</li>
+<li>T12 journal/recovery는 Linux와 Darwin에서 동작한다. PR #2(<code>9226555</code>)가 Darwin의 <code>fstat</code> 기반 metadata, <code>F_FULLFSYNC</code> 내구 동기화, store 파일의 extended ACL 거부를 넣었고, T11은 커널이 붙이는 <code>com.apple.provenance</code> 속성을 원본과 교체본의 값이 같을 때만 허용한다. 운영 쓰기는 여전히 비활성이다.</li>
 <li><code>src/watch/linux.zig</code>가 존재해도 T17 전체 backend·자원 관측·플랫폼 게이트가 완료된 것은 아니다.</li>
 </ul>
 <h2>이번 점검에서 수정한 CI 오류</h2>
@@ -3810,6 +3810,43 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <p>9개 실패는 <code>AF_UNIX</code> socket 생성 시 발생했다. 이 컨테이너에서 Python으로 별도 확인한 결과도 <code>errno=1 Operation not permitted</code>였다. 1개 SKIP은 Linux에서 실행할 수 없는 native GCD 시험이다. 로컬 전체 결과는 <strong>FAIL</strong>로 보존하며 제한된 환경의 실패를 통과로 바꾸지 않는다.</p>
 <p><a href="https://github.com/Topabaem05/ZCR/actions/runs/34705666351">GitHub native 실행 34705666351</a>은 source <code>88546e8</code>을 검증한다. Linux job은 최종 <strong>SUCCESS</strong>, Apple Silicon job은 <strong>FAILURE</strong>로 확인했다. 이는 CI 시작 오류가 해결됐음을 보여주지만 Mac 지원 완료를 뜻하지 않는다. 문서만 바뀐 병합 commit에 이 실행의 source별 결과를 새 runtime PASS로 재사용하지 않는다.</p>
 <p>Apple Silicon은 Debug <strong>320 PASS / 12 SKIP / 24 FAIL</strong>, ReleaseSafe <strong>321 PASS / 12 SKIP / 23 FAIL</strong>이다. 두 모드 모두 T12의 Linux 전용 <code>Store.init</code>/<code>metadata</code>가 <code>Unsupported</code>를 반환해 23개 시험이 실패했다. Debug에서는 fixture 초기화 실패 경로의 168개 allocation leak도 보고됐다. 추가 Debug 실패 1개는 T08 <code>MC-004 retiring tool id is detached before gated arena teardown</code>의 <code>entered and accepted_during_retirement</code> assertion이며 재현·원인 분석이 필요하다. 테스트 시간 제한만 늘려 통과 처리하지 않는다. <a data-package-file="evidence/merge-20260913/mac-registered-logs.tar.gz" title="편집 원본은 저장소에 포함">Mac 원본 로그</a>와 <a data-package-file="evidence/merge-20260913/mac-native-report.json" title="편집 원본은 저장소에 포함">보고서</a>를 보존했다. Intel Mac job은 이 문서의 점검 시점에 실행 중이므로 최종 결과를 단정하지 않는다.</p>
+<p>이 절의 Mac 실패는 <code>88546e8</code> 시점의 기록이다. 아래 병합 후 실행에서 해소됐다.</p>
+<h2>PR #2·#3 병합 후 native CI</h2>
+<p><a href="https://github.com/Topabaem05/ZCR/actions/runs/34793696720">실행 34793696720</a>은 PR #3 병합 commit인 <code>main</code> <code>a15b127</code>을 세 플랫폼에서 검증했다. 세 job 모두 <strong>SUCCESS</strong>다. 플랫폼별 보고서, 등록 시험 로그, artifact digest는 <a data-package-file="evidence/continuation/native-ci-34793696720/README.md" title="편집 원본은 저장소에 포함">증거 묶음</a>에 보존했다.</p>
+<table>
+<thead>
+<tr>
+<th>플랫폼</th>
+<th>Debug</th>
+<th>ReleaseSafe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x86_64 Linux</td>
+<td>356 PASS / 3 SKIP / 0 FAIL</td>
+<td>356 PASS / 3 SKIP / 0 FAIL</td>
+</tr>
+<tr>
+<td>Apple Silicon (macOS 15)</td>
+<td>347 PASS / 12 SKIP / 0 FAIL</td>
+<td>347 PASS / 12 SKIP / 0 FAIL</td>
+</tr>
+<tr>
+<td>Intel Mac (macOS 15)</td>
+<td>347 PASS / 12 SKIP / 0 FAIL</td>
+<td>347 PASS / 12 SKIP / 0 FAIL</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>leak과 명령:</strong> 세 플랫폼 모두 allocation leak이 없다. contracts, codec, 실제 CLI subprocess, capability 검사가 모두 exit 0이다.</li>
+<li><strong>Mac 시험:</strong> 두 Mac에서 T08 27/27, T11 43/43, T12 25/25를 통과했다. Mac의 SKIP 12개는 T14 시험이다. Linux의 SKIP 3개는 T09, T11, T12의 플랫폼 전용 시험이다.</li>
+<li><strong>PR #2:</strong> T12의 Linux 전용 guard와 fixture leak을 없앴다. 원인과 probe는 <code>evidence/mac-write-path-20260913/README.md</code>에 있다.</li>
+<li><strong>PR #3:</strong> MC-004 retirement 실패의 원인을 찾아 고쳤다. 시험이 요청마다 두 번 오르는 authority 검증 카운터를 <code>== 2</code>로 읽어 서버 스레드와 경쟁했다. 증거는 <code>evidence/T08/mc004-retirement-20260913/README.md</code>에 있다.</li>
+<li><strong>아직 NOT_RUN인 외부 gate:</strong> G05 APFS 전체 ACL/xattr/crash-durability 검증, G07/G08/G13 실제 host client·sandbox 연동, G11 macOS 11 Intel 실행, G12 모델 공존·E2E 성능. release 상태는 계속 <strong>BLOCKED</strong>다.</li>
+<li><strong>남은 발견:</strong> MC-004 deadline 시험은 watcher의 취소를 관찰하지 못한다(T08). 로컬에서 CPU 부하를 걸었을 때 runtime-cache 시험이 한 번 <code>IoFailure</code>로 실패했다(T10/T13).</li>
+</ul>
 <h2>남은 작업과 완료 조건</h2>
 <table>
 <thead>
@@ -3824,8 +3861,8 @@ MutableAssociationKey = workspace_id + generation + filesystem_file_id + relativ
 <tr>
 <td>1</td>
 <td>T08 / T12 / native CI</td>
-<td>MC-004 Mac Debug 실패 분석, Darwin storage 이식 및 fixture 초기화 실패 시 자원 회수, Mac crash/lifecycle 검증</td>
-<td>Linux·Apple Silicon·Intel Mac에서 Debug/ReleaseSafe 결과와 raw 복구 증거</td>
+<td><strong>대부분 완료</strong>(PR #2·#3, 실행 34793696720): MC-004 원인 분석·수정, Darwin storage 이식, fixture 초기화 실패 시 자원 회수, Mac의 T12 SIGKILL 복구 시험과 storage 증거 수집. 남음: G05 APFS 파괴적 crash-durability 검증, G11 macOS 11 Intel, MC-004 deadline 시험 관찰 지점, 부하 시 runtime-cache <code>IoFailure</code></td>
+<td>Linux·Apple Silicon·Intel Mac에서 Debug/ReleaseSafe 결과와 raw 복구 증거(위 병합 후 native CI 절)</td>
 </tr>
 <tr>
 <td>2</td>
