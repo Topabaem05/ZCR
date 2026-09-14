@@ -16,7 +16,7 @@
     {
       "check": "all_json_parse",
       "status": "pass",
-      "detail": "454"
+      "detail": "456"
     },
     {
       "check": "schema:contracts/data.schema.json",
